@@ -1,0 +1,30 @@
+{
+  "id_norma": "250604",
+  "extracted_at": "2026-01-21T14:54:21.502265",
+  "modificada_por": [
+    {
+      "id_norma": "1204012",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "fuente": "inline"
+    },
+    {
+      "id_norma": "1153949",
+      "tipo": "DECRETO",
+      "numero": "42",
+      "fuente": "inline"
+    },
+    {
+      "id_norma": "1047565",
+      "tipo": "DECRETO",
+      "numero": "130",
+      "fuente": "inline"
+    },
+    {
+      "id_norma": "258729",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "fuente": "inline"
+    }
+  ]
+}

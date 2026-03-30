@@ -1,0 +1,670 @@
+{
+  "fecha": "2026-01-21T17:32:30.899237",
+  "total_normas": 56,
+  "normas_analizadas": 15,
+  "temas": {
+    "POTENCIA": 9,
+    "ENERGIA": 14,
+    "DISTRIBUCION": 11,
+    "TRANSMISION": 8,
+    "GENERACION": 11,
+    "MEDIDAS": 9,
+    "TARIFAS": 8,
+    "PEAJES": 1
+  },
+  "normas_por_tema": {
+    "POTENCIA": [
+      "258729",
+      "1204012",
+      "1047565",
+      "1153949",
+      "1179524",
+      "1087315",
+      "1008692",
+      "1209692",
+      "1125560"
+    ],
+    "ENERGIA": [
+      "258729",
+      "1204012",
+      "1047565",
+      "1153949",
+      "1179524",
+      "1087315",
+      "1008692",
+      "1055402",
+      "1099982",
+      "1115627",
+      "1209692",
+      "3410",
+      "1055073",
+      "1125560"
+    ],
+    "DISTRIBUCION": [
+      "1204012",
+      "1047565",
+      "1153949",
+      "1179524",
+      "1008692",
+      "1099982",
+      "1115627",
+      "1209692",
+      "3410",
+      "1055073",
+      "1125560"
+    ],
+    "TRANSMISION": [
+      "1204012",
+      "1047565",
+      "1153949",
+      "1087315",
+      "1099982",
+      "1209692",
+      "3410",
+      "1055073"
+    ],
+    "GENERACION": [
+      "1204012",
+      "1047565",
+      "1153949",
+      "1179524",
+      "1087315",
+      "1008692",
+      "1055402",
+      "1099982",
+      "1209692",
+      "3410",
+      "1125560"
+    ],
+    "MEDIDAS": [
+      "1204012",
+      "1153949",
+      "1179524",
+      "1087315",
+      "1008692",
+      "1099982",
+      "1115627",
+      "1055073",
+      "1125560"
+    ],
+    "TARIFAS": [
+      "1047565",
+      "1179524",
+      "1008692",
+      "1099982",
+      "1115627",
+      "1209692",
+      "3410",
+      "1125560"
+    ],
+    "PEAJES": [
+      "1055402"
+    ]
+  },
+  "referencias_cruzadas": {
+    "258171": [
+      {
+        "desde": "1047565",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1179524",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1055402",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1115627",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1209692",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1055073",
+        "tipo": "LEY",
+        "numero": "4"
+      },
+      {
+        "desde": "1125560",
+        "tipo": "LEY",
+        "numero": "4"
+      }
+    ],
+    "1129970": [
+      {
+        "desde": "1047565",
+        "tipo": "DECRETO",
+        "numero": "113"
+      }
+    ],
+    "1203005": [
+      {
+        "desde": "1179524",
+        "tipo": "LEY",
+        "numero": "21667"
+      }
+    ],
+    "1005169": [
+      {
+        "desde": "1087315",
+        "tipo": "LEY",
+        "numero": "20"
+      }
+    ],
+    "5362": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "302"
+      }
+    ],
+    "150669": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "19"
+      }
+    ],
+    "28393": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "16"
+      }
+    ],
+    "6857": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "2"
+      }
+    ],
+    "30397": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "19"
+      }
+    ],
+    "29719": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "18"
+      }
+    ],
+    "242411": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "20"
+      }
+    ],
+    "3517": [
+      {
+        "desde": "1008692",
+        "tipo": "LEY",
+        "numero": "2"
+      }
+    ],
+    "237718": [
+      {
+        "desde": "1194043",
+        "tipo": "LEY",
+        "numero": "20"
+      }
+    ],
+    "13315": [
+      {
+        "desde": "1194043",
+        "tipo": "DECRETO",
+        "numero": "430"
+      }
+    ],
+    "5423": [
+      {
+        "desde": "1194043",
+        "tipo": "LEY",
+        "numero": "323"
+      },
+      {
+        "desde": "1099982",
+        "tipo": "LEY",
+        "numero": "323"
+      }
+    ],
+    "221322": [
+      {
+        "desde": "1194043",
+        "tipo": "LEY",
+        "numero": "5"
+      }
+    ],
+    "248850": [
+      {
+        "desde": "3410",
+        "tipo": "DFL",
+        "numero": "2"
+      }
+    ],
+    "239956": [
+      {
+        "desde": "3410",
+        "tipo": "LEY",
+        "numero": "20040"
+      }
+    ],
+    "167498": [
+      {
+        "desde": "3410",
+        "tipo": "LEY",
+        "numero": "19674"
+      }
+    ],
+    "273006": [
+      {
+        "desde": "3410",
+        "tipo": "LEY",
+        "numero": "20273"
+      }
+    ],
+    "222380": [
+      {
+        "desde": "3410",
+        "tipo": "LEY",
+        "numero": "19940"
+      }
+    ],
+    "238139": [
+      {
+        "desde": "3410",
+        "tipo": "LEY",
+        "numero": "20018"
+      }
+    ]
+  },
+  "normas": [
+    {
+      "id_norma": "258729",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "texto": "DTO 44 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO Y ",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1204012",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "texto": "05-JUN-2024\n                                    - Decreto 70",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1047565",
+      "tipo": "DECRETO",
+      "numero": "130",
+      "texto": "DTO 130 MINISTERIO DE ENERGÍA 31-DIC-2012",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1153949",
+      "tipo": "DECRETO",
+      "numero": "42",
+      "texto": "DTO 42 MINISTERIO DE ENERGÍA 26-DIC-2020",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1179524",
+      "tipo": "LEY",
+      "numero": "21472",
+      "texto": "LEY 21472 MINISTERIO DE ENERGÍA 02-AGO-2022",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1087315",
+      "tipo": "LEY",
+      "numero": "20897",
+      "texto": "LEY 20897 MINISTERIO DE ENERGÍA 05-FEB-2016",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1008692",
+      "tipo": "LEY",
+      "numero": "20402",
+      "texto": "LEY 20402 MINISTERIO DE MINERÍA;   SUBSECRETARÍA DE MINERÍA 03-DIC-2009",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1055402",
+      "tipo": "LEY",
+      "numero": "20698",
+      "texto": "LEY 20698 MINISTERIO DE ENERGÍA 22-OCT-2013",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1194043",
+      "tipo": "LEY",
+      "numero": "21582",
+      "texto": "LEY 21582 MINISTERIO DE JUSTICIA Y DERECHOS HUMANOS 07-JUL-2023",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1099982",
+      "tipo": "LEY",
+      "numero": "20999",
+      "texto": "LEY 20999 MINISTERIO DE ENERGÍA 09-FEB-2017",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1115627",
+      "tipo": "LEY",
+      "numero": "21076",
+      "texto": "LEY 21076 MINISTERIO DE ENERGÍA 27-FEB-2018",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1209692",
+      "tipo": "LEY",
+      "numero": "21721",
+      "texto": "LEY 21721 MINISTERIO DE ENERGÍA 27-DIC-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "3410",
+      "tipo": "LEY",
+      "numero": "1",
+      "texto": "Decreto con Fuerza de Ley 1 / 13-SEP-1982",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1055073",
+      "tipo": "LEY",
+      "numero": "20701",
+      "texto": "LEY 20701 MINISTERIO DE ENERGÍA 14-OCT-2013",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1125560",
+      "tipo": "LEY",
+      "numero": "21118",
+      "texto": "LEY 21118 MINISTERIO DE ENERGÍA 17-NOV-2018",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1038211",
+      "tipo": "LEY",
+      "numero": "20571",
+      "texto": "LEY 20571 MINISTERIO DE ENERGÍA 22-MAR-2012",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1058072",
+      "tipo": "LEY",
+      "numero": "20720",
+      "texto": "LEY 20720 MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO;   SUBSECRETARÍA DE ECONOMÍA Y EMPRESAS DE MENO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "273006",
+      "tipo": "LEY",
+      "numero": "20273",
+      "texto": "LEY 20273 MINISTERIO DEL INTERIOR;   SUBSECRETARIA DEL INTERIOR 28-JUN-2008",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1203005",
+      "tipo": "LEY",
+      "numero": "21667",
+      "texto": "LEY 21667 MINISTERIO DE ENERGÍA 30-ABR-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "264650",
+      "tipo": "LEY",
+      "numero": "20220",
+      "texto": "LEY 20220 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1216930",
+      "tipo": "LEY",
+      "numero": "21770",
+      "texto": "LEY 21770 MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO 29-SEP-2025",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1184572",
+      "tipo": "LEY",
+      "numero": "21505",
+      "texto": "LEY 21505 MINISTERIO DE ENERGÍA 21-NOV-2022",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1199483",
+      "tipo": "LEY",
+      "numero": "21647",
+      "texto": "LEY 21647 MINISTERIO DE HACIENDA 23-DIC-2023",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1074277",
+      "tipo": "LEY",
+      "numero": "20805",
+      "texto": "LEY 20805 MINISTERIO DE ENERGÍA 29-ENE-2015",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "270212",
+      "tipo": "LEY",
+      "numero": "20257",
+      "texto": "LEY 20257 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1059332",
+      "tipo": "LEY",
+      "numero": "20726",
+      "texto": "LEY 20726 MINISTERIO DE ENERGÍA 07-FEB-2014",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1201175",
+      "tipo": "LEY",
+      "numero": "21657",
+      "texto": "LEY 21657 MINISTERIO DE ENERGÍA 19-FEB-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1092695",
+      "tipo": "LEY",
+      "numero": "20936",
+      "texto": "20-JUL-2016\n                                    - Ley 20936",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1140301",
+      "tipo": "LEY",
+      "numero": "21194",
+      "texto": "LEY 21194 MINISTERIO DE ENERGÍA 21-DIC-2019",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1209158",
+      "tipo": "RESOLUCION",
+      "numero": "58",
+      "texto": "RES 58 EXENTA MINISTERIO DE ENERGÍA 09-DIC-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1091871",
+      "tipo": "LEY",
+      "numero": "20928",
+      "texto": "LEY 20928 MINISTERIO DE ENERGÍA 22-JUN-2016",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1154423",
+      "tipo": "LEY",
+      "numero": "21304",
+      "texto": "LEY 21304 MINISTERIO DE ENERGÍA 12-ENE-2021",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "250604",
+      "tipo": "DECRETO",
+      "numero": "62",
+      "texto": "Decreto 62 (Potencia)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "texto": "DFL 4 (LGSE)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1109624",
+      "tipo": "LEY",
+      "numero": "20936",
+      "texto": "Ley 20936 (Transmisión)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1215040",
+      "tipo": "DECRETO",
+      "numero": "10",
+      "texto": "Decreto 10 (Valorización)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1191446",
+      "tipo": "DECRETO",
+      "numero": "52",
+      "texto": "Decreto 52 (Coordinador)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1129970",
+      "tipo": "DECRETO",
+      "numero": "113",
+      "encontrado_desde": "DECRETO 130"
+    },
+    {
+      "id_norma": "1005169",
+      "tipo": "LEY",
+      "numero": "20",
+      "encontrado_desde": "LEY 20897"
+    },
+    {
+      "id_norma": "5362",
+      "tipo": "LEY",
+      "numero": "302",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "150669",
+      "tipo": "LEY",
+      "numero": "19",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "28393",
+      "tipo": "LEY",
+      "numero": "16",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "6857",
+      "tipo": "LEY",
+      "numero": "2",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "30397",
+      "tipo": "LEY",
+      "numero": "19",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "29719",
+      "tipo": "LEY",
+      "numero": "18",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "242411",
+      "tipo": "LEY",
+      "numero": "20",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "3517",
+      "tipo": "LEY",
+      "numero": "2",
+      "encontrado_desde": "LEY 20402"
+    },
+    {
+      "id_norma": "237718",
+      "tipo": "LEY",
+      "numero": "20",
+      "encontrado_desde": "LEY 21582"
+    },
+    {
+      "id_norma": "13315",
+      "tipo": "DECRETO",
+      "numero": "430",
+      "encontrado_desde": "LEY 21582"
+    },
+    {
+      "id_norma": "5423",
+      "tipo": "LEY",
+      "numero": "323",
+      "encontrado_desde": "LEY 21582"
+    },
+    {
+      "id_norma": "221322",
+      "tipo": "LEY",
+      "numero": "5",
+      "encontrado_desde": "LEY 21582"
+    },
+    {
+      "id_norma": "248850",
+      "tipo": "DFL",
+      "numero": "2",
+      "encontrado_desde": "LEY 1"
+    },
+    {
+      "id_norma": "239956",
+      "tipo": "LEY",
+      "numero": "20040",
+      "encontrado_desde": "LEY 1"
+    },
+    {
+      "id_norma": "167498",
+      "tipo": "LEY",
+      "numero": "19674",
+      "encontrado_desde": "LEY 1"
+    },
+    {
+      "id_norma": "222380",
+      "tipo": "LEY",
+      "numero": "19940",
+      "encontrado_desde": "LEY 1"
+    },
+    {
+      "id_norma": "238139",
+      "tipo": "LEY",
+      "numero": "20018",
+      "encontrado_desde": "LEY 1"
+    }
+  ]
+}

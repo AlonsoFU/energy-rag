@@ -1,0 +1,273 @@
+{
+  "descripcion": "Normas del mercado eléctrico chileno - transacciones económicas",
+  "fecha": "2026-01-21T15:49:08.463435",
+  "semillas": [
+    "250604",
+    "258171",
+    "1109624",
+    "1215040",
+    "1191446"
+  ],
+  "total": 37,
+  "normas": [
+    {
+      "id_norma": "258729",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "texto": "DTO 44 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO Y ",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1204012",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "texto": "05-JUN-2024\n                                    - Decreto 70",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1047565",
+      "tipo": "DECRETO",
+      "numero": "130",
+      "texto": "DTO 130 MINISTERIO DE ENERGÍA 31-DIC-2012",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1153949",
+      "tipo": "DECRETO",
+      "numero": "42",
+      "texto": "DTO 42 MINISTERIO DE ENERGÍA 26-DIC-2020",
+      "encontrado_desde": "Decreto 62 (Potencia)"
+    },
+    {
+      "id_norma": "1179524",
+      "tipo": "LEY",
+      "numero": "21472",
+      "texto": "LEY 21472 MINISTERIO DE ENERGÍA 02-AGO-2022",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1087315",
+      "tipo": "LEY",
+      "numero": "20897",
+      "texto": "LEY 20897 MINISTERIO DE ENERGÍA 05-FEB-2016",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1008692",
+      "tipo": "LEY",
+      "numero": "20402",
+      "texto": "LEY 20402 MINISTERIO DE MINERÍA;   SUBSECRETARÍA DE MINERÍA 03-DIC-2009",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1055402",
+      "tipo": "LEY",
+      "numero": "20698",
+      "texto": "LEY 20698 MINISTERIO DE ENERGÍA 22-OCT-2013",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1194043",
+      "tipo": "LEY",
+      "numero": "21582",
+      "texto": "LEY 21582 MINISTERIO DE JUSTICIA Y DERECHOS HUMANOS 07-JUL-2023",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1099982",
+      "tipo": "LEY",
+      "numero": "20999",
+      "texto": "LEY 20999 MINISTERIO DE ENERGÍA 09-FEB-2017",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1115627",
+      "tipo": "LEY",
+      "numero": "21076",
+      "texto": "LEY 21076 MINISTERIO DE ENERGÍA 27-FEB-2018",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1209692",
+      "tipo": "LEY",
+      "numero": "21721",
+      "texto": "LEY 21721 MINISTERIO DE ENERGÍA 27-DIC-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "3410",
+      "tipo": "LEY",
+      "numero": "1",
+      "texto": "Decreto con Fuerza de Ley 1 / 13-SEP-1982",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1055073",
+      "tipo": "LEY",
+      "numero": "20701",
+      "texto": "LEY 20701 MINISTERIO DE ENERGÍA 14-OCT-2013",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1125560",
+      "tipo": "LEY",
+      "numero": "21118",
+      "texto": "LEY 21118 MINISTERIO DE ENERGÍA 17-NOV-2018",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1038211",
+      "tipo": "LEY",
+      "numero": "20571",
+      "texto": "LEY 20571 MINISTERIO DE ENERGÍA 22-MAR-2012",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1058072",
+      "tipo": "LEY",
+      "numero": "20720",
+      "texto": "LEY 20720 MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO;   SUBSECRETARÍA DE ECONOMÍA Y EMPRESAS DE MENO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "273006",
+      "tipo": "LEY",
+      "numero": "20273",
+      "texto": "LEY 20273 MINISTERIO DEL INTERIOR;   SUBSECRETARIA DEL INTERIOR 28-JUN-2008",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1203005",
+      "tipo": "LEY",
+      "numero": "21667",
+      "texto": "LEY 21667 MINISTERIO DE ENERGÍA 30-ABR-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "264650",
+      "tipo": "LEY",
+      "numero": "20220",
+      "texto": "LEY 20220 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1216930",
+      "tipo": "LEY",
+      "numero": "21770",
+      "texto": "LEY 21770 MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO 29-SEP-2025",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1184572",
+      "tipo": "LEY",
+      "numero": "21505",
+      "texto": "LEY 21505 MINISTERIO DE ENERGÍA 21-NOV-2022",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1199483",
+      "tipo": "LEY",
+      "numero": "21647",
+      "texto": "LEY 21647 MINISTERIO DE HACIENDA 23-DIC-2023",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1074277",
+      "tipo": "LEY",
+      "numero": "20805",
+      "texto": "LEY 20805 MINISTERIO DE ENERGÍA 29-ENE-2015",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "270212",
+      "tipo": "LEY",
+      "numero": "20257",
+      "texto": "LEY 20257 MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1059332",
+      "tipo": "LEY",
+      "numero": "20726",
+      "texto": "LEY 20726 MINISTERIO DE ENERGÍA 07-FEB-2014",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1201175",
+      "tipo": "LEY",
+      "numero": "21657",
+      "texto": "LEY 21657 MINISTERIO DE ENERGÍA 19-FEB-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1092695",
+      "tipo": "LEY",
+      "numero": "20936",
+      "texto": "20-JUL-2016\n                                    - Ley 20936",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1140301",
+      "tipo": "LEY",
+      "numero": "21194",
+      "texto": "LEY 21194 MINISTERIO DE ENERGÍA 21-DIC-2019",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1209158",
+      "tipo": "RESOLUCION",
+      "numero": "58",
+      "texto": "RES 58 EXENTA MINISTERIO DE ENERGÍA 09-DIC-2024",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1091871",
+      "tipo": "LEY",
+      "numero": "20928",
+      "texto": "LEY 20928 MINISTERIO DE ENERGÍA 22-JUN-2016",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "1154423",
+      "tipo": "LEY",
+      "numero": "21304",
+      "texto": "LEY 21304 MINISTERIO DE ENERGÍA 12-ENE-2021",
+      "encontrado_desde": "DFL 4 (LGSE)"
+    },
+    {
+      "id_norma": "250604",
+      "tipo": "DECRETO",
+      "numero": "62",
+      "texto": "Decreto 62 (Potencia)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "texto": "DFL 4 (LGSE)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1109624",
+      "tipo": "LEY",
+      "numero": "20936",
+      "texto": "Ley 20936 (Transmisión)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1215040",
+      "tipo": "DECRETO",
+      "numero": "10",
+      "texto": "Decreto 10 (Valorización)",
+      "encontrado_desde": "semilla"
+    },
+    {
+      "id_norma": "1191446",
+      "tipo": "DECRETO",
+      "numero": "52",
+      "texto": "Decreto 52 (Coordinador)",
+      "encontrado_desde": "semilla"
+    }
+  ]
+}

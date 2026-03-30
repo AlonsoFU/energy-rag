@@ -1,0 +1,91 @@
+{
+  "stats": {
+    "total": 10,
+    "ids_conocidos": 3,
+    "ids_buscados": 7,
+    "descargadas": 10,
+    "errores": 0
+  },
+  "resultados": [
+    {
+      "nombre": "Ley 21.721",
+      "id_norma": "258171",
+      "titulo": "DFL 4DFL 4/20018 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CO",
+      "caracteres": 10075,
+      "json": "data/normas/dfl/dfl_4.json",
+      "txt": "data/textos/258171.txt"
+    },
+    {
+      "nombre": "Ley 20.936",
+      "id_norma": "1109624",
+      "titulo": "RESOLUCIÓN 583 EXENTA MODIFICA RESOLUCIÓN Nº 18 EXENTA, DE 2017, QUE ESTABLECE N",
+      "caracteres": 4867,
+      "json": "data/normas/resoluciones/resolución_583.json",
+      "txt": "data/textos/1109624.txt"
+    },
+    {
+      "nombre": "DFL 4/2006",
+      "id_norma": "258171",
+      "titulo": "DFL 4DFL 4/20018 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CO",
+      "caracteres": 10075,
+      "json": "data/normas/dfl/dfl_4.json",
+      "txt": "data/textos/258171.txt"
+    },
+    {
+      "nombre": "Decreto 62",
+      "id_norma": "250604",
+      "titulo": "DECRETO 62 APRUEBA REGLAMENTO DE TRANSFERENCIAS DE POTENCIA ESTABLECIDAS EN LA L",
+      "caracteres": 8834,
+      "json": "data/normas/decretos/decreto_62.json",
+      "txt": "data/textos/250604.txt"
+    },
+    {
+      "nombre": "Decreto 52",
+      "id_norma": "1191446",
+      "titulo": "RESOLUCIÓN 149 EXENTA DEJA SIN EFECTO RESOLUCIÓN Nº 52 EXENTA, DE 31 DE ENERO DE",
+      "caracteres": 16320,
+      "json": "data/normas/resoluciones/resolución_149.json",
+      "txt": "data/textos/1191446.txt"
+    },
+    {
+      "nombre": "Decreto 10",
+      "id_norma": "1215040",
+      "titulo": "DECRETO 13DECRETO 13 T FIJA VALORES, PROPIETARIOS Y FÓRMULAS DE INDEXACIÓN DE LA",
+      "caracteres": 20535,
+      "json": "data/normas/decretos/decreto_13.json",
+      "txt": "data/textos/1215040.txt"
+    },
+    {
+      "nombre": "Decreto 44",
+      "id_norma": "252841",
+      "titulo": "RESOLUCION 838 OTORGA CONCESION DE ACUICULTURA",
+      "caracteres": 1253,
+      "json": "data/normas/otros/_.json",
+      "txt": "data/textos/252841.txt"
+    },
+    {
+      "nombre": "Resolución 711",
+      "id_norma": "1112591",
+      "titulo": "RESOLUCIÓN 711 EXENTA ESTABLECE METODOLOGÍA APLICABLE AL PROCESO DE PLANIFICACIÓ",
+      "caracteres": 14353,
+      "json": "data/normas/resoluciones/resolución_711.json",
+      "txt": "data/textos/1112591.txt"
+    },
+    {
+      "nombre": "Decreto 70",
+      "id_norma": "1200958",
+      "titulo": "RESOLUCIÓN 70 EXENTA RECTIFICA LA RESOLUCIÓN Nº 61/2024 EXENTA, QUE MODIFICA RES",
+      "caracteres": 3314,
+      "json": "data/normas/resoluciones/resolución_70.json",
+      "txt": "data/textos/1200958.txt"
+    },
+    {
+      "nombre": "Ley 19.940",
+      "id_norma": "237695",
+      "titulo": "RESOLUCION 32 EXENTA NOMBRA REPRESENTANTE SUPLENTE DEL MINISTERIO DE ECONOMIA, F",
+      "caracteres": 4004,
+      "json": "data/normas/otros/_.json",
+      "txt": "data/textos/237695.txt"
+    }
+  ]
+}

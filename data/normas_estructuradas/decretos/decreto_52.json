@@ -1,0 +1,173 @@
+{
+  "id_norma": "1191446",
+  "tipo": "DECRETO",
+  "numero": "52",
+  "nombre": "Decreto 52",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "17 de abril de 2023",
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [],
+    "articulos": {
+      "primero": {
+        "numero": "primero",
+        "texto": "Déjase sin efecto la resolución exenta Nº 52 de la Comisión, de 31 de enero de 2018, que complementa y modifica resolución exenta Nº 659, de 17 de noviembre de 2017, de la Comisión Nacional de Energía, que establece disposiciones técnicas para implementación del artículo 8 de la Ley Nº 20.780.",
+        "texto_original": "Déjase sin efecto la resolución exenta Nº 52 de la Comisión, de 31 de enero de 2018, que complementa y modifica resolución exenta Nº 659, de 17 de noviembre de 2017, de la Comisión Nacional de Energía, que establece disposiciones técnicas para implementación del artículo 8 de la Ley Nº 20.780.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "LEY",
+            "numero": "20780",
+            "año": null,
+            "contexto": "iones técnicas para implementación del artículo 8 de la Ley Nº 20.780.",
+            "en_articulo": "primero",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": null
+      },
+      "segundo": {
+        "numero": "segundo",
+        "texto": "Lo dispuesto por el artículo primero precedente, será aplicable a partir de la elaboración de los Balances de Compensaciones que deberán publicarse el año 2024 por parte del Coordinador Independiente del Sistema Eléctrico Nacional, en cumplimiento de lo dispuesto en los numerales 9 y 10 del artículo primero de la resolución exenta Nº 659, a efectos de realizar los cálculos para determinar las compensaciones por pago del impuesto a las emisiones asociadas a la operación de las empresas generadoras durante todo el año 2023.",
+        "texto_original": "Lo dispuesto por el artículo primero precedente, será aplicable a partir de la elaboración de los Balances de Compensaciones que deberán publicarse el año 2024 por parte del Coordinador Independiente del Sistema Eléctrico Nacional, en cumplimiento de lo dispuesto en los numerales 9 y 10 del artículo primero de la resolución exenta Nº 659, a efectos de realizar los cálculos para determinar las compensaciones por pago del impuesto a las emisiones asociadas a la operación de las empresas generadoras durante todo el año 2023.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      },
+      "tercero": {
+        "numero": "tercero",
+        "texto": "Notifíquese la presente resolución al Coordinador Independiente del Sistema Eléctrico Nacional.",
+        "texto_original": "Notifíquese la presente resolución al Coordinador Independiente del Sistema Eléctrico Nacional.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      },
+      "cuarto": {
+        "numero": "cuarto",
+        "texto": "Publíquese la presente resolución en el Diario Oficial y en el sitio web de la Comisión Nacional de Energía.\n\n    Anótese, publíquese y notifíquese.- Marco Antonio Mancilla Ayancán, Secretario Ejecutivo, Comisión Nacional de Energía.",
+        "texto_original": "Publíquese la presente resolución en el Diario Oficial y en el sitio web de la Comisión Nacional de Energía.\n\n\n\n\n    Anótese, publíquese y notifíquese.- Marco Antonio Mancilla Ayancán, Secretario Ejecutivo, Comisión Nacional de Energía.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      }
+    }
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": [
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "52",
+        "año": null,
+        "contexto": "Texto\nVersiones\nEscuchar\n\n\nDEJA SIN EFECTO RESOLUCIÓN Nº 52 EXENTA, DE 31 DE ENERO DE 2018, QUE COMPLEMENTA Y",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "659",
+        "año": null,
+        "contexto": "DE 31 DE ENERO DE 2018, QUE COMPLEMENTA Y MODIFICA RESOLUCIÓN Nº 659 EXENTA, DE 17 DE NOVIEMBRE DE 2017, QUE ESTABLECE",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "20780",
+        "año": null,
+        "contexto": "ONES TÉCNICAS PARA IMPLEMENTACIÓN DEL ARTÍCULO 8º DE LA LEY Nº 20.780, DE LA COMISIÓN NACIONAL DE ENERGÍA\n     \n    Núm",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DL",
+        "numero": "2224",
+        "año": 1978,
+        "contexto": "a) Lo dispuesto en el artículo 9º letra h) del DL Nº 2.224 de 1978, que crea el Ministerio de Energía y la Comisión",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "20402",
+        "año": null,
+        "contexto": "e indistintamente, \"la Comisión\", modificado por la Ley Nº 20.402 que crea el Ministerio de Energía;\n    b) Lo seña",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DFL",
+        "numero": "4",
+        "año": null,
+        "contexto": "a el Ministerio de Energía;\n    b) Lo señalado en el decreto con fuerza de Ley Nº 4 del Ministerio de Economía, Fomento y Reconstrucc",
+        "en_articulo": "preámbulo",
+        "id_norma": "258171"
+      },
+      {
+        "tipo": "DFL",
+        "numero": "1",
+        "año": null,
+        "contexto": "ja el texto refundido, coordinado y sistematizado del decreto con fuerza de Ley Nº 1 del Ministerio de Minería, de 1982, Ley General d",
+        "en_articulo": "preámbulo",
+        "id_norma": "5605"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "21455",
+        "año": null,
+        "contexto": "intamente \"Ley Nº 20.780\";\n    d) Lo dispuesto en la Ley Nº 21.455, que establece la ley marco de cambio climático,",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19880",
+        "año": null,
+        "contexto": "tamente \"Ley Nº 21.455\";\n    e) Lo establecido en la Ley Nº 19.880, que establece bases de los procedimientos admini",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "63",
+        "año": null,
+        "contexto": "adelante, \"Ley Nº 19.880\";\n    f) Lo dispuesto en el decreto supremo Nº 63, del Ministerio del Medio Ambiente, de 2022, que",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "21210",
+        "año": null,
+        "contexto": "l artículo 8º de la Ley Nº 20.780, modificado por la Ley Nº 21.210, en adelante e indistintamente \"Reglamento\";",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "125",
+        "año": null,
+        "contexto": "tintamente \"Reglamento\";\n    g) Lo establecido en el decreto supremo Nº 125 del Ministerio de Energía, de 2017, que aprueba r",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "12",
+        "año": null,
+        "contexto": "fecha 20 de junio de 2022;\n    o) Lo dispuesto en el decreto supremo Nº 12A del Ministerio de Energía (en trámite), del 21 d",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "7",
+        "año": null,
+        "contexto": "sión Nacional de Energía, y\n    p) Lo señalado en la resolución Nº 7 de la Contraloría General de la República, de 201",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      }
+    ]
+  }
+}

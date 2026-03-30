@@ -1,0 +1,85 @@
+{
+  "id_norma": "1142940",
+  "tipo": "",
+  "numero": "",
+  "titulo": "",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142940",
+  "texto_completo": "Formulario de contacto\nBÚSQUEDA AVANZADA\n Modo oscuro\n \n Alto contraste\n  Selección\n Cerrar Navegar Norma\nPortada Ley 21213\n  VOLVER\nLEY 21213\nENCABEZADO\nARTÍCULO 1\nARTÍCULO 2\nARTÍCULO TRANSITORIO\nPROMULGACIÓN\nLEY 21213  MODIFICA LOS CUERPOS LEGALES QUE INDICA PARA DELIMITAR LA INFRACCIÓN QUE CONSISTE EN CIRCULAR UN VEHÍCULO SIN DISPOSITIVO ELECTRÓNICO DE PAGO DE PEAJES O TARIFAS\n\nMINISTERIO DE TRANSPORTES Y TELECOMUNICACIONES\n\n   \n  \n\nPromulgación: 24-FEB-2020\n\nPublicación: 29-FEB-2020\n\nVersión: Última Versión - 08-JUN-2021\n\nMaterias: Dispositivo Electrónico, Vehículo sin Dispositivo Electrónico, Pago de Multas, Pago de Infracción, Prescripción de Multas, Regulación de cobros Reiterados de Multas\n\nResumen: La presente ley establece que será considerada como una sola infracción el paso por distintos portales del TA ... ver más >>\n\nCONCORDANCIAMODIFICACION\n    \n Ocultar notas\nTexto\nVersiones\nProyectos de Ley\nSíguenos en:\nPolíticas de privacidad\nMapa del sitio\nUbicación, horarios y teléfonos",
+  "content_hash": "97af2bb08c4e8cae",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "2021-06-08",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "artículo 114"
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "ley N° 18.290"
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "artículo 24"
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "ley N° 18.287"
+    },
+    {
+      "id_version": "2021-06-08",
+      "descripcion": "Ley 21343Art. ÚNICOD.O. 08.06.2021"
+    },
+    {
+      "id_version": "2020-09-21",
+      "descripcion": "Ley 21268Art. único N° 2 a), b), c)D.O. 21.09.2020"
+    },
+    {
+      "id_version": "2020-09-21",
+      "descripcion": "Ley 21268Art. único N° 3D.O. 21.09.2020"
+    },
+    {
+      "id_version": "2021-06-08",
+      "descripcion": "Última Versión"
+    },
+    {
+      "id_version": "2020-09-21",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "Texto Original"
+    },
+    {
+      "id_version": "2021-06-08",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2021-06-08",
+      "descripcion": ""
+    }
+  ],
+  "extracted_at": "2026-01-24T12:49:03.384761",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 1004,
+    "num_articulos": 2,
+    "num_palabras": 133,
+    "issues": [],
+    "warnings": []
+  }
+}

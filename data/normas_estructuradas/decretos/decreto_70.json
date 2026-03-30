@@ -1,0 +1,59 @@
+{
+  "id_norma": "1200958",
+  "tipo": "DECRETO",
+  "numero": "70",
+  "nombre": "Decreto 70",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": null,
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [],
+    "articulos": {}
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": [
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "61",
+        "año": null,
+        "contexto": "Texto\nVersiones\nEscuchar\n\n\nRECTIFICA LA RESOLUCIÓN Nº 61/2024 EXENTA, QUE MODIFICA RESOLUCIÓN Nº 487/2023",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "487",
+        "año": null,
+        "contexto": "FICA LA RESOLUCIÓN Nº 61/2024 EXENTA, QUE MODIFICA RESOLUCIÓN Nº 487/2023 EXENTA, QUE DISPONE LLAMADO REGIONAL EN COND",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19880",
+        "año": null,
+        "contexto": "1 de enero de 2024.\n     \n    Visto:\n     \n    a) La ley Nº 19.880, que establece las bases de los procedimientos ad",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "397",
+        "año": 1976,
+        "contexto": "a Cecilia.\n    d) Las facultades que me confieren el decreto supremo Nº 397 de 1976 (V. y U.), y el decreto supremo Nº 43, de fecha 2",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "43",
+        "año": null,
+        "contexto": "en el decreto supremo Nº 397 de 1976 (V. y U.), y el decreto supremo Nº 43, de fecha 20 de octubre de 2022, que nombra al in",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,1413 @@
+{
+  "resumen": {
+    "total_normas": 36,
+    "por_institucion": {
+      "Coordinador Eléctrico Nacional": 11,
+      "Comisión Nacional de Energía": 15,
+      "Ministerio de Energía": 10
+    },
+    "por_materia": {
+      "Otros": 19,
+      "Institucionalidad": 6,
+      "Transmisión Eléctrica": 3,
+      "Tarifas y Precios": 3,
+      "Seguridad y Calidad": 2,
+      "Combustibles": 2,
+      "Operación del Sistema": 1,
+      "Distribución Eléctrica": 1,
+      "Normas Técnicas": 1,
+      "Generación Eléctrica": 1,
+      "Eficiencia Energética": 1,
+      "Mercado Eléctrico": 1,
+      "Concesiones": 1
+    },
+    "por_año": {
+      "2025": 2,
+      "2024": 2,
+      "2023": 1,
+      "2022": 5,
+      "2021": 2,
+      "2020": 1,
+      "2018": 6,
+      "2017": 2,
+      "2016": 3,
+      "2014": 1,
+      "2009": 3,
+      "2008": 1,
+      "2005": 3,
+      "2004": 1,
+      "2003": 1,
+      "1997": 1,
+      "1995": 1
+    },
+    "por_tipo": {
+      "RESOLUCIÓN": 14,
+      "DECRETO": 11,
+      "LEY": 10,
+      "DFL": 1
+    }
+  },
+  "materias": {
+    "Seguridad y Calidad": [
+      {
+        "fecha": "08-ABR-2024",
+        "año": 2024,
+        "tipo": "LEY 21663",
+        "titulo": "LEY MARCO DE CIBERSEGURIDAD",
+        "organismo": "MINISTERIO DEL INTERIOR Y SEGURIDAD PÚBLICA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Seguridad y Calidad"
+        ]
+      },
+      {
+        "fecha": "18-JUL-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 527 EXENTA",
+        "titulo": "MODIFICA EL ARTÍCULO 7-7 TRANSITORIO DE LA NORMA TÉCNICA DE CALIDAD DE SERVICIO PARA SISTEMAS DE DISTRIBUCIÓN, APROBADA MEDIANTE RESOLUCIÓN N° 763 EXENTA, DE 10 DE DICIEMBRE DE 2019, DE LA COMISIÓN NACIONAL DE ENERGÍA, EN CONSIDERACIÓN A LAS CIRCUNSTANCIAS EXTRAORDINARIAS QUE SE INDICAN",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Distribución Eléctrica",
+          "Seguridad y Calidad",
+          "Normas Técnicas"
+        ]
+      }
+    ],
+    "Transmisión Eléctrica": [
+      {
+        "fecha": "20-JUL-2016",
+        "año": 2016,
+        "tipo": "LEY 20936",
+        "titulo": "ESTABLECE UN NUEVO SISTEMA DE TRANSMISIÓN ELÉCTRICA Y CREA UN ORGANISMO COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Transmisión Eléctrica"
+        ]
+      },
+      {
+        "fecha": "01-AGO-2020",
+        "año": 2020,
+        "tipo": "DECRETO 11; DECRETO 11T",
+        "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN, PALENA Y GENERAL CARRERA Y ESTABLECE SU PLAN DE EXPANSIÓN, Y DECRETO SUPREMO Nº 10T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Generación Eléctrica",
+          "Tarifas y Precios"
+        ]
+      },
+      {
+        "fecha": "31-MAR-2021",
+        "año": 2021,
+        "tipo": "DECRETO 17; DECRETO 17T",
+        "titulo": "FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS DE AMPLIACIÓN DEL SISTEMA DE TRANSMISIÓN ZONAL CORRESPONDIENTES AL TERCER LLAMADO DE LA LICITACIÓN PÚBLICA DE LAS OBRAS CONTEMPLADAS EN EL DECRETO N° 418 EXENTO, DE 2017, DEL MINISTERIO DE ENERGÍA, Y DE LAS OBRAS DE AMPLIACIÓN ",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Mercado Eléctrico"
+        ]
+      }
+    ],
+    "Otros": [
+      {
+        "fecha": "10-AGO-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 561 EXENTA",
+        "titulo": "DEJA SIN EFECTO RESOLUCIÓN CNE N° 571 EXENTA, DE 26 DE JULIO DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "18-ENE-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 11 EXENTA",
+        "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO D",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "13-SEP-2016",
+        "año": 2016,
+        "tipo": "RESOLUCIÓN 630 EXENTA  DEROGADO",
+        "titulo": "MODIFICA RESOLUCIÓN CNE N° 571 EXENTA, DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "30-JUL-2016",
+        "año": 2016,
+        "tipo": "RESOLUCIÓN 571 EXENTA  DEROGADO",
+        "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "10-AGO-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 562 EXENTA",
+        "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA ELECCIÓN DE MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "13-FEB-2017",
+        "año": 2017,
+        "tipo": "RESOLUCIÓN 71 EXENTA",
+        "titulo": "ESTABLECE PROCEDIMIENTO PARA LA ENTREGA DE INFORMACIÓN PÚBLICA POR PARTE DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, DE CONFORMIDAD AL ARTÍCULO 212°-2 DE LA LEY GENERAL DE SERVICIOS ELÉCTRICOS",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "06-JUL-2017",
+        "año": 2017,
+        "tipo": "RESOLUCIÓN 333 EXENTA",
+        "titulo": "FIJA NORMAS PARA LA FORMULACIÓN Y CONTROL DE LA EJECUCIÓN DEL PRESUPUESTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, EN ESPECIAL PARA EL AÑO 2018",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "03-ABR-2018",
+        "año": 2018,
+        "tipo": "DECRETO 52",
+        "titulo": "APRUEBA REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "16-DIC-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 878 EXENTA",
+        "titulo": "MODIFICA RESOLUCIÓN N° 164 EXENTA, DE LA COMISIÓN NACIONAL DE ENERGÍA, DE 25 DE FEBRERO DE 2010, QUE FIJA EL TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DE RESOLUCIÓN N° 386 EXENTA, DE 2007 DE LA COMISIÓN NACIONAL DE ENERGÍA QUE ESTABLECE NORMAS PARA LA ADECUADA APLICACIÓN DEL ARTÍCULO 148° DEL DFL ",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "21-NOV-2025",
+        "año": 2025,
+        "tipo": "RESOLUCIÓN 711 EXENTA",
+        "titulo": "MODIFICA RESOLUCIÓN Nº 379 EXENTA, DE 30 DE JULIO DE 2024, QUE MODIFICA RESOLUCIÓN Nº 334 EXENTA, DE 27 DE JULIO DE 2023, DE LA COMISIÓN NACIONAL DE ENERGÍA, Y FIJA TEXTO REFUNDIDO DE LA RESOLUCIÓN QUE ESTABLECE DISPOSICIONES TÉCNICAS PARA LA IMPLEMENTACIÓN DE LA LEY Nº 21.472, MODIFICADA POR LA LEY",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "24-SEP-2009",
+        "año": 2009,
+        "tipo": "DFL 2",
+        "titulo": "SUSTITUYE LOS REQUISITOS ESPECÍFICOS DE INGRESO Y PROMOCIÓN DE LAS PLANTAS DE PERSONAL DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "22-SEP-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 24730 EXENTA",
+        "titulo": "INSTRUYE CARACTERÍSTICA TÉCNICA QUE DEBEN CUMPLIR LOS PRODUCTOS ELÉCTRICOS PARA SER COMERCIALIZADOS",
+        "organismo": "MINISTERIO DE ENERGÍA; SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "22-JUL-1995",
+        "año": 1995,
+        "tipo": "DECRETO 441",
+        "titulo": "MODIFICA DECRETOS N°S. 240 Y 315, AMBOS DE 1995",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "12-SEP-1997",
+        "año": 1997,
+        "tipo": "DECRETO 1052",
+        "titulo": "PROMULGA ACUERDO CON ALEMANIA SOBRE EL PROYECTO \"USO RACIONAL DE LA ENERGIA\"",
+        "organismo": "MINISTERIO DE RELACIONES EXTERIORES",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "22-SEP-2014",
+        "año": 2014,
+        "tipo": "LEY 20776",
+        "titulo": "MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "04-NOV-2024",
+        "año": 2024,
+        "tipo": "LEY 21711",
+        "titulo": "PERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "03-DIC-2009",
+        "año": 2009,
+        "tipo": "LEY 20402",
+        "titulo": "CREA EL MINISTERIO DE ENERGÍA, ESTABLECIENDO MODIFICACIONES AL DL Nº 2.224, DE 1978 Y A OTROS CUERPOS LEGALES",
+        "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "17-MAY-2025",
+        "año": 2025,
+        "tipo": "DECRETO 2; DECRETO 2T",
+        "titulo": "FIJA DERECHOS Y CONDICIONES DE EJECUCIÓN Y EXPLOTACIÓN Y FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS CONTEMPLADAS EN LOS DECRETOS EXENTOS N°198, DE 2019; N°185, DE 2021; N°200, DE 2022; Y, N°4, DE 2024, TODOS DEL MINISTERIO DE ENERGÍA; MODIFICA DECRETO SUPREMO N°18T, DE ",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "17-DIC-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 42 EXENTA",
+        "titulo": "RECTIFICA RESOLUCIÓN N° 40/2022 EXENTA MINISTERIAL, DE 5 DE DICIEMBRE DE 2022, DEL MINISTERIO DE ENERGÍA, QUE INICIA PROCEDIMIENTO DE INVALIDACIÓN ADMINISTRATIVA PARCIAL DEL DECRETO SUPREMO N° 33, DE 2022, DEL MINISTERIO DE ENERGÍA, CONFIERE TRASLADO A LOS INTERESADOS Y CONCEDE AUDIENCIA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "Operación del Sistema": [
+      {
+        "fecha": "18-ENE-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 12 EXENTA",
+        "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DE LA COORDINACIÓN Y OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO ",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Operación del Sistema"
+        ]
+      }
+    ],
+    "Tarifas y Precios": [
+      {
+        "fecha": "29-SEP-2005",
+        "año": 2005,
+        "tipo": "LEY 20063",
+        "titulo": "CREA FONDOS DE ESTABILIZACION DE PRECIOS DE COMBUSTIBLES DERIVADOS DEL PETROLEO",
+        "organismo": "MINISTERIO DE HACIENDA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Tarifas y Precios",
+          "Combustibles"
+        ]
+      },
+      {
+        "fecha": "13-MAR-2004",
+        "año": 2004,
+        "tipo": "LEY 19940",
+        "titulo": "REGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACIONES QUE INDICA A LA LEY GENERAL DE SERVICIOS ELECTRICOS",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Tarifas y Precios"
+        ]
+      },
+      {
+        "fecha": "01-AGO-2020",
+        "año": 2020,
+        "tipo": "DECRETO 11; DECRETO 11T",
+        "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN, PALENA Y GENERAL CARRERA Y ESTABLECE SU PLAN DE EXPANSIÓN, Y DECRETO SUPREMO Nº 10T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Generación Eléctrica",
+          "Tarifas y Precios"
+        ]
+      }
+    ],
+    "Combustibles": [
+      {
+        "fecha": "29-SEP-2005",
+        "año": 2005,
+        "tipo": "LEY 20063",
+        "titulo": "CREA FONDOS DE ESTABILIZACION DE PRECIOS DE COMBUSTIBLES DERIVADOS DEL PETROLEO",
+        "organismo": "MINISTERIO DE HACIENDA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Tarifas y Precios",
+          "Combustibles"
+        ]
+      },
+      {
+        "fecha": "04-NOV-2022",
+        "año": 2022,
+        "tipo": "LEY 21499",
+        "titulo": "REGULA LOS BIOCOMBUSTIBLES SÓLIDOS",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Combustibles"
+        ]
+      }
+    ],
+    "Institucionalidad": [
+      {
+        "fecha": "30-SEP-2003",
+        "año": 2003,
+        "tipo": "DECRETO 68",
+        "titulo": "ACEPTA RENUNCIA AL CARGO DE SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA, A LA SRA. VIVIANNE BLANLOT SOZA, Y NOMBRASE EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISION NACIONAL DE ENERGIA, AL SEÑOR LUIS SANCHEZ CASTELLON",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "19-MAY-2005",
+        "año": 2005,
+        "tipo": "LEY 20018",
+        "titulo": "MODIFICA EL MARCO NORMATIVO DEL SECTOR ELECTRICO",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "13-JUN-2005",
+        "año": 2005,
+        "tipo": "DECRETO 42",
+        "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGACION EN LA SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "24-NOV-2008",
+        "año": 2008,
+        "tipo": "DECRETO 401  DEROGADO",
+        "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGANCIA EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "20-FEB-2009",
+        "año": 2009,
+        "tipo": "DECRETO 55",
+        "titulo": "MODIFICA TEMPORALMENTE ORDEN DE SUBROGACIÓN EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA, DISPUESTO MEDIANTE DECRETO Nº 401, DE 2008, ESTABLECIENDO UN ORDEN ESPECIAL DE SUBROGACIÓN POR EL TIEMPO QUE INDICA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "10-JUL-2023",
+        "año": 2023,
+        "tipo": "DECRETO 12",
+        "titulo": "NOMBRA A DON MARCO ANTONIO MANCILLA AYANCÁN EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      }
+    ],
+    "Distribución Eléctrica": [
+      {
+        "fecha": "18-JUL-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 527 EXENTA",
+        "titulo": "MODIFICA EL ARTÍCULO 7-7 TRANSITORIO DE LA NORMA TÉCNICA DE CALIDAD DE SERVICIO PARA SISTEMAS DE DISTRIBUCIÓN, APROBADA MEDIANTE RESOLUCIÓN N° 763 EXENTA, DE 10 DE DICIEMBRE DE 2019, DE LA COMISIÓN NACIONAL DE ENERGÍA, EN CONSIDERACIÓN A LAS CIRCUNSTANCIAS EXTRAORDINARIAS QUE SE INDICAN",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Distribución Eléctrica",
+          "Seguridad y Calidad",
+          "Normas Técnicas"
+        ]
+      }
+    ],
+    "Normas Técnicas": [
+      {
+        "fecha": "18-JUL-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 527 EXENTA",
+        "titulo": "MODIFICA EL ARTÍCULO 7-7 TRANSITORIO DE LA NORMA TÉCNICA DE CALIDAD DE SERVICIO PARA SISTEMAS DE DISTRIBUCIÓN, APROBADA MEDIANTE RESOLUCIÓN N° 763 EXENTA, DE 10 DE DICIEMBRE DE 2019, DE LA COMISIÓN NACIONAL DE ENERGÍA, EN CONSIDERACIÓN A LAS CIRCUNSTANCIAS EXTRAORDINARIAS QUE SE INDICAN",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Distribución Eléctrica",
+          "Seguridad y Calidad",
+          "Normas Técnicas"
+        ]
+      }
+    ],
+    "Generación Eléctrica": [
+      {
+        "fecha": "01-AGO-2020",
+        "año": 2020,
+        "tipo": "DECRETO 11; DECRETO 11T",
+        "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN, PALENA Y GENERAL CARRERA Y ESTABLECE SU PLAN DE EXPANSIÓN, Y DECRETO SUPREMO Nº 10T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Generación Eléctrica",
+          "Tarifas y Precios"
+        ]
+      }
+    ],
+    "Eficiencia Energética": [
+      {
+        "fecha": "13-FEB-2021",
+        "año": 2021,
+        "tipo": "LEY 21305",
+        "titulo": "SOBRE EFICIENCIA ENERGÉTICA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Eficiencia Energética"
+        ]
+      }
+    ],
+    "Mercado Eléctrico": [
+      {
+        "fecha": "31-MAR-2021",
+        "año": 2021,
+        "tipo": "DECRETO 17; DECRETO 17T",
+        "titulo": "FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS DE AMPLIACIÓN DEL SISTEMA DE TRANSMISIÓN ZONAL CORRESPONDIENTES AL TERCER LLAMADO DE LA LICITACIÓN PÚBLICA DE LAS OBRAS CONTEMPLADAS EN EL DECRETO N° 418 EXENTO, DE 2017, DEL MINISTERIO DE ENERGÍA, Y DE LAS OBRAS DE AMPLIACIÓN ",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Mercado Eléctrico"
+        ]
+      }
+    ],
+    "Concesiones": [
+      {
+        "fecha": "26-ABR-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 91 EXENTA",
+        "titulo": "RECTIFICA DECRETO SUPREMO Nº 71 EXENTO, DE 2022, DEL MINISTERIO DE ENERGÍA, QUE MODIFICA DECRETO SUPREMO Nº 16, DE 2021, DEL MINISTERIO DE ENERGÍA, QUE OTORGA A GASODUCTO DEL PACÍFICO S.A. CONCESIÓN DEFINITIVA DE TRANSPORTE DE GAS DE RED EN LA COMUNA DE CABRERO, REGIÓN DEL BIOBÍO",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Concesiones"
+        ]
+      }
+    ]
+  },
+  "por_año": {
+    "2024": [
+      {
+        "fecha": "08-ABR-2024",
+        "año": 2024,
+        "tipo": "LEY 21663",
+        "titulo": "LEY MARCO DE CIBERSEGURIDAD",
+        "organismo": "MINISTERIO DEL INTERIOR Y SEGURIDAD PÚBLICA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Seguridad y Calidad"
+        ]
+      },
+      {
+        "fecha": "04-NOV-2024",
+        "año": 2024,
+        "tipo": "LEY 21711",
+        "titulo": "PERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2016": [
+      {
+        "fecha": "20-JUL-2016",
+        "año": 2016,
+        "tipo": "LEY 20936",
+        "titulo": "ESTABLECE UN NUEVO SISTEMA DE TRANSMISIÓN ELÉCTRICA Y CREA UN ORGANISMO COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Transmisión Eléctrica"
+        ]
+      },
+      {
+        "fecha": "13-SEP-2016",
+        "año": 2016,
+        "tipo": "RESOLUCIÓN 630 EXENTA  DEROGADO",
+        "titulo": "MODIFICA RESOLUCIÓN CNE N° 571 EXENTA, DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "30-JUL-2016",
+        "año": 2016,
+        "tipo": "RESOLUCIÓN 571 EXENTA  DEROGADO",
+        "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2018": [
+      {
+        "fecha": "10-AGO-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 561 EXENTA",
+        "titulo": "DEJA SIN EFECTO RESOLUCIÓN CNE N° 571 EXENTA, DE 26 DE JULIO DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "18-ENE-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 11 EXENTA",
+        "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO D",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "10-AGO-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 562 EXENTA",
+        "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA ELECCIÓN DE MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "03-ABR-2018",
+        "año": 2018,
+        "tipo": "DECRETO 52",
+        "titulo": "APRUEBA REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "18-ENE-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 12 EXENTA",
+        "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DE LA COORDINACIÓN Y OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO ",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Operación del Sistema"
+        ]
+      },
+      {
+        "fecha": "22-SEP-2018",
+        "año": 2018,
+        "tipo": "RESOLUCIÓN 24730 EXENTA",
+        "titulo": "INSTRUYE CARACTERÍSTICA TÉCNICA QUE DEBEN CUMPLIR LOS PRODUCTOS ELÉCTRICOS PARA SER COMERCIALIZADOS",
+        "organismo": "MINISTERIO DE ENERGÍA; SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2017": [
+      {
+        "fecha": "13-FEB-2017",
+        "año": 2017,
+        "tipo": "RESOLUCIÓN 71 EXENTA",
+        "titulo": "ESTABLECE PROCEDIMIENTO PARA LA ENTREGA DE INFORMACIÓN PÚBLICA POR PARTE DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, DE CONFORMIDAD AL ARTÍCULO 212°-2 DE LA LEY GENERAL DE SERVICIOS ELÉCTRICOS",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "06-JUL-2017",
+        "año": 2017,
+        "tipo": "RESOLUCIÓN 333 EXENTA",
+        "titulo": "FIJA NORMAS PARA LA FORMULACIÓN Y CONTROL DE LA EJECUCIÓN DEL PRESUPUESTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, EN ESPECIAL PARA EL AÑO 2018",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Coordinador Eléctrico Nacional",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2005": [
+      {
+        "fecha": "29-SEP-2005",
+        "año": 2005,
+        "tipo": "LEY 20063",
+        "titulo": "CREA FONDOS DE ESTABILIZACION DE PRECIOS DE COMBUSTIBLES DERIVADOS DEL PETROLEO",
+        "organismo": "MINISTERIO DE HACIENDA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Tarifas y Precios",
+          "Combustibles"
+        ]
+      },
+      {
+        "fecha": "19-MAY-2005",
+        "año": 2005,
+        "tipo": "LEY 20018",
+        "titulo": "MODIFICA EL MARCO NORMATIVO DEL SECTOR ELECTRICO",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "13-JUN-2005",
+        "año": 2005,
+        "tipo": "DECRETO 42",
+        "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGACION EN LA SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      }
+    ],
+    "2004": [
+      {
+        "fecha": "13-MAR-2004",
+        "año": 2004,
+        "tipo": "LEY 19940",
+        "titulo": "REGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACIONES QUE INDICA A LA LEY GENERAL DE SERVICIOS ELECTRICOS",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Tarifas y Precios"
+        ]
+      }
+    ],
+    "2022": [
+      {
+        "fecha": "16-DIC-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 878 EXENTA",
+        "titulo": "MODIFICA RESOLUCIÓN N° 164 EXENTA, DE LA COMISIÓN NACIONAL DE ENERGÍA, DE 25 DE FEBRERO DE 2010, QUE FIJA EL TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DE RESOLUCIÓN N° 386 EXENTA, DE 2007 DE LA COMISIÓN NACIONAL DE ENERGÍA QUE ESTABLECE NORMAS PARA LA ADECUADA APLICACIÓN DEL ARTÍCULO 148° DEL DFL ",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "18-JUL-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 527 EXENTA",
+        "titulo": "MODIFICA EL ARTÍCULO 7-7 TRANSITORIO DE LA NORMA TÉCNICA DE CALIDAD DE SERVICIO PARA SISTEMAS DE DISTRIBUCIÓN, APROBADA MEDIANTE RESOLUCIÓN N° 763 EXENTA, DE 10 DE DICIEMBRE DE 2019, DE LA COMISIÓN NACIONAL DE ENERGÍA, EN CONSIDERACIÓN A LAS CIRCUNSTANCIAS EXTRAORDINARIAS QUE SE INDICAN",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Distribución Eléctrica",
+          "Seguridad y Calidad",
+          "Normas Técnicas"
+        ]
+      },
+      {
+        "fecha": "04-NOV-2022",
+        "año": 2022,
+        "tipo": "LEY 21499",
+        "titulo": "REGULA LOS BIOCOMBUSTIBLES SÓLIDOS",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Combustibles"
+        ]
+      },
+      {
+        "fecha": "26-ABR-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 91 EXENTA",
+        "titulo": "RECTIFICA DECRETO SUPREMO Nº 71 EXENTO, DE 2022, DEL MINISTERIO DE ENERGÍA, QUE MODIFICA DECRETO SUPREMO Nº 16, DE 2021, DEL MINISTERIO DE ENERGÍA, QUE OTORGA A GASODUCTO DEL PACÍFICO S.A. CONCESIÓN DEFINITIVA DE TRANSPORTE DE GAS DE RED EN LA COMUNA DE CABRERO, REGIÓN DEL BIOBÍO",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Concesiones"
+        ]
+      },
+      {
+        "fecha": "17-DIC-2022",
+        "año": 2022,
+        "tipo": "RESOLUCIÓN 42 EXENTA",
+        "titulo": "RECTIFICA RESOLUCIÓN N° 40/2022 EXENTA MINISTERIAL, DE 5 DE DICIEMBRE DE 2022, DEL MINISTERIO DE ENERGÍA, QUE INICIA PROCEDIMIENTO DE INVALIDACIÓN ADMINISTRATIVA PARCIAL DEL DECRETO SUPREMO N° 33, DE 2022, DEL MINISTERIO DE ENERGÍA, CONFIERE TRASLADO A LOS INTERESADOS Y CONCEDE AUDIENCIA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2003": [
+      {
+        "fecha": "30-SEP-2003",
+        "año": 2003,
+        "tipo": "DECRETO 68",
+        "titulo": "ACEPTA RENUNCIA AL CARGO DE SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA, A LA SRA. VIVIANNE BLANLOT SOZA, Y NOMBRASE EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISION NACIONAL DE ENERGIA, AL SEÑOR LUIS SANCHEZ CASTELLON",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      }
+    ],
+    "2025": [
+      {
+        "fecha": "21-NOV-2025",
+        "año": 2025,
+        "tipo": "RESOLUCIÓN 711 EXENTA",
+        "titulo": "MODIFICA RESOLUCIÓN Nº 379 EXENTA, DE 30 DE JULIO DE 2024, QUE MODIFICA RESOLUCIÓN Nº 334 EXENTA, DE 27 DE JULIO DE 2023, DE LA COMISIÓN NACIONAL DE ENERGÍA, Y FIJA TEXTO REFUNDIDO DE LA RESOLUCIÓN QUE ESTABLECE DISPOSICIONES TÉCNICAS PARA LA IMPLEMENTACIÓN DE LA LEY Nº 21.472, MODIFICADA POR LA LEY",
+        "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "17-MAY-2025",
+        "año": 2025,
+        "tipo": "DECRETO 2; DECRETO 2T",
+        "titulo": "FIJA DERECHOS Y CONDICIONES DE EJECUCIÓN Y EXPLOTACIÓN Y FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS CONTEMPLADAS EN LOS DECRETOS EXENTOS N°198, DE 2019; N°185, DE 2021; N°200, DE 2022; Y, N°4, DE 2024, TODOS DEL MINISTERIO DE ENERGÍA; MODIFICA DECRETO SUPREMO N°18T, DE ",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2009": [
+      {
+        "fecha": "24-SEP-2009",
+        "año": 2009,
+        "tipo": "DFL 2",
+        "titulo": "SUSTITUYE LOS REQUISITOS ESPECÍFICOS DE INGRESO Y PROMOCIÓN DE LAS PLANTAS DE PERSONAL DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      },
+      {
+        "fecha": "20-FEB-2009",
+        "año": 2009,
+        "tipo": "DECRETO 55",
+        "titulo": "MODIFICA TEMPORALMENTE ORDEN DE SUBROGACIÓN EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA, DISPUESTO MEDIANTE DECRETO Nº 401, DE 2008, ESTABLECIENDO UN ORDEN ESPECIAL DE SUBROGACIÓN POR EL TIEMPO QUE INDICA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      },
+      {
+        "fecha": "03-DIC-2009",
+        "año": 2009,
+        "tipo": "LEY 20402",
+        "titulo": "CREA EL MINISTERIO DE ENERGÍA, ESTABLECIENDO MODIFICACIONES AL DL Nº 2.224, DE 1978 Y A OTROS CUERPOS LEGALES",
+        "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "1995": [
+      {
+        "fecha": "22-JUL-1995",
+        "año": 1995,
+        "tipo": "DECRETO 441",
+        "titulo": "MODIFICA DECRETOS N°S. 240 Y 315, AMBOS DE 1995",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2008": [
+      {
+        "fecha": "24-NOV-2008",
+        "año": 2008,
+        "tipo": "DECRETO 401  DEROGADO",
+        "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGANCIA EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE MINERÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      }
+    ],
+    "1997": [
+      {
+        "fecha": "12-SEP-1997",
+        "año": 1997,
+        "tipo": "DECRETO 1052",
+        "titulo": "PROMULGA ACUERDO CON ALEMANIA SOBRE EL PROYECTO \"USO RACIONAL DE LA ENERGIA\"",
+        "organismo": "MINISTERIO DE RELACIONES EXTERIORES",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2023": [
+      {
+        "fecha": "10-JUL-2023",
+        "año": 2023,
+        "tipo": "DECRETO 12",
+        "titulo": "NOMBRA A DON MARCO ANTONIO MANCILLA AYANCÁN EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISIÓN NACIONAL DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Comisión Nacional de Energía",
+        "materias": [
+          "Institucionalidad"
+        ]
+      }
+    ],
+    "2014": [
+      {
+        "fecha": "22-SEP-2014",
+        "año": 2014,
+        "tipo": "LEY 20776",
+        "titulo": "MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Otros"
+        ]
+      }
+    ],
+    "2020": [
+      {
+        "fecha": "01-AGO-2020",
+        "año": 2020,
+        "tipo": "DECRETO 11; DECRETO 11T",
+        "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN, PALENA Y GENERAL CARRERA Y ESTABLECE SU PLAN DE EXPANSIÓN, Y DECRETO SUPREMO Nº 10T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Generación Eléctrica",
+          "Tarifas y Precios"
+        ]
+      }
+    ],
+    "2021": [
+      {
+        "fecha": "13-FEB-2021",
+        "año": 2021,
+        "tipo": "LEY 21305",
+        "titulo": "SOBRE EFICIENCIA ENERGÉTICA",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Eficiencia Energética"
+        ]
+      },
+      {
+        "fecha": "31-MAR-2021",
+        "año": 2021,
+        "tipo": "DECRETO 17; DECRETO 17T",
+        "titulo": "FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS DE AMPLIACIÓN DEL SISTEMA DE TRANSMISIÓN ZONAL CORRESPONDIENTES AL TERCER LLAMADO DE LA LICITACIÓN PÚBLICA DE LAS OBRAS CONTEMPLADAS EN EL DECRETO N° 418 EXENTO, DE 2017, DEL MINISTERIO DE ENERGÍA, Y DE LAS OBRAS DE AMPLIACIÓN ",
+        "organismo": "MINISTERIO DE ENERGÍA",
+        "institucion": "Ministerio de Energía",
+        "materias": [
+          "Transmisión Eléctrica",
+          "Mercado Eléctrico"
+        ]
+      }
+    ]
+  },
+  "instituciones": {
+    "Coordinador Eléctrico Nacional": {
+      "total": 11,
+      "normas": [
+        {
+          "fecha": "08-ABR-2024",
+          "año": 2024,
+          "tipo": "LEY 21663",
+          "titulo": "LEY MARCO DE CIBERSEGURIDAD",
+          "organismo": "MINISTERIO DEL INTERIOR Y SEGURIDAD PÚBLICA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Seguridad y Calidad"
+          ]
+        },
+        {
+          "fecha": "20-JUL-2016",
+          "año": 2016,
+          "tipo": "LEY 20936",
+          "titulo": "ESTABLECE UN NUEVO SISTEMA DE TRANSMISIÓN ELÉCTRICA Y CREA UN ORGANISMO COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Transmisión Eléctrica"
+          ]
+        },
+        {
+          "fecha": "10-AGO-2018",
+          "año": 2018,
+          "tipo": "RESOLUCIÓN 561 EXENTA",
+          "titulo": "DEJA SIN EFECTO RESOLUCIÓN CNE N° 571 EXENTA, DE 26 DE JULIO DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRE",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "18-ENE-2018",
+          "año": 2018,
+          "tipo": "RESOLUCIÓN 11 EXENTA",
+          "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO D",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "13-SEP-2016",
+          "año": 2016,
+          "tipo": "RESOLUCIÓN 630 EXENTA  DEROGADO",
+          "titulo": "MODIFICA RESOLUCIÓN CNE N° 571 EXENTA, DE 2016, QUE APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "30-JUL-2016",
+          "año": 2016,
+          "tipo": "RESOLUCIÓN 571 EXENTA  DEROGADO",
+          "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA PRIMERA ELECCIÓN DE LOS MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "10-AGO-2018",
+          "año": 2018,
+          "tipo": "RESOLUCIÓN 562 EXENTA",
+          "titulo": "APRUEBA NORMAS SOBRE FUNCIONAMIENTO DEL COMITÉ ESPECIAL DE NOMINACIONES Y EL PROCEDIMIENTO PARA LA ELECCIÓN DE MIEMBROS DEL CONSEJO DIRECTIVO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL Y DE SU PRESIDENTE",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "13-FEB-2017",
+          "año": 2017,
+          "tipo": "RESOLUCIÓN 71 EXENTA",
+          "titulo": "ESTABLECE PROCEDIMIENTO PARA LA ENTREGA DE INFORMACIÓN PÚBLICA POR PARTE DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, DE CONFORMIDAD AL ARTÍCULO 212°-2 DE LA LEY GENERAL DE SERVICIOS ELÉCTRICOS",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "06-JUL-2017",
+          "año": 2017,
+          "tipo": "RESOLUCIÓN 333 EXENTA",
+          "titulo": "FIJA NORMAS PARA LA FORMULACIÓN Y CONTROL DE LA EJECUCIÓN DEL PRESUPUESTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL, EN ESPECIAL PARA EL AÑO 2018",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "03-ABR-2018",
+          "año": 2018,
+          "tipo": "DECRETO 52",
+          "titulo": "APRUEBA REGLAMENTO DEL COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "18-ENE-2018",
+          "año": 2018,
+          "tipo": "RESOLUCIÓN 12 EXENTA",
+          "titulo": "APRUEBA PRÓRROGA DE VIGENCIA DE LAS RESOLUCIONES EXENTAS CNE CON NORMAS DE CARÁCTER REGLAMENTARIO QUE INDICA, DURANTE EL TIEMPO EN EL QUE EL REGLAMENTO DE LA COORDINACIÓN Y OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL SE ENCUENTRE EN TRÁMITE Y HASTA LA ENTRADA EN VIGENCIA DEL MISMO, EN CONFORMIDAD A LO ",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Coordinador Eléctrico Nacional",
+          "materias": [
+            "Operación del Sistema"
+          ]
+        }
+      ]
+    },
+    "Comisión Nacional de Energía": {
+      "total": 15,
+      "normas": [
+        {
+          "fecha": "29-SEP-2005",
+          "año": 2005,
+          "tipo": "LEY 20063",
+          "titulo": "CREA FONDOS DE ESTABILIZACION DE PRECIOS DE COMBUSTIBLES DERIVADOS DEL PETROLEO",
+          "organismo": "MINISTERIO DE HACIENDA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Tarifas y Precios",
+            "Combustibles"
+          ]
+        },
+        {
+          "fecha": "13-MAR-2004",
+          "año": 2004,
+          "tipo": "LEY 19940",
+          "titulo": "REGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACIONES QUE INDICA A LA LEY GENERAL DE SERVICIOS ELECTRICOS",
+          "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Tarifas y Precios"
+          ]
+        },
+        {
+          "fecha": "16-DIC-2022",
+          "año": 2022,
+          "tipo": "RESOLUCIÓN 878 EXENTA",
+          "titulo": "MODIFICA RESOLUCIÓN N° 164 EXENTA, DE LA COMISIÓN NACIONAL DE ENERGÍA, DE 25 DE FEBRERO DE 2010, QUE FIJA EL TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DE RESOLUCIÓN N° 386 EXENTA, DE 2007 DE LA COMISIÓN NACIONAL DE ENERGÍA QUE ESTABLECE NORMAS PARA LA ADECUADA APLICACIÓN DEL ARTÍCULO 148° DEL DFL ",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "30-SEP-2003",
+          "año": 2003,
+          "tipo": "DECRETO 68",
+          "titulo": "ACEPTA RENUNCIA AL CARGO DE SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA, A LA SRA. VIVIANNE BLANLOT SOZA, Y NOMBRASE EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISION NACIONAL DE ENERGIA, AL SEÑOR LUIS SANCHEZ CASTELLON",
+          "organismo": "MINISTERIO DE MINERÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        },
+        {
+          "fecha": "21-NOV-2025",
+          "año": 2025,
+          "tipo": "RESOLUCIÓN 711 EXENTA",
+          "titulo": "MODIFICA RESOLUCIÓN Nº 379 EXENTA, DE 30 DE JULIO DE 2024, QUE MODIFICA RESOLUCIÓN Nº 334 EXENTA, DE 27 DE JULIO DE 2023, DE LA COMISIÓN NACIONAL DE ENERGÍA, Y FIJA TEXTO REFUNDIDO DE LA RESOLUCIÓN QUE ESTABLECE DISPOSICIONES TÉCNICAS PARA LA IMPLEMENTACIÓN DE LA LEY Nº 21.472, MODIFICADA POR LA LEY",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "18-JUL-2022",
+          "año": 2022,
+          "tipo": "RESOLUCIÓN 527 EXENTA",
+          "titulo": "MODIFICA EL ARTÍCULO 7-7 TRANSITORIO DE LA NORMA TÉCNICA DE CALIDAD DE SERVICIO PARA SISTEMAS DE DISTRIBUCIÓN, APROBADA MEDIANTE RESOLUCIÓN N° 763 EXENTA, DE 10 DE DICIEMBRE DE 2019, DE LA COMISIÓN NACIONAL DE ENERGÍA, EN CONSIDERACIÓN A LAS CIRCUNSTANCIAS EXTRAORDINARIAS QUE SE INDICAN",
+          "organismo": "MINISTERIO DE ENERGÍA; COMISIÓN NACIONAL DE ENERGÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Distribución Eléctrica",
+            "Seguridad y Calidad",
+            "Normas Técnicas"
+          ]
+        },
+        {
+          "fecha": "24-SEP-2009",
+          "año": 2009,
+          "tipo": "DFL 2",
+          "titulo": "SUSTITUYE LOS REQUISITOS ESPECÍFICOS DE INGRESO Y PROMOCIÓN DE LAS PLANTAS DE PERSONAL DE LA COMISIÓN NACIONAL DE ENERGÍA",
+          "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "19-MAY-2005",
+          "año": 2005,
+          "tipo": "LEY 20018",
+          "titulo": "MODIFICA EL MARCO NORMATIVO DEL SECTOR ELECTRICO",
+          "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        },
+        {
+          "fecha": "22-SEP-2018",
+          "año": 2018,
+          "tipo": "RESOLUCIÓN 24730 EXENTA",
+          "titulo": "INSTRUYE CARACTERÍSTICA TÉCNICA QUE DEBEN CUMPLIR LOS PRODUCTOS ELÉCTRICOS PARA SER COMERCIALIZADOS",
+          "organismo": "MINISTERIO DE ENERGÍA; SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "13-JUN-2005",
+          "año": 2005,
+          "tipo": "DECRETO 42",
+          "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGACION EN LA SECRETARIA EJECUTIVA DE LA COMISION NACIONAL DE ENERGIA",
+          "organismo": "MINISTERIO DE MINERÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        },
+        {
+          "fecha": "22-JUL-1995",
+          "año": 1995,
+          "tipo": "DECRETO 441",
+          "titulo": "MODIFICA DECRETOS N°S. 240 Y 315, AMBOS DE 1995",
+          "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "24-NOV-2008",
+          "año": 2008,
+          "tipo": "DECRETO 401  DEROGADO",
+          "titulo": "ESTABLECE ORDEN ESPECIAL DE SUBROGANCIA EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA",
+          "organismo": "MINISTERIO DE MINERÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        },
+        {
+          "fecha": "12-SEP-1997",
+          "año": 1997,
+          "tipo": "DECRETO 1052",
+          "titulo": "PROMULGA ACUERDO CON ALEMANIA SOBRE EL PROYECTO \"USO RACIONAL DE LA ENERGIA\"",
+          "organismo": "MINISTERIO DE RELACIONES EXTERIORES",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "20-FEB-2009",
+          "año": 2009,
+          "tipo": "DECRETO 55",
+          "titulo": "MODIFICA TEMPORALMENTE ORDEN DE SUBROGACIÓN EN LA SECRETARÍA EJECUTIVA DE LA COMISIÓN NACIONAL DE ENERGÍA, DISPUESTO MEDIANTE DECRETO Nº 401, DE 2008, ESTABLECIENDO UN ORDEN ESPECIAL DE SUBROGACIÓN POR EL TIEMPO QUE INDICA",
+          "organismo": "MINISTERIO DE MINERÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        },
+        {
+          "fecha": "10-JUL-2023",
+          "año": 2023,
+          "tipo": "DECRETO 12",
+          "titulo": "NOMBRA A DON MARCO ANTONIO MANCILLA AYANCÁN EN EL CARGO DE SECRETARIO EJECUTIVO DE LA COMISIÓN NACIONAL DE ENERGÍA",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Comisión Nacional de Energía",
+          "materias": [
+            "Institucionalidad"
+          ]
+        }
+      ]
+    },
+    "Ministerio de Energía": {
+      "total": 10,
+      "normas": [
+        {
+          "fecha": "22-SEP-2014",
+          "año": 2014,
+          "tipo": "LEY 20776",
+          "titulo": "MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "01-AGO-2020",
+          "año": 2020,
+          "tipo": "DECRETO 11; DECRETO 11T",
+          "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN, PALENA Y GENERAL CARRERA Y ESTABLECE SU PLAN DE EXPANSIÓN, Y DECRETO SUPREMO Nº 10T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Transmisión Eléctrica",
+            "Generación Eléctrica",
+            "Tarifas y Precios"
+          ]
+        },
+        {
+          "fecha": "13-FEB-2021",
+          "año": 2021,
+          "tipo": "LEY 21305",
+          "titulo": "SOBRE EFICIENCIA ENERGÉTICA",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Eficiencia Energética"
+          ]
+        },
+        {
+          "fecha": "04-NOV-2022",
+          "año": 2022,
+          "tipo": "LEY 21499",
+          "titulo": "REGULA LOS BIOCOMBUSTIBLES SÓLIDOS",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Combustibles"
+          ]
+        },
+        {
+          "fecha": "04-NOV-2024",
+          "año": 2024,
+          "tipo": "LEY 21711",
+          "titulo": "PERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "03-DIC-2009",
+          "año": 2009,
+          "tipo": "LEY 20402",
+          "titulo": "CREA EL MINISTERIO DE ENERGÍA, ESTABLECIENDO MODIFICACIONES AL DL Nº 2.224, DE 1978 Y A OTROS CUERPOS LEGALES",
+          "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "17-MAY-2025",
+          "año": 2025,
+          "tipo": "DECRETO 2; DECRETO 2T",
+          "titulo": "FIJA DERECHOS Y CONDICIONES DE EJECUCIÓN Y EXPLOTACIÓN Y FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS CONTEMPLADAS EN LOS DECRETOS EXENTOS N°198, DE 2019; N°185, DE 2021; N°200, DE 2022; Y, N°4, DE 2024, TODOS DEL MINISTERIO DE ENERGÍA; MODIFICA DECRETO SUPREMO N°18T, DE ",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Otros"
+          ]
+        },
+        {
+          "fecha": "31-MAR-2021",
+          "año": 2021,
+          "tipo": "DECRETO 17; DECRETO 17T",
+          "titulo": "FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS DE AMPLIACIÓN DEL SISTEMA DE TRANSMISIÓN ZONAL CORRESPONDIENTES AL TERCER LLAMADO DE LA LICITACIÓN PÚBLICA DE LAS OBRAS CONTEMPLADAS EN EL DECRETO N° 418 EXENTO, DE 2017, DEL MINISTERIO DE ENERGÍA, Y DE LAS OBRAS DE AMPLIACIÓN ",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Transmisión Eléctrica",
+            "Mercado Eléctrico"
+          ]
+        },
+        {
+          "fecha": "26-ABR-2022",
+          "año": 2022,
+          "tipo": "RESOLUCIÓN 91 EXENTA",
+          "titulo": "RECTIFICA DECRETO SUPREMO Nº 71 EXENTO, DE 2022, DEL MINISTERIO DE ENERGÍA, QUE MODIFICA DECRETO SUPREMO Nº 16, DE 2021, DEL MINISTERIO DE ENERGÍA, QUE OTORGA A GASODUCTO DEL PACÍFICO S.A. CONCESIÓN DEFINITIVA DE TRANSPORTE DE GAS DE RED EN LA COMUNA DE CABRERO, REGIÓN DEL BIOBÍO",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Concesiones"
+          ]
+        },
+        {
+          "fecha": "17-DIC-2022",
+          "año": 2022,
+          "tipo": "RESOLUCIÓN 42 EXENTA",
+          "titulo": "RECTIFICA RESOLUCIÓN N° 40/2022 EXENTA MINISTERIAL, DE 5 DE DICIEMBRE DE 2022, DEL MINISTERIO DE ENERGÍA, QUE INICIA PROCEDIMIENTO DE INVALIDACIÓN ADMINISTRATIVA PARCIAL DEL DECRETO SUPREMO N° 33, DE 2022, DEL MINISTERIO DE ENERGÍA, CONFIERE TRASLADO A LOS INTERESADOS Y CONCEDE AUDIENCIA",
+          "organismo": "MINISTERIO DE ENERGÍA",
+          "institucion": "Ministerio de Energía",
+          "materias": [
+            "Otros"
+          ]
+        }
+      ]
+    }
+  }
+}

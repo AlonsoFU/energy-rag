@@ -1,0 +1,406 @@
+
+======================================================================
+Query: 'que es el vatt'
+======================================================================
+Encontrados: 11 artículos en 7 normas
+Latencia: 2062.2ms | Threshold: -3.0
+======================================================================
+
+======================================================================
+DECRETO 61 (3 artículos)
+======================================================================
+
+[Score: 0.60] ARTÍCULO 94
+----------------------------------------------------------------------
+artículo 94º de la ley. Para el tramo TSIC-92 "Charrúa-Lagunillas", el VATT y
+peaje respectivo podrá ser aplicado una vez que las instalaciones asociadas
+entren en operación. 2.1. STATCOM CERRO NAVIA, CER POLPAICO Y FÓRMULAS DE
+INDEXACIÓN El V.I. y A.V.I. de los equipos CER en Polpaico y STATCOM en Cerro
+Navia, se asignarán en partes iguales a los tramos TSIC-01, TSIC-02 y TSIC-03.
+. La fórmula de indexación del A.V.I. del equipo CER en Polpaico y del equipo
+Statcom en Cerro Navia, es la que a continuación se indica: . Donde, para todas
+las fórmulas anteriores: A.V.I.k : Valor del A.V.I. del equipo CER o Statcom
+para el mes k. A.V.I.o : Valor Total del A.V.I. del equipo CER o Statcom,
+establecido en la Tabla 3 o Tabla 4, según corresponda. CPIk : Valor del índice
+Consumer Price Index (All Urban Consumers), en el segundo mes anterior al mes
+k, publicado por el Bureau of Labor Statistics (BLS) del Gobierno de los
+Estados Unidos de América (Código BLS: CUUR0000SA0). CPIo : 216,177, octubre
+2009. 2.2. LABORES DE AMPLIACIÓN Y FÓRMULAS DE INDEXACIÓN De acuerdo a lo
+establecido en la resolución exenta Nº 1.312, de 2009, de la Comisión Nacional
+de Energía, que "Aprueba Bases Técnicas y Administrativas Definitivas para la
+Realización del Estudio de Transmisión Troncal", la valorización de las Labores
+de Ampliación a instalaciones de transmisión troncal, debe considerar los
+costos propios de las ampliaciones realizadas, tales como costos asociados a
+labores de desmontaje, a faenas en instalaciones energizadas, costos por
+construcción de variantes provisorias, entre otros, no considerados en el V.I.
+de los tramos sujetos de obras de ampliación. Conforme aquello, a continuación
+se presentan las labores de ampliación, referentes a obras realizadas en
+instalaciones del Sistema de Transmisión Troncal. . La fórmula de indexación
+del A.V.I. de las labores de ampliación, es la que a continuación se indica: .
+Donde, para todas las fórmulas anteriores: LabAmpn,k : Valor del A.V.I. de la
+labor de ampliación n para el mes k. LabAmpn,0 : Valor del A.V.I. de la labor
+de ampliación n, establecido en la Tabla 5. IPCk : Valor del Índice de Precios
+al Consumidor en el segundo mes anterior al mes k, publicado por el Instituto
+Nacional de Estadísticas (INE). DOLk : Promedio mensual del Precio Dólar
+Observado, en el segundo mes anterior al mes k, publicado por el Banco Central
+de Chile. Los valores base para los índices antes definidos, corresponden a los
+que a continuación se indican: . 2.3. ASIGNACIÓN VATT A TRAMOS TRONCALES DE LA
+OBRA NUEVA CER EN PUERTO MONTT Para el caso de la Obra Nueva Equipo de
+Compensación Estática de Reactivos, CER, ubicado en la subestación Puerto
+Montt, adjudicado mediante decreto Nº 162, de 2005, del Ministerio de Economía,
+Fomento y Reconstrucción, su VATT debidamente indexado deberá ser prorrateado
+entre los tramos y en la proporción que a continuación se indica: . 3. FÓRMULAS
+DE INDEXACIÓN Las fórmulas de indexación del A.V.I. y COMA establecidos en la
+Tabla 2 del numeral 2. del presente artículo, son las siguientes: . Donde, para
+todas las fórmulas anteriores: AVIn,k : A.V.I. del tramo n para el mes k.
+COMAn,k : Valor del COMA del tramo n para el mes k. AVIn,0 : A.V.I. del tramo
+n, establecido en la Tabla 2 del numeral 2. COMAn,0 : Valor del COMA del tramo
+n, establecido en la Tabla 2 del numeral 2. IPCk : Valor del Índice de Precios
+al Consumidor en el segundo mes anterior al mes k, publicado por el Instituto
+Nacional de Estadísticas (INE). DOLk : Promedio mensual del Precio Dólar
+Observado, en el segundo mes anterior al mes k, publicado por el Banco Central
+de Chile. CPIk : Valor del Índice Consumer Price Índex (All Urban Consumers),
+en el segundo mes anterior al mes k, publicado por el Bureau of Labor
+Statistics (BLS) del Gobierno de los Estados Unidos de América (Código BLS:
+CUUR0000SA0). PFek : Valor del Índice Iron and Steel, de la serie Producer
+Price Index - Commodities, grupo Metals and Metal Products, en el sexto mes
+anterior al mes k, publicado por el Bureau of Labor Statistics (BLS) del
+Gobierno de EE.UU. (Código BLS: WPU101). PCuk : Promedio del precio del cobre,
+del segundo, tercer y cuarto mes anterior al mes k, cotizado en la Bolsa de
+Metales de Londres (London Metal Exchange, LME), correspondiente al valor Cash
+Seller"&"Settlement mensual, publicado por el Boletín Mensual de la Comisión
+Chilena del Cobre, en USc/Lb. PAIk : Promedio del precio del aluminio, del
+segundo, tercer y cuarto mes anterior al mes k, cotizado en la Bolsa de Metales
+de Londres (London Metal Exchange, LME), correspondiente al valor Cash
+Seller"&"Settlement mensual, publicado por el Boletín Mensual de la Comisión
+Chilena del Cobre, en USc/Lb. Los valores base para los índices antes
+definidos, corresponden a los que a continuación se indican: . Los coeficientes
+α y β1, a β4, de la fórmula señalada, para la indexación del A.V.I. son los
+siguientes: . Los coeficientes a utilizar, así como la fórmula de indexación de
+los tramos TSIC-29, TSIC-47, TSIC-79 y TSIC-80, deberán ser los indicados en
+los respectivos decretos de adjudicación, decretos supremos Nº 163, de 2005, Nº
+138, de 2006, y Nº 118, de 2008, todos del Ministerio de Economía, Fomento y
+Reconstrucción. El conjunto de coeficientes y fórmula de indexación a utilizar
+en el tramo TSIC-89, será el que se indique en el decreto que establezca el
+V.I. definitivo de la obra. Artículo segundo.- Fíjanse las condiciones de
+aplicación para la determinación del pago por los servicios de transporte en
+sistemas de transmisión troncal para el cuadrienio 2011-2014. El cálculo de
+peajes de inyección, peajes de retiro y el cálculo de cargos únicos por el uso
+de sistemas de transmisión troncal que deberá realizar la Dirección de Peajes,
+en adelante "DP", en cada Centro de Despacho Económico de Carga, en adelante
+"CDEC", se realizará conforme a los términos y condiciones que se establecen a
+continuación: 1. CÁLCULOS E INFORMES DE LA DP En las fechas y modalidad que el
+presente decreto establece, la DP deberá elaborar, hacer públicos y comunicar a
+los usuarios del sistema de transmisión troncal, informes que contengan los
+siguientes cálculos y montos de pago: a) Informe anual de uso esperado de las
+instalaciones del sistema que considera los pagos mensuales por peaje de
+inyección, retiro y cargos únicos, así como también el ingreso tarifario
+esperado por tramo, para cada uno de los años calendario del período 2011-2014,
+en adelante Período Tarifario, conforme señala la condición establecida en el
+numeral 2. del presente artículo. El informe correspondiente al año 2011 deberá
+comunicarse a más tardar 60 días corridos después de publicado el presente
+decreto en el Diario Oficial y el informe correspondiente al año 2012 deberá
+comunicarse dentro de los 60 días corridos después de emitido el informe
+correspondiente al año 2011. Para los restantes años del Período Tarifario,
+dicho informe deberá comunicarse antes del 31 de diciembre del año anterior
+respectivo; b) Informe de revisión anual de los cálculos señalados en la letra
+anterior, para los informes correspondientes al Período Tarifario, conforme se
+señala en el numeral 3. del presente artículo. Cada informe deberá comunicarse
+antes del 31 de marzo del año siguiente a cada año del Período Tarifario. La DP
+deberá hacer públicos todos los cálculos, bases de datos y metodologías que
+utilice para la determinación de los pagos de peajes y la determinación de los
+cargos únicos de transmisión troncal y la indexación que proceda para cada una
+de las etapas de cálculo, a efectos de garantizar la total reproducción de los
+cálculos realizados. El tipo de cambio a utilizar por parte de la DP
+respectiva, para los efectos de la determinación de los pagos a realizar,
+deberá ser el promedio mensual del Precio Dólar Observado, en el segundo mes
+anterior a aquel en el que se realiza el informe respectivo, publicado por el
+Banco Central de Chile. 2. CÁLCULO DE LOS PAGOS POR PEAJES, CARGOS ÚNICOS E
+INGRESO TARIFARIO ESPERADO POR TRAMO PARA EL PERÍODO TARIFARIO 2.1. METODOLOGÍA
+Anualmente, la DP deberá hacer públicos y comunicar a las empresas usuarias del
+sistema de transmisión troncal, los pagos por peaje de inyección y retiro que a
+cada una de ellas corresponda, de acuerdo a su uso esperado de las
+instalaciones del sistema de transmisión troncal, así como al ingreso tarifario
+esperado por tramo. Para tal efecto, la DP deberá realizar el cálculo de
+participaciones y prorratas sobre las instalaciones troncales de modo que
+garanticen la remuneración del 100% del VATT en cada uno de los tramos del
+sistema troncal. A estos efectos, los pagos mensuales que se determinen
+conforme a la aplicación del presente decreto deberán remunerar un doceavo del
+VATT, debidamente indexado, cada mes. Lo anterior deberá considerar, a lo
+menos, lo siguiente: a) Nivel de modelación del sistema, barras y tramos de
+transmisión representados, niveles de tensión considerados, cantidad de bloques
+de demanda, mantenimientos de centrales y líneas, indisponibilidades de
+instalaciones, entre otros; b) Tratamiento de la demanda, conforme lo
+establecido en el
+
+
+[Score: -0.46] ARTÍCULO 91
+----------------------------------------------------------------------
+artículo 91º del mismo cuerpo legal; 2. Que, mediante el oficio Nº 301, citado
+en el Visto 9., la Comisión ha remitido al Ministerio de Energía el Informe
+Técnico con aquellas materias que le conciernen conforme a sus competencias,
+aportando además el Dictamen del Panel de Expertos Nº 2-2011, que dirimió las
+controversias suscitadas respecto del referido Informe Técnico basado en los
+resultados del Estudio de Transmisión Troncal, considerando todas las
+observaciones realizadas oportunamente por participantes, usuarios e
+instituciones interesadas debidamente registradas; 3. Que se debe dar curso
+progresivo al proceso de fijación de las instalaciones que integran los
+sistemas de transmisión troncal, el área de influencia común, el valor anual de
+transmisión por tramo, la anualidad del valor de inversión del tramo y el costo
+anual de operación, mantenimiento y administración de las respectivas
+instalaciones; y 4. Que, de acuerdo a lo expuesto, se han cumplido todas las
+etapas y actuaciones previstas en la ley para que este Ministerio dicte el
+decreto respectivo. Decreto: NOTA El Artículo Primero del Decreto 8, Energía,
+publicado el 22.04.2015, extiende la vigencia de la presente norma hasta el 31
+de diciembre de 2015. Artículo primero.- Fíjanse las instalaciones de cada
+sistema de transmisión troncal, el área de influencia común y el valor anual de
+transmisión por tramo, en adelante "VATT", la anualidad del valor de inversión
+del tramo, en adelante "A.V.I.", y el costo anual de operación, mantenimiento y
+administración del tramo respectivo, en adelante "COMA" de dichas
+instalaciones, con sus fórmulas de indexación, para el cuadrienio 2011-2014, de
+acuerdo a lo que a continuación se indica. 1. IDENTIFICACIÓN DE LOS TRAMOS
+TRONCALES Y ÁREA DE INFLUENCIA COMÚN . 2. VALOR ANUAL POR TRAMO DE LOS SISTEMAS
+TRONCALES . En el caso de los tramos TSIC-47 "Charrúa-Cautín", TSIC-29 "El
+Rodeo-Chena (Circuito 1)", el VATT a aplicar será el indicado en sus
+respectivos decretos de adjudicación, decretos supremos Nº 163, de 2005 y Nº
+138, de 2006, respectivamente, ambos del Ministerio de Economía, Fomento y
+Reconstrucción, más lo establecido en la tabla precedente. Los valores que se
+muestran en la precedente Tabla 2 para los tramos aludidos, corresponden a la
+asignación de elementos comunes del sistema troncal y de subestaciones, sin
+perjuicio de lo establecido en los respectivos decretos de adjudicación. Para
+los tramos TSIC-79 y TSIC-80 "Nogales-Polpaico", el VATT a aplicar será el
+establecido en su decreto de adjudicación, decreto supremo Nº 118, de 2008, del
+Ministerio de Economía, Fomento y Reconstrucción. Los tramos TSIC-87 y TSIC-88
+se considerarán parte del sistema troncal del SIC, una vez que el proyecto de
+interconexión de las subestaciones "Colbún-Ancoa", tramo TSIC-89, entre en
+operación. El VATT y peaje respectivo que corresponda aplicar al tramo TSIC-89,
+será el establecido en el decreto que fije su valor de inversión, en adelante
+"V.I.", definitivo, de acuerdo a lo dispuesto en el
+
+
+[Score: -2.26] ARTÍCULO 16
+----------------------------------------------------------------------
+artículo 16º transitorio de la ley, conforme lo señalado en el numeral 5. del
+presente artículo; y k) Para aquellos tramos conformados por instalaciones
+pertenecientes a distintos propietarios, sean éstos equipos mayores o
+instalaciones comunes, el informe de la DP deberá especificar en forma separada
+el VATT de las instalaciones que componen el tramo, en base al Informe Técnico
+de la Comisión y a la aplicación de lo dispuesto en el dictamen del Panel de
+Expertos Nº 2-2011 con fe de erratas. La DP deberá calcular los pagos conforme
+a lo señalado en el presente decreto para cada propietario, teniendo presente
+el VATT establecido para las instalaciones de cada propietario en el decreto
+respectivo. Para el caso de tramos cuyo VATT está compuesto por valores
+licitados en conformidad al
+
+
+======================================================================
+DECRETO 2 (2 artículos)
+======================================================================
+
+[Score: -0.63] ARTÍCULO 157
+----------------------------------------------------------------------
+artículo 157 de la Ley, sin considerar los cargos de reliquidaciones, en
+[$/kWh]. EFACTATi : Energía facturada a clientes regulados finales en el nivel
+de alta tensión de distribución del sector "i" de la concesionaria, en [kWh].
+EFACTBTi : Energía facturada a clientes regulados finales en el nivel de baja
+tensión de distribución del sector "i" de la concesionaria, en [kWh]. PEAT :
+Factor de expansión de pérdidas de energía en alta tensión, indicado en el
+número 7.6 del Artículo Primero del Decreto 1T. PEBT : Factor de expansión de
+pérdidas de energía en baja tensión, indicado en el número 7.6 del Artículo
+Primero del Decreto 1T. NSN : Cantidad de sectores de subtransmisión de la
+concesionaria. Cuando la energía facturada esté conformada por fracciones de
+tiempo en que se hayan incluido distintos ajustes o recargos, el monto
+recaudado se determinará a partir de la proporción de días en los cuales se
+encuentre vigente el ajuste o recargo que en cada caso corresponda. b) La
+valorización de dicho monto (MFAR) se denominará, para cada concesionaria,
+Valorización del Ajuste (VA) o bien Valorización del Recargo (VR), según lo
+siguiente: VA = |MFAR|, si MFAR < 0 VR = MFAR, si MFAR ≥ 0 c) La DP del CDEC
+respectivo deberá validar la información entregada por las concesionarias.
+Asimismo, a partir de la suma de la totalidad de los VA y VR del sistema
+eléctrico, obtenidos según la letra anterior, deberá determinar la valorización
+total de ajustes del sistema (VTAS) y la valorización total de recargos del
+sistema (VTRS), según corresponda. d) La VTRS deberá ser transferida a las
+concesionarias con ajustes a prorrata de sus respectivos VA. Por su parte, las
+concesionarias que hayan aplicado recargos en sus tarifas finales, deberán
+transferirlos a prorrata de sus respectivos VR. Sin perjuicio de lo anterior,
+en caso que la VTRS sea superior a la de la VTAS, el monto total que deberán
+transferir las concesionarias que aplican recargos, será igual a la VTAS. e)
+Las concesionarias deberán hacer efectiva la reliquidación, procediendo a
+realizar el pago correspondiente, a más tardar 3 días contados desde la
+determinación de los montos a reliquidar por la DP. Asimismo, deberán informar
+a esta última los pagos recibidos o realizados con ocasión de dicha
+reliquidación, conforme al formato que para ello establezca la DP. f) La
+respectiva DP deberá contabilizar en cuentas individuales por concesionaria los
+montos correspondientes a los saldos resultantes de la aplicación de la
+reliquidación, de modo que ellos sean considerados en las reliquidaciones
+posteriores que mensualmente efectúe. g) La respectiva DP deberá Informar a la
+Comisión y a la Superintendencia de Electricidad y Combustibles, dentro de los
+25 primeros días corridos de cada mes, el detalle de los resultados de las
+reliquidaciones indicadas en la letra d) anterior y los volúmenes de energía
+determinados de acuerdo a la letra a) de este número. h) Conjuntamente con el
+envío de la información a que hace referencia la letra anterior, la DP deberá
+informar a la Comisión los volúmenes de energía y potencia asociados a los
+contratos de suministro, de acuerdo a los formatos que ésta establezca. 4.2
+Determinación de excedente o déficit de recaudaciones En virtud de lo
+establecido en el inciso final del
+
+
+[Score: -0.98] ARTÍCULO 157
+----------------------------------------------------------------------
+artículo 157º de la Ley, sin considerar los cargos de reliquidaciones, en
+[$/kWh]. EFACTATi : Energía facturada a clientes regulados finales en el nivel
+de alta tensión de distribución del sector "i" de la concesionaria, en [kWh].
+EFACTBTi : Energía facturada a clientes regulados finales en el nivel de baja
+tensión de distribución del sector "i" de la concesionaria, en [kWh]. PEAT :
+Factor de expansión de pérdidas de energía en alta tensión, indicado en el
+número 7.6 del Artículo Primero del Decreto 1T. PEBT : Factor de expansión de
+pérdidas de energía en baja tensión, indicado en el número 7.6 del Artículo
+Primero del Decreto 1T. NSN : Cantidad de sectores de subtransmisión de la
+concesionaria. Cuando la energía facturada esté conformada por fracciones de
+tiempo en que se hayan incluido distintos ajustes o recargos, el monto
+recaudado se determinará a partir de la proporción de días en los cuales se
+encuentre vigente el ajuste o recargo que en cada caso corresponda. b) La
+valorización de dicho monto (MFAR) se denominará, para cada concesionaria,
+Valorización del Ajuste (VA) o bien Valorización del Recargo (VR), según lo
+siguiente: VA = |MFAR|, si MFAR < 0 VR = MFAR, si MFAR ≥ 0 c) La DP del CDEC
+respectivo deberá validar la información entregada por las concesionarias.
+Asimismo, a partir de la suma de la totalidad de los VA y VR del sistema
+eléctrico, obtenidos según la letra anterior, deberá determinar la valorización
+total de ajustes del sistema (VTAS) y la valorización total de recargos del
+sistema (VTRS), según corresponda. d) La VTRS deberá ser transferida a las
+concesionarias con ajustes a prorrata de sus respectivos VA. Por su parte, las
+concesionarias que hayan aplicado recargos en sus tarifas finales, deberán
+transferirlos a prorrata de sus respectivos VR. Sin perjuicio de lo anterior,
+en caso que la VTRS sea superior a la de la VTAS, el monto total que deberán
+transferir las concesionarias que aplican recargos, será igual a la VTAS. e)
+Las concesionarias deberán hacer efectiva la reliquidación, procediendo a
+realizar el pago correspondiente, a más tardar 3 días contados desde la
+determinación de los montos a reliquidar por la DP. Asimismo, deberán informar
+a esta última los pagos recibidos o realizados con ocasión de dicha
+reliquidación, conforme al formato que para ello establezca la DP. f) La
+respectiva DP deberá contabilizar en cuentas individuales por concesionaria los
+montos correspondientes a los saldos resultantes de la aplicación de la
+reliquidación, de modo que ellos sean considerados en las reliquidaciones
+posteriores que mensualmente efectúe. g) La respectiva DP deberá Informar a la
+Comisión y a la Superintendencia de Electricidad y Combustibles, dentro de los
+25 primeros días corridos de cada mes, el detalle de los resultados de las
+reliquidaciones indicadas en la letra d) anterior y los volúmenes de energía
+determinados de acuerdo a la letra a) de este número. h) Conjuntamente con el
+envío de la información a que hace referencia la letra anterior, la DP deberá
+informar a la Comisión los volúmenes de energía y potencia asociados a los
+contratos de suministro, de acuerdo a los formatos que ésta establezca. 4.2
+Determinación de excedente o déficit de recaudaciones En virtud de lo
+establecido en el inciso final del
+
+
+======================================================================
+LEY 20999 (1 artículos)
+======================================================================
+
+[Score: -1.26] ARTÍCULO 40
+----------------------------------------------------------------------
+Artículo 40-A. Las tarifas del servicio de gas se obtendrán a partir de la suma
+del valor del gas al ingreso del sistema de distribución, en adelante e
+indistintamente "VGISD", y el valor agregado de distribución, en adelante e
+indistintamente "VAD".
+
+
+======================================================================
+DECRETO 13 (2 artículos)
+======================================================================
+
+[Score: -1.51] ARTÍCULO 52
+----------------------------------------------------------------------
+artículo 52 del Reglamento, de acuerdo al siguiente detalle: Tabla 4: V.I.,
+A.V.I., C.O.M.A., A.E.I.R. y V.A.T.T. de instalaciones a que se refieren los
+literales a), b), c) y d) del inciso primero del
+
+
+[Score: -2.63] ARTÍCULO 52
+----------------------------------------------------------------------
+artículo 52 del Reglamento, de acuerdo al siguiente detalle: Tabla 1: V.I.,
+A.V.I., C.O.M.A. y V.A.T.T. de las instalaciones del
+
+
+======================================================================
+RESOLUCIÓN 711 (1 artículos)
+======================================================================
+
+[Score: -1.87] ARTÍCULO 103
+----------------------------------------------------------------------
+artículo 103º de la Ley, ambos necesarios para determinar el V.A.T.T. de las
+obras de expansión; 10) Que, como consecuencia de lo anterior, se debe fijar un
+régimen transitorio que rija estas materias para el proceso de planificación de
+la transmisión correspondiente al año 2017; 11) Que, en especial, esta Comisión
+utilizará para el cálculo de los correspondientes V.A.T.T. de las obras de
+ampliación los antecedentes preliminares del estudio de tasa de costo de
+capital, los cuales indican que la tasa de descuento resultaría en un valor
+cercano al límite inferior señalado en el
+
+
+======================================================================
+DECRETO 1 (1 artículos)
+======================================================================
+
+[Score: -2.19] ARTÍCULO 157
+----------------------------------------------------------------------
+artículo 157º de la ley, aplicable a los clientes sujetos a fijación de precios
+del sector de nudo "i" de la concesionaria, en conformidad con lo establecido
+en el número 2.1 [$/kWh]. EFACTATi : Energía facturada a clientes regulados
+finales en el nivel de alta tensión de distribución del sector "i" de la
+concesionaria, en [kWh]. EFACTBTi : Energía facturada a clientes regulados
+finales en el nivel de baja tensión de distribución del sector "i" de la
+concesionaria, en [kWh]. PEAT : Factor de expansión de pérdidas de energía en
+alta tensión, indicado en el número 7.6 del artículo primero del decreto 385.
+PEBT : Factor de expansión de pérdidas de energía en baja tensión, indicado en
+el número 7.6 del artículo primero del decreto 385. NSN : Cantidad de sectores
+de nudo de la concesionaria. Cuando la energía facturada esté conformada por
+fracciones de tiempo en que se hayan incluido distintos ajustes o recargos, el
+monto recaudado se determinará a partir de la proporción de días en los cuales
+se encuentre vigente el ajuste o recargo que en cada caso corresponda. b) La
+valorización de dicho monto (MFAR) se denominará, para cada concesionaria,
+Valorización del Ajuste (VA) o bien Valorización del Recargo (VR), según lo
+siguiente: VA= |MFAR|, si MFAR < 0 VR = MFAR, si MFAR ≥ 0 c) La DP del CDEC
+respectivo deberá validar la información entregada por las concesionarias.
+Asimismo, a partir de la suma de la totalidad de los VA y VR del sistema
+eléctrico, obtenidos según la letra anterior, deberá determinar la valorización
+total de ajustes del sistema (VTAS) y la valorización total de recargos del
+sistema (VTRS), según corresponda. d) La VTRS deberá ser transferida a las
+concesionarias con ajustes a prorrata de sus respectivos VA. Por su parte, las
+concesionarias que hayan aplicado recargos en sus tarifas finales, deberán
+transferirlos a prorrata de sus respectivos VR. Sin perjuicio de lo anterior,
+en caso que la VTRS sea superior a la de la VTAS, el monto total que deberán
+transferir las concesionarias que aplican recargos, será igual a la VTAS. e)
+Las concesionarias deberán hacer efectiva la reliquidación, procediendo a
+realizar el pago correspondiente, a más tardar 3 días contados desde la
+determinación de los montos a reliquidar por la DP. Asimismo, deberán informar
+a esta última los pagos recibidos o realizados con ocasión de dicha
+reliquidación, conforme al formato que para ello establezca la DP. f) La
+respectiva DP deberá contabilizar en cuentas individuales por concesionaria los
+montos correspondientes a los saldos resultantes de la aplicación de la
+reliquidación, de modo que ellos sean considerados en las reliquidaciones
+posteriores que mensualmente efectúe. g) La respectiva DP deberá informar a la
+Comisión y a la Superintendencia de Electricidad y Combustibles, dentro de los
+25 primeros días corridos de cada mes, el detalle de los resultados de las
+reliquidaciones indicadas en la letra d) anterior y los volúmenes de energía
+determinados de acuerdo a la letra a) de este número. h) Conjuntamente con el
+envío de la información a que hace referencia la letra anterior, la DP deberá
+informar a la Comisión los volúmenes de energía y potencia asociados a los
+contratos de suministro referidos a nivel troncal, de acuerdo a los formatos
+que ésta establezca. 4.2 Determinación de excedente o déficit de recaudaciones
+En virtud de lo establecido en el inciso final del
+
+
+======================================================================
+DECRETO 262 (1 artículos)
+======================================================================
+
+[Score: -2.26] ARTÍCULO 43 ter
+----------------------------------------------------------------------
+artículo 43 ter de la ley N° 18.287, que establece procedimiento ante los
+juzgados de policía local. 7) Convenio de Pago de Multa TAG: Es el acuerdo
+formal entre una persona natural o jurídica a cuyo nombre está inscrito un
+vehículo y la municipalidad respectiva ante la cual se pretende renovar o pagar
+de forma atrasada el permiso de circulación, el que debe ser suscrito en forma
+simultánea con la renovación o el pago de dicho permiso, sujeto a las
+condiciones establecidas en el

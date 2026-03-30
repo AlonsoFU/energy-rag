@@ -1,0 +1,18 @@
+{
+  "id_norma": "1153934",
+  "tipo": "DECRETO",
+  "numero": "42",
+  "nombre": "Decreto 42",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": null,
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [],
+    "articulos": {}
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": []
+  }
+}

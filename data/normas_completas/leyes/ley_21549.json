@@ -1,0 +1,45 @@
+{
+  "id_norma": "1191007",
+  "tipo": "",
+  "numero": "",
+  "titulo": "",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=1191007",
+  "texto_completo": "Formulario de contacto\nBÚSQUEDA AVANZADA\n Modo oscuro\n \n Alto contraste\n  Selección\n Cerrar Navegar Norma\nPortada Ley 21549\n  VOLVER\nLEY 21549\nENCABEZADO\nTÍTULO I DE LA FISCALIZACIÓN Y EL TRATAMIENTO AUTOMATIZADOS DE INFRACCIONES DE TRÁNSITO\nTÍTULO II DE LA RED DE DISPOSITIVOS AUTOMATIZADOS DE REGISTRO DE INFRACCIONES DE TRÁNSITO\nTÍTULO III DE LA DETECCIÓN Y NOTIFICACIÓN DE LAS INFRACCIONES DE LA LEY DE TRÁNSITO Y LA DENUNCIA ANTE EL JUZGADO DE POLICÍA LOCAL\nTÍTULO IV OTRAS DISPOSICIONES\nTÍTULO V MODIFICACIONES LEGALES\nDISPOSICIONES TRANSITORIAS\nPROMULGACIÓN\nANEXO PROYECTO DE LEY QUE CREA UN SISTEMA DE TRATAMIENTO AUTOMATIZADO DE INFRACCIONES DEL TRÁNSITO Y MODIFICA LAS LEYES N° 18.287 Y N° 18.290, CORRESPONDIENTE AL BOLETÍN N°9.252-15\nLa presente ley comenzará a regir transcurridos noventa días desde la publicación en el Diario Oficial del último de los reglamentos señalados en el inciso primero del artículo segundo transitorio de la ley 21549.\nLEY 21549  CREA UN SISTEMA DE TRATAMIENTO AUTOMATIZADO DE INFRACCIONES DEL TRÁNSITO Y MODIFICA LAS LEYES N° 18.287 Y N° 18.290\n\nMINISTERIO DE TRANSPORTES Y TELECOMUNICACIONES\n\n   \n  \n TIENE TEXTO DIFERIDO\n\nPromulgación: 30-MAR-2023\n\nPublicación: 10-ABR-2023\n\nVersión: Con Vigencia Diferida por Evento - La presente ley comenzará a regir transcurridos noventa días desde la publicación en el Diario Oficial del último de los reglamentos señalados en el inciso primero del artículo segundo transitorio de la ley 21549.\n\nMaterias: Sistema de Tratamiento Automatizado de Infracciones de Tránsito, Ley de Tránsito\n\nResumen: La presente ley establece la gestión electrónica del tratamiento de ciertas infracciones de tránsito mediant ... ver más >>\n\nCONCORDANCIAMODIFICACION\n    \n Ocultar notas\nTexto\nVersiones\nJurisprudencia\nProyectos de Ley\nSíguenos en:\nPolíticas de privacidad\nMapa del sitio\nUbicación, horarios y teléfonos",
+  "content_hash": "9a9a6267e832dc72",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "2222-02-02",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2222-02-02",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2222-02-02",
+      "descripcion": ""
+    }
+  ],
+  "extracted_at": "2026-01-24T12:50:17.758665",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 1880,
+    "num_articulos": 2,
+    "num_palabras": 271,
+    "issues": [],
+    "warnings": []
+  }
+}

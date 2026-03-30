@@ -1,0 +1,2373 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "62",
+      "titulo": "DECRETO 62 APRUEBA REGLAMENTO DE TRANSFERENCIAS DE POTENCIA ESTABLECIDAS EN LA LEY GENERAL DE SERVIC",
+      "año": "2006",
+      "clase": "reglamento_base",
+      "id": "250604"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "262",
+      "titulo": "DECRETO 262 APRUEBA REGLAMENTO DE SITIO ELECTRÓNICO UNIFICADO DE TARIFAS Y PEAJES CORRESPONDIENTES A",
+      "año": "2023",
+      "clase": "reglamento_base",
+      "id": "1207690"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "4",
+      "titulo": "DECRETO 4DECRETO 4T FIJA PEAJES DE DISTRIBUCIÓN APLICABLES AL SERVICIO DE TRANSPORTE QUE PRESTEN LAS",
+      "año": "2018",
+      "clase": "fija_valores",
+      "id": "1122953"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "10",
+      "titulo": "DECRETO 10 APRUEBA REGLAMENTO DE CALIFICACIÓN, VALORIZACIÓN, TARIFICACIÓN Y REMUNERACIÓN DE LAS INST",
+      "año": "2019",
+      "clase": "reglamento_base",
+      "id": "1146553"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "3",
+      "titulo": "DECRETO 3DECRETO 3 T MODIFICA DECRETO SUPREMO N° 4T, DE 2018, DEL MINISTERIO DE ENERGÍA, QUE FIJA PE",
+      "año": "2025",
+      "clase": "modifica",
+      "id": "1212738"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "52",
+      "titulo": "DECRETO 52 MODIFICA REGLAMENTO SOBRE INTEGRACIÓN Y FUNCIONAMIENTO DE LA COMISIÓN DE HOMBRES BUENOS E",
+      "año": "2014",
+      "clase": "modifica",
+      "id": "1066212"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "8",
+      "titulo": "DECRETO 8TDECRETO 8 EXTIENDE VIGENCIA DEL DECRETO SUPREMO Nº 61, DE 2011, QUE FIJA INSTALACIONES DEL",
+      "año": "2015",
+      "clase": "fija_valores",
+      "id": "1076507"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "13",
+      "titulo": "DECRETO 13DECRETO 13 T FIJA VALORES, PROPIETARIOS Y FÓRMULAS DE INDEXACIÓN DE LAS INSTALACIONES DE L",
+      "año": "2025",
+      "clase": "fija_valores",
+      "id": "1215040"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "14",
+      "titulo": "DECRETO 14 FIJA TARIFAS DE SISTEMAS DE SUBTRANSMISIÓN Y DE TRANSMISIÓN ADICIONAL Y SUS FÓRMULAS DE I",
+      "año": "2012",
+      "clase": "fija_valores",
+      "id": "1049988"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "113",
+      "titulo": "DECRETO 113 REGLAMENTO SOBRE INTEGRACIÓN Y FUNCIONAMIENTO DE LAS COMISIONES TASADORAS ESTABLECIDAS P",
+      "año": "2007",
+      "clase": "",
+      "id": "264058"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "57",
+      "titulo": "DECRETO 57 APRUEBA REGLAMENTO DE GENERACIÓN DISTRIBUIDA PARA AUTOCONSUMO",
+      "año": "2019",
+      "clase": "reglamento_base",
+      "id": "1149788"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "titulo": "RESOLUCION 838 OTORGA CONCESION DE ACUICULTURA",
+      "año": "",
+      "clase": "",
+      "id": "252841"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "1",
+      "titulo": "DECRETO 1 FIJA PRECIOS DE NUDO PROMEDIO EN EL SISTEMA INTERCONECTADO CENTRAL Y SISTEMA INTERCONECTAD",
+      "año": "",
+      "clase": "fija_valores",
+      "id": "1048990"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "37",
+      "titulo": "DECRETO 37 APRUEBA REGLAMENTO DE LOS SISTEMAS DE TRANSMISIÓN Y DE LA PLANIFICACIÓN DE LA TRANSMISIÓN",
+      "año": "2019",
+      "clase": "reglamento_base",
+      "id": "1160108"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "61",
+      "titulo": "DECRETO 61 FIJA INSTALACIONES DEL SISTEMA DE TRANSMISIÓN TRONCAL, EL ÁREA DE INFLUENCIA COMÚN, EL VA",
+      "año": "2011",
+      "clase": "fija_valores",
+      "id": "1032851"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "7",
+      "titulo": "DECRETO 7TDECRETO 7 EXTIENDE VIGENCIA DEL DECRETO SUPREMO Nº 14 DE 2012, QUE FIJA TARIFAS DE SISTEMA",
+      "año": "2015",
+      "clase": "fija_valores",
+      "id": "1076506"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "2",
+      "titulo": "DECRETO 2 ACTUALIZA VALORES DE DECRETOS QUE INDICA PARA LOS EFECTOS DE LA APLICACIÓN DEL DECRETO Nº ",
+      "año": "2014",
+      "clase": "",
+      "id": "1067875"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "900",
+      "titulo": "DECRETO 900 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DFL MOP N° 164, DE 1991 LEY DE CONC",
+      "año": "1996",
+      "clase": "fija_valores",
+      "id": "16121"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "",
+      "año": "",
+      "clase": "",
+      "id": "1153949"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "3386",
+      "titulo": "DECRETO 3386 APRUEBA EL REGLAMENTO DE EXPLOTACION DE SERVICIOS ELECTRICOS DE ALUMBRADO Y FUERZA MOTR",
+      "año": "1935",
+      "clase": "",
+      "id": "202975"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "titulo": "DECRETO 70 MODIFICA DECRETO SUPREMO Nº 62, DE 2006, DEL MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUC",
+      "año": "2023",
+      "clase": "modifica",
+      "id": "1204012"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DECRETO",
+      "numero": "130",
+      "titulo": "Decreto 130",
+      "año": "",
+      "clase": "",
+      "id": "1047565"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20526",
+      "titulo": "LEY 20526  SANCIONA EL ACOSO SEXUAL DE MENORES, LA PORNOGRAFÍA INFANTIL VIRTUAL Y LA POSESIÓN DE MAT",
+      "año": "",
+      "clase": "",
+      "id": "1028636"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21527",
+      "titulo": "Ley 21527",
+      "año": "",
+      "clase": "",
+      "id": "1187684"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "DECRETO LEY 2978 MODIFICA DECRETO LEY NO. 2.224, DE 1978, QUE CREO LA COMISION NACIONAL DE ENERGIA",
+      "año": "1979",
+      "clase": "modifica",
+      "id": "7045"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21180",
+      "titulo": "LEY 21180  TRANSFORMACIÓN DIGITAL DEL ESTADO",
+      "año": "",
+      "clase": "",
+      "id": "1138479"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19940",
+      "titulo": "RESOLUCION 32 EXENTA NOMBRA REPRESENTANTE SUPLENTE DEL MINISTERIO DE ECONOMIA, FOMENTO Y RECONSTRUCC",
+      "año": "2005",
+      "clase": "",
+      "id": "237695"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21560",
+      "titulo": "LEY 21560  MODIFICA TEXTOS LEGALES QUE INDICA PARA FORTALECER Y PROTEGER EL EJERCICIO DE LA FUNCIÓN ",
+      "año": "",
+      "clase": "modifica",
+      "id": "1191005"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21770",
+      "titulo": "LEY 21770  ESTABLECE UNA LEY MARCO DE AUTORIZACIONES SECTORIALES E INTRODUCE MODIFICACIONES A LOS CU",
+      "año": "",
+      "clase": "modifica",
+      "id": "1216930"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "",
+      "año": "",
+      "clase": "",
+      "id": "1191007"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21076",
+      "titulo": "LEY 21076  MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS PARA IMPONER A LA EMPRESA DISTRIBUIDORA D",
+      "año": "",
+      "clase": "modifica",
+      "id": "1115627"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20237",
+      "titulo": "LEY 20237 MODIFICA EL DECRETO LEY Nº 3.063, DE 1979, SOBRE RENTAS MUNICIPALES LA LEY Nº 18.695, ORGÁ",
+      "año": "1979",
+      "clase": "modifica",
+      "id": "267822"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20931",
+      "titulo": "LEY 20931  FACILITA LA APLICACIÓN EFECTIVA DE LAS PENAS ESTABLECIDAS PARA LOS DELITOS DE ROBO, HURTO",
+      "año": "",
+      "clase": "",
+      "id": "1092269"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19574",
+      "titulo": "LEY 19574 DECLARA INAPELABLES SANCIONES POR MULTAS",
+      "año": "1998",
+      "clase": "",
+      "id": "122891"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "Ley",
+      "numero": "20776",
+      "titulo": "DECRETO LEY 2224 CREA EL MINISTERIO DE ENERGÍA Y LA COMISION NACIONAL DE ENERGÍA",
+      "año": "1978",
+      "clase": "",
+      "id": "6857"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21044",
+      "titulo": "LEY 21044  CREA LA DIRECCIÓN GENERAL DE CONCESIONES DE OBRAS PÚBLICAS",
+      "año": "",
+      "clase": "",
+      "id": "1111297"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20805",
+      "titulo": "LEY 20805  PERFECCIONA EL SISTEMA DE LICITACIONES DE SUMINISTRO ELÉCTRICO PARA CLIENTES SUJETOS A RE",
+      "año": "",
+      "clase": "",
+      "id": "1074277"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20714",
+      "titulo": "LEY 20714  RESTABLECE EXCEPCIÓN, EN LAS REGIONES DE AYSÉN Y MAGALLANES, ACERCA DE LOS ESTABLECIMIENT",
+      "año": "",
+      "clase": "",
+      "id": "1058529"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20726",
+      "titulo": "LEY 20726  MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS, CON EL FIN DE PROMOVER LA INTERCONEXIÓN ",
+      "año": "",
+      "clase": "modifica",
+      "id": "1059332"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21555",
+      "titulo": "LEY 21555  REFUERZA LAS COMPETENCIAS DE GENDARMERÍA DE CHILE Y CREA UN DELITO GENERAL DE EXTORSIÓN",
+      "año": "",
+      "clase": "",
+      "id": "1191006"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19925",
+      "titulo": "LEY 19925 LEY SOBRE EXPENDIO Y CONSUMO DE BEBIDAS ALCOHOLICAS",
+      "año": "",
+      "clase": "",
+      "id": "220208"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20530",
+      "titulo": "LEY 20530  CREA EL MINISTERIO DE DESARROLLO SOCIAL Y FAMILIA Y MODIFICA CUERPOS LEGALES QUE INDICA",
+      "año": "",
+      "clase": "modifica",
+      "id": "1030861"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21305",
+      "titulo": "LEY 21305  SOBRE EFICIENCIA ENERGÉTICA",
+      "año": "",
+      "clase": "",
+      "id": "1155887"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21522",
+      "titulo": "LEY 21522  INTRODUCE UN NUEVO PÁRRAFO EN EL TÍTULO VII DEL LIBRO II DEL CÓDIGO PENAL, RELATIVO A LA ",
+      "año": "",
+      "clase": "",
+      "id": "1187183"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20776",
+      "titulo": "LEY 20776  MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+      "año": "",
+      "clase": "modifica",
+      "id": "1066889"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "",
+      "año": "",
+      "clase": "",
+      "id": "1142940"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20720",
+      "titulo": "LEY 20720  SUSTITUYE EL RÉGIMEN CONCURSAL VIGENTE POR UNA LEY DE REORGANIZACIÓN Y LIQUIDACIÓN DE EMP",
+      "año": "",
+      "clase": "",
+      "id": "1058072"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19657",
+      "titulo": "LEY 19657 SOBRE CONCESIONES DE ENERGIA GEOTERMICA",
+      "año": "",
+      "clase": "",
+      "id": "150669"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "",
+      "año": "",
+      "clase": "",
+      "id": "1092695"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21394",
+      "titulo": "LEY 21394  INTRODUCE REFORMAS AL SISTEMA DE JUSTICIA PARA ENFRENTAR LA SITUACIÓN LUEGO DEL ESTADO DE",
+      "año": "",
+      "clase": "",
+      "id": "1168803"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21118",
+      "titulo": "LEY 21118  MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS, CON EL FIN DE INCENTIVAR EL DESARROLLO D",
+      "año": "",
+      "clase": "modifica",
+      "id": "1125560"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21755",
+      "titulo": "LEY 21755  MODIFICA CUERPOS LEGALES QUE INDICA EN MATERIA DE SIMPLIFICACIÓN REGULATORIA Y PROMOCIÓN ",
+      "año": "",
+      "clase": "modifica",
+      "id": "1214890"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20484",
+      "titulo": "LEY 20484  SANCIONA EL NO PAGO DE LA TARIFA EN EL TRANSPORTE PÚBLICO DE PASAJEROS",
+      "año": "",
+      "clase": "",
+      "id": "1021880"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20620",
+      "titulo": "LEY 20620  MODIFICA LEY Nº 19.327, QUE FIJA NORMAS PARA LA PREVENCIÓN Y SANCIÓN DE HECHOS DE VIOLENC",
+      "año": "",
+      "clase": "modifica",
+      "id": "1043725"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20928",
+      "titulo": "LEY 20928  ESTABLECE MECANISMOS DE EQUIDAD EN LAS TARIFAS DE SERVICIOS ELÉCTRICOS",
+      "año": "",
+      "clase": "",
+      "id": "1091871"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20257",
+      "titulo": "LEY 20257 INTRODUCE MODIFICACIONES A LA LEY GENERAL DE SERVICIOS ELÉCTRICOS RESPECTO DE LA GENERACIÓ",
+      "año": "",
+      "clase": "modifica",
+      "id": "270212"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19676",
+      "titulo": "LEY 19676 MODIFICA LA LEY Nº 18.287, SOBRE PROCEDIMIENTO ANTE LOS JUZGADOS DE POLICIA LOCAL Y LA LEY",
+      "año": "",
+      "clase": "modifica",
+      "id": "169559"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21241",
+      "titulo": "LEY 21241  MODIFICA LA LEY Nº 18.287, QUE ESTABLECE PROCEDIMIENTO ANTE LOS JUZGADOS DE POLICÍA LOCAL",
+      "año": "",
+      "clase": "modifica",
+      "id": "1147028"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19814",
+      "titulo": "LEY 19814 INTRODUCE DIVERSAS MODIFICACIONES A LA LEY DE ALCOHOLES, BEBIDAS ALCOHOLICAS Y VINAGRES, E",
+      "año": "",
+      "clase": "modifica",
+      "id": "200301"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20500",
+      "titulo": "LEY 20500  SOBRE ASOCIACIONES Y PARTICIPACIÓN CIUDADANA EN LA GESTIÓN PÚBLICA",
+      "año": "",
+      "clase": "",
+      "id": "1023143"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21268",
+      "titulo": "LEY 21268  MODIFICA LA DISPOSICIÓN TRANSITORIA DE LA LEY Nº 21.213, QUE MODIFICA LOS CUERPOS LEGALES",
+      "año": "",
+      "clase": "modifica",
+      "id": "1149645"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "DECRETO LEY 3001 NORMAS COMPLEMENTARIAS DE ADMINISTRACION FINANCIERA Y DE INCIDENCIA PRESUPUESTARIA",
+      "año": "1979",
+      "clase": "",
+      "id": "7047"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20591",
+      "titulo": "LEY 20591  MODIFICA LEY Nº 19.925, SOBRE EXPENDIO Y CONSUMO DE BEBIDAS ALCOHÓLICAS, CON EL OBJETO DE",
+      "año": "",
+      "clase": "modifica",
+      "id": "1040796"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20402",
+      "titulo": "LEY 20402 CREA EL MINISTERIO DE ENERGÍA, ESTABLECIENDO MODIFICACIONES AL DL Nº 2.224, DE 1978 Y A OT",
+      "año": "1978",
+      "clase": "modifica",
+      "id": "1008692"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21304",
+      "titulo": "LEY 21304  SOBRE SUMINISTRO DE ELECTRICIDAD PARA PERSONAS ELECTRODEPENDIENTES",
+      "año": "",
+      "clase": "",
+      "id": "1154423"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20897",
+      "titulo": "LEY 20897  MODIFICA LA LEY Nº 20.365, QUE ESTABLECE FRANQUICIA TRIBUTARIA RESPECTO DE SISTEMAS SOLAR",
+      "año": "",
+      "clase": "modifica",
+      "id": "1087315"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19696",
+      "titulo": "LEY 19696  ESTABLECE CODIGO PROCESAL PENAL",
+      "año": "",
+      "clase": "",
+      "id": "176595"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20416",
+      "titulo": "LEY 20416  FIJA NORMAS ESPECIALES PARA LAS EMPRESAS DE MENOR TAMAÑO",
+      "año": "",
+      "clase": "fija_valores",
+      "id": "1010668"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21529",
+      "titulo": "LEY 21529  FACILITA LA OBTENCIÓN DE PATENTE DE SALONES DE MÚSICA EN VIVO POR PARTE DE LOS ESTABLECIM",
+      "año": "",
+      "clase": "",
+      "id": "1188063"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21343",
+      "titulo": "LEY 21343  MODIFICA LA DISPOSICIÓN TRANSITORIA DE LA LEY Nº 21.213, QUE MODIFICA LOS CUERPOS LEGALES",
+      "año": "",
+      "clase": "modifica",
+      "id": "1160783"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20365",
+      "titulo": "LEY 20365 ESTABLECE FRANQUICIA TRIBUTARIA RESPECTO DE SISTEMAS SOLARES TÉRMICOS",
+      "año": "",
+      "clase": "",
+      "id": "1005169"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21547",
+      "titulo": "LEY 21547  ESTABLECE UN SITIO ELECTRÓNICO UNIFICADO DE TARIFAS Y PEAJES CORRESPONDIENTES AL USO DE D",
+      "año": "",
+      "clase": "",
+      "id": "1190824"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21025",
+      "titulo": "LEY 21025  ESTABLECE UN NUEVO GOBIERNO CORPORATIVO DE LA EMPRESA NACIONAL DEL PETRÓLEO",
+      "año": "",
+      "clase": "",
+      "id": "1106211"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19628",
+      "titulo": "LEY 19628 SOBRE PROTECCION DE LA VIDA PRIVADA",
+      "año": "",
+      "clase": "",
+      "id": "141599"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21083",
+      "titulo": "LEY 21083  ADOPTA MEDIDAS DE SEGURIDAD Y CONTROL EN MEDIOS DE PAGO DEL TRANSPORTE PÚBLICO DE PASAJER",
+      "año": "",
+      "clase": "",
+      "id": "1116754"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21750",
+      "titulo": "LEY 21750  MODIFICA LA LEY DE CONCESIONES DE OBRAS PÚBLICAS PARA ESTABLECER LA OBLIGACIÓN DE ADOPTAR",
+      "año": "",
+      "clase": "modifica",
+      "id": "1215190"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20586",
+      "titulo": "LEY 20586  REGULA LA CERTIFICACIÓN DE LOS ARTEFACTOS PARA COMBUSTIÓN DE LEÑA Y OTROS PRODUCTOS DENDR",
+      "año": "",
+      "clase": "",
+      "id": "1040103"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20571",
+      "titulo": "LEY 20571  REGULA EL PAGO DE LAS TARIFAS ELÉCTRICAS DE LAS GENERADORAS RESIDENCIALES",
+      "año": "",
+      "clase": "",
+      "id": "1038211"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20410",
+      "titulo": "LEY 20410  MODIFICA LA LEY DE CONCESIONES DE OBRAS PÚBLICAS Y OTRAS NORMAS QUE INDICA",
+      "año": "",
+      "clase": "modifica",
+      "id": "1010304"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20084",
+      "titulo": "LEY 20084 ESTABLECE UN SISTEMA DE RESPONSABILIDAD DE LOS ADOLESCENTES POR INFRACCIONES A LA LEY PENA",
+      "año": "",
+      "clase": "",
+      "id": "244803"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20795",
+      "titulo": "LEY 20795  MODIFICA EL ARTÍCULO 42 DE LA LEY DE TRÁNSITO EN LA FORMA QUE INDICA",
+      "año": "",
+      "clase": "modifica",
+      "id": "1071441"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "19841",
+      "titulo": "LEY 19841 MODIFICA LA LEY DE TRANSITO EN LO RELATIVO AL COBRO ELECTRONICO DE PEAJES Y LA LEY Nº18.28",
+      "año": "",
+      "clase": "modifica",
+      "id": "206038"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21567",
+      "titulo": "LEY 21567  MODIFICA LA LEY N° 20.931, PARA AMPLIAR LAS FACULTADES DE CONTROL POLICIAL PARA EFECTOS D",
+      "año": "",
+      "clase": "modifica",
+      "id": "1191683"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20886",
+      "titulo": "LEY 20886  MODIFICA EL CÓDIGO DE PROCEDIMIENTO CIVIL, PARA ESTABLECER LA TRAMITACIÓN DIGITAL DE LOS ",
+      "año": "",
+      "clase": "modifica",
+      "id": "1085545"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21363",
+      "titulo": "LEY 21363  ESTABLECE NORMAS EN MATERIA DE COMERCIALIZACIÓN Y PUBLICIDAD DE BEBIDAS ALCOHÓLICAS, Y OT",
+      "año": "",
+      "clase": "",
+      "id": "1163383"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21499",
+      "titulo": "LEY 21499  REGULA LOS BIOCOMBUSTIBLES SÓLIDOS",
+      "año": "",
+      "clase": "",
+      "id": "1183783"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "",
+      "numero": "",
+      "titulo": "",
+      "año": "",
+      "clase": "",
+      "id": "29705"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21601",
+      "titulo": "LEY 21601  MODIFICA LA LEY DE TRÁNSITO PARA PREVENIR LA VENTA DE VEHÍCULOS MOTORIZADOS ROBADOS Y SAN",
+      "año": "",
+      "clase": "modifica",
+      "id": "1195774"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20698",
+      "titulo": "LEY 20698  PROPICIA LA AMPLIACIÓN DE LA MATRIZ ENERGÉTICA, MEDIANTE FUENTES RENOVABLES NO CONVENCION",
+      "año": "",
+      "clase": "",
+      "id": "1055402"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "18410",
+      "titulo": "LEY 18410 CREA LA SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES",
+      "año": "",
+      "clase": "",
+      "id": "29819"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "21647",
+      "titulo": "Ley 21647",
+      "año": "",
+      "clase": "",
+      "id": "1199483"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20999",
+      "titulo": "Ley 20999",
+      "año": "",
+      "clase": "",
+      "id": "1099982"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20701",
+      "titulo": "LEY 20701  PROCEDIMIENTO PARA OTORGAR CONCESIONES ELÉCTRICAS",
+      "año": "",
+      "clase": "",
+      "id": "1055073"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "LEY",
+      "numero": "20908",
+      "titulo": "LEY 20908  MODIFICA LEY DE CONCESIONES DE OBRAS PÚBLICAS, PARA EXIMIR DEL PAGO DE PEAJE A LOS VEHÍCU",
+      "año": "",
+      "clase": "modifica",
+      "id": "1089564"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "RESOLUCIÓN",
+      "numero": "149",
+      "titulo": "RESOLUCIÓN 149 EXENTA DEJA SIN EFECTO RESOLUCIÓN Nº 52 EXENTA, DE 31 DE ENERO DE 2018, QUE COMPLEMEN",
+      "año": "2023",
+      "clase": "",
+      "id": "1191446"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "RESOLUCIÓN",
+      "numero": "70",
+      "titulo": "RESOLUCIÓN 70 EXENTA RECTIFICA LA RESOLUCIÓN Nº 61/2024 EXENTA, QUE MODIFICA RESOLUCIÓN Nº 487/2023 ",
+      "año": "2024",
+      "clase": "modifica",
+      "id": "1200958"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "RESOLUCIÓN",
+      "numero": "583",
+      "titulo": "RESOLUCIÓN 583 EXENTA MODIFICA RESOLUCIÓN Nº 18 EXENTA, DE 2017, QUE ESTABLECE NORMAS PROCEDIMENTALE",
+      "año": "2017",
+      "clase": "modifica",
+      "id": "1109624"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "RESOLUCIÓN",
+      "numero": "237",
+      "titulo": "RESOLUCIÓN 237 EXENTA APRUEBA INFORME TÉCNICO \"FIJACIÓN DE PEAJES DE DISTRIBUCIÓN\"",
+      "año": "2017",
+      "clase": "fija_valores",
+      "id": "1102690"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "RESOLUCIÓN",
+      "numero": "711",
+      "titulo": "RESOLUCIÓN 711 EXENTA ESTABLECE METODOLOGÍA APLICABLE AL PROCESO DE PLANIFICACIÓN ANUAL DE LA TRANSM",
+      "año": "2017",
+      "clase": "",
+      "id": "1112591"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "DFL 1 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DE LA LEY DE TRÁNSITO",
+      "año": "2007",
+      "clase": "fija_valores",
+      "id": "1007469"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DFL",
+      "numero": "12",
+      "titulo": "DFL 12 FIJA PLANTA DE PERSONAL DE LA SUBSECRETARÍA DE ENERGÍA, RÉGIMEN DE REMUNERACIONES QUE LE SERÁ",
+      "año": "2009",
+      "clase": "fija_valores",
+      "id": "1009792"
+    },
+    {
+      "tipo_nodo": "norma",
+      "tipo": "DFL",
+      "numero": "4",
+      "titulo": "DFL 4DFL 4/20018 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CON FUERZA DE LEY Nº 1",
+      "año": "2006",
+      "clase": "fija_valores",
+      "id": "258171"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "tal",
+      "variantes": [
+        "tal"
+      ],
+      "id": "concepto:tal"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "TAG",
+      "variantes": [
+        "tag"
+      ],
+      "id": "concepto:tag"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "usuario o cliente",
+      "variantes": [
+        "usuario o cliente"
+      ],
+      "id": "concepto:usuario o cliente"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "empresa suministradora",
+      "variantes": [
+        "empresa suministradora"
+      ],
+      "id": "concepto:empresa suministradora"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "CDAT",
+      "variantes": [
+        "cdat"
+      ],
+      "id": "concepto:cdat"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "CDBT",
+      "variantes": [
+        "cdbt"
+      ],
+      "id": "concepto:cdbt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "CFHS",
+      "variantes": [
+        "cfhs"
+      ],
+      "id": "concepto:cfhs"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "AEIR",
+      "variantes": [
+        "aeir",
+        "a.e.i.r"
+      ],
+      "id": "concepto:aeir"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "AVI",
+      "variantes": [
+        "a.v.i",
+        "avi"
+      ],
+      "id": "concepto:avi"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "COMA",
+      "variantes": [
+        "c.o.m.a",
+        "coma"
+      ],
+      "id": "concepto:coma"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "VATT",
+      "variantes": [
+        "v.a.t.t",
+        "vatt"
+      ],
+      "id": "concepto:vatt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PNEP",
+      "variantes": [
+        "pnep"
+      ],
+      "id": "concepto:pnep"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PNPP",
+      "variantes": [
+        "pnpp"
+      ],
+      "id": "concepto:pnpp"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PNPT",
+      "variantes": [
+        "pnpt"
+      ],
+      "id": "concepto:pnpt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "MFAR",
+      "variantes": [
+        "mfar"
+      ],
+      "id": "concepto:mfar"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "EFACTAT",
+      "variantes": [
+        "efactat"
+      ],
+      "id": "concepto:efactat"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "EFACTBT",
+      "variantes": [
+        "efactbt"
+      ],
+      "id": "concepto:efactbt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PEAT",
+      "variantes": [
+        "peat"
+      ],
+      "id": "concepto:peat"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PEBT",
+      "variantes": [
+        "pebt"
+      ],
+      "id": "concepto:pebt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "NSN",
+      "variantes": [
+        "nsn"
+      ],
+      "id": "concepto:nsn"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "EGPT",
+      "variantes": [
+        "egpt"
+      ],
+      "id": "concepto:egpt"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "VI",
+      "variantes": [
+        "vi",
+        "vi"
+      ],
+      "id": "concepto_vi"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "DOL",
+      "variantes": [
+        "dol",
+        "dol"
+      ],
+      "id": "concepto_dol"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "POTENCIA FIRME",
+      "variantes": [
+        "potencia firme",
+        "potencia firme"
+      ],
+      "id": "concepto_potencia firme"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "POTENCIA INICIAL",
+      "variantes": [
+        "potencia inicial",
+        "potencia inicial"
+      ],
+      "id": "concepto_potencia inicial"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "BALANCE DE POTENCIA",
+      "variantes": [
+        "balance de potencia",
+        "balance de potencia"
+      ],
+      "id": "concepto_balance de potencia"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "EXPANSIÓN",
+      "variantes": [
+        "expansión",
+        "expansión"
+      ],
+      "id": "concepto_expansión"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "PLAN DE EXPANSIÓN",
+      "variantes": [
+        "plan de expansión",
+        "plan de expansión"
+      ],
+      "id": "concepto_plan de expansión"
+    },
+    {
+      "tipo_nodo": "concepto",
+      "termino": "COORDINADOR",
+      "variantes": [
+        "coordinador",
+        "coordinador"
+      ],
+      "id": "concepto_coordinador"
+    }
+  ],
+  "edges": [
+    {
+      "relacion": "referencia",
+      "source": "250604",
+      "target": "1204012"
+    },
+    {
+      "relacion": "referencia",
+      "source": "250604",
+      "target": "1007469"
+    },
+    {
+      "relacion": "alias",
+      "source": "250604",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "250604",
+      "target": "concepto_potencia firme"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "250604",
+      "target": "concepto_potencia inicial"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "250604",
+      "target": "concepto_balance de potencia"
+    },
+    {
+      "relacion": "define",
+      "source": "1207690",
+      "target": "concepto:tal"
+    },
+    {
+      "relacion": "define",
+      "source": "1207690",
+      "target": "concepto:tag"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1207690",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1207690",
+      "target": "1111297"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1207690",
+      "target": "1190824"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1207690",
+      "target": "1076506"
+    },
+    {
+      "relacion": "define",
+      "source": "1122953",
+      "target": "concepto:usuario o cliente"
+    },
+    {
+      "relacion": "define",
+      "source": "1122953",
+      "target": "concepto:empresa suministradora"
+    },
+    {
+      "relacion": "define",
+      "source": "1122953",
+      "target": "concepto:cdat"
+    },
+    {
+      "relacion": "define",
+      "source": "1122953",
+      "target": "concepto:cdbt"
+    },
+    {
+      "relacion": "define",
+      "source": "1122953",
+      "target": "concepto:cfhs"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1122953",
+      "target": "252841"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1122953",
+      "target": "250604"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1122953",
+      "target": "1212738"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1122953",
+      "target": "1102690"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1122953",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1122953",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "source": "1146553",
+      "target": "concepto:aeir"
+    },
+    {
+      "relacion": "define",
+      "source": "1146553",
+      "target": "concepto:avi"
+    },
+    {
+      "relacion": "define",
+      "source": "1146553",
+      "target": "concepto:coma"
+    },
+    {
+      "relacion": "define",
+      "source": "1146553",
+      "target": "concepto:vatt"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1146553",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1146553",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto_vi"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto:cdat"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto:cdbt"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto_dol"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto:peat"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1146553",
+      "target": "concepto:pebt"
+    },
+    {
+      "relacion": "alias",
+      "source": "1212738",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1066212",
+      "target": "264058"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1066212",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1066212",
+      "target": "1055073"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1066212",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1066212",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076507",
+      "target": "1032851"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076507",
+      "target": "1074277"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076507",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1076507",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1215040",
+      "target": "1146553"
+    },
+    {
+      "relacion": "alias",
+      "source": "1215040",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1049988",
+      "target": "1076506"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1049988",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1049988",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1049988",
+      "target": "1048990"
+    },
+    {
+      "relacion": "referencia",
+      "source": "264058",
+      "target": "1066212"
+    },
+    {
+      "relacion": "alias",
+      "source": "264058",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1149788",
+      "target": "1125560"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1149788",
+      "target": "1076506"
+    },
+    {
+      "relacion": "alias",
+      "source": "1149788",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:pnep"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:pnpp"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:pnpt"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:mfar"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:efactat"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:efactbt"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:peat"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:pebt"
+    },
+    {
+      "relacion": "define",
+      "source": "1048990",
+      "target": "concepto:nsn"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1048990",
+      "target": "1008692"
+    },
+    {
+      "relacion": "alias",
+      "source": "1048990",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "source": "1160108",
+      "target": "concepto:egpt"
+    },
+    {
+      "relacion": "define",
+      "source": "1160108",
+      "target": "concepto:aeir"
+    },
+    {
+      "relacion": "define",
+      "source": "1160108",
+      "target": "concepto:avi"
+    },
+    {
+      "relacion": "define",
+      "source": "1160108",
+      "target": "concepto:coma"
+    },
+    {
+      "relacion": "define",
+      "source": "1160108",
+      "target": "concepto:vatt"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1160108",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1160108",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1160108",
+      "target": "concepto_expansión"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1160108",
+      "target": "concepto_plan de expansión"
+    },
+    {
+      "relacion": "define",
+      "fuente": "config_manual",
+      "source": "1160108",
+      "target": "concepto_coordinador"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1032851",
+      "target": "1076507"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1032851",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1032851",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1032851",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076506",
+      "target": "1049988"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076506",
+      "target": "1074277"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1076506",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1076506",
+      "target": "258171"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:pnep"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:pnpp"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:mfar"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:efactat"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:efactbt"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:peat"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:pebt"
+    },
+    {
+      "relacion": "define",
+      "source": "1067875",
+      "target": "concepto:nsn"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1067875",
+      "target": "1049988"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1067875",
+      "target": "1048990"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1067875",
+      "target": "1066212"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1067875",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1067875",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1067875",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "16121",
+      "target": "1010304"
+    },
+    {
+      "relacion": "referencia",
+      "source": "16121",
+      "target": "1111297"
+    },
+    {
+      "relacion": "referencia",
+      "source": "16121",
+      "target": "1030861"
+    },
+    {
+      "relacion": "referencia",
+      "source": "16121",
+      "target": "1199483"
+    },
+    {
+      "relacion": "alias",
+      "source": "1153949",
+      "target": "258171"
+    },
+    {
+      "relacion": "alias",
+      "source": "1153949",
+      "target": "250604"
+    },
+    {
+      "relacion": "alias",
+      "source": "202975",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1204012",
+      "target": "250604"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1204012",
+      "target": "1076506"
+    },
+    {
+      "relacion": "alias",
+      "source": "1204012",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1047565",
+      "target": "264058"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1047565",
+      "target": "250604"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1047565",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1047565",
+      "target": "237695"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1047565",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1047565",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1028636",
+      "target": "244803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1187684",
+      "target": "244803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1187684",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1138479",
+      "target": "1067875"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1138479",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "237695",
+      "target": "1007469"
+    },
+    {
+      "relacion": "alias",
+      "source": "237695",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1216930",
+      "target": "220208"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1216930",
+      "target": "1030861"
+    },
+    {
+      "relacion": "alias",
+      "source": "1115627",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "267822",
+      "target": "1067875"
+    },
+    {
+      "relacion": "referencia",
+      "source": "6857",
+      "target": "1066889"
+    },
+    {
+      "relacion": "referencia",
+      "source": "6857",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "6857",
+      "target": "1155887"
+    },
+    {
+      "relacion": "referencia",
+      "source": "6857",
+      "target": "29819"
+    },
+    {
+      "relacion": "referencia",
+      "source": "6857",
+      "target": "1216930"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1111297",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1074277",
+      "target": "1049988"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1074277",
+      "target": "1032851"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1074277",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1074277",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1058529",
+      "target": "220208"
+    },
+    {
+      "relacion": "alias",
+      "source": "1059332",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1191006",
+      "target": "1092269"
+    },
+    {
+      "relacion": "referencia",
+      "source": "220208",
+      "target": "1163383"
+    },
+    {
+      "relacion": "referencia",
+      "source": "220208",
+      "target": "1188063"
+    },
+    {
+      "relacion": "referencia",
+      "source": "220208",
+      "target": "1040796"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1030861",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1030861",
+      "target": "1023143"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1030861",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1030861",
+      "target": "1216930"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1155887",
+      "target": "1023143"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1155887",
+      "target": "1010668"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1155887",
+      "target": "29819"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1187183",
+      "target": "244803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1066889",
+      "target": "1009792"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1058072",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "150669",
+      "target": "1102690"
+    },
+    {
+      "relacion": "referencia",
+      "source": "150669",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1168803",
+      "target": "244803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1168803",
+      "target": "1085545"
+    },
+    {
+      "relacion": "alias",
+      "source": "1125560",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1214890",
+      "target": "1067875"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1214890",
+      "target": "1122953"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1043725",
+      "target": "244803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1043725",
+      "target": "220208"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1091871",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1091871",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "270212",
+      "target": "1055402"
+    },
+    {
+      "relacion": "alias",
+      "source": "270212",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "169559",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1040796",
+      "target": "220208"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1008692",
+      "target": "29819"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1008692",
+      "target": "150669"
+    },
+    {
+      "relacion": "alias",
+      "source": "1008692",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1154423",
+      "target": "141599"
+    },
+    {
+      "relacion": "alias",
+      "source": "1154423",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1087315",
+      "target": "1048990"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1087315",
+      "target": "1005169"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1087315",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1087315",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "176595",
+      "target": "1191005"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1010668",
+      "target": "1216930"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1188063",
+      "target": "220208"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1005169",
+      "target": "1087315"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1005169",
+      "target": "29819"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1190824",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1190824",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1106211",
+      "target": "1067875"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1106211",
+      "target": "1010668"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1116754",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1215190",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1040103",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1038211",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1010304",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "244803",
+      "target": "1187183"
+    },
+    {
+      "relacion": "referencia",
+      "source": "244803",
+      "target": "1187684"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1191683",
+      "target": "1092269"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1085545",
+      "target": "141599"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1085545",
+      "target": "1168803"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1163383",
+      "target": "220208"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1183783",
+      "target": "1122953"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1183783",
+      "target": "29819"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1195774",
+      "target": "1092269"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1055402",
+      "target": "270212"
+    },
+    {
+      "relacion": "alias",
+      "source": "1055402",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "29819",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "29819",
+      "target": "1040103"
+    },
+    {
+      "relacion": "referencia",
+      "source": "29819",
+      "target": "1216930"
+    },
+    {
+      "relacion": "alias",
+      "source": "29819",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1099982",
+      "target": "1212738"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1099982",
+      "target": "29819"
+    },
+    {
+      "relacion": "alias",
+      "source": "1099982",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1055073",
+      "target": "264058"
+    },
+    {
+      "relacion": "alias",
+      "source": "1055073",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1089564",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1191446",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1191446",
+      "target": "1066212"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1191446",
+      "target": "1076506"
+    },
+    {
+      "relacion": "alias",
+      "source": "1191446",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1200958",
+      "target": "1066212"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1200958",
+      "target": "1032851"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1109624",
+      "target": "1048990"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1109624",
+      "target": "1215040"
+    },
+    {
+      "relacion": "alias",
+      "source": "1109624",
+      "target": "258171"
+    },
+    {
+      "relacion": "alias",
+      "source": "1109624",
+      "target": "1160108"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1102690",
+      "target": "250604"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1102690",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1102690",
+      "target": "1048990"
+    },
+    {
+      "relacion": "alias",
+      "source": "1102690",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1112591",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1112591",
+      "target": "258171"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1112591",
+      "target": "1007469"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1112591",
+      "target": "1048990"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1112591",
+      "target": "1215040"
+    },
+    {
+      "relacion": "alias",
+      "source": "1112591",
+      "target": "1160108"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1007469",
+      "target": "16121"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1007469",
+      "target": "1089564"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1007469",
+      "target": "1116754"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1009792",
+      "target": "1008692"
+    },
+    {
+      "relacion": "referencia",
+      "source": "1009792",
+      "target": "1215040"
+    },
+    {
+      "relacion": "referencia",
+      "source": "258171",
+      "target": "237695"
+    },
+    {
+      "relacion": "referencia",
+      "source": "258171",
+      "target": "1007469"
+    }
+  ]
+}

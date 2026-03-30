@@ -1,0 +1,28 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Data generated (regenerable)
+data/search_index/
+data/concept_index/
+data/debug/
+data/temp/
+data/logs/
+data/monitor/
+data/downloads/
+data/download_progress.json
+data/processed/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.key

@@ -1,0 +1,232 @@
+{
+  "caso": "\n    Una central generadora de 200 MW instaló nuevos equipos de control que\n    mejoraron su capacidad de suficiencia. El Coordinador reconoció esta mejora\n    y ahora la central debe recibir pagos por transferencias de potencia mayores\n    a las que recibía antes. La empresa quiere saber:\n    1. Qué normativa aplica para el cálculo de estos pagos\n    2. Cómo se determina la nueva suficiencia\n    3. Qué procedimientos seguir ante el Coordinador\n    4. Plazos y formalidades\n    ",
+  "temas_detectados": [
+    "TRANSFERENCIAS",
+    "COORDINADOR",
+    "POTENCIA",
+    "GENERACION"
+  ],
+  "normas_aplicables": 381,
+  "normas_clave": [
+    {
+      "id": "1984",
+      "tipo": "DESCONOCIDO",
+      "numero": "",
+      "titulo": "Ley Chile - Codigo PENAL 12-NOV-1874 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "referencias": 46,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1984"
+    },
+    {
+      "id": "1142163",
+      "tipo": "DECRETO",
+      "numero": "4",
+      "titulo": "Ley Chile - Decreto 4 08-FEB-2020 MINISTERIO DE SALUD, SUBSECRETARÍA DE SALUD PÚBLICA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "MEDICION",
+        "SSCC",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 34,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142163"
+    },
+    {
+      "id": "172986",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 30-MAY-2000 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "MEDICION",
+        "SSCC",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 29,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=172986"
+    },
+    {
+      "id": "1142667",
+      "tipo": "LEY",
+      "numero": "21210",
+      "titulo": "Ley Chile - Ley 21210 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "SSCC",
+        "ENERGIA"
+      ],
+      "referencias": 25,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142667"
+    },
+    {
+      "id": "1007469",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 29-OCT-2009 MINISTERIO DE TRANSPORTES Y TELECOMUNICACIONES, SUBSECRETARÍA DE TRANSPORTES, MINISTERIO DE JUSTICIA, SUBSECRETARÍA DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "TRANSMISION",
+        "MEDICION",
+        "PEAJES",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 24,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    },
+    {
+      "id": "25563",
+      "tipo": "LEY",
+      "numero": "7421",
+      "titulo": "Ley Chile - Codigo ORGÁNICO DE TRIBUNALESLey 7421 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "MEDICION",
+        "SSCC",
+        "POTENCIA"
+      ],
+      "referencias": 21,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=25563"
+    },
+    {
+      "id": "13315",
+      "tipo": "DECRETO",
+      "numero": "430",
+      "titulo": "Ley Chile - Decreto 430 21-ENE-1992 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "POTENCIA",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 21,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=13315"
+    },
+    {
+      "id": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "titulo": "Ley Chile - DFL 4DFL 4/20018 05-FEB-2007 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN, SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "ENERGIA",
+        "COORDINADOR"
+      ],
+      "referencias": 20,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=258171"
+    },
+    {
+      "id": "1199483",
+      "tipo": "LEY",
+      "numero": "21647",
+      "titulo": "Ley Chile - Ley 21647 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "SSCC",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 19,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1199483"
+    },
+    {
+      "id": "1077207",
+      "tipo": "DESCONOCIDO",
+      "numero": "",
+      "titulo": "Ley Chile - Circular Bancos 2409Circular Financieras 798 13-DIC-1988 MINISTERIO DE HACIENDA, SUPERINTENDENCIA DE BANCOS E INSTITUCIONES FINANCIERAS - Biblioteca del Congreso Nacional",
+      "temas": [
+        "TRANSMISION",
+        "MEDICION",
+        "SSCC",
+        "POTENCIA",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 19,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1077207"
+    },
+    {
+      "id": "127911",
+      "tipo": "DFL",
+      "numero": "2",
+      "titulo": "Ley Chile - DFL 2 28-NOV-1998 MINISTERIO DE EDUCACIÓN - Biblioteca del Congreso Nacional",
+      "temas": [
+        "SSCC",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 18,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=127911"
+    },
+    {
+      "id": "242302",
+      "tipo": "DECRETO",
+      "numero": "100",
+      "titulo": "Ley Chile - Decreto 100 22-SEP-2005 MINISTERIO SECRETARÍA GENERAL DE LA PRESIDENCIA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "SSCC",
+        "TARIFAS",
+        "ENERGIA"
+      ],
+      "referencias": 18,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=242302"
+    },
+    {
+      "id": "6369",
+      "tipo": "LEY",
+      "numero": "825",
+      "titulo": "Ley Chile - Decreto Ley 825 31-DIC-1974 MINISTERIO DE HACIENDA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "MEDICION",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 16,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=6369"
+    },
+    {
+      "id": "1067194",
+      "tipo": "LEY",
+      "numero": "20780",
+      "titulo": "Ley Chile - Ley 20780 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "SSCC",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR"
+      ],
+      "referencias": 16,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1067194"
+    },
+    {
+      "id": "1209939",
+      "tipo": "LEY",
+      "numero": "21724",
+      "titulo": "Ley Chile - Ley 21724 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "SSCC",
+        "TRANSFERENCIAS"
+      ],
+      "referencias": 16,
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1209939"
+    }
+  ]
+}

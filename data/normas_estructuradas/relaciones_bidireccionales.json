@@ -1,0 +1,46 @@
+{
+  "generado": "2026-01-21T14:54:21.502265",
+  "total": 4,
+  "relaciones": [
+    {
+      "origen_id": "1204012",
+      "origen": "DECRETO 70",
+      "destino_id": "250604",
+      "destino": "DECRETO 62",
+      "tipo_relacion": "MODIFICA",
+      "fecha_do": null,
+      "articulo_modificador": null,
+      "organismo": null
+    },
+    {
+      "origen_id": "1153949",
+      "origen": "DECRETO 42",
+      "destino_id": "250604",
+      "destino": "DECRETO 62",
+      "tipo_relacion": "MODIFICA",
+      "fecha_do": null,
+      "articulo_modificador": null,
+      "organismo": null
+    },
+    {
+      "origen_id": "1047565",
+      "origen": "DECRETO 130",
+      "destino_id": "250604",
+      "destino": "DECRETO 62",
+      "tipo_relacion": "MODIFICA",
+      "fecha_do": null,
+      "articulo_modificador": null,
+      "organismo": null
+    },
+    {
+      "origen_id": "258729",
+      "origen": "DECRETO 44",
+      "destino_id": "250604",
+      "destino": "DECRETO 62",
+      "tipo_relacion": "MODIFICA",
+      "fecha_do": null,
+      "articulo_modificador": null,
+      "organismo": null
+    }
+  ]
+}

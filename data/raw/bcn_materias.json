@@ -1,0 +1,1074 @@
+{
+  "todas": [
+    {
+      "nombre": "Leyes de Quórum Calificado",
+      "url": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=3&tipCat=0",
+      "sub": "3",
+      "agr": "1"
+    },
+    {
+      "nombre": "Leyes Orgánicas Constitucionales",
+      "url": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=4&tipCat=0",
+      "sub": "4",
+      "agr": "1"
+    },
+    {
+      "nombre": "Leyes por temas",
+      "url": "https://www.bcn.cl/leychile/consulta/listado_n_sel?agr=2",
+      "sub": null,
+      "agr": "2"
+    },
+    {
+      "nombre": "INCLUSIÓN\n                                    1",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1317",
+      "sub": "1317",
+      "agr": "2"
+    },
+    {
+      "nombre": "INCENDIOS\n                                    23\n                                    \n              ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1356",
+      "sub": "1356",
+      "agr": "2"
+    },
+    {
+      "nombre": "VALPARAÍSO 2024 (EMERGENCIA)\n                                            6",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1358",
+      "sub": "1358",
+      "agr": "2"
+    },
+    {
+      "nombre": "NORMATIVA DE INCENDIOS\n                                            17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1357",
+      "sub": "1357",
+      "agr": "2"
+    },
+    {
+      "nombre": "XIX JUEGOS PANAMERICANOS Y PARAPANAMERICANOS, SANTIAGO 2023\n                                    45\n ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1349",
+      "sub": "1349",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1350",
+      "sub": "1350",
+      "agr": "2"
+    },
+    {
+      "nombre": "Decretos\n                                            7",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1351",
+      "sub": "1351",
+      "agr": "2"
+    },
+    {
+      "nombre": "Resoluciones\n                                            29",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1352",
+      "sub": "1352",
+      "agr": "2"
+    },
+    {
+      "nombre": "MUJER, GÉNERO Y DIVERSIDAD SEXUAL\n                                    84\n                           ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1305",
+      "sub": "1305",
+      "agr": "2"
+    },
+    {
+      "nombre": "Institucionalidad\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1307",
+      "sub": "1307",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes Civiles\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1308",
+      "sub": "1308",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes de Educación\n                                            5",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1309",
+      "sub": "1309",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes Derecho Penal\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1312",
+      "sub": "1312",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes Procesales\n                                            1",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1315",
+      "sub": "1315",
+      "agr": "2"
+    },
+    {
+      "nombre": "Diversidad Sexual\n                                            17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1316",
+      "sub": "1316",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes de Protección a la Maternidad de la Mujer Trabajadora\n                                        ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1311",
+      "sub": "1311",
+      "agr": "2"
+    },
+    {
+      "nombre": "Reformas Constitucionales\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1306",
+      "sub": "1306",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes del ámbito comercial y laboral\n                                            20",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1310",
+      "sub": "1310",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes de Género y Salud\n                                            2",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1314",
+      "sub": "1314",
+      "agr": "2"
+    },
+    {
+      "nombre": "Leyes derecho a sufragio activo y pasivo\n                                            1",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1313",
+      "sub": "1313",
+      "agr": "2"
+    },
+    {
+      "nombre": "CORONAVIRUS COVID-19\n                                    1968\n                                    \n ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1236",
+      "sub": "1236",
+      "agr": "2"
+    },
+    {
+      "nombre": "Laborales y/o Económicas\n                                            172",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1255",
+      "sub": "1255",
+      "agr": "2"
+    },
+    {
+      "nombre": "Paralización de actividades\n                                            70",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1259",
+      "sub": "1259",
+      "agr": "2"
+    },
+    {
+      "nombre": "Cordones Sanitarios\n                                            114",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1260",
+      "sub": "1260",
+      "agr": "2"
+    },
+    {
+      "nombre": "Estado de Excepción\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1253",
+      "sub": "1253",
+      "agr": "2"
+    },
+    {
+      "nombre": "Sanitarias\n                                            418",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1254",
+      "sub": "1254",
+      "agr": "2"
+    },
+    {
+      "nombre": "Trámites y/o Documentos\n                                            39",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1256",
+      "sub": "1256",
+      "agr": "2"
+    },
+    {
+      "nombre": "Institucionales y/o Administrativas\n                                            972",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1257",
+      "sub": "1257",
+      "agr": "2"
+    },
+    {
+      "nombre": "Aislamiento y/o Cuarentena\n                                            174",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1258",
+      "sub": "1258",
+      "agr": "2"
+    },
+    {
+      "nombre": "REGIONALIZACIÓN DEL PAÍS\n                                    10\n                                    ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1294",
+      "sub": "1294",
+      "agr": "2"
+    },
+    {
+      "nombre": "División Política Administrativa\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1295",
+      "sub": "1295",
+      "agr": "2"
+    },
+    {
+      "nombre": "Normas sobre funcionamiento de las regiones\n                                            6",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1296",
+      "sub": "1296",
+      "agr": "2"
+    },
+    {
+      "nombre": "TRANSFORMACIÓN DIGITAL DEL ESTADO\n                                    29\n                           ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1362",
+      "sub": "1362",
+      "agr": "2"
+    },
+    {
+      "nombre": "Gobierno Digital\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1365",
+      "sub": "1365",
+      "agr": "2"
+    },
+    {
+      "nombre": "Inteligencia Artificial\n                                            5",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1367",
+      "sub": "1367",
+      "agr": "2"
+    },
+    {
+      "nombre": "Protección de Datos Personales\n                                            5",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1364",
+      "sub": "1364",
+      "agr": "2"
+    },
+    {
+      "nombre": "Firma Electrónica\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1366",
+      "sub": "1366",
+      "agr": "2"
+    },
+    {
+      "nombre": "Ciberseguridad\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1363",
+      "sub": "1363",
+      "agr": "2"
+    },
+    {
+      "nombre": "ACTIVIDAD FINANCIERA\n                                    62\n                                    \n   ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1100",
+      "sub": "1100",
+      "agr": "2"
+    },
+    {
+      "nombre": "Actividad Bancaria\n                                            20",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1101",
+      "sub": "1101",
+      "agr": "2"
+    },
+    {
+      "nombre": "Mercado de Valores\n                                            17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1103",
+      "sub": "1103",
+      "agr": "2"
+    },
+    {
+      "nombre": "Mercado de Seguros\n                                            11",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1102",
+      "sub": "1102",
+      "agr": "2"
+    },
+    {
+      "nombre": "Endeudamiento y Crédito\n                                            14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1104",
+      "sub": "1104",
+      "agr": "2"
+    },
+    {
+      "nombre": "ADULTO MAYOR\n                                    25",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1107",
+      "sub": "1107",
+      "agr": "2"
+    },
+    {
+      "nombre": "BOMBEROS\n                                    22",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1110",
+      "sub": "1110",
+      "agr": "2"
+    },
+    {
+      "nombre": "CULTURA\n                                    75\n                                    \n                ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1111",
+      "sub": "1111",
+      "agr": "2"
+    },
+    {
+      "nombre": "Consejo Nacional de la Cultura y de las Artes\n                                            11",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1112",
+      "sub": "1112",
+      "agr": "2"
+    },
+    {
+      "nombre": "Artistas\n                                            27",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1114",
+      "sub": "1114",
+      "agr": "2"
+    },
+    {
+      "nombre": "Fomento y Promoción de la Creación Artística y Cultural\n                                            ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1113",
+      "sub": "1113",
+      "agr": "2"
+    },
+    {
+      "nombre": "Patrimonio Cultural e Indígena\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1116",
+      "sub": "1116",
+      "agr": "2"
+    },
+    {
+      "nombre": "Régimen Legal de la Actividad Audiovisual\n                                            7",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1115",
+      "sub": "1115",
+      "agr": "2"
+    },
+    {
+      "nombre": "DELINCUENCIA\n                                    74\n                                    \n           ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1120",
+      "sub": "1120",
+      "agr": "2"
+    },
+    {
+      "nombre": "Régimen Penitenciario\n                                            30",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1122",
+      "sub": "1122",
+      "agr": "2"
+    },
+    {
+      "nombre": "Porte y Uso de Armas\n                                            20",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1123",
+      "sub": "1123",
+      "agr": "2"
+    },
+    {
+      "nombre": "Reforma Procesal Penal\n                                            24",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1121",
+      "sub": "1121",
+      "agr": "2"
+    },
+    {
+      "nombre": "DISCAPACIDAD\n                                    46\n                                    \n           ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1117",
+      "sub": "1117",
+      "agr": "2"
+    },
+    {
+      "nombre": "Accesibilidad Universal\n                                            41",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1118",
+      "sub": "1118",
+      "agr": "2"
+    },
+    {
+      "nombre": "Normas de Salud para Personas con Discapacidad\n                                            5",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1119",
+      "sub": "1119",
+      "agr": "2"
+    },
+    {
+      "nombre": "DÍAS NACIONALES\n                                    125",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1124",
+      "sub": "1124",
+      "agr": "2"
+    },
+    {
+      "nombre": "EDUCACION\n                                    160\n                                    \n             ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1125",
+      "sub": "1125",
+      "agr": "2"
+    },
+    {
+      "nombre": "Financiamiento Universitario\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1131",
+      "sub": "1131",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación Superior\n                                            42",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1128",
+      "sub": "1128",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación Media Técnica Profesional\n                                            25",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1129",
+      "sub": "1129",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación Básica\n                                            32",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1126",
+      "sub": "1126",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación Media\n                                            26",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1127",
+      "sub": "1127",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación Parvularia\n                                            20",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1133",
+      "sub": "1133",
+      "agr": "2"
+    },
+    {
+      "nombre": "Escuelas Especiales\n                                            11",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1130",
+      "sub": "1130",
+      "agr": "2"
+    },
+    {
+      "nombre": "ELECCIONES\n                                    47\n                                    \n             ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1134",
+      "sub": "1134",
+      "agr": "2"
+    },
+    {
+      "nombre": "Financiamiento Electoral\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1135",
+      "sub": "1135",
+      "agr": "2"
+    },
+    {
+      "nombre": "Legislación Electoral\n                                            37",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1136",
+      "sub": "1136",
+      "agr": "2"
+    },
+    {
+      "nombre": "EMPRESAS\n                                    43\n                                    \n               ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1140",
+      "sub": "1140",
+      "agr": "2"
+    },
+    {
+      "nombre": "Pequeña y Mediana Empresa (PYMES)\n                                            43",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1141",
+      "sub": "1141",
+      "agr": "2"
+    },
+    {
+      "nombre": "ENERGIA\n                                    113\n                                    \n               ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1137",
+      "sub": "1137",
+      "agr": "2"
+    },
+    {
+      "nombre": "Energía Nuclear\n                                            45",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1138",
+      "sub": "1138",
+      "agr": "2"
+    },
+    {
+      "nombre": "Energía Renovable\n                                            23",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1139",
+      "sub": "1139",
+      "agr": "2"
+    },
+    {
+      "nombre": "Institucionalidad Energética\n                                            45",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1227",
+      "sub": "1227",
+      "agr": "2"
+    },
+    {
+      "nombre": "EXTRANJEROS EN CHILE\n                                    21",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1143",
+      "sub": "1143",
+      "agr": "2"
+    },
+    {
+      "nombre": "FAMILIA\n                                    87\n                                    \n                ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1144",
+      "sub": "1144",
+      "agr": "2"
+    },
+    {
+      "nombre": "Matrimonio y Acuerdo de Unión Civil\n                                            22",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1146",
+      "sub": "1146",
+      "agr": "2"
+    },
+    {
+      "nombre": "Mediación Familiar\n                                            11",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1147",
+      "sub": "1147",
+      "agr": "2"
+    },
+    {
+      "nombre": "Justicia de Familia\n                                            22",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1149",
+      "sub": "1149",
+      "agr": "2"
+    },
+    {
+      "nombre": "Violencia Intrafamiliar\n                                            15",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1150",
+      "sub": "1150",
+      "agr": "2"
+    },
+    {
+      "nombre": "Adopción\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1145",
+      "sub": "1145",
+      "agr": "2"
+    },
+    {
+      "nombre": "Pensiones Alimenticias\n                                            8",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1148",
+      "sub": "1148",
+      "agr": "2"
+    },
+    {
+      "nombre": "FERIADOS\n                                    14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1151",
+      "sub": "1151",
+      "agr": "2"
+    },
+    {
+      "nombre": "FUERZAS ARMADAS Y DE ORDEN Y SEGURIDAD\n                                    49",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1152",
+      "sub": "1152",
+      "agr": "2"
+    },
+    {
+      "nombre": "GENERO E INCLUSION SOCIAL\n                                    34",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1155",
+      "sub": "1155",
+      "agr": "2"
+    },
+    {
+      "nombre": "GOBIERNO Y ESTADO\n                                    255\n                                    \n     ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1154",
+      "sub": "1154",
+      "agr": "2"
+    },
+    {
+      "nombre": "Aduanas\n                                            92",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1157",
+      "sub": "1157",
+      "agr": "2"
+    },
+    {
+      "nombre": "Organismos del Estado\n                                            21",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1161",
+      "sub": "1161",
+      "agr": "2"
+    },
+    {
+      "nombre": "Probidad\n                                            30",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1162",
+      "sub": "1162",
+      "agr": "2"
+    },
+    {
+      "nombre": "Alta Dirección Pública\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1158",
+      "sub": "1158",
+      "agr": "2"
+    },
+    {
+      "nombre": "Gobierno Electrónico\n                                            21",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1160",
+      "sub": "1160",
+      "agr": "2"
+    },
+    {
+      "nombre": "Empresas del Estado y Sociedades en las que participa\n                                            21",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1159",
+      "sub": "1159",
+      "agr": "2"
+    },
+    {
+      "nombre": "Municipalidades\n                                            12",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1163",
+      "sub": "1163",
+      "agr": "2"
+    },
+    {
+      "nombre": "Acceso a la Información Pública\n                                            21",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1156",
+      "sub": "1156",
+      "agr": "2"
+    },
+    {
+      "nombre": "Presupuesto Sector Público desde el año 2000-\n                                            27",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1164",
+      "sub": "1164",
+      "agr": "2"
+    },
+    {
+      "nombre": "IMPUESTOS\n                                    38\n                                    \n              ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1165",
+      "sub": "1165",
+      "agr": "2"
+    },
+    {
+      "nombre": "Diversos Impuestos\n                                            17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1166",
+      "sub": "1166",
+      "agr": "2"
+    },
+    {
+      "nombre": "Impuesto a los Combustibles\n                                            7",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1168",
+      "sub": "1168",
+      "agr": "2"
+    },
+    {
+      "nombre": "Legislación Básica Tributaria\n                                            14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1167",
+      "sub": "1167",
+      "agr": "2"
+    },
+    {
+      "nombre": "INFANCIA\n                                    72\n                                    \n               ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1169",
+      "sub": "1169",
+      "agr": "2"
+    },
+    {
+      "nombre": "Protección a la Infancia\n                                            53",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1172",
+      "sub": "1172",
+      "agr": "2"
+    },
+    {
+      "nombre": "Embarazo Adolescente\n                                            8",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1170",
+      "sub": "1170",
+      "agr": "2"
+    },
+    {
+      "nombre": "Convenios Internacionales sobre Protección a la Infancia\n                                           ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1171",
+      "sub": "1171",
+      "agr": "2"
+    },
+    {
+      "nombre": "LEGISLACION LABORAL\n                                    225\n                                    \n   ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1173",
+      "sub": "1173",
+      "agr": "2"
+    },
+    {
+      "nombre": "Convenios Internacionales sobre Seguridad Social\n                                            103",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1174",
+      "sub": "1174",
+      "agr": "2"
+    },
+    {
+      "nombre": "Accidentes del Trabajo y Enfermedades Profesionales\n                                            42",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1175",
+      "sub": "1175",
+      "agr": "2"
+    },
+    {
+      "nombre": "Mediación Laboral\n                                            11",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1177",
+      "sub": "1177",
+      "agr": "2"
+    },
+    {
+      "nombre": "Justicia Laboral\n                                            12",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1178",
+      "sub": "1178",
+      "agr": "2"
+    },
+    {
+      "nombre": "Permiso de la Madre o Padre Trabajadores\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1179",
+      "sub": "1179",
+      "agr": "2"
+    },
+    {
+      "nombre": "Ingreso Mínimo desde el año 1990 -\n                                            31",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1180",
+      "sub": "1180",
+      "agr": "2"
+    },
+    {
+      "nombre": "Trabajo Infantil\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1176",
+      "sub": "1176",
+      "agr": "2"
+    },
+    {
+      "nombre": "Régimen legal sobre prestaciones de crédito social de las Cajas de Compensación\n                    ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1228",
+      "sub": "1228",
+      "agr": "2"
+    },
+    {
+      "nombre": "MEDIO AMBIENTE\n                                    213\n                                    \n        ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1181",
+      "sub": "1181",
+      "agr": "2"
+    },
+    {
+      "nombre": "Residuos\n                                            33",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1182",
+      "sub": "1182",
+      "agr": "2"
+    },
+    {
+      "nombre": "Bosques\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1186",
+      "sub": "1186",
+      "agr": "2"
+    },
+    {
+      "nombre": "Emisión de Olores\n                                            14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1188",
+      "sub": "1188",
+      "agr": "2"
+    },
+    {
+      "nombre": "Borde Costero\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1360",
+      "sub": "1360",
+      "agr": "2"
+    },
+    {
+      "nombre": "Animales\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1359",
+      "sub": "1359",
+      "agr": "2"
+    },
+    {
+      "nombre": "Cambio Climático\n                                            35",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1187",
+      "sub": "1187",
+      "agr": "2"
+    },
+    {
+      "nombre": "Normativa General sobre Medio Ambiente\n                                            46",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1185",
+      "sub": "1185",
+      "agr": "2"
+    },
+    {
+      "nombre": "Contaminación\n                                            73",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1183",
+      "sub": "1183",
+      "agr": "2"
+    },
+    {
+      "nombre": "Acuicultura\n                                            1",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1361",
+      "sub": "1361",
+      "agr": "2"
+    },
+    {
+      "nombre": "PESCA\n                                    48\n                                    \n                  ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1192",
+      "sub": "1192",
+      "agr": "2"
+    },
+    {
+      "nombre": "Pesca Artesanal\n                                            32",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1194",
+      "sub": "1194",
+      "agr": "2"
+    },
+    {
+      "nombre": "Institucionalidad\n                                            16",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1193",
+      "sub": "1193",
+      "agr": "2"
+    },
+    {
+      "nombre": "PUEBLOS ORIGINARIOS\n                                    39\n                                    \n    ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1189",
+      "sub": "1189",
+      "agr": "2"
+    },
+    {
+      "nombre": "Proceso Constituyente\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1190",
+      "sub": "1190",
+      "agr": "2"
+    },
+    {
+      "nombre": "Consulta Previa Indígena\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1304",
+      "sub": "1304",
+      "agr": "2"
+    },
+    {
+      "nombre": "Institucionalidad pueblos indígenas\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1303",
+      "sub": "1303",
+      "agr": "2"
+    },
+    {
+      "nombre": "Educación\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1299",
+      "sub": "1299",
+      "agr": "2"
+    },
+    {
+      "nombre": "Medio Ambiente y territorio\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1191",
+      "sub": "1191",
+      "agr": "2"
+    },
+    {
+      "nombre": "Impuestos\n                                            1",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1301",
+      "sub": "1301",
+      "agr": "2"
+    },
+    {
+      "nombre": "Normas de Derecho Internacional\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1302",
+      "sub": "1302",
+      "agr": "2"
+    },
+    {
+      "nombre": "CONADI\n                                            2",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1298",
+      "sub": "1298",
+      "agr": "2"
+    },
+    {
+      "nombre": "Isla de Pascua/Rapa Nui\n                                            12",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1297",
+      "sub": "1297",
+      "agr": "2"
+    },
+    {
+      "nombre": "Cultura\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1300",
+      "sub": "1300",
+      "agr": "2"
+    },
+    {
+      "nombre": "REAJUSTE DEL SECTOR PÚBLICO DESDE EL AÑO 2000 -\n                                    22",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1195",
+      "sub": "1195",
+      "agr": "2"
+    },
+    {
+      "nombre": "SALUD\n                                    101\n                                    \n                 ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1201",
+      "sub": "1201",
+      "agr": "2"
+    },
+    {
+      "nombre": "Mediación en Salud\n                                            8",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1203",
+      "sub": "1203",
+      "agr": "2"
+    },
+    {
+      "nombre": "Enfermedades Catastróficas\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1226",
+      "sub": "1226",
+      "agr": "2"
+    },
+    {
+      "nombre": "Alertas Sanitarias\n                                            6",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1235",
+      "sub": "1235",
+      "agr": "2"
+    },
+    {
+      "nombre": "Medicina Alternativa\n                                            7",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1206",
+      "sub": "1206",
+      "agr": "2"
+    },
+    {
+      "nombre": "Trasplante y  Donación de Organos\n                                            14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1208",
+      "sub": "1208",
+      "agr": "2"
+    },
+    {
+      "nombre": "Auge\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1202",
+      "sub": "1202",
+      "agr": "2"
+    },
+    {
+      "nombre": "Medicamentos\n                                            23",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1204",
+      "sub": "1204",
+      "agr": "2"
+    },
+    {
+      "nombre": "Enfermedades de Transmisión Sexual\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1205",
+      "sub": "1205",
+      "agr": "2"
+    },
+    {
+      "nombre": "Tabaco y Adicciones\n                                            4",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1207",
+      "sub": "1207",
+      "agr": "2"
+    },
+    {
+      "nombre": "SERVICIOS BÁSICOS\n                                    55\n                                    \n      ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1196",
+      "sub": "1196",
+      "agr": "2"
+    },
+    {
+      "nombre": "Agua Potable\n                                            13",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1198",
+      "sub": "1198",
+      "agr": "2"
+    },
+    {
+      "nombre": "Gas\n                                            24",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1197",
+      "sub": "1197",
+      "agr": "2"
+    },
+    {
+      "nombre": "Luz\n                                            15",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1199",
+      "sub": "1199",
+      "agr": "2"
+    },
+    {
+      "nombre": "Concesiones Sanitarias\n                                            3",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1200",
+      "sub": "1200",
+      "agr": "2"
+    },
+    {
+      "nombre": "TRANSPORTES\n                                    89\n                                    \n            ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1212",
+      "sub": "1212",
+      "agr": "2"
+    },
+    {
+      "nombre": "Administración de Puertos\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1213",
+      "sub": "1213",
+      "agr": "2"
+    },
+    {
+      "nombre": "Metro de Santiago\n                                            9",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1214",
+      "sub": "1214",
+      "agr": "2"
+    },
+    {
+      "nombre": "Taxis\n                                            8",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1215",
+      "sub": "1215",
+      "agr": "2"
+    },
+    {
+      "nombre": "Transporte Escolar\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1218",
+      "sub": "1218",
+      "agr": "2"
+    },
+    {
+      "nombre": "Transporte de Pasajeros Urbano y por Carreteras\n                                            20",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1217",
+      "sub": "1217",
+      "agr": "2"
+    },
+    {
+      "nombre": "Transporte de Carga Terrestre\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1216",
+      "sub": "1216",
+      "agr": "2"
+    },
+    {
+      "nombre": "Transporte Aéreo\n                                            23",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1219",
+      "sub": "1219",
+      "agr": "2"
+    },
+    {
+      "nombre": "TRATADOS INTERNACIONALES SOBRE DERECHOS HUMANOS\n                                    37\n             ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1229",
+      "sub": "1229",
+      "agr": "2"
+    },
+    {
+      "nombre": "Sistema Interamericano  (Organización de los Estados Americanos, OEA)\n                              ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1231",
+      "sub": "1231",
+      "agr": "2"
+    },
+    {
+      "nombre": "Sistema Universal  (Organización de las Naciones Unidas, ONU, Organización Internacional del Trabajo",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1230",
+      "sub": "1230",
+      "agr": "2"
+    },
+    {
+      "nombre": "VIVIENDA\n                                    41\n                                    \n               ",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1220",
+      "sub": "1220",
+      "agr": "2"
+    },
+    {
+      "nombre": "Acceso a la Vivienda\n                                            14",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1221",
+      "sub": "1221",
+      "agr": "2"
+    },
+    {
+      "nombre": "Construcciones y Sismicidad\n                                            17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1222",
+      "sub": "1222",
+      "agr": "2"
+    },
+    {
+      "nombre": "Urbanismo\n                                            10",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1223",
+      "sub": "1223",
+      "agr": "2"
+    },
+    {
+      "nombre": "ZONAS EXTREMAS\n                                    17",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1224",
+      "sub": "1224",
+      "agr": "2"
+    },
+    {
+      "nombre": "ZONAS FRANCAS\n                                    16",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1225",
+      "sub": "1225",
+      "agr": "2"
+    }
+  ],
+  "energia": [
+    {
+      "nombre": "Energía Nuclear\n                                            45",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1138",
+      "sub": "1138",
+      "agr": "2"
+    },
+    {
+      "nombre": "Energía Renovable\n                                            23",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1139",
+      "sub": "1139",
+      "agr": "2"
+    },
+    {
+      "nombre": "Impuesto a los Combustibles\n                                            7",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1168",
+      "sub": "1168",
+      "agr": "2"
+    },
+    {
+      "nombre": "Gas\n                                            24",
+      "url": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?comp=&agr=2&_grupo_aporte=&sub=1197",
+      "sub": "1197",
+      "agr": "2"
+    }
+  ]
+}

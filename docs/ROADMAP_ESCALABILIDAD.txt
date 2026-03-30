@@ -1,0 +1,336 @@
+================================================================================
+RESUMEN EJECUTIVO: Roadmap de Escalabilidad
+================================================================================
+
+TU SITUACIÓN HOY:
+  📊 2,031 normas eléctricas BCN
+  🎯 70% precisión con keywords
+  💰 $0 costo
+  ⚡ 50ms búsqueda
+
+
+COMPARATIVA RÁPIDA (diferentes escalas):
+════════════════════════════════════════════════════════════════════════════
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ESCALA 1: 2K-5K normas (HOY → 2 años)                                 │
+├────────────────────────────────────────────────────────────────────────┤
+│ Solución:  Keywords mejorados                                          │
+│ Esfuerzo:  2 horas                                                     │
+│ Ganancia:  70% → 75% precisión                                         │
+│ Costo:     $0                                                          │
+│                                                                        │
+│ ✅ RECOMENDADO: Expandir sinónimos, agregar fuzzy matching            │
+│ ❌ NO HACER: Embeddings (overkill, 10% más precisión no justifica)    │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ESCALA 2: 5K-20K normas (2-4 años)                                    │
+├────────────────────────────────────────────────────────────────────────┤
+│ Solución:  Embeddings (jina-es) + numpy                               │
+│ Esfuerzo:  1 día setup                                                 │
+│ Ganancia:  75% → 83% precisión                                         │
+│ Costo:     $0                                                          │
+│                                                                        │
+│ ⚠️  PUNTO DE INFLEXIÓN: ~8K normas                                     │
+│     Keywords caen a 65-70% (ya no aceptable)                          │
+│                                                                        │
+│ ✅ MIGRAR SI:                                                          │
+│    • Dataset >5K normas                                                │
+│    • Usuarios reportan >5 fallos/semana                                │
+│    • Compliance requiere >80% precisión                                │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ESCALA 3: 20K-100K normas (4-7 años)                                  │
+├────────────────────────────────────────────────────────────────────────┤
+│ Solución:  Embeddings (e5-large) + FAISS                              │
+│ Esfuerzo:  1 semana                                                    │
+│ Ganancia:  Búsquedas 400ms → 50ms (8x más rápido)                     │
+│ Costo:     $50/mes (servidor opcional)                                 │
+│                                                                        │
+│ 🔧 QUÉ ES FAISS:                                                       │
+│    Librería de Facebook para búsqueda vectorial ultra-rápida          │
+│    Gratis, open source, 10-100x más rápido que numpy                  │
+│                                                                        │
+│ ✅ MIGRAR SI:                                                          │
+│    • Búsquedas tardan >300ms                                           │
+│    • >100 búsquedas/minuto                                             │
+│    • Dataset >20K normas                                               │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────┐
+│ ESCALA 4: 100K-1M normas (7-10 años / Enterprise)                     │
+├────────────────────────────────────────────────────────────────────────┤
+│ Solución:  Hybrid (BM25 + Embeddings + LLM) + Qdrant                  │
+│ Esfuerzo:  1-3 meses                                                   │
+│ Ganancia:  84% → 88% precisión, <50ms multi-usuario                   │
+│ Costo:     $100-500/mes                                                │
+│                                                                        │
+│ 🏢 ARQUITECTURA ENTERPRISE:                                            │
+│    Tier 1: BM25 (100K → 500 candidatos) - 10ms                        │
+│    Tier 2: Embeddings re-ranking (500 → 50) - 20ms                    │
+│    Tier 3: LLM (50 → Top 10 explicados) - 500ms (solo VIP)           │
+│                                                                        │
+│ ✅ SOLO SI:                                                            │
+│    • Dataset >100K normas                                              │
+│    • >10 usuarios concurrentes                                         │
+│    • Presupuesto para equipo dedicado                                  │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+COSTOS PROYECTADOS (5 años):
+════════════════════════════════════════════════════════════════════════════
+
+Año   Normas    Keywords    Embeddings Local    Pinecone      Recomendado
+────────────────────────────────────────────────────────────────────────────
+2025   2,000    $0          $0                  $70/mes       Keywords ✅
+2026   5,000    $0          $0                  $70/mes       Keywords
+2027  10,000    $0          $0                  $100/mes      Embeddings ✅
+2028  20,000    $0          $50/mes             $150/mes      Embeddings
+2029  50,000    $0          $50/mes             $300/mes      Embeddings
+
+────────────────────────────────────────────────────────────────────────────
+TOTAL 5 AÑOS:
+  Keywords:         $0
+  Embeddings Local: $600        ← Solo años 4-5 con server
+  Pinecone:         $8,400      ← Prohibitivo ❌
+
+PERO considerando tiempo de mantenimiento ($100/hora):
+  Keywords:         $20,000 (tiempo dev)
+  Embeddings Local: $5,600 (tiempo + server)  ✅ GANADOR
+  OpenAI API:       $1,396                     ✅ Menos mantenimiento
+
+
+DECISION TREE (¿Qué hacer hoy?):
+════════════════════════════════════════════════════════════════════════════
+
+START
+  │
+  ├─ ¿Tienes >5,000 normas? ──NO─→ KEYWORDS MEJORADOS (2 horas)
+  │                                 └─ Expandir sinónimos
+  │                                 └─ Fuzzy matching
+  │                                 └─ Logging de fallos
+  │                                 └─ STOP aquí (suficiente)
+  │
+  └─ SÍ
+     │
+     ├─ ¿Precisión <75% causa problemas? ──NO─→ KEYWORDS (STOP)
+     │
+     └─ SÍ
+        │
+        └─ IMPLEMENTAR EMBEDDINGS (jina-es)
+           └─ 1 día desarrollo
+           └─ Ganancia: 75% → 83%
+           │
+           ├─ ¿Tienes >20K normas? ──NO─→ numpy (STOP)
+           │
+           └─ SÍ
+              │
+              ├─ ¿Búsquedas >300ms? ──NO─→ numpy (STOP)
+              │
+              └─ SÍ
+                 │
+                 └─ MIGRAR A FAISS
+                    └─ 1 semana desarrollo
+                    └─ Ganancia: 400ms → 50ms
+
+
+TU ROADMAP RECOMENDADO:
+════════════════════════════════════════════════════════════════════════════
+
+  2025 (HOY)
+  ┌─────────────────────────────────────────────────────────────┐
+  │ FASE 1: Keywords Mejorados                                  │
+  ├─────────────────────────────────────────────────────────────┤
+  │ Tiempo:    2 horas                                           │
+  │ Ganancia:  70% → 75%                                         │
+  │ Costo:     $0                                                │
+  │                                                              │
+  │ Tareas:                                                      │
+  │ ☐ Expandir keywords_map con sinónimos                       │
+  │   • 'planta' → 'generador', 'central'                       │
+  │   • 'operador' → 'coordinador', 'CEN'                       │
+  │   • 'capacidad' → 'suficiencia', 'potencia'                 │
+  │                                                              │
+  │ ☐ Agregar fuzzy matching (typos)                            │
+  │   • "suficiecia" → "suficiencia"                            │
+  │   • "coordinaor" → "coordinador"                            │
+  │                                                              │
+  │ ☐ Logging de búsquedas fallidas                             │
+  │   • Guardar queries que retornan 0 resultados               │
+  │   • Usar para mejorar keywords iterativamente               │
+  │                                                              │
+  │ ☐ Caché de búsquedas frecuentes                             │
+  │   • Almacenar top 100 queries                               │
+  │   • 10x más rápido para queries repetidas                   │
+  └─────────────────────────────────────────────────────────────┘
+
+  Triggers para FASE 2:
+  ⚠️  Dataset crece a >5,000 normas
+  ⚠️  Usuarios reportan >5 fallos/semana
+  ⚠️  Compliance requiere >80% precisión
+
+  ───────────────────────────────────────────────────────────────
+
+  2026-2027
+  ┌─────────────────────────────────────────────────────────────┐
+  │ FASE 2: Embeddings Básicos (jina-es)                        │
+  ├─────────────────────────────────────────────────────────────┤
+  │ Tiempo:    1 día setup                                       │
+  │ Ganancia:  75% → 83%                                         │
+  │ Costo:     $0                                                │
+  │                                                              │
+  │ Stack:                                                       │
+  │ • sentence-transformers                                      │
+  │ • jina-embeddings-v2-base-es (especializado español)        │
+  │ • numpy + pickle (almacenamiento)                           │
+  │                                                              │
+  │ Arquitectura:                                                │
+  │ 1. Setup (UNA VEZ): Generar embeddings (~45 min)           │
+  │ 2. Búsqueda: numpy dot product (~120ms)                     │
+  │ 3. Updates: Regenerar embeddings mensualmente               │
+  └─────────────────────────────────────────────────────────────┘
+
+  Triggers para FASE 3:
+  ⚠️  Dataset >15,000 normas
+  ⚠️  Búsquedas tardan >200ms
+  ⚠️  >50 búsquedas/minuto
+
+  ───────────────────────────────────────────────────────────────
+
+  2028+
+  ┌─────────────────────────────────────────────────────────────┐
+  │ FASE 3: Optimización FAISS                                  │
+  ├─────────────────────────────────────────────────────────────┤
+  │ Tiempo:    1 semana                                          │
+  │ Ganancia:  400ms → 50ms                                      │
+  │ Costo:     $0-50/mes                                         │
+  │                                                              │
+  │ Stack:                                                       │
+  │ • faiss-cpu (o faiss-gpu si tienes)                         │
+  │ • Índices optimizados (IVF, PQ)                             │
+  │                                                              │
+  │ Ganancia:                                                    │
+  │ • 8-10x más rápido que numpy                                │
+  │ • Soporta 100K+ vectores sin degradación                    │
+  └─────────────────────────────────────────────────────────────┘
+
+  Triggers para FASE 4:
+  ⚠️  Dataset >100,000 normas
+  ⚠️  Múltiples usuarios concurrentes (>10)
+  ⚠️  Presupuesto para servidor dedicado
+
+
+PRINCIPIOS CLAVE:
+════════════════════════════════════════════════════════════════════════════
+
+1. START SIMPLE, SCALE WHEN PAIN POINTS APPEAR
+   No optimices para problemas que no tienes todavía
+
+2. MEASURE BEFORE OPTIMIZING
+   Logging de fallos → datos reales → mejoras dirigidas
+
+3. PROGRESSIVE ENHANCEMENT
+   Keywords → Embeddings básicos → FAISS → Hybrid
+   Cada paso con trigger claro
+
+4. COST/BENEFIT ANALYSIS
+   2 horas keywords (+5%) >> 1 día embeddings (+8%) para 2K normas
+   Pero a 10K normas: embeddings >> keywords
+
+5. AVOID OVER-ENGINEERING
+   ❌ NO necesitas Pinecone con 2K normas
+   ❌ NO necesitas GPU con <20K normas
+   ❌ NO necesitas microservicios con <10 usuarios
+
+
+RIESGOS DE SOBRE-INGENIERÍA (NO HACER AHORA):
+════════════════════════════════════════════════════════════════════════════
+
+❌ Vector databases (Pinecone, Weaviate, Qdrant)
+   Razón: Overkill para 2K vectores, numpy es más rápido
+
+❌ Fine-tuning custom de modelos
+   Razón: Necesitas >50K normas para justificar
+
+❌ Arquitectura microservicios
+   Razón: Complejidad innecesaria para <10 usuarios
+
+❌ GPU dedicada
+   Razón: CPU suficiente para 2-20K normas
+
+❌ Multiple modelos ensemble
+   Razón: Mantenimiento complejo, ganancia marginal <3%
+
+❌ Real-time updates
+   Razón: Batch processing mensual es suficiente
+
+
+QUICK WINS PARA HOY (próximas 2 horas):
+════════════════════════════════════════════════════════════════════════════
+
+✅ Expandir KEYWORDS_MAP
+   Ganancia: +5%
+   Esfuerzo: 30 min
+
+✅ Fuzzy matching para typos
+   Ganancia: +2%
+   Esfuerzo: 1 hora
+
+✅ Logging de búsquedas fallidas
+   Ganancia: Data para mejoras futuras
+   Esfuerzo: 30 min
+
+✅ Caché de búsquedas frecuentes
+   Ganancia: 10x más rápido para queries repetidas
+   Esfuerzo: 1 hora
+
+TOTAL: 3 horas → +7% precisión + 10x velocidad (casos frecuentes)
+
+
+MÉTRICAS DE SEGUIMIENTO:
+════════════════════════════════════════════════════════════════════════════
+
+KPI                      Meta 2025    Meta 2027    Meta 2030
+────────────────────────────────────────────────────────────────────────
+Precisión @10            75%          83%          88%
+Recall @10               70%          80%          85%
+Latencia búsqueda        <150ms       <100ms       <50ms
+Falsos negativos/semana  <5           <2           <1
+Costo mensual            $0           <$10         <$100
+Tiempo mantenimiento/mes 8h           2h           4h
+
+
+RESUMEN FINAL:
+════════════════════════════════════════════════════════════════════════════
+
+PARA HOY (2,031 normas):
+  ✅ Keywords mejorados (2 horas)
+  ✅ Monitorear pain points
+  ❌ NO implementar embeddings todavía
+
+PARA 2027 (si crece a >5K normas):
+  ✅ Migrar a jina-embeddings-v2-base-es
+  ✅ Arquitectura simple (numpy + pickle)
+  ❌ NO usar vector DB todavía
+
+PARA 2028+ (si crece a >20K normas):
+  ✅ Optimizar con FAISS
+  ✅ Considerar servidor dedicado ($50/mes)
+  ❌ NO sobre-ingenierizar
+
+PARA 2030+ (si crece a >100K normas):
+  ✅ Arquitectura enterprise híbrida
+  ✅ Considerar equipo dedicado
+  ✅ Presupuesto $100-500/mes
+
+
+═══════════════════════════════════════════════════════════════════════════
+DECISIÓN EJECUTIVA:
+
+Por ahora: KEYWORDS MEJORADOS (2 horas inversión)
+Futuro: Migrar cuando pain points aparezcan, no antes
+Filosofía: Start simple, scale progressively
+
+═══════════════════════════════════════════════════════════════════════════

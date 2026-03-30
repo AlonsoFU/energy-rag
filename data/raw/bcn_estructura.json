@@ -1,0 +1,1063 @@
+{
+  "homepage": {
+    "menus": [
+      [
+        {
+          "text": "Ingresar",
+          "href": "javascript:void(0);"
+        },
+        {
+          "text": "Registrarse",
+          "href": "javascript:void(0);"
+        }
+      ],
+      [
+        {
+          "text": "︱Ley Chile",
+          "href": "https://www.bcn.cl/leychile"
+        },
+        {
+          "text": "Acerca de la Biblioteca",
+          "href": "https://www.bcn.cl/portal/pagina/acerca"
+        },
+        {
+          "text": "Ubicación, horarios y teléfonos",
+          "href": "https://www.bcn.cl/portal/pagina/ubicacion"
+        },
+        {
+          "text": "Asesorías parlamentarias",
+          "href": "https://www.bcn.cl/asesoriasparlamentarias"
+        },
+        {
+          "text": "Actualidad BCN",
+          "href": "https://www.bcn.cl/portal/actualidad"
+        },
+        {
+          "text": "Programa Asia Pacífico",
+          "href": "https://www.bcn.cl/observatorio/asiapacifico/"
+        },
+        {
+          "text": "Boletines",
+          "href": "https://www.bcn.cl/boletines/index.html"
+        },
+        {
+          "text": "Concursos públicos",
+          "href": "https://www.bcn.cl/concurso_publico"
+        },
+        {
+          "text": "Políticas de Privacidad",
+          "href": "https://www.bcn.cl/portal/pagina/privacidad"
+        },
+        {
+          "text": "Mapa del sitio",
+          "href": "https://www.bcn.cl/portal/mapa-sitio"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/leychile"
+        },
+        {
+          "text": "Acerca de Ley Chile",
+          "href": "https://www.bcn.cl/leychile/acerca-de-ley-chile"
+        },
+        {
+          "text": "Normas destacadas",
+          "href": "https://www.bcn.cl/leychile/#"
+        },
+        {
+          "text": "Leyes de Quórum Calificado",
+          "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=3&tipCat=0"
+        },
+        {
+          "text": "Leyes Orgánicas Constitucionales",
+          "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=4&tipCat=0"
+        },
+        {
+          "text": "Leyes por temas",
+          "href": "https://www.bcn.cl/leychile/consulta/listado_n_sel?agr=2"
+        },
+        {
+          "text": "Leyes usadas por comisiones legislativas",
+          "href": "https://www.bcn.cl/leychile/consulta/agrupadores?tipCat=2"
+        },
+        {
+          "text": "Resúmenes de leyes",
+          "href": "https://www.bcn.cl/leychile/consulta/resumenes"
+        },
+        {
+          "text": "Historia de la Ley",
+          "href": "https://www.bcn.cl/historiadelaley"
+        },
+        {
+          "text": "Tratados Internacionales",
+          "href": "https://www.bcn.cl/leychile/consulta/buscador_tratados"
+        },
+        {
+          "text": "Historia de la Constitución",
+          "href": "https://www.bcn.cl/historia-de-la-constitucion"
+        },
+        {
+          "text": "Ley Fácil",
+          "href": "https://www.bcn.cl/portal/leyfacil"
+        },
+        {
+          "text": "Glosario",
+          "href": "https://www.bcn.cl/leychile/glosario"
+        },
+        {
+          "text": "Llévatelo",
+          "href": "https://www.bcn.cl/leychile/consulta/legislacion_abierta_web_service"
+        },
+        {
+          "text": "Ayuda",
+          "href": "https://www.bcn.cl/leychile/ayuda"
+        },
+        {
+          "text": "Catálogo",
+          "href": "https://www.bcn.cl/catalogo"
+        },
+        {
+          "text": "Estantería Digital",
+          "href": "https://www.bcn.cl/estanteriadigital"
+        },
+        {
+          "text": "Publicaciones BCN",
+          "href": "https://www.bcn.cl/portal/publicaciones/ediciones-bcn"
+        },
+        {
+          "text": "Fichas de Prensa Histórica",
+          "href": "https://www.bcn.cl/fichas_prensa_historica"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/siit"
+        },
+        {
+          "text": "Discapacidad en Chile",
+          "href": "https://arcgiswebad.bcn.cl/portal/apps/sites/#/discapacidad"
+        },
+        {
+          "text": "Estadísticas Territoriales",
+          "href": "https://www.bcn.cl/siit/estadisticasterritoriales"
+        },
+        {
+          "text": "Elecciones Históricas",
+          "href": "https://www.bcn.cl/siit/elecciones_historicas/"
+        },
+        {
+          "text": "Mapoteca",
+          "href": "https://www.bcn.cl/siit/mapoteca"
+        },
+        {
+          "text": "Nuestro País",
+          "href": "https://www.bcn.cl/siit/nuestropais/index_html"
+        },
+        {
+          "text": "Reportes Comunales",
+          "href": "https://www.bcn.cl/siit/reportescomunales/index.html"
+        },
+        {
+          "text": "Reportes Distritales",
+          "href": "https://www.bcn.cl/siit/reportesdistritales/index.html"
+        },
+        {
+          "text": "Reportes Regionales",
+          "href": "https://www.bcn.cl/siit/reportesregionales"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/historiapolitica/index.html"
+        },
+        {
+          "text": "Acerca de",
+          "href": "https://www.bcn.cl/historiapolitica/acerca"
+        },
+        {
+          "text": "Constituciones políticas y Actas constitucionales",
+          "href": "https://www.bcn.cl/historiapolitica/constituciones/index.html"
+        },
+        {
+          "text": "Reseñas biográficas parlamentarias",
+          "href": "https://www.bcn.cl/historiapolitica/resenas_parlamentarias/index.html?categ=en_ejercicio&filtros=2"
+        },
+        {
+          "text": "Diarios de Sesiones e Intervenciones Parlamentaria",
+          "href": "https://www.bcn.cl/historiapolitica/corporaciones"
+        },
+        {
+          "text": "Entrevistas ex parlamentarios",
+          "href": "https://www.bcn.cl/historiapolitica/entrevistas"
+        },
+        {
+          "text": "Labor Parlamentaria",
+          "href": "https://www.bcn.cl/laborparlamentaria/"
+        },
+        {
+          "text": "Mujeres en el Congreso Nacional",
+          "href": "https://www.bcn.cl/historiapolitica/mujeres_en_el_congreso/index.html"
+        },
+        {
+          "text": "Proceso Constituyente 2021-2022",
+          "href": "https://www.bcn.cl/procesoconstituyente/"
+        },
+        {
+          "text": "Proceso Constitucional 2022-2023",
+          "href": "https://www.bcn.cl/procesoconstitucional"
+        },
+        {
+          "text": "Presidentes de la República de Chile",
+          "href": "https://www.bcn.cl/historiapolitica/presidentes_de_la_republica"
+        },
+        {
+          "text": "El Congreso Nacional y sus edificios",
+          "href": "https://www.bcn.cl/historiapolitica/congreso_nacional"
+        },
+        {
+          "text": "Procesos eleccionarios",
+          "href": "https://www.bcn.cl/historiapolitica/elecciones/index.html"
+        },
+        {
+          "text": "Partidos, movimientos y coaliciones",
+          "href": "https://www.bcn.cl/historiapolitica/partidos_politicos/index.html"
+        },
+        {
+          "text": "Libros y folletos sobre historia política",
+          "href": "https://www.bcn.cl/historiapolitica/colecciones/index.html"
+        },
+        {
+          "text": "Archivo histórico de ex parlamentarias, parlamenta",
+          "href": "https://www.bcn.cl/historiapolitica/archivo_historico"
+        },
+        {
+          "text": "Documentando la historia política",
+          "href": "https://www.bcn.cl/historiapolitica/documentando/index.html"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/formacioncivica/"
+        },
+        {
+          "text": "Boletín Legislativo BCN",
+          "href": "https://www.bcn.cl/boletinlegislativo"
+        },
+        {
+          "text": "Boletín Legislativo Mujeres y Género",
+          "href": "https://www.bcn.cl/boletines/boletindemujerygenero"
+        },
+        {
+          "text": "Delibera",
+          "href": "https://www.bcn.cl/delibera"
+        },
+        {
+          "text": "Documentos y libros",
+          "href": "https://www.bcn.cl/formacioncivica/registros.html"
+        },
+        {
+          "text": "Documentos Para el Debate Nacional",
+          "href": "https://www.bcn.cl/procesoconstituyente/debatenacional/"
+        },
+        {
+          "text": "Evolución Constitucional",
+          "href": "https://www.bcn.cl/formacioncivica/constituciones.html"
+        },
+        {
+          "text": "Guía de Formación Cívica",
+          "href": "https://www.bcn.cl/formacioncivica/presentacion"
+        },
+        {
+          "text": "Contacto",
+          "href": "https://www.bcn.cl/formacioncivica/contacto"
+        },
+        {
+          "text": "Transparencia",
+          "href": "https://www.bcn.cl/transparencia"
+        },
+        {
+          "text": "Transparencia",
+          "href": "https://www.bcn.cl/transparencia"
+        },
+        {
+          "text": "Formulario de contacto",
+          "href": "https://www.bcn.cl/leychile/consulta/contacto"
+        }
+      ],
+      [
+        {
+          "text": "Acerca de la Biblioteca",
+          "href": "https://www.bcn.cl/portal/pagina/acerca"
+        },
+        {
+          "text": "Ubicación, horarios y teléfonos",
+          "href": "https://www.bcn.cl/portal/pagina/ubicacion"
+        },
+        {
+          "text": "Asesorías parlamentarias",
+          "href": "https://www.bcn.cl/asesoriasparlamentarias"
+        },
+        {
+          "text": "Actualidad BCN",
+          "href": "https://www.bcn.cl/portal/actualidad"
+        },
+        {
+          "text": "Programa Asia Pacífico",
+          "href": "https://www.bcn.cl/observatorio/asiapacifico/"
+        },
+        {
+          "text": "Boletines",
+          "href": "https://www.bcn.cl/boletines/index.html"
+        },
+        {
+          "text": "Concursos públicos",
+          "href": "https://www.bcn.cl/concurso_publico"
+        },
+        {
+          "text": "Políticas de Privacidad",
+          "href": "https://www.bcn.cl/portal/pagina/privacidad"
+        },
+        {
+          "text": "Mapa del sitio",
+          "href": "https://www.bcn.cl/portal/mapa-sitio"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/leychile"
+        },
+        {
+          "text": "Acerca de Ley Chile",
+          "href": "https://www.bcn.cl/leychile/acerca-de-ley-chile"
+        },
+        {
+          "text": "Normas destacadas",
+          "href": "https://www.bcn.cl/leychile/#"
+        },
+        {
+          "text": "Leyes de Quórum Calificado",
+          "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=3&tipCat=0"
+        },
+        {
+          "text": "Leyes Orgánicas Constitucionales",
+          "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=4&tipCat=0"
+        },
+        {
+          "text": "Leyes por temas",
+          "href": "https://www.bcn.cl/leychile/consulta/listado_n_sel?agr=2"
+        },
+        {
+          "text": "Leyes usadas por comisiones legislativas",
+          "href": "https://www.bcn.cl/leychile/consulta/agrupadores?tipCat=2"
+        },
+        {
+          "text": "Resúmenes de leyes",
+          "href": "https://www.bcn.cl/leychile/consulta/resumenes"
+        },
+        {
+          "text": "Historia de la Ley",
+          "href": "https://www.bcn.cl/historiadelaley"
+        },
+        {
+          "text": "Tratados Internacionales",
+          "href": "https://www.bcn.cl/leychile/consulta/buscador_tratados"
+        },
+        {
+          "text": "Historia de la Constitución",
+          "href": "https://www.bcn.cl/historia-de-la-constitucion"
+        },
+        {
+          "text": "Ley Fácil",
+          "href": "https://www.bcn.cl/portal/leyfacil"
+        },
+        {
+          "text": "Glosario",
+          "href": "https://www.bcn.cl/leychile/glosario"
+        },
+        {
+          "text": "Llévatelo",
+          "href": "https://www.bcn.cl/leychile/consulta/legislacion_abierta_web_service"
+        },
+        {
+          "text": "Ayuda",
+          "href": "https://www.bcn.cl/leychile/ayuda"
+        },
+        {
+          "text": "Catálogo",
+          "href": "https://www.bcn.cl/catalogo"
+        },
+        {
+          "text": "Estantería Digital",
+          "href": "https://www.bcn.cl/estanteriadigital"
+        },
+        {
+          "text": "Publicaciones BCN",
+          "href": "https://www.bcn.cl/portal/publicaciones/ediciones-bcn"
+        },
+        {
+          "text": "Fichas de Prensa Histórica",
+          "href": "https://www.bcn.cl/fichas_prensa_historica"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/siit"
+        },
+        {
+          "text": "Discapacidad en Chile",
+          "href": "https://arcgiswebad.bcn.cl/portal/apps/sites/#/discapacidad"
+        },
+        {
+          "text": "Estadísticas Territoriales",
+          "href": "https://www.bcn.cl/siit/estadisticasterritoriales"
+        },
+        {
+          "text": "Elecciones Históricas",
+          "href": "https://www.bcn.cl/siit/elecciones_historicas/"
+        },
+        {
+          "text": "Mapoteca",
+          "href": "https://www.bcn.cl/siit/mapoteca"
+        },
+        {
+          "text": "Nuestro País",
+          "href": "https://www.bcn.cl/siit/nuestropais/index_html"
+        },
+        {
+          "text": "Reportes Comunales",
+          "href": "https://www.bcn.cl/siit/reportescomunales/index.html"
+        },
+        {
+          "text": "Reportes Distritales",
+          "href": "https://www.bcn.cl/siit/reportesdistritales/index.html"
+        },
+        {
+          "text": "Reportes Regionales",
+          "href": "https://www.bcn.cl/siit/reportesregionales"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/historiapolitica/index.html"
+        },
+        {
+          "text": "Acerca de",
+          "href": "https://www.bcn.cl/historiapolitica/acerca"
+        },
+        {
+          "text": "Constituciones políticas y Actas constitucionales",
+          "href": "https://www.bcn.cl/historiapolitica/constituciones/index.html"
+        },
+        {
+          "text": "Reseñas biográficas parlamentarias",
+          "href": "https://www.bcn.cl/historiapolitica/resenas_parlamentarias/index.html?categ=en_ejercicio&filtros=2"
+        },
+        {
+          "text": "Diarios de Sesiones e Intervenciones Parlamentaria",
+          "href": "https://www.bcn.cl/historiapolitica/corporaciones"
+        },
+        {
+          "text": "Entrevistas ex parlamentarios",
+          "href": "https://www.bcn.cl/historiapolitica/entrevistas"
+        },
+        {
+          "text": "Labor Parlamentaria",
+          "href": "https://www.bcn.cl/laborparlamentaria/"
+        },
+        {
+          "text": "Mujeres en el Congreso Nacional",
+          "href": "https://www.bcn.cl/historiapolitica/mujeres_en_el_congreso/index.html"
+        },
+        {
+          "text": "Proceso Constituyente 2021-2022",
+          "href": "https://www.bcn.cl/procesoconstituyente/"
+        },
+        {
+          "text": "Proceso Constitucional 2022-2023",
+          "href": "https://www.bcn.cl/procesoconstitucional"
+        },
+        {
+          "text": "Presidentes de la República de Chile",
+          "href": "https://www.bcn.cl/historiapolitica/presidentes_de_la_republica"
+        },
+        {
+          "text": "El Congreso Nacional y sus edificios",
+          "href": "https://www.bcn.cl/historiapolitica/congreso_nacional"
+        },
+        {
+          "text": "Procesos eleccionarios",
+          "href": "https://www.bcn.cl/historiapolitica/elecciones/index.html"
+        },
+        {
+          "text": "Partidos, movimientos y coaliciones",
+          "href": "https://www.bcn.cl/historiapolitica/partidos_politicos/index.html"
+        },
+        {
+          "text": "Libros y folletos sobre historia política",
+          "href": "https://www.bcn.cl/historiapolitica/colecciones/index.html"
+        },
+        {
+          "text": "Archivo histórico de ex parlamentarias, parlamenta",
+          "href": "https://www.bcn.cl/historiapolitica/archivo_historico"
+        },
+        {
+          "text": "Documentando la historia política",
+          "href": "https://www.bcn.cl/historiapolitica/documentando/index.html"
+        },
+        {
+          "text": "Inicio",
+          "href": "https://www.bcn.cl/formacioncivica/"
+        },
+        {
+          "text": "Boletín Legislativo BCN",
+          "href": "https://www.bcn.cl/boletinlegislativo"
+        },
+        {
+          "text": "Boletín Legislativo Mujeres y Género",
+          "href": "https://www.bcn.cl/boletines/boletindemujerygenero"
+        },
+        {
+          "text": "Delibera",
+          "href": "https://www.bcn.cl/delibera"
+        },
+        {
+          "text": "Documentos y libros",
+          "href": "https://www.bcn.cl/formacioncivica/registros.html"
+        },
+        {
+          "text": "Documentos Para el Debate Nacional",
+          "href": "https://www.bcn.cl/procesoconstituyente/debatenacional/"
+        },
+        {
+          "text": "Evolución Constitucional",
+          "href": "https://www.bcn.cl/formacioncivica/constituciones.html"
+        },
+        {
+          "text": "Guía de Formación Cívica",
+          "href": "https://www.bcn.cl/formacioncivica/presentacion"
+        },
+        {
+          "text": "Contacto",
+          "href": "https://www.bcn.cl/formacioncivica/contacto"
+        },
+        {
+          "text": "Transparencia",
+          "href": "https://www.bcn.cl/transparencia"
+        },
+        {
+          "text": "Transparencia",
+          "href": "https://www.bcn.cl/transparencia"
+        },
+        {
+          "text": "Formulario de contacto",
+          "href": "https://www.bcn.cl/leychile/consulta/contacto"
+        }
+      ]
+    ],
+    "links": [
+      {
+        "text": "︱Ley Chile",
+        "href": "https://www.bcn.cl/leychile"
+      },
+      {
+        "text": "Acerca de la Biblioteca",
+        "href": "https://www.bcn.cl/portal/pagina/acerca"
+      },
+      {
+        "text": "Ubicación, horarios y teléfonos",
+        "href": "https://www.bcn.cl/portal/pagina/ubicacion"
+      },
+      {
+        "text": "Asesorías parlamentarias",
+        "href": "https://www.bcn.cl/asesoriasparlamentarias"
+      },
+      {
+        "text": "Actualidad BCN",
+        "href": "https://www.bcn.cl/portal/actualidad"
+      },
+      {
+        "text": "Programa Asia Pacífico",
+        "href": "https://www.bcn.cl/observatorio/asiapacifico/"
+      },
+      {
+        "text": "Boletines",
+        "href": "https://www.bcn.cl/boletines/index.html"
+      },
+      {
+        "text": "Concursos públicos",
+        "href": "https://www.bcn.cl/concurso_publico"
+      },
+      {
+        "text": "Políticas de Privacidad",
+        "href": "https://www.bcn.cl/portal/pagina/privacidad"
+      },
+      {
+        "text": "Mapa del sitio",
+        "href": "https://www.bcn.cl/portal/mapa-sitio"
+      },
+      {
+        "text": "Inicio",
+        "href": "https://www.bcn.cl/leychile"
+      },
+      {
+        "text": "Acerca de Ley Chile",
+        "href": "https://www.bcn.cl/leychile/acerca-de-ley-chile"
+      },
+      {
+        "text": "Normas destacadas",
+        "href": "https://www.bcn.cl/leychile/#"
+      },
+      {
+        "text": "Leyes de Quórum Calificado",
+        "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=3&tipCat=0"
+      },
+      {
+        "text": "Leyes Orgánicas Constitucionales",
+        "href": "https://www.bcn.cl/leychile/consulta/listaMasSolicitadasxmat?agr=1&sub=4&tipCat=0"
+      },
+      {
+        "text": "Leyes por temas",
+        "href": "https://www.bcn.cl/leychile/consulta/listado_n_sel?agr=2"
+      },
+      {
+        "text": "Leyes usadas por comisiones legislativas",
+        "href": "https://www.bcn.cl/leychile/consulta/agrupadores?tipCat=2"
+      },
+      {
+        "text": "Resúmenes de leyes",
+        "href": "https://www.bcn.cl/leychile/consulta/resumenes"
+      },
+      {
+        "text": "Historia de la Ley",
+        "href": "https://www.bcn.cl/historiadelaley"
+      },
+      {
+        "text": "Tratados Internacionales",
+        "href": "https://www.bcn.cl/leychile/consulta/buscador_tratados"
+      },
+      {
+        "text": "Historia de la Constitución",
+        "href": "https://www.bcn.cl/historia-de-la-constitucion"
+      },
+      {
+        "text": "Ley Fácil",
+        "href": "https://www.bcn.cl/portal/leyfacil"
+      },
+      {
+        "text": "Glosario",
+        "href": "https://www.bcn.cl/leychile/glosario"
+      },
+      {
+        "text": "Llévatelo",
+        "href": "https://www.bcn.cl/leychile/consulta/legislacion_abierta_web_service"
+      },
+      {
+        "text": "Ayuda",
+        "href": "https://www.bcn.cl/leychile/ayuda"
+      },
+      {
+        "text": "Catálogo",
+        "href": "https://www.bcn.cl/catalogo"
+      },
+      {
+        "text": "Estantería Digital",
+        "href": "https://www.bcn.cl/estanteriadigital"
+      },
+      {
+        "text": "Publicaciones BCN",
+        "href": "https://www.bcn.cl/portal/publicaciones/ediciones-bcn"
+      },
+      {
+        "text": "Fichas de Prensa Histórica",
+        "href": "https://www.bcn.cl/fichas_prensa_historica"
+      },
+      {
+        "text": "Inicio",
+        "href": "https://www.bcn.cl/siit"
+      },
+      {
+        "text": "Discapacidad en Chile",
+        "href": "https://arcgiswebad.bcn.cl/portal/apps/sites/#/discapacidad"
+      },
+      {
+        "text": "Estadísticas Territoriales",
+        "href": "https://www.bcn.cl/siit/estadisticasterritoriales"
+      },
+      {
+        "text": "Elecciones Históricas",
+        "href": "https://www.bcn.cl/siit/elecciones_historicas/"
+      },
+      {
+        "text": "Mapoteca",
+        "href": "https://www.bcn.cl/siit/mapoteca"
+      },
+      {
+        "text": "Nuestro País",
+        "href": "https://www.bcn.cl/siit/nuestropais/index_html"
+      },
+      {
+        "text": "Reportes Comunales",
+        "href": "https://www.bcn.cl/siit/reportescomunales/index.html"
+      },
+      {
+        "text": "Reportes Distritales",
+        "href": "https://www.bcn.cl/siit/reportesdistritales/index.html"
+      },
+      {
+        "text": "Reportes Regionales",
+        "href": "https://www.bcn.cl/siit/reportesregionales"
+      },
+      {
+        "text": "Inicio",
+        "href": "https://www.bcn.cl/historiapolitica/index.html"
+      },
+      {
+        "text": "Acerca de",
+        "href": "https://www.bcn.cl/historiapolitica/acerca"
+      },
+      {
+        "text": "Constituciones políticas y Actas constitucionales",
+        "href": "https://www.bcn.cl/historiapolitica/constituciones/index.html"
+      },
+      {
+        "text": "Reseñas biográficas parlamentarias",
+        "href": "https://www.bcn.cl/historiapolitica/resenas_parlamentarias/index.html?categ=en_ejercicio&filtros=2"
+      },
+      {
+        "text": "Diarios de Sesiones e Intervenciones Parlamentarias",
+        "href": "https://www.bcn.cl/historiapolitica/corporaciones"
+      },
+      {
+        "text": "Entrevistas ex parlamentarios",
+        "href": "https://www.bcn.cl/historiapolitica/entrevistas"
+      },
+      {
+        "text": "Labor Parlamentaria",
+        "href": "https://www.bcn.cl/laborparlamentaria/"
+      },
+      {
+        "text": "Mujeres en el Congreso Nacional",
+        "href": "https://www.bcn.cl/historiapolitica/mujeres_en_el_congreso/index.html"
+      },
+      {
+        "text": "Proceso Constituyente 2021-2022",
+        "href": "https://www.bcn.cl/procesoconstituyente/"
+      },
+      {
+        "text": "Proceso Constitucional 2022-2023",
+        "href": "https://www.bcn.cl/procesoconstitucional"
+      },
+      {
+        "text": "Presidentes de la República de Chile",
+        "href": "https://www.bcn.cl/historiapolitica/presidentes_de_la_republica"
+      },
+      {
+        "text": "El Congreso Nacional y sus edificios",
+        "href": "https://www.bcn.cl/historiapolitica/congreso_nacional"
+      },
+      {
+        "text": "Procesos eleccionarios",
+        "href": "https://www.bcn.cl/historiapolitica/elecciones/index.html"
+      },
+      {
+        "text": "Partidos, movimientos y coaliciones",
+        "href": "https://www.bcn.cl/historiapolitica/partidos_politicos/index.html"
+      },
+      {
+        "text": "Libros y folletos sobre historia política",
+        "href": "https://www.bcn.cl/historiapolitica/colecciones/index.html"
+      },
+      {
+        "text": "Archivo histórico de ex parlamentarias, parlamentarios y políticos",
+        "href": "https://www.bcn.cl/historiapolitica/archivo_historico"
+      },
+      {
+        "text": "Documentando la historia política",
+        "href": "https://www.bcn.cl/historiapolitica/documentando/index.html"
+      },
+      {
+        "text": "Inicio",
+        "href": "https://www.bcn.cl/formacioncivica/"
+      },
+      {
+        "text": "Boletín Legislativo BCN",
+        "href": "https://www.bcn.cl/boletinlegislativo"
+      },
+      {
+        "text": "Boletín Legislativo Mujeres y Género",
+        "href": "https://www.bcn.cl/boletines/boletindemujerygenero"
+      },
+      {
+        "text": "Delibera",
+        "href": "https://www.bcn.cl/delibera"
+      },
+      {
+        "text": "Documentos y libros",
+        "href": "https://www.bcn.cl/formacioncivica/registros.html"
+      },
+      {
+        "text": "Documentos Para el Debate Nacional",
+        "href": "https://www.bcn.cl/procesoconstituyente/debatenacional/"
+      },
+      {
+        "text": "Evolución Constitucional",
+        "href": "https://www.bcn.cl/formacioncivica/constituciones.html"
+      },
+      {
+        "text": "Guía de Formación Cívica",
+        "href": "https://www.bcn.cl/formacioncivica/presentacion"
+      },
+      {
+        "text": "Contacto",
+        "href": "https://www.bcn.cl/formacioncivica/contacto"
+      },
+      {
+        "text": "Transparencia",
+        "href": "https://www.bcn.cl/transparencia"
+      },
+      {
+        "text": "Transparencia",
+        "href": "https://www.bcn.cl/transparencia"
+      },
+      {
+        "text": "Formulario de contacto",
+        "href": "https://www.bcn.cl/leychile/consulta/contacto"
+      },
+      {
+        "text": "Selección",
+        "href": "https://www.bcn.cl/leychile/consulta/maletin"
+      },
+      {
+        "text": "Selección",
+        "href": "https://www.bcn.cl/leychile/consulta/maletin"
+      },
+      {
+        "text": "Selección",
+        "href": "https://www.bcn.cl/leychile/consulta/maletin"
+      },
+      {
+        "text": "Normas más visitadas",
+        "href": "https://www.bcn.cl/leychile/Consulta/portada_mas_visitado"
+      },
+      {
+        "text": "DFL 1",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=172986"
+      },
+      {
+        "text": "Ley 1552",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=22740"
+      },
+      {
+        "text": "DFL 1",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=207436"
+      },
+      {
+        "text": "Normas más visitadas",
+        "href": "https://www.bcn.cl/leychile/Consulta/portada_mas_visitado"
+      },
+      {
+        "text": "DFL 1",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=172986"
+      },
+      {
+        "text": "Ley 1552",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=22740"
+      },
+      {
+        "text": "DFL 1",
+        "href": "https://www.bcn.cl/leychile/Navegar?idNorma=207436"
+      },
+      {
+        "text": "SISTEMA DE TRAMITACIÓN DE PROYECTOS (SIL)",
+        "href": "http://www.senado.cl/appsenado/templates/tramitacion/index.php"
+      },
+      {
+        "text": "(Imagen: Código Orgánico de Tribunales\n                    )",
+        "href": "https://www.bcn.cl/leychile/navegar?idNorma=25563"
+      },
+      {
+        "text": "Leyes de Quórum\n                    Calificado",
+        "href": "https://www.bcn.cl/leychile/Consulta/listaMasSolicitadasxmat?agr=1&sub=3&tipCat=0"
+      },
+      {
+        "text": "Leyes Orgánicas\n                    Constitucionales",
+        "href": "https://www.bcn.cl/leychile/Consulta/listaMasSolicitadasxmat?agr=1&sub=4&tipCat=0"
+      },
+      {
+        "text": "Leyes por temas",
+        "href": "https://www.bcn.cl/leychile/Consulta/listado_n_sel?agr=2"
+      },
+      {
+        "text": "Leyes usadas por comisiones legislativas",
+        "href": "https://www.bcn.cl/leychile/Consulta/agrupadores?tipCat=2"
+      },
+      {
+        "text": "Resúmenes de Leyes",
+        "href": "https://www.bcn.cl/leychile/Consulta/resumenes"
+      },
+      {
+        "text": "Período 1810 - 1833",
+        "href": "https://www.bcn.cl/leychile/consulta/listado_n_sel?agr=1389"
+      },
+      {
+        "text": "Seguir leyendo",
+        "href": "https://www.bcn.cl/portal/leyfacil/recurso/servicio-nacional-de-acceso-a-la-justicia-y-defensoria-de-victimas-de-delitos"
+      },
+      {
+        "text": "Ver más",
+        "href": "https://www.bcn.cl/historiadelaley/ultimas-historias-de-la-ley-publicadas/"
+      },
+      {
+        "text": "Ver más",
+        "href": "https://www.bcn.cl/laborparlamentaria/"
+      },
+      {
+        "text": "Reseñas Biográficas Parlamentarias",
+        "href": "https://www.bcn.cl/historiapolitica/resenas_parlamentarias/index.html?categ=en_ejercicio&filtros=2"
+      },
+      {
+        "text": "Corporaciones Legislativas y Diarios de Sesiones",
+        "href": "https://www.bcn.cl/historiapolitica/corporaciones/index.html"
+      },
+      {
+        "text": "Discursos",
+        "href": "https://www.bcn.cl/historiapolitica/corporaciones/cuentas_publicas/index.html"
+      },
+      {
+        "text": "Historia",
+        "href": "https://www.bcn.cl/historiapolitica/congreso_nacional/index.html"
+      },
+      {
+        "text": "Edificios",
+        "href": "https://www.bcn.cl/historiapolitica/congreso_nacional/edificios/index.html"
+      },
+      {
+        "text": "Ver más",
+        "href": "https://www.bcn.cl/historiapolitica"
+      },
+      {
+        "text": "Ver\n                                más",
+        "href": "https://www.bcn.cl/leychile/Consulta/portada_ulp"
+      },
+      {
+        "text": "Llévatelo",
+        "href": "https://www.bcn.cl/leychile/consulta/legislacion_abierta_widget?o=ulp"
+      },
+      {
+        "text": "Ver\n                                más",
+        "href": "https://www.bcn.cl/leychile/Consulta/portada_ppl"
+      },
+      {
+        "text": "Llévatelo",
+        "href": "https://www.bcn.cl/leychile/consulta/legislacion_abierta_widget?o=pld"
+      },
+      {
+        "text": "Ver Convenios",
+        "href": "https://www.bcn.cl/leychile/consulta/agrupadores?tipCat=1&lxi=t"
+      },
+      {
+        "text": "Compendio de Legislación Ambiental",
+        "href": "https://www.bcn.cl/leychile/consulta/aportar_leychile?comp=1"
+      },
+      {
+        "text": "Compendio de Gestión Pública",
+        "href": "https://www.bcn.cl/leychile/consulta/aportar_leychile?comp=3"
+      },
+      {
+        "text": "Compendio Cultural",
+        "href": "https://www.bcn.cl/leychile/consulta/aportar_leychile?comp=4"
+      },
+      {
+        "text": "Políticas de privacidad",
+        "href": "https://www.bcn.cl/portal/pagina/privacidad"
+      },
+      {
+        "text": "Mapa del sitio",
+        "href": "https://www.bcn.cl/portal/mapa-sitio"
+      },
+      {
+        "text": "Ubicación, horarios y teléfonos",
+        "href": "https://www.bcn.cl/portal/pagina/ubicacion"
+      },
+      {
+        "text": "Descargar ahora sin firma",
+        "href": "https://www.bcn.cl/leychile/"
+      }
+    ],
+    "forms": [
+      {
+        "action": "https://www.bcn.cl/leychile/",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "usuario",
+            "placeholder": ""
+          },
+          {
+            "type": "password",
+            "name": "password",
+            "placeholder": ""
+          }
+        ]
+      },
+      {
+        "action": "https://www.bcn.cl/leychile/",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "form24",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "form241",
+            "placeholder": ""
+          },
+          {
+            "type": "password",
+            "name": "form25",
+            "placeholder": ""
+          },
+          {
+            "type": "password",
+            "name": "form26",
+            "placeholder": ""
+          }
+        ]
+      }
+    ],
+    "selects": [],
+    "buttons": []
+  },
+  "filters": {
+    "refine_options": [
+      "Refinar búsqueda",
+      "Portada Resultado para: energia",
+      "VOLVER",
+      "Aciertos",
+      "1 - 10   de 14.020",
+      "Quizás le pueda interesar:",
+      "ENERGIA Energía Nuclear Energía Renovable",
+      "05-FEB-2007",
+      "DFL 4; DFL 4/20018  REFUNDE A",
+      "Alertas  Vinculaciones",
+      "07-ENE-2000",
+      "LEY 19657",
+      "SOBRE CONCESIONES DE ENERGIA GEOTERMICA",
+      "MINISTERIO DE MINERÍA",
+      "Alertas  Vinculaciones",
+      "13-MAR-2004",
+      "LEY 19940",
+      "Vinculaciones",
+      "01-ABR-2008",
+      "LEY 20257",
+      "Vinculaciones"
+    ],
+    "sidebar_links": [],
+    "filter_selects": [
+      {
+        "name": "",
+        "options": 3
+      },
+      {
+        "name": "",
+        "options": 4
+      }
+    ]
+  },
+  "sample_search_text": "︱Ley Chile\nBCN\nLey Chile\nColecciones\nInformación Territorial\nHistoria Política\nFormación Cívica\nTransparencia\nFormulario de contacto\nBÚSQUEDA AVANZADA\n Modo oscuro\n \n Alto contraste\n  Selección\n Refinar búsqueda\nPortada Resultado para: energia\n  VOLVER\nAciertos \n5\n10\n20\n50\n   1 - 10   de 14.020\nQuizás le pueda interesar:\n ENERGIA Energía Nuclear Energía Renovable\n  \n05-FEB-2007\nDFL 4; DFL 4/20018  REFUNDE A\nFIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CON FUERZA DE LEY Nº 1, DE MINERIA, DE 1982, LEY GENERAL DE SERVICIOS ELECTRICOS, EN MATERIA DE ENERGIA ELECTRICA\n\nMINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION\n\nAlertas  Vinculaciones \n  \n07-ENE-2000\nLEY 19657\nSOBRE CONCESIONES DE ENERGIA GEOTERMICA\n\nMINISTERIO DE MINERÍA\n\nAlertas  Vinculaciones \n  \n13-MAR-2004\nLEY 19940\nREGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACIONES QUE INDICA A LA LEY GENERAL DE SERVICIOS ELECTRICOS\n\nMINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION\n\nVinculaciones \n  \n01-ABR-2008\nLEY 20257\nINTRODUCE MODIFICACIONES A LA LEY GENERAL DE SERVICIOS ELÉCTRICOS RESPECTO DE LA GENERACIÓN DE ENERGÍA ELÉCTRICA CON FUENTES DE ENERGÍAS RENOVABLES NO CONVENCIONALES\n\nMINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION\n\nVinculaciones \n  \n19-MAY-2005\nLEY 20018\nMODIFICA EL MARCO NORMATIVO DEL SECTOR ELECTRICO\n\nMINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION\n\nVinculaciones \n  \n04-NOV-2024\nLEY 21711 \nPERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA\n\nMINISTERIO DE ENERGÍA\n\nVinculaciones \n  \n14-SEP-2007\nLEY 20220\nPERFECCIONA EL MARCO LEGAL VIGENTE CON EL OBJETO DE RESGUARDAR LA SEGURIDAD DEL SUMINISTRO A LOS CLIENTES REGULADOS Y LA SUFICIENCIA DE LOS SISTEMAS ELÉCTRICOS\n\nMINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETARIA DE ECONOMIA; FOMENTO Y RECONSTRUCCION\n\nVinculaciones \n  \n21-NOV-2022\nLEY 21505 \nPROMUEVE EL ALMACENAMIENTO DE ENERGÍA ELÉCTRICA Y LA ELECTROMOVILIDAD\n\nMINISTERIO DE ENERGÍA\n\nVinculaciones \n  \n13-FEB-2021\nLEY 21305 \nSOBRE EFICIENCIA ENERGÉTICA\n\nMINISTERIO DE ENERGÍA\n\nVinculaciones \n  \n22-SEP-2014\nLEY 20776 \nMODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA\n\nMINISTERIO DE ENERGÍA\n\nVinculaciones \nSíguenos en:\nPolíticas de privacidad\nMapa del sitio\nUbicación, horarios y teléfonos"
+}

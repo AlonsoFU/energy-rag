@@ -1,0 +1,80 @@
+{
+  "id_norma": "1109624",
+  "tipo": "LEY",
+  "numero": "20936",
+  "titulo": "Sistema de Transmisión",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "18 de octubre de 2017",
+  "organismo": "Economía",
+  "estado": "VIGENTE",
+  "modificada_por": [],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "18",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20936",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1109624"
+    },
+    {
+      "tipo": "DL",
+      "numero": "2224",
+      "año": 1978,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "4",
+      "año": 2006,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "1",
+      "año": 1982,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "1600",
+      "año": 2008,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "13",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    }
+  ]
+}

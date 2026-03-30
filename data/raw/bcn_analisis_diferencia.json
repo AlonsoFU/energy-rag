@@ -1,0 +1,337 @@
+{
+  "tematica": {
+    "total_visible": "113",
+    "tipos_norma": {
+      "LEY": 2,
+      "DECRETO": 8
+    },
+    "organismos": {},
+    "años": {
+      "1965": 1,
+      "2006": 1,
+      "2008": 1,
+      "2012": 1,
+      "2015": 1,
+      "2017": 2,
+      "2018": 1,
+      "2020": 1
+    },
+    "sample_normas": [
+      {
+        "fecha": "02-MAY-1984",
+        "tipo": "Ley 18302",
+        "titulo": "LEY DE SEGURIDAD NUCLEAR",
+        "organismo": ""
+      },
+      {
+        "fecha": "23-OCT-1965",
+        "tipo": "Ley 16319",
+        "titulo": "CREA LA COMISION CHILENA DE ENERGIA NUCLEAR",
+        "organismo": ""
+      },
+      {
+        "fecha": "09-ENE-2020",
+        "tipo": "Decreto 128",
+        "titulo": "DISPONE EL CUMPLIMIENTO DE LA RESOLUCIÓN 2.231 (2015) APROBADA POR EL CONSEJO DE SEGURIDAD DE LA ORGANIZACIÓN DE LAS NACIONES UNIDAS RELATIVA A LA CUE",
+        "organismo": ""
+      },
+      {
+        "fecha": "25-SEP-2018",
+        "tipo": "Decreto 114",
+        "titulo": "NOMBRA INSTITUTO DESIGNADO QUE INDICA EN EL ÁMBITO DE LA METROLOGÍA DE RADIACIONES IONIZANTES",
+        "organismo": ""
+      },
+      {
+        "fecha": "06-MAR-2017",
+        "tipo": "Decreto 145",
+        "titulo": "DISPONE EL CUMPLIMIENTO DE LA RESOLUCIÓN 1.540 (2004) APROBADA POR EL CONSEJO DE SEGURIDAD DE LAS NACIONES UNIDAS POR LA CUAL SE ESTABLECE QUE TODOS L",
+        "organismo": ""
+      },
+      {
+        "fecha": "08-FEB-2017",
+        "tipo": "Decreto 132",
+        "titulo": "PROMULGA LA ENMIENDA DE LA CONVENCIÓN SOBRE LA PROTECCIÓN FÍSICA DE LOS MATERIALES NUCLEARES",
+        "organismo": ""
+      },
+      {
+        "fecha": "02-DIC-2015",
+        "tipo": "Decreto 647",
+        "titulo": "CREA COMISIÓN DE SEGURIDAD EN EMERGENCIAS RADIOLÓGICAS (CONSER)",
+        "organismo": ""
+      },
+      {
+        "fecha": "09-AGO-2012",
+        "tipo": "Decreto 25",
+        "titulo": "PROMULGA ACUERDO DE PROYECTO Y SUMINISTRO - ACUERDO ENTRE EL ORGANISMO INTERNACIONAL DE ENERGÍA ATÓMICA EL GOBIERNO DE CHILE Y EL GOBIERNO DE LOS ESTA",
+        "organismo": ""
+      },
+      {
+        "fecha": "26-SEP-2008",
+        "tipo": "Decreto 49",
+        "titulo": "APRUEBA \"REGLAMENTO TRANSPORTE SIN RIESGOS DE MERCANCÍAS PELIGROSAS POR VÍA AÉREA DAR 18\"",
+        "organismo": ""
+      },
+      {
+        "fecha": "14-SEP-2006",
+        "tipo": "Decreto 276",
+        "titulo": "PROMULGA EL CONVENIO SOBRE COOPERACION EN LOS USOS PACIFICOS DE LA ENERGIA NUCLEAR Y SUS ANEXOS CON COREA",
+        "organismo": ""
+      }
+    ]
+  },
+  "texto_libre": {
+    "total_visible": "14.020",
+    "tipos_norma": {
+      "DFL": 1,
+      "LEY": 9
+    },
+    "organismos": {
+      "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA": 2,
+      "MINISTERIO DE MINERÍA": 1,
+      "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA": 3,
+      "MINISTERIO DE ENERGÍA": 4
+    },
+    "años": {
+      "2000": 1,
+      "2004": 1,
+      "2005": 1,
+      "2007": 1,
+      "2008": 1,
+      "2014": 1,
+      "2021": 1,
+      "2022": 1,
+      "2024": 1
+    },
+    "sample_normas": [
+      {
+        "fecha": "05-FEB-2007",
+        "tipo": "DFL 4; DFL 4/20018  REFUNDE A",
+        "titulo": "FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CON FUERZA DE LEY Nº 1, DE MINERIA, DE 1982, LEY GENERAL DE SERVICIOS ELECTRICOS, EN MATE",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA"
+      },
+      {
+        "fecha": "07-ENE-2000",
+        "tipo": "LEY 19657",
+        "titulo": "SOBRE CONCESIONES DE ENERGIA GEOTERMICA",
+        "organismo": "MINISTERIO DE MINERÍA"
+      },
+      {
+        "fecha": "13-MAR-2004",
+        "tipo": "LEY 19940",
+        "titulo": "REGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACION",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA"
+      },
+      {
+        "fecha": "01-ABR-2008",
+        "tipo": "LEY 20257",
+        "titulo": "INTRODUCE MODIFICACIONES A LA LEY GENERAL DE SERVICIOS ELÉCTRICOS RESPECTO DE LA GENERACIÓN DE ENERGÍA ELÉCTRICA CON FUENTES DE ENERGÍAS RENOVABLES NO",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA"
+      },
+      {
+        "fecha": "19-MAY-2005",
+        "tipo": "LEY 20018",
+        "titulo": "MODIFICA EL MARCO NORMATIVO DEL SECTOR ELECTRICO",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA"
+      },
+      {
+        "fecha": "04-NOV-2024",
+        "tipo": "LEY 21711",
+        "titulo": "PERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "14-SEP-2007",
+        "tipo": "LEY 20220",
+        "titulo": "PERFECCIONA EL MARCO LEGAL VIGENTE CON EL OBJETO DE RESGUARDAR LA SEGURIDAD DEL SUMINISTRO A LOS CLIENTES REGULADOS Y LA SUFICIENCIA DE LOS SISTEMAS E",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA"
+      },
+      {
+        "fecha": "21-NOV-2022",
+        "tipo": "LEY 21505",
+        "titulo": "PROMUEVE EL ALMACENAMIENTO DE ENERGÍA ELÉCTRICA Y LA ELECTROMOVILIDAD",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "13-FEB-2021",
+        "tipo": "LEY 21305",
+        "titulo": "SOBRE EFICIENCIA ENERGÉTICA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "22-SEP-2014",
+        "tipo": "LEY 20776",
+        "titulo": "MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      }
+    ]
+  },
+  "electricos": {
+    "total_visible": "3.513",
+    "tipos_norma": {
+      "DFL": 1,
+      "LEY": 9
+    },
+    "organismos": {
+      "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA": 3,
+      "MINISTERIO DEL INTERIOR": 1,
+      "MINISTERIO DE MINERÍA": 2,
+      "MINISTERIO DE ENERGÍA": 3,
+      "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA": 1
+    },
+    "años": {
+      "1962": 1,
+      "1996": 1,
+      "1999": 1,
+      "2000": 1,
+      "2004": 1,
+      "2008": 1,
+      "2014": 1,
+      "2018": 1,
+      "2024": 1
+    },
+    "sample_normas": [
+      {
+        "fecha": "05-FEB-2007",
+        "tipo": "DFL 4; DFL 4/20018  REFUNDE A",
+        "titulo": "FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CON FUERZA DE LEY Nº 1, DE MINERIA, DE 1982, LEY GENERAL DE SERVICIOS ELECTRICOS, EN MATE",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA"
+      },
+      {
+        "fecha": "13-MAR-2004",
+        "tipo": "LEY 19940",
+        "titulo": "REGULA SISTEMAS DE TRANSPORTE DE ENERGIA ELECTRICA, ESTABLECE UN NUEVO REGIMEN DE TARIFAS PARA SISTEMAS ELECTRICOS MEDIANOS E INTRODUCE LAS ADECUACION",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA"
+      },
+      {
+        "fecha": "04-OCT-1962",
+        "tipo": "LEY 14914",
+        "titulo": "CREA LOS CARGOS QUE INDICA EN LA PLANTA DIRECTIVA, PROFESIONAL Y TECNICA DE LA DIRECCION DE SERVICIOS ELECTRICOS Y DE GAS, FIJADA POR DECRETO CON FUER",
+        "organismo": "MINISTERIO DEL INTERIOR"
+      },
+      {
+        "fecha": "08-JUN-1999",
+        "tipo": "LEY 19613",
+        "titulo": "MODIFICA LA LEY Nº 18.410, ORGANICA DE LA SUPERINTENDENCIA DE ELECTRICIDAD Y COMBUSTIBLES, Y EL DECRETO CON FUERZA DE LEY Nº 1, DE 1982, DE MINERIA, L",
+        "organismo": "MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN; SUBSECRETA"
+      },
+      {
+        "fecha": "03-MAY-2000",
+        "tipo": "LEY 19674",
+        "titulo": "MODIFICA EL D.F.L. Nº 1, DE 1982, DE MINERIA, LEY GENERAL DE SERVICIOS ELECTRICOS, CON EL OBJETO DE REGULAR LOS COBROS POR SERVICIOS ASOCIADOS AL SUMI",
+        "organismo": "MINISTERIO DE MINERÍA"
+      },
+      {
+        "fecha": "27-FEB-2018",
+        "tipo": "LEY 21076",
+        "titulo": "MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS PARA IMPONER A LA EMPRESA DISTRIBUIDORA DE ENERGÍA LA OBLIGACIÓN DE SOLVENTAR EL RETIRO Y REPOSICIÓN D",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "27-DIC-2024",
+        "tipo": "LEY 21721",
+        "titulo": "MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS, EN MATERIA DE TRANSMISIÓN ELÉCTRICA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "28-DIC-1996",
+        "tipo": "LEY 19489",
+        "titulo": "MODIFICA LEY GENERAL DE SERVICIOS ELECTRICOS EN MATERIA DE APLICACION DE TARIFAS A USUARIOS FINALES",
+        "organismo": "MINISTERIO DE MINERÍA"
+      },
+      {
+        "fecha": "07-FEB-2014",
+        "tipo": "LEY 20726",
+        "titulo": "MODIFICA LA LEY GENERAL DE SERVICIOS ELÉCTRICOS, CON EL FIN DE PROMOVER LA INTERCONEXIÓN DE SISTEMAS ELÉCTRICOS INDEPENDIENTES",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "01-ABR-2008",
+        "tipo": "LEY 20257",
+        "titulo": "INTRODUCE MODIFICACIONES A LA LEY GENERAL DE SERVICIOS ELÉCTRICOS RESPECTO DE LA GENERACIÓN DE ENERGÍA ELÉCTRICA CON FUENTES DE ENERGÍAS RENOVABLES NO",
+        "organismo": "MINISTERIO DE ECONOMÍA; FOMENTO Y RECONSTRUCCION; SUBSECRETA"
+      }
+    ]
+  },
+  "ministerio": {
+    "total_visible": "13.831",
+    "tipos_norma": {
+      "LEY": 5,
+      "DECRETO": 3,
+      "RESOLUCIÓN": 2
+    },
+    "organismos": {
+      "MINISTERIO DE ENERGÍA": 9,
+      "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA": 1
+    },
+    "años": {
+      "2009": 1,
+      "2020": 1,
+      "2021": 2,
+      "2022": 3,
+      "2024": 1,
+      "2025": 1
+    },
+    "sample_normas": [
+      {
+        "fecha": "22-SEP-2014",
+        "tipo": "LEY 20776",
+        "titulo": "MODIFICA Y PERFECCIONA LA LEY QUE RIGE AL MINISTERIO DE ENERGÍA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "01-AGO-2020",
+        "tipo": "DECRETO 11; DECRETO 11T",
+        "titulo": "MODIFICA DECRETO SUPREMO Nº 3T, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE FIJA PRECIOS A NIVEL DE GENERACIÓN Y TRANSMISIÓN EN SISTEMAS MEDIANOS DE AYSÉN",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "13-FEB-2021",
+        "tipo": "LEY 21305",
+        "titulo": "SOBRE EFICIENCIA ENERGÉTICA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "04-NOV-2022",
+        "tipo": "LEY 21499",
+        "titulo": "REGULA LOS BIOCOMBUSTIBLES SÓLIDOS",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "04-NOV-2024",
+        "tipo": "LEY 21711",
+        "titulo": "PERFECCIONA LA LEY N° 19.657, SOBRE CONCESIONES DE ENERGÍA GEOTÉRMICA, PARA EL DESARROLLO DE PROYECTOS DE APROVECHAMIENTO SOMERO DE ENERGÍA GEOTÉRMICA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "03-DIC-2009",
+        "tipo": "LEY 20402",
+        "titulo": "CREA EL MINISTERIO DE ENERGÍA, ESTABLECIENDO MODIFICACIONES AL DL Nº 2.224, DE 1978 Y A OTROS CUERPOS LEGALES",
+        "organismo": "MINISTERIO DE MINERÍA; SUBSECRETARÍA DE MINERÍA"
+      },
+      {
+        "fecha": "17-MAY-2025",
+        "tipo": "DECRETO 2; DECRETO 2T",
+        "titulo": "FIJA DERECHOS Y CONDICIONES DE EJECUCIÓN Y EXPLOTACIÓN Y FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS CONTEMPLADAS EN LOS ",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "31-MAR-2021",
+        "tipo": "DECRETO 17; DECRETO 17T",
+        "titulo": "FIJA EMPRESAS ADJUDICATARIAS DE LA CONSTRUCCIÓN Y EJECUCIÓN DE LAS OBRAS DE AMPLIACIÓN DEL SISTEMA DE TRANSMISIÓN ZONAL CORRESPONDIENTES AL TERCER LLA",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "26-ABR-2022",
+        "tipo": "RESOLUCIÓN 91 EXENTA",
+        "titulo": "RECTIFICA DECRETO SUPREMO Nº 71 EXENTO, DE 2022, DEL MINISTERIO DE ENERGÍA, QUE MODIFICA DECRETO SUPREMO Nº 16, DE 2021, DEL MINISTERIO DE ENERGÍA, QU",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      },
+      {
+        "fecha": "17-DIC-2022",
+        "tipo": "RESOLUCIÓN 42 EXENTA",
+        "titulo": "RECTIFICA RESOLUCIÓN N° 40/2022 EXENTA MINISTERIAL, DE 5 DE DICIEMBRE DE 2022, DEL MINISTERIO DE ENERGÍA, QUE INICIA PROCEDIMIENTO DE INVALIDACIÓN ADM",
+        "organismo": "MINISTERIO DE ENERGÍA"
+      }
+    ]
+  }
+}

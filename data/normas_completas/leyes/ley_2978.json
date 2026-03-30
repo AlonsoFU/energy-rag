@@ -1,0 +1,41 @@
+{
+  "id_norma": "7045",
+  "tipo": "",
+  "numero": "",
+  "titulo": "DECRETO LEY 2978 MODIFICA DECRETO LEY NO. 2.224, DE 1978, QUE CREO LA COMISION NACIONAL DE ENERGIA",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=7045",
+  "texto_completo": "Texto\nVersiones\nEscuchar\n    MODIFICA DECRETO LEY No. 2.224, DE 1978, QUE CREO LA COMISION NACIONAL DE ENERGIA\n    Santiago, 6 de Diciembre de 1979.- Hoy se decretó lo que sigue:\n    Núm. 2.978.- Visto: Lo dispuesto en los decretos leyes N°s. 1 y 128, de 1973; 527, de 1974; 1.263, de 1975; 991, de 1976, y 2.224, de 1978, y en los oficios números 49.127 y 53.338, de 1979, de la Contraloría General de la República,\n    La Junta de Gobierno de la República de Chile ha acordado dictar el siguiente Decreto ley:\n\n\n    Artículo primero.- Introdúcense las siguientes modificaciones al decreto ley N° 2.224, de 1978:\n    a) Sustitúyese el inciso primero del artículo 1° por el siguiente:\n    \"La Comisión Nacional de Energía será una persona jurídica de derecho público, funcionalmente descentralizada, con patrimonio propio y plena capacidad para adquirir y ejercer derechos y contraer obligaciones, que se relacionará directamente con el Presidente de la República. Sin perjuicio de la relación señalada, todos aquellos actos jurídico-administrativos de la Comisión Nacional de Energía, en los que, según las leyes, se exija la intervención de un Ministerio, utilizando expresiones tales como \"Ministerio del Ramo\", \"Ministerio correspondiente\", u otras semejantes, se realizarán a través del Ministerio de Minería\".\n    b) Agrégase el siguiente inciso final al artículo 5°:\n    \"El Presidente titular de la Comisión tendrá, para todos los efectos administrativos, el rango de Ministro de Estado, será funcionario de la exclusiva confianza del Presidente de la República y respondera directamente ante él de la gestión de la Comisión\".\n    c) Agrégase la siguiente frase al inciso final del artículo 2° transitorio:\n    \"El plazo concedido se contará a partir del 31 de Diciembre de 1979\".\n\n\n    Artículo segundo.- Modifícase el artículo 2° del decreto ley N° 1.263, de 1975, Orgánico de la Administración Financiera del Estado, en el sentido de incluir entre los Servicios e Instituciones que integran el área correspondiente a la Junta de Gobierno de la República de Chile, a la Comisión Nacional de Energía.\n    Artículo transitorio.- Facúltase al Presidente de la República para que, dentro del plazo de un año, por decreto del Ministerio de Minería, el que deberá llevar además, la firma del Ministro de Hacienda, fije la Planta del Personal de la Comisión Nacional de Energía que regirá a contar del 1° de Julio de 1979.\n    Corresponderá al Secretario Ejecutivo, mediante resolución y conforme a sus facultades del artículo 8° del D.L. No. 2.224, de 1978, encasillar discrecionalmente al personal de la Comisión en la Planta que se cree.\n\n\n    Regístrese en la Contraloría General de la República, publíquese en el Diario Oficial e insértese en la Recopilación Oficial de dicha Contraloría.- AUGUSTO PINOCHET UGARTE, General de Ejército, Presidente de la República.- JOSE T. MERINO CASTRO, Almirante, Comandante en Jefe de la Armada.- CESAR MENDOZA DURAN, General Director de Carabineros.- FERNANDO MATTHEI AUBEL, General del Aire, Comandante en Jefe de la Fuerza Aérea.- Carlos Quiñones López, Contraalmirante, Ministro de Minería.\n    Lo que transcribo para su conocimiento.- Saluda atentamente a Ud.- Bonifacio Arturo Neira Moraga, Teniente Coronel (I), de Carabineros, Subsecretario de Minería.",
+  "content_hash": "b9517240b16a5987",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "1979-12-13",
+      "descripcion": ""
+    },
+    {
+      "id_version": "1979-12-13",
+      "descripcion": "Única"
+    }
+  ],
+  "extracted_at": "2026-01-24T12:53:06.334650",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 3304,
+    "num_articulos": 7,
+    "num_palabras": 505,
+    "issues": [],
+    "warnings": []
+  }
+}

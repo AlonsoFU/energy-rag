@@ -1,0 +1,166 @@
+{
+  "id_norma": "1112591",
+  "tipo": "RESOLUCION",
+  "numero": "711",
+  "nombre": "Resolución 711",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "12 de diciembre de 2017",
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [],
+    "articulos": {
+      "primero": {
+        "numero": "primero",
+        "texto": "Establece metodología aplicable al Proceso de Planificación Anual de la Transmisión a realizarse conforme a lo dispuesto en los artículos 87º y siguientes de la Ley General de Servicios Eléctricos.\n\n    CAPÍTULO 1\n    OBJETO Y ALCANCE",
+        "texto_original": "Establece metodología aplicable al Proceso de Planificación Anual de la Transmisión a realizarse conforme a lo dispuesto en los artículos 87º y siguientes de la Ley General de Servicios Eléctricos.\n \n    CAPÍTULO 1\n    OBJETO Y ALCANCE",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      },
+      "1": {
+        "numero": "1",
+        "texto": "- La presente resolución tiene por objeto establecer los criterios y metodología aplicable al proceso de Planificación Anual de la Transmisión a efectuarse de acuerdo a lo dispuesto en los nuevos artículos 87º y siguientes de la Ley General de Servicios Eléctricos, introducidos por la Ley Nº 20.936.\n    CAPÍTULO 2\n    DEFINICIONES",
+        "texto_original": "- La presente resolución tiene por objeto establecer los criterios y metodología aplicable al proceso de Planificación Anual de la Transmisión a efectuarse de acuerdo a lo dispuesto en los nuevos artículos 87º y siguientes de la Ley General de Servicios Eléctricos, introducidos por la Ley Nº 20.936.\n    CAPÍTULO 2\n    DEFINICIONES",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "LEY",
+            "numero": "20936",
+            "año": null,
+            "contexto": "General de Servicios Eléctricos, introducidos por la Ley Nº 20.936.\n    CAPÍTULO 2\n    DEFINICIONES",
+            "en_articulo": "1",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": null
+      },
+      "2": {
+        "numero": "2",
+        "texto": "- Para efectos de la aplicación de la presente resolución, se entenderá por:\n    a) A.V.I.: Anualidad del Valor de Inversión;\n    b) Coordinador: Coordinador Independiente del Sistema Eléctrico Nacional, a que se refiere el artículo 212º-1 de la Ley General de Servicios Eléctricos;\n    c) Comisión: Comisión Nacional de Energía;\n    d) C.O.M.A.: Costo de Operación, Mantenimiento y Administración;\n    e) Escenario: Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;\n    f) Escenario Energético: De acuerdo a lo establecido en el decreto supremo Nº 134, del Ministerio de Energía, de 14 de octubre de 2016, que Aprueba Reglamento de Planificación Energética de Largo Plazo, corresponde al escenario que permite abastecer la o las proyecciones de demanda energética de forma eficiente de acuerdo, al menos, a las circunstancias actuales y tendencias previstas en materia de precios y costos relevantes para el sector, disponibilidad física de recursos energéticos, usos esperados de energía, prospectiva de cambios tecnológicos y las condicionantes ambientales y territoriales. Cada escenario deberá de considerar una oferta de energía para tales fines;\n    g) GNL: Gas Natural Licuado;\n    h) Ley o Ley General de Servicios Eléctricos: decreto con fuerza de ley Nº 4/20.018, de 2006, del Ministerio de Economía, Fomento y Reconstrucción, que fija texto refundido, coordinado y sistematizado del decreto con fuerza de ley Nº 1, de 1982, del Ministerio de Minería, Ley General de Servicios Eléctricos, y sus modificaciones posteriores o norma que la reemplace;\n    i) Ministerio: Ministerio de Energía;\n    j) Plan de Expansión: Resultado del Proceso de Planificación de la Transmisión, que podrá contener las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro;\n    k) Planificación de la Transmisión o Proceso de Planificación: Proceso de planificación de la transmisión que debe realizar la Comisión Nacional de Energía, en conformidad a lo dispuesto en el artículo 87º de la Ley;\n    l) Planificación Energética: Proceso de planificación energética de largo plazo que debe realizar el Ministerio de Energía, en conformidad a lo dispuesto en el artículo 83º de la Ley;\n    m) Sistema de Transmisión: Conjunto de líneas y subestaciones eléctricas que forman parte de un sistema eléctrico, y que no están destinadas a prestar servicio público de distribución, cuya operación deberá coordinarse según lo dispone el artículo 72º-1 de la Ley;\n    n) Sistema de Transmisión Nacional: Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de servicio establecidas en la Ley, los reglamentos y las normas técnicas;\n    o) Sistemas de Transmisión para Polos de Desarrollo: son aquéllos que están constituidos por las líneas y subestaciones eléctricas, destinadas a transportar la energía eléctrica producida por medios de generación ubicados en un mismo polo de desarrollo, hacia el sistema de transmisión, haciendo un uso eficiente del territorio nacional;\n    p) Sistemas de Transmisión Dedicados: son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso anterior, y adicionalmente se verifique que su operación no produce impactos o modificaciones significativas en la operación del resto del sistema, de acuerdo a lo que determine el reglamento;\n    q) Sistemas de Transmisión Zonal: son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;\n    r) Sistema Eléctrico: conjunto de instalaciones de centrales eléctricas generadoras, líneas de transporte, subestaciones eléctricas y líneas de distribución, interconectadas entre sí, que permite generar, transportar y distribuir energía eléctrica;\n    s) Sistema Eléctrico Nacional: Sistema eléctrico interconectado cuya capacidad instalada de generación sea igual o superior a 200 megawatts.\n    t) V.A.T.T.: Valor Anual de la Transmisión por Tramo;\n    u) V.I.: Valor de Inversión.\n\n    CAPÍTULO 3\n    OBJETIVOS Y CRITERIOS GENERALES DE LA PLANIFICACIÓN DE LA TRANSMISIÓN",
+        "texto_original": "- Para efectos de la aplicación de la presente resolución, se entenderá por:\n    a) A.V.I.: Anualidad del Valor de Inversión;\n    b) Coordinador: Coordinador Independiente del Sistema Eléctrico Nacional, a que se refiere el artículo 212º-1 de la Ley General de Servicios Eléctricos;\n    c) Comisión: Comisión Nacional de Energía;\n    d) C.O.M.A.: Costo de Operación, Mantenimiento y Administración;\n    e) Escenario: Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;\n    f) Escenario Energético: De acuerdo a lo establecido en el decreto supremo Nº 134, del Ministerio de Energía, de 14 de octubre de 2016, que Aprueba Reglamento de Planificación Energética de Largo Plazo, corresponde al escenario que permite abastecer la o las proyecciones de demanda energética de forma eficiente de acuerdo, al menos, a las circunstancias actuales y tendencias previstas en materia de precios y costos relevantes para el sector, disponibilidad física de recursos energéticos, usos esperados de energía, prospectiva de cambios tecnológicos y las condicionantes ambientales y territoriales. Cada escenario deberá de considerar una oferta de energía para tales fines;\n    g) GNL: Gas Natural Licuado;\n    h) Ley o Ley General de Servicios Eléctricos: decreto con fuerza de ley Nº 4/20.018, de 2006, del Ministerio de Economía, Fomento y Reconstrucción, que fija texto refundido, coordinado y sistematizado del decreto con fuerza de ley Nº 1, de 1982, del Ministerio de Minería, Ley General de Servicios Eléctricos, y sus modificaciones posteriores o norma que la reemplace;\n    i) Ministerio: Ministerio de Energía;\n    j) Plan de Expansión: Resultado del Proceso de Planificación de la Transmisión, que podrá contener las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro;\n    k) Planificación de la Transmisión o Proceso de Planificación: Proceso de planificación de la transmisión que debe realizar la Comisión Nacional de Energía, en conformidad a lo dispuesto en el artículo 87º de la Ley;\n    l) Planificación Energética: Proceso de planificación energética de largo plazo que debe realizar el Ministerio de Energía, en conformidad a lo dispuesto en el artículo 83º de la Ley;\n    m) Sistema de Transmisión: Conjunto de líneas y subestaciones eléctricas que forman parte de un sistema eléctrico, y que no están destinadas a prestar servicio público de distribución, cuya operación deberá coordinarse según lo dispone el artículo 72º-1 de la Ley;\n    n) Sistema de Transmisión Nacional: Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de servicio establecidas en la Ley, los reglamentos y las normas técnicas;\n    o) Sistemas de Transmisión para Polos de Desarrollo: son aquéllos que están constituidos por las líneas y subestaciones eléctricas, destinadas a transportar la energía eléctrica producida por medios de generación ubicados en un mismo polo de desarrollo, hacia el sistema de transmisión, haciendo un uso eficiente del territorio nacional;\n    p) Sistemas de Transmisión Dedicados: son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso anterior, y adicionalmente se verifique que su operación no produce impactos o modificaciones significativas en la operación del resto del sistema, de acuerdo a lo que determine el reglamento;\n    q) Sistemas de Transmisión Zonal: son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;\n    r) Sistema Eléctrico: conjunto de instalaciones de centrales eléctricas generadoras, líneas de transporte, subestaciones eléctricas y líneas de distribución, interconectadas entre sí, que permite generar, transportar y distribuir energía eléctrica;\n    s) Sistema Eléctrico Nacional: Sistema eléctrico interconectado cuya capacidad instalada de generación sea igual o superior a 200 megawatts.\n    t) V.A.T.T.: Valor Anual de la Transmisión por Tramo;\n    u) V.I.: Valor de Inversión.\n\n\n    CAPÍTULO 3\n    OBJETIVOS Y CRITERIOS GENERALES DE LA PLANIFICACIÓN DE LA TRANSMISIÓN",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "134",
+            "año": null,
+            "contexto": "enario Energético: De acuerdo a lo establecido en el decreto supremo Nº 134, del Ministerio de Energía, de 14 de octubre de 2",
+            "en_articulo": "2",
+            "id_norma": null
+          },
+          {
+            "tipo": "DFL",
+            "numero": "4",
+            "año": null,
+            "contexto": "h) Ley o Ley General de Servicios Eléctricos: decreto con fuerza de ley Nº 4/20.018, de 2006, del Ministerio de Economía, Fome",
+            "en_articulo": "2",
+            "id_norma": null
+          },
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "fija texto refundido, coordinado y sistematizado del decreto con fuerza de ley Nº 1, de 1982, del Ministerio de Minería, Ley General de Servic",
+            "en_articulo": "2",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": null
+      },
+      "3": {
+        "numero": "3",
+        "texto": "- La Comisión deberá llevar a cabo anualmente un proceso de Planificación de la Transmisión, de acuerdo al procedimiento establecido en el artículo 91º y siguientes de la Ley.",
+        "texto_original": "- La Comisión deberá llevar a cabo anualmente un proceso de Planificación de la Transmisión, de acuerdo al procedimiento establecido en el artículo 91º y siguientes de la Ley.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      },
+      "4": {
+        "numero": "4",
+        "texto": "- La Planificación de la Transmisión deberá considerar, al menos, un horizonte de veinte años, y contemplará las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro, según corresponda.\nLoading...",
+        "texto_original": "- La Planificación de la Transmisión deberá considerar, al menos, un horizonte de veinte años, y contemplará las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro, según corresponda.\nLoading...",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": null
+      }
+    }
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": [
+      {
+        "tipo": "DL",
+        "numero": "2224",
+        "año": 1978,
+        "contexto": "s:\n    a) Lo dispuesto en el artículo 9º letra h) del DL Nº 2.224, de 1978, que crea el Ministerio de Energía y la Comisión",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "20402",
+        "año": null,
+        "contexto": "e e indistintamente la \"Comisión\", modificado por la Ley Nº 20.402, que crea el Ministerio de Energía;\n    b) El DFL",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DFL",
+        "numero": "4",
+        "año": 2006,
+        "contexto": "20.402, que crea el Ministerio de Energía;\n    b) El DFL Nº 4, de 2006, del Ministerio de Economía, Fomento y Reconstruc",
+        "en_articulo": "preámbulo",
+        "id_norma": "258171"
+      },
+      {
+        "tipo": "DFL",
+        "numero": "1",
+        "año": 1982,
+        "contexto": "ja el texto refundido, coordinado y sistematizado del DFL Nº 1, de 1982, del Ministerio de Minería, Ley General de Servic",
+        "en_articulo": "preámbulo",
+        "id_norma": "5605"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "20936",
+        "año": null,
+        "contexto": "y General de Servicios Eléctricos, modificada por la ley Nº 20.936, en adelante e indistintamente la \"Ley\" o \"Ley Ge",
+        "en_articulo": "preámbulo",
+        "id_norma": "1109624"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19880",
+        "año": null,
+        "contexto": "ículos 87º, octavo y vigésimo transitorio;\n    d) La Ley Nº 19.880, que Establece Bases de los Procedimientos Admini",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "1600",
+        "año": 2008,
+        "contexto": "Central, para todos los efectos legales, y\n    h) La resolución Nº 1.600, de 2008, de la Contraloría General de la República.\n    C",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "RESOLUCIÓN",
+        "numero": "13",
+        "año": null,
+        "contexto": ".\n    Resuelvo:\n\n\n\nNOTA\n      El Artículo primero de la Resolución 13 Exenta, Energía, publicada el 18.01.2018, dispone",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "134",
+        "año": null,
+        "contexto": "enario Energético: De acuerdo a lo establecido en el decreto supremo Nº 134, del Ministerio de Energía, de 14 de octubre de 2",
+        "en_articulo": "2",
+        "id_norma": null
+      }
+    ]
+  }
+}

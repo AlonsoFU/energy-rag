@@ -1,0 +1,134 @@
+{
+  "id_norma": "1215040",
+  "tipo": "DECRETO",
+  "numero": "13",
+  "titulo": "FIJA VALORES, PROPIETARIOS Y FÓRMULAS DE INDEXACIÓN DE LAS INSTALACIONES DE LOS SISTEMAS DE TRANSMISIÓN A QUE SE REFIERE EL ARTÍCULO 52 DEL DECRETO SUPREMO N° 10, DE 2019, DEL MINISTERIO DE ENERGÍA, QUE APRUEBA REGLAMENTO DE CALIFICACIÓN, VALORIZACIÓN, TARIFICACIÓN Y REMUNERACIÓN DE LAS INSTALACIONES DE TRANSMISIÓN",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "27 de mayo de 2025",
+  "organismo": "ENERGÍA, QUE APRUEBA REGLAMENTO DE CALIFICACIÓN, VALORIZACIÓN, TARIFICACIÓN Y REMUNERACIÓN DE LAS INSTALACIONES DE TRANSMISIÓN",
+  "estado": "VIGENTE",
+  "modificada_por": [],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "DECRETO",
+      "numero": "10",
+      "año": 2019,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "100",
+      "año": 2005,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "2224",
+      "año": 1978,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "4",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "1",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "258171"
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20936",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1109624"
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "6",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "7",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "452",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "116",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "166",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "36",
+      "año": 2024,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "824",
+      "año": 1974,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    }
+  ]
+}

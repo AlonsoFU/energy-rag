@@ -1,0 +1,72 @@
+{
+  "id_norma": "250604",
+  "tipo": "DECRETO",
+  "numero": "62",
+  "titulo": "Transferencias de Potencia",
+  "fecha_publicacion": "05.06.2024",
+  "fecha_promulgacion": "1 de febrero de 2006",
+  "organismo": "Minería",
+  "estado": "MODIFICADA",
+  "modificada_por": [
+    {
+      "tipo": "DECRETO",
+      "numero": "70",
+      "año": 2024,
+      "organismo": "ENERGÍA",
+      "fecha_do": "05.06.2024",
+      "articulo": "primero N° 1",
+      "id_norma": "1200958"
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "42",
+      "año": 2020,
+      "organismo": "ENERGÍA",
+      "fecha_do": "26.12.2020",
+      "articulo": "primero N° 1",
+      "id_norma": null
+    }
+  ],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "DECRETO",
+      "numero": "70",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1200958"
+    },
+    {
+      "tipo": "LEY",
+      "numero": "1",
+      "año": 1982,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "327",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "42",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    }
+  ]
+}

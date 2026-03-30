@@ -1,0 +1,387 @@
+{
+  "generado": "2026-01-11T23:27:51.366421",
+  "total": 38,
+  "nota": "Relaciones extraidas directamente del HTML de BCN con idNorma de la norma modificadora",
+  "relaciones": [
+    {
+      "origen": "DECRETO 70",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "05.06.2024",
+      "articulo": "Art. primero N° 1",
+      "origen_id": "1204012",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "Art. primero N° 1",
+      "origen_id": "1153949",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 70",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "05.06.2024",
+      "articulo": "Art. primero N° 2, i) y ii)",
+      "origen_id": "1204012",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "Art. primero N° 2",
+      "origen_id": "1153949",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 70",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "05.06.2024",
+      "articulo": "Art. primero N° 3",
+      "origen_id": "1204012",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "Art. primero N° 3",
+      "origen_id": "1153949",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 70",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "05.06.2024",
+      "articulo": "Art. primero N° 4",
+      "origen_id": "1204012",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "Art. primero N° 4",
+      "origen_id": "1153949",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "Art. primero N° 5",
+      "origen_id": "1153949",
+      "destino_id": "250604",
+      "organismo_origen": "ENERGÍA"
+    },
+    {
+      "origen": "LEY 20936",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": "20.07.2016",
+      "articulo": "Art. 1 N° 1 a)",
+      "origen_id": "1092695",
+      "destino_id": "258171",
+      "organismo_origen": null
+    },
+    {
+      "origen": "LEY 20936",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": "20.07.2016",
+      "articulo": "Art. 1 N° 1 b)",
+      "origen_id": "1092695",
+      "destino_id": "258171",
+      "organismo_origen": null
+    },
+    {
+      "origen": "LEY 20936",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": "20.07.2016",
+      "articulo": "Art. 1 N° 1 c), d), e)",
+      "origen_id": "1092695",
+      "destino_id": "258171",
+      "organismo_origen": null
+    },
+    {
+      "origen": "LEY 21770",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1216930",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO 29-SEP-2025"
+    },
+    {
+      "origen": "LEY 21304",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1154423",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 12-ENE-2021"
+    },
+    {
+      "origen": "LEY 21076",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1115627",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 27-FEB-2018"
+    },
+    {
+      "origen": "LEY 20571",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1038211",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 22-MAR-2012"
+    },
+    {
+      "origen": "LEY 20402",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1008692",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE MINERÍA;   SUBSECRETARÍA DE MINERÍA 03-DIC-2009"
+    },
+    {
+      "origen": "LEY 21721",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1209692",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 27-DIC-2024"
+    },
+    {
+      "origen": "LEY 21667",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1203005",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 30-ABR-2024"
+    },
+    {
+      "origen": "LEY 21657",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1201175",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 19-FEB-2024"
+    },
+    {
+      "origen": "LEY 21647",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1199483",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE HACIENDA 23-DIC-2023"
+    },
+    {
+      "origen": "LEY 21582",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1194043",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE JUSTICIA Y DERECHOS HUMANOS 07-JUL-2023"
+    },
+    {
+      "origen": "LEY 21505",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1184572",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 21-NOV-2022"
+    },
+    {
+      "origen": "LEY 21472",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1179524",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 02-AGO-2022"
+    },
+    {
+      "origen": "LEY 21194",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1140301",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 21-DIC-2019"
+    },
+    {
+      "origen": "LEY 21118",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1125560",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 17-NOV-2018"
+    },
+    {
+      "origen": "LEY 20999",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1099982",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 09-FEB-2017"
+    },
+    {
+      "origen": "LEY 20936",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1092695",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 20-JUL-2016"
+    },
+    {
+      "origen": "LEY 20928",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1091871",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 22-JUN-2016"
+    },
+    {
+      "origen": "LEY 20897",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1087315",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 05-FEB-2016"
+    },
+    {
+      "origen": "LEY 20805",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1074277",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 29-ENE-2015"
+    },
+    {
+      "origen": "LEY 20720",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1058072",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ECONOMÍA;  FOMENTO Y TURISMO;   SUBSECRETARÍA DE ECONOMÍA Y EMPRESAS DE MENOR TAMAÑO 09-ENE-2014"
+    },
+    {
+      "origen": "LEY 20726",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1059332",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 07-FEB-2014"
+    },
+    {
+      "origen": "LEY 20698",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1055402",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 22-OCT-2013"
+    },
+    {
+      "origen": "LEY 20701",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "1055073",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ENERGÍA 14-OCT-2013"
+    },
+    {
+      "origen": "LEY 20273",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "273006",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DEL INTERIOR;   SUBSECRETARIA DEL INTERIOR 28-JUN-2008"
+    },
+    {
+      "origen": "LEY 20257",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "270212",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO Y RECONSTRUCCION 01-ABR-2008"
+    },
+    {
+      "origen": "LEY 20220",
+      "destino": "DFL 4",
+      "tipo": "MODIFICA",
+      "fecha": null,
+      "articulo": null,
+      "origen_id": "264650",
+      "destino_id": "258171",
+      "organismo_origen": "MINISTERIO DE ECONOMÍA;   FOMENTO Y RECONSTRUCCION;   SUBSECRETARIA DE ECONOMIA;   FOMENTO Y RECONSTRUCCION 14-SEP-2007"
+    }
+  ]
+}

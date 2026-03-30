@@ -1,0 +1,323 @@
+{
+  "id_norma": "250604",
+  "tipo": "DECRETO",
+  "numero": "62",
+  "nombre": "Decreto 62",
+  "fecha_publicacion": "05.06.2024",
+  "fecha_promulgacion": "1 de febrero de 2006",
+  "organismo": null,
+  "estado": "MODIFICADA",
+  "estructura": {
+    "titulos": [
+      {
+        "numero": "I",
+        "nombre": "DISPOSICIONES GENERALES",
+        "articulos": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ]
+      }
+    ],
+    "articulos": {
+      "primero": {
+        "numero": "primero",
+        "texto": "- Apruébase el siguiente reglamento de transferencias de potencia establecidas en \n\nla Ley:\n\n        TITULO I DISPOSICIONES GENERALES",
+        "texto_original": "- Apruébase el siguiente reglamento de transferencias de potencia establecidas en \nDecreto 70, ENERGÍA\nArt. primero N° 1\nD.O. 05.06.2024\nla Ley:\n\n\n\n \n        TITULO I DISPOSICIONES GENERALES",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 1",
+            "fecha_do": "05.06.2024",
+            "id_norma": "1200958"
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "año": null,
+            "contexto": "ento de transferencias de potencia establecidas en \nDecreto 70, ENERGÍA\nArt. primero N° 1\nD.O. 05.06.2024\nla Ley",
+            "en_articulo": "primero",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": null
+      },
+      "1": {
+        "numero": "1",
+        "texto": "Las transferencias de potencia entre propietarios, arrendatarios, usufructuarios o quienes operen a cualquier título medios de generación o Sistemas de Almacenamiento de Energía que se encuentren en operación, en \n\nlos términos que establece el inciso final del artículo 72º-17 de la Ley, exceptuando a aquellos que se abstengan de ejercer su derecho a participar en las transferencias de potencia, según el Artículo 8º del presente reglamento, en adelante los \"Participantes del Balance de Potencia\", se determinarán a partir de la capacidad de generación compatible con la suficiencia y los compromisos de demanda de punta existentes, que se asignen a cada generador o Sistema de Almacenamiento de Energía.\n    Para estos efectos se establecerán balances por sistemas o por subsistemas conforme a los subsistemas que se identificaren en los correspondientes informes técnicos definitivos de precio de nudo de corto plazo según se establece en el artículo 162 numeral 3 de la Ley, a partir de la Potencia de Suficiencia y los compromisos de Demanda de Punta de cada Participante del Balance de Potencia.",
+        "texto_original": "Decreto 42, ENERGÍA\nArt. primero N° 1\nD.O. 26.12.2020\n Las transferencias de potencia entre propietarios, arrendatarios, usufructuarios o quienes operen a cualquier título medios de generación o Sistemas de Almacenamiento de Energía que se encuentren en operación, en \nDecreto 70, ENERGÍA\nArt. primero N° 2, i) y ii)\nD.O. 05.06.2024\nlos términos que establece el inciso final del artículo 72º-17 de la Ley, exceptuando a aquellos que se abstengan de ejercer su derecho a participar en las transferencias de potencia, según el Artículo 8º del presente reglamento, en adelante los \"Participantes del Balance de Potencia\", se determinarán a partir de la capacidad de generación compatible con la suficiencia y los compromisos de demanda de punta existentes, que se asignen a cada generador o Sistema de Almacenamiento de Energía.\n    Para estos efectos se establecerán balances por sistemas o por subsistemas conforme a los subsistemas que se identificaren en los correspondientes informes técnicos definitivos de precio de nudo de corto plazo según se establece en el artículo 162 numeral 3 de la Ley, a partir de la Potencia de Suficiencia y los compromisos de Demanda de Punta de cada Participante del Balance de Potencia.",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 1",
+            "fecha_do": "26.12.2020",
+            "id_norma": "1153934"
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 2, i) y ii)",
+            "fecha_do": "05.06.2024",
+            "id_norma": null
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "año": null,
+            "contexto": "Decreto 42, ENERGÍA\nArt. primero N° 1\nD.O. 26.12.2020\n Las t",
+            "en_articulo": "1",
+            "id_norma": "1153934"
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "año": null,
+            "contexto": "ento de Energía que se encuentren en operación, en \nDecreto 70, ENERGÍA\nArt. primero N° 2, i) y ii)\nD.O. 05.06.2",
+            "en_articulo": "1",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "2": {
+        "numero": "2",
+        "texto": "Los Participantes del Balance de Potencia tendrán derecho a vender los excedentes de potencia, que resulten de los balances señalados en el artículo precedente, al precio de nudo de corto plazo de la potencia.\n    Los procedimientos para la determinación de los precios que corresponda, cuando los medios de generación o \n\nSistemas de Almacenamiento de Energía se conecten directamente a instalaciones del Sistema de Transmisión Nacional o Zonal o del Sistema de Distribución, deberán sujetarse a las disposiciones de la normativa vigente.\n    Las inyecciones y retiros de potencia mediante los cuales se determinen las transferencias de potencia, serán valorizadas utilizando el precio de nudo de corto plazo de la potencia, de acuerdo a lo establecido en el Título V del presente reglamento.",
+        "texto_original": "Decreto 42, ENERGÍA\nArt. primero N° 2\nD.O. 26.12.2020\n Los Participantes del Balance de Potencia tendrán derecho a vender los excedentes de potencia, que resulten de los balances señalados en el artículo precedente, al precio de nudo de corto plazo de la potencia.\n    Los procedimientos para la determinación de los precios que corresponda, cuando los medios de generación o \nDecreto 70, ENERGÍA\nArt. primero N° 3\nD.O. 05.06.2024\nSistemas de Almacenamiento de Energía se conecten directamente a instalaciones del Sistema de Transmisión Nacional o Zonal o del Sistema de Distribución, deberán sujetarse a las disposiciones de la normativa vigente.\n    Las inyecciones y retiros de potencia mediante los cuales se determinen las transferencias de potencia, serán valorizadas utilizando el precio de nudo de corto plazo de la potencia, de acuerdo a lo establecido en el Título V del presente reglamento.",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 2",
+            "fecha_do": "26.12.2020",
+            "id_norma": null
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 3",
+            "fecha_do": "05.06.2024",
+            "id_norma": null
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "año": null,
+            "contexto": "Decreto 42, ENERGÍA\nArt. primero N° 2\nD.O. 26.12.2020\n Los P",
+            "en_articulo": "2",
+            "id_norma": null
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "año": null,
+            "contexto": "que corresponda, cuando los medios de generación o \nDecreto 70, ENERGÍA\nArt. primero N° 3\nD.O. 05.06.2024\nSistem",
+            "en_articulo": "2",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "3": {
+        "numero": "3",
+        "texto": "Los Participantes del Balance de Potencia deberán estar en condiciones de satisfacer, en cada año, sus compromisos para la Demanda de Punta, considerando la Potencia de Suficiencia propia y la adquirida a otras empresas que posean medios de generación o \n\nSistemas de Almacenamiento de Energía. Para cada Participante del Balance de Potencia, el Coordinador Independiente del Sistema Eléctrico Nacional, en adelante el \"Coordinador\", verificará el cumplimiento de lo anterior, realizando un balance de inyecciones y retiros de potencia.",
+        "texto_original": "Decreto 42, ENERGÍA\nArt. primero N° 3\nD.O. 26.12.2020\n Los Participantes del Balance de Potencia deberán estar en condiciones de satisfacer, en cada año, sus compromisos para la Demanda de Punta, considerando la Potencia de Suficiencia propia y la adquirida a otras empresas que posean medios de generación o \nDecreto 70, ENERGÍA\nArt. primero N° 4\nD.O. 05.06.2024\nSistemas de Almacenamiento de Energía. Para cada Participante del Balance de Potencia, el Coordinador Independiente del Sistema Eléctrico Nacional, en adelante el \"Coordinador\", verificará el cumplimiento de lo anterior, realizando un balance de inyecciones y retiros de potencia.",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 3",
+            "fecha_do": "26.12.2020",
+            "id_norma": null
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 4",
+            "fecha_do": "05.06.2024",
+            "id_norma": null
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "año": null,
+            "contexto": "Decreto 42, ENERGÍA\nArt. primero N° 3\nD.O. 26.12.2020\n Los P",
+            "en_articulo": "3",
+            "id_norma": null
+          },
+          {
+            "tipo": "DECRETO",
+            "numero": "70",
+            "año": null,
+            "contexto": "a otras empresas que posean medios de generación o \nDecreto 70, ENERGÍA\nArt. primero N° 4\nD.O. 05.06.2024\nSistem",
+            "en_articulo": "3",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "4": {
+        "numero": "4",
+        "texto": "El balance de inyecciones y retiros de potencia constará de un cálculo preliminar, que considerará los Retiros de Potencia previstos para cada Participante del Balance de Potencia. El Coordinador comunicará, a más tardar el último día del mes de diciembre de cada año, los correspondientes pagos que deban efectuarse entre los referidos Participantes del Balance de Potencia durante el año siguiente. Estos pagos se efectuarán en doce mensualidades, durante el año al cual correspondan.\n    Una vez transcurrido el Año de Cálculo, el Coordinador deberá comunicar el cálculo definitivo de las transferencias de potencia, a más tardar el último día del mes de marzo. Para ello, el Coordinador deberá actualizar el cálculo preliminar con toda la información y supuestos que no se ajusten a lo observado en el Año de Cálculo, conforme se establece en el Artículo 15 del presente reglamento.\n    El cálculo preliminar y el cálculo definitivo de las transferencias de potencia podrán ser observados por los Participantes del Balance de Potencia y por los propietarios, arrendatarios, usufructuarios o quienes operen a cualquier título instalaciones del sistema de transmisión, en adelante \"Titulares de Transmisión\".\n    Para el cálculo preliminar y el cálculo definitivo, los Participantes del Balance de Potencia y los Titulares de Transmisión, contarán con 10 días hábiles, a partir de la comunicación del Coordinador, para enviar sus observaciones al mismo. Recibidas las observaciones antes señaladas, el Coordinador deberá comunicar la versión final de los respectivos cálculos preliminares o definitivos según corresponda, en un plazo de 10 días hábiles, contado desde el vencimiento del plazo para recibir observaciones.\n    Las diferencias que surjan entre los pagos determinados por el cálculo definitivo y los pagos realizados según el cálculo preliminar del año respectivo, darán origen a una reliquidación. Estas diferencias serán pagadas en una sola cuota, incluyendo los intereses, que se facturará a más tardar a los 20 días corridos contados desde que el Coordinador comunique la versión final del cálculo definitivo, y se pagará a más tardar 10 días corridos después de emitidas las correspondientes facturas.",
+        "texto_original": "Decreto 42, ENERGÍA\nArt. primero N° 4\nD.O. 26.12.2020\n El balance de inyecciones y retiros de potencia constará de un cálculo preliminar, que considerará los Retiros de Potencia previstos para cada Participante del Balance de Potencia. El Coordinador comunicará, a más tardar el último día del mes de diciembre de cada año, los correspondientes pagos que deban efectuarse entre los referidos Participantes del Balance de Potencia durante el año siguiente. Estos pagos se efectuarán en doce mensualidades, durante el año al cual correspondan.\n    Una vez transcurrido el Año de Cálculo, el Coordinador deberá comunicar el cálculo definitivo de las transferencias de potencia, a más tardar el último día del mes de marzo. Para ello, el Coordinador deberá actualizar el cálculo preliminar con toda la información y supuestos que no se ajusten a lo observado en el Año de Cálculo, conforme se establece en el Artículo 15 del presente reglamento.\n    El cálculo preliminar y el cálculo definitivo de las transferencias de potencia podrán ser observados por los Participantes del Balance de Potencia y por los propietarios, arrendatarios, usufructuarios o quienes operen a cualquier título instalaciones del sistema de transmisión, en adelante \"Titulares de Transmisión\".\n    Para el cálculo preliminar y el cálculo definitivo, los Participantes del Balance de Potencia y los Titulares de Transmisión, contarán con 10 días hábiles, a partir de la comunicación del Coordinador, para enviar sus observaciones al mismo. Recibidas las observaciones antes señaladas, el Coordinador deberá comunicar la versión final de los respectivos cálculos preliminares o definitivos según corresponda, en un plazo de 10 días hábiles, contado desde el vencimiento del plazo para recibir observaciones.\n    Las diferencias que surjan entre los pagos determinados por el cálculo definitivo y los pagos realizados según el cálculo preliminar del año respectivo, darán origen a una reliquidación. Estas diferencias serán pagadas en una sola cuota, incluyendo los intereses, que se facturará a más tardar a los 20 días corridos contados desde que el Coordinador comunique la versión final del cálculo definitivo, y se pagará a más tardar 10 días corridos después de emitidas las correspondientes facturas.",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 4",
+            "fecha_do": "26.12.2020",
+            "id_norma": null
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "año": null,
+            "contexto": "Decreto 42, ENERGÍA\nArt. primero N° 4\nD.O. 26.12.2020\n El ba",
+            "en_articulo": "4",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "5": {
+        "numero": "5",
+        "texto": "Las reliquidaciones a que se refiere el artículo anterior deberán ser pagadas aplicando la tasa de interés corriente para operaciones no reajustables de menos o más de 90 días, según sea la fecha de devengo en relación con la del pago de las deudas.\n    El interés se entenderá devengado a partir del término que expiraba el día 22 de cada mes siguiente a aquel en que se efectuaron las transferencias de potencia.\n    En el caso de atraso o mora en los pagos correspondientes tanto al cálculo preliminar como definitivo, se utilizará el interés corriente para operaciones no reajustables a menos o más de 90 días, según corresponda, incrementado en un 50%.",
+        "texto_original": "Las reliquidaciones a que se refiere el artículo anterior deberán ser pagadas aplicando la tasa de interés corriente para operaciones no reajustables de menos o más de 90 días, según sea la fecha de devengo en relación con la del pago de las deudas.\n    El interés se entenderá devengado a partir del término que expiraba el día 22 de cada mes siguiente a aquel en que se efectuaron las transferencias de potencia.\n    En el caso de atraso o mora en los pagos correspondientes tanto al cálculo preliminar como definitivo, se utilizará el interés corriente para operaciones no reajustables a menos o más de 90 días, según corresponda, incrementado en un 50%.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": "I"
+      },
+      "6": {
+        "numero": "6",
+        "texto": "Los cálculos y pagos definitivos que determine \n\nel Coordinador deberán ser realizados en los plazos que se señalan en el presente reglamento, sin perjuicio de las instancias de reclamación pertinentes, las que en ningún caso podrán interrumpir la cadena de pagos entre las empresas que participan de las transferencias de potencia.\n\nLoading...",
+        "texto_original": "Los cálculos y pagos definitivos que determine \nDecreto 42, ENERGÍA\nArt. primero N° 5\nD.O. 26.12.2020\nel Coordinador deberán ser realizados en los plazos que se señalan en el presente reglamento, sin perjuicio de las instancias de reclamación pertinentes, las que en ningún caso podrán interrumpir la cadena de pagos entre las empresas que participan de las transferencias de potencia.\n\n\nLoading...",
+        "modificaciones": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "organismo": "ENERGÍA",
+            "articulo_modificador": "primero N° 5",
+            "fecha_do": "26.12.2020",
+            "id_norma": null
+          }
+        ],
+        "referencias": [
+          {
+            "tipo": "DECRETO",
+            "numero": "42",
+            "año": null,
+            "contexto": "Los cálculos y pagos definitivos que determine \nDecreto 42, ENERGÍA\nArt. primero N° 5\nD.O. 26.12.2020\nel Coo",
+            "en_articulo": "6",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      }
+    }
+  },
+  "relaciones": {
+    "modificada_por": [
+      {
+        "tipo": "DECRETO",
+        "numero": "70",
+        "id_norma": "1204012",
+        "organismo": null,
+        "articulo_modificador": null,
+        "fecha_do": null,
+        "fuente": "inline"
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "42",
+        "id_norma": "1153949",
+        "organismo": null,
+        "articulo_modificador": null,
+        "fecha_do": null,
+        "fuente": "inline"
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "130",
+        "id_norma": "1047565",
+        "organismo": null,
+        "articulo_modificador": null,
+        "fecha_do": null,
+        "fuente": "inline"
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "44",
+        "id_norma": "258729",
+        "organismo": null,
+        "articulo_modificador": null,
+        "fecha_do": null,
+        "fuente": "inline"
+      }
+    ],
+    "referencias": [
+      {
+        "tipo": "DECRETO",
+        "numero": "70",
+        "año": null,
+        "contexto": "r\nAPRUEBA REGLAMENTO DE TRANSFERENCIAS DE POTENCIA \nDecreto 70, ENERGÍA\nArt. primero N° 1\nD.O. 05.06.2024\nESTABL",
+        "en_articulo": "preámbulo",
+        "id_norma": "1200958"
+      },
+      {
+        "tipo": "DFL",
+        "numero": "1",
+        "año": 1982,
+        "contexto": "de febrero de 2006.- Vistos:\n1)  Lo dispuesto en el Decreto con Fuerza de Ley N° 1 de 1982, del Ministerio de Minería, que establece la Ley",
+        "en_articulo": "preámbulo",
+        "id_norma": "5605"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19940",
+        "año": 2004,
+        "contexto": "Eléctricos, y las modificaciones introducidas por las Leyes N° 19.940 de 2004 y N° 20.018 de 2005;\n2)  Lo dispuesto en el Decre",
+        "en_articulo": "preámbulo",
+        "id_norma": "237695"
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "327",
+        "año": null,
+        "contexto": "de 2004 y N° 20.018 de 2005;\n2)  Lo dispuesto en el Decreto Supremo N° 327, de 12 de diciembre de 1997, del Ministerio de Mi",
+        "en_articulo": "preámbulo",
+        "id_norma": "127024"
+      },
+      {
+        "tipo": "DECRETO",
+        "numero": "42",
+        "año": null,
+        "contexto": "Decreto 42, ENERGÍA\nArt. primero N° 1\nD.O. 26.12.2020\n Las t",
+        "en_articulo": "1",
+        "id_norma": "1153934"
+      }
+    ]
+  },
+  "vinculaciones_actualizadas": "2026-01-21T14:54:21.502265"
+}

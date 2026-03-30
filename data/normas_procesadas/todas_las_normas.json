@@ -1,0 +1,764 @@
+{
+  "generado": "2026-01-11T18:51:38.539816",
+  "total": 9,
+  "normas": [
+    {
+      "id_norma": "250604",
+      "tipo": "DECRETO",
+      "numero": "62",
+      "titulo": "Transferencias de Potencia",
+      "fecha_publicacion": "05.06.2024",
+      "fecha_promulgacion": "1 de febrero de 2006",
+      "organismo": "Minería",
+      "estado": "MODIFICADA",
+      "modificada_por": [
+        {
+          "tipo": "DECRETO",
+          "numero": "70",
+          "año": 2024,
+          "organismo": "ENERGÍA",
+          "fecha_do": "05.06.2024",
+          "articulo": "primero N° 1",
+          "id_norma": "1200958"
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "42",
+          "año": 2020,
+          "organismo": "ENERGÍA",
+          "fecha_do": "26.12.2020",
+          "articulo": "primero N° 1",
+          "id_norma": null
+        }
+      ],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "DECRETO",
+          "numero": "70",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1200958"
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": 1982,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "327",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "42",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "237695",
+      "tipo": "LEY",
+      "numero": "19940",
+      "titulo": "Ley Corta I",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "29 de abril de 2005",
+      "organismo": "Economía",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "LEY",
+          "numero": "19940",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "237695"
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "520",
+          "año": 1996,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "55",
+          "año": 1992,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "1200958",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "titulo": "Modifica D.62",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": null,
+      "organismo": null,
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "61",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "487",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "19880",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "397",
+          "año": 1976,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "43",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "titulo": "LGSE (refundido)",
+      "fecha_publicacion": "13.09.1982",
+      "fecha_promulgacion": "12 de mayo de 2006",
+      "organismo": "Minería",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "2",
+          "año": 2006,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "19940",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "237695"
+        },
+        {
+          "tipo": "LEY",
+          "numero": "19674",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1939",
+          "año": 1977,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20936",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1109624"
+        },
+        {
+          "tipo": "LEY",
+          "numero": "18046",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "1112591",
+      "tipo": "RESOLUCION",
+      "numero": "711",
+      "titulo": "NTSyCS actualizada",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "12 de diciembre de 2017",
+      "organismo": "Economía",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "DL",
+          "numero": "2224",
+          "año": 1978,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20402",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DFL",
+          "numero": "4",
+          "año": 2006,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "258171"
+        },
+        {
+          "tipo": "DFL",
+          "numero": "1",
+          "año": 1982,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20936",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1109624"
+        },
+        {
+          "tipo": "LEY",
+          "numero": "19880",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "1600",
+          "año": 2008,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "13",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "134",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "4",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": 1982,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "1191446",
+      "tipo": "DECRETO",
+      "numero": "52",
+      "titulo": "Reglamento Coordinador",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "17 de abril de 2023",
+      "organismo": "Economía",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "52",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "659",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20780",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DL",
+          "numero": "2224",
+          "año": 1978,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20402",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "4",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "21455",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "19880",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "63",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "21210",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "125",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "12",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "7",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "1215040",
+      "tipo": "DECRETO",
+      "numero": "10",
+      "titulo": "Valorización Transmisión",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "27 de mayo de 2025",
+      "organismo": "ENERGÍA, QUE APRUEBA REGLAMENTO DE CALIFICACIÓN, VALORIZACIÓN, TARIFICACIÓN Y REMUNERACIÓN DE LAS INSTALACIONES DE TRANSMISIÓN",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "DECRETO",
+          "numero": "10",
+          "año": 2019,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1215040"
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "100",
+          "año": 2005,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "2224",
+          "año": 1978,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "4",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20936",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1109624"
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "6",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "DECRETO",
+          "numero": "7",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "452",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "116",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "166",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "36",
+          "año": 2024,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "824",
+          "año": 1974,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    },
+    {
+      "id_norma": "252841",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "titulo": "Modifica D.62",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "11 de agosto de 2006",
+      "organismo": null,
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": []
+    },
+    {
+      "id_norma": "1109624",
+      "tipo": "LEY",
+      "numero": "20936",
+      "titulo": "Sistema de Transmisión",
+      "fecha_publicacion": null,
+      "fecha_promulgacion": "18 de octubre de 2017",
+      "organismo": "Economía",
+      "estado": "VIGENTE",
+      "modificada_por": [],
+      "modifica_a": [],
+      "deroga_a": [],
+      "derogada_por": [],
+      "reglamenta": [],
+      "referencias": [
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "18",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "20936",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": "1109624"
+        },
+        {
+          "tipo": "DL",
+          "numero": "2224",
+          "año": 1978,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "4",
+          "año": 2006,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "LEY",
+          "numero": "1",
+          "año": 1982,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "1600",
+          "año": 2008,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        },
+        {
+          "tipo": "RESOLUCIÓN",
+          "numero": "13",
+          "año": null,
+          "organismo": null,
+          "fecha_do": null,
+          "articulo": null,
+          "id_norma": null
+        }
+      ]
+    }
+  ],
+  "indice": {
+    "DECRETO_62": "250604",
+    "LEY_19940": "237695",
+    "DECRETO_70": "1200958",
+    "DFL_4": "258171",
+    "RESOLUCION_711": "1112591",
+    "DECRETO_52": "1191446",
+    "DECRETO_10": "1215040",
+    "DECRETO_44": "252841",
+    "LEY_20936": "1109624"
+  }
+}

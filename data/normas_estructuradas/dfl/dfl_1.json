@@ -1,0 +1,129 @@
+{
+  "id_norma": "5605",
+  "tipo": "DFL",
+  "numero": "1",
+  "nombre": "DFL 1",
+  "fecha_publicacion": "06.04.2022",
+  "fecha_promulgacion": "13 de Agosto de 1981",
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [
+      {
+        "numero": "I",
+        "nombre": "DISPOSICIONES GENERALES",
+        "articulos": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      {
+        "numero": "II",
+        "nombre": "DEL APR",
+        "articulos": [
+          "5",
+          "5"
+        ]
+      }
+    ],
+    "articulos": {
+      "1": {
+        "numero": "1",
+        "texto": "Las aguas se dividen en marítimas y terrestres. Las disposiciones de este Código sólo se aplican a las aguas terrestres.\n    Son aguas pluviales las que proceden inmediatamente de las lluvias, las cuales serán marítimas o terrestres según donde se precipiten.",
+        "texto_original": "Las aguas se dividen en marítimas y terrestres. Las disposiciones de este Código sólo se aplican a las aguas terrestres.\n    Son aguas pluviales las que proceden inmediatamente de las lluvias, las cuales serán marítimas o terrestres según donde se precipiten.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": "I"
+      },
+      "2": {
+        "numero": "2",
+        "texto": "Las aguas terrestres son superficiales o subterráneas.\n    Son aguas superficiales aquellas que se encuentran naturalmente a la vista del hombre y pueden ser corrientes o detenidas.\n    Son aguas corrientes las que escurren por cauces naturales o artificiales.\n    Son aguas detenidas las que están acumuladas en depósitos naturales o artificiales, tales como lagos, lagunas, pantanos, charcas, aguadas, ciénagas, estanques o embalses.\n    Son aguas subterráneas las que están ocultas en el seno de la tierra y no han sido alumbradas.",
+        "texto_original": "Las aguas terrestres son superficiales o subterráneas.\n    Son aguas superficiales aquellas que se encuentran naturalmente a la vista del hombre y pueden ser corrientes o detenidas.\n    Son aguas corrientes las que escurren por cauces naturales o artificiales.\n    Son aguas detenidas las que están acumuladas en depósitos naturales o artificiales, tales como lagos, lagunas, pantanos, charcas, aguadas, ciénagas, estanques o embalses.\n    Son aguas subterráneas las que están ocultas en el seno de la tierra y no han sido alumbradas.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": "I"
+      },
+      "3": {
+        "numero": "3",
+        "texto": "Las aguas que afluyen, continua o discontinuamente, superficial o subterráneamente, a una misma cuenca u hoya hidrográfica, son parte integrante de una misma corriente.\n    La cuenca u hoya hidrográfica de un caudal de aguas la forman todos los afluentes, subafluentes, quebradas, esteros, lagos y lagunas que afluyen a ella, en forma continua o discontinua, superficial o subterráneamente.",
+        "texto_original": "Las aguas que afluyen, continua o discontinuamente, superficial o subterráneamente, a una misma cuenca u hoya hidrográfica, son parte integrante de una misma corriente.\n    La cuenca u hoya hidrográfica de un caudal de aguas la forman todos los afluentes, subafluentes, quebradas, esteros, lagos y lagunas que afluyen a ella, en forma continua o discontinua, superficial o subterráneamente.",
+        "modificaciones": [],
+        "referencias": [],
+        "en_titulo": "I"
+      },
+      "4": {
+        "numero": "4",
+        "texto": "Atendida su naturaleza, las aguas son muebles, pero destinadas al uso, cultivo o beneficio de un inmueble se reputan inmuebles.\n    Título II\n\n    DEL APR\nLey 21435\nArt. 1, N° 1\nD.O. 06.04.2022\nOVECHAMIENTO DE LAS AGUAS Y SUS FUNCIONES",
+        "texto_original": "Atendida su naturaleza, las aguas son muebles, pero destinadas al uso, cultivo o beneficio de un inmueble se reputan inmuebles.\n    Título II\n\n\n    DEL APR\nLey 21435\nArt. 1, N° 1\nD.O. 06.04.2022\nOVECHAMIENTO DE LAS AGUAS Y SUS FUNCIONES",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "LEY",
+            "numero": "21435",
+            "año": null,
+            "contexto": "se reputan inmuebles.\n    Título II\n\n\n    DEL APR\nLey 21435\nArt. 1, N° 1\nD.O. 06.04.2022\nOVECHAMIENTO DE LAS",
+            "en_articulo": "4",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "5": {
+        "numero": "5",
+        "texto": "bis.- \nLey 21435\nArt. 1, N° 3\nD.O. 06.04.2022\nLas aguas cumplen diversas funciones, principalmente las de subsistencia, que incluyen el uso para el consumo humano, el saneamiento y el uso doméstico de subsistencia; las de preservación ecosistémica, y las productivas.\n    Siempre prevalecerá el uso para el consumo humano, el uso doméstico de subsistencia y el saneamiento, tanto en el otorgamiento como en la limitación al ejercicio de los derechos de aprovechamiento.\n    Se entenderá por usos domésticos de subsistencia, el aprovechamiento que una persona o una familia hace del agua que ella misma extrae, con el fin de utilizarla para satisfacer sus necesidades de bebida, aseo personal, la bebida de sus animales y cultivo de productos hortofrutícolas indispensables para su subsistencia.\n    La autoridad deberá siempre velar por la armonía y el equilibrio entre la función de preservación ecosistémica y la función productiva que cumplen las aguas.\n    La Dirección General de Aguas se sujetará a la priorización dispuesta en el inciso segundo cuando disponga la reducción temporal del ejercicio de los derechos de aprovechamiento o la redistribución de las aguas, de conformidad con lo dispuesto en los artículos 17, 62, 314 y demás normas pertinentes de este Código. Con todo, la autoridad deberá considerar la diversidad geográfica y climática del país, la disponibilidad efectiva de los recursos hídricos y la situación de cada cuenca hidrográfica.\n    Cuando se concedan derechos de agua para el consumo humano y el saneamiento, solo podrá utilizarse dicha agua para fines distintos en la medida que se destinen a un uso no consuntivo y prevalezca la preferencia del consumo humano y el saneamiento.\n    Tratándose de solicitudes realizadas por un comité o una cooperativa de servicio sanitario rural, y siempre que no excedan de 12 litros por segundo, durante la tramitación de la solicitud definitiva, la Dirección General de Aguas podrá autorizar transitoriamente, mediante resolución, la extracción del recurso hídrico por un caudal no superior al indicado. Para ello, la Dirección deberá efectuar una visita a terreno y confeccionar un informe técnico que respalde el caudal autorizado transitoriamente y dictará una resolución fundada al respecto dentro del plazo de noventa días, contado desde la presentación de la solicitud. Esta autorización se mantendrá vigente durante la tramitación de la solicitud definitiva, la que no podrá exceder de un año, prorrogable por una sola vez.\n\nLoading...",
+        "texto_original": "bis.- \nLey 21435\nArt. 1, N° 3\nD.O. 06.04.2022\nLas aguas cumplen diversas funciones, principalmente las de subsistencia, que incluyen el uso para el consumo humano, el saneamiento y el uso doméstico de subsistencia; las de preservación ecosistémica, y las productivas.\n    Siempre prevalecerá el uso para el consumo humano, el uso doméstico de subsistencia y el saneamiento, tanto en el otorgamiento como en la limitación al ejercicio de los derechos de aprovechamiento.\n    Se entenderá por usos domésticos de subsistencia, el aprovechamiento que una persona o una familia hace del agua que ella misma extrae, con el fin de utilizarla para satisfacer sus necesidades de bebida, aseo personal, la bebida de sus animales y cultivo de productos hortofrutícolas indispensables para su subsistencia.\n    La autoridad deberá siempre velar por la armonía y el equilibrio entre la función de preservación ecosistémica y la función productiva que cumplen las aguas.\n    La Dirección General de Aguas se sujetará a la priorización dispuesta en el inciso segundo cuando disponga la reducción temporal del ejercicio de los derechos de aprovechamiento o la redistribución de las aguas, de conformidad con lo dispuesto en los artículos 17, 62, 314 y demás normas pertinentes de este Código. Con todo, la autoridad deberá considerar la diversidad geográfica y climática del país, la disponibilidad efectiva de los recursos hídricos y la situación de cada cuenca hidrográfica.\n    Cuando se concedan derechos de agua para el consumo humano y el saneamiento, solo podrá utilizarse dicha agua para fines distintos en la medida que se destinen a un uso no consuntivo y prevalezca la preferencia del consumo humano y el saneamiento.\n    Tratándose de solicitudes realizadas por un comité o una cooperativa de servicio sanitario rural, y siempre que no excedan de 12 litros por segundo, durante la tramitación de la solicitud definitiva, la Dirección General de Aguas podrá autorizar transitoriamente, mediante resolución, la extracción del recurso hídrico por un caudal no superior al indicado. Para ello, la Dirección deberá efectuar una visita a terreno y confeccionar un informe técnico que respalde el caudal autorizado transitoriamente y dictará una resolución fundada al respecto dentro del plazo de noventa días, contado desde la presentación de la solicitud. Esta autorización se mantendrá vigente durante la tramitación de la solicitud definitiva, la que no podrá exceder de un año, prorrogable por una sola vez.\n\n\nLoading...",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "LEY",
+            "numero": "21435",
+            "año": null,
+            "contexto": "bis.- \nLey 21435\nArt. 1, N° 3\nD.O. 06.04.2022\nLas aguas cumplen di",
+            "en_articulo": "5",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "II"
+      }
+    }
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": [
+      {
+        "tipo": "DFL",
+        "numero": "1122",
+        "año": null,
+        "contexto": "3 de Agosto de 1981.- Hoy se decretó lo que sigue:\n\n\n    D.F.L. N° 1.122.- Visto: La facultad que me otorga el artículo 2°",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "3337",
+        "año": 1980,
+        "contexto": "y número 2.603, de 1979, prorrogada por el decreto ley 3.337, de 1980, y renovada por el decreto ley 3.549, de 1981, di",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "3549",
+        "año": 1981,
+        "contexto": "reto ley 3.337, de 1980, y renovada por el decreto ley 3.549, de 1981, dicto el siguiente\n\n\n    Decreto con fuerza de l",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "21435",
+        "año": null,
+        "contexto": "se reputan inmuebles.\n    Título II\n\n\n    DEL APR\nLey 21435\nArt. 1, N° 1\nD.O. 06.04.2022\nOVECHAMIENTO DE LAS",
+        "en_articulo": "4",
+        "id_norma": null
+      }
+    ]
+  }
+}

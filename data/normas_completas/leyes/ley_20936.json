@@ -1,0 +1,65 @@
+{
+  "id_norma": "1092695",
+  "tipo": "",
+  "numero": "",
+  "titulo": "",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=1092695",
+  "texto_completo": "Formulario de contacto\nBÚSQUEDA AVANZADA\n Modo oscuro\n \n Alto contraste\n  Selección\n Cerrar Navegar Norma\nPortada Ley 20936\n  VOLVER\nLEY 20936\nENCABEZADO\nARTÍCULO 1\nARTÍCULO 2\nDISPOSICIONES TRANSITORIAS\nPROMULGACIÓN\nLEY 20936  ESTABLECE UN NUEVO SISTEMA DE TRANSMISIÓN ELÉCTRICA Y CREA UN ORGANISMO COORDINADOR INDEPENDIENTE DEL SISTEMA ELÉCTRICO NACIONAL\n\nMINISTERIO DE ENERGÍA\n\n   \n  \n\nPromulgación: 11-JUL-2016\n\nPublicación: 20-JUL-2016\n\nVersión: Última Versión - 09-FEB-2017\n\nMaterias: Sistema Eléctrico Nacional, Sistemas de Transmisión de Energía Eléctrica, Centros de Despacho Económico de Carga (CDEC), Comisión Nacional de Energía (CNE), Comisión Ciudadana de Energía, Ministerio de Energía\n\nResumen: Esta ley tiene por objeto determinar un plan de acción para lograr que Chile cuente con energía confiable, sustent ... ver más >>\n\nMODIFICACIONCONCORDANCIAREGLAMENTO\n    \n Ocultar notas\nTexto\nVersiones\nProyectos de Ley\nSíguenos en:\nPolíticas de privacidad\nMapa del sitio\nUbicación, horarios y teléfonos",
+  "content_hash": "b1b3ca7c7ae924df",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "2017-02-09",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2016-07-20",
+      "descripcion": "artículo 15°"
+    },
+    {
+      "id_version": "2017-02-09",
+      "descripcion": "Ley 20999Art. 4 N° 1D.O. 09.02.2017"
+    },
+    {
+      "id_version": "2017-02-09",
+      "descripcion": "Ley 20999Art. 4 N° 2D.O. 09.02.2017"
+    },
+    {
+      "id_version": "2017-02-09",
+      "descripcion": "Última Versión"
+    },
+    {
+      "id_version": "2016-07-20",
+      "descripcion": "Texto Original"
+    },
+    {
+      "id_version": "2017-02-09",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2017-02-09",
+      "descripcion": ""
+    }
+  ],
+  "extracted_at": "2026-01-24T12:41:38.129717",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 1012,
+    "num_articulos": 2,
+    "num_palabras": 131,
+    "issues": [],
+    "warnings": []
+  }
+}

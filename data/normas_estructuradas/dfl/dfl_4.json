@@ -1,0 +1,290 @@
+{
+  "id_norma": "258171",
+  "tipo": "DFL",
+  "numero": "4",
+  "nombre": "DFL 4/2006",
+  "fecha_publicacion": "13.09.1982",
+  "fecha_promulgacion": "12 de mayo de 2006",
+  "organismo": null,
+  "estado": "VIGENTE",
+  "estructura": {
+    "titulos": [
+      {
+        "numero": "I",
+        "nombre": "Disposiciones Generales",
+        "articulos": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    ],
+    "articulos": {
+      "1": {
+        "numero": "1",
+        "texto": "- La producción, el\nD.F.L. Nº 1, de\n1982, Minería\nArt. 1º\nD.O. 13.09.1982\n transporte, la distribución, el régimen de concesiones y tarifas de la energía eléctrica y las funciones del Estado relacionadas con estas materias se regirán por la presente ley.\n\n              TITULO I\n        Disposiciones Generales",
+        "texto_original": "- La producción, el\nD.F.L. Nº 1, de\n1982, Minería\nArt. 1º\nD.O. 13.09.1982\n transporte, la distribución, el régimen de concesiones y tarifas de la energía eléctrica y las funciones del Estado relacionadas con estas materias se regirán por la presente ley.\n\n\n              TITULO I\n        Disposiciones Generales",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- La producción, el\nD.F.L. Nº 1, de\n1982, Minería\nArt. 1º\nD.O. 13.09.1982\n transporte, la",
+            "en_articulo": "1",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": null
+      },
+      "2": {
+        "numero": "2",
+        "texto": "- Están comprendidas en\nD.F.L. Nº 1, de\n1982, Minería\nArt. 2º\nD.O. 13.09.1982\nRectificación\nD.O. 27.09.1982\n las disposiciones de la presente ley:\n      1.- Las concesiones para establecer:\n    a) Centrales hidráulicas productoras de energía eléctrica.\n    Los derechos de aprovechamiento sobre las aguas terrestres que se destinen a la producción de energía eléctrica se regirán por las disposiciones del Código de Aguas;\n    b) Subestaciones eléctricas;\n    c) Líneas de transporte de la energía eléctrica.\n    2.- Las concesiones para establecer, operar y explotar las instalaciones de servicio público de distribución.\n    3.- Los permisos para que las líneas de transporte y distribución de energía eléctrica no sujetas a concesión puedan usar y/o cruzar calles, otras líneas eléctricas y otros bienes nacionales de uso público.\n    4.- Las servidumbres a que están sujetos:\n    a) Las heredades, para \nLey Nº 19.940\nArt. 4º Nº 1\nD.O. 13.03.2004\nla construcción, establecimiento y explotación de las instalaciones y obras anexas que posean concesión, mencionadas en los números 1 y 2 de este artículo;\n    b) Las postaciones y líneas eléctricas, en aquellas partes que usen bienes nacionales de uso público o heredades haciendo uso de las servidumbres que se mencionan en la letra anterior, para que personas distintas al propietario de esas instalaciones las puedan usar en el tendido de otras líneas o para que las Municipalidades puedan hacer el alumbrado público.\n    5.- El régimen de precios a q\nLey Nº 19.674\nArt. Único\nNº 1º\nD.O. 03.05.2000\nLey Nº 19.940\nArt. 4º Nº 2\nD.O. 13.03.2004\nue están sometidas las ventas de energía eléctrica, el transporte de electricidad y demás servicios asociados al suministro de electricidad o que se presten en mérito de la calidad de concesionario de servicio público.\n    6.- Las condiciones de seguridad a que deben someterse las instalaciones, maquinarias, instrumentos, aparatos, equipos, artefactos y materiales eléctricos de toda naturaleza y las condiciones de calidad y seguridad de los instrumentos destinados a registrar el consumo o transferencia de energía eléctrica.\n    7.- Las relaciones de las empresas eléctricas con el Estado, las Municipalidades, otras entidades de servicio eléctrico y los particulares.",
+        "texto_original": "- Están comprendidas en\nD.F.L. Nº 1, de\n1982, Minería\nArt. 2º\nD.O. 13.09.1982\nRectificación\nD.O. 27.09.1982\n las disposiciones de la presente ley:\n      1.- Las concesiones para establecer:\n    a) Centrales hidráulicas productoras de energía eléctrica.\n    Los derechos de aprovechamiento sobre las aguas terrestres que se destinen a la producción de energía eléctrica se regirán por las disposiciones del Código de Aguas;\n    b) Subestaciones eléctricas;\n    c) Líneas de transporte de la energía eléctrica.\n    2.- Las concesiones para establecer, operar y explotar las instalaciones de servicio público de distribución.\n    3.- Los permisos para que las líneas de transporte y distribución de energía eléctrica no sujetas a concesión puedan usar y/o cruzar calles, otras líneas eléctricas y otros bienes nacionales de uso público.\n    4.- Las servidumbres a que están sujetos:\n    a) Las heredades, para \nLey Nº 19.940\nArt. 4º Nº 1\nD.O. 13.03.2004\nla construcción, establecimiento y explotación de las instalaciones y obras anexas que posean concesión, mencionadas en los números 1 y 2 de este artículo;\n    b) Las postaciones y líneas eléctricas, en aquellas partes que usen bienes nacionales de uso público o heredades haciendo uso de las servidumbres que se mencionan en la letra anterior, para que personas distintas al propietario de esas instalaciones las puedan usar en el tendido de otras líneas o para que las Municipalidades puedan hacer el alumbrado público.\n    5.- El régimen de precios a q\nLey Nº 19.674\nArt. Único\nNº 1º\nD.O. 03.05.2000\nLey Nº 19.940\nArt. 4º Nº 2\nD.O. 13.03.2004\nue están sometidas las ventas de energía eléctrica, el transporte de electricidad y demás servicios asociados al suministro de electricidad o que se presten en mérito de la calidad de concesionario de servicio público.\n    6.- Las condiciones de seguridad a que deben someterse las instalaciones, maquinarias, instrumentos, aparatos, equipos, artefactos y materiales eléctricos de toda naturaleza y las condiciones de calidad y seguridad de los instrumentos destinados a registrar el consumo o transferencia de energía eléctrica.\n    7.- Las relaciones de las empresas eléctricas con el Estado, las Municipalidades, otras entidades de servicio eléctrico y los particulares.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- Están comprendidas en\nD.F.L. Nº 1, de\n1982, Minería\nArt. 2º\nD.O. 13.09.1982\nRectificación\nD.",
+            "en_articulo": "2",
+            "id_norma": null
+          },
+          {
+            "tipo": "LEY",
+            "numero": "19940",
+            "año": null,
+            "contexto": "es a que están sujetos:\n    a) Las heredades, para \nLey Nº 19.940\nArt. 4º Nº 1\nD.O. 13.03.2004\nla construcción, est",
+            "en_articulo": "2",
+            "id_norma": "237695"
+          },
+          {
+            "tipo": "LEY",
+            "numero": "19674",
+            "año": null,
+            "contexto": "umbrado público.\n    5.- El régimen de precios a q\nLey Nº 19.674\nArt. Único\nNº 1º\nD.O. 03.05.2000\nLey Nº 19.940\nAr",
+            "en_articulo": "2",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "3": {
+        "numero": "3",
+        "texto": "- No están sometidas a\nD.F.L. 1, de\n1982, Minería\nArt. 3º\nD.O. 13.09.1982\n las concesiones a que se refiere el artículo anterior:\n      a) Las centrales productoras de energía eléctrica distintas de las señaladas en la letra a) del Nº 1 del artículo precedente;\n    b) Las líneas de distribución que no sean de servicio público;\n    c) Las líneas de distribución destinadas al alumbrado público de calles, caminos, plazas, parques y avenidas - en adelante alumbrado público - ; sean éstas establecidas por la Municipalidad, o por cualquier otra entidad, incluyéndose las empresas distribuidoras de servicio público que tengan a su cargo el alumbrado público en virtud de un contrato con las respectivas Municipalidades.",
+        "texto_original": "- No están sometidas a\nD.F.L. 1, de\n1982, Minería\nArt. 3º\nD.O. 13.09.1982\n las concesiones a que se refiere el artículo anterior:\n      a) Las centrales productoras de energía eléctrica distintas de las señaladas en la letra a) del Nº 1 del artículo precedente;\n    b) Las líneas de distribución que no sean de servicio público;\n    c) Las líneas de distribución destinadas al alumbrado público de calles, caminos, plazas, parques y avenidas - en adelante alumbrado público - ; sean éstas establecidas por la Municipalidad, o por cualquier otra entidad, incluyéndose las empresas distribuidoras de servicio público que tengan a su cargo el alumbrado público en virtud de un contrato con las respectivas Municipalidades.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- No están sometidas a\nD.F.L. 1, de\n1982, Minería\nArt. 3º\nD.O. 13.09.1982\n las concesiones",
+            "en_articulo": "3",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "4": {
+        "numero": "4",
+        "texto": "- Las concesiones\nD.F.L. Nº 1, de\n1982, Minería\nArt. 4º\nD.O. 13.09.1982\n enumeradas en los números 1 y 2 del artículo 2º de esta ley, serán provisionales o definitivas. La concesión provisional tiene por objeto permitir el estudio de los proyectos de las obras de aprovechamiento de la concesión definitiva.\n    Las concesiones provisionales no constituyen un requisito previo para obtener la concesión definitiva y tampoco obligan a solicitar esta última.\n    No obstante lo anterior, las instalaciones que se mencionan en el Nº 1 del artículo 2º podrán, asimismo, instalarse sin solicitar concesión, cuando el interesado así lo desee.",
+        "texto_original": "- Las concesiones\nD.F.L. Nº 1, de\n1982, Minería\nArt. 4º\nD.O. 13.09.1982\n enumeradas en los números 1 y 2 del artículo 2º de esta ley, serán provisionales o definitivas. La concesión provisional tiene por objeto permitir el estudio de los proyectos de las obras de aprovechamiento de la concesión definitiva.\n    Las concesiones provisionales no constituyen un requisito previo para obtener la concesión definitiva y tampoco obligan a solicitar esta última.\n    No obstante lo anterior, las instalaciones que se mencionan en el Nº 1 del artículo 2º podrán, asimismo, instalarse sin solicitar concesión, cuando el interesado así lo desee.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- Las concesiones\nD.F.L. Nº 1, de\n1982, Minería\nArt. 4º\nD.O. 13.09.1982\n enumeradas en l",
+            "en_articulo": "4",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "5": {
+        "numero": "5",
+        "texto": "- El Presidente de la\nD.F.L. Nº 1, de\n1982, Minería\nArt. 5º\nD.O. 13.09.1982\n República, a través del Ministerio de Bienes Nacionales, y cumpliendo las normas establecidas en el decreto ley 1.939 de 1977, podrá administrar y disponer de terrenos fiscales con la finalidad de que en ellos se efectúen instalaciones de obras eléctricas. Para estos efectos no regirán las limitaciones de plazos que señala ese cuerpo legal para arrendar o conceder en uso estos inmuebles.",
+        "texto_original": "- El Presidente de la\nD.F.L. Nº 1, de\n1982, Minería\nArt. 5º\nD.O. 13.09.1982\n República, a través del Ministerio de Bienes Nacionales, y cumpliendo las normas establecidas en el decreto ley 1.939 de 1977, podrá administrar y disponer de terrenos fiscales con la finalidad de que en ellos se efectúen instalaciones de obras eléctricas. Para estos efectos no regirán las limitaciones de plazos que señala ese cuerpo legal para arrendar o conceder en uso estos inmuebles.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- El Presidente de la\nD.F.L. Nº 1, de\n1982, Minería\nArt. 5º\nD.O. 13.09.1982\n República, a tr",
+            "en_articulo": "5",
+            "id_norma": null
+          },
+          {
+            "tipo": "LEY",
+            "numero": "1939",
+            "año": 1977,
+            "contexto": "y cumpliendo las normas establecidas en el decreto ley 1.939 de 1977, podrá administrar y disponer de terrenos fiscale",
+            "en_articulo": "5",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "6": {
+        "numero": "6",
+        "texto": "- No estarán sometidas\nD.F.L. Nº 1, de\n1982, Minería\nArt. 6º\nD.O. 13.09.1982\n a las disposiciones de la presente ley las concesiones de ferrocarriles eléctricos.",
+        "texto_original": "- No estarán sometidas\nD.F.L. Nº 1, de\n1982, Minería\nArt. 6º\nD.O. 13.09.1982\n a las disposiciones de la presente ley las concesiones de ferrocarriles eléctricos.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- No estarán sometidas\nD.F.L. Nº 1, de\n1982, Minería\nArt. 6º\nD.O. 13.09.1982\n a las disposici",
+            "en_articulo": "6",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "7": {
+        "numero": "7",
+        "texto": "- Es servicio público\nD.F.L. Nº 1, de\n1982, Minería\nArt. 7º\nD.O. 13.09.1982\n eléctrico, el suministro que efectúe una empresa concesionaria de distribución a usuarios finales ubicados en sus zonas de concesión, o bien a usuarios ubicados fuera de dichas zonas, que se conecten a las instalaciones de la concesionaria mediante líneas propias o de terceros.\n    Las empresas que posean concesiones de servicio público de distribución sólo podrán destinar sus instalaciones de distribución al servicio público y al alumbrado público.\n      Asimismo, es servicio público\nLey Nº 19.940\nArt. 4º Nº 3\nD.O. 13.03.2004\n eléctrico el transporte de electricidad por sistemas de transmisión \nLey 20936\nArt. 1 N° 1 a)\nD.O. 20.07.2016\nnacional, zonal y para polos de desarrollo de generación.\n    Las empresas operadoras o propietarias de los sistemas de transmisión nacional deberán estar constituidas como sociedades anónimas abiertas o cerradas \nLey 20936\nArt. 1 N° 1 b)\nD.O. 20.07.2016\nsujetas a las obligaciones de información y publicidad a que se refiere el inciso séptimo del artículo 2° de la ley N°18.046.\n    Estas sociedades no podrán dedicarse, por sí, ni a través de personas naturales o jurídicas relacionadas, a actividades que comprendan en cualquier forma, el giro de generación o distribución de electricidad.\n    El desarrollo de otras actividades, que no comprendan las señaladas precedentemente, sólo podrán llevarlas a cabo a través de sociedades anónimas filiales o coligadas.\n    La participación individual de empresas que operan en cualquier otro segmento del sistema eléctrico, o de los usuarios no sometidos a fijación de precios en el sistema de transmisión nacional, no podrá exceder, directa o indirectamente, del ocho por ciento del valor de inversión total del sistema de transmisión nacional. La participación conjunta de empresas generadoras, distribuidoras y del conjunto de los usuarios no sometidos a fijación de precios, en el sistema de transmisión nacional, no podrá exceder del cuarenta por ciento del valor de inversión total del sistema nacional. Estas limitaciones a la propiedad se extienden a grupos empresariales o personas jurídicas o naturales que formen parte de empresas de transmisión o que tengan acuerdos de actuación conjunta con las empresas transmisoras, generadoras y distribuidoras.\n    Los propietarios de las instalaciones construidas con anterioridad a que sean definidas como pertenecientes al sistema \nLey 20936\nArt. 1 N° 1 c), d), e)\nD.O. 20.07.2016\nnacional de acuerdo al artículo 74, podrán mantener la propiedad de dichas instalaciones. Respecto de ellos no se aplicarán los límites de propiedad establecidos en el inciso anterior, pudiendo sobrepasar los porcentajes del ocho y cuarenta ya señalados. Sin perjuicio de lo anterior, las instalaciones que se encuentren en esta situación deberán ser consideradas en el cómputo del límite del 40% señalado en el inciso anterior.\n    En todo caso, los propietarios de dichas instalaciones deberán constituir sociedades de giro de transmisión en el plazo de un año, contado desde la publicación del decreto que declara la respectiva línea o instalación como nacional, y no podrán participar en la propiedad de ninguna ampliación del sistema nacional respectivo.",
+        "texto_original": "- Es servicio público\nD.F.L. Nº 1, de\n1982, Minería\nArt. 7º\nD.O. 13.09.1982\n eléctrico, el suministro que efectúe una empresa concesionaria de distribución a usuarios finales ubicados en sus zonas de concesión, o bien a usuarios ubicados fuera de dichas zonas, que se conecten a las instalaciones de la concesionaria mediante líneas propias o de terceros.\n    Las empresas que posean concesiones de servicio público de distribución sólo podrán destinar sus instalaciones de distribución al servicio público y al alumbrado público.\n      Asimismo, es servicio público\nLey Nº 19.940\nArt. 4º Nº 3\nD.O. 13.03.2004\n eléctrico el transporte de electricidad por sistemas de transmisión \nLey 20936\nArt. 1 N° 1 a)\nD.O. 20.07.2016\nnacional, zonal y para polos de desarrollo de generación.\n    Las empresas operadoras o propietarias de los sistemas de transmisión nacional deberán estar constituidas como sociedades anónimas abiertas o cerradas \nLey 20936\nArt. 1 N° 1 b)\nD.O. 20.07.2016\nsujetas a las obligaciones de información y publicidad a que se refiere el inciso séptimo del artículo 2° de la ley N°18.046.\n    Estas sociedades no podrán dedicarse, por sí, ni a través de personas naturales o jurídicas relacionadas, a actividades que comprendan en cualquier forma, el giro de generación o distribución de electricidad.\n    El desarrollo de otras actividades, que no comprendan las señaladas precedentemente, sólo podrán llevarlas a cabo a través de sociedades anónimas filiales o coligadas.\n    La participación individual de empresas que operan en cualquier otro segmento del sistema eléctrico, o de los usuarios no sometidos a fijación de precios en el sistema de transmisión nacional, no podrá exceder, directa o indirectamente, del ocho por ciento del valor de inversión total del sistema de transmisión nacional. La participación conjunta de empresas generadoras, distribuidoras y del conjunto de los usuarios no sometidos a fijación de precios, en el sistema de transmisión nacional, no podrá exceder del cuarenta por ciento del valor de inversión total del sistema nacional. Estas limitaciones a la propiedad se extienden a grupos empresariales o personas jurídicas o naturales que formen parte de empresas de transmisión o que tengan acuerdos de actuación conjunta con las empresas transmisoras, generadoras y distribuidoras.\n    Los propietarios de las instalaciones construidas con anterioridad a que sean definidas como pertenecientes al sistema \nLey 20936\nArt. 1 N° 1 c), d), e)\nD.O. 20.07.2016\nnacional de acuerdo al artículo 74, podrán mantener la propiedad de dichas instalaciones. Respecto de ellos no se aplicarán los límites de propiedad establecidos en el inciso anterior, pudiendo sobrepasar los porcentajes del ocho y cuarenta ya señalados. Sin perjuicio de lo anterior, las instalaciones que se encuentren en esta situación deberán ser consideradas en el cómputo del límite del 40% señalado en el inciso anterior.\n    En todo caso, los propietarios de dichas instalaciones deberán constituir sociedades de giro de transmisión en el plazo de un año, contado desde la publicación del decreto que declara la respectiva línea o instalación como nacional, y no podrán participar en la propiedad de ninguna ampliación del sistema nacional respectivo.",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- Es servicio público\nD.F.L. Nº 1, de\n1982, Minería\nArt. 7º\nD.O. 13.09.1982\n eléctrico, el s",
+            "en_articulo": "7",
+            "id_norma": null
+          },
+          {
+            "tipo": "LEY",
+            "numero": "19940",
+            "año": null,
+            "contexto": "brado público.\n      Asimismo, es servicio público\nLey Nº 19.940\nArt. 4º Nº 3\nD.O. 13.03.2004\n eléctrico el transp",
+            "en_articulo": "7",
+            "id_norma": null
+          },
+          {
+            "tipo": "LEY",
+            "numero": "20936",
+            "año": null,
+            "contexto": "sporte de electricidad por sistemas de transmisión \nLey 20936\nArt. 1 N° 1 a)\nD.O. 20.07.2016\nnacional, zonal y",
+            "en_articulo": "7",
+            "id_norma": "1109624"
+          },
+          {
+            "tipo": "LEY",
+            "numero": "18046",
+            "año": null,
+            "contexto": "que se refiere el inciso séptimo del artículo 2° de la ley N°18.046.\n    Estas sociedades no podrán dedicarse, por sí",
+            "en_articulo": "7",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      },
+      "8": {
+        "numero": "8",
+        "texto": "- No se considerarán de\nD.F.L. Nº 1, de\n1982, Minería\nArt. 8º\nD.O. 13.09.1982\nLey Nº 19.940\nArt. 4º Nº 4\nD.O. 13.03.2004\n servicio público: los suministros efectuados desde instalaciones de generación, la distribución de energía que hagan las Cooperativas, no concesionarias, o bien la distribución que se realice sin concesión.\nLoading...",
+        "texto_original": "- No se considerarán de\nD.F.L. Nº 1, de\n1982, Minería\nArt. 8º\nD.O. 13.09.1982\nLey Nº 19.940\nArt. 4º Nº 4\nD.O. 13.03.2004\n servicio público: los suministros efectuados desde instalaciones de generación, la distribución de energía que hagan las Cooperativas, no concesionarias, o bien la distribución que se realice sin concesión.\nLoading...",
+        "modificaciones": [],
+        "referencias": [
+          {
+            "tipo": "DFL",
+            "numero": "1",
+            "año": 1982,
+            "contexto": "- No se considerarán de\nD.F.L. Nº 1, de\n1982, Minería\nArt. 8º\nD.O. 13.09.1982\nLey Nº 19.940\nAr",
+            "en_articulo": "8",
+            "id_norma": null
+          },
+          {
+            "tipo": "LEY",
+            "numero": "19940",
+            "año": null,
+            "contexto": ".L. Nº 1, de\n1982, Minería\nArt. 8º\nD.O. 13.09.1982\nLey Nº 19.940\nArt. 4º Nº 4\nD.O. 13.03.2004\n servicio público: l",
+            "en_articulo": "8",
+            "id_norma": null
+          }
+        ],
+        "en_titulo": "I"
+      }
+    }
+  },
+  "relaciones": {
+    "modificada_por": [],
+    "referencias": [
+      {
+        "tipo": "DFL",
+        "numero": "1",
+        "año": null,
+        "contexto": "FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO CON FUERZA DE LEY Nº 1, DE MINERIA, DE 1982, LEY GENERAL DE SERVICIOS EL",
+        "en_articulo": "preámbulo",
+        "id_norma": "5605"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "18196",
+        "año": null,
+        "contexto": "ha sido objeto de modificaciones introducidas por las leyes Nº 18.196, de 29 de diciembre de 1982; Nº 18.341, de 14 de",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "DFL",
+        "numero": "2",
+        "año": 2006,
+        "contexto": "mayo de 2005; Nº 20.040, de 9 de julio de 2005; y el Decreto con Fuerza de Ley Nº 2, de 2006, del Ministerio de Economía, Fomento y Reconstruc",
+        "en_articulo": "preámbulo",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19940",
+        "año": null,
+        "contexto": "es a que están sujetos:\n    a) Las heredades, para \nLey Nº 19.940\nArt. 4º Nº 1\nD.O. 13.03.2004\nla construcción, est",
+        "en_articulo": "2",
+        "id_norma": "237695"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "19674",
+        "año": null,
+        "contexto": "umbrado público.\n    5.- El régimen de precios a q\nLey Nº 19.674\nArt. Único\nNº 1º\nD.O. 03.05.2000\nLey Nº 19.940\nAr",
+        "en_articulo": "2",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "1939",
+        "año": 1977,
+        "contexto": "y cumpliendo las normas establecidas en el decreto ley 1.939 de 1977, podrá administrar y disponer de terrenos fiscale",
+        "en_articulo": "5",
+        "id_norma": null
+      },
+      {
+        "tipo": "LEY",
+        "numero": "20936",
+        "año": null,
+        "contexto": "sporte de electricidad por sistemas de transmisión \nLey 20936\nArt. 1 N° 1 a)\nD.O. 20.07.2016\nnacional, zonal y",
+        "en_articulo": "7",
+        "id_norma": "1109624"
+      },
+      {
+        "tipo": "LEY",
+        "numero": "18046",
+        "año": null,
+        "contexto": "que se refiere el inciso séptimo del artículo 2° de la ley N°18.046.\n    Estas sociedades no podrán dedicarse, por sí",
+        "en_articulo": "7",
+        "id_norma": null
+      }
+    ]
+  }
+}

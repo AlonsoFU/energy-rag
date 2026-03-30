@@ -1,0 +1,116 @@
+{
+  "id_norma": "1112591",
+  "tipo": "DL",
+  "numero": "2",
+  "titulo": "ESTABLECE METODOLOGÍA APLICABLE AL PROCESO DE PLANIFICACIÓN ANUAL DE LA TRANSMISIÓN A REALIZARSE CONFORME A LO DISPUESTO EN EL ARTÍCULO 87° DE LA LEY GENERAL DE SERVICIOS ELÉCTRICOS, Y DEJA SIN EFECTO LA RESOLUCIÓN CNE N° 384 EXENTA, DE LA COMISIÓN NACIONAL DE ENERGÍA, DE 20 DE JULIO DE 2017",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "12 de diciembre de 2017",
+  "organismo": "Economía",
+  "estado": "VIGENTE",
+  "modificada_por": [],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "DL",
+      "numero": "2224",
+      "año": 1978,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20402",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DFL",
+      "numero": "4",
+      "año": 2006,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DFL",
+      "numero": "1",
+      "año": 1982,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20936",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1109624"
+    },
+    {
+      "tipo": "LEY",
+      "numero": "19880",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1200958"
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "1600",
+      "año": 2008,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "13",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "134",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "4",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "1",
+      "año": 1982,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "258171"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id_norma": "1023143",
+  "tipo": "LEY",
+  "numero": "20500",
+  "titulo": "LEY 20500  SOBRE ASOCIACIONES Y PARTICIPACIÓN CIUDADANA EN LA GESTIÓN PÚBLICA",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=1023143",
+  "texto_completo": "Texto\nVersiones\nJurisprudencia\nProyectos de Ley\nLey Fácil\nChile Atiende\nHistoria de la Ley\nEscuchar\nLEY NÚM. 20.500\n\n\nSOBRE ASOCIACIONES Y PARTICIPACIÓN CIUDADANA EN LA GESTIÓN PÚBLICA\n\n\n    Teniendo presente que el H. Congreso Nacional ha dado su aprobación al siguiente proyecto de ley,\n\n\n    Proyecto de ley:\n    \"TÍTULO I\n\n\n    De las asociaciones sin fines de lucro\n\n\n\n    PÁRRAFO 1º\n\n\n    Del derecho de asociación\n\n\n\n    Artículo 1º. Todas las personas tienen derecho a asociarse libremente para la consecución de fines lícitos.\n\n\n    Este derecho comprende la facultad de crear asociaciones que expresen la diversidad de intereses sociales e identidades culturales.\n\n\n    Prohíbense las asociaciones contrarias a la moral, al orden público y a la seguridad del Estado.\n\n\n    Las asociaciones no podrán realizar actos contrarios a la dignidad y valor de la persona, al régimen de Derecho y al bienestar general de la sociedad democrática.\n\n\n    Artículo 2º. Es deber del Estado promover y apoyar las iniciativas asociativas de la sociedad civil.\n\n\n    Los órganos de la Administración del Estado garantizarán la plena autonomía de las asociaciones y no podrán adoptar medidas que interfieran en su vida interna.\n\n\n    El Estado, en sus programas, planes y acciones, deberá contemplar el fomento de las asociaciones, garantizando criterios técnicos objetivos y de plena transparencia en los procedimientos de asignación de recursos.\n\n\n    Artículo 3º. Nadie puede ser obligado a constituir una asociación, ni a integrarse o a permanecer en ella. La afiliación es libre, personal y voluntaria.\n\n\n    Ni la ley ni autoridad pública alguna podrán exigir la afiliación a una determinada asociación, como requisito para desarrollar una actividad o trabajo, ni la desafiliación para permanecer en éstos.\n\n\n    Artículo 4º. A través de sus respectivos estatutos, las asociaciones deberán garantizar los derechos y deberes que tendrán sus asociados en materia de participación, elecciones y acceso a información del estado de cuentas, sin perjuicio de las demás estipulaciones que ellas consideren incluir.\n\n\n    La condición de asociado lleva consigo el deber de cumplir los estatutos y acuerdos válidamente adoptados por la asamblea y demás órganos de la asociación, tanto en relación con los aportes pecuniarios que correspondan, como a la participación en sus actividades.\n\n\n    Artículo 5º. Las asociaciones se constituirán y adquirirán personalidad jurídica conforme al Título XXXIII del Libro I del Código Civil, sin perjuicio de lo que dispongan leyes especiales.\n\n\n    Artículo 6º. Las asociaciones podrán constituir uniones o federaciones, cumpliendo los requisitos que dispongan sus estatutos y aquellos que la ley exige para la constitución de las asociaciones. En las mismas condiciones, las federaciones podrán constituir confederaciones.\n\n\n    Artículo 7º. Podrán constituirse libremente agrupaciones que no gocen de personalidad jurídica. Sin perjuicio de lo dispuesto en el inciso final del artículo 549 del Código Civil, en procura de los fines de tales agrupaciones podrán actuar otras personas, jurídicas o naturales, quienes responderán ante terceros de las obligaciones contraídas en interés de los fines de la agrupación.\nLoading...",
+  "content_hash": "927561026b4be2c7",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "2011-02-16",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2011-02-16",
+      "descripcion": "Única"
+    },
+    {
+      "id_version": "2011-02-16",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2011-02-16",
+      "descripcion": ""
+    }
+  ],
+  "extracted_at": "2026-01-24T12:54:31.420845",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 3253,
+    "num_articulos": 8,
+    "num_palabras": 472,
+    "issues": [],
+    "warnings": []
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "generado": "2026-01-20T17:26:09.185618",
+  "total": 13,
+  "indice": {
+    "DECRETO_62": "250604",
+    "DECRETO_42": "1153934",
+    "LEY_19940": "237695",
+    "DECRETO_70": "1200958",
+    "DECRETO_327": "127024",
+    "DFL_4": "258171",
+    "RESOLUCION_711": "1112591",
+    "DECRETO_52": "1191446",
+    "DECRETO_10": "1215040",
+    "DFL_1": "5605",
+    "DECRETO_44": "252841",
+    "LEY_20018": "238139",
+    "LEY_20936": "1109624"
+  },
+  "normas": [
+    {
+      "id_norma": "250604",
+      "tipo": "DECRETO",
+      "numero": "62",
+      "nombre": "Decreto 62",
+      "estado": "MODIFICADA",
+      "articulos": 7,
+      "modificada_por": 2,
+      "referencias": 5
+    },
+    {
+      "id_norma": "1153934",
+      "tipo": "DECRETO",
+      "numero": "42",
+      "nombre": "Decreto 42",
+      "estado": "VIGENTE",
+      "articulos": 0,
+      "modificada_por": 0,
+      "referencias": 0
+    },
+    {
+      "id_norma": "237695",
+      "tipo": "LEY",
+      "numero": "19940",
+      "nombre": "Ley 19.940",
+      "estado": "VIGENTE",
+      "articulos": 0,
+      "modificada_por": 0,
+      "referencias": 4
+    },
+    {
+      "id_norma": "1200958",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "nombre": "Decreto 70",
+      "estado": "VIGENTE",
+      "articulos": 0,
+      "modificada_por": 0,
+      "referencias": 5
+    },
+    {
+      "id_norma": "127024",
+      "tipo": "DECRETO",
+      "numero": "327",
+      "nombre": "Decreto 327",
+      "estado": "VIGENTE",
+      "articulos": 0,
+      "modificada_por": 0,
+      "referencias": 0
+    },
+    {
+      "id_norma": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "nombre": "DFL 4/2006",
+      "estado": "VIGENTE",
+      "articulos": 8,
+      "modificada_por": 0,
+      "referencias": 8
+    },
+    {
+      "id_norma": "1112591",
+      "tipo": "RESOLUCION",
+      "numero": "711",
+      "nombre": "Resolución 711",
+      "estado": "VIGENTE",
+      "articulos": 5,
+      "modificada_por": 0,
+      "referencias": 9
+    },
+    {
+      "id_norma": "1191446",
+      "tipo": "DECRETO",
+      "numero": "52",
+      "nombre": "Decreto 52",
+      "estado": "VIGENTE",
+      "articulos": 4,
+      "modificada_por": 0,
+      "referencias": 14
+    },
+    {
+      "id_norma": "1215040",
+      "tipo": "DECRETO",
+      "numero": "10",
+      "nombre": "Decreto 10",
+      "estado": "VIGENTE",
+      "articulos": 5,
+      "modificada_por": 0,
+      "referencias": 13
+    },
+    {
+      "id_norma": "5605",
+      "tipo": "DFL",
+      "numero": "1",
+      "nombre": "DFL 1",
+      "estado": "VIGENTE",
+      "articulos": 5,
+      "modificada_por": 0,
+      "referencias": 4
+    },
+    {
+      "id_norma": "252841",
+      "tipo": "DECRETO",
+      "numero": "44",
+      "nombre": "Decreto 44",
+      "estado": "VIGENTE",
+      "articulos": 0,
+      "modificada_por": 0,
+      "referencias": 0
+    },
+    {
+      "id_norma": "238139",
+      "tipo": "LEY",
+      "numero": "20018",
+      "nombre": "Ley 20.018",
+      "estado": "VIGENTE",
+      "articulos": 9,
+      "modificada_por": 0,
+      "referencias": 2
+    },
+    {
+      "id_norma": "1109624",
+      "tipo": "LEY",
+      "numero": "20936",
+      "nombre": "Ley 20.936",
+      "estado": "VIGENTE",
+      "articulos": 2,
+      "modificada_por": 0,
+      "referencias": 7
+    }
+  ]
+}

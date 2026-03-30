@@ -1,0 +1,198 @@
+{
+  "escenario": "Empresa generadora - Energía + SSCC + Transferencias",
+  "normas_aplicables": 560,
+  "por_tema": {
+    "GENERACION": 128,
+    "ENERGIA": 144,
+    "SSCC": 305,
+    "TRANSFERENCIAS": 192
+  },
+  "normas_clave": {
+    "ENERGIA": [
+      {
+        "id": "1984",
+        "tipo": "DESCONOCIDO",
+        "numero": "",
+        "titulo": "Ley Chile - Codigo PENAL 12-NOV-1874 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+        "referencias": 46,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1984"
+      },
+      {
+        "id": "1216930",
+        "tipo": "LEY",
+        "numero": "21770",
+        "titulo": "Ley Chile - Ley 21770 - Biblioteca del Congreso Nacional",
+        "referencias": 28,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1216930"
+      },
+      {
+        "id": "1142667",
+        "tipo": "LEY",
+        "numero": "21210",
+        "titulo": "Ley Chile - Ley 21210 - Biblioteca del Congreso Nacional",
+        "referencias": 25,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142667"
+      },
+      {
+        "id": "211480",
+        "tipo": "LEY",
+        "numero": "19882",
+        "titulo": "Ley Chile - Ley 19882 - Biblioteca del Congreso Nacional",
+        "referencias": 25,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=211480"
+      },
+      {
+        "id": "258171",
+        "tipo": "DFL",
+        "numero": "4",
+        "titulo": "Ley Chile - DFL 4DFL 4/20018 05-FEB-2007 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN, SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION - Biblioteca del Congreso Nacional",
+        "referencias": 20,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=258171"
+      }
+    ],
+    "GENERACION": [
+      {
+        "id": "1984",
+        "tipo": "DESCONOCIDO",
+        "numero": "",
+        "titulo": "Ley Chile - Codigo PENAL 12-NOV-1874 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+        "referencias": 46,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1984"
+      },
+      {
+        "id": "1142667",
+        "tipo": "LEY",
+        "numero": "21210",
+        "titulo": "Ley Chile - Ley 21210 - Biblioteca del Congreso Nacional",
+        "referencias": 25,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142667"
+      },
+      {
+        "id": "13315",
+        "tipo": "DECRETO",
+        "numero": "430",
+        "titulo": "Ley Chile - Decreto 430 21-ENE-1992 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN - Biblioteca del Congreso Nacional",
+        "referencias": 21,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=13315"
+      },
+      {
+        "id": "258171",
+        "tipo": "DFL",
+        "numero": "4",
+        "titulo": "Ley Chile - DFL 4DFL 4/20018 05-FEB-2007 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN, SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION - Biblioteca del Congreso Nacional",
+        "referencias": 20,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=258171"
+      },
+      {
+        "id": "242302",
+        "tipo": "DECRETO",
+        "numero": "100",
+        "titulo": "Ley Chile - Decreto 100 22-SEP-2005 MINISTERIO SECRETARÍA GENERAL DE LA PRESIDENCIA - Biblioteca del Congreso Nacional",
+        "referencias": 18,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=242302"
+      }
+    ],
+    "SSCC": [
+      {
+        "id": "1142163",
+        "tipo": "DECRETO",
+        "numero": "4",
+        "titulo": "Ley Chile - Decreto 4 08-FEB-2020 MINISTERIO DE SALUD, SUBSECRETARÍA DE SALUD PÚBLICA - Biblioteca del Congreso Nacional",
+        "referencias": 34,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142163"
+      },
+      {
+        "id": "1058072",
+        "tipo": "LEY",
+        "numero": "20720",
+        "titulo": "Ley Chile - Ley 20720 - Biblioteca del Congreso Nacional",
+        "referencias": 33,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1058072"
+      },
+      {
+        "id": "207436",
+        "tipo": "DFL",
+        "numero": "1",
+        "titulo": "Ley Chile - DFL 1 16-ENE-2003 MINISTERIO DEL TRABAJO Y PREVISIÓN SOCIAL, SUBSECRETARÍA DEL TRABAJO - Biblioteca del Congreso Nacional",
+        "referencias": 33,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=207436"
+      },
+      {
+        "id": "172986",
+        "tipo": "DFL",
+        "numero": "1",
+        "titulo": "Ley Chile - DFL 1 30-MAY-2000 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+        "referencias": 29,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=172986"
+      },
+      {
+        "id": "198675",
+        "tipo": "LEY",
+        "numero": "19806",
+        "titulo": "Ley Chile - Ley 19806 - Biblioteca del Congreso Nacional",
+        "referencias": 26,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=198675"
+      }
+    ],
+    "TRANSFERENCIAS": [
+      {
+        "id": "1142163",
+        "tipo": "DECRETO",
+        "numero": "4",
+        "titulo": "Ley Chile - Decreto 4 08-FEB-2020 MINISTERIO DE SALUD, SUBSECRETARÍA DE SALUD PÚBLICA - Biblioteca del Congreso Nacional",
+        "referencias": 34,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1142163"
+      },
+      {
+        "id": "172986",
+        "tipo": "DFL",
+        "numero": "1",
+        "titulo": "Ley Chile - DFL 1 30-MAY-2000 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+        "referencias": 29,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=172986"
+      },
+      {
+        "id": "1007469",
+        "tipo": "DFL",
+        "numero": "1",
+        "titulo": "Ley Chile - DFL 1 29-OCT-2009 MINISTERIO DE TRANSPORTES Y TELECOMUNICACIONES, SUBSECRETARÍA DE TRANSPORTES, MINISTERIO DE JUSTICIA, SUBSECRETARÍA DE JUSTICIA - Biblioteca del Congreso Nacional",
+        "referencias": 24,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+      },
+      {
+        "id": "13315",
+        "tipo": "DECRETO",
+        "numero": "430",
+        "titulo": "Ley Chile - Decreto 430 21-ENE-1992 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN - Biblioteca del Congreso Nacional",
+        "referencias": 21,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=13315"
+      },
+      {
+        "id": "1199483",
+        "tipo": "LEY",
+        "numero": "21647",
+        "titulo": "Ley Chile - Ley 21647 - Biblioteca del Congreso Nacional",
+        "referencias": 19,
+        "url": "https://www.bcn.cl/leychile/navegar?idNorma=1199483"
+      }
+    ]
+  },
+  "posibles_falencias": [
+    {
+      "id": "202975",
+      "tipo": "DECRETO",
+      "numero": "3386",
+      "titulo": "Ley Chile - Decreto 3386 25-OCT-1935 MINISTERIO DEL INTERIOR - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "MEDICION",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "razon": "Sin vinculaciones con otras normas"
+    }
+  ]
+}

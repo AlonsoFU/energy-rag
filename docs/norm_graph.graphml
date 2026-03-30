@@ -1,0 +1,452 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d12" for="edge" attr.name="width" attr.type="long" />
+  <key id="d11" for="edge" attr.name="arrows" attr.type="string" />
+  <key id="d10" for="edge" attr.name="color" attr.type="string" />
+  <key id="d9" for="edge" attr.name="label" attr.type="string" />
+  <key id="d8" for="edge" attr.name="title" attr.type="string" />
+  <key id="d7" for="node" attr.name="borderColor" attr.type="string" />
+  <key id="d6" for="node" attr.name="borderWidth" attr.type="long" />
+  <key id="d5" for="node" attr.name="color" attr.type="string" />
+  <key id="d4" for="node" attr.name="año" attr.type="long" />
+  <key id="d3" for="node" attr.name="estado" attr.type="string" />
+  <key id="d2" for="node" attr.name="tipo" attr.type="string" />
+  <key id="d1" for="node" attr.name="title" attr.type="string" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="142">
+      <data key="d0">DECRETO 115</data>
+      <data key="d1">DECRETO 115
+MODIFICA DECRETO Nº 291, DE 2007, DEL MINISTERIO DE ECONOMÍA, FOMENTO Y RECONTRUCCIÓN, QUE APRUEBA E...
+
+Año: 2013
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2013</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="143">
+      <data key="d0">DECRETO 291</data>
+      <data key="d1">DECRETO 291
+APRUEBA REGLAMENTO QUE ESTABLECE LA ESTRUCTURA, FUNCIONAMIENTO Y FINANCIAMIENTO DE LOS CENTROS DE DE...
+
+Año: 2008
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2008</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="400">
+      <data key="d0">DECRETO 111</data>
+      <data key="d1">DECRETO 111
+MODIFICA DECRETO Nº 47, DE 1992, ORDENANZA GENERAL DE URBANISMO Y CONSTRUCCIONES...
+
+Año: 1998
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">1998</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="530">
+      <data key="d0">DECRETO 252</data>
+      <data key="d1">DECRETO 252
+MODIFICA DECRETO Nº 4, DE 2008, QUE APRUEBA REGLAMENTO SOBRE LICITACIONES DE SUMINISTRO DE ENERGÍA P...
+
+Año: 2010
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2010</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="531">
+      <data key="d0">DECRETO 126</data>
+      <data key="d1">DECRETO 126
+MODIFICA DECRETO Nº 4, DE 2008, QUE APRUEBA REGLAMENTO SOBRE LICITACIONES DE SUMINISTRO DE ENERGÍA P...
+
+Año: 2014
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2014</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="532">
+      <data key="d0">DECRETO 4</data>
+      <data key="d1">DECRETO 4
+APRUEBA REGLAMENTO SOBRE LICITACIONES DE SUMINISTRO DE ENERGÍA PARA SATISFACER EL CONSUMO DE LOS CLI...
+
+Año: 2008
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2008</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="658">
+      <data key="d0">DECRETO 62</data>
+      <data key="d1">DECRETO 62
+APRUEBA REGLAMENTO DE TRANSFERENCIAS DE POTENCIA ESTABLECIDAS EN LA LEY GENERAL DE SERVICIOS ELECTRI...
+
+Año: 2006
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2006</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="544">
+      <data key="d0">DECRETO 44</data>
+      <data key="d1">DECRETO 44
+MODIFICA DECRETO Nº 62, DE 2006, QUE APRUEBA EL REGLAMENTO DE TRANSFERENCIAS DE POTENCIA ENTRE EMPRE...
+
+Año: 2007
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2007</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="304">
+      <data key="d0">DECRETO 25</data>
+      <data key="d1">DECRETO 25
+MODIFICA DECRETO Nº 311, DE 2007, QUE FIJA PRECIOS DE NUDO PARA SUMINISTROS DE ELECTRICIDAD...
+
+Año: 2008
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2008</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="51">
+      <data key="d0">DECRETO 312</data>
+      <data key="d1">DECRETO 312
+MODIFICA DECRETO Nº 282, DE 2007, QUE FIJA PLAN DE EXPANSIÓN DEL SISTEMA DE TRANSMISIÓN TRONCAL DEL ...
+
+Año: 2008
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2008</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="309">
+      <data key="d0">DECRETO 208</data>
+      <data key="d1">DECRETO 208
+FIJA PRECIOS DE NUDO PROMEDIO PARA SUMINISTROS DE ELECTRICIDAD EN EL SISTEMA INTERCONECTADO CENTRAL,...
+
+Año: 2011
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2011</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="438">
+      <data key="d0">DECRETO 311</data>
+      <data key="d1">DECRETO 311
+OTORGA A HQI TRANSELEC CHILE S.A. CONCESION DEFINITIVA PARA ESTABLECER EN LA VIII REGION DEL BIOBIO,...
+
+Año: 2006
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2006</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="62">
+      <data key="d0">DECRETO 282</data>
+      <data key="d1">DECRETO 282
+FIJA PLAN DE EXPANSIÓN DEL SISTEMA DE TRANSMISIÓN TRONCAL DEL SISTEMA INTERCONECTADO CENTRAL PARA EL...
+
+Año: 2007
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2007</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="450">
+      <data key="d0">DECRETO 47</data>
+      <data key="d1">DECRETO 47
+FIJA NUEVO TEXTO DE LA ORDENANZA GENERAL DE LA LEY GENERAL DE URBANISMO Y CONSTRUCCIONES...
+
+Año: 1992
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">1992</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="200">
+      <data key="d0">DECRETO 1403</data>
+      <data key="d1">DECRETO 1403
+MODIFICA DECRETO Nº 942 EXENTO, DE 2009, QUE DEJA SIN EFECTO DECRETO QUE INDICA Y FIJA VALORES DE IN...
+
+Año: 2009
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2009</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="585">
+      <data key="d0">DECRETO 136</data>
+      <data key="d1">DECRETO 136
+ESTABLECE PARA LOS AÑOS 2024, 2025 Y 2026 SUBSIDIO TRANSITORIO AL PAGO DEL CONSUMO DE ENERGÍA ELÉCTR...
+
+Año: 2024
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2024</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="202">
+      <data key="d0">DECRETO 942</data>
+      <data key="d1">DECRETO 942
+DEJA SIN EFECTO DECRETO QUE INDICA Y FIJA VALORES DE INVERSIÓN REFERENCIAL PARA NUEVO PROCESO DE LIC...
+
+Año: 2009
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2009</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="89">
+      <data key="d0">DECRETO 399</data>
+      <data key="d1">DECRETO 399
+MODIFICA DECRETO N°115, DE 2011, QUE FIJA EL PLAN DE EXPANSIÓN DEL SISTEMA DE TRANSMISIÓN TRONCAL PA...
+
+Año: 2011
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2011</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="614">
+      <data key="d0">DECRETO 115</data>
+      <data key="d1">DECRETO 115
+APRUEBA NORMA TECNICA NCH.ELEC. 4/2003, INSTALACIONES DE CONSUMO EN BAJA TENSION Y DEROGA, EN LO PER...
+
+Año: 2004
+Estado: MODIFICADA</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">MODIFICADA</data>
+      <data key="d4">2004</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#FFC107</data>
+    </node>
+    <node id="492">
+      <data key="d0">DECRETO 214</data>
+      <data key="d1">DECRETO 214
+MODIFICA DECRETO Nº 115, DE 2004...
+
+Año: 2004
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2004</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="245">
+      <data key="d0">DECRETO 298</data>
+      <data key="d1">DECRETO 298
+MODIFICA DECRETO N° 136 EXENTO, DE 2024, DEL MINISTERIO DE ENERGÍA, QUE ESTABLECE PARA LOS AÑOS 2024...
+
+Año: 2025
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2025</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="246">
+      <data key="d0">DECRETO 156</data>
+      <data key="d1">DECRETO 156
+MODIFICA DECRETO N° 136 EXENTO, DE 2024, DEL MINISTERIO DE ENERGÍA, QUE ESTABLECE PARA LOS AÑOS 2024...
+
+Año: 2025
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2025</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="247">
+      <data key="d0">DECRETO 233</data>
+      <data key="d1">DECRETO 233
+MODIFICA DECRETO N° 136 EXENTO, DE 2024, DEL MINISTERIO DE ENERGÍA, QUE ESTABLECE PARA LOS AÑOS 2024...
+
+Año: 2024
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2024</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <node id="509">
+      <data key="d0">DECRETO 127</data>
+      <data key="d1">DECRETO 127
+MODIFICA DECRETO N° 208, DE 2016...
+
+Año: 2017
+Estado: VIGENTE</data>
+      <data key="d2">DECRETO</data>
+      <data key="d3">VIGENTE</data>
+      <data key="d4">2017</data>
+      <data key="d5">#A23B72</data>
+      <data key="d6">3</data>
+      <data key="d7">#28A745</data>
+    </node>
+    <edge source="142" target="143">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="400" target="450">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="530" target="532">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="531" target="532">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="544" target="658">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="304" target="438">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="51" target="62">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="200" target="202">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="89" target="142">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="492" target="614">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="245" target="585">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="246" target="585">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="247" target="585">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+    <edge source="509" target="309">
+      <data key="d8">MODIFICA</data>
+      <data key="d9">MOD</data>
+      <data key="d10">#FFA500</data>
+      <data key="d11">to</data>
+      <data key="d12">2</data>
+    </edge>
+  </graph>
+</graphml>

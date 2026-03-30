@@ -1,0 +1,187 @@
+{
+  "total_normas": 2031,
+  "total_relaciones": 5727,
+  "por_tipo": {
+    "REFERENCIA": 5718,
+    "REGLAMENTA": 9
+  },
+  "modificaciones": {
+    "total": 0,
+    "normas_modificadas": 0,
+    "mas_modificadas": []
+  },
+  "huerfanas": {
+    "total": 1,
+    "con_temas": 1,
+    "ejemplos": [
+      {
+        "id": "202975",
+        "tipo": "DECRETO",
+        "numero": "3386",
+        "titulo": "Ley Chile - Decreto 3386 25-OCT-1935 MINISTERIO DEL INTERIOR - Biblioteca del Congreso Nacional",
+        "temas": [
+          "DISTRIBUCION",
+          "TRANSMISION",
+          "MEDICION",
+          "SSCC",
+          "TARIFAS",
+          "POTENCIA",
+          "ENERGIA"
+        ]
+      }
+    ]
+  },
+  "hubs": [
+    {
+      "id": "1984",
+      "tipo": "DESCONOCIDO",
+      "numero": "",
+      "titulo": "Ley Chile - Codigo PENAL 12-NOV-1874 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "referencias": 46,
+      "tipos_relacion": {
+        "REFERENCIA": 46
+      }
+    },
+    {
+      "id": "1143580",
+      "tipo": "DECRETO",
+      "numero": "104",
+      "titulo": "Ley Chile - Decreto 104 18-MAR-2020 MINISTERIO DEL INTERIOR Y SEGURIDAD PÚBLICA, SUBSECRETARÍA DEL INTERIOR - Biblioteca del Congreso Nacional",
+      "referencias": 36,
+      "tipos_relacion": {
+        "REFERENCIA": 36
+      }
+    },
+    {
+      "id": "1142163",
+      "tipo": "DECRETO",
+      "numero": "4",
+      "titulo": "Ley Chile - Decreto 4 08-FEB-2020 MINISTERIO DE SALUD, SUBSECRETARÍA DE SALUD PÚBLICA - Biblioteca del Congreso Nacional",
+      "referencias": 34,
+      "tipos_relacion": {
+        "REFERENCIA": 34
+      }
+    },
+    {
+      "id": "207436",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 16-ENE-2003 MINISTERIO DEL TRABAJO Y PREVISIÓN SOCIAL, SUBSECRETARÍA DEL TRABAJO - Biblioteca del Congreso Nacional",
+      "referencias": 33,
+      "tipos_relacion": {
+        "REFERENCIA": 33
+      }
+    },
+    {
+      "id": "1058072",
+      "tipo": "LEY",
+      "numero": "20720",
+      "titulo": "Ley Chile - Ley 20720 - Biblioteca del Congreso Nacional",
+      "referencias": 33,
+      "tipos_relacion": {
+        "REFERENCIA": 33
+      }
+    },
+    {
+      "id": "251693",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 26-JUL-2006 MINISTERIO DEL INTERIOR, SUBSECRETARÍA DE DESARROLLO REGIONAL Y ADMINISTRATIVO - Biblioteca del Congreso Nacional",
+      "referencias": 29,
+      "tipos_relacion": {
+        "REFERENCIA": 25,
+        "REGLAMENTA": 4
+      }
+    },
+    {
+      "id": "172986",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 30-MAY-2000 MINISTERIO DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "referencias": 29,
+      "tipos_relacion": {
+        "REFERENCIA": 29
+      }
+    },
+    {
+      "id": "1216930",
+      "tipo": "LEY",
+      "numero": "21770",
+      "titulo": "Ley Chile - Ley 21770 - Biblioteca del Congreso Nacional",
+      "referencias": 28,
+      "tipos_relacion": {
+        "REFERENCIA": 28
+      }
+    },
+    {
+      "id": "176595",
+      "tipo": "LEY",
+      "numero": "19696",
+      "titulo": "Ley Chile - Ley 19696 - Biblioteca del Congreso Nacional",
+      "referencias": 27,
+      "tipos_relacion": {
+        "REFERENCIA": 27
+      }
+    },
+    {
+      "id": "198675",
+      "tipo": "LEY",
+      "numero": "19806",
+      "titulo": "Ley Chile - Ley 19806 - Biblioteca del Congreso Nacional",
+      "referencias": 26,
+      "tipos_relacion": {
+        "REFERENCIA": 26
+      }
+    },
+    {
+      "id": "211480",
+      "tipo": "LEY",
+      "numero": "19882",
+      "titulo": "Ley Chile - Ley 19882 - Biblioteca del Congreso Nacional",
+      "referencias": 25,
+      "tipos_relacion": {
+        "REFERENCIA": 25
+      }
+    },
+    {
+      "id": "1142667",
+      "tipo": "LEY",
+      "numero": "21210",
+      "titulo": "Ley Chile - Ley 21210 - Biblioteca del Congreso Nacional",
+      "referencias": 25,
+      "tipos_relacion": {
+        "REFERENCIA": 25
+      }
+    },
+    {
+      "id": "83135",
+      "tipo": "DFL",
+      "numero": "3",
+      "titulo": "Ley Chile - DFL 3 19-DIC-1997 MINISTERIO DE HACIENDA - Biblioteca del Congreso Nacional",
+      "referencias": 25,
+      "tipos_relacion": {
+        "REFERENCIA": 25
+      }
+    },
+    {
+      "id": "6368",
+      "tipo": "LEY",
+      "numero": "824",
+      "titulo": "Ley Chile - Decreto Ley 824 31-DIC-1974 MINISTERIO DE HACIENDA - Biblioteca del Congreso Nacional",
+      "referencias": 24,
+      "tipos_relacion": {
+        "REFERENCIA": 24
+      }
+    },
+    {
+      "id": "1007469",
+      "tipo": "DFL",
+      "numero": "1",
+      "titulo": "Ley Chile - DFL 1 29-OCT-2009 MINISTERIO DE TRANSPORTES Y TELECOMUNICACIONES, SUBSECRETARÍA DE TRANSPORTES, MINISTERIO DE JUSTICIA, SUBSECRETARÍA DE JUSTICIA - Biblioteca del Congreso Nacional",
+      "referencias": 24,
+      "tipos_relacion": {
+        "REFERENCIA": 24
+      }
+    }
+  ]
+}

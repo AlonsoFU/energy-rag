@@ -1,0 +1,24 @@
+{
+  "generado": "2026-01-11T18:51:38.545821",
+  "total": 2,
+  "relaciones": [
+    {
+      "origen": "DECRETO 70",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "05.06.2024",
+      "articulo": "primero N° 1",
+      "origen_id": "1200958",
+      "destino_id": "250604"
+    },
+    {
+      "origen": "DECRETO 42",
+      "destino": "DECRETO 62",
+      "tipo": "MODIFICA",
+      "fecha": "26.12.2020",
+      "articulo": "primero N° 1",
+      "origen_id": null,
+      "destino_id": "250604"
+    }
+  ]
+}

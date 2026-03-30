@@ -1,0 +1,143 @@
+{
+  "id_norma": "1191446",
+  "tipo": "LEY",
+  "numero": "20780",
+  "titulo": "",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": "17 de abril de 2023",
+  "organismo": "Economía",
+  "estado": "VIGENTE",
+  "modificada_por": [],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "52",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "659",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20780",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1191446"
+    },
+    {
+      "tipo": "DL",
+      "numero": "2224",
+      "año": 1978,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "20402",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "4",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "1",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "258171"
+    },
+    {
+      "tipo": "LEY",
+      "numero": "21455",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "19880",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": "1200958"
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "63",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "21210",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "125",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "12",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "7",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    }
+  ]
+}

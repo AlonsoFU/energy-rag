@@ -1,0 +1,90 @@
+{
+  "_comentario": "Alias informales → norma formal. Usado por graph_builder.py",
+
+  "confirmados": {
+    "ley general de servicios eléctricos": "258171",
+    "lgse": "258171",
+    "reglamento de transmisión": "1146553",
+    "reglamento de calificación": "1146553",
+    "reglamento de calificación valorización y tarificación": "1146553",
+    "reglamento de planificación": "1160108",
+    "reglamento de planificación de la transmisión": "1160108",
+    "reglamento de sistemas de transmisión y planificación": "1160108",
+    "reglamento de transferencias de potencia": "250604",
+    "reglamento de potencia": "250604",
+    "reglamento de generación distribuida": "1149788",
+    "reglamento de autoconsumo": "1149788",
+    "reglamento de explotación de servicios eléctricos": "202975",
+    "reglamento de explotación": "202975",
+    "ley de concesiones de obras públicas": "16121",
+    "reglamento de sitio electrónico": "1207690"
+  },
+
+  "_comentario_conceptos": "Conceptos técnicos → reglamento base donde se definen. Para normas con texto incompleto.",
+  "conceptos_base": {
+    "1146553": {
+      "_norma": "D.S. N°10 (2019) - Reglamento de Calificación, Valorización, Tarificación y Remuneración de Transmisión",
+      "_nota": "Texto descargado incompleto (3.7KB). Re-descargar. Capítulo 2 tiene todas las definiciones.",
+      "conceptos": ["COMA", "VATT", "AVI", "VI", "CDAT", "CDBT", "DOL", "PEAT", "PEBT"]
+    },
+    "250604": {
+      "_norma": "D.S. N°62 (2006) - Reglamento de Transferencias de Potencia",
+      "conceptos": ["potencia firme", "potencia inicial", "balance de potencia"]
+    },
+    "1160108": {
+      "_norma": "D.S. N°37 (2019) - Reglamento de Planificación de la Transmisión",
+      "conceptos": ["expansión", "plan de expansión", "coordinador"]
+    }
+  },
+
+  "por_confirmar": [
+    {
+      "alias": "ley corta",
+      "candidato": "LEY 19940 (2004)?",
+      "id_norma": "237695",
+      "nota": "Título en dataset dice Resolución 32 — puede estar mal scrapeado"
+    },
+    {
+      "alias": "ley larga",
+      "candidato": "LEY 20936?",
+      "id_norma": "?",
+      "nota": "No está en las 102 normas del dataset"
+    },
+    {
+      "alias": "decreto de subtransmisión",
+      "candidato": "D.S. N°14 (2012)?",
+      "id_norma": "1049988",
+      "nota": "Fija tarifas de subtransmisión y transmisión adicional"
+    },
+    {
+      "alias": "decreto de precio de nudo promedio",
+      "candidato": "D.S. N°1T (2013)?",
+      "id_norma": "1048990",
+      "nota": "Fija precios de nudo promedio SIC y SING"
+    },
+    {
+      "alias": "decreto de expansión",
+      "candidato": "?",
+      "id_norma": "?",
+      "nota": "Mencionado 3 veces en textos. Sin identificar"
+    },
+    {
+      "alias": "norma técnica de seguridad y calidad de servicio",
+      "candidato": "NTSyCS?",
+      "id_norma": "?",
+      "nota": "No está en las 102 normas"
+    },
+    {
+      "alias": "norma técnica de calidad de servicio para sistemas de distribución",
+      "candidato": "?",
+      "id_norma": "?",
+      "nota": "No está en las 102 normas"
+    },
+    {
+      "alias": "reglamento de medidores",
+      "candidato": "?",
+      "id_norma": "?",
+      "nota": "Mencionado 3 veces. No está en las 102 normas"
+    }
+  ]
+}

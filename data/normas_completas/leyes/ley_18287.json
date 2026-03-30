@@ -1,0 +1,153 @@
+{
+  "id_norma": "29705",
+  "tipo": "",
+  "numero": "",
+  "titulo": "",
+  "fecha_publicacion": "",
+  "fecha_promulgacion": null,
+  "organismo": "",
+  "estado": "DESCONOCIDO",
+  "url": "https://www.bcn.cl/leychile/navegar?idNorma=29705",
+  "texto_completo": "BÚSQUEDA AVANZADA\n Modo oscuro\n \n Alto contraste\n  Selección\n Cerrar Navegar Norma\nPortada Ley 18287\n  VOLVER\nLEY 18287\nENCABEZADO\nTITULO I DEL PROCEDIMIENTO ORDINARIO\nTITULO II DE LAS MEDIDAS PRECAUTORIAS\nTITULO III DE LA APELACIÓN\nTITULO IV DEL PROCEDIMIENTO DE CANCELACIÓN Y SUSPENSIÓN DE LA LICENCIA DE CONDUCTOR POR ACUMULACIÓN DE ANOTACIONES DE INFRACCIONES\nTITULO V DISPOSICIONES VARIAS\nARTÍCULO 1 TRANSITORIO\nPROMULGACIÓN\nLEY 18287 ESTABLECE PROCEDIMIENTO ANTE LOS JUZGADOS DE POLICIA LOCAL\n\nMINISTERIO DE JUSTICIA\n\n   \n  \n TIENE TEXTO DIFERIDO\n\nPromulgación: 18-ENE-1984\n\nPublicación: 07-FEB-1984\n\nVersión: Última Versión - de 30-MAR-2023 a\n\nMaterias: JUZGADOS DE POLICIA LOCAL / CHILE\n\nMODIFICACIONCONCORDANCIAREGLAMENTORECTIFICACION\n    \n Ocultar notas\nTexto\nVersiones\nProyectos de Ley",
+  "content_hash": "3e29e22bbfaa58c5",
+  "vinculaciones": {
+    "modifica_a": [],
+    "modificada_por": [],
+    "deroga_a": [],
+    "derogada_por": [],
+    "reglamenta": [],
+    "reglamentada_por": [],
+    "referencias": []
+  },
+  "versiones": [
+    {
+      "id_version": "2023-03-30",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2010-01-20",
+      "descripcion": "Ley 20410\nArt. 3 Nº 1 a)\nD.O. 20.01.2010"
+    },
+    {
+      "id_version": "2010-01-20",
+      "descripcion": "Ley 20410\nArt. 3 Nº 1 b)\nD.O. 20.01.2010"
+    },
+    {
+      "id_version": "2018-04-05",
+      "descripcion": "Ley 21083\nArt. 2 N°1\nD.O. 05.04.2018"
+    },
+    {
+      "id_version": "2021-11-30",
+      "descripcion": "Ley 21394\nArt. 9º N° 1\nD.O. 30.11.2021"
+    },
+    {
+      "id_version": "2021-11-30",
+      "descripcion": "Ley 21394\nArt. 9º N° 2\nD.O. 30.11.2021"
+    },
+    {
+      "id_version": "2016-07-05",
+      "descripcion": "Ley 20931\nArt. 10\nD.O. 05.07.2016"
+    },
+    {
+      "id_version": "2023-03-30",
+      "descripcion": "Última Versión"
+    },
+    {
+      "id_version": "2022-12-12",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2021-11-30",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2020-06-30",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2020-02-29",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2018-06-04",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2016-07-05",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2014-12-05",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2011-01-08",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2010-01-20",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2007-12-24",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2005-12-07",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2004-01-19",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2002-12-19",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2002-08-07",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2002-07-15",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2002-05-31",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "2000-05-29",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "1998-08-11",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "1998-05-16",
+      "descripcion": "Intermedio"
+    },
+    {
+      "id_version": "1985-01-01",
+      "descripcion": "Texto Original"
+    },
+    {
+      "id_version": "2023-03-30",
+      "descripcion": ""
+    },
+    {
+      "id_version": "2023-03-30",
+      "descripcion": ""
+    }
+  ],
+  "extracted_at": "2026-01-24T12:39:25.873773",
+  "validation_status": {
+    "status": "VALID",
+    "text_length": 796,
+    "num_articulos": 1,
+    "num_palabras": 102,
+    "issues": [],
+    "warnings": []
+  }
+}

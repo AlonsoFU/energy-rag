@@ -1,0 +1,512 @@
+{
+  "coocurrencia": {
+    "top_pares": [
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "MEDICION",
+        "count": 185
+      },
+      {
+        "tema1": "MEDICION",
+        "tema2": "SSCC",
+        "count": 161
+      },
+      {
+        "tema1": "MEDICION",
+        "tema2": "TRANSFERENCIAS",
+        "count": 120
+      },
+      {
+        "tema1": "MEDICION",
+        "tema2": "POTENCIA",
+        "count": 101
+      },
+      {
+        "tema1": "GENERACION",
+        "tema2": "MEDICION",
+        "count": 88
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "SSCC",
+        "count": 87
+      },
+      {
+        "tema1": "MEDICION",
+        "tema2": "TRANSMISION",
+        "count": 86
+      },
+      {
+        "tema1": "ENERGIA",
+        "tema2": "MEDICION",
+        "count": 75
+      },
+      {
+        "tema1": "MEDICION",
+        "tema2": "TARIFAS",
+        "count": 69
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "GENERACION",
+        "count": 67
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "ENERGIA",
+        "count": 67
+      },
+      {
+        "tema1": "ENERGIA",
+        "tema2": "GENERACION",
+        "count": 63
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "POTENCIA",
+        "count": 63
+      },
+      {
+        "tema1": "GENERACION",
+        "tema2": "POTENCIA",
+        "count": 61
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "TRANSFERENCIAS",
+        "count": 61
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "TARIFAS",
+        "count": 56
+      },
+      {
+        "tema1": "SSCC",
+        "tema2": "TRANSFERENCIAS",
+        "count": 56
+      },
+      {
+        "tema1": "ENERGIA",
+        "tema2": "POTENCIA",
+        "count": 51
+      },
+      {
+        "tema1": "DISTRIBUCION",
+        "tema2": "TRANSMISION",
+        "count": 50
+      },
+      {
+        "tema1": "GENERACION",
+        "tema2": "TRANSMISION",
+        "count": 43
+      }
+    ]
+  },
+  "clusters": {
+    "Transmisión Sistema": {
+      "temas": [
+        "TARIFAS",
+        "TRANSMISION",
+        "PEAJES"
+      ],
+      "total_normas": 55
+    },
+    "Generación y Venta": {
+      "temas": [
+        "GENERACION",
+        "ENERGIA",
+        "POTENCIA"
+      ],
+      "total_normas": 95
+    },
+    "Distribución": {
+      "temas": [
+        "TARIFAS",
+        "DISTRIBUCION",
+        "MEDICION"
+      ],
+      "total_normas": 234
+    },
+    "Operación Sistema": {
+      "temas": [
+        "SSCC",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "total_normas": 71
+    }
+  },
+  "falencias_potenciales": [
+    {
+      "tema1": "COORDINADOR",
+      "tema2": "PEAJES",
+      "normas": 4,
+      "nivel": "CRITICO"
+    },
+    {
+      "tema1": "COORDINADOR",
+      "tema2": "TARIFAS",
+      "normas": 8,
+      "nivel": "MODERADO"
+    },
+    {
+      "tema1": "COORDINADOR",
+      "tema2": "TRANSFERENCIAS",
+      "normas": 8,
+      "nivel": "MODERADO"
+    },
+    {
+      "tema1": "PEAJES",
+      "tema2": "TRANSFERENCIAS",
+      "normas": 8,
+      "nivel": "MODERADO"
+    },
+    {
+      "tema1": "PEAJES",
+      "tema2": "SSCC",
+      "normas": 9,
+      "nivel": "MODERADO"
+    }
+  ],
+  "normas_integradoras": [
+    {
+      "id": "1092695",
+      "tipo": "LEY",
+      "numero": "20936",
+      "titulo": "Ley Chile - Ley 20936 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 11
+    },
+    {
+      "id": "1102690",
+      "tipo": "DESCONOCIDO",
+      "numero": "",
+      "titulo": "Ley Chile - Resolución 237 EXENTA 12-MAY-2017 MINISTERIO DE ENERGÍA, COMISIÓN NACIONAL DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 10
+    },
+    {
+      "id": "1122953",
+      "tipo": "DECRETO",
+      "numero": "4",
+      "titulo": "Ley Chile - Decreto 4Decreto 4T 08-SEP-2018 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR"
+      ],
+      "num_temas": 9
+    },
+    {
+      "id": "1153949",
+      "tipo": "DECRETO",
+      "numero": "42",
+      "titulo": "Ley Chile - Decreto 42 26-DIC-2020 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "SSCC",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 9
+    },
+    {
+      "id": "1049988",
+      "tipo": "DECRETO",
+      "numero": "14",
+      "titulo": "Ley Chile - Decreto 14 09-ABR-2013 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 9
+    },
+    {
+      "id": "1032851",
+      "tipo": "DECRETO",
+      "numero": "61",
+      "titulo": "Ley Chile - Decreto 61 17-NOV-2011 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "PEAJES",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "num_temas": 8
+    },
+    {
+      "id": "1099982",
+      "tipo": "LEY",
+      "numero": "20999",
+      "titulo": "Ley Chile - Ley 20999 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "ENERGIA",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 8
+    },
+    {
+      "id": "1110301",
+      "tipo": "DESCONOCIDO",
+      "numero": "",
+      "titulo": "Ley Chile - Resolución 614 EXENTA 08-NOV-2017 MINISTERIO DE ENERGÍA, COMISIÓN NACIONAL DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 8
+    },
+    {
+      "id": "1204012",
+      "tipo": "DECRETO",
+      "numero": "70",
+      "titulo": "Ley Chile - Decreto 70 05-JUN-2024 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 8
+    },
+    {
+      "id": "1174443",
+      "tipo": "LEY",
+      "numero": "21435",
+      "titulo": "Ley Chile - Ley 21435 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 8
+    },
+    {
+      "id": "1074277",
+      "tipo": "LEY",
+      "numero": "20805",
+      "titulo": "Ley Chile - Ley 20805 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "1160108",
+      "tipo": "DECRETO",
+      "numero": "37",
+      "titulo": "Ley Chile - Decreto 37 25-MAY-2021 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "SSCC",
+        "POTENCIA",
+        "ENERGIA",
+        "COORDINADOR"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "1047565",
+      "tipo": "DECRETO",
+      "numero": "130",
+      "titulo": "Ley Chile - Decreto 130 31-DIC-2012 MINISTERIO DE ENERGÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "202975",
+      "tipo": "DECRETO",
+      "numero": "3386",
+      "titulo": "Ley Chile - Decreto 3386 25-OCT-1935 MINISTERIO DEL INTERIOR - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "MEDICION",
+        "SSCC",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "258171",
+      "tipo": "DFL",
+      "numero": "4",
+      "titulo": "Ley Chile - DFL 4DFL 4/20018 05-FEB-2007 MINISTERIO DE ECONOMÍA, FOMENTO Y RECONSTRUCCIÓN, SUBSECRETARIA DE ECONOMIA, FOMENTO Y ECONSTRUCCION - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "ENERGIA",
+        "COORDINADOR"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "6857",
+      "tipo": "LEY",
+      "numero": "2224",
+      "titulo": "Ley Chile - Decreto Ley 2224 08-JUN-1978 MINISTERIO DE MINERÍA - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "TRANSMISION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "1038211",
+      "tipo": "LEY",
+      "numero": "20571",
+      "titulo": "Ley Chile - Ley 20571 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "1091871",
+      "tipo": "LEY",
+      "numero": "20928",
+      "titulo": "Ley Chile - Ley 20928 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "270212",
+      "tipo": "LEY",
+      "numero": "20257",
+      "titulo": "Ley Chile - Ley 20257 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "PEAJES",
+        "POTENCIA",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 7
+    },
+    {
+      "id": "1008692",
+      "tipo": "LEY",
+      "numero": "20402",
+      "titulo": "Ley Chile - Ley 20402 - Biblioteca del Congreso Nacional",
+      "temas": [
+        "DISTRIBUCION",
+        "GENERACION",
+        "MEDICION",
+        "TARIFAS",
+        "POTENCIA",
+        "ENERGIA",
+        "TRANSFERENCIAS"
+      ],
+      "num_temas": 7
+    }
+  ]
+}

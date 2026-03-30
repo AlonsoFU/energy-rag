@@ -1,0 +1,99 @@
+{
+  "descripcion": "Grupo de 10 normas para probar el crawler de descarga completa",
+  "normas": [
+    {
+      "nombre": "Ley 21.721",
+      "busqueda": "Ley 21721 estabilización tarifaria",
+      "id_norma": "258171",
+      "año": 2024,
+      "tema": "Estabilización tarifaria"
+    },
+    {
+      "nombre": "Ley 20.936",
+      "busqueda": "Ley 20936 transmisión eléctrica",
+      "id_norma": "1109624",
+      "año": 2016,
+      "tema": "Sistema de Transmisión"
+    },
+    {
+      "nombre": "DFL 4/2006",
+      "busqueda": "DFL 4 servicios eléctricos",
+      "id_norma": "258171",
+      "año": 2006,
+      "tema": "LGSE (refundido)"
+    },
+    {
+      "nombre": "Decreto 62",
+      "busqueda": "Decreto 62 transferencias potencia",
+      "id_norma": "250604",
+      "año": 2006,
+      "tema": "Transferencias de Potencia"
+    },
+    {
+      "nombre": "Decreto 52",
+      "busqueda": "Decreto 52 coordinador eléctrico 2024",
+      "id_norma": "1191446",
+      "año": 2024,
+      "tema": "Reglamento Coordinador"
+    },
+    {
+      "nombre": "Decreto 10",
+      "busqueda": "Decreto 10 valorización transmisión",
+      "id_norma": "1215040",
+      "año": 2020,
+      "tema": "Valorización Transmisión"
+    },
+    {
+      "nombre": "Decreto 44",
+      "busqueda": "Decreto 44 modifica decreto 62",
+      "id_norma": "252841",
+      "año": 2007,
+      "tema": "Modifica D.62"
+    },
+    {
+      "nombre": "Resolución 711",
+      "busqueda": "Resolución 711 CNE norma técnica",
+      "id_norma": "1112591",
+      "año": 2024,
+      "tema": "NTSyCS actualizada"
+    },
+    {
+      "nombre": "Decreto 70",
+      "busqueda": "Decreto 70 modifica decreto 62 2024",
+      "id_norma": "1200958",
+      "año": 2024,
+      "tema": "Modifica D.62"
+    },
+    {
+      "nombre": "Ley 19.940",
+      "busqueda": "Ley 19940 servicios eléctricos",
+      "id_norma": "237695",
+      "año": 2004,
+      "tema": "Ley Corta I"
+    },
+    {
+      "nombre": "DFL 1",
+      "id_norma": "5605",
+      "año": 1982,
+      "tema": "LGSE original"
+    },
+    {
+      "nombre": "Decreto 327",
+      "id_norma": "127024",
+      "año": 1997,
+      "tema": "Reglamento LGSE"
+    },
+    {
+      "nombre": "Decreto 42",
+      "id_norma": "1153934",
+      "año": 2020,
+      "tema": "Modifica D.62"
+    },
+    {
+      "nombre": "Ley 20.018",
+      "id_norma": "238139",
+      "año": 2005,
+      "tema": "Ley Corta II"
+    }
+  ]
+}

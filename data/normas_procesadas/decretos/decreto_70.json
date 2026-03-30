@@ -1,0 +1,62 @@
+{
+  "id_norma": "1200958",
+  "tipo": "DECRETO",
+  "numero": "70",
+  "titulo": "Modifica D.62",
+  "fecha_publicacion": null,
+  "fecha_promulgacion": null,
+  "organismo": null,
+  "estado": "VIGENTE",
+  "modificada_por": [],
+  "modifica_a": [],
+  "deroga_a": [],
+  "derogada_por": [],
+  "reglamenta": [],
+  "referencias": [
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "61",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "RESOLUCIÓN",
+      "numero": "487",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "LEY",
+      "numero": "19880",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "397",
+      "año": 1976,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    },
+    {
+      "tipo": "DECRETO",
+      "numero": "43",
+      "año": null,
+      "organismo": null,
+      "fecha_do": null,
+      "articulo": null,
+      "id_norma": null
+    }
+  ]
+}
