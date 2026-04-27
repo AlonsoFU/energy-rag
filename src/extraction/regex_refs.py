@@ -13,7 +13,9 @@ from src.core.catalogo import Catalogo
 
 @dataclass
 class ExtractedRef:
-    """Reference extracted from text. Caller fills origen_* before persisting as Referencia."""
+    """Reference extracted from text. Caller may fill origen_* before persisting."""
+    origen_articulo_id: int | None = None
+    origen_norma_id: str | None = None
     destino_articulo_id: int | None = None
     destino_norma_id: str | None = None
     destino_concepto_id: int | None = None
