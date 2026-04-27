@@ -122,3 +122,20 @@ def test_complex_retriever_smoke(db_clean):
     results = cr.retrieve("potencia firme", top_k=5)
     assert len(results) >= 1
     assert "articulo_text" in results[0]
+
+
+def test_adaptive_retriever_uses_simple_for_short_query():
+    """Unit test: AdaptiveRetriever calls SimpleRetriever for simple-classified queries."""
+    from unittest.mock import MagicMock
+    from src.pipelines.retrieve import AdaptiveRetriever
+
+    simple = MagicMock(); simple.retrieve.return_value = [{"id": 1}]
+    complejo = MagicMock()
+    router = MagicMock(); router.classify.return_value = "simple"
+
+    ar = AdaptiveRetriever(simple=simple, complejo=complejo, router=router)
+    branch, results = ar.retrieve("¿qué es COMA?", top_k=5)
+    assert branch == "simple"
+    assert len(results) == 1
+    simple.retrieve.assert_called_once()
+    complejo.retrieve.assert_not_called()

@@ -247,3 +247,25 @@ class ComplexRetriever(SimpleRetriever):
         # 6. Hierarchical expand
         expanded = hierarchical_expand(fused)
         return expanded[:top_k]
+
+
+# ---------------------------------------------------------------------------
+# Step 7: AdaptiveRetriever (router + simple/complejo branches)
+# ---------------------------------------------------------------------------
+
+class AdaptiveRetriever:
+    """Routes queries to the appropriate retriever based on a classifier.
+
+    Returns ``(branch, results)`` so callers can log/observe routing decisions.
+    """
+
+    def __init__(self, simple: SimpleRetriever, complejo: ComplexRetriever, router):
+        self.simple = simple
+        self.complejo = complejo
+        self.router = router
+
+    def retrieve(self, query: str, top_k: int = 10):
+        branch = self.router.classify(query)
+        if branch == "simple":
+            return branch, self.simple.retrieve(query, top_k=top_k)
+        return branch, self.complejo.retrieve(query, top_k=top_k)
