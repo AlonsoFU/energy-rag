@@ -26,13 +26,13 @@ from __future__ import annotations
 import argparse
 import json
 import re
-from datetime import datetime
 from pathlib import Path
 
 from src.components.vectorstore import PostgresStore
 from src.core.models import Articulo, Concepto, Norma
 from src.pipelines.classification import classify_norma
 from src.pipelines.concept_extraction import extract_concepts_from_text
+from src.pipelines.date_extraction import extract_fecha_publicacion
 
 
 SUBDIRS = ("decretos", "leyes", "dfl", "resoluciones", "otros")
@@ -71,13 +71,7 @@ def _has_required_fields(d: dict) -> bool:
 
 def to_norma(data: dict) -> Norma:
     """Convert a raw JSON dict into a :class:`Norma` pydantic model."""
-    fp = data.get("fecha_publicacion")
-    fecha = None
-    if fp:
-        try:
-            fecha = datetime.strptime(fp, "%Y-%m-%d").date()
-        except ValueError:
-            fecha = None
+    fecha = extract_fecha_publicacion(data)
     organismo = data.get("organismo") or None
     return Norma(
         id_norma=str(data["id_norma"]),
