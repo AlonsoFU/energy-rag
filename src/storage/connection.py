@@ -1,8 +1,14 @@
 from contextlib import contextmanager
 from psycopg_pool import ConnectionPool
+from pgvector.psycopg import register_vector
 from src.core.config import settings
 
 _pool: ConnectionPool | None = None
+
+
+def _configure_connection(conn) -> None:
+    """Register pgvector type adapter on every pooled connection."""
+    register_vector(conn)
 
 
 def get_pool() -> ConnectionPool:
@@ -13,6 +19,7 @@ def get_pool() -> ConnectionPool:
             min_size=1,
             max_size=10,
             open=False,  # don't connect at construction
+            configure=_configure_connection,
         )
     return _pool
 
