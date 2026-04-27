@@ -96,3 +96,29 @@ def test_simple_retriever_end_to_end_with_mock(db_clean):
     results = rr.retrieve("potencia firme", top_k=5)
     assert len(results) >= 1
     assert "articulo_text" in results[0]
+
+
+@pytest.mark.integration
+def test_complex_retriever_smoke(db_clean):
+    """Smoke test: ComplexRetriever runs end-to-end with mocked LLM and reranker."""
+    from unittest.mock import MagicMock
+    from src.components.vectorstore import PostgresStore
+    from src.core.models import Norma, Articulo, Fragmento
+    from src.pipelines.retrieve import ComplexRetriever
+    s = PostgresStore()
+    s.upsert_norma(Norma(id_norma="X", tipo="LEY", numero="1", titulo="X"))
+    aid = s.upsert_articulo(Articulo(id_norma="X", numero="1°", texto="potencia firme texto"))
+    s.upsert_fragmento(Fragmento(articulo_id=aid, chunk_index=0,
+        text="potencia firme", contextual_text="potencia firme calculo",
+        embedding=[0.5]*1024))
+
+    fake_emb = MagicMock(); fake_emb.embed.return_value = [[0.5]*1024]
+    fake_rr = MagicMock()
+    fake_rr.rerank.side_effect = lambda q, docs, top_k: [(i, 1.0/(i+1)) for i in range(min(len(docs), top_k))]
+    fake_llm = MagicMock()
+    fake_llm.generate.return_value = MagicMock(text="generated", tokens_in=1, tokens_out=1)
+
+    cr = ComplexRetriever(store=s, embedder=fake_emb, reranker=fake_rr, llm=fake_llm)
+    results = cr.retrieve("potencia firme", top_k=5)
+    assert len(results) >= 1
+    assert "articulo_text" in results[0]

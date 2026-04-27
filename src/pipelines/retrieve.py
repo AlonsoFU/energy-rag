@@ -9,6 +9,8 @@ import re as _re
 from psycopg.rows import dict_row
 
 from src.storage.connection import with_connection
+from src.components.llm import LLMProvider, get_llm_provider
+from src.pipelines.expansion import hyde, multi_query, step_back
 
 
 # ---------------------------------------------------------------------------
@@ -187,5 +189,61 @@ class SimpleRetriever:
         if query_concepts:
             fused = graph_boost(fused, query_concepts=query_concepts)
         # 7. Hierarchical expand
+        expanded = hierarchical_expand(fused)
+        return expanded[:top_k]
+
+
+# ---------------------------------------------------------------------------
+# Step 6: ComplexRetriever (expansion + multi-query merge)
+# ---------------------------------------------------------------------------
+
+class ComplexRetriever(SimpleRetriever):
+    """COMPLEJO branch retriever.
+
+    Pipeline: expand query (step-back + HyDE + 3 multi-query variants) ->
+    BM25 + vector + RRF per query -> merge across queries via RRF -> rerank
+    -> graph boost -> hierarchical expand -> top_k.
+    """
+
+    def __init__(self, *args, llm: LLMProvider | None = None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.llm = llm or get_llm_provider()
+
+    def retrieve(self, query: str, top_k: int = 10,
+                 query_concepts: list[str] | None = None) -> list[dict]:
+        # 1. Generate expansions
+        sb = step_back(query, llm=self.llm)
+        hd = hyde(query, llm=self.llm)
+        mq = multi_query(query, llm=self.llm)
+        all_queries = [query, sb, hd] + mq
+
+        # 2. Run BM25+vector+RRF for each, then merge across queries via RRF
+        rankings = []
+        for q in all_queries:
+            bm25 = self.store.search_bm25(q, top_k=self.top_bm25)
+            q_emb = self.embedder.embed([q])[0]
+            vec = self.store.search_vector(q_emb, top_k=self.top_vector)
+            rankings.append(rrf_fusion([bm25, vec], k=60)[: self.top_bm25])
+        fused = rrf_fusion(rankings, k=60)[: self.top_bm25]
+
+        # 3. Rerank against the original query
+        if fused:
+            scored = self.reranker.rerank(
+                query, [c["contextual_text"] for c in fused], top_k=15
+            )
+            fused = [{**fused[i], "score": float(s)} for i, s in scored]
+
+        # 4. Auto-detect concepts if not provided
+        if query_concepts is None:
+            with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+                cur.execute("SELECT nombre, aliases FROM conceptos")
+                all_c = cur.fetchall()
+            query_concepts = extract_query_concepts(query, all_c)
+
+        # 5. Graph boost
+        if query_concepts:
+            fused = graph_boost(fused, query_concepts=query_concepts)
+
+        # 6. Hierarchical expand
         expanded = hierarchical_expand(fused)
         return expanded[:top_k]
