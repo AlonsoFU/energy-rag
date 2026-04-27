@@ -3,14 +3,6 @@ from sentence_transformers import SentenceTransformer
 
 from src.core.config import settings
 
-# TODO(schema-mismatch): Qwen3-Embedding-0.6B outputs 1024-dim vectors by default,
-# but Phase 1 schema declares `vector(768)`. The model supports Matryoshka
-# Representation Learning (MRL) with custom dims in [32, 1024], so we can either:
-#   (a) truncate output to 768 dims via MRL (set `truncate_dim=768` on the
-#       SentenceTransformer or slice + renormalize after encode), or
-#   (b) migrate the schema to `vector(1024)`.
-# Decide before persisting any embeddings to Postgres.
-
 
 class Qwen3Embedder:
     def __init__(self, model_name: str | None = None, device: str | None = None):

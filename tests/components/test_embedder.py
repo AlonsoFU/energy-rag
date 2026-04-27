@@ -8,8 +8,7 @@ def test_embedder_returns_correct_dim():
     emb = Qwen3Embedder()
     vecs = emb.embed(["hola mundo", "potencia firme"])
     assert len(vecs) == 2
-    # Qwen3-Embedding-0.6B native output dim is 1024 (MRL-truncatable to [32, 1024]).
-    # Phase 1 schema uses vector(768) -- see TODO in src/components/embedder.py.
+    # Qwen3-Embedding-0.6B native output dim is 1024.
     assert len(vecs[0]) == 1024
 
 
