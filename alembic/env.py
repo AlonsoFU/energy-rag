@@ -4,7 +4,9 @@ from sqlalchemy import engine_from_config, pool
 from src.core.config import settings
 
 config = context.config
-config.set_main_option("sqlalchemy.url", settings.dsn())
+# Use psycopg (v3) driver — SQLAlchemy defaults to psycopg2 for "postgresql://".
+_dsn = settings.dsn().replace("postgresql://", "postgresql+psycopg://", 1)
+config.set_main_option("sqlalchemy.url", _dsn)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
@@ -13,7 +15,7 @@ target_metadata = None  # we use raw SQL migrations, not autogenerate
 
 def run_migrations_offline():
     context.configure(
-        url=settings.dsn(),
+        url=_dsn,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
