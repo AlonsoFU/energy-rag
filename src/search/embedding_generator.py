@@ -1,4 +1,6 @@
-"""
+"""DEPRECATED. Replaced by src/pipelines/, src/components/, src/extraction/.
+Kept for transition period; will be removed in v1.1.
+
 Generador de embeddings para artículos de normas legales.
 
 Usa multilingual-e5-base para generar embeddings y FAISS para indexación.

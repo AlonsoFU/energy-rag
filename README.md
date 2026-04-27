@@ -1,3 +1,29 @@
+## v1: Postgres + LLM (April 2026)
+
+The system has been rewritten on top of PostgreSQL + pgvector + Claude API.
+See `docs/superpowers/specs/2026-04-26-rag-normativa-electrica-design.md`
+for the design and `docs/superpowers/plans/2026-04-26-rag-normativa-electrica.md`
+for the implementation plan.
+
+### Quick start
+
+```bash
+sudo apt install postgresql-16 postgresql-16-pgvector
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt -r requirements-dev.txt
+cp .env.example .env  # edit with ANTHROPIC_API_KEY and DB credentials
+alembic upgrade head
+python scripts/migrate_to_postgres.py            # one-shot migration of JSON normas
+python scripts/embed_all.py --skip-contextual --mock --limit 200  # quick test
+python -m src ask "¿qué es COMA?" --mock
+```
+
+The legacy code under `src/search/` is deprecated; new code lives in
+`src/components/`, `src/pipelines/`, `src/extraction/`, `src/routing/`,
+`src/eval/`, and `src/cli.py`.
+
+---
+
 # Buscador de Normas Eléctricas Chile (BCN)
 
 Sistema de búsqueda semántica + grafo de conocimiento (GraphRAG) sobre normas legales del sector eléctrico chileno, extraídas desde la Biblioteca del Congreso Nacional (BCN).

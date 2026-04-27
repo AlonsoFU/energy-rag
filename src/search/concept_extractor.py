@@ -1,4 +1,6 @@
-"""
+"""DEPRECATED. Replaced by src/pipelines/, src/components/, src/extraction/.
+Kept for transition period; will be removed in v1.1.
+
 Extractor automático de conceptos legales.
 
 Extrae conceptos y relaciones de normas usando:
