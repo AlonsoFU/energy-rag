@@ -1,0 +1,5 @@
+{"query": "¿qué es COMA?", "expected_norma": "DECRETO_10", "expected_articulo": "2"}
+{"query": "definición de potencia firme", "expected_norma": "DECRETO_62", "expected_articulo": "1"}
+{"query": "VATT", "expected_norma": "DECRETO_10", "expected_articulo": "2"}
+{"query": "Ley General de Servicios Eléctricos", "expected_norma": "DFL_4", "expected_articulo": null}
+{"query": "transferencias entre generadoras", "expected_norma": "DECRETO_62", "expected_articulo": null}

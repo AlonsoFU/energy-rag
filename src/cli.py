@@ -148,5 +148,37 @@ def stats():
         rprint(p)
 
 
+@app.command(name="eval")
+def eval_cmd(
+    eval_file: str = typer.Option("data/eval/queries_chilean_electric.jsonl", "--eval-file"),
+    mock: bool = typer.Option(False, "--mock"),
+):
+    """Run evaluation against a JSONL eval set (recall@5)."""
+    from src.eval.deepeval_runner import run_deepeval
+    from src.pipelines.retrieve import SimpleRetriever, ComplexRetriever, AdaptiveRetriever
+    from src.routing.adaptive import AdaptiveRouter
+    from src.components.vectorstore import PostgresStore
+    from src.components.llm import get_llm_provider
+
+    if mock:
+        class _ME:
+            def embed(self, texts): return [[(hash(t + str(i)) % 1000)/1000.0 for i in range(1024)] for t in texts]
+        class _MR:
+            def rerank(self, q, docs, top_k): return [(i, 1.0/(i+1)) for i in range(min(len(docs), top_k))]
+        e, r = _ME(), _MR()
+    else:
+        from src.components.embedder import Qwen3Embedder
+        from src.components.reranker import Qwen3Reranker
+        e, r = Qwen3Embedder(), Qwen3Reranker()
+
+    store = PostgresStore(); llm = get_llm_provider()
+    router = AdaptiveRouter(); router.train_default()
+    simple = SimpleRetriever(store, e, r)
+    complejo = ComplexRetriever(store, e, r, llm=llm)
+    adaptive = AdaptiveRetriever(simple, complejo, router)
+    metrics = run_deepeval(eval_file, adaptive)
+    rprint(metrics)
+
+
 if __name__ == "__main__":
     app()

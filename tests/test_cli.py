@@ -45,3 +45,8 @@ def test_help_works():
     assert "ask" in result.output
     assert "ingest" in result.output
     assert "stats" in result.output
+
+
+def test_eval_command_help_listed():
+    result = runner.invoke(app, ["--help"])
+    assert "eval" in result.output
