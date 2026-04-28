@@ -151,10 +151,15 @@ def stats():
 @app.command(name="eval")
 def eval_cmd(
     eval_file: str = typer.Option("data/eval/queries_chilean_electric.jsonl", "--eval-file"),
+    top_k: int = typer.Option(5, "--top-k", "-k"),
     mock: bool = typer.Option(False, "--mock"),
+    no_llm: bool = typer.Option(False, "--no-llm", help="Skip generation entirely (retrieval-only)"),
+    save: bool = typer.Option(True, "--save/--no-save", help="Save full results to data/eval/results"),
+    json_out: bool = typer.Option(False, "--json", help="Print full metrics dict as JSON"),
 ):
-    """Run evaluation against a JSONL eval set (recall@5)."""
-    from src.eval.deepeval_runner import run_deepeval
+    """Run evaluation against a JSONL eval set (recall@5 + grounding + latency)."""
+    import json as _json
+    from src.eval.deepeval_runner import run_deepeval, render_summary
     from src.pipelines.retrieve import SimpleRetriever, ComplexRetriever, AdaptiveRetriever
     from src.routing.adaptive import AdaptiveRouter
     from src.components.vectorstore import PostgresStore
@@ -171,13 +176,32 @@ def eval_cmd(
         from src.components.reranker import Qwen3Reranker
         e, r = Qwen3Embedder(), Qwen3Reranker()
 
-    store = PostgresStore(); llm = get_llm_provider()
+    store = PostgresStore()
+    llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
     simple = SimpleRetriever(store, e, r)
     complejo = ComplexRetriever(store, e, r, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
-    metrics = run_deepeval(eval_file, adaptive)
-    rprint(metrics)
+
+    def _progress(i: int, n: int, row: dict) -> None:
+        marker = "+" if row["retrieval_hit"] else ("~" if row["retrieval_norma_only_hit"] else ".")
+        # Use parens around the branch name — rich treats `[...]` as markup.
+        rprint(f"[dim]({i}/{n}) {marker} {row['latency_ms']}ms ({row['branch']}) {row['query'][:60]}[/dim]")
+
+    metrics = run_deepeval(
+        eval_file=eval_file,
+        retriever=adaptive,
+        top_k=top_k,
+        llm=None if no_llm else llm,
+        save_results=save,
+        progress=_progress,
+    )
+
+    render_summary(metrics)
+    if "results_path" in metrics:
+        rprint(f"[green]Saved full results to {metrics['results_path']}[/green]")
+    if json_out:
+        rprint(_json.dumps({k: v for k, v in metrics.items() if k != "per_query"}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
