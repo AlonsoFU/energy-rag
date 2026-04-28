@@ -62,12 +62,21 @@ class LiteLLMProvider:
                 messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
 
-        resp = litellm.completion(
-            model=model,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=max_tokens,
-        )
+        kwargs = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+        # Ollama bug: max_tokens (num_predict) competes with num_ctx and truncates
+        # output for prompts > 1k tokens. Drop max_tokens for ollama and bump
+        # num_ctx via litellm extra params instead.
+        if model.startswith("ollama/"):
+            kwargs.pop("max_tokens", None)
+            # 8k context fits our largest prompts (Contextual Retrieval + 10 docs)
+            kwargs["num_ctx"] = 8192
+
+        resp = litellm.completion(**kwargs)
         return LLMResponse(
             text=resp.choices[0].message.content,
             model=resp.model,
