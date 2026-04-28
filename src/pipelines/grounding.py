@@ -19,7 +19,7 @@ CITATION_PATTERN = re.compile(
     r"(?:art[íi]culos?\.?|arts?\.)"                          # Art / Art. / Artículo / Artículos
     r"\s*"
     r"(?P<art>\d+\s*[°º]?(?:\s*(?:bis|ter|quater|quinquies))?(?:\s*[A-Z])?)"
-    r"\s+de\s+"
+    r"\s+(?:de|del)\s+"                                      # 'de' or 'del'
     r"(?P<norma>[A-Z_0-9]+)"
     r"\]",
     re.IGNORECASE,
