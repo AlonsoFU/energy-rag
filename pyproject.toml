@@ -1,0 +1,12 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+markers = [
+    "integration: integration tests requiring Postgres",
+    "slow: slow tests"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

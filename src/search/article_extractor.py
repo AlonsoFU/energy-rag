@@ -1,4 +1,6 @@
-"""
+"""DEPRECATED. Replaced by src/pipelines/, src/components/, src/extraction/.
+Kept for transition period; will be removed in v1.1.
+
 Extractor de artículos desde normas legales chilenas.
 
 Parsea el texto completo de cada norma y extrae artículos individuales

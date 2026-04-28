@@ -1,4 +1,6 @@
-"""
+"""DEPRECATED. Replaced by src/pipelines/, src/components/, src/extraction/.
+Kept for transition period; will be removed in v1.1.
+
 Cross-Encoder Reranker para búsqueda de normas legales.
 
 Reordena los candidatos usando un modelo que lee query+documento juntos

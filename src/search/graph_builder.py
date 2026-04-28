@@ -1,4 +1,6 @@
-"""
+"""DEPRECATED. Replaced by src/pipelines/, src/components/, src/extraction/.
+Kept for transition period; will be removed in v1.1.
+
 Construye un grafo de relaciones entre normas legales.
 
 3 capas:
