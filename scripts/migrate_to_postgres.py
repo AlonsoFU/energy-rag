@@ -86,55 +86,76 @@ def to_norma(data: dict) -> Norma:
     )
 
 
-# Match an "Artículo N°..." heading. Real-world JSON uses both the masculine
-# ordinal indicator "º" and the degree sign "°" interchangeably, and the
-# heading may be preceded by non-breaking whitespace. We split on a heading
-# that sits at the start of a line *or* after whitespace following a newline.
-_ART_HEAD = re.compile(
-    r"(?m)(?:^|\n)[\s ]*(?=Art[íi]culo\s+\d+\s*[°º]?[\s:.\-])",
+# Article heading detector. Real Chilean legal text uses many forms:
+#   numeric:    "Artículo 5°.-", "Artículo 5º.-", "Artículo 5 bis.-",
+#               "Artículo 5° A.-"
+#   word form:  "Artículo primero.-", "Artículo decimotercero.-"
+#   transit.:   "Artículo primero transitorio.-", "Artículo 5° transitorio.-"
+# Lines may start with non-breaking spaces (\xa0). The "." or "-" separator
+# is required to avoid matching cross-references like "Art. 5° del DFL 4".
+_WORD_ORDINALS = (
+    r"primero|segundo|tercero|cuarto|quinto|sexto|s[eé]ptimo|octavo|noveno|"
+    r"d[eé]cimo|und[eé]cimo|duod[eé]cimo|"
+    r"decimo(?:primero|segundo|tercero|cuarto|quinto|sexto|s[eé]ptimo|octavo|noveno)|"
+    r"vig[eé]simo(?:primero|segundo|tercero|cuarto|quinto)?"
 )
-_ART_NUM = re.compile(
-    r"^[\s ]*Art[íi]culo\s+(\d+(?:\s*[°º])?[a-z]?(?:\s+(?:bis|ter|quater))?)",
-    re.IGNORECASE,
+_HEAD_PATTERN = (
+    r"(?im)"
+    r"(?:^|\n)[\s\xa0]*"
+    r"(?:art[íi]culo[s]?|art\.)"
+    r"[\s\xa0]+"
+    r"(?P<num>"
+        r"\d+\s*[°º]?(?:\s+(?:bis|ter|quater|quinquies))?(?:\s+[A-Z])?"
+        r"|"
+        rf"(?:{_WORD_ORDINALS})"
+    r")"
+    r"(?P<trans>\s+transitorio)?"
+    r"\s*[\.\-]"
 )
+_ART_HEAD = re.compile(_HEAD_PATTERN)
+
+
+def _normalize_numero(raw: str, has_transitorio: bool) -> str:
+    """Collapse whitespace, lowercase suffix words, optionally add 'transitorio'."""
+    n = re.sub(r"\s+", " ", raw).strip()
+    n = re.sub(r"\b(BIS|TER|QUATER|QUINQUIES)\b", lambda m: m.group(1).lower(), n)
+    if has_transitorio:
+        n = f"{n} transitorio"
+    return n
 
 
 def split_into_articulos(norma_data: dict) -> list[Articulo]:
-    """Split ``texto_completo`` by ``Artículo N°`` headings.
+    """Split ``texto_completo`` by every detected article heading.
 
-    The split is deliberately simple — anything before the first heading is
-    discarded (preamble / "Vistos") and each subsequent chunk becomes one
-    :class:`Articulo` keyed by the article number captured from the heading.
-    Duplicate article numbers within the same norma are dropped (the table
-    has UNIQUE(id_norma, numero)).
+    Captures numeric and word-ordinal forms plus optional ``bis``/``ter`` and
+    ``transitorio`` suffixes. Each article body runs from its heading to the
+    next heading (or end of text). Duplicate article numbers within the same
+    norma are skipped (UNIQUE constraint would reject them anyway).
     """
     texto = norma_data.get("texto_completo", "") or ""
     if not texto.strip():
         return []
-    chunks = _ART_HEAD.split(texto)
+    matches = list(_ART_HEAD.finditer(texto))
+    if not matches:
+        return []
     out: list[Articulo] = []
     seen_numeros: set[str] = set()
-    orden = 0
-    for ch in chunks:
-        m = _ART_NUM.match(ch)
-        if not m:
-            continue
-        numero = re.sub(r"\s+", " ", m.group(1)).strip()
+    for i, m in enumerate(matches):
+        numero = _normalize_numero(m.group("num"), bool(m.group("trans")))
         if numero in seen_numeros:
-            # The same article number appears twice (e.g. cited in body and
-            # then defined). Keep the first occurrence; the unique constraint
-            # would reject duplicates anyway.
             continue
         seen_numeros.add(numero)
+        body_start = m.start()
+        body_end = matches[i + 1].start() if i + 1 < len(matches) else len(texto)
+        body = texto[body_start:body_end].strip()
         out.append(
             Articulo(
                 id_norma=str(norma_data["id_norma"]),
                 numero=numero,
-                texto=ch.strip(),
-                orden=orden,
+                texto=body,
+                orden=len(out),
             )
         )
-        orden += 1
     return out
 
 
