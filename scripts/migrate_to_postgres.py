@@ -110,7 +110,7 @@ _HEAD_PATTERN = (
         rf"(?:{_WORD_ORDINALS})"
     r")"
     r"(?P<trans>\s+transitorio)?"
-    r"\s*[\.\-]"
+    r"\s*[\.\-:]"
 )
 _ART_HEAD = re.compile(_HEAD_PATTERN)
 
