@@ -9,6 +9,7 @@ Use `get_llm_provider()` to get the right one based on environment.
 from dataclasses import dataclass, field
 from typing import Protocol
 import litellm
+import requests
 from src.core import config as _config
 
 
@@ -30,11 +31,18 @@ class LLMProvider(Protocol):
         temperature: float = 0.0,
         max_tokens: int = 4096,
         cache_control: bool = False,
+        grammar: str | None = None,
     ) -> LLMResponse: ...
 
 
 class LiteLLMProvider:
-    """Real LLM provider backed by litellm."""
+    """Real LLM provider backed by litellm.
+
+    For Ollama with constrained decoding (`grammar` param), bypasses litellm
+    and posts directly to /api/generate — litellm doesn't expose Ollama's
+    grammar parameter. Non-Ollama models ignore grammar (no equivalent on
+    Anthropic/OpenAI; structured-output enforcement happens elsewhere).
+    """
 
     def __init__(self):
         litellm.api_key = _config.settings.anthropic_api_key
@@ -47,8 +55,17 @@ class LiteLLMProvider:
         temperature: float = 0.0,
         max_tokens: int = 4096,
         cache_control: bool = False,
+        grammar: str | None = None,
     ) -> LLMResponse:
         model = model or _config.settings.llm_default
+
+        # Constrained-decoding path: Ollama + grammar bypasses litellm.
+        if grammar and model.startswith("ollama/"):
+            return self._ollama_with_grammar(
+                prompt=prompt, model=model, system=system,
+                temperature=temperature, grammar=grammar,
+            )
+
         messages = []
         if system:
             if cache_control:
@@ -84,6 +101,38 @@ class LiteLLMProvider:
             tokens_out=resp.usage.completion_tokens,
         )
 
+    def _ollama_with_grammar(
+        self,
+        prompt: str,
+        model: str,
+        system: str | None,
+        temperature: float,
+        grammar: str,
+    ) -> LLMResponse:
+        """Direct call to Ollama's /api/generate with GBNF grammar."""
+        model_name = model.replace("ollama/", "")
+        body = {
+            "model": model_name,
+            "prompt": prompt,
+            "grammar": grammar,
+            "stream": False,
+            "options": {
+                "num_ctx": 8192,
+                "temperature": temperature,
+            },
+        }
+        if system:
+            body["system"] = system
+        host = getattr(_config.settings, "ollama_host", "http://localhost:11434")
+        resp = requests.post(f"{host}/api/generate", json=body, timeout=180)
+        data = resp.json()
+        return LLMResponse(
+            text=data.get("response", ""),
+            model=model,
+            tokens_in=data.get("prompt_eval_count", 0),
+            tokens_out=data.get("eval_count", 0),
+        )
+
 
 @dataclass
 class MockLLMProvider:
@@ -102,6 +151,7 @@ class MockLLMProvider:
         temperature: float = 0.0,
         max_tokens: int = 4096,
         cache_control: bool = False,
+        grammar: str | None = None,
     ) -> LLMResponse:
         text = self._pick_response(prompt)
         # Token approximation: 1 token ~= 4 chars

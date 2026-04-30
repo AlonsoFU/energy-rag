@@ -3,10 +3,16 @@
 Calls the LLM with the answer prompt; if the response fails grounding, retries
 once with a corrective addendum. Returns text plus a `grounding_pass` flag and
 accumulated token counts across attempts.
+
+For Ollama models we additionally constrain decoding with a GBNF grammar
+generated from the retrieved docs — the model is physically prevented from
+emitting citations outside the retrieved set. Non-Ollama providers receive
+no grammar (constraint enforced via tool use / json schema elsewhere).
 """
 from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.prompts import build_answer_prompt, get_answer_system
 from src.pipelines.grounding import verify_citations
+from src.pipelines.grammar import extract_valid_citations, build_gbnf_grammar
 
 
 def generate_answer(
@@ -27,6 +33,15 @@ def generate_answer(
     system = get_answer_system()
     base_prompt = build_answer_prompt(query, docs)
 
+    # Build grammar only when applicable: Ollama target + non-empty doc set.
+    # Empty docs would yield an unusable grammar; non-Ollama providers can't
+    # consume GBNF (their constraint path is JSON schema / tool use).
+    grammar: str | None = None
+    if docs and model.startswith("ollama/"):
+        citations = extract_valid_citations(docs)
+        gbnf = build_gbnf_grammar(citations)
+        grammar = gbnf or None
+
     response_text = ""
     grounding_pass = False
     tokens_in = tokens_out = 0
@@ -37,6 +52,7 @@ def generate_answer(
         resp = llm.generate(
             prompt, model=model, system=system,
             temperature=0.0, max_tokens=2000,
+            grammar=grammar,
         )
         response_text = resp.text
         tokens_in += resp.tokens_in

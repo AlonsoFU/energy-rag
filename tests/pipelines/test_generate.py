@@ -50,3 +50,42 @@ def test_generate_answer_accumulates_tokens():
     result = generate_answer("?", docs, llm=fake_llm)
     assert result["tokens_in"] == 25
     assert result["tokens_out"] == 13
+
+
+def test_generate_passes_grammar_for_ollama_model():
+    """When model is ollama/*, generate_answer must build grammar and pass it."""
+    fake_llm = MagicMock()
+    fake_llm.generate.return_value = MagicMock(
+        text="[Art. 1 de X]", tokens_in=10, tokens_out=5, model="ollama/qwen2.5:7b",
+    )
+    docs = [{"id_norma": "X", "articulo_numero": "1", "articulo_text": "..."}]
+    generate_answer("?", docs, llm=fake_llm, model="ollama/qwen2.5:7b")
+    # Grammar must be passed
+    call_kwargs = fake_llm.generate.call_args.kwargs
+    assert "grammar" in call_kwargs
+    assert call_kwargs["grammar"] != ""
+    assert '"[Art. 1 de X]"' in call_kwargs["grammar"]
+
+
+def test_generate_no_grammar_for_api_model():
+    """When model is non-Ollama (Claude/OpenAI), grammar param should be None."""
+    fake_llm = MagicMock()
+    fake_llm.generate.return_value = MagicMock(
+        text="[Art. 1 de X]", tokens_in=10, tokens_out=5, model="claude-haiku-4-5",
+    )
+    docs = [{"id_norma": "X", "articulo_numero": "1", "articulo_text": "..."}]
+    generate_answer("?", docs, llm=fake_llm, model="claude-haiku-4-5-20251001")
+    call_kwargs = fake_llm.generate.call_args.kwargs
+    # Grammar either absent or None — both acceptable
+    assert call_kwargs.get("grammar") is None
+
+
+def test_generate_skips_grammar_when_no_docs():
+    """Empty docs → no valid citations → no grammar (would be invalid anyway)."""
+    fake_llm = MagicMock()
+    fake_llm.generate.return_value = MagicMock(
+        text="No info.", tokens_in=10, tokens_out=5, model="ollama/qwen2.5:7b",
+    )
+    generate_answer("?", [], llm=fake_llm, model="ollama/qwen2.5:7b")
+    call_kwargs = fake_llm.generate.call_args.kwargs
+    assert call_kwargs.get("grammar") in (None, "")
