@@ -1,0 +1,118 @@
+# Schema for glossary/concepts.yaml — documentation only, not loaded.
+#
+# A concept entry has the following shape:
+
+example_concept:
+  # === Identity ===
+
+  # Database id (foreign key to conceptos.id). Null if not yet in DB.
+  id: 96
+
+  # Canonical name. Must match conceptos.nombre exactly.
+  name: "Comisión"
+
+  # Definition extracted from the source norm. May be edited if the auto
+  # extraction was wrong; if so, set status: corrected.
+  definition: "Comisión Nacional de Energía."
+
+  # === Aliases (the most important field for query expansion) ===
+
+  aliases:
+    - alias: "CNE"
+      confidence: high     # high | medium | low — your judgment
+      validated: true      # true = load to DB; false = proposed only
+    - alias: "Comisión Nacional de Energía"
+      confidence: high
+      validated: true
+
+  # === Source / provenance (for audit) ===
+
+  source:
+    # idNorma in BCN (biblioteca.bcn.cl/leychile)
+    norm_id: "1005169"
+    # Human-readable label e.g. "LEY 20365", "DECRETO 62"
+    norm_label: "LEY 20365"
+    # Article number where the definition was extracted from
+    article: "Art. 11"
+    # Direct URL to the BCN page
+    url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+
+  # === Disambiguation ===
+
+  # Use when the same term has different meanings in different domains.
+  # Examples: general | concursal | tarifario | distribución | gas | tránsito |
+  #           generación | transmisión | renovables | concesiones-viales
+  domain_context: general
+
+  # === Review status ===
+
+  # not_reviewed   = auto-extracted, awaiting human review (default)
+  # ok             = reviewed, definition + aliases are correct
+  # corrected      = reviewed, fields were edited
+  # needs_research = reviewed, but unclear or ambiguous, deferred
+  status: not_reviewed
+
+  # === Relations (SKOS-inspired, for advanced retrieval) ===
+
+  relations:
+    # Synonyms or terms that frequently co-occur and should also retrieve docs
+    related: ["Coordinador"]
+    # Parent / hyponym relations: this concept is a kind of...
+    broader: []
+    # Child / hypernym relations: kinds of this concept
+    narrower: ["Comisión Resolutiva"]
+
+  # === Free-form notes ===
+
+  # Anything you want to remember about this concept.
+  notes: ""
+
+  # Notes for future scrapers / LLM extractors:
+  # - what made this hard to extract?
+  # - what redactions vary?
+  # - any aliases that LOOK like sub-concepts but are actually the same?
+  extraction_difficulty: ""
+
+  # === Metadata (auto-managed mostly) ===
+
+  metadata:
+    # Number of references to this concept in `referencias` table
+    refs_count: 371
+    # Who last reviewed: "auto" (machine-extracted), or human name
+    last_reviewed_by: "auto"
+    # ISO date of last review
+    last_reviewed_date: "2026-05-02"
+
+
+# === Field types reference ===
+
+field_types:
+  id: int | null
+  name: string (required, must match conceptos.nombre)
+  definition: string (required)
+  aliases: list of {alias: string, confidence: enum, validated: bool}
+  source.norm_id: string (BCN idNorma) | "unknown"
+  source.norm_label: string | null
+  source.article: string | null
+  source.url: string | null
+  domain_context: string (enum, see above)
+  status: enum (not_reviewed | ok | corrected | needs_research)
+  relations.related: list of strings (concept names)
+  relations.broader: list of strings
+  relations.narrower: list of strings
+  notes: string
+  extraction_difficulty: string
+  metadata.refs_count: int
+  metadata.last_reviewed_by: string
+  metadata.last_reviewed_date: string (ISO date)
+
+
+# === Conventions ===
+
+conventions:
+  - "Names match conceptos.nombre case-sensitively. If you change a name in YAML, also update DB."
+  - "Aliases are case-insensitive at retrieval time but stored as written."
+  - "Always validate before setting validated: true on an alias."
+  - "Use domain_context when the term is genuinely ambiguous, not for every entry."
+  - "Set source.norm_id to 'unknown' (string, not null) if you couldn't find the source. This makes audit easier than null."
+  - "Use 'corrected' instead of 'ok' when you had to edit the auto-extracted definition. Helps spot extraction bugs."

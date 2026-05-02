@@ -1,0 +1,2079 @@
+# Glossary concepts — domain terms with curated aliases for query expansion.
+# 
+# Edit this file to validate aliases, mark status, fix definitions, etc.
+# After editing, run:
+#   python scripts/render_glossary.py     # generate human-readable docs/glossary.md
+#   python scripts/load_glossary_to_db.py  # load validated aliases into Postgres
+#
+# Generated: 2026-05-02
+# Source: top 80 concepts by reference count from `conceptos` table
+# Schema: see schema.yaml
+
+schema_version: 1
+generated_at: "2026-05-02"
+total_concepts: 80
+
+concepts:
+  - id: 171
+    name: "Ministerio"
+    definition: "el Ministerio de Energía."
+    aliases:
+      - alias: "Ministerio de Energía"
+        confidence: high
+        validated: false
+      - alias: "MinEnergía"
+        confidence: medium
+        validated: false
+      - alias: "Ministerio del ramo"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "8º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 570
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 96
+    name: "Comisión"
+    definition: "Comisión Nacional de Energía."
+    aliases:
+      - alias: "CNE"
+        confidence: high
+        validated: false
+      - alias: "Comisión Nacional de Energía"
+        confidence: high
+        validated: false
+      - alias: "la Comisión"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "11"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 371
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 97
+    name: "Coordinador"
+    definition: "Coordinador independiente del sistema eléctrico nacional, al que se refiere el artículo 212º-1 de la Ley General de Servicios Eléctricos."
+    aliases:
+      - alias: "CEN"
+        confidence: high
+        validated: false
+      - alias: "Coordinador Eléctrico Nacional"
+        confidence: high
+        validated: false
+      - alias: "el Coordinador"
+        confidence: medium
+        validated: false
+      - alias: "Coordinador del Sistema"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1023143"
+      norm_label: "LEY 20500"
+      article: "29"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1023143"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 200
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 88
+    name: "Superintendencia"
+    definition: "Superintendencia de Electricidad y Combustibles;"
+    aliases:
+      - alias: "SEC"
+        confidence: high
+        validated: false
+      - alias: "Superintendencia de Electricidad y Combustibles"
+        confidence: high
+        validated: false
+      - alias: "la Superintendencia"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "3º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 165
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 253
+    name: "Vehículo"
+    definition: "Medio motorizado o no motorizado con el"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "2 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 152
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 251
+    name: "Tránsito"
+    definition: "Desplazamiento de peatones, animales o vehículos por vías de uso público;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "3"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 125
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 207
+    name: "Proyecto"
+    definition: "cualquier plan, obra, instalación o establecimiento, público o privado, desarrollado por una persona natural o jurídica, que requiere autorización previa o la aplicación de una técnica habilitante alternativa para proceder a su realización, construcción, modificación, habilitación, funcionamiento o cierre."
+    aliases:
+      []
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "2º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 102
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 233
+    name: "Conductor"
+    definition: "Toda persona que conduce, maneja o tiene control físico de un vehículo motorizado en la vía pública; que controla o maneja un vehículo remolcado por otro; o que dirige, maniobra o está a cargo del manejo directo de cualquier otro vehículo, de un animal de silla, de tiro o de arreo de animales;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "5 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 95
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 276
+    name: "Sistema Eléctrico"
+    definition: "conjunto de instalaciones de centrales eléctricas generadoras, líneas de transporte, subestaciones eléctricas y líneas de distribución, interconectadas entre sí, que permite generar, transportar y distribuir energía eléctrica;"
+    aliases:
+      - alias: "sistema eléctrico interconectado"
+        confidence: medium
+        validated: false
+      - alias: "red eléctrica"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1032851"
+      norm_label: "DECRETO 61"
+      article: "segundo"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1032851"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 88
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 112
+    name: "Sistema de Transmisión"
+    definition: "Conjunto de líneas y subestaciones eléctricas que forman parte de un sistema eléctrico y que no están destinadas a prestar el servicio público de distribución."
+    aliases:
+      - alias: "transmisión eléctrica"
+        confidence: medium
+        validated: false
+      - alias: "red de transmisión"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1008692"
+      norm_label: "LEY 20402"
+      article: "13"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1008692"
+    domain_context: transmisión
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 84
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 212
+    name: "Titular"
+    definition: "persona natural o jurídica sobre quien recae la responsabilidad legal de un proyecto o actividad que, de acuerdo con la ley, exige obtener una habilitación previa para su realización."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "19"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 83
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 210
+    name: "Solicitante"
+    definition: "persona natural o jurídica que efectúa una solicitud ante un órgano de la Administración del Estado para la obtención de una autorización sectorial."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "14 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 83
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 23
+    name: "Bases de Licitación"
+    definition: "Conjunto de normas y especificaciones administrativas, técnicas y económicas, elaboradas por el Ministerio de Obras Públicas, con que se hace el llamado a licitación y que forman parte del contrato de concesión."
+    aliases:
+      - alias: "BL"
+        confidence: medium
+        validated: false
+      - alias: "bases de licitación pública"
+        confidence: medium
+        validated: false
+      - alias: "bases administrativas"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "90"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 72
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 174
+    name: "Empresa distribuidora"
+    definition: "la entidad que presta el servicio de gas mediante redes de distribución de gas, con o sin concesión."
+    aliases:
+      - alias: "distribuidora"
+        confidence: high
+        validated: false
+      - alias: "concesionaria de distribución"
+        confidence: high
+        validated: false
+      - alias: "empresa concesionaria"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "34"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 62
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 205
+    name: "Órganos sectoriales"
+    definition: "aquellos definidos en el artículo 3 con competencias legales para la habilitación de proyectos o actividades sometidas a limitaciones impuestas por la regulación."
+    aliases:
+      []
+    source:
+      norm_id: "1030861"
+      norm_label: "LEY 20530"
+      article: "103 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1030861"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 56
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 208
+    name: "Riesgo"
+    definition: "posibilidad de ocurrencia de una afectación al objeto de protección cautelado por la respectiva habilitación sectorial. La magnitud de un riesgo es cuantificada en términos de la probabilidad de ocurrencia de una afectación y del impacto de sus consecuencias sobre el objeto de protección."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "57 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 51
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 196
+    name: "Actividad"
+    definition: "acto, acción, tarea o conjunto de operaciones específicas realizadas por una persona natural o jurídica, sujeta a regulación y cuyo desarrollo, ejecución, suspensión o cese, de acuerdo con la ley, exige la obtención de una autorización previa o la aplicación de una técnica habilitante alternativa."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "224"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 50
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 269
+    name: "Plan de Expansión"
+    definition: "Resultado del Proceso de Planificación de la Transmisión, que podrá contener las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro;"
+    aliases:
+      - alias: "Plan de Expansión de la Transmisión"
+        confidence: high
+        validated: false
+      - alias: "PdE"
+        confidence: high
+        validated: false
+      - alias: "plan anual de expansión"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1032851"
+      norm_label: "DECRETO 61"
+      article: "segundo"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1032851"
+    domain_context: transmisión
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 50
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 211
+    name: "Técnicas habilitantes alternativas"
+    definition: "instrumentos que habilitan el desarrollo de un proyecto o la ejecución de una actividad sin exigir la dictación de un acto administrativo favorable previo. Son técnicas habilitantes alternativas el aviso y la declaración jurada establecidos en el Título II."
+    aliases:
+      []
+    source:
+      norm_id: "1030861"
+      norm_label: "LEY 20530"
+      article: "103 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1030861"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 47
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 44
+    name: "Sitio Electrónico Unificado de Tarifas y Peajes"
+    definition: "Es aquel que corresponde al espacio virtual que permite al Usuario de Sistema Interoperable realizar, de manera conjunta o separada, el pago de sus Cuentas de Tarifas o Peajes correspondientes a las distintas concesionarias y que contiene toda la información y las funcionalidades exigidas en la ley N° 21.547 y en el presente reglamento."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: concesiones-viales
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 42
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 172
+    name: "Panel"
+    definition: "Panel de Expertos establecido en el Título VI del decreto con fuerza de ley N°4/20.018, de 2006, del Ministerio de Economía, Fomento y Reconstrucción, que fija texto refundido, coordinado y sistematizado de la Ley General de Servicios Eléctricos, el cual se someterá a dicho cuerpo legal en todo lo que le sea aplicable, en especial respecto a su integración, carácter vinculante de su dictamen, financiamiento y plazos."
+    aliases:
+      - alias: "Panel de Expertos"
+        confidence: high
+        validated: false
+      - alias: "Panel de Expertos Eléctrico"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1010304"
+      norm_label: "LEY 20410"
+      article: "20"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010304"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 38
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 90
+    name: "Usuario Final"
+    definition: "Persona natural o jurídica sujeta a fijación de precios de acuerdo a lo dispuesto en la Ley General de Servicios Eléctricos y que utiliza el suministro de energía eléctrica para consumirlo. El Usuario Final podrá tener la calidad de Cliente;"
+    aliases:
+      []
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 38
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 80
+    name: "Cliente"
+    definition: "Persona natural o jurídica que acredite dominio sobre un inmueble o instalaciones que reciben servicio eléctrico. En este inmueble o instalación quedarán radicadas todas las obligaciones derivadas del servicio para con la empresa distribuidora;"
+    aliases:
+      []
+    source:
+      norm_id: "1038211"
+      norm_label: "LEY 20571"
+      article: "149 ter"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1038211"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 37
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 75
+    name: "Ajustes"
+    definition: "Modificaciones de parámetros técnicos de configuración para la operación de componentes existentes en la red de distribución, sin que se requiera su recambio para permitir la operación de un equipamiento de generación;"
+    aliases:
+      []
+    source:
+      norm_id: "1010304"
+      norm_label: "LEY 20410"
+      article: "1º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010304"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 36
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 199
+    name: "Aviso"
+    definition: "técnica habilitante alternativa correspondiente al acto mediante el cual la persona titular informa al órgano sectorial competente la construcción, instalación, habilitación, funcionamiento, desarrollo, suspensión, cierre o cese de un proyecto o actividad regulada, y que, por sus características, corresponde a aquellos que no requieren ser sometidos a autorización."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "165 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 35
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 180
+    name: "Medidor"
+    definition: "instrumento de propiedad de la empresa de gas destinado al registro del consumo de gas en metros cúbicos (m3), o en otras magnitudes que configuren el suministro, que incluye el regulador de servicio."
+    aliases:
+      []
+    source:
+      norm_id: "1115627"
+      norm_label: "LEY 21076"
+      article: "primero"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1115627"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 34
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 77
+    name: "Capacidad Instalada"
+    definition: "Suma de la potencia máxima de las unidades de generación que conforman el equipamiento de generación de un usuario final, expresada en kilowatts;"
+    aliases:
+      - alias: "potencia instalada"
+        confidence: high
+        validated: false
+      - alias: "kW instalados"
+        confidence: medium
+        validated: false
+      - alias: "capacidad nominal del parque"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1038211"
+      norm_label: "LEY 20571"
+      article: "149 ter"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1038211"
+    domain_context: generación
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 34
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 200
+    name: "Declaración jurada"
+    definition: "técnica habilitante alternativa correspondiente al documento suscrito por quien es titular de un proyecto o actividad, en el que manifiesta, bajo su responsabilidad, que cumple con los requisitos y condiciones impuestos por la normativa sectorial vigente para proceder a su construcción, instalación, habilitación, funcionamiento, desarrollo, suspensión, cierre o cese, y que, por sus características, corresponde a aquellos que no requieren ser sometidos a autorización."
+    aliases:
+      []
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "3º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 33
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 74
+    name: "Adecuaciones"
+    definition: "Obras físicas y trabajos en el punto de conexión de un equipamiento de generación a la red de distribución eléctrica necesarias para la construcción o modificación de la respectiva instalación de conexión o empalme, así como para la instalación o modificación del equipo de medida del respectivo equipamiento de generación;"
+    aliases:
+      - alias: "obras de adecuación"
+        confidence: high
+        validated: false
+      - alias: "adecuaciones de conexión"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1010668"
+      norm_label: "LEY 20416"
+      article: "Primero"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010668"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 31
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 141
+    name: "Deudor"
+    definition: "Toda Empresa Deudora o Persona Deudora, atendido el Procedimiento Concursal de que se trate y la naturaleza de la disposición a que se refiera."
+    aliases:
+      - alias: "el Deudor"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1010304"
+      norm_label: "LEY 20410"
+      article: "28 ter"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010304"
+    domain_context: concursal
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 30
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 277
+    name: "Sistema Eléctrico Nacional"
+    definition: "Sistema eléctrico interconectado cuya capacidad instalada de generación sea igual o superior a 200 megawatts."
+    aliases:
+      - alias: "SEN"
+        confidence: high
+        validated: false
+      - alias: "Sistema Eléctrico Nacional Chileno"
+        confidence: medium
+        validated: false
+      - alias: "SIC"
+        confidence: low
+        validated: false
+      - alias: "SING"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1099982"
+      norm_label: "LEY 20999"
+      article: "4"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1099982"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 30
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 123
+    name: "Vivienda"
+    definition: "Los bienes corporales inmuebles destinados a la habitación y las dependencias directas, tales como estacionamientos y bodegas amparadas por un mismo permiso de edificación o un mismo proyecto de construcción, siempre que el inmueble destinado a la habitación propiamente tal constituya la obra principal."
+    aliases:
+      []
+    source:
+      norm_id: "1005169"
+      norm_label: "LEY 20365"
+      article: "2º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1005169"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 28
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 139
+    name: "Correo electrónico"
+    definition: "medio de comunicación electrónica que permite el envío y recepción de información y documentos electrónicos."
+    aliases:
+      []
+    source:
+      norm_id: "1058072"
+      norm_label: "LEY 20720"
+      article: "2º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1058072"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 27
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 108
+    name: "Potencia de Suficiencia"
+    definition: "Potencia que una Unidad Generadora o Sistema de Almacenamiento de Energía aporta a la Suficiencia de Potencia del sistema o subsistema. A partir de dicha potencia, se determina la remuneración que resulte de las transferencias de potencia para cada Participante del Balance de Potencia."
+    aliases:
+      - alias: "potencia firme"
+        confidence: high
+        validated: false
+      - alias: "potencia inicial"
+        confidence: medium
+        validated: false
+      - alias: "potencia eficiente"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "29"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: generación
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 26
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 247
+    name: "Placa patente"
+    definition: "Distintivo que permite"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "34 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 25
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 83
+    name: "Equipamiento de Generación Conjunto"
+    definition: "Equipamiento de Generación del que disponen dos o más usuarios finales conectados a la misma red de distribución, en calidad de propietarios del mismo y que tiene por objeto abastecer sus propios consumos de energía e inyectar los excedentes de energía a la red de distribución. El Equipamiento de Generación deberá estar conectado a un único empalme de la misma red de distribución a la que se encuentran conectados los usuarios finales;"
+    aliases:
+      - alias: "generación conjunta"
+        confidence: high
+        validated: false
+      - alias: "generación compartida"
+        confidence: medium
+        validated: false
+      - alias: "equipamiento conjunto"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 24
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 272
+    name: "Sistema de Transmisión Nacional"
+    definition: "Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de se"
+    aliases:
+      - alias: "STN"
+        confidence: high
+        validated: false
+      - alias: "transmisión troncal"
+        confidence: medium
+        validated: false
+      - alias: "red troncal"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1112591"
+      norm_label: "RESOLUCIÓN 711"
+      article: "2°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1112591"
+    domain_context: transmisión
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 24
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 231
+    name: "Calzada"
+    definition: "Parte de una vía destinada al uso de vehículos y animales;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "2 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 24
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 87
+    name: "Obras Adicionales"
+    definition: "Obras físicas mayores y trabajos en la red de distribución eléctrica, necesarias para la conexión de un Equipamiento de Generación;"
+    aliases:
+      - alias: "obras adicionales de conexión"
+        confidence: medium
+        validated: false
+      - alias: "obras complementarias"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1010304"
+      norm_label: "LEY 20410"
+      article: "1º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010304"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 22
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 35
+    name: "Mora"
+    definition: "Para efectos de obtener el beneficio establecido en el inciso 3° del artículo 43 del decreto supremo N° 900, de 1996, del Ministerio de Obras Públicas, que fija el texto refundido, coordinado y sistematizado del decreto con fuerza de ley del Ministerio de Obras Públicas N° 164, de 1991, Ley de Concesiones de Obras Públicas, se entenderá que un Usuario de Sistema Interoperable está en Mora cuando existen deudas impagas en un plazo igual o inferior a 5 años. El cómputo de dicho término considerará"
+    aliases:
+      []
+    source:
+      norm_id: "1099982"
+      norm_label: "LEY 20999"
+      article: "33 quinquies"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1099982"
+    domain_context: concursal
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 21
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 21
+    name: "Ambiente Privado"
+    definition: "Sección del Sitio Electrónico Unificado de Tarifas y Peajes cuyo contenido y funciones están restringidos únicamente a Usuarios registrados, autorizados y autenticados a través de credenciales individuales."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "3"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: concesiones-viales
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 20
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 274
+    name: "Sistemas de Transmisión Dedicados"
+    definition: "son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso ante"
+    aliases:
+      - alias: "transmisión dedicada"
+        confidence: medium
+        validated: false
+      - alias: "STX"
+        confidence: low
+        validated: false
+      - alias: "transmisión adicional"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1112591"
+      norm_label: "RESOLUCIÓN 711"
+      article: "2°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1112591"
+    domain_context: transmisión
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 20
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 241
+    name: "Detención"
+    definition: "Paralización a que obligan los dispositivos de señalización del tránsito o las órdenes de los funcionarios encargados de su regulación, como asimismo, la paralización breve de un vehículo para recibir o dejar pasajeros, pero sólo mientras dure esta maniobra;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "86"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 20
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 203
+    name: "Normativa sectorial"
+    definition: "conjunto de normas, reglamentos y disposiciones legales que determinan la regulación de proyectos o actividades, en atención al objeto de protección en una determinada área de competencias."
+    aliases:
+      []
+    source:
+      norm_id: "1216930"
+      norm_label: "LEY 21770"
+      article: "5"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1216930"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 18
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 164
+    name: "Reposición"
+    definition: "Procederá contra aquellas resoluciones susceptibles e este recurso conforme a las reglas generales, deberá interponerse dentro del plazo de tres días contado desde la notificación de aquélla y podrá resolverse de plano o previa tramitación incidental, según determine el tribunal. Contra la resolución que resuelva la reposición no procederá recurso alguno."
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "88 bis"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 18
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 234
+    name: "Cruce"
+    definition: "La unión de una calle o camino con otros, aunque no los atraviese. Comprende todo el ancho de la calle o camino entre las líneas de edificación o deslindes en su caso;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "103 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: tránsito
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: "OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos."
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 18
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 109
+    name: "Potencia Máxima"
+    definition: "Máximo valor que puede sostener de manera continua una Unidad Generadora o Sistema de Almacenamiento de Energía, considerando, si corresponde, sus componentes de generación y de almacenamiento, ambas con el mismo punto de conexión al sistema eléctrico, de acuerdo a la norma técnica y la verificación que realice el Coordinador a través de pruebas destinadas especialmente para este fin. En el caso de Sistemas de Almacenamiento de Energía o de componentes de almacenamiento de Centrales Renovables c"
+    aliases:
+      - alias: "potencia nominal"
+        confidence: medium
+        validated: false
+      - alias: "Pmax"
+        confidence: high
+        validated: false
+      - alias: "capacidad nominal"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "25"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: generación
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 18
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 20
+    name: "Administrador del Sitio"
+    definition: "Es el tercero encargado de la creación, implementación, mantención y administración del Sitio Electrónico Unificado de Tarifas y Peajes, elegido previa licitación conforme a las reglas que se establecen en el presente reglamento y en las Bases de Licitación Sitio Electrónico Unificado de Tarifas y Peajes."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: concesiones-viales
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 17
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 178
+    name: "Empalme"
+    definition: "conjunto de tuberías y accesorios que conducen el gas desde el término de la acometida, o desde la salida de un tanque de almacenamiento cuando no exista acometida, hasta la entrada del regulador de servicio."
+    aliases:
+      - alias: "empalme eléctrico"
+        confidence: medium
+        validated: false
+      - alias: "conexión a la red"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1115627"
+      norm_label: "LEY 21076"
+      article: "primero"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1115627"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 16
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 43
+    name: "Sistema Interoperable"
+    definition: "Es aquel conformado por los contratos de concesión vigentes o futuros y otros servicios autorizados o que se autoricen conforme a la legislación vigente, que utilicen el Sistema Electrónico de Cobro de Tarifas o Peajes y que permite que se comuniquen entre sí y compartan información en tiempo real."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: concesiones-viales
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 15
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 190
+    name: "Biocombustibles sólidos"
+    definition: "los combustibles elaborados a partir de biomasa de origen leñoso o no leñoso, tales como leña, pellets, carbón vegetal, briquetas y astillas, entre otros."
+    aliases:
+      - alias: "pellets"
+        confidence: high
+        validated: false
+      - alias: "leña"
+        confidence: high
+        validated: false
+      - alias: "briquetas"
+        confidence: high
+        validated: false
+      - alias: "combustibles sólidos"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1183783"
+      norm_label: "LEY 21499"
+      article: "2"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1183783"
+    domain_context: renovables
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 15
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 104
+    name: "Insumo Principal"
+    definition: "Insumo o combustible con el cual la Unidad Generadora puede operar en forma continua, a un menor costo variable promedio durante el año anterior al Año de Cálculo, para una determinada Potencia Máxima."
+    aliases:
+      []
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "segundo"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 14
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 1
+    name: "AR"
+    definition: "Ajuste o recargo aplicable a los clientes"
+    aliases:
+      - alias: "Ajuste y Recargo"
+        confidence: medium
+        validated: false
+      - alias: "ajuste o recargo"
+        confidence: medium
+        validated: false
+      - alias: "ajustes tarifarios"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1067875"
+      norm_label: "DECRETO 2"
+      article: "PRIMERO"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1067875"
+    domain_context: tarifario
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 14
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 3
+    name: "PNPP"
+    definition: "Precio de nudo de la potencia de punta promedio"
+    aliases:
+      - alias: "Precio de Nudo de Potencia de Punta Promedio"
+        confidence: high
+        validated: false
+      - alias: "precio nudo potencia"
+        confidence: medium
+        validated: false
+      - alias: "PNP promedio"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1067875"
+      norm_label: "DECRETO 2"
+      article: "PRIMERO"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1067875"
+    domain_context: tarifario
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 14
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 2
+    name: "PNEP"
+    definition: "Precio de nudo de la energía promedio para"
+    aliases:
+      - alias: "Precio de Nudo de la Energía Promedio"
+        confidence: high
+        validated: false
+      - alias: "precio nudo energía"
+        confidence: medium
+        validated: false
+      - alias: "PNE promedio"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1067875"
+      norm_label: "DECRETO 2"
+      article: "PRIMERO"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1067875"
+    domain_context: tarifario
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 14
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 79
+    name: "Capacidad de Inyección"
+    definition: "Suma de la potencia máxima que el equipamiento de generación es capaz de inyectar a la red, expresada en kilowatts;"
+    aliases:
+      - alias: "potencia de inyección"
+        confidence: high
+        validated: false
+      - alias: "inyección máxima"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "11"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 14
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 189
+    name: "Biomasa"
+    definition: "la materia orgánica sólida, biodegradable, de origen vegetal o animal, que puede ser usada como materia prima para la elaboración de biocombustibles sólidos."
+    aliases:
+      - alias: "biomasa sólida"
+        confidence: medium
+        validated: false
+      - alias: "materia orgánica energética"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1183783"
+      norm_label: "LEY 21499"
+      article: "2"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1183783"
+    domain_context: renovables
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 76
+    name: "Cargos por Suministro Eléctrico"
+    definition: "Cargos tarifarios correspondientes a las distintas opciones tarifarias de acuerdo a lo establecido en el decreto 11T, de 2016, del Ministerio de Energía, que fija fórmulas tarifarias aplicables a los suministros sujetos a precios regulados que se señalan, efectuados por las empresas concesionarias de distribución que se indican, o el que lo reemplace;"
+    aliases:
+      - alias: "cargos tarifarios"
+        confidence: medium
+        validated: false
+      - alias: "cargos por suministro"
+        confidence: medium
+        validated: false
+      - alias: "tarifa eléctrica"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "2º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: tarifario
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 85
+    name: "Inyección de Excedentes Permitida"
+    definition: "Cálculo de la inyección máxima de potencia que el Equipamiento de Generación puede realizar en régimen permanente en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;"
+    aliases:
+      - alias: "IEP"
+        confidence: high
+        validated: false
+      - alias: "inyección permitida"
+        confidence: medium
+        validated: false
+      - alias: "límite de inyección"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 78
+    name: "Capacidad Instalada Permitida"
+    definition: "Cálculo de la capacidad del equipamiento de generación máxima que puede conectar un usuario final en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;"
+    aliases:
+      - alias: "capacidad permitida"
+        confidence: medium
+        validated: false
+      - alias: "límite de capacidad de conexión"
+        confidence: medium
+        validated: false
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: distribución
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 128
+    name: "Iniciativas de Inversión"
+    definition: "corresponde a los gastos por concepto de estudios preinversionales, de prefactibilidad, factibilidad y diseño, destinados a generar información que sirva para decidir y llevar a cabo la ejecución futura de proyectos de inversión pública. Asimismo, considera los gastos en proyectos de inversión que realizan los organismos del sector público, para inicio de ejecución de obras y/o la continuación de las obras iniciadas en años anteriores, con el fin de incrementar, mantener o mejorar la producción"
+    aliases:
+      []
+    source:
+      norm_id: "1030861"
+      norm_label: "LEY 20530"
+      article: "87 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1030861"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 271
+    name: "Planificación Energética"
+    definition: "Proceso de planificación energética de largo plazo que debe realizar el Ministerio de Energía, en conformidad a lo dispuesto en el artículo 83º de la Ley;"
+    aliases:
+      []
+    source:
+      norm_id: "1112591"
+      norm_label: "RESOLUCIÓN 711"
+      article: "2°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1112591"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 13
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 102
+    name: "Estado de Reserva Estratégica"
+    definition: "Corresponde a un Estado Deteriorado en que puede encontrarse una Unidad Generadora, solicitado por el correspondiente Participante del Balance de Potencia y aprobado por el Coordinador, en los términos que establece el Artículo 25 bis del presente reglamento."
+    aliases:
+      []
+    source:
+      norm_id: "250604"
+      norm_label: "DECRETO 62"
+      article: "13"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=250604"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 12
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 25
+    name: "Convenio de Pago de Multa TAG"
+    definition: "Es el acuerdo formal entre una persona natural o jurídica a cuyo nombre está inscrito un vehículo y la municipalidad respectiva ante la cual se pretende renovar o pagar de forma atrasada el permiso de circulación, el que debe ser suscrito en forma simultánea con la renovación o el pago de dicho permiso, sujeto a las condiciones establecidas en el artículo 43 ter de la ley N° 18.287, que establece procedimiento ante los juzgados de policía local."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 12
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 37
+    name: "Multa TAG"
+    definition: "Es la sanción impuesta por el tribunal competente a un Usuario de Sistema Interoperable por haber incurrido en la prohibición dispuesta en el inciso primero del artículo 114 de la ley N° 18.290 de Tránsito; o en infracción a lo dispuesto en el inciso segundo del artículo 42 del decreto supremo N° 900, de 1996, del Ministerio de Obras Públicas, que fija el texto refundido, coordinado y sistematizado del decreto con fuerza de ley del Ministerio de Obras Públicas N° 164, de 1991, Ley de Concesiones"
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 12
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 92
+    name: "Año de Cálculo"
+    definition: "Período comprendido entre enero y diciembre de cada año, para el cual se determinan los pagos asociados a las transferencias de potencia."
+    aliases:
+      []
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "segundo"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 11
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 48
+    name: "Usuario de Sistema Interoperable"
+    definition: "Es la persona natural o jurídica obligada al pago de Tarifas o Peajes que forman parte del Sistema Interoperable, con o sin Contrato Televía."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "1"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 11
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 177
+    name: "Zona de concesión"
+    definition: "para los efectos de esta ley se entenderá por zona de concesión el conjunto de zonas geográficas ubicadas en una misma región, especificadas en uno o más decretos de concesión de servicio público de gas de red de una empresa concesionaria. Sin perjuicio de lo anterior, en el caso que la zona geográfica identificada en uno o más decretos de concesión abarque de manera continua dos regiones adyacentes, la Comisión podrá considerar dicha zona geográfica como parte de una misma zona de concesión. Pa"
+    aliases:
+      []
+    source:
+      norm_id: "1067875"
+      norm_label: "DECRETO 2"
+      article: "PRIMERO"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1067875"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 11
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 206
+    name: "Procedimiento sectorial"
+    definition: "procedimiento administrativo, iniciado a solicitud de parte, destinado al otorgamiento de una autorización sectorial."
+    aliases:
+      []
+    source:
+      norm_id: "1216930"
+      norm_label: "LEY 21770"
+      article: "5"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1216930"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 11
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 81
+    name: "Equipamiento de Generación Individual"
+    definition: "Equipamiento de Generación del que dispone un único usuario final y tiene por objeto abastecer sus propios consumos de energía e inyectar los excedentes de energía a la red de distribución;"
+    aliases:
+      []
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 10
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 82
+    name: "Equipamiento de Generación Individual con Descuentos Remotos"
+    definition: "Equipamiento de Generación Individual cuyos remanentes de energía valorizados, de acuerdo a lo establecido en el artículo 149 bis de la ley, son descontados de los Cargos por Suministro Eléctrico correspondientes a más de un inmueble o instalación de propiedad del mismo Cliente, conectadas a las redes de distribución del mismo concesionario de servicio público de distribución;"
+    aliases:
+      []
+    source:
+      norm_id: "1149788"
+      norm_label: "DECRETO 57"
+      article: "4º"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1149788"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 10
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 28
+    name: "Coordinadora para el Proceso de Licitación"
+    definition: "Es aquella entidad que asume la obligación de realizar un proceso de licitación para la creación, implementación, mantención y administración del Sitio Electrónico Unificado de Tarifas y Peajes, conforme las reglas establecidas en el Título VI del presente reglamento. Asimismo, es la entidad encargada de ejercer como contraparte en el contrato que se suscriba con dicho Administrador del Sitio."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "3"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 10
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 154
+    name: "Procedimiento Concursal"
+    definition: "cualquiera de los regulados en esta ley, denominados, indistintamente, Procedimiento Concursal de Reorganización de la Empresa Deudora, Procedimiento Concursal de Liquidación de la Empresa Deudora, Procedimiento Concursal de Renegociación de la Persona Deudora"
+    aliases:
+      - alias: "proceso concursal"
+        confidence: high
+        validated: false
+      - alias: "quiebra"
+        confidence: medium
+        validated: false
+      - alias: "concurso de acreedores"
+        confidence: low
+        validated: false
+    source:
+      norm_id: "1010668"
+      norm_label: "LEY 20416"
+      article: "6°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1010668"
+    domain_context: concursal
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 10
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 275
+    name: "Sistemas de Transmisión Zonal"
+    definition: "son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;"
+    aliases:
+      []
+    source:
+      norm_id: "1112591"
+      norm_label: "RESOLUCIÓN 711"
+      article: "2°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1112591"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 10
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 266
+    name: "Escenario"
+    definition: "Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;"
+    aliases:
+      []
+    source:
+      norm_id: "1112591"
+      norm_label: "RESOLUCIÓN 711"
+      article: "2°"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1112591"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 9
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 240
+    name: "Derecho preferente de paso"
+    definition: "Prerrogativa de un peatón o conductor de un vehículo para proseguir su marcha;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "134"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 9
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 98
+    name: "Demanda de Punta"
+    definition: "Demanda promedio de los 52 mayores valores horarios de la curva de carga anual de cada sistema o subsistema."
+    aliases:
+      []
+    source:
+      norm_id: "1047565"
+      norm_label: "DECRETO 130"
+      article: "segundo"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1047565"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 9
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 47
+    name: "Usuarios Acreditados"
+    definition: "Son aquellos que corresponden a la denominación conjunta de Usuarios de Sitio Electrónico Unificado de Tarifas y Peajes, Usuarios Administradores Municipales, Usuarios Funcionarios Municipales, Usuarios Administradores Sociedad Concesionaria y Usuarios Sociedad Concesionaria."
+    aliases:
+      []
+    source:
+      norm_id: "1207690"
+      norm_label: "DECRETO 262"
+      article: "3"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1207690"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 9
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 94
+    name: "Central Renovable con Capacidad de Almacenamiento"
+    definition: "Central de generación renovable que utiliza recursos primarios variables, compuesta por una componente de generación y una componente de almacenamiento, ambas con el mismo punto de conexión al sistema eléctrico. La componente de generación corresponde al equipamiento tecnológico para transformar energía primaria en energía eléctrica, en tanto la componente de almacenamiento es aquel equipamiento capaz de transformar la energía eléctrica re"
+    aliases:
+      []
+    source:
+      norm_id: "1204012"
+      norm_label: "DECRETO 70"
+      article: "primero"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1204012"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 9
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
+
+  - id: 225
+    name: "Acera"
+    definition: "Parte de una vía destinada al uso de peatones;"
+    aliases:
+      []
+    source:
+      norm_id: "1007469"
+      norm_label: "DFL 1"
+      article: "1 D"
+      url: "https://www.bcn.cl/leychile/navegar?idNorma=1007469"
+    domain_context: general
+    status: not_reviewed
+    relations:
+      related: []
+      broader: []
+      narrower: []
+    notes: ""
+    extraction_difficulty: ""
+    metadata:
+      refs_count: 8
+      last_reviewed_by: auto
+      last_reviewed_date: "2026-05-02"
