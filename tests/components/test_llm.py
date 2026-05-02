@@ -59,12 +59,20 @@ def test_get_llm_provider_real_when_key_real(monkeypatch):
     assert isinstance(provider, LiteLLMProvider)
 
 
-def test_litellm_uses_ollama_grammar_when_provided():
-    """When model is ollama/* and grammar is given, bypass litellm and call Ollama API directly."""
-    grammar = 'root ::= "[Art. 1 de X]"\n'
+def test_litellm_uses_ollama_format_when_schema_provided():
+    """When model is ollama/* and response_format (JSON schema) is given,
+    bypass litellm and post directly to /api/generate with `format` field."""
+    schema = {
+        "type": "object",
+        "properties": {
+            "answer": {"type": "string"},
+            "citations": {"type": "array", "items": {"type": "string", "enum": ["[Art. 1 de X]"]}},
+        },
+        "required": ["answer", "citations"],
+    }
     fake_resp = MagicMock()
     fake_resp.json.return_value = {
-        "response": "[Art. 1 de X]",
+        "response": '{"answer": "ok", "citations": ["[Art. 1 de X]"]}',
         "prompt_eval_count": 50,
         "eval_count": 10,
     }
@@ -73,41 +81,40 @@ def test_litellm_uses_ollama_grammar_when_provided():
         resp = provider.generate(
             "test prompt",
             model="ollama/qwen2.5:7b",
-            grammar=grammar,
+            response_format=schema,
         )
-        assert resp.text == "[Art. 1 de X]"
+        assert "[Art. 1 de X]" in resp.text
         assert resp.tokens_in == 50
         assert resp.tokens_out == 10
         mock_post.assert_called_once()
-        # Grammar must be in the request body
         body = mock_post.call_args.kwargs["json"]
-        assert body["grammar"] == grammar
+        assert body["format"] == schema
         assert body["model"] == "qwen2.5:7b"
 
 
-def test_litellm_ignores_grammar_for_non_ollama_model():
-    """For Claude/OpenAI models, grammar param is ignored (doesn't break call)."""
+def test_litellm_passes_schema_for_non_ollama_model():
+    """For Claude/OpenAI models, response_format is forwarded to litellm as
+    json_schema (provider-native structured outputs)."""
     with patch("src.components.llm.litellm.completion") as mock:
         mock.return_value = type("X", (), {
-            "choices": [type("Y", (), {"message": type("Z", (), {"content": "ok"})})()],
+            "choices": [type("Y", (), {"message": type("Z", (), {"content": '{"answer":"ok","citations":[]}'})})()],
             "usage": type("U", (), {"prompt_tokens": 5, "completion_tokens": 2})(),
             "model": "claude-haiku-4-5",
         })()
         provider = LiteLLMProvider()
-        # Pass grammar — should be ignored, normal litellm call should proceed
+        schema = {"type": "object", "properties": {"answer": {"type": "string"}}}
         resp = provider.generate(
             "hi",
             model="claude-haiku-4-5-20251001",
-            grammar="root ::= anything",
+            response_format=schema,
         )
-        assert resp.text == "ok"
-        # Grammar should NOT have been added to litellm kwargs
+        assert '"answer"' in resp.text
         kwargs_passed = mock.call_args.kwargs
-        assert "grammar" not in kwargs_passed
+        assert kwargs_passed.get("response_format", {}).get("type") == "json_schema"
 
 
-def test_litellm_no_grammar_uses_default_litellm_path_for_ollama():
-    """For Ollama without grammar, use the existing litellm flow (regression check)."""
+def test_litellm_no_schema_uses_default_litellm_path_for_ollama():
+    """For Ollama without response_format, use the existing litellm flow."""
     with patch("src.components.llm.litellm.completion") as mock:
         mock.return_value = type("X", (), {
             "choices": [type("Y", (), {"message": type("Z", (), {"content": "regular ollama"})})()],
@@ -117,14 +124,16 @@ def test_litellm_no_grammar_uses_default_litellm_path_for_ollama():
         provider = LiteLLMProvider()
         resp = provider.generate("hi", model="ollama/qwen2.5:7b")
         assert resp.text == "regular ollama"
-        # max_tokens dropped, num_ctx set (existing Ollama behavior)
         kwargs_passed = mock.call_args.kwargs
         assert "max_tokens" not in kwargs_passed
         assert kwargs_passed.get("num_ctx") == 8192
 
 
-def test_mock_provider_accepts_grammar_param():
-    """MockLLMProvider must accept grammar kwarg so test code stays uniform."""
+def test_mock_provider_accepts_response_format_param():
+    """MockLLMProvider must accept response_format kwarg so test code stays uniform."""
     provider = MockLLMProvider()
-    resp = provider.generate("any prompt", grammar="root ::= 'x'")
+    resp = provider.generate(
+        "any prompt",
+        response_format={"type": "object", "properties": {}},
+    )
     assert isinstance(resp, LLMResponse)

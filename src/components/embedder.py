@@ -16,7 +16,16 @@ def _supports_fp16(device: str) -> bool:
 
 class Qwen3Embedder:
     def __init__(self, model_name: str | None = None, device: str | None = None):
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        # Resolve device: explicit arg > settings override > auto-detect.
+        # Setting EMBEDDER_DEVICE=cpu via .env is the standard escape hatch
+        # when Ollama occupies GPU VRAM with a large model.
+        if device is None:
+            cfg = (settings.embedder_device or "auto").lower()
+            if cfg == "auto":
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            else:
+                device = cfg
+        self.device = device
         self.model_name = model_name or settings.qwen_embedding_model
         self.model = SentenceTransformer(
             self.model_name,

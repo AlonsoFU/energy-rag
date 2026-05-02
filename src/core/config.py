@@ -14,6 +14,8 @@ class Settings(BaseSettings):
 
     qwen_embedding_model: str = "Qwen/Qwen3-Embedding-0.6B"
     qwen_reranker_model: str = "Qwen/Qwen3-Reranker-0.6B"
+    embedder_device: str = "auto"  # "auto" | "cuda" | "cpu" — set "cpu" when LLM occupies GPU
+    reranker_device: str = "auto"  # same semantics as embedder_device
 
     llm_default: str = "claude-sonnet-4-6"
     llm_haiku: str = "claude-haiku-4-5-20251001"
