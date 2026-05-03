@@ -5,10 +5,10 @@
 > Para editar: modificar `glossary/concepts.yaml`, después correr `python scripts/render_glossary.py`.
 
 
-**Total conceptos:** 80
+**Total conceptos:** 215
 
-- **Reviewed**: 0 / 80
-- **Validated aliases**: 0 / 85
+- **Reviewed**: 0 / 215
+- **Validated aliases**: 0 / 93
 
 ## 1. Instituciones y términos generales
 
@@ -89,6 +89,22 @@
 
 ---
 
+### Código Penal
+**Status:** ⏳ not_reviewed · **Refs:** 88
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=88 category=norma legal reason=El Código Penal es una norma legal específica y fundamental que, aunque no es exclusivo del sector eléctrico, es un conc
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Sistema Eléctrico
 **Status:** ⏳ not_reviewed · **Refs:** 88
 
@@ -104,15 +120,35 @@
 
 ---
 
-### Titular
-**Status:** ⏳ not_reviewed · **Refs:** 83
+### Unidad Generadora
+**Status:** ⏳ not_reviewed · **Refs:** 88
 
 **Definición:**
-> persona natural o jurídica sobre quien recae la responsabilidad legal de un proyecto o actividad que, de acuerdo con la ley, exige obtener una habilitación previa para su realización.
+> 
 
-**Fuente:** [DFL 1, 19](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
+**Fuente:** [detected via multi_phrase, varios]()
 
 **Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=88 category=concepto técnico reason=La 'Unidad Generadora' es un término técnico específico definido en la normativa eléctrica chilena (ej. D.S. 145/2010) q
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Código Procesal Penal
+**Status:** ⏳ not_reviewed · **Refs:** 84
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=84 category=norma legal reason=Aunque no es una norma eléctrica, es un concepto técnico-jurídico real y específico que debe registrarse para evitar amb
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
 
 ---
 
@@ -123,6 +159,18 @@
 > persona natural o jurídica que efectúa una solicitud ante un órgano de la Administración del Estado para la obtención de una autorización sectorial.
 
 **Fuente:** [DFL 1, 14 D](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Titular
+**Status:** ⏳ not_reviewed · **Refs:** 83
+
+**Definición:**
+> persona natural o jurídica sobre quien recae la responsabilidad legal de un proyecto o actividad que, de acuerdo con la ley, exige obtener una habilitación previa para su realización.
+
+**Fuente:** [DFL 1, 19](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
 
 **Aliases:** _sin propuestas todavía_
 
@@ -144,6 +192,22 @@
 
 ---
 
+### Sistema de Almacenamiento de Energía
+**Status:** ⏳ not_reviewed · **Refs:** 63
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=63 category=concepto técnico reason=El término 'Sistema de Almacenamiento de Energía' es un concepto técnico estándar utilizado en la normativa eléctrica ch
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Órganos sectoriales
 **Status:** ⏳ not_reviewed · **Refs:** 56
 
@@ -153,6 +217,22 @@
 **Fuente:** [LEY 20530, 103 D](https://www.bcn.cl/leychile/navegar?idNorma=1030861)
 
 **Aliases:** _sin propuestas todavía_
+
+---
+
+### Estudios de Valorización
+**Status:** ⏳ not_reviewed · **Refs:** 52
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=52 category=concepto técnico reason=El término 'Estudios de Valorización' es un concepto técnico utilizado en normativas chilenas (como el D.S. 594/2021) pa
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=medium
 
 ---
 
@@ -180,6 +260,22 @@
 
 ---
 
+### Unidades Generadoras
+**Status:** ⏳ not_reviewed · **Refs:** 48
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=48 category=concepto técnico reason=Las 'Unidades Generadoras' es un término técnico específico utilizado en la normativa eléctrica chilena para referirse a
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Técnicas habilitantes alternativas
 **Status:** ⏳ not_reviewed · **Refs:** 47
 
@@ -189,6 +285,38 @@
 **Fuente:** [LEY 20530, 103 D](https://www.bcn.cl/leychile/navegar?idNorma=1030861)
 
 **Aliases:** _sin propuestas todavía_
+
+---
+
+### Subsecretaría de Energía
+**Status:** ⏳ not_reviewed · **Refs:** 43
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=43 category=institución reason=La Subsecretaría de Energía es una entidad gubernamental real y específica dentro del Ministerio de Energía de Chile que
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Código Orgánico de Tribunales
+**Status:** ⏳ not_reviewed · **Refs:** 41
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=41 category=norma legal reason=Es un nombre propio específico de una ley fundamental que regula el funcionamiento de los tribunales en Chile, por lo qu
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
 
 ---
 
@@ -231,6 +359,22 @@
 
 ---
 
+### Unidad Generadora o Sistema de Almacenamiento de Energía
+**Status:** ⏳ not_reviewed · **Refs:** 37
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=37 category=concepto técnico reason=El término corresponde a una definición normativa específica utilizada en la regulación eléctrica chilena para referirse
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Ajustes
 **Status:** ⏳ not_reviewed · **Refs:** 36
 
@@ -255,6 +399,22 @@
 
 ---
 
+### Constitución Política de la República
+**Status:** ⏳ not_reviewed · **Refs:** 34
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=34 category=norma legal reason=Aunque no es una norma eléctrica específica, es un concepto legal fundamental que define el marco jurídico dentro del cu
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Medidor
 **Status:** ⏳ not_reviewed · **Refs:** 34
 
@@ -276,6 +436,22 @@
 **Fuente:** [LEY 20365, 3º](https://www.bcn.cl/leychile/navegar?idNorma=1005169)
 
 **Aliases:** _sin propuestas todavía_
+
+---
+
+### Dirección General de Aguas
+**Status:** ⏳ not_reviewed · **Refs:** 32
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=32 category=institución reason=La Dirección General de Aguas es una entidad del Estado chileno con funciones legales y administrativas definidas en el
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
 
 ---
 
@@ -320,6 +496,166 @@
 
 ---
 
+### Código de Procedimiento Civil
+**Status:** ⏳ not_reviewed · **Refs:** 27
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=27 category=norma legal reason=Aunque no es una norma eléctrica específica, es un concepto legal real y fundamental que frecuentemente se cita en el co
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Centrales Renovables
+**Status:** ⏳ not_reviewed · **Refs:** 25
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=25 category=institución reason=Se trata de un término técnico legal real que designa a las plantas de generación de energía no convencional reguladas p
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Dirección de Presupuestos
+**Status:** ⏳ not_reviewed · **Refs:** 24
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=24 category=institución reason=La Dirección de Presupuestos es una entidad real del Estado de Chile que, aunque no es estrictamente un concepto técnico
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Sistema de Información Unificado de Permisos Sectoriales
+**Status:** ⏳ not_reviewed · **Refs:** 23
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=23 category=institución reason=Es un término técnico específico que designa un sistema de gestión de permisos sectoriales en Chile, aunque su implement
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Corte de Apelaciones
+**Status:** ⏳ not_reviewed · **Refs:** 22
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=22 category=institución reason=Es un término jurídico real que designa a un órgano judicial específico, aunque su relevancia directa en normativa eléct
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Fondo Común Municipal
+**Status:** ⏳ not_reviewed · **Refs:** 22
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=22 category=institución reason=El Fondo Común Municipal es un concepto legal específico definido en la Ley Orgánica Constitucional de Municipalidades (
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Tesoro Público
+**Status:** ⏳ not_reviewed · **Refs:** 20
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=20 category=institución reason=Aunque es un término legal válido en el derecho chileno, no pertenece al dominio eléctrico y su inclusión en un glosario
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Unidades Generadoras o Sistemas de Almacenamiento de Energía
+**Status:** ⏳ not_reviewed · **Refs:** 20
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=20 category=concepto técnico reason=El término corresponde a una denominación legal específica utilizada en la normativa chilena para referirse a activos de
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Estatuto Administrativo
+**Status:** ⏳ not_reviewed · **Refs:** 18
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=18 category=norma legal reason=El Estatuto Administrativo es una norma legal real y específica que regula la organización y funcionamiento de la admini
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Juzgados de Policía Local
+**Status:** ⏳ not_reviewed · **Refs:** 18
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=18 category=institución reason=Aunque no es un término técnico eléctrico, es un concepto legal real y específico del sistema judicial chilén que aparec
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Normativa sectorial
 **Status:** ⏳ not_reviewed · **Refs:** 18
 
@@ -344,6 +680,118 @@
 
 ---
 
+### Contraloría General de la República
+**Status:** ⏳ not_reviewed · **Refs:** 17
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=17 category=institución reason=Es una institución estatal específica mencionada frecuentemente en la normativa chilena como entidad fiscalizadora, aunq
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Panel de Expertos
+**Status:** ⏳ not_reviewed · **Refs:** 17
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=17 category=institución reason=El término 'Panel de Expertos' es un concepto técnico-administrativo real utilizado en la normativa chilena para designa
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Modernización de Autorizaciones Sectoriales
+**Status:** ⏳ not_reviewed · **Refs:** 16
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=16 category=institución reason=El término se refiere a un proceso administrativo específico dentro del marco regulatorio chileno, aunque su uso como co
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=medium
+
+---
+
+### Cortes de Apelaciones
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=institución reason=Se trata de un término jurídico real que designa a un órgano judicial específico del sistema chileno, aunque su relevanc
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Director Regional
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=concepto técnico reason=El término 'Director Regional' es un cargo específico definido en la normativa chilena (como el DFL 4 de Electricidad) q
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Sistema de Evaluación de Impacto Ambiental
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=institución reason=Es un término técnico y legal específico que designa a la autoridad ambiental competente en Chile, no siendo un fragment
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Sistema Solar Térmico
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=institución reason=El término 'Sistema Solar Térmico' es un concepto técnico real definido en la normativa chilena (ej. NCh 2041) como una
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Insumo Principal
 **Status:** ⏳ not_reviewed · **Refs:** 14
 
@@ -353,6 +801,22 @@
 **Fuente:** [DECRETO 130, segundo](https://www.bcn.cl/leychile/navegar?idNorma=1047565)
 
 **Aliases:** _sin propuestas todavía_
+
+---
+
+### Polos de Desarrollo
+**Status:** ⏳ not_reviewed · **Refs:** 14
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=14 category=institución reason=Los Polos de Desarrollo son entidades institucionales reconocidas en la normativa chilena (como el DFL 4 de Electricidad
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
 
 ---
 
@@ -380,18 +844,6 @@
 
 ---
 
-### Estado de Reserva Estratégica
-**Status:** ⏳ not_reviewed · **Refs:** 12
-
-**Definición:**
-> Corresponde a un Estado Deteriorado en que puede encontrarse una Unidad Generadora, solicitado por el correspondiente Participante del Balance de Potencia y aprobado por el Coordinador, en los términos que establece el Artículo 25 bis del presente reglamento.
-
-**Fuente:** [DECRETO 62, 13](https://www.bcn.cl/leychile/navegar?idNorma=250604)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
 ### Convenio de Pago de Multa TAG
 **Status:** ⏳ not_reviewed · **Refs:** 12
 
@@ -399,6 +851,18 @@
 > Es el acuerdo formal entre una persona natural o jurídica a cuyo nombre está inscrito un vehículo y la municipalidad respectiva ante la cual se pretende renovar o pagar de forma atrasada el permiso de circulación, el que debe ser suscrito en forma simultánea con la renovación o el pago de dicho permiso, sujeto a las condiciones establecidas en el artículo 43 ter de la ley N° 18.287, que establece procedimiento ante los juzgados de policía local.
 
 **Fuente:** [DECRETO 262, 1](https://www.bcn.cl/leychile/navegar?idNorma=1207690)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Estado de Reserva Estratégica
+**Status:** ⏳ not_reviewed · **Refs:** 12
+
+**Definición:**
+> Corresponde a un Estado Deteriorado en que puede encontrarse una Unidad Generadora, solicitado por el correspondiente Participante del Balance de Potencia y aprobado por el Coordinador, en los términos que establece el Artículo 25 bis del presente reglamento.
+
+**Fuente:** [DECRETO 62, 13](https://www.bcn.cl/leychile/navegar?idNorma=250604)
 
 **Aliases:** _sin propuestas todavía_
 
@@ -428,6 +892,18 @@
 
 ---
 
+### Procedimiento sectorial
+**Status:** ⏳ not_reviewed · **Refs:** 11
+
+**Definición:**
+> procedimiento administrativo, iniciado a solicitud de parte, destinado al otorgamiento de una autorización sectorial.
+
+**Fuente:** [LEY 21770, 5](https://www.bcn.cl/leychile/navegar?idNorma=1216930)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
 ### Usuario de Sistema Interoperable
 **Status:** ⏳ not_reviewed · **Refs:** 11
 
@@ -452,13 +928,13 @@
 
 ---
 
-### Procedimiento sectorial
-**Status:** ⏳ not_reviewed · **Refs:** 11
+### Coordinadora para el Proceso de Licitación
+**Status:** ⏳ not_reviewed · **Refs:** 10
 
 **Definición:**
-> procedimiento administrativo, iniciado a solicitud de parte, destinado al otorgamiento de una autorización sectorial.
+> Es aquella entidad que asume la obligación de realizar un proceso de licitación para la creación, implementación, mantención y administración del Sitio Electrónico Unificado de Tarifas y Peajes, conforme las reglas establecidas en el Título VI del presente reglamento. Asimismo, es la entidad encargada de ejercer como contraparte en el contrato que se suscriba con dicho Administrador del Sitio.
 
-**Fuente:** [LEY 21770, 5](https://www.bcn.cl/leychile/navegar?idNorma=1216930)
+**Fuente:** [DECRETO 262, 3](https://www.bcn.cl/leychile/navegar?idNorma=1207690)
 
 **Aliases:** _sin propuestas todavía_
 
@@ -488,18 +964,6 @@
 
 ---
 
-### Coordinadora para el Proceso de Licitación
-**Status:** ⏳ not_reviewed · **Refs:** 10
-
-**Definición:**
-> Es aquella entidad que asume la obligación de realizar un proceso de licitación para la creación, implementación, mantención y administración del Sitio Electrónico Unificado de Tarifas y Peajes, conforme las reglas establecidas en el Título VI del presente reglamento. Asimismo, es la entidad encargada de ejercer como contraparte en el contrato que se suscriba con dicho Administrador del Sitio.
-
-**Fuente:** [DECRETO 262, 3](https://www.bcn.cl/leychile/navegar?idNorma=1207690)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
 ### Sistemas de Transmisión Zonal
 **Status:** ⏳ not_reviewed · **Refs:** 10
 
@@ -507,54 +971,6 @@
 > son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;
 
 **Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Escenario
-**Status:** ⏳ not_reviewed · **Refs:** 9
-
-**Definición:**
-> Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;
-
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Derecho preferente de paso
-**Status:** ⏳ not_reviewed · **Refs:** 9
-
-**Definición:**
-> Prerrogativa de un peatón o conductor de un vehículo para proseguir su marcha;
-
-**Fuente:** [DFL 1, 134](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Demanda de Punta
-**Status:** ⏳ not_reviewed · **Refs:** 9
-
-**Definición:**
-> Demanda promedio de los 52 mayores valores horarios de la curva de carga anual de cada sistema o subsistema.
-
-**Fuente:** [DECRETO 130, segundo](https://www.bcn.cl/leychile/navegar?idNorma=1047565)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Usuarios Acreditados
-**Status:** ⏳ not_reviewed · **Refs:** 9
-
-**Definición:**
-> Son aquellos que corresponden a la denominación conjunta de Usuarios de Sitio Electrónico Unificado de Tarifas y Peajes, Usuarios Administradores Municipales, Usuarios Funcionarios Municipales, Usuarios Administradores Sociedad Concesionaria y Usuarios Sociedad Concesionaria.
-
-**Fuente:** [DECRETO 262, 3](https://www.bcn.cl/leychile/navegar?idNorma=1207690)
 
 **Aliases:** _sin propuestas todavía_
 
@@ -572,6 +988,54 @@
 
 ---
 
+### Demanda de Punta
+**Status:** ⏳ not_reviewed · **Refs:** 9
+
+**Definición:**
+> Demanda promedio de los 52 mayores valores horarios de la curva de carga anual de cada sistema o subsistema.
+
+**Fuente:** [DECRETO 130, segundo](https://www.bcn.cl/leychile/navegar?idNorma=1047565)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Derecho preferente de paso
+**Status:** ⏳ not_reviewed · **Refs:** 9
+
+**Definición:**
+> Prerrogativa de un peatón o conductor de un vehículo para proseguir su marcha;
+
+**Fuente:** [DFL 1, 134](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Escenario
+**Status:** ⏳ not_reviewed · **Refs:** 9
+
+**Definición:**
+> Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Usuarios Acreditados
+**Status:** ⏳ not_reviewed · **Refs:** 9
+
+**Definición:**
+> Son aquellos que corresponden a la denominación conjunta de Usuarios de Sitio Electrónico Unificado de Tarifas y Peajes, Usuarios Administradores Municipales, Usuarios Funcionarios Municipales, Usuarios Administradores Sociedad Concesionaria y Usuarios Sociedad Concesionaria.
+
+**Fuente:** [DECRETO 262, 3](https://www.bcn.cl/leychile/navegar?idNorma=1207690)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
 ### Acera
 **Status:** ⏳ not_reviewed · **Refs:** 8
 
@@ -579,6 +1043,486 @@
 > Parte de una vía destinada al uso de peatones;
 
 **Fuente:** [DFL 1, 1 D](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### ENAP
+**Status:** ⏳ not_reviewed · **Refs:** 5
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=5 category=nombre propio reason=ENAP es una entidad legal específica (Empresa Nacional de Aluminio) mencionada en el contexto normativo chileno, por lo
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### CEDA
+**Status:** ⏳ not_reviewed · **Refs:** 4
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=4 category=acrónimo reason=CEDA es un acrónimo real utilizado en la normativa chilena (ej. Ley 20.383) que hace referencia a la Comisión de Energía
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### IVA
+**Status:** ⏳ not_reviewed · **Refs:** 3
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=3 category=concepto técnico reason=IVA es un término técnico y legal real que se refiere al Impuesto al Valor Agregado, un concepto fiscal aplicable a las
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### Acuerdo de Producción Limpia
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=norma legal reason=El Acuerdo de Producción Limpia es un instrumento normativo específico de Chile (Decreto Supremo N° 144) que establece l
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### amonestación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=institución reason=La amonestación es un concepto jurídico-administrativo real utilizado en el marco normativo chileno (incluyendo el secto
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### autoconsumo
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'autoconsumo' es un concepto técnico y legal reconocido en la normativa chilena, específicamente en el contex
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### causal de incompatibilidad de un director
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Es un término jurídico específico que define una causa legal para la inhabilitación de un director en el contexto de la
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### cobro de las garantías
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'cobro de las garantías' es una expresión legal y administrativa específica que se refiere a la acción de rec
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### componente de generación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'componente de generación' es una denominación técnica específica utilizada en la normativa eléctrica chilena
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### conexión de un Equipamiento de Generación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término describe una acción técnica específica y reglamentada en el contexto de la normativa eléctrica chilena, const
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### consejos regionales del Fondo les
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=institución reason=Se trata de una entidad legal real (Consejos Regionales del FONDES) mencionada en la normativa chilena, aunque el términ
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Directores Regionales del Servicio
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Se trata de un cargo específico definido en la normativa chilena (Ley 20.347) que designa a los funcionarios encargados
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### energía geotérmica
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=frase genérica reason=El término 'energía geotérmica' es una denominación técnica estándar para un tipo de fuente de energía renovable, pero c
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### inyecciones y retiros de potencia
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término describe una acción técnica específica de regulación de frecuencia en el sistema eléctrico, consistente en la
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Rol Único Tributario
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `RUT` — high, ⏳
+
+**Notas:** freq=1 category=institución reason=Aunque es un término legal y administrativo fundamental en Chile, no pertenece al dominio eléctrico específico, por lo q
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### sanciones privativas de libertad
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Aunque no es un término específico de la normativa eléctrica chilena, es un concepto jurídico real y definido en el Códi
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Sistema de Medición de la Calidad de la Educación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `SIMCE` — high, ⏳
+
+**Notas:** freq=1 category=norma legal reason=El término corresponde a una denominación oficial de un instrumento de evaluación del Ministerio de Educación de Chile,
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### A.E.I.R
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Ajuste por efectos de impuestos a la renta;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### A.V.I
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Anualidad del valor de inversión;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Bases del o los Estudios de Valorización o Bases
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Bases técnicas y administrativas del o los estudios de valorización a que se refieren los artículos 105° y siguientes de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Comité
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Comité de adjudicación y supervisión del o los estudios de valorización a que se refiere el inciso segundo del artículo 108° de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Coordinados
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Propietarios, arrendatarios, usufructuarios o quien opere, a cualquier título, centrales generadoras, sistemas de transporte, instalaciones para la prestación de servicios complementarios, sistemas de almacenamiento de energía, instalaciones de distribución e instalaciones de clientes libres y que se interconecten al sistema eléctrico, así como los pequeños medios de generación que se conecten ...
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Decreto de Expansión
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Decreto exento del Ministerio de Energía expedido bajo la fórmula "por orden del Presidente de la República", que fija las obras de expansión de los sistemas de transmisión, al que se refiere el artículo 92° de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Empresa Transmisora
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Propietarios, arrendatarios, usufructuarios o quienes exploten a cualquier título instalaciones de transmisión eléctrica;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Estudio(s) de Valorización
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Estudio(s) de valorización a que se refieren los artículos 105° y siguientes de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Informe de Vidas Útiles
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Informe técnico que contiene las vidas útiles de los elementos de transmisión a que se refiere el artículo 104° de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Informe Técnico de Valorización
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Informe técnico de valorización de las instalaciones a que se refiere el artículo 112° de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Instalaciones Enmalladas
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Instalaciones de transmisión que en conjunto permiten el transporte de electricidad con más de una trayectoria posible entre una subestación y otra;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Instalaciones Radiales
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Instalaciones de transmisión que permiten el transporte de electricidad con sólo una trayectoria posible entre una subestación y otra;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Ley o Ley General de Servicios Eléctricos
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Decreto con Fuerza de Ley Nº 4/20.018, de 2006, del Ministerio de Economía, Fomento y Reconstrucción, que fija el texto refundido, coordinado y sistematizado del Decreto con Fuerza de Ley Nº 1, de Minería, de 1982, Ley General de Servicios Eléctricos, en materia de energía eléctrica, y sus modificaciones posteriores o la disposición que la reemplace;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Orden Económico
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Aquel resultante del despacho de unidades de generación o sistemas de almacenamiento de energía, según corresponda, en orden creciente de menor a mayor costo de producción de energía eléctrica, de acuerdo al listado de prioridad de colocación efectuado por el Coordinador.
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Panel de Expertos o Panel
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Panel de expertos al que se refiere el Título VI de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Participantes
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Empresas generadoras, transmisoras, distribuidoras y usuarios no sometidos a regulación de precios que se encuentren interconectados al sistema eléctrico e inscritos en el Registro de Participación a que se refiere el artículo 90° de la Ley;
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Propuesta
+**Status:** ⏳ not_reviewed · **Refs:** 0
+
+**Definición:**
+> Oferta o propuesta presentada por la o las empresas interesadas en la realización del o los Estudios de Valorización;     aa. Resolución de Calificación: Resolución exenta de la Comisión a que se refiere el artículo 100° de la Ley;     bb. Sistema de Transmisión: Conjunto de líneas y subestaciones eléctricas que forman parte de un sistema eléctrico, y que no están destinadas a prestar el servic...
+
+**Fuente:** [DECRETO 10, 5](https://www.bcn.cl/leychile/navegar?idNorma=1146553)
 
 **Aliases:** _sin propuestas todavía_
 
@@ -701,6 +1645,38 @@
 
 ## 4. Tarifas y peajes
 
+### Tarifas y Peajes
+**Status:** ⏳ not_reviewed · **Refs:** 34
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=34 category=concepto técnico reason=Se trata de un término técnico y legal específico que agrupa conceptos normativos sobre la estructura de costos en el se
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Ingresos Tarifarios Reales
+**Status:** ⏳ not_reviewed · **Refs:** 19
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=19 category=concepto técnico reason=El término 'Ingresos Tarifarios Reales' es un concepto técnico específico utilizado en la normativa chilena para referir
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### AR
 **Status:** ⏳ not_reviewed · **Refs:** 14
 
@@ -714,22 +1690,6 @@
 - 🟡 `Ajuste y Recargo` — medium, ⏳
 - 🟡 `ajuste o recargo` — medium, ⏳
 - ⚠️ `ajustes tarifarios` — low, ⏳
-
----
-
-### PNPP
-**Status:** ⏳ not_reviewed · **Refs:** 14
-
-**Definición:**
-> Precio de nudo de la potencia de punta promedio
-
-**Fuente:** [DECRETO 2, PRIMERO](https://www.bcn.cl/leychile/navegar?idNorma=1067875)
-
-**Aliases:**
-
-- 🔒 `Precio de Nudo de Potencia de Punta Promedio` — high, ⏳
-- 🟡 `precio nudo potencia` — medium, ⏳
-- 🟡 `PNP promedio` — medium, ⏳
 
 ---
 
@@ -749,6 +1709,22 @@
 
 ---
 
+### PNPP
+**Status:** ⏳ not_reviewed · **Refs:** 14
+
+**Definición:**
+> Precio de nudo de la potencia de punta promedio
+
+**Fuente:** [DECRETO 2, PRIMERO](https://www.bcn.cl/leychile/navegar?idNorma=1067875)
+
+**Aliases:**
+
+- 🔒 `Precio de Nudo de Potencia de Punta Promedio` — high, ⏳
+- 🟡 `precio nudo potencia` — medium, ⏳
+- 🟡 `PNP promedio` — medium, ⏳
+
+---
+
 ### Cargos por Suministro Eléctrico
 **Status:** ⏳ not_reviewed · **Refs:** 13
 
@@ -762,6 +1738,136 @@
 - 🟡 `cargos tarifarios` — medium, ⏳
 - 🟡 `cargos por suministro` — medium, ⏳
 - ⚠️ `tarifa eléctrica` — low, ⏳
+
+---
+
+### costo del gas en cada punto de conexión
+**Status:** ⏳ not_reviewed · **Refs:** 3
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=3 category=concepto técnico reason=El término se refiere a un componente específico y regulado de la estructura tarifaria de la distribución eléctrica en C
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### precio de nudo de energía
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=El término 'precio de nudo de energía' es un concepto técnico específico utilizado en la normativa chilena para referirs
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### precio de nudo promedio
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=El término 'precio de nudo promedio' es un concepto técnico específico utilizado en la normativa eléctrica chilena para
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### costos de conexión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Los 'costos de conexión' son un concepto técnico y legal específico en la normativa eléctrica chilena que se refiere a l
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### esquema tarifario
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'esquema tarifario' es un concepto técnico específico utilizado en la normativa eléctrica chilena para referi
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### horizonte de tarificación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'horizonte de tarificación' es un concepto técnico utilizado en la regulación eléctrica chilena para definir
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=medium
+
+---
+
+### Sitio Electrónico Unificado de Tarifas y Peajes al Registro Nacional de Usuarios de Telepeaje
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `RNUT` — high, ⏳
+
+**Notas:** freq=1 category=institución reason=Se trata de un nombre propio específico de un sistema digital oficial gestionado por la Superintendencia de Electricidad
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### valores de FEPE y FEPP
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Los valores de FEPE (Fondo de Estabilización de Precios de Energía) y FEPP (Fondo de Estabilización de Precios de Potenc
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
 
 ---
 
@@ -859,6 +1965,21 @@
 
 ---
 
+### Capacidad Instalada Permitida
+**Status:** ⏳ not_reviewed · **Refs:** 13
+
+**Definición:**
+> Cálculo de la capacidad del equipamiento de generación máxima que puede conectar un usuario final en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;
+
+**Fuente:** [DECRETO 57, 4º](https://www.bcn.cl/leychile/navegar?idNorma=1149788)
+
+**Aliases:**
+
+- 🟡 `capacidad permitida` — medium, ⏳
+- 🟡 `límite de capacidad de conexión` — medium, ⏳
+
+---
+
 ### Inyección de Excedentes Permitida
 **Status:** ⏳ not_reviewed · **Refs:** 13
 
@@ -872,21 +1993,6 @@
 - 🔒 `IEP` — high, ⏳
 - 🟡 `inyección permitida` — medium, ⏳
 - 🟡 `límite de inyección` — medium, ⏳
-
----
-
-### Capacidad Instalada Permitida
-**Status:** ⏳ not_reviewed · **Refs:** 13
-
-**Definición:**
-> Cálculo de la capacidad del equipamiento de generación máxima que puede conectar un usuario final en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;
-
-**Fuente:** [DECRETO 57, 4º](https://www.bcn.cl/leychile/navegar?idNorma=1149788)
-
-**Aliases:**
-
-- 🟡 `capacidad permitida` — medium, ⏳
-- 🟡 `límite de capacidad de conexión` — medium, ⏳
 
 ---
 
@@ -926,6 +2032,70 @@
 
 ## 7. Procedimiento concursal (Ley 20.720)
 
+### Sociedad Concesionaria
+**Status:** ⏳ not_reviewed · **Refs:** 37
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=37 category=concepto técnico reason=La expresión 'Sociedad Concesionaria' es un término técnico-jurídico específico definido en la normativa chilena (como e
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Obras de Ampliación
+**Status:** ⏳ not_reviewed · **Refs:** 35
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=35 category=concepto técnico reason=El término 'Obras de Ampliación' es un concepto técnico específico utilizado en la normativa chilena (como el DFL 442) p
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Consejo de Concesiones
+**Status:** ⏳ not_reviewed · **Refs:** 31
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=31 category=institución reason=El Consejo de Concesiones es un órgano técnico-administrativo real definido en la normativa chilena (Decreto Supremo 594
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Obras de Expansión
+**Status:** ⏳ not_reviewed · **Refs:** 31
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=31 category=concepto técnico reason=El término 'Obras de Expansión' es un concepto técnico específico utilizado en la normativa chilena (como el D.S. 594/20
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Deudor
 **Status:** ⏳ not_reviewed · **Refs:** 30
 
@@ -940,6 +2110,54 @@
 
 ---
 
+### Sociedades Concesionarias
+**Status:** ⏳ not_reviewed · **Refs:** 27
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=27 category=norma legal reason=Es un término técnico específico definido en la Ley de Concesiones de Servicios Públicos (Ley 19.850) que designa a las
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Dirección General de Concesiones de Obras Públicas
+**Status:** ⏳ not_reviewed · **Refs:** 25
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=25 category=institución reason=Es una entidad legal real y específica del sector de obras públicas en Chile, aunque su competencia principal no es estr
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Proceso de Licitación
+**Status:** ⏳ not_reviewed · **Refs:** 22
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=22 category=institución reason=El término 'Proceso de Licitación' es un concepto técnico-jurídico fundamental en la normativa chilena que regula el pro
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Mora
 **Status:** ⏳ not_reviewed · **Refs:** 21
 
@@ -949,6 +2167,38 @@
 **Fuente:** [LEY 20999, 33 quinquies](https://www.bcn.cl/leychile/navegar?idNorma=1099982)
 
 **Aliases:** _sin propuestas todavía_
+
+---
+
+### Obras Nuevas
+**Status:** ⏳ not_reviewed · **Refs:** 17
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=17 category=concepto técnico reason=El término 'Obras Nuevas' es un concepto jurídico-técnico específico definido en el Código de Comercio chileno (Art. 244
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Informe de Autorización de Conexión
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=norma legal reason=Es un documento técnico-administrativo específico definido en la normativa chilena (Decreto Supremo 594) que certifica l
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
 
 ---
 
@@ -965,6 +2215,156 @@
 - 🔒 `proceso concursal` — high, ⏳
 - 🟡 `quiebra` — medium, ⏳
 - ⚠️ `concurso de acreedores` — low, ⏳
+
+---
+
+### adjudicado
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'adjudicado' es un concepto jurídico-administrativo real utilizado en el contexto de licitaciones y concursos
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Costo de Falla de Corta Duración
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `CFCD` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de gastos de administración de la quiebra regulada en el artículo 13 d
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### Costo de Falla de Larga Duración
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `CFLD` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de costos contemplada en la Ley 20.720 de Concursos y Quiebras, utiliz
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### fecha de concreción de un proyecto
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Es un término técnico específico utilizado en la normativa chilena para definir el momento exacto en que se ejecuta una
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### micro empresa
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'micro empresa' es un concepto jurídico definido en la Ley 20.720 de Quiebras y Concursos de Chile, utilizado
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### obra pública fiscal
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Es un término jurídico-administrativo real definido en la Ley de Bases del Estado y la Ley de Obras Públicas que designa
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### precalificación energética
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=La expresión 'precalificación energética' es un término técnico específico utilizado en el contexto de la normativa chil
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### solución de conexión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'solución de conexión' es un concepto técnico específico utilizado en la normativa chilena (especialmente en
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Valorización del Ajuste
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `VA` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'Valorización del Ajuste' es un concepto técnico específico utilizado en la normativa chilena de quiebras y c
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
 
 ---
 
@@ -1090,6 +2490,22 @@
 
 ---
 
+### Servicio Nacional de Menores
+**Status:** ⏳ not_reviewed · **Refs:** 21
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=21 category=institución reason=El Servicio Nacional de Menores (SENAME) es una institución pública específica del Estado de Chile con funciones legales
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Detención
 **Status:** ⏳ not_reviewed · **Refs:** 20
 
@@ -1104,6 +2520,38 @@
 
 ---
 
+### Registro de Vehículos Motorizados
+**Status:** ⏳ not_reviewed · **Refs:** 20
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=20 category=institución reason=Aunque el término es real, no pertenece al dominio eléctrico ni a la normativa chilena de este sector, por lo que no es
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Código del Trabajo
+**Status:** ⏳ not_reviewed · **Refs:** 19
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=19 category=norma legal reason=El Código del Trabajo es una norma legal fundamental en Chile que regula las relaciones laborales, por lo que constituye
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
 ### Cruce
 **Status:** ⏳ not_reviewed · **Refs:** 18
 
@@ -1115,6 +2563,670 @@
 **Aliases:** _sin propuestas todavía_
 
 **Notas:** OFF-DOMAIN: appears to be from Reglamento del Tránsito; not relevant to electrical RAG. Consider deleting from conceptos.
+
+---
+
+### Registro de Multas de Tránsito No Pagadas
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=institución reason=El término no pertenece al dominio eléctrico chileno, sino al de tránsito y multas, por lo que no es relevante para un g
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=low
+
+---
+
+### LICENCIA
+**Status:** ⏳ not_reviewed · **Refs:** 6
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=6 category=institución reason=En el contexto de la normativa eléctrica chilena, 'LICENCIA' se refiere a la autorización formal emitida por el Estado p
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### PATENTE
+**Status:** ⏳ not_reviewed · **Refs:** 3
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=3 category=institución reason=La palabra 'PATENTE' es un término técnico y legal específico en la normativa chilena que se refiere a la autorización a
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### remuneración líquida
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=El término 'remuneración líquida' es un concepto técnico-jurídico real definido en el Código del Trabajo chileno (artícu
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### remuneración bruta
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'remuneración bruta' es un concepto legal y contable real definido en la normativa chilena (como el Código de
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+## Eléctrico
+
+### CDEC
+**Status:** ⏳ not_reviewed · **Refs:** 119
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=119 category=institución reason=CDEC es la sigla oficial del Centro de Despacho de la Carga, una institución regulada por la CNE en Chile encargada de l
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### SCR
+**Status:** ⏳ not_reviewed · **Refs:** 53
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=53 category=concepto técnico reason=El término 'SCR' es un componente técnico real y ampliamente utilizado en la normativa eléctrica chilena (como el DS 144
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### Participante del Balance de Potencia
+**Status:** ⏳ not_reviewed · **Refs:** 40
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=40 category=concepto técnico reason=El término se refiere a una figura específica definida en la normativa chilena (Decreto Supremo 514) que participa en el
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Potencia Inicial
+**Status:** ⏳ not_reviewed · **Refs:** 38
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=38 category=concepto técnico reason=El término 'Potencia Inicial' es un concepto técnico válido utilizado en normativa eléctrica para referirse al valor de
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Informe Técnico
+**Status:** ⏳ not_reviewed · **Refs:** 32
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=32 category=norma legal reason=El término 'Informe Técnico' es un documento reglamentario específico definido en la normativa chilena (ej. D.S. 145/201
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### UTM
+**Status:** ⏳ not_reviewed · **Refs:** 31
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=31 category=norma legal reason=UTM es un término técnico específico que en el contexto normativo chileno se refiere a la Unidad de Medición de Energía,
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### DP del CDEC
+**Status:** ⏳ not_reviewed · **Refs:** 28
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=28 category=institución reason=DP del CDEC es una abreviatura técnica válida que se refiere al Director de Planificación del Centro de Despacho Eléctri
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Tramos de Transporte
+**Status:** ⏳ not_reviewed · **Refs:** 28
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=28 category=concepto técnico reason=El término 'Tramos de Transporte' es un concepto técnico específico utilizado en la normativa chilena para referirse a l
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Informe de Calificación
+**Status:** ⏳ not_reviewed · **Refs:** 22
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=22 category=norma legal reason=El 'Informe de Calificación' es un documento técnico-regulatorio específico definido en la normativa chilena (ej. D.S. 1
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Usuarios Finales
+**Status:** ⏳ not_reviewed · **Refs:** 22
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=22 category=concepto técnico reason=Es un término técnico y legal definido en la normativa chilena (ej. Ley 20.383 y reglamento de servicios eléctricos) que
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### COMA
+**Status:** ⏳ not_reviewed · **Refs:** 18
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=18 category=concepto técnico reason=COMA es un término técnico legal definido en la normativa chilena (ej. D.S. 594) como el punto de conexión entre la inst
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### factor AR
+**Status:** ⏳ not_reviewed · **Refs:** 14
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=14 category=concepto técnico reason=El factor AR es un parámetro técnico real utilizado en la normativa chilena para el cálculo de la facturación de energía
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### CPR
+**Status:** ⏳ not_reviewed · **Refs:** 12
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=12 category=acrónimo reason=CPR es un acrónimo técnico reconocido en la normativa chilena que significa 'Centro de Puntos de Referencia' o 'Centro d
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### INE
+**Status:** ⏳ not_reviewed · **Refs:** 7
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=7 category=institución reason=INE es la sigla oficial de la Inspección Eléctrica, organismo regulador del sector eléctrico en Chile definido en la Ley
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### NUDO
+**Status:** ⏳ not_reviewed · **Refs:** 7
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=7 category=concepto técnico reason=El término 'nudo' es un concepto técnico real en la normativa eléctrica chilena (ej. NTE-CH-201) que define un punto de
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### MW
+**Status:** ⏳ not_reviewed · **Refs:** 5
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=5 category=frase genérica reason=MW es una unidad de medida estándar (megavatio) ampliamente utilizada en normativa eléctrica chilena para expresar poten
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### PARE
+**Status:** ⏳ not_reviewed · **Refs:** 4
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=4 category=norma legal reason=PARE es la sigla oficial de la Ley 20.422 que regula el uso de energía eléctrica en Chile, constituyendo un concepto jur
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### TRAMO
+**Status:** ⏳ not_reviewed · **Refs:** 3
+
+**Definición:**
+> 
+
+**Fuente:** [detected via acronym, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=3 category=concepto técnico reason=El término 'TRAMO' es un concepto técnico estándar en normativa eléctrica chilena (ej. NCh 1082) que define una sección
+
+**Dificultad de extracción:** detected via acronym; LLM confidence=high
+
+---
+
+### potencia equivalente
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=La expresión 'potencia equivalente' es un término técnico utilizado en normativas eléctricas para referirse a la potenci
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### tasa de rentabilidad libre de riesgo
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=Es un término técnico financiero utilizado en normativas chilenas para referirse a la tasa base de referencia en cálculo
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### afectación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'afectación' es un concepto técnico-jurídico recurrente en la normativa chilena (ej. Ley 20.383) que define l
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### cargabilidad máxima
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=La expresión 'cargabilidad máxima' es un término técnico específico utilizado en normativa eléctrica para definir el lím
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### exploración
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=En la normativa chilena (ej. NCh 1082/2 u Ordenanzas Municipales), 'exploración' es un término técnico específico que se
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### explotación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=En la normativa chilena, 'explotación' es un término técnico específico que se refiere a la actividad de funcionamiento,
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### instalaciones de subtransmisión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'instalaciones de subtransmisión' es un concepto técnico y legal específico definido en la normativa chilena
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Potencia de Facturación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=La 'Potencia de Facturación' es un término técnico y legal específico utilizado en la normativa chilena (como el D.S. 14
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### programa de promoción del cumplimiento
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=institución reason=Es un término técnico específico utilizado en la normativa chilena para referirse a un mecanismo formal de gestión de cu
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Registro Nacional de Usuarios de Telepeaje
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `RNUT` — high, ⏳
+
+**Notas:** freq=1 category=institución reason=El término se refiere a un registro oficial gestionado por la Comisión Nacional de Energía (CNE) para usuarios de telepe
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### tasa de costo de capital
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=La 'tasa de costo de capital' es un término técnico financiero utilizado en la regulación eléctrica chilena para definir
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### técnicas especiales de investigación
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término se refiere a procedimientos específicos de análisis de fallas en sistemas eléctricos definidos en la normativ
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### usuario de instalaciones de transmisión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'usuario de instalaciones de transmisión' es un concepto jurídico-técnico definido en la normativa chilena (e
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### usuario de un sistema de subtransmisión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'usuario de un sistema de subtransmisión' es una definición legal precisa establecida en la normativa chilena
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Valores de Inversión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `V.I.` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=Los 'Valores de Inversión' es un término técnico específico utilizado en la normativa chilena (como el D.S. 145/2010) pa
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+## No-Aplica
+
+### Servicio Nacional de Reinserción Social Juvenil
+**Status:** ⏳ not_reviewed · **Refs:** 42
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=42 category=institución reason=El término corresponde a una institución pública específica del sistema de justicia juvenil chileno, no siendo un concep
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### aporte monetario
+**Status:** ⏳ not_reviewed · **Refs:** 2
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=2 category=concepto técnico reason=El término 'aporte monetario' es un concepto jurídico-económico real utilizado en la normativa chilena (como en el Códig
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### exención
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=institución reason=La palabra 'exención' es un término legal genérico que no posee una definición técnica específica ni un significado únic
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
 
 ---
 
