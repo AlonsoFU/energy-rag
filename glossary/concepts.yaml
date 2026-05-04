@@ -491,8 +491,8 @@ concepts:
     confidence: high
     validated: true
   - alias: empresa concesionaria
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1047565'
     norm_label: DECRETO 130
@@ -956,8 +956,8 @@ concepts:
     confidence: high
     validated: true
   - alias: MinEnergía
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: Ministerio del ramo
     confidence: low
     validated: false
@@ -992,9 +992,6 @@ concepts:
   - alias: Comisión Nacional de Energía
     confidence: high
     validated: true
-  - alias: la Comisión
-    confidence: medium
-    validated: false
   source:
     norm_id: '1005169'
     norm_label: LEY 20365
@@ -1026,9 +1023,6 @@ concepts:
   - alias: Superintendencia de Electricidad y Combustibles
     confidence: high
     validated: true
-  - alias: la Superintendencia
-    confidence: medium
-    validated: false
   source:
     norm_id: '1005169'
     norm_label: LEY 20365
@@ -1193,9 +1187,6 @@ concepts:
   - alias: potencia firme
     confidence: high
     validated: true
-  - alias: potencia inicial
-    confidence: medium
-    validated: false
   - alias: potencia eficiente
     confidence: low
     validated: false
@@ -1255,14 +1246,14 @@ concepts:
     Centrales Renovables c
   aliases:
   - alias: potencia nominal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: Pmax
     confidence: high
     validated: true
   - alias: capacidad nominal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1047565'
     norm_label: DECRETO 130
@@ -3102,8 +3093,8 @@ concepts:
     un tanque de almacenamiento cuando no exista acometida, hasta la entrada del regulador de servicio.
   aliases:
   - alias: empalme eléctrico
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: conexión a la red
     confidence: low
     validated: false
@@ -3113,7 +3104,7 @@ concepts:
     article: primero
     url: https://www.bcn.cl/leychile/navegar?idNorma=1115627
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3193,8 +3184,8 @@ concepts:
     confidence: high
     validated: true
   - alias: Panel de Expertos Eléctrico
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1010304'
     norm_label: LEY 20410
@@ -3715,8 +3706,8 @@ concepts:
     para la elaboración de biocombustibles sólidos.
   aliases:
   - alias: biomasa sólida
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: materia orgánica energética
     confidence: low
     validated: false
@@ -3726,7 +3717,7 @@ concepts:
     article: '2'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1183783
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3775,8 +3766,8 @@ concepts:
     confidence: high
     validated: true
   - alias: Sistema Eléctrico Nacional Chileno
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: SIC
     confidence: low
     validated: false
@@ -4031,11 +4022,11 @@ concepts:
     confidence: high
     validated: true
   - alias: precio nudo energía
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: PNE promedio
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1067875'
     norm_label: DECRETO 2
@@ -4065,11 +4056,11 @@ concepts:
     confidence: high
     validated: true
   - alias: precio nudo potencia
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: PNP promedio
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1067875'
     norm_label: DECRETO 2
@@ -4259,12 +4250,6 @@ concepts:
   - alias: Coordinador Eléctrico Nacional
     confidence: high
     validated: true
-  - alias: el Coordinador
-    confidence: medium
-    validated: false
-  - alias: Coordinador del Sistema
-    confidence: medium
-    validated: false
   source:
     norm_id: '1023143'
     norm_label: LEY 20500
@@ -4292,18 +4277,18 @@ concepts:
     a prestar el servicio público de distribución.
   aliases:
   - alias: transmisión eléctrica
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: red de transmisión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1008692'
     norm_label: LEY 20402
     article: '13'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1008692
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4332,8 +4317,8 @@ concepts:
     confidence: high
     validated: true
   - alias: plan anual de expansión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1032851'
     norm_label: DECRETO 61
@@ -4445,11 +4430,11 @@ concepts:
     confidence: high
     validated: true
   - alias: transmisión troncal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: red troncal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1112591'
     norm_label: RESOLUCIÓN 711
@@ -4480,8 +4465,8 @@ concepts:
     el inciso ante
   aliases:
   - alias: transmisión dedicada
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: STX
     confidence: low
     validated: false
@@ -4494,7 +4479,7 @@ concepts:
     article: 2°
     url: https://www.bcn.cl/leychile/navegar?idNorma=1112591
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []

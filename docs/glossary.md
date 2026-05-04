@@ -7,8 +7,8 @@
 
 **Total conceptos:** 215
 
-- **Reviewed**: 18 / 215
-- **Validated aliases**: 23 / 93
+- **Reviewed**: 22 / 215
+- **Validated aliases**: 41 / 88
 
 # ⚡ Electricidad
 
@@ -27,7 +27,7 @@
 **Aliases:**
 
 - 🔒 `Ministerio de Energía` — high, ✅
-- 🟡 `MinEnergía` — medium, ⏳
+- 🔒 `MinEnergía` — high, ✅
 - ⚠️ `Ministerio del ramo` — low, ⏳
 
 ---
@@ -44,7 +44,6 @@
 
 - 🔒 `CNE` — high, ✅
 - 🔒 `Comisión Nacional de Energía` — high, ✅
-- 🟡 `la Comisión` — medium, ⏳
 
 ---
 
@@ -60,7 +59,6 @@
 
 - 🔒 `SEC` — high, ✅
 - 🔒 `Superintendencia de Electricidad y Combustibles` — high, ✅
-- 🟡 `la Superintendencia` — medium, ⏳
 
 ---
 
@@ -1174,7 +1172,7 @@
 ---
 
 ### Empalme
-**Status:** ⏳ not_reviewed · **Refs:** 16
+**Status:** ✅ ok · **Refs:** 16
 
 **Definición:**
 > conjunto de tuberías y accesorios que conducen el gas desde el término de la acometida, o desde la salida de un tanque de almacenamiento cuando no exista acometida, hasta la entrada del regulador de servicio.
@@ -1183,7 +1181,7 @@
 
 **Aliases:**
 
-- 🟡 `empalme eléctrico` — medium, ⏳
+- 🔒 `empalme eléctrico` — high, ✅
 - ⚠️ `conexión a la red` — low, ⏳
 
 ---
@@ -1230,8 +1228,6 @@
 
 - 🔒 `CEN` — high, ✅
 - 🔒 `Coordinador Eléctrico Nacional` — high, ✅
-- 🟡 `el Coordinador` — medium, ⏳
-- 🟡 `Coordinador del Sistema` — medium, ⏳
 
 ---
 
@@ -1428,7 +1424,6 @@
 **Aliases:**
 
 - 🔒 `potencia firme` — high, ✅
-- 🟡 `potencia inicial` — medium, ⏳
 - ⚠️ `potencia eficiente` — low, ⏳
 
 ---
@@ -1459,9 +1454,9 @@
 
 **Aliases:**
 
-- 🟡 `potencia nominal` — medium, ⏳
+- 🔒 `potencia nominal` — high, ✅
 - 🔒 `Pmax` — high, ✅
-- 🟡 `capacidad nominal` — medium, ⏳
+- 🔒 `capacidad nominal` — high, ✅
 
 ---
 
@@ -1479,7 +1474,7 @@
 
 - 🔒 `distribuidora` — high, ✅
 - 🔒 `concesionaria de distribución` — high, ✅
-- 🟡 `empresa concesionaria` — medium, ⏳
+- 🔒 `empresa concesionaria` — high, ✅
 
 ---
 
@@ -1712,7 +1707,7 @@
 ## transmisión/general *(5)*
 
 ### Sistema de Transmisión
-**Status:** ⏳ not_reviewed · **Refs:** 84
+**Status:** ✅ ok · **Refs:** 84
 
 **Definición:**
 > Conjunto de líneas y subestaciones eléctricas que forman parte de un sistema eléctrico y que no están destinadas a prestar el servicio público de distribución.
@@ -1721,8 +1716,8 @@
 
 **Aliases:**
 
-- 🟡 `transmisión eléctrica` — medium, ⏳
-- 🟡 `red de transmisión` — medium, ⏳
+- 🔒 `transmisión eléctrica` — high, ✅
+- 🔒 `red de transmisión` — high, ✅
 
 ---
 
@@ -1738,7 +1733,7 @@
 
 - 🔒 `Plan de Expansión de la Transmisión` — high, ✅
 - 🔒 `PdE` — high, ✅
-- 🟡 `plan anual de expansión` — medium, ⏳
+- 🔒 `plan anual de expansión` — high, ✅
 
 ---
 
@@ -1821,13 +1816,13 @@
 **Aliases:**
 
 - 🔒 `STN` — high, ✅
-- 🟡 `transmisión troncal` — medium, ⏳
-- 🟡 `red troncal` — medium, ⏳
+- 🔒 `transmisión troncal` — high, ✅
+- 🔒 `red troncal` — high, ✅
 
 ---
 
 ### Sistemas de Transmisión Dedicados
-**Status:** ⏳ not_reviewed · **Refs:** 20
+**Status:** ✅ ok · **Refs:** 20
 
 **Definición:**
 > son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso ante
@@ -1836,7 +1831,7 @@
 
 **Aliases:**
 
-- 🟡 `transmisión dedicada` — medium, ⏳
+- 🔒 `transmisión dedicada` — high, ✅
 - ⚠️ `STX` — low, ⏳
 - ⚠️ `transmisión adicional` — low, ⏳
 
@@ -1891,7 +1886,7 @@
 **Aliases:**
 
 - 🔒 `SEN` — high, ✅
-- 🟡 `Sistema Eléctrico Nacional Chileno` — medium, ⏳
+- 🔒 `Sistema Eléctrico Nacional Chileno` — high, ✅
 - ⚠️ `SIC` — low, ⏳
 - ⚠️ `SING` — low, ⏳
 
@@ -2036,7 +2031,7 @@
 **Aliases:**
 
 - 🔒 `Panel de Expertos` — high, ✅
-- 🟡 `Panel de Expertos Eléctrico` — medium, ⏳
+- 🔒 `Panel de Expertos Eléctrico` — high, ✅
 
 ---
 
@@ -2119,8 +2114,8 @@
 **Aliases:**
 
 - 🔒 `Precio de Nudo de la Energía Promedio` — high, ✅
-- 🟡 `precio nudo energía` — medium, ⏳
-- 🟡 `PNE promedio` — medium, ⏳
+- 🔒 `precio nudo energía` — high, ✅
+- 🔒 `PNE promedio` — high, ✅
 
 ---
 
@@ -2135,8 +2130,8 @@
 **Aliases:**
 
 - 🔒 `Precio de Nudo de Potencia de Punta Promedio` — high, ✅
-- 🟡 `precio nudo potencia` — medium, ⏳
-- 🟡 `PNP promedio` — medium, ⏳
+- 🔒 `precio nudo potencia` — high, ✅
+- 🔒 `PNP promedio` — high, ✅
 
 ---
 
@@ -2218,7 +2213,7 @@
 ---
 
 ### Biomasa
-**Status:** ⏳ not_reviewed · **Refs:** 13
+**Status:** ✅ ok · **Refs:** 13
 
 **Definición:**
 > la materia orgánica sólida, biodegradable, de origen vegetal o animal, que puede ser usada como materia prima para la elaboración de biocombustibles sólidos.
@@ -2227,7 +2222,7 @@
 
 **Aliases:**
 
-- 🟡 `biomasa sólida` — medium, ⏳
+- 🔒 `biomasa sólida` — high, ✅
 - ⚠️ `materia orgánica energética` — low, ⏳
 
 ---
