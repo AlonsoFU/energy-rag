@@ -38,13 +38,43 @@
 {"query": "qué es Usuario de Televía", "expected_norma": "1207690", "expected_articulo": "3", "category": "concept_definition_auto"}
 {"query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "concept_definition_auto"}
 {"query": "qué es Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "concept_definition_auto"}
-{"query": "qué es C.O.M.A.", "expected_norma": "1146553", "expected_articulo": "49", "category": "concept_definition_manual"}
-{"query": "qué es V.A.T.T.", "expected_norma": "1146553", "expected_articulo": "50", "category": "concept_definition_manual"}
-{"query": "qué es potencia inicial", "expected_norma": "250604", "expected_articulo": "28", "category": "concept_definition_manual"}
-{"query": "Artículo 99 de la Ley 18410", "expected_norma": "29819", "expected_articulo": "99", "category": "specific_article"}
-{"query": "qué leyes regulan las concesiones eléctricas", "expected_norma": "1007469", "expected_articulo": null, "category": "multi_norma"}
-{"query": "cómo se calcula el VATT", "expected_norma": "1146553", "expected_articulo": "50", "category": "tariff"}
-{"query": "qué es el coordinador del sistema eléctrico", "expected_norma": "1146553", "expected_articulo": null, "category": "coordinator"}
-{"query": "transferencias de potencia", "expected_norma": "250604", "expected_articulo": null, "category": "power_transfers"}
-{"query": "qué es xenobalbúrgico", "expected_norma": null, "expected_articulo": null, "category": "negative"}
-{"query": "cuál es la receta del pisco sour", "expected_norma": null, "expected_articulo": null, "category": "negative"}
+{"query": "qué es Pórtico", "expected_norma": "1207690", "expected_articulo": "3", "category": "concept_definition_auto"}
+{"query": "qué es Valor o Mon to Cobrado", "expected_norma": "1207690", "expected_articulo": "3", "category": "concept_definition_auto"}
+{"query": "qué es Criterio de proporcionalidad", "expected_norma": "1216930", "expected_articulo": "61", "category": "concept_definition_auto"}
+{"query": "qué es CMPC", "expected_norma": "1212738", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es CDAT", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es CDBT", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es Autorización de localización", "expected_norma": "1216930", "expected_articulo": "7", "category": "concept_definition_auto"}
+{"query": "qué es CFHS", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es Garantías de Protección Social", "expected_norma": "1030861", "expected_articulo": "2°", "category": "concept_definition_auto"}
+{"query": "qué es Autorización sectorial o autorización", "expected_norma": "1216930", "expected_articulo": "5", "category": "concept_definition_auto"}
+{"query": "qué es Criterio de necesidad", "expected_norma": "1216930", "expected_articulo": "61", "category": "concept_definition_auto"}
+{"query": "qué es Criterio de simplicidad", "expected_norma": "1216930", "expected_articulo": "61", "category": "concept_definition_auto"}
+{"query": "qué es Criterio de riesgo", "expected_norma": "1216930", "expected_articulo": "61", "category": "concept_definition_auto"}
+{"query": "qué es Oficina de Autorizaciones Sectoriales e Inversión u Oficina", "expected_norma": "1216930", "expected_articulo": "5", "category": "concept_definition_auto"}
+{"query": "qué es Autorización de profesional o servicio", "expected_norma": "1216930", "expected_articulo": "7", "category": "concept_definition_auto"}
+{"query": "qué es CPI", "expected_norma": "1215040", "expected_articulo": "segundo", "category": "concept_definition_auto"}
+{"query": "qué es Autorización de proyecto", "expected_norma": "1216930", "expected_articulo": "7", "category": "concept_definition_auto"}
+{"query": "qué es Autorización de administración o disposición", "expected_norma": "1216930", "expected_articulo": "7", "category": "concept_definition_auto"}
+{"query": "qué es Luz amarilla", "expected_norma": "1007469", "expected_articulo": "110 D", "category": "concept_definition_auto"}
+{"query": "qué es Luz verde", "expected_norma": "1007469", "expected_articulo": "110 D", "category": "concept_definition_auto"}
+{"query": "qué es Criterio de no discriminación", "expected_norma": "1216930", "expected_articulo": "61", "category": "concept_definition_auto"}
+{"query": "qué es Administración o Administración del Estado", "expected_norma": "1216930", "expected_articulo": "5", "category": "concept_definition_auto"}
+{"query": "qué es Adelantamiento", "expected_norma": "1007469", "expected_articulo": "2 D", "category": "concept_definition_auto"}
+{"query": "qué es Iniciativa de inversión estratégica", "expected_norma": "1216930", "expected_articulo": "5", "category": "concept_definition_auto"}
+{"query": "qué es PMPBT", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es FDPPB", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es FDPPA", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es PPBT", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es PPAT", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es Cruce de ferrocarriles", "expected_norma": "1007469", "expected_articulo": "105 D", "category": "concept_definition_auto"}
+{"query": "qué es FDFPB", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es FDFPA", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es Bicicleta", "expected_norma": "1007469", "expected_articulo": "110 D", "category": "concept_definition_auto"}
+{"query": "qué es Avenida o calle", "expected_norma": "1007469", "expected_articulo": "161", "category": "concept_definition_auto"}
+{"query": "qué es FNPPA", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es FNPPB", "expected_norma": "1102690", "expected_articulo": "primero", "category": "concept_definition_auto"}
+{"query": "qué es Tratándose de embalses que se construyan en un cauce natural", "expected_norma": "1216930", "expected_articulo": "85", "category": "concept_definition_auto"}
+{"query": "qué es Pista de uso exclusivo", "expected_norma": "1007469", "expected_articulo": "222", "category": "concept_definition_auto"}
+{"query": "qué es Aparato sonoro", "expected_norma": "1007469", "expected_articulo": "74", "category": "concept_definition_auto"}
+{"query": "qué es FEPP", "expected_norma": "1049988", "expected_articulo": "segundo", "category": "concept_definition_auto"}

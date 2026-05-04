@@ -1,0 +1,352 @@
+[
+  {
+    "query": "qué es Plan de obra de generación y transmisión",
+    "expected_norma": "1112591",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "El Plan de obra de generación y transmisión se conforma por las obras de generación y de transmisión que hayan sido declaradas en construcción por la Comisión, de acuerdo a lo establecido en el artículo 72º-17 de la Ley [Art. 4 de 1160108]. Se incluyen también las obras de transmisión nacional, zona"
+  },
+  {
+    "query": "qué es Modelamiento de las unidades solares y eólicas",
+    "expected_norma": "1112591",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 37 de ID] La Potencia Inicial de cada Sistema de Almacenamiento de Energía y de la componente de almacenamiento de Centrales Renovables con Capacidad de Almacenamiento se determinará a partir de su aporte a la curva de carga. Para estos efectos, el Coordinador deberá calcular la Potencia Inici"
+  },
+  {
+    "query": "qué es Comisión de acreedores",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "[Art. 36 bis de 16121]\n[Art. 36 bis de 16121] Las controversias o reclamaciones que se produzcan con motivo de la interpretación o aplicación del contrato de concesión o a que dé lugar su ejecución, podrán ser llevadas por las partes al conocimiento de una Comisión Arbitral o de la Corte de Apelacio"
+  },
+  {
+    "query": "qué es Pequeño Centro de Procesamiento de Biomasa",
+    "expected_norma": "1183783",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Pequeño Centro de Procesamiento de Biomasa es aquel que tiene capacidad para producir y comercializar anualmente una cantidad igual o inferior a 500 m3st de leña al año, o su equivalente en peso u otra unidad de medida de otros tipos de biocombustibles sólidos provenientes de la biomasa [Art. 2 d"
+  },
+  {
+    "query": "qué es Martillero Concursal",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 20 de 1058072] El Martillero Concursal es aquel martillero público que voluntariamente se somete a la fiscalización de la Superintendencia de Insolvencia y Reemprendimiento, cuya misión principal es realizar los bienes del Deudor, en conformidad a lo encomendado por la Junta de Acreedores y de"
+  },
+  {
+    "query": "qué es Parámetros y variables del Sistema Eléctrico Nacional",
+    "expected_norma": "1112591",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 8 del 1112591] Parámetros y variables del Sistema Eléctrico Nacional corresponden a los parámetros y características técnicas de las instalaciones de transmisión a modelar en el Proceso de Planificación, las que se obtendrán del Sistema de Información Pública que mantiene el Coordinador, según"
+  },
+  {
+    "query": "qué es Cuenta final de administración",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "\"La Cuenta final de administración es aquella rendición de cuentas que debe efectuar tanto el Veedor como el Liquidador ante el tribunal, en la oportunidad prevista por la ley [Art. 11 de 1058072]. En esta rendición se deben observar las normativas contables, tributarias y financieras aplicables, as"
+  },
+  {
+    "query": "qué es Colector Solar Térmico",
+    "expected_norma": "1005169",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Colector Solar Térmico es un dispositivo que forma parte de un Sistema Solar Térmico, diseñado para captar la radiación solar incidente, transformarla en energía térmica y transmitir la energía térmica producida a un fluido de trabajo que circula por su interior [Art. 2º de 1005169]."
+  },
+  {
+    "query": "qué es Nómina de Árbitros Concursales",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "[Art. 36 bis de 16121]\n[Art. 36 bis de 16121] Las controversias o reclamaciones que se produzcan con motivo de la interpretación o aplicación del contrato de concesión o a que dé lugar su ejecución, podrán ser llevadas por las partes al conocimiento de una Comisión Arbitral o de la Corte de Apelacio"
+  },
+  {
+    "query": "qué es Audiencia Inicial",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "No encuentro esa información en las normas disponibles."
+  },
+  {
+    "query": "qué es Quórum Simple",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "El Quórum Simple es el conformado por la mayoría del pasivo verificado y/o reconocido, según corresponda, con derecho a voto, presente en la Junta de Acreedores, en el Procedimiento Concursal respectivo. [Art. 34 de 1058072]"
+  },
+  {
+    "query": "qué es Nómina de Martilleros Concursales",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 36 bis] Se introduce un nuevo artículo 36 bis que establece una Comisión Arbitral para resolver controversias relacionadas con la interpretación o aplicación del contrato de concesión, así como las reclamaciones surgidas durante su ejecución. La composición y designación de los miembros de est"
+  },
+  {
+    "query": "qué es DEPÓSITOS TURÍSTICOS",
+    "expected_norma": "220208",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "DEPÓSITOS TURÍSTICOS son establecimientos de venta de bebidas alcohólicas de fabricación nacional, destinados a ser consumidas fuera del local, ubicadas en terminales aéreos y marítimos con tráfico internacional. Su valor patente es de 3 UTM [Art. 3º de 220208]."
+  },
+  {
+    "query": "qué es Quórum Especial",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 32 de 1058072] El Quórum Especial es el conformado por dos tercios del pasivo total con derecho a voto verificado y/o reconocido, según corresponda, en el Procedimiento Concursal respectivo."
+  },
+  {
+    "query": "qué es Certificado de Nominación",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Certificado de Nominación es un documento emitido por la Superintendencia de Insolvencia y Reemprendimiento, que consta la nominación del Veedor o Liquidador, titular y suplente [Art. 2º de 1058072].\n\nEste certificado tiene carácter público y se emite en respuesta a un requerimiento formal presen"
+  },
+  {
+    "query": "qué es Audiencia de Fallo",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 32 de ID] \n[Art. 40 bis de ID] \n[Art. 41 bis de ID] \n[Art. 44 bis de ID] \n[Art. 48 bis de ID] \n[Art. 52 bis de ID] \n[Art. 55 bis de ID] \n[Art. 56 bis de ID]"
+  },
+  {
+    "query": "qué es Liquidación Voluntaria",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "Liquidación Voluntaria es aquella solicitada por el Deudor, conforme al Párrafo 1 del Título 1 del Capítulo IV, o al Párrafo 1 del Título 2 del Capítulo V de la Ley [Art. 18 de 1058072]."
+  },
+  {
+    "query": "qué es Depósito Acumulador",
+    "expected_norma": "1005169",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Depósito Acumulador es un componente del Sistema Solar Térmico para Agua Caliente Sanitaria que almacena la energía térmica producida por los Colectores Solares Térmicos [Art. 2º de 1005169].\n\nEste depósito cumple una función crucial en el funcionamiento del sistema, almacenando temporalmente la "
+  },
+  {
+    "query": "qué es Acuerdo de Reorganización Judicial",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Acuerdo de Reorganización Judicial es aquel que se suscribe entre una Empresa Deudora y sus acreedores con el fin de reestructurar sus activos y pasivos, con sujeción a los procedimientos establecidos en los Títulos 1 y 2 del Capítulo III, y en el Título 3 del Capítulo V. [Art. 2º de 1058072]"
+  },
+  {
+    "query": "qué es Persona Relacionada",
+    "expected_norma": "1058072",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es Informe del Veedor",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "No encuentro esa información en las normas disponibles."
+  },
+  {
+    "query": "qué es Liquidación Forzosa",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "Liquidación Forzosa es una demanda presentada por cualquier acreedor del Deudor, conforme al Párrafo 2 del Título 1 del Capítulo IV o al Párrafo 2 del Título 2 del Capítulo V de la Ley.\n\n[Art. 17 de 250604]"
+  },
+  {
+    "query": "qué es Protección Financiera Concursal",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "No encuentro esa información en las normas disponibles."
+  },
+  {
+    "query": "qué es Infracciones menos graves",
+    "expected_norma": "1155887",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es Valor afecto a bono",
+    "expected_norma": "1199483",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Valor afecto a bono es corresponde al 71,771% de la diferencia entre la remuneración bruta mensual y $597.399 [Art. 33 de 1199483]. Este valor se utiliza para determinar el monto del bono mensual que será otorgado a ciertos trabajadores según las condiciones establecidas en este artículo."
+  },
+  {
+    "query": "qué es Procedimiento Concursal de Reorganización",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El Procedimiento Concursal de Reorganización es un proceso regulado por la Ley 21563, que permite a una Empresa Deudora reestructurar sus activos y pasivos mediante un acuerdo entre la empresa y sus acreedores [Art. 2º de 1058072]. Este acuerdo se somete a aprobación judicial con sujeción al procedi"
+  },
+  {
+    "query": "qué es Procedimiento Concursal de Renegociación",
+    "expected_norma": "1058072",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "El Procedimiento Concursal de Renegociación es aquel regulado en el Capítulo V de esta ley [Art. 30 de 1058072]. Este procedimiento concursal se refiere a un proceso mediante el cual una Persona Deudora puede renegociar sus obligaciones con sus acreedores, buscando alcanzar acuerdos que permitan la "
+  },
+  {
+    "query": "qué es Deuda de Tarifa o Peaje",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "Deuda de Tarifa o Peaje se refiere al incumplimiento por parte del Usuario de Sistema Interoperable en el pago de la Tarifa o Peaje correspondiente al uso de una obra pública fiscal concesionada [Art. 12 de 1207690].\n\nEste incumplimiento puede llevar a que el concesionario pueda cobrar judicialmente"
+  },
+  {
+    "query": "qué es Estado Deteriorado",
+    "expected_norma": "250604",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "\"El Estado Deteriorado es una condición de operación de una Unidad Generadora o Sistema de Almacenamiento de Energía en la cual se limita su Potencia Máxima producto de restricciones en sus componentes o instalaciones, independiente de la disponibilidad de su Insumo Principal y Alternativo; o en la "
+  },
+  {
+    "query": "qué es Convenio o Contrato TAG o Televía",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "El Convenio o Contrato TAG o Televía es el acuerdo suscrito entre una Sociedad Concesionaria y el Usuario de Sistema Interoperable, mediante el cual se regula el uso del Televía que, a cualquier título, es entregado por la Sociedad Concesionaria y recibido por el Usuario de Sistema Interoperable, en"
+  },
+  {
+    "query": "qué es Inhabilitar",
+    "expected_norma": "1207690",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es Documento de Cobro",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "Un Documento de Cobro es aquel que refleja las cantidades adeudadas por el Usuario de Sistema Interoperable por concepto de Tarifas o Peajes, intereses y otros cargos de conformidad a la legislación vigente. Este documento será emitido y enviado para su pago en conformidad al contrato de concesión p"
+  },
+  {
+    "query": "qué es Cuenta de Tarifas o Peajes",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 11 de 1207690] La Cuenta de Tarifas o Peajes es aquella que corresponde a las cantidades adeudadas por el Usuario de Sistema Interoperable por concepto de Tarifas o Peajes, intereses y otros cargos de conformidad a la legislación vigente, con cada una de las Sociedades Concesionarias reflejado"
+  },
+  {
+    "query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía",
+    "expected_norma": "1160108",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "Según los artículos proporcionados, se entiende que:\n\n1. La Potencia Inicial para Sistemas de Almacenamiento de Energía y Centrales Renovables con Capacidad de Almacenamiento se determinará a partir del excedente de potencia que pueden inyectar al sistema [Art. 34 bis].\n\n2. Para la determinación de "
+  },
+  {
+    "query": "qué es Multioperador o Multioperadora",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 18 de 1207690]\nMultioperador o Multioperadora es la empresa o Sociedad Concesionaria que realiza labores de servicio al Usuario de Sistema Interoperable relativos a la facturación, recaudación y cobranza de peajes de otra Sociedad Concesionaria, de conformidad a lo establecido en cada contrato"
+  },
+  {
+    "query": "qué es Usuario de Sistema Complementario",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "El Usuario de Sistema Complementario es la persona natural o jurídica que adquiere el Sistema Complementario establecido en los contratos de concesión con Sistema Electrónico de Peaje de autopistas urbanas e interurbanas para los usuarios poco frecuentes. [Art. 34 de 1207690]"
+  },
+  {
+    "query": "qué es Televía o TAG",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "Basándome únicamente en los artículos proporcionados, no se puede responder directamente a ninguna pregunta específica ya que no se ha formulada una pregunta concreta. Sin embargo, si necesitas información sobre los derechos de cobro según el artículo 218 de la Ley N° 18.287, puedes consultar las di"
+  },
+  {
+    "query": "qué es Usuario de Televía",
+    "expected_norma": "1207690",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "\"Un Usuario de Televía es la persona natural o jurídica que ha suscrito un Contrato de Televía con alguna Sociedad Concesionaria para uno o más vehículos con el objeto de integrarse al Sistema Interoperable [Art. 31 de 1207690].\"\n\nEsta oración responde directamente a la pregunta, utilizando la defin"
+  },
+  {
+    "query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia",
+    "expected_norma": "1160108",
+    "full_hit": true,
+    "grounding_pass": false,
+    "answer": "[Art. 37 de ID] La Potencia Inicial de cada Sistema de Almacenamiento de Energía y de la componente de almacenamiento de Centrales Renovables con Capacidad de Almacenamiento se determinará a partir de su aporte a la curva de carga. Para estos efectos, el Coordinador deberá calcular la Potencia Inici"
+  },
+  {
+    "query": "qué es Acometida",
+    "expected_norma": "1160108",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es C.O.M.A.",
+    "expected_norma": "1146553",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "El C.O.M.A. se determina como los costos de operación, mantenimiento y administración de una única empresa eficiente que opera permanentemente las instalaciones de transmisión según los estándares establecidos en la normativa vigente [Art. 49 de 1146553]."
+  },
+  {
+    "query": "qué es V.A.T.T.",
+    "expected_norma": "1146553",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es potencia inicial",
+    "expected_norma": "250604",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "La potencia inicial se refiere a la potencia que cada unidad generadora puede aportar al sistema, en función de la incertidumbre asociada a la disponibilidad del Insumo Principal y del Insumo Alternativo de generación, según corresponda, junto a las restricciones ambientales asociadas a éstos y en l"
+  },
+  {
+    "query": "Artículo 99 de la Ley 18410",
+    "expected_norma": "29819",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué leyes regulan las concesiones eléctricas",
+    "expected_norma": "1007469",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "cómo se calcula el VATT",
+    "expected_norma": "1146553",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "qué es el coordinador del sistema eléctrico",
+    "expected_norma": "1146553",
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": ""
+  },
+  {
+    "query": "transferencias de potencia",
+    "expected_norma": "250604",
+    "full_hit": true,
+    "grounding_pass": true,
+    "answer": "Transferencias de potencia se determinan a través de auditorías, inspecciones, mediciones y pruebas de operación realizadas por el Coordinador para verificar los antecedentes proporcionados por los Participantes del Balance de Potencia [Art. 19 de 250604]. Estos procesos permiten establecer los valo"
+  },
+  {
+    "query": "qué es xenobalbúrgico",
+    "expected_norma": null,
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": "No encuentro esa información en las normas disponibles."
+  },
+  {
+    "query": "cuál es la receta del pisco sour",
+    "expected_norma": null,
+    "full_hit": false,
+    "grounding_pass": false,
+    "answer": "No encuentro esa información en las normas disponibles."
+  }
+]

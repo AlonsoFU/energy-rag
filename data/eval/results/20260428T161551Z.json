@@ -1,0 +1,1284 @@
+{
+  "n_queries": 50,
+  "n_positive": 48,
+  "n_negative": 2,
+  "n_with_generation": 43,
+  "retrieval": {
+    "recall_at_5": 0.8541666666666666,
+    "recall_norma_only": 0.9166666666666666
+  },
+  "generation": {
+    "grounding_pass": 0.3953488372093023,
+    "answered": 0.6976744186046512,
+    "negative_correct": 1.0
+  },
+  "latency_ms": {
+    "p50": 16658,
+    "p95": 30851,
+    "p99": 41702
+  },
+  "per_query": [
+    {
+      "query": "qué es Plan de obra de generación y transmisión",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 11222,
+      "retrieval_ms": 30,
+      "generation_ms": 11192,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "98"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Modelamiento de las unidades solares y eólicas",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 30608,
+      "retrieval_ms": 24,
+      "generation_ms": 30584,
+      "answer": "Modelamiento de las unidades solares y eólicas corresponde a la representación de los perfiles de inyección de las unidades de generación solares y eólicas mediante la caracterización de, al menos, 16 bloques horarios, con el propósito de obtener una mejor representación de la utilización de las redes de transmisión. Para estos efectos, se considerará la información de radiación solar y datos de viento de acuerdo al Explorador de Energía Solar y Energía Eólica de la Universidad de Chile, desarrollado para el Ministerio de Energía, junto con la información recogida de los perfiles de generación de centrales existentes. [Art. 7° de 1112591]",
+      "citations": [
+        [
+          "1112591",
+          "7"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Comisión de acreedores",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 20777,
+      "retrieval_ms": 21,
+      "generation_ms": 20756,
+      "answer": "No se puede responder a la pregunta sobre el artículo 100 de la Ley N° 18.045, de Mercado de Valores, ya que este artículo no está incluido en los textos proporcionados. Los artículos mencionados son del Decreto con Fuerza de Ley N° 12 de 2009, del Ministerio de Hacienda, y la Ley N° 21044, Orgánica Constitucional del Banco Central de Chile, entre otros.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1010304",
+        "articulo_numero": "28 ter"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pequeño Centro de Procesamiento de Biomasa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1183783",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 8470,
+      "retrieval_ms": 21,
+      "generation_ms": 8449,
+      "answer": "[Art. 2 de 1183783]\nEl Pequeño Centro de Procesamiento de Biomasa es aquel que tiene capacidad para producir y comercializar anualmente una cantidad igual o inferior a 500 m³st de leña al año, o su equivalente en peso u otra unidad de medida de otros tipos de biocombustibles sólidos provenientes de la biomasa, según lo determine el reglamento [Art. 2 de 1183783].",
+      "citations": [
+        [
+          "1183783",
+          "2"
+        ],
+        [
+          "1183783",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1183783",
+        "articulo_numero": "2"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Martillero Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 15946,
+      "retrieval_ms": 21,
+      "generation_ms": 15925,
+      "answer": "El Martillero Concursal es aquel martillero público que voluntariamente se somete a la fiscalización de la Superintendencia de Insolvencia y Reemprendimiento, cuya misión principal es realizar los bienes del Deudor, en conformidad a lo encomendado por la Junta de Acreedores y de acuerdo a lo establecido en esta ley.\n\n[Art. 20 de 1058072]",
+      "citations": [
+        [
+          "1058072",
+          "20"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Parámetros y variables del Sistema Eléctrico Nacional",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 22671,
+      "retrieval_ms": 21,
+      "generation_ms": 22650,
+      "answer": "[Art. 80 de 1160108]\nEl Parámetros y variables del Sistema Eléctrico Nacional corresponderán a los parámetros y características técnicas de las instalaciones de transmisión a modelar en el Proceso de Planificación, las que se obtendrán del sistema de información pública del Coordinador, según lo establece el artículo 72°-8 de la Ley.",
+      "citations": [
+        [
+          "1160108",
+          "80"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Cuenta final de administración",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 15988,
+      "retrieval_ms": 22,
+      "generation_ms": 15966,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "141599",
+        "articulo_numero": "17"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Colector Solar Térmico",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 8164,
+      "retrieval_ms": 21,
+      "generation_ms": 8143,
+      "answer": "El Colector Solar Térmico es un dispositivo que forma parte de un Sistema Solar Térmico, diseñado para captar la radiación solar incidente, transformarla en energía térmica y transmitir la energía térmica producida a un fluido de trabajo que circula por su interior. [Art. 2º de 1005169]",
+      "citations": [
+        [
+          "1005169",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Árbitros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 8368,
+      "retrieval_ms": 22,
+      "generation_ms": 8346,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia Inicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 11512,
+      "retrieval_ms": 21,
+      "generation_ms": 11491,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Simple",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 15587,
+      "retrieval_ms": 22,
+      "generation_ms": 15565,
+      "answer": "[Art. 34 de 1058072]\nEl Quórum Simple es el conformado por la mayoría del pasivo verificado y/o reconocido, según corresponda, con derecho a voto, presente en la Junta de Acreedores, en el Procedimiento Concursal respectivo.",
+      "citations": [
+        [
+          "1058072",
+          "34"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Martilleros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 31050,
+      "retrieval_ms": 21,
+      "generation_ms": 31029,
+      "answer": "[Art. 62 de 250604]\n[Art. 153 D de 1007469]",
+      "citations": [
+        [
+          "250604",
+          "62"
+        ],
+        [
+          "1007469",
+          "153 D"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es DEPÓSITOS TURÍSTICOS",
+      "category": "concept_definition_auto",
+      "expected_norma": "220208",
+      "expected_articulo": "3º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 25431,
+      "retrieval_ms": 21,
+      "generation_ms": 25410,
+      "answer": "[Art. 79 de 1216930]\n[Art. 159 de 1007469]\n[Art. 210 de 202975]",
+      "citations": [
+        [
+          "1216930",
+          "79"
+        ],
+        [
+          "1007469",
+          "159"
+        ],
+        [
+          "202975",
+          "210"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "220208",
+        "articulo_numero": "3º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Especial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 16916,
+      "retrieval_ms": 21,
+      "generation_ms": 16895,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Certificado de Nominación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 14532,
+      "retrieval_ms": 22,
+      "generation_ms": 14510,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia de Fallo",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 14896,
+      "retrieval_ms": 21,
+      "generation_ms": 14875,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Liquidación Voluntaria",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 19315,
+      "retrieval_ms": 21,
+      "generation_ms": 19294,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Depósito Acumulador",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 6815,
+      "retrieval_ms": 22,
+      "generation_ms": 6793,
+      "answer": "El Depósito Acumulador es un componente que forma parte de un Sistema Solar Térmico, donde se acumula la energía térmica producida por los Colectores Solares Térmicos [Art. 2º de 1005169].",
+      "citations": [
+        [
+          "1005169",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acuerdo de Reorganización Judicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 20412,
+      "retrieval_ms": 21,
+      "generation_ms": 20391,
+      "answer": "[Art. 2º de 1058072]\nEl Acuerdo de Reorganización Judicial es aquel que se suscribe entre una Empresa Deudora y sus acreedores con el fin de reestructurar sus activos y pasivos, con sujeción a los procedimientos establecidos en los Títulos 1 y 2 del Capítulo III, y en el Título 3 del Capítulo V. Para los efectos de esta ley, se denominará indistintamente \"Acuerdo de Reorganización Judicial\" o \"Acuerdo\".",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Persona Relacionada",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 33916,
+      "retrieval_ms": 22,
+      "generation_ms": 33894,
+      "answer": "[Art. 1 Nº 1 a) i y ii D.O. 10.05.2023]\n[Art. 1 Nº 1 b) i y ii D.O. 10.05.2023]\n[Art. 1 Nº 1 c) D.O. 10.05.2023]\n[Art. 1 Nº 1 d) y e) D.O. 10.05.2023]\n[Art. 1 Nº 1 f) i y ii D.O. 10.05.2023]\n[Art. 1 Nº 1 g) D.O. 10.05.2023]\n[Art. 1 Nº 1 h) D.O. 10.05.2023]\n[Art. 1 Nº 1 i) D.O. 10.05.2023]\n[Art. 1 Nº 1 j) D.O. 10.05.2023]",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Informe del Veedor",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 18643,
+      "retrieval_ms": 20,
+      "generation_ms": 18623,
+      "answer": "[Art. 46 de 1207690]\n[Art. 41 de 1207690]",
+      "citations": [
+        [
+          "1207690",
+          "46"
+        ],
+        [
+          "1207690",
+          "41"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Liquidación Forzosa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 23507,
+      "retrieval_ms": 21,
+      "generation_ms": 23486,
+      "answer": "Liquidación Forzosa es una demanda presentada por cualquier acreedor del Deudor, conforme al Párrafo 2 del Título 1 del Capítulo IV [Art. 17 de 21563] o al Párrafo 2 del Título 2 del Capítulo V de esta ley.",
+      "citations": [
+        [
+          "21563",
+          "17"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Protección Financiera Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 17744,
+      "retrieval_ms": 21,
+      "generation_ms": 17723,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Infracciones menos graves",
+      "category": "concept_definition_auto",
+      "expected_norma": "1155887",
+      "expected_articulo": "4°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 19184,
+      "retrieval_ms": 21,
+      "generation_ms": 19163,
+      "answer": "Infracciones menos graves se refieren a actos u omisiones cometidos por los evaluadores energéticos que contravengan las normas que regulen la calificación y precalificación energética de una o más edificaciones. Estas infracciones incluyen no cumplir con los plazos establecidos para realizar la calificación o precalificación energética, no cumplir con acciones correctivas dispuestas por el Ministerio de Vivienda y Urbanismo dentro del plazo fijado, y ser sancionado al menos tres veces en un mismo año por infracciones leves.\n\n[Art. 4° de 1155887]",
+      "citations": [
+        [
+          "1155887",
+          "4"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1155887",
+        "articulo_numero": "4°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Valor afecto a bono",
+      "category": "concept_definition_auto",
+      "expected_norma": "1199483",
+      "expected_articulo": "33",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 9966,
+      "retrieval_ms": 21,
+      "generation_ms": 9945,
+      "answer": "El \"Valor afecto a bono\" corresponde al 71,771% de la diferencia entre la remuneración bruta mensual y $597.399 [Art. 33 de 1199483]. Este valor se utiliza para determinar el monto del bono que será otorgado a ciertos trabajadores en 2024, según las condiciones establecidas en este artículo.",
+      "citations": [
+        [
+          "1199483",
+          "33"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1199483",
+        "articulo_numero": "33"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Reorganización",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 8673,
+      "retrieval_ms": 21,
+      "generation_ms": 8652,
+      "answer": "[Art. 4º de 1058072]\n[Art. 122 de 1146553]",
+      "citations": [
+        [
+          "1058072",
+          "4"
+        ],
+        [
+          "1146553",
+          "122"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Renegociación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 25570,
+      "retrieval_ms": 21,
+      "generation_ms": 25549,
+      "answer": "El Procedimiento Concursal de Renegociación es aquel regulado en el Capítulo V de la Ley 21563 [Art. 30 de 1058072]. Este procedimiento se refiere a un proceso mediante el cual una Persona Deudora puede renegociar sus obligaciones con sus acreedores, con el fin de alcanzar acuerdos que permitan la reestructuración y el pago gradual de sus deudas [Art. 30 de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "30"
+        ],
+        [
+          "1058072",
+          "30"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Deuda de Tarifa o Peaje",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 22565,
+      "retrieval_ms": 21,
+      "generation_ms": 22544,
+      "answer": "Deuda de Tarifa o Peaje se refiere al incumplimiento por parte del Usuario de Sistema Interoperable en el pago de la Tarifa o Peaje correspondiente al uso de una obra pública fiscal concesionada. El concesionario podrá cobrar judicialmente la Deuda de Tarifa o Peaje, reajustada según la variación del índice de precios al consumidor, más los intereses máximos convencionales y las costas, de conformidad a lo establecido en el artículo 12 [Art. 12 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "12"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Estado Deteriorado",
+      "category": "concept_definition_auto",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 18615,
+      "retrieval_ms": 21,
+      "generation_ms": 18594,
+      "answer": "El Estado Deteriorado se define como la condición de operación de una Unidad Generadora o Sistema de Almacenamiento de Energía en la cual se limita su Potencia Máxima producto de restricciones en sus componentes o instalaciones, independiente de la disponibilidad de su Insumo Principal y Alternativo; o en la cual la Unidad Generadora presenta restricciones asociadas a las condiciones señaladas en el Artículo 25 quáter del presente reglamento para ser convocada por el Coordinador al despacho. [Art. 8 de 250604]",
+      "citations": [
+        [
+          "250604",
+          "8"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Convenio o Contrato TAG o Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 27001,
+      "retrieval_ms": 21,
+      "generation_ms": 26980,
+      "answer": "El Convenio o Contrato TAG o Televía es el acuerdo suscrito entre una Sociedad Concesionaria y el Usuario de Sistema Interoperable, mediante el cual se regula el uso del Televía que, a cualquier título, es entregado por la Sociedad Concesionaria y recibido por el Usuario de Sistema Interoperable, en los términos y condiciones señalados en dicho convenio y en las respectivas Condiciones Generales de Uso de TAG y Cobro de Tarifa de Peajes. [Art. 8 de 1207690]",
+      "citations": [
+        [
+          "1207690",
+          "8"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Inhabilitar",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 21,
+      "retrieval_ms": 21,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "25"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Documento de Cobro",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 22116,
+      "retrieval_ms": 17,
+      "generation_ms": 22099,
+      "answer": "El Documento de Cobro es aquel que refleja las cantidades adeudadas por el Usuario de Sistema Interoperable por concepto de Tarifas o Peajes, intereses y otros cargos de conformidad a la legislación vigente. Este documento será emitido y enviado para su pago en conformidad al contrato de concesión [Art. 13 de 1207690].\n\nEste Documento de Cobro contiene información sobre las cantidades adeudadas, incluyendo el monto cobrado, la fecha de emisión y vencimiento, entre otros detalles relevantes para el Usuario de Sistema Interoperable [Art. 14 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "13"
+        ],
+        [
+          "1207690",
+          "14"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Cuenta de Tarifas o Peajes",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 21,
+      "retrieval_ms": 21,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "29"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 20395,
+      "retrieval_ms": 17,
+      "generation_ms": 20378,
+      "answer": "Sistemas de Almacenamiento de Energía intensivos en energía son aquellos cuyo propósito es permitir el abastecimiento de la demanda de una zona específica, perteneciente a alguno de los Sistemas de Transmisión Zonal, y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 5 [Art. 102 de 1160108].\n\nEstos sistemas deben estar adaptados a la demanda y no pueden superar la capacidad de la infraestructura existente o proyectada a la que se conectarán [Art. 102 de 1160108]. Además, su dimensionamiento debe considerarse en el marco del Plan de Expansión y las bases de licitación establecidas por el Coordinador [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Multioperador o Multioperadora",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 24531,
+      "retrieval_ms": 21,
+      "generation_ms": 24510,
+      "answer": "[Art. 18 de 1207690]\nMultioperador o Multioperadora es la empresa o Sociedad Concesionaria que realiza labores de servicio al Usuario de Sistema Interoperable relativos a la facturación, recaudación y cobranza de peajes de otra Sociedad Concesionaria, de conformidad a lo establecido en cada contrato de concesión.",
+      "citations": [
+        [
+          "1207690",
+          "18"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "29"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Usuario de Sistema Complementario",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 18643,
+      "retrieval_ms": 21,
+      "generation_ms": 18622,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Televía o TAG",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 24430,
+      "retrieval_ms": 21,
+      "generation_ms": 24409,
+      "answer": "¿Cuáles son las infracciones o contravenciones gravísimas según los artículos proporcionados?\n\n[Art. 199 de 1007469]\nLas siguientes son infracciones o contravenciones gravísimas:\n\n1. No detenerse ante la luz roja de las señales luminosas del tránsito, o ante la señal \"PARE\".\n2. Conducir un vehículo motorizado o a tracción animal sin haber obtenido licencia de conductor.\n3. Conducir un vehículo infringiendo lo dispuesto en los incisos tercero y cuarto del artículo 75.\n4. Acceder a los servicios de transporte público remunerado de pasajeros utilizando un pase escolar, pase de educación superior o cualquier instrumento o mecanismo que permita el uso del transporte público remunerado de pasajeros con beneficios, sin ser su titular, o alterándolo con el fin de aparentar la titularidad sobre éstos.\n5. Conducir un vehículo manipulando un dispositivo de telefonía móvil o cualquier otro artefacto electrónico o digital, que no venga incorporado de fábrica en él, excepto si la acción se realiza a través de un sistema de manos libres.\n6. Conducir un vehículo sin la placa patente única cuando ésta sea exigible conforme con lo dispuesto en el artículo 51.\n7. Conducir un vehículo con la placa patente oculta o que utilice objetos, accesorios, luces o aditamentos que obstaculicen su plena percepción, o si la placa patente se encuentra en mal estado y dificulte la identificación del vehículo, siempre que la placa patente sea exigible conforme a lo dispuesto en el artículo 51.",
+      "citations": [
+        [
+          "1007469",
+          "199"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Usuario de Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 16277,
+      "retrieval_ms": 20,
+      "generation_ms": 16257,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 7826,
+      "retrieval_ms": 21,
+      "generation_ms": 7805,
+      "answer": "Sistemas de Almacenamiento de Energía intensivos en potencia son aquellos cuyo propósito es aumentar la capacidad segura de transmisión y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 0,5 [Art. 102 de 1160108].\n\nEstos sistemas deben estar dimensionados de acuerdo con la demanda y no pueden superar la capacidad de la infraestructura existente o proyectada a la que se conectarán [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acometida",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "16",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 23472,
+      "retrieval_ms": 21,
+      "generation_ms": 23451,
+      "answer": "Para responder a su pregunta sobre cómo se define la solución de conexión a las instalaciones del Sistema de Transmisión según los artículos proporcionados, se puede citar directamente el Artículo 16 de 1160108:\n\n[Art. 16 de 1160108]\nEn la descripción del proyecto de conexión y sus principales características, el solicitante deberá señalar, de acuerdo a las especificaciones que indique el Coordinador, a lo menos lo siguiente:\na. La identificación y ubicación geográfica de las nuevas instalaciones que se solicita interconectar y del punto de conexión;\nb. La descripción del punto de conexión propuesto señalando las características de diseño mínimas para efectuar la conexión;\nc. La descripción del equipamiento eléctrico del proyecto de conexión, así como de las instalaciones que a través de éste inyectarán y/o retirarán energía del Sistema Eléctrico;\nd. La fecha estimada para la obtención de la declaración en construcción ante la Comisión y la fecha estimada de interconexión del proyecto de conexión, así como de las instalaciones que a través de éste inyectarán y/o retirarán energía del Sistema Eléctrico; y\ne. Plano o diagrama georreferenciado de la acometida a la subestación que se desea conectar.\n\nEste artículo establece los requisitos mínimos que debe cumplir el proyecto de conexión para ser considerado conforme a las normas técnicas y operativas del Sistema de Transmisión, incluyendo detalles sobre la identificación geográfica, características del punto de conexión, equipamiento eléctrico, fechas estimadas y planos georreferenciados.",
+      "citations": [
+        [
+          "1160108",
+          "16"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1010304",
+        "articulo_numero": "20"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es C.O.M.A.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "49",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 11793,
+      "retrieval_ms": 21,
+      "generation_ms": 11772,
+      "answer": "El C.O.M.A. es el Costo Operación Mantenimiento Administración de una única empresa eficiente que opera permanentemente las instalaciones de transmisión según los estándares establecidos en la normativa vigente [Art. 49 de 1146553].\n\nEste costo se determina para cada segmento de los Sistemas de Transmisión y para cada Sistema de Transmisión Zonal, considerando factores como tecnologías, zonas, valor de inversión, anualidades, entre otros [Art. 49 de 1146553].\n\nAdemás, el C.O.M.A. se utiliza para determinar las asignaciones asociadas a cada Tramo y para la determinación del C.O.M.A. vigente durante el periodo que medie entre la fecha de entrada en operación de las Obras de Ampliación y el siguiente proceso de valorización de la transmisión [Art. 49 de 1146553].",
+      "citations": [
+        [
+          "1146553",
+          "49"
+        ],
+        [
+          "1146553",
+          "49"
+        ],
+        [
+          "1146553",
+          "49"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1215040",
+        "articulo_numero": "primero"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es V.A.T.T.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 21,
+      "retrieval_ms": 21,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "164"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia inicial",
+      "category": "concept_definition_manual",
+      "expected_norma": "250604",
+      "expected_articulo": "28",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 49183,
+      "retrieval_ms": 17,
+      "generation_ms": 49166,
+      "answer": "La potencia inicial se asigna a cada Unidad Generadora o Sistema de Almacenamiento de Energía, y es menor o igual a su Potencia Máxima. Esta potencia caracteriza la capacidad que cada unidad puede aportar al sistema en función de la incertidumbre asociada a la disponibilidad del Insumo Principal y del Insumo Alternativo de generación, según corresponda, junto con las restricciones ambientales y los procesos logísticos asociados al suministro de ambos insumos. [Art. 28 de 250604]\n\nPara el caso de Sistemas de Almacenamiento de Energía, la Potencia Inicial se asignará conforme a lo establecido en el artículo 37 del presente reglamento. En el caso de una Central Renovable con Capacidad de Almacenamiento, su Potencia Inicial se asignará conforme a lo establecido en el artículo 38 del presente reglamento. [Art. 28 de 250604]\n\nPara cada Sistema de Almacenamiento de Energía y de la componente de almacenamiento de Centrales Renovables con Capacidad de Almacenamiento, se determinará a partir de su aporte a la curva de carga. Para estos efectos, el Coordinador deberá calcular la Potencia Inicial para cada instalación de forma individual de acuerdo a lo establecido en el presente artículo. [Art. 37 de 250604]",
+      "citations": [
+        [
+          "250604",
+          "28"
+        ],
+        [
+          "250604",
+          "28"
+        ],
+        [
+          "250604",
+          "37"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "42 bis"
+      },
+      "error": null
+    },
+    {
+      "query": "Artículo 99 de la Ley 18410",
+      "category": "specific_article",
+      "expected_norma": "29819",
+      "expected_articulo": "99",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 20,
+      "retrieval_ms": 20,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1043725",
+        "articulo_numero": "segundo"
+      },
+      "error": null
+    },
+    {
+      "query": "qué leyes regulan las concesiones eléctricas",
+      "category": "multi_norma",
+      "expected_norma": "1007469",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 16,
+      "retrieval_ms": 16,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "29819",
+        "articulo_numero": "16 B"
+      },
+      "error": null
+    },
+    {
+      "query": "cómo se calcula el VATT",
+      "category": "tariff",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "complejo",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 7834,
+      "retrieval_ms": 7834,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "202975",
+        "articulo_numero": "135"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el coordinador del sistema eléctrico",
+      "category": "coordinator",
+      "expected_norma": "1146553",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 17,
+      "retrieval_ms": 17,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1102690",
+        "articulo_numero": "primero"
+      },
+      "error": null
+    },
+    {
+      "query": "transferencias de potencia",
+      "category": "power_transfers",
+      "expected_norma": "250604",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 21143,
+      "retrieval_ms": 16,
+      "generation_ms": 21127,
+      "answer": "Transferencias de potencia se refieren a los compromisos de potencia que un Participante del Balance de Potencia tiene para suministrar energía a clientes no sometidos a regulación de precios o empresas distribuidoras, contando con un contrato de suministro destinado a esos efectos [Art. 13 de 250604].\n\nLas empresas que operan medios de generación o sistemas de almacenamiento de energía de pequeña escala pueden abstenerse de participar en las transferencias de potencia, comunicando su decisión al Coordinador antes del 31 de diciembre del año anterior a la efectiva abstención [Art. 8º de 250604]. Sin embargo, si posteriormente suscriben contratos para suministrar energía a clientes no sometidos a regulación de precios o empresas distribuidoras, deberán participar en las transferencias de potencia desde el mes indicado en el contrato [Art. 8º de 250604].\n\nAdemás, si una empresa que no participa en las transferencias de potencia desea reintegrarse a este proceso, puede solicitarlo al Coordinador, quien requerirá la presentación de antecedentes e información para llevar a cabo los cálculos y balances pertinentes [Art. 8º de 250604].",
+      "citations": [
+        [
+          "250604",
+          "13"
+        ],
+        [
+          "250604",
+          "8"
+        ],
+        [
+          "250604",
+          "8"
+        ],
+        [
+          "250604",
+          "8"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "8º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es xenobalbúrgico",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 11321,
+      "retrieval_ms": 21,
+      "generation_ms": 11300,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "220208",
+        "articulo_numero": "3º"
+      },
+      "error": null
+    },
+    {
+      "query": "cuál es la receta del pisco sour",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 16400,
+      "retrieval_ms": 20,
+      "generation_ms": 16380,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1007469",
+        "articulo_numero": "196 bis"
+      },
+      "error": null
+    }
+  ]
+}

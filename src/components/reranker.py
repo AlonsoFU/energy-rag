@@ -9,7 +9,14 @@ from src.core.config import settings
 
 class Qwen3Reranker:
     def __init__(self, model_name: str | None = None, device: str | None = None):
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        # Resolve device with same precedence as Qwen3Embedder.
+        if device is None:
+            cfg = (settings.reranker_device or "auto").lower()
+            if cfg == "auto":
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            else:
+                device = cfg
+        self.device = device
         self.model_name = model_name or settings.qwen_reranker_model
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name, trust_remote_code=True

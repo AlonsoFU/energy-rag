@@ -1,0 +1,1226 @@
+{
+  "n_queries": 50,
+  "n_positive": 48,
+  "n_negative": 2,
+  "n_with_generation": 45,
+  "retrieval": {
+    "recall_at_5": 0.8958333333333334,
+    "recall_norma_only": 0.9583333333333334
+  },
+  "generation": {
+    "grounding_pass": 0.2,
+    "answered": 0.7111111111111111,
+    "negative_correct": 1.0
+  },
+  "latency_ms": {
+    "p50": 16451,
+    "p95": 43215,
+    "p99": 96937
+  },
+  "per_query": [
+    {
+      "query": "qué es Plan de obra de generación y transmisión",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 15378,
+      "retrieval_ms": 33,
+      "generation_ms": 15345,
+      "answer": "El Plan de obra de generación y transmisión se conforma por las obras de generación y de transmisión que hayan sido declaradas en construcción por la Comisión, de acuerdo a lo establecido en el artículo 11° de 1112591. Se incluyen también las obras de transmisión nacional, zonal y para polos de desarrollo que hayan sido decretadas en algún proceso de planificación de transmisión anterior. Por último, se considerarán aquellos proyectos de generación que se encuentren comprometidos, esto es, que hayan suscrito contratos de suministro en los respectivos procesos de licitación de suministro para clientes regulados a partir del proceso 2015/01 y aquellos proyectos comprometidos para el suministro de clientes libres, en contratos de largo plazo, que se hayan acreditado ante la Comisión al inicio del proceso de Planificación [Art. 11° de 1112591].",
+      "citations": [
+        [
+          "1112591",
+          "11"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Modelamiento de las unidades solares y eólicas",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 11564,
+      "retrieval_ms": 23,
+      "generation_ms": 11541,
+      "answer": "Modelamiento de las unidades solares y eólicas corresponde a la representación de los perfiles de inyección de las unidades de generación solares y eólicas mediante la caracterización de, al menos, 16 bloques horarios, con el propósito de obtener una mejor representación de la utilización de las redes de transmisión [Art. 7° de 1009792].\n\nPara estos efectos, se considerará la información de radiación solar y datos de viento de acuerdo al Explorador de Energía Solar y Energía Eólica de la Universidad de Chile, desarrollado para el Ministerio de Energía, junto con la información recogida de los perfiles de generación de centrales existentes [Art. 7° de 1009792].",
+      "citations": [
+        [
+          "1009792",
+          "7"
+        ],
+        [
+          "1009792",
+          "7"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Comisión de acreedores",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 44837,
+      "retrieval_ms": 21,
+      "generation_ms": 44816,
+      "answer": "[Art. 36 bis] \n[Art. 36 ter]\n[Art. 37 a) Reemplázase, en el inciso primero, la expresión \"conciliadora\" por \"Arbitral\". b) Sustitúyese el inciso tercero, por el siguiente: \"Autorizada la designación del interventor, se entenderá haber incumplimiento grave del contrato de concesión y se procederá según lo dispuesto en los incisos segundo y siguientes del artículo 28.\" c) Elimínase el inciso quinto.]\n[Art. 38 a) Elimínase la frase \", ni inferior a la mitad de dicho monto en segunda subasta\". b) Sustitúyese la voz \"tercera\" por \"segunda\".]\n[Art. 39 a) Sustitúyese, en el inciso primero, la frase \"a desarrollar áreas de servicio\" por \"al desarrollo de áreas de servicio, a la provisión de equipamiento o a la prestación de servicios asociados\". b) Intercálase, en el inciso segundo, a continuación de la expresión \"toda obra pública,\", la frase \"la provisión de su equipamiento o la prestación de servicios asociados,\".]\n[Art. 42]",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pequeño Centro de Procesamiento de Biomasa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1183783",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 10116,
+      "retrieval_ms": 21,
+      "generation_ms": 10095,
+      "answer": "El Pequeño Centro de Procesamiento de Biomasa es aquel que tiene capacidad para producir y comercializar anualmente una cantidad igual o inferior a 500 m3st de leña al año, o su equivalente en peso u otra unidad de medida de otros tipos de biocombustibles sólidos provenientes de la biomasa, según lo determine el reglamento [Art. g de 1183783].",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1183783",
+        "articulo_numero": "2"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Martillero Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 17813,
+      "retrieval_ms": 22,
+      "generation_ms": 17791,
+      "answer": "El Martillero Concursal es aquel martillero público que voluntariamente se somete a la fiscalización de la Superintendencia de Insolvencia y Reemprendimiento, cuya misión principal es realizar los bienes del Deudor, en conformidad a lo encomendado por la Junta de Acreedores y de acuerdo a lo establecido en esta ley [Art. 20 de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "20"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Parámetros y variables del Sistema Eléctrico Nacional",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 16343,
+      "retrieval_ms": 22,
+      "generation_ms": 16321,
+      "answer": "\"Parámetros y variables del Sistema Eléctrico Nacional corresponden a los parámetros y características técnicas de las instalaciones de transmisión a modelar en el proceso de calificación de instalaciones de transmisión, las que se obtendrán del sistema de información pública del Coordinador, según lo establece el artículo 18°-i de 1146553.\"",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Cuenta final de administración",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 12694,
+      "retrieval_ms": 21,
+      "generation_ms": 12673,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Colector Solar Térmico",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 13203,
+      "retrieval_ms": 21,
+      "generation_ms": 13182,
+      "answer": "El Colector Solar Térmico es un dispositivo que forma parte de un Sistema Solar Térmico, diseñado para captar la radiación solar incidente, transformarla en energía térmica y transmitir la energía térmica producida a un fluido de trabajo que circula por su interior [Art. 2º de 1005169].",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Árbitros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 13940,
+      "retrieval_ms": 21,
+      "generation_ms": 13919,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia Inicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 11464,
+      "retrieval_ms": 21,
+      "generation_ms": 11443,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Simple",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 23001,
+      "retrieval_ms": 21,
+      "generation_ms": 22980,
+      "answer": "El Quórum Simple se define como \"El conformado por la mayoría del pasivo verificado y/o reconocido, según corresponda, con derecho a voto, presente en la Junta de Acreedores, en el Procedimiento Concursal respectivo.\" [Art. 34 de 1058072]",
+      "citations": [
+        [
+          "1058072",
+          "34"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Martilleros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 17813,
+      "retrieval_ms": 21,
+      "generation_ms": 17792,
+      "answer": "[Art. 4 N° 5 v) de 21305]\n[Art. 46 de 202975]",
+      "citations": [
+        [
+          "202975",
+          "46"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es DEPÓSITOS TURÍSTICOS",
+      "category": "concept_definition_auto",
+      "expected_norma": "220208",
+      "expected_articulo": "3º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 16560,
+      "retrieval_ms": 21,
+      "generation_ms": 16539,
+      "answer": "DEPÓSITOS TURÍSTICOS son establecimientos que venden bebidas alcohólicas de fabricación nacional para ser consumidas fuera del local, ubicados en terminales aéreos y marítimos con tráfico internacional [Art. 37 de 250604].\n\nEstos depósitos tienen un valor patente de 3 UTM [Art. 3º de 220208].",
+      "citations": [
+        [
+          "250604",
+          "37"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "220208",
+        "articulo_numero": "3º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Especial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 19525,
+      "retrieval_ms": 21,
+      "generation_ms": 19504,
+      "answer": "El Quórum Especial se conforma por dos tercios del pasivo total con derecho a voto verificado y/o reconocido, según corresponda, en el Procedimiento Concursal respectivo [Art. 32 de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "32"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Certificado de Nominación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 12508,
+      "retrieval_ms": 20,
+      "generation_ms": 12488,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia de Fallo",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 16621,
+      "retrieval_ms": 21,
+      "generation_ms": 16600,
+      "answer": "[Art. 37 de 1207690]\n[Art. 1° de 1168803]",
+      "citations": [
+        [
+          "1207690",
+          "37"
+        ],
+        [
+          "1168803",
+          "1"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "141599",
+        "articulo_numero": "16"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Liquidación Voluntaria",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 41233,
+      "retrieval_ms": 21,
+      "generation_ms": 41212,
+      "answer": "[Art. 13 N° 7]\n[Art. 14 N° 8]\n[Art. 15 N° 9 a] \n[Art. 15 N° 9 b] \n[Art. 16 N° 10 a] \n[Art. 16 N° 10 b] \n[Art. 16 N° 10 c] \n[Art. 18 N° 11 a] \n[Art. 18 N° 11 b] \n[Art. 19 N° 12 a] \n[Art. 19 N° 12 b] \n[Art. 19 N° 12 c] \n[Art. 19 N° 12 d] \n[Art. 19 N° 12 e] \n[Art. 23 N° 14 a] \n[Art. 23 N° 14 b] \n[Art. 23 N° 14 c] \n[Art. 23 N° 14 d] \n[Art. 23 N° 14 e] \n[Art. 23 N° 15 f] \n[Art. 24 N° 15] \n[Art. 25 N° 16] \n[Art. 25 bis N° 17] \n[Art. 25 ter N° 18] \n[Art. 25 quáter N° 19] \n[Art. 25 quinquies N° 20]",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Depósito Acumulador",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 23209,
+      "retrieval_ms": 21,
+      "generation_ms": 23188,
+      "answer": "El Depósito Acumulador es un componente del Sistema Solar Térmico para Agua Caliente de uso Sanitario [Art. 2º de 1005169]. Este depósito se utiliza para almacenar la energía térmica producida por los Colectores Solares Térmicos, permitiendo el suministro continuo de agua caliente sanitaria a los puntos de consumo [Art. 2º de 1005169].",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acuerdo de Reorganización Judicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 18780,
+      "retrieval_ms": 21,
+      "generation_ms": 18759,
+      "answer": "[Art. 37 D de 1007469]\n[Art. 3° de 29819]",
+      "citations": [
+        [
+          "29819",
+          "3"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Persona Relacionada",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 16907,
+      "retrieval_ms": 21,
+      "generation_ms": 16886,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1010668",
+        "articulo_numero": "Noveno"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Informe del Veedor",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 12090,
+      "retrieval_ms": 21,
+      "generation_ms": 12069,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Liquidación Forzosa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 48544,
+      "retrieval_ms": 21,
+      "generation_ms": 48523,
+      "answer": "[Art. 33 bis de 250604]\nEn el mismo plazo señalado en el inciso octavo del artículo 32, la Comisión emitirá para cada empresa concesionaria sujeta al chequeo de rentabilidad un informe técnico preliminar con los bienes considerados eficientes de dicha empresa, para efectos del chequeo de rentabilidad, su vida útil, el Valor Nuevo de Reemplazo de éstos y su fórmula de indexación, los indicadores de eficiencia para la actividad de distribución de gas en cada zona de concesión y el plazo de amortización de los gastos de comercialización eficientes de la empresa concesionaria que se aplicarán durante el cuatrienio siguiente.\n\n[Art. 33 ter de 250604]\nEste informe técnico preliminar podrá ser observado por la respectiva empresa concesionaria dentro de los diez días siguientes al de su notificación. Vencido el plazo anterior, la Comisión dispondrá de quince días para emitir su Informe Definitivo.\n\n[Art. 33 quáter de 250604]\nEn caso de subsistir discrepancias relativas a la determinación de los bienes de la empresa concesionaria que serán considerados en el chequeo de rentabilidad, su vida útil, el Valor Nuevo de Reemplazo de éstos y su fórmula de indexación, o los indicadores de eficiencia para la actividad de distribución de gas para una determinada zona de concesión, la empresa concesionaria dispondrá de diez días para presentarlas ante el Panel, el que deberá emitir su dictamen dentro del plazo de treinta días contado desde la audiencia pública correspondiente a la o las discrepancias presentadas.\n\n[Art. 33 quinquies de 250604]\nPara los efectos anteriores, se entenderá que existe discrepancia susceptible de ser sometida al dictamen del Panel, si la empresa concesionaria hubiere formulado observaciones al informe técnico preliminar y persevere en ellas con posterioridad a su rechazo por parte de la Comisión.\n\n[Art. 33 sexies de 250604]\nSi no se presentaren discrepancias o emitido el dictamen del Panel, en su caso, la Comisión deberá, antes del 31 de diciembre, mediante resolución, fijar los bienes de la empresa concesionaria que serán considerados en el chequeo de rentabilidad, su vida útil, el Valor Nuevo de Reemplazo de éstos, y su fórmula de indexación, los indicadores de eficiencia para la actividad de distribución de gas por zona de concesión y el plazo de amortización de los gastos de comercialización eficientes de la empresa concesionaria, para el cuatrienio siguiente.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Protección Financiera Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 34427,
+      "retrieval_ms": 20,
+      "generation_ms": 34407,
+      "answer": "La Protección Financiera Concursal es un período durante el cual no se puede solicitar ni declarar la liquidación del Deudor que se somete al Procedimiento Concursal de Reorganización o al Procedimiento Concursal de Reorganización Simplificada. Durante este período, tampoco pueden iniciarse en su contra juicios ejecutivos, ejecuciones de cualquier clase o restituciones en los juicios de arrendamiento [Art. 31 de 1058072]. Este período comienza desde la notificación de la Resolución de Reorganización hasta el Acuerdo de Reorganización Judicial, o si este no se acuerda, durante el plazo fijado por la ley [Art. 31 de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "31"
+        ],
+        [
+          "1058072",
+          "31"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Infracciones menos graves",
+      "category": "concept_definition_auto",
+      "expected_norma": "1155887",
+      "expected_articulo": "4°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 19877,
+      "retrieval_ms": 21,
+      "generation_ms": 19856,
+      "answer": "Infracciones menos graves se refieren a actos u omisiones cometidos por los evaluadores energéticos que no causan alteración en la determinación de la etiqueta ni en el resultado del informe de la calificación o precalificación [Art. 2 de 1155887].\n\nEstas incluyen:\n- No cumplir con los plazos establecidos por los reglamentos para realizar la calificación o precalificación energética [Art. 2.a) de 1155887].\n- No cumplir dentro del plazo fijado en la fiscalización respectiva con las acciones correctivas dispuestas por el Ministerio de Vivienda y Urbanismo [Art. 2.b) de 1155887].\n- Ser sancionado al menos tres veces en un mismo año por la comisión de alguna infracción leve [Art. 2.c) de 1155887].",
+      "citations": [
+        [
+          "1155887",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1155887",
+        "articulo_numero": "4°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Valor afecto a bono",
+      "category": "concept_definition_auto",
+      "expected_norma": "1199483",
+      "expected_articulo": "33",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 14531,
+      "retrieval_ms": 20,
+      "generation_ms": 14511,
+      "answer": "El \"Valor afecto a bono\" se refiere al 71,771% de la diferencia entre la remuneración bruta mensual y $597.399 [Art. 2 de 1199483]. Este valor es crucial para determinar el monto del bono que será otorgado a ciertos trabajadores durante el año 2024, específicamente aquellos cuya remuneración bruta mensual sea superior a $597.399 e inferior a $675.482 [Art. 33 de 1199483].",
+      "citations": [
+        [
+          "1199483",
+          "2"
+        ],
+        [
+          "1199483",
+          "33"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1199483",
+        "articulo_numero": "33"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Reorganización",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 143433,
+      "retrieval_ms": 21,
+      "generation_ms": 143412,
+      "answer": "[Art. 6º de 1168803]\nArtículo 6º.- Introdúcense las siguientes modificaciones en el Código Orgánico de Tribunales:\n\n1) Agrégase, en el artículo 19, un inciso final, nuevo, del siguiente tenor:\n\"Sin perjuicio de lo dispuesto en el presente artículo y en el artículo 281 del Código Procesal Penal, podrán ser resueltas por un único juez del tribunal de juicio oral en lo penal la fijación de día y hora para la realización de audiencias. Asimismo, podrán ser resueltas por un único juez del tribunal de juicio oral en lo penal las resoluciones de mero trámite, tales como téngase presente y traslados; pedir cuenta de oficios e informes; y tramitación de exhortos.\"\n\n2) Incorpórase un artículo 47 D, nuevo, del siguiente tenor:\n\"Artículo 47 D.- En los Juzgados de Letras en lo Civil, en los Juzgados de Familia, en los Juzgados de Letras del Trabajo, en los Juzgados de Cobranza Laboral y Previsional, en el Juzgado de Letras de Familia, Garantía y Trabajo creado por el artículo 1º de la ley Nº 20.876, y en los Juzgados de Letras con competencia común, a solicitud del juez o del juez presidente, si es el caso, y previo informe de la Corporación Administrativa del Poder Judicial, las Cortes de Apelaciones podrán autorizar, por resolución fundada en razones de buen servicio con el fin de cautelar la eficiencia del sistema judicial para garantizar el acceso a la justicia o la vida o integridad de las personas, la adopción de un sistema de funcionamiento excepcional que habilite al tribunal a realizar de forma remota por videoconferencia las audiencias de su competencia en que no se rinda prueba testimonial, absolución de posiciones o declaración de partes o de peritos. Lo anterior no procederá respecto de las audiencias en materias penales que se realicen en los Juzgados de Letras con competencia común.\nLa propuesta de funcionamiento excepcional será elaborada por el secretario o administrador del tribunal, y suscrita por el juez o juez presidente, según corresponda. Dicha propuesta tendrá una duración máxima de un año, la que se podrá prorrogar por una sola vez por el mismo período, sin necesidad de una nueva solicitud.\nEl tribunal deberá solicitar a las partes una forma expedita de contacto a efectos de que coordine con ellas los aspectos logísticos necesarios, tales como número de teléfono o correo electrónico. Las partes deberán dar cumplimiento a esta exigencia hasta dos días antes de la realización de la audiencia respectiva. Si cualquiera de las partes no ofreciere oportunamente una forma expedita de contacto, o no fuere posible contactarla a través de los medios ofrecidos tras tres intentos, de lo cual se deberá dejar constancia, se entenderá que no ha comparecido a la audiencia.\nLa constatación de la identidad de la parte que comparece de forma remota deberá efectuarse inmediatamente al inicio de la audiencia, de manera remota ante el ministro de fe o el funcionario que determine el tribunal respectivo, mediante la exhibición de su cédula de identidad o pasaporte, de lo que se dejará registro.\nDe la audiencia realizada por vía remota mediante videoconferencia en los asuntos civiles y comerciales se levantará acta que consignará todo lo obrado en ella, la que deberá ser suscrita por las partes, el juez y los demás comparecientes, mediante firma electrónica simple o avanzada.\nSin perjuicio de lo dispuesto en el inciso primero, cualquier persona legitimada a comparecer en la causa podrá solicitar, hasta dos días antes de la realización de la audiencia, que ésta se desarrolle de forma presencial, invocando razones graves que imposibiliten o dificulten su participación, o que por circunstancias particulares, quede en una situación de indefensión.\nLa disponibilidad y correcto funcionamiento de los medios tecnológicos de las partes que comparezcan remotamente en dependencias ajenas al Poder Judicial será de su responsabilidad. Con todo, la parte podrá alegar entorpecimiento si el mal funcionamiento de los medios tecnológicos no fuera atribuible a ella. En caso de acoger dicho incidente, el tribunal fijará un nuevo día y hora para la continuación de la audiencia, sin que se pierda lo obrado con anterioridad a dicho mal funcionamiento. En la nueva audiencia que se fije, el tribunal velará por la igualdad de las partes en el ejercicio de sus derechos.\nLa Corte Suprema regulará mediante auto acordado los criterios que las Cortes de Apelaciones deberán tener a la vista para aprobar este tipo de funcionamiento excepcional.\"\n\n3) Incorpórase un artículo 68 bis, nuevo, del siguiente tenor:\n\"Artículo 68 bis. Las Cortes de Apelaciones podrán autorizar, por resolución fundada en razones de buen servicio a fin de cautelar la eficiencia del sistema judicial para garantizar el acceso a la justicia o la vida o integridad de las personas, la adopción de un sistema de funcionamiento excepcional que las habilite a realizar la vista de las causas sometidas a su conocimiento en forma remota por videoconferencia. La propuesta de funcionamiento excepcional será elaborada por el presidente de la Corte respectiva y deberá ser aprobada por el pleno. Dicha propuesta tendrá una duración máxima de un año, la que se podrá prorrogar por una sola vez por el mismo período, sin necesidad de una nueva solicitud.\nEn este caso, tendrá aplicación lo dispuesto en los artículos 223 y 223 bis del Código de Procedimiento Civil.\nCon todo, cualquiera de las partes podrá solicitar, hasta las 12:00 horas del día anterior a la vista de la causa, que esta se desarrolle de forma presencial, invocando razones graves que imposibiliten o dificulten su participación, o que por circunstancias particulares, quede en una situación de indefensión.\nLa Corte Suprema regulará mediante auto acordado los criterios que las Cortes de Apelaciones deberán tener a la vista para aprobar este tipo de funcionamiento excepcional.\"\n\n4) Incorpórase un artículo 98 bis, nuevo, del siguiente tenor:\n\"Artículo 98 bis. La Corte Suprema podrá autorizar por razones de buen servicio a fin de cautelar la eficiencia del sistema judicial para garantizar el acceso a la justicia o la vida o integridad de las personas, por resolución fundada, la adopción de un sistema de funcionamiento excepcional que la habilite a realizar la vista de las causas sometidas a su conocimiento en forma remota por videoconferencia. La propuesta de funcionamiento excepcional será elaborada por su presidente y deberá ser aprobada por el pleno. Dicha propuesta tendrá una duración máxima de un año, la que se podrá prorrogar por una sola vez por el mismo período, sin necesidad de una nueva solicitud.\nEn este caso, tendrá aplicación lo dispuesto en los artículos 223 y 223 bis del Código de Procedimiento Civil.\nCon todo, cualquiera de las partes podrá solicitar, hasta las 12:00 horas del día anterior a la vista de la causa, que ésta se desarrolle de forma presencial, invocando razones graves que imposibiliten o dificulten su participación de manera significativa, o que por circunstancias particulares, quede en una situación de indefensión.\nLa Corte Suprema regulará mediante auto acordado los criterios que las Cortes de Apelaciones deberán tener a la vista para aprobar este tipo de funcionamiento excepcional.\"\n\n5) Incorpórase un artículo 101 bis, nuevo, del siguiente tenor:\n\"Artículo 101 bis. Cuando existieren desequilibrios entre las dotaciones de los ministros, secretarios, fiscales judiciales, relatores y funcionarios; y la carga de trabajo entre las Cortes de Apelaciones de Santiago y de San Miguel de la Región Metropolitana, por razones de buen servicio con el fin de cautelar la eficiencia del sistema judicial para garantizar el acceso a la justicia o la vida o integridad de las personas, la Corte Suprema podrá, por resolución fundada, a solicitud del Presidente de la Corte de Apelaciones respectiva, previo informe de la Corporación Administrativa del Poder Judicial, en que consten los datos objetivos para su procedencia, destinar transitoriamente a uno o más ministros, secretarios, fiscales judiciales, relatores o funcionarios de Corte a desempeñar sus funciones preferentemente en la otra Corte. Los destinados sólo podrán asumir el mismo cargo y labor que respectivamente desempeñaban en la Corte de origen.\nDicha facultad podrá ejercerse excepcionalmente entre las Cortes mencionadas por un plazo mínimo de seis meses y máximo de un año por cada ministro, secretario, fiscal judicial, relator o funcionario, sin renovación inmediata.\nLa solicitud deberá presentarse por la respectiva Corte de Apelaciones, debiendo indicar en ella el tiempo por el cual se solicita, el que no podrá ser menor a seis meses ni superior a un año. Dicha petición, acompañada con el respectivo informe de la Corporación Administrativa del Poder Judicial a que alude el inciso primero, oyendo previamente a las respectivas Cortes de Apelaciones, será conocida y resuelta por la Corte Suprema considerando la proyección necesaria para superar los desequilibrios y cautelar el buen servicio a que alude el inciso primero. En sus informes deberán las Cortes de Apelaciones respectivas incluir la nómina de ministros, secretarios, fiscales judiciales, relatores y funcionarios que presten su anuencia para ser preferidos en su destinación a la otra Corte.\nLa Corte Suprema designará al ministro, secretario, fiscal judicial, relator o funcionario destinado dando preferencia a aquellos que manifiesten su interés en ser destinados transitoriamente.\nEsta facultad no podrá ejercerse con respecto al ministro presidente del tribunal ni afectar en forma simultánea a un porcentaje superior al cincuenta por ciento de los ministros, secretarios, fiscales judiciales, relatores o funcionarios integrantes de cada Corte.\nEl ejercicio de esta facultad no modificará el sistema de remuneración, de calificación o el régimen estatutario de los ministros, secretarios, fiscales judiciales, relatores o funcionarios destinados, ni tampoco podrá importar deterioro en su condición funcionaria, personal o familiar.\nLa obligación señalada en el artículo 311 se entenderá cumplida por el ministro transitoriamente destinado, para todos los efectos legales, por el hecho de verificarse respecto de su tribunal de origen.\nEn ningún caso, la facultad establecida en este artículo podrá ser empleada como mecanismo de sanción o menoscabo en contra de los ministros, secretarios, fiscales judiciales, relatores o funcionarios destinados, ni tampoco ser utilizada reiteradamente respecto de alguno de ellos sin contar con su anuencia previa. No podrá ser destinado quien que se encuentre sometido a un proceso disciplinario o cumpliendo una sanción administrativa.\"",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Renegociación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 41091,
+      "retrieval_ms": 21,
+      "generation_ms": 41070,
+      "answer": "[Art. 16 bis de 1030861]\n[Art. 16 quater de 21805]\n[Art. 16 sexies de 21805]\n[Art. 16 septies de 21805]\n[Art. 16 octies de 21805]",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Deuda de Tarifa o Peaje",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 31764,
+      "retrieval_ms": 20,
+      "generation_ms": 31744,
+      "answer": "Deuda de Tarifa o Peaje se refiere al incumplimiento por parte del Usuario de Sistema Interoperable en el pago de la Tarifa o Peaje correspondiente al uso de una obra pública fiscal concesionada [Art. 12 de 1207690]. Según este artículo, el concesionario podrá cobrar judicialmente la Deuda de Tarifa o Peaje, reajustada según la variación del índice de precios al consumidor, más los intereses máximos convencionales y las costas, de conformidad a lo establecido en el artículo 42 del decreto supremo N° 900, de 1996, del Ministerio de Obras Públicas, que fija el texto refundido, coordinado y sistematizado del decreto con fuerza de ley del Ministerio de Obras Públicas N° 164, de 1991, Ley de Concesiones de Obras Públicas.",
+      "citations": [
+        [
+          "1207690",
+          "12"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Estado Deteriorado",
+      "category": "concept_definition_auto",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 25137,
+      "retrieval_ms": 21,
+      "generation_ms": 25116,
+      "answer": "El Estado Deteriorado se define como la condición de operación de una Unidad Generadora o Sistema de Almacenamiento de Energía en la cual se limita su Potencia Máxima producto de restricciones en sus componentes o instalaciones, independiente de la disponibilidad de su Insumo Principal y Alternativo; o en la cual la Unidad Generadora presenta restricciones asociadas a las condiciones señaladas en el Artículo 25 quáter del presente reglamento para ser convocada por el Coordinador al despacho. [Art. 8 de 250604]",
+      "citations": [
+        [
+          "250604",
+          "8"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Convenio o Contrato TAG o Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 22832,
+      "retrieval_ms": 20,
+      "generation_ms": 22812,
+      "answer": "El Convenio o Contrato TAG o Televía es el acuerdo suscrito entre una Sociedad Concesionaria y el Usuario de Sistema Interoperable, mediante el cual se regula el uso del Televía que, a cualquier título, es entregado por la Sociedad Concesionaria y recibido por el Usuario de Sistema Interoperable, en los términos y condiciones señalados en dicho convenio y en las respectivas Condiciones Generales de Uso de TAG y Cobro de Tarifa de Peajes [Art. 8 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "8"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Inhabilitar",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 22,
+      "retrieval_ms": 22,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "27"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Documento de Cobro",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 19874,
+      "retrieval_ms": 17,
+      "generation_ms": 19857,
+      "answer": "Un Documento de Cobro es aquel que refleja las cantidades adeudadas por el Usuario de Sistema Interoperable por concepto de Tarifas o Peajes, intereses y otros cargos de conformidad a la legislación vigente [Art. 13 de 1207690]. Este documento será emitido y enviado para su pago en conformidad al contrato de concesión [Art. 13 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "13"
+        ],
+        [
+          "1207690",
+          "13"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Cuenta de Tarifas o Peajes",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 21,
+      "retrieval_ms": 21,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "29"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 11220,
+      "retrieval_ms": 17,
+      "generation_ms": 11203,
+      "answer": "Un Sistema de Almacenamiento de Energía intensivo en energía es aquel cuyo propósito principal es permitir el abastecimiento de la demanda de una zona específica, perteneciente a alguno de los Sistemas de Transmisión Zonal, y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 5 [Art. 102 de 1160108].\n\nEstos sistemas están diseñados para satisfacer la demanda local sin necesidad de ampliar significativamente la infraestructura de transmisión convencional, ya que su capacidad de almacenamiento es relativamente menor en comparación con su potencia nominal [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Multioperador o Multioperadora",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 23304,
+      "retrieval_ms": 21,
+      "generation_ms": 23283,
+      "answer": "\"Multioperador o Multioperadora es la empresa o Sociedad Concesionaria que realiza labores de servicio al Usuario de Sistema Interoperable relativos a la facturación, recaudación y cobranza de peajes de otra Sociedad Concesionaria, de conformidad a lo establecido en cada contrato de concesión [Art. 18 de 1207690].\"\n\nEsta respuesta se basa directamente en el artículo proporcionado, sin agregar información no citada ni inventar detalles fuera del texto original.",
+      "citations": [
+        [
+          "1207690",
+          "18"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "29"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Usuario de Sistema Complementario",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 21082,
+      "retrieval_ms": 21,
+      "generation_ms": 21061,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Televía o TAG",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 10782,
+      "retrieval_ms": 20,
+      "generation_ms": 10762,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Usuario de Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 28980,
+      "retrieval_ms": 20,
+      "generation_ms": 28960,
+      "answer": "El Usuario de Televía es la persona natural o jurídica que ha suscrito un Contrato de Televía con alguna Sociedad Concesionaria para uno o más vehículos con el objeto de integrarse al Sistema Interoperable [Art. 31 de 1207690].\n\nEste usuario tiene derecho a utilizar los servicios del Sistema Electrónico de Cobro de Tarifas o Peajes y se beneficia de la funcionalidad que permite realizar el pago conjunto de las cuentas de tarifas o peajes correspondientes a las distintas concesionarias [Art. 43-1 D de 16121].\n\nAdemás, los datos de contacto del Usuario de Televía deben ser actualizados y comunicados al Registro Nacional de Usuarios de Telepeaje (RNUT) por el Sitio Electrónico Unificado de Tarifas y Peajes [Art. 18 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "31"
+        ],
+        [
+          "1207690",
+          "18"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 15147,
+      "retrieval_ms": 21,
+      "generation_ms": 15126,
+      "answer": "Un Sistema de Almacenamiento de Energía intensivo en potencia es aquel cuyo propósito sea aumentar la capacidad segura de transmisión y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 0,5 [Art. 102 de 1160108].\n\nEste tipo de sistema se integra al Sistema de Transmisión con el fin de reducir costos relacionados con la inversión, operación y falla del Sistema Eléctrico [Art. 102 de 1160108]. Su capacidad de almacenamiento es limitada en comparación con su potencia nominal, lo que lo hace adecuado para situaciones donde se necesita mejorar la capacidad de transmisión sin requerir grandes reservas energéticas [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ],
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acometida",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "16",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 10659,
+      "retrieval_ms": 21,
+      "generation_ms": 10638,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1010304",
+        "articulo_numero": "20"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es C.O.M.A.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "49",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 10332,
+      "retrieval_ms": 21,
+      "generation_ms": 10311,
+      "answer": "El C.O.M.A. (Costo Operación Mantenimiento Administración) se refiere al costo de operación, mantenimiento y administración de una única empresa eficiente que opera las instalaciones permanentemente según los estándares establecidos en la normativa vigente [Art. 49 de 1146553]. Este valor se determina para cada segmento del Sistema de Transmisión y para cada Sistema de Transmisión Zonal, a partir del C.O.M.A. total de la empresa eficiente. Además, el C.O.M.A. también se aplica a las Obras de Ampliación durante un período específico [Art. 49 de 1146553].",
+      "citations": [
+        [
+          "1146553",
+          "49"
+        ],
+        [
+          "1146553",
+          "49"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "49"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es V.A.T.T.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 20,
+      "retrieval_ms": 20,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "164"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia inicial",
+      "category": "concept_definition_manual",
+      "expected_norma": "250604",
+      "expected_articulo": "28",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 27857,
+      "retrieval_ms": 17,
+      "generation_ms": 27840,
+      "answer": "[Art. 37 de 1155887]\nLa Potencia Inicial de cada Sistema de Almacenamiento de Energía y de la componente de almacenamiento de Centrales Renovables con Capacidad de Almacenamiento se determinará a partir de su aporte a la curva de carga. Para estos efectos, el Coordinador deberá calcular la Potencia Inicial para cada instalación de forma individual de acuerdo a lo establecido en el presente artículo.\n\n[Art. 37 bis de 1155887]\nLa Potencia Inicial de cada Sistema de Almacenamiento de Energía y de la componente de almacenamiento de Centrales Renovables con Capacidad de Almacenamiento se determinará a partir de su aporte a la curva de carga. Para estos efectos, el Coordinador deberá calcular la Potencia Inicial para cada instalación de forma individual de acuerdo a lo establecido en el presente artículo.\n\n[Art. 38 de 1155887]\nLa Potencia Inicial de las Centrales Renovables con Capacidad de Almacenamiento se determinará conforme a lo establecido en el artículo 37 del presente reglamento.",
+      "citations": [
+        [
+          "1155887",
+          "37"
+        ],
+        [
+          "1155887",
+          "38"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "28"
+      },
+      "error": null
+    },
+    {
+      "query": "Artículo 99 de la Ley 18410",
+      "category": "specific_article",
+      "expected_norma": "29819",
+      "expected_articulo": "99",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 21,
+      "retrieval_ms": 21,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1149788",
+        "articulo_numero": "5º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué leyes regulan las concesiones eléctricas",
+      "category": "multi_norma",
+      "expected_norma": "1007469",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 14760,
+      "retrieval_ms": 18,
+      "generation_ms": 14742,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "29819",
+        "articulo_numero": "16 B"
+      },
+      "error": null
+    },
+    {
+      "query": "cómo se calcula el VATT",
+      "category": "tariff",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "complejo",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 7939,
+      "retrieval_ms": 7939,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1155887",
+        "articulo_numero": "5°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el coordinador del sistema eléctrico",
+      "category": "coordinator",
+      "expected_norma": "1146553",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 15635,
+      "retrieval_ms": 17,
+      "generation_ms": 15618,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "transferencias de potencia",
+      "category": "power_transfers",
+      "expected_norma": "250604",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 28832,
+      "retrieval_ms": 21,
+      "generation_ms": 28811,
+      "answer": "Transferencias de potencia están sujetas a ciertas condiciones según las normativas disponibles:\n\n1. Las empresas que operan medios de generación o sistemas de almacenamiento de energía de pequeña escala pueden abstenerse de participar en las transferencias de potencia [Art. 8º de 250604], siempre y cuando no estén abasteciendo a clientes no sometidos a regulación de precios o empresas distribuidoras.\n\n2. Si estas empresas suscriben contratos para abastecer a tales clientes, deberán participar en las transferencias de potencia desde el mes indicado en el contrato [Art. 8º de 250604].\n\n3. Las empresas que no participen en las transferencias de potencia podrán solicitar al Coordinador ser incluidas, aportando los antecedentes e información requerida [Art. 8º de 250604].",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "8º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es xenobalbúrgico",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 5752,
+      "retrieval_ms": 20,
+      "generation_ms": 5732,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1214890",
+        "articulo_numero": "32"
+      },
+      "error": null
+    },
+    {
+      "query": "cuál es la receta del pisco sour",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 3220,
+      "retrieval_ms": 20,
+      "generation_ms": 3200,
+      "answer": "No encuentro esa información en las normas disponibles.",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "15°"
+      },
+      "error": null
+    }
+  ]
+}
