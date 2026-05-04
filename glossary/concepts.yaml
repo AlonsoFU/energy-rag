@@ -486,10 +486,10 @@ concepts:
   aliases:
   - alias: distribuidora
     confidence: high
-    validated: false
+    validated: true
   - alias: concesionaria de distribución
     confidence: high
-    validated: false
+    validated: true
   - alias: empresa concesionaria
     confidence: medium
     validated: false
@@ -499,7 +499,7 @@ concepts:
     article: '34'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -548,7 +548,7 @@ concepts:
   aliases:
   - alias: obras de adecuación
     confidence: high
-    validated: false
+    validated: true
   - alias: adecuaciones de conexión
     confidence: medium
     validated: false
@@ -558,7 +558,7 @@ concepts:
     article: Primero
     url: https://www.bcn.cl/leychile/navegar?idNorma=1010668
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -665,7 +665,7 @@ concepts:
   aliases:
   - alias: potencia instalada
     confidence: high
-    validated: false
+    validated: true
   - alias: kW instalados
     confidence: medium
     validated: false
@@ -678,7 +678,7 @@ concepts:
     article: 149 ter
     url: https://www.bcn.cl/leychile/navegar?idNorma=1038211
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -702,7 +702,7 @@ concepts:
   aliases:
   - alias: generación conjunta
     confidence: high
-    validated: false
+    validated: true
   - alias: generación compartida
     confidence: medium
     validated: false
@@ -715,7 +715,7 @@ concepts:
     article: 4º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -736,7 +736,7 @@ concepts:
   aliases:
   - alias: potencia de inyección
     confidence: high
-    validated: false
+    validated: true
   - alias: inyección máxima
     confidence: medium
     validated: false
@@ -746,7 +746,7 @@ concepts:
     article: '11'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -840,7 +840,7 @@ concepts:
   aliases:
   - alias: IEP
     confidence: high
-    validated: false
+    validated: true
   - alias: inyección permitida
     confidence: medium
     validated: false
@@ -853,7 +853,7 @@ concepts:
     article: 4º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -954,7 +954,7 @@ concepts:
   aliases:
   - alias: Ministerio de Energía
     confidence: high
-    validated: false
+    validated: true
   - alias: MinEnergía
     confidence: medium
     validated: false
@@ -967,7 +967,7 @@ concepts:
     article: 8º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -988,10 +988,10 @@ concepts:
   aliases:
   - alias: CNE
     confidence: high
-    validated: false
+    validated: true
   - alias: Comisión Nacional de Energía
     confidence: high
-    validated: false
+    validated: true
   - alias: la Comisión
     confidence: medium
     validated: false
@@ -1001,7 +1001,7 @@ concepts:
     article: '11'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1022,10 +1022,10 @@ concepts:
   aliases:
   - alias: SEC
     confidence: high
-    validated: false
+    validated: true
   - alias: Superintendencia de Electricidad y Combustibles
     confidence: high
-    validated: false
+    validated: true
   - alias: la Superintendencia
     confidence: medium
     validated: false
@@ -1035,7 +1035,7 @@ concepts:
     article: 3º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1192,7 +1192,7 @@ concepts:
   aliases:
   - alias: potencia firme
     confidence: high
-    validated: false
+    validated: true
   - alias: potencia inicial
     confidence: medium
     validated: false
@@ -1205,7 +1205,7 @@ concepts:
     article: '29'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1259,7 +1259,7 @@ concepts:
     validated: false
   - alias: Pmax
     confidence: high
-    validated: false
+    validated: true
   - alias: capacidad nominal
     confidence: medium
     validated: false
@@ -1269,7 +1269,7 @@ concepts:
     article: '25'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3191,7 +3191,7 @@ concepts:
   aliases:
   - alias: Panel de Expertos
     confidence: high
-    validated: false
+    validated: true
   - alias: Panel de Expertos Eléctrico
     confidence: medium
     validated: false
@@ -3201,7 +3201,7 @@ concepts:
     article: '20'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1010304
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3773,7 +3773,7 @@ concepts:
   aliases:
   - alias: SEN
     confidence: high
-    validated: false
+    validated: true
   - alias: Sistema Eléctrico Nacional Chileno
     confidence: medium
     validated: false
@@ -3789,7 +3789,7 @@ concepts:
     article: '4'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1099982
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4029,7 +4029,7 @@ concepts:
   aliases:
   - alias: Precio de Nudo de la Energía Promedio
     confidence: high
-    validated: false
+    validated: true
   - alias: precio nudo energía
     confidence: medium
     validated: false
@@ -4042,7 +4042,7 @@ concepts:
     article: PRIMERO
     url: https://www.bcn.cl/leychile/navegar?idNorma=1067875
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4063,7 +4063,7 @@ concepts:
   aliases:
   - alias: Precio de Nudo de Potencia de Punta Promedio
     confidence: high
-    validated: false
+    validated: true
   - alias: precio nudo potencia
     confidence: medium
     validated: false
@@ -4076,7 +4076,7 @@ concepts:
     article: PRIMERO
     url: https://www.bcn.cl/leychile/navegar?idNorma=1067875
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4255,10 +4255,10 @@ concepts:
   aliases:
   - alias: CEN
     confidence: high
-    validated: false
+    validated: true
   - alias: Coordinador Eléctrico Nacional
     confidence: high
-    validated: false
+    validated: true
   - alias: el Coordinador
     confidence: medium
     validated: false
@@ -4271,7 +4271,7 @@ concepts:
     article: '29'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1023143
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4327,10 +4327,10 @@ concepts:
   aliases:
   - alias: Plan de Expansión de la Transmisión
     confidence: high
-    validated: false
+    validated: true
   - alias: PdE
     confidence: high
-    validated: false
+    validated: true
   - alias: plan anual de expansión
     confidence: medium
     validated: false
@@ -4340,7 +4340,7 @@ concepts:
     article: segundo
     url: https://www.bcn.cl/leychile/navegar?idNorma=1032851
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4443,7 +4443,7 @@ concepts:
   aliases:
   - alias: STN
     confidence: high
-    validated: false
+    validated: true
   - alias: transmisión troncal
     confidence: medium
     validated: false
@@ -4456,7 +4456,7 @@ concepts:
     article: 2°
     url: https://www.bcn.cl/leychile/navegar?idNorma=1112591
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []

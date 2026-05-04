@@ -7,8 +7,8 @@
 
 **Total conceptos:** 215
 
-- **Reviewed**: 0 / 215
-- **Validated aliases**: 0 / 93
+- **Reviewed**: 18 / 215
+- **Validated aliases**: 23 / 93
 
 # ⚡ Electricidad
 
@@ -17,7 +17,7 @@
 ## ernc/ley_20365 *(6)*
 
 ### Ministerio
-**Status:** ⏳ not_reviewed · **Refs:** 570
+**Status:** ✅ ok · **Refs:** 570
 
 **Definición:**
 > el Ministerio de Energía.
@@ -26,14 +26,14 @@
 
 **Aliases:**
 
-- 🔒 `Ministerio de Energía` — high, ⏳
+- 🔒 `Ministerio de Energía` — high, ✅
 - 🟡 `MinEnergía` — medium, ⏳
 - ⚠️ `Ministerio del ramo` — low, ⏳
 
 ---
 
 ### Comisión
-**Status:** ⏳ not_reviewed · **Refs:** 371
+**Status:** ✅ ok · **Refs:** 371
 
 **Definición:**
 > Comisión Nacional de Energía.
@@ -42,14 +42,14 @@
 
 **Aliases:**
 
-- 🔒 `CNE` — high, ⏳
-- 🔒 `Comisión Nacional de Energía` — high, ⏳
+- 🔒 `CNE` — high, ✅
+- 🔒 `Comisión Nacional de Energía` — high, ✅
 - 🟡 `la Comisión` — medium, ⏳
 
 ---
 
 ### Superintendencia
-**Status:** ⏳ not_reviewed · **Refs:** 165
+**Status:** ✅ ok · **Refs:** 165
 
 **Definición:**
 > Superintendencia de Electricidad y Combustibles;
@@ -58,8 +58,8 @@
 
 **Aliases:**
 
-- 🔒 `SEC` — high, ⏳
-- 🔒 `Superintendencia de Electricidad y Combustibles` — high, ⏳
+- 🔒 `SEC` — high, ✅
+- 🔒 `Superintendencia de Electricidad y Combustibles` — high, ✅
 - 🟡 `la Superintendencia` — medium, ⏳
 
 ---
@@ -1219,7 +1219,7 @@
 ## transmisión/coordinador *(1)*
 
 ### Coordinador
-**Status:** ⏳ not_reviewed · **Refs:** 200
+**Status:** ✅ ok · **Refs:** 200
 
 **Definición:**
 > Coordinador independiente del sistema eléctrico nacional, al que se refiere el artículo 212º-1 de la Ley General de Servicios Eléctricos.
@@ -1228,8 +1228,8 @@
 
 **Aliases:**
 
-- 🔒 `CEN` — high, ⏳
-- 🔒 `Coordinador Eléctrico Nacional` — high, ⏳
+- 🔒 `CEN` — high, ✅
+- 🔒 `Coordinador Eléctrico Nacional` — high, ✅
 - 🟡 `el Coordinador` — medium, ⏳
 - 🟡 `Coordinador del Sistema` — medium, ⏳
 
@@ -1250,7 +1250,7 @@
 ---
 
 ### Capacidad Instalada
-**Status:** ⏳ not_reviewed · **Refs:** 34
+**Status:** ✅ ok · **Refs:** 34
 
 **Definición:**
 > Suma de la potencia máxima de las unidades de generación que conforman el equipamiento de generación de un usuario final, expresada en kilowatts;
@@ -1259,14 +1259,14 @@
 
 **Aliases:**
 
-- 🔒 `potencia instalada` — high, ⏳
+- 🔒 `potencia instalada` — high, ✅
 - 🟡 `kW instalados` — medium, ⏳
 - 🟡 `capacidad nominal del parque` — medium, ⏳
 
 ---
 
 ### Equipamiento de Generación Conjunto
-**Status:** ⏳ not_reviewed · **Refs:** 24
+**Status:** ✅ ok · **Refs:** 24
 
 **Definición:**
 > Equipamiento de Generación del que disponen dos o más usuarios finales conectados a la misma red de distribución, en calidad de propietarios del mismo y que tiene por objeto abastecer sus propios consumos de energía e inyectar los excedentes de energía a la red de distribución. El Equipamiento de Generación deberá estar conectado a un único empalme de la misma red de distribución a la que se encuentran conectados los usuarios finales;
@@ -1275,14 +1275,14 @@
 
 **Aliases:**
 
-- 🔒 `generación conjunta` — high, ⏳
+- 🔒 `generación conjunta` — high, ✅
 - 🟡 `generación compartida` — medium, ⏳
 - 🟡 `equipamiento conjunto` — medium, ⏳
 
 ---
 
 ### Capacidad de Inyección
-**Status:** ⏳ not_reviewed · **Refs:** 14
+**Status:** ✅ ok · **Refs:** 14
 
 **Definición:**
 > Suma de la potencia máxima que el equipamiento de generación es capaz de inyectar a la red, expresada en kilowatts;
@@ -1291,7 +1291,7 @@
 
 **Aliases:**
 
-- 🔒 `potencia de inyección` — high, ⏳
+- 🔒 `potencia de inyección` — high, ✅
 - 🟡 `inyección máxima` — medium, ⏳
 
 ---
@@ -1328,7 +1328,7 @@
 ---
 
 ### Inyección de Excedentes Permitida
-**Status:** ⏳ not_reviewed · **Refs:** 13
+**Status:** ✅ ok · **Refs:** 13
 
 **Definición:**
 > Cálculo de la inyección máxima de potencia que el Equipamiento de Generación puede realizar en régimen permanente en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;
@@ -1337,7 +1337,7 @@
 
 **Aliases:**
 
-- 🔒 `IEP` — high, ⏳
+- 🔒 `IEP` — high, ✅
 - 🟡 `inyección permitida` — medium, ⏳
 - 🟡 `límite de inyección` — medium, ⏳
 
@@ -1418,7 +1418,7 @@
 ---
 
 ### Potencia de Suficiencia
-**Status:** ⏳ not_reviewed · **Refs:** 26
+**Status:** ✅ ok · **Refs:** 26
 
 **Definición:**
 > Potencia que una Unidad Generadora o Sistema de Almacenamiento de Energía aporta a la Suficiencia de Potencia del sistema o subsistema. A partir de dicha potencia, se determina la remuneración que resulte de las transferencias de potencia para cada Participante del Balance de Potencia.
@@ -1427,7 +1427,7 @@
 
 **Aliases:**
 
-- 🔒 `potencia firme` — high, ⏳
+- 🔒 `potencia firme` — high, ✅
 - 🟡 `potencia inicial` — medium, ⏳
 - ⚠️ `potencia eficiente` — low, ⏳
 
@@ -1450,7 +1450,7 @@
 ---
 
 ### Potencia Máxima
-**Status:** ⏳ not_reviewed · **Refs:** 18
+**Status:** ✅ ok · **Refs:** 18
 
 **Definición:**
 > Máximo valor que puede sostener de manera continua una Unidad Generadora o Sistema de Almacenamiento de Energía, considerando, si corresponde, sus componentes de generación y de almacenamiento, ambas con el mismo punto de conexión al sistema eléctrico, de acuerdo a la norma técnica y la verificación que realice el Coordinador a través de pruebas destinadas especialmente para este fin. En el caso de Sistemas de Almacenamiento de Energía o de componentes de almacenamiento de Centrales Renovables c
@@ -1460,7 +1460,7 @@
 **Aliases:**
 
 - 🟡 `potencia nominal` — medium, ⏳
-- 🔒 `Pmax` — high, ⏳
+- 🔒 `Pmax` — high, ✅
 - 🟡 `capacidad nominal` — medium, ⏳
 
 ---
@@ -1468,7 +1468,7 @@
 ## distribución/general *(4)*
 
 ### Empresa distribuidora
-**Status:** ⏳ not_reviewed · **Refs:** 62
+**Status:** ✅ ok · **Refs:** 62
 
 **Definición:**
 > la entidad que presta el servicio de gas mediante redes de distribución de gas, con o sin concesión.
@@ -1477,8 +1477,8 @@
 
 **Aliases:**
 
-- 🔒 `distribuidora` — high, ⏳
-- 🔒 `concesionaria de distribución` — high, ⏳
+- 🔒 `distribuidora` — high, ✅
+- 🔒 `concesionaria de distribución` — high, ✅
 - 🟡 `empresa concesionaria` — medium, ⏳
 
 ---
@@ -1496,7 +1496,7 @@
 ---
 
 ### Adecuaciones
-**Status:** ⏳ not_reviewed · **Refs:** 31
+**Status:** ✅ ok · **Refs:** 31
 
 **Definición:**
 > Obras físicas y trabajos en el punto de conexión de un equipamiento de generación a la red de distribución eléctrica necesarias para la construcción o modificación de la respectiva instalación de conexión o empalme, así como para la instalación o modificación del equipo de medida del respectivo equipamiento de generación;
@@ -1505,7 +1505,7 @@
 
 **Aliases:**
 
-- 🔒 `obras de adecuación` — high, ⏳
+- 🔒 `obras de adecuación` — high, ✅
 - 🟡 `adecuaciones de conexión` — medium, ⏳
 
 ---
@@ -1727,7 +1727,7 @@
 ---
 
 ### Plan de Expansión
-**Status:** ⏳ not_reviewed · **Refs:** 50
+**Status:** ✅ ok · **Refs:** 50
 
 **Definición:**
 > Resultado del Proceso de Planificación de la Transmisión, que podrá contener las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro;
@@ -1736,8 +1736,8 @@
 
 **Aliases:**
 
-- 🔒 `Plan de Expansión de la Transmisión` — high, ⏳
-- 🔒 `PdE` — high, ⏳
+- 🔒 `Plan de Expansión de la Transmisión` — high, ✅
+- 🔒 `PdE` — high, ✅
 - 🟡 `plan anual de expansión` — medium, ⏳
 
 ---
@@ -1811,7 +1811,7 @@
 ## transmisión/plan_expansión *(5)*
 
 ### Sistema de Transmisión Nacional
-**Status:** ⏳ not_reviewed · **Refs:** 24
+**Status:** ✅ ok · **Refs:** 24
 
 **Definición:**
 > Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de se
@@ -1820,7 +1820,7 @@
 
 **Aliases:**
 
-- 🔒 `STN` — high, ⏳
+- 🔒 `STN` — high, ✅
 - 🟡 `transmisión troncal` — medium, ⏳
 - 🟡 `red troncal` — medium, ⏳
 
@@ -1881,7 +1881,7 @@
 ## tarifas/distribución *(2)*
 
 ### Sistema Eléctrico Nacional
-**Status:** ⏳ not_reviewed · **Refs:** 30
+**Status:** ✅ ok · **Refs:** 30
 
 **Definición:**
 > Sistema eléctrico interconectado cuya capacidad instalada de generación sea igual o superior a 200 megawatts.
@@ -1890,7 +1890,7 @@
 
 **Aliases:**
 
-- 🔒 `SEN` — high, ⏳
+- 🔒 `SEN` — high, ✅
 - 🟡 `Sistema Eléctrico Nacional Chileno` — medium, ⏳
 - ⚠️ `SIC` — low, ⏳
 - ⚠️ `SING` — low, ⏳
@@ -2026,7 +2026,7 @@
 ## institucional/ministerio_energía *(1)*
 
 ### Panel
-**Status:** ⏳ not_reviewed · **Refs:** 38
+**Status:** ✅ ok · **Refs:** 38
 
 **Definición:**
 > Panel de Expertos establecido en el Título VI del decreto con fuerza de ley N°4/20.018, de 2006, del Ministerio de Economía, Fomento y Reconstrucción, que fija texto refundido, coordinado y sistematizado de la Ley General de Servicios Eléctricos, el cual se someterá a dicho cuerpo legal en todo lo que le sea aplicable, en especial respecto a su integración, carácter vinculante de su dictamen, financiamiento y plazos.
@@ -2035,7 +2035,7 @@
 
 **Aliases:**
 
-- 🔒 `Panel de Expertos` — high, ⏳
+- 🔒 `Panel de Expertos` — high, ✅
 - 🟡 `Panel de Expertos Eléctrico` — medium, ⏳
 
 ---
@@ -2109,7 +2109,7 @@
 ## tarifas/precios_nudo *(4)*
 
 ### PNEP
-**Status:** ⏳ not_reviewed · **Refs:** 14
+**Status:** ✅ ok · **Refs:** 14
 
 **Definición:**
 > Precio de nudo de la energía promedio para
@@ -2118,14 +2118,14 @@
 
 **Aliases:**
 
-- 🔒 `Precio de Nudo de la Energía Promedio` — high, ⏳
+- 🔒 `Precio de Nudo de la Energía Promedio` — high, ✅
 - 🟡 `precio nudo energía` — medium, ⏳
 - 🟡 `PNE promedio` — medium, ⏳
 
 ---
 
 ### PNPP
-**Status:** ⏳ not_reviewed · **Refs:** 14
+**Status:** ✅ ok · **Refs:** 14
 
 **Definición:**
 > Precio de nudo de la potencia de punta promedio
@@ -2134,7 +2134,7 @@
 
 **Aliases:**
 
-- 🔒 `Precio de Nudo de Potencia de Punta Promedio` — high, ⏳
+- 🔒 `Precio de Nudo de Potencia de Punta Promedio` — high, ✅
 - 🟡 `precio nudo potencia` — medium, ⏳
 - 🟡 `PNP promedio` — medium, ⏳
 
