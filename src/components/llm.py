@@ -138,7 +138,9 @@ class LiteLLMProvider:
         if system:
             body["system"] = system
         host = getattr(_config.settings, "ollama_host", "http://localhost:11434")
-        resp = requests.post(f"{host}/api/generate", json=body, timeout=180)
+        # 300s instead of 180: qwen3.5:9b in tight VRAM occasionally needs >180s
+        # for long prompts; the prior 180 limit caused 14% query loss in eval.
+        resp = requests.post(f"{host}/api/generate", json=body, timeout=300)
         data = resp.json()
         return LLMResponse(
             text=data.get("response", ""),
