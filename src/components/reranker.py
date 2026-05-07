@@ -41,27 +41,17 @@ class Qwen3Reranker:
     def rerank(
         self, query: str, docs: list[str], top_k: int
     ) -> list[tuple[int, float]]:
-        """Returns list of (original_index, score) sorted by score desc, length=top_k."""
+        """Returns list of (original_index, score), length=top_k.
+
+        IMPORTANT: this is currently an IDENTITY rerank — preserves the input
+        order from RRF fusion. The Qwen3-Reranker checkpoint has its classifier
+        head (`score.weight`) randomly initialized, so calling the model would
+        return noise that destroys the upstream BM25+vector+RRF ranking. Eval
+        on 2026-05-06 confirmed this: random rerank dropped recall@5 from 95.8%
+        to 64.6%. Identity rerank is a no-op that at least doesn't regress.
+        Wire proper yes/no token-probability scoring before re-enabling.
+        """
         if not docs:
             return []
-        pairs = [[query, d] for d in docs]
-        inputs = self.tokenizer(
-            pairs,
-            padding=True,
-            truncation=True,
-            return_tensors="pt",
-            max_length=512,
-        ).to(self.device)
-        with torch.no_grad():
-            logits = self.model(**inputs).logits.float().cpu()
-        # Qwen3-Reranker via AutoModelForSequenceClassification returns (N, 2)
-        # logits with the classifier head randomly initialized (`score.weight`
-        # missing from checkpoint). Use the positive-class margin as score —
-        # weights are random, so this rerank step is effectively a no-op until
-        # we wire the proper yes/no token-probability API (see TODO at top).
-        if logits.dim() == 2 and logits.shape[-1] == 2:
-            scores = (logits[:, 1] - logits[:, 0]).numpy()
-        else:
-            scores = logits.squeeze(-1).numpy()
-        ranked = sorted(enumerate(scores.tolist()), key=lambda x: x[1], reverse=True)
-        return [(i, float(s)) for i, s in ranked[:top_k]]
+        n = min(len(docs), top_k)
+        return [(i, 1.0 / (i + 1)) for i in range(n)]
