@@ -70,10 +70,21 @@ def graph_boost(candidates: list[dict], query_concepts: list[str]) -> list[dict]
     for c in candidates:
         edges = edges_by_art.get(c["articulo_id"], [])
         if edges:
-            factor = max(GRAPH_BOOST_FACTOR.get(e["tipo_relacion"], 1.0) for e in edges)
+            tipos = {e["tipo_relacion"] for e in edges}
             new = dict(c)
-            new["score"] = c["score"] * factor
-            new["graph_boost_factor"] = factor
+            # `define_termino` is the strongest signal: this article literally
+            # defines a concept the query is asking about. Promote with a large
+            # additive boost so it can leapfrog top candidates from RRF, even
+            # when the per-doc score is small (e.g. identity reranker = 1/i).
+            # Multiplicative 2.0× is too weak when score difference is order-of-
+            # magnitude (top=1.0 vs pos-10=0.1).
+            if "define_termino" in tipos:
+                new["score"] = c["score"] + 10.0
+                new["graph_boost_factor"] = "define_termino+10"
+            else:
+                factor = max(GRAPH_BOOST_FACTOR.get(t, 1.0) for t in tipos)
+                new["score"] = c["score"] * factor
+                new["graph_boost_factor"] = factor
             out.append(new)
         else:
             out.append(c)

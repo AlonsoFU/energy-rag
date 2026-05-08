@@ -1,0 +1,15 @@
+{"query": "qué es la CNE", "expected_norma": "1005169", "expected_articulo": "11", "category": "alias_test"}
+{"query": "qué hace la SEC", "expected_norma": "1005169", "expected_articulo": "3º", "category": "alias_test"}
+{"query": "qué es el CEN", "expected_norma": "1023143", "expected_articulo": "29", "category": "alias_test"}
+{"query": "qué es el SEN", "expected_norma": "1099982", "expected_articulo": "4", "category": "alias_test"}
+{"query": "qué es el STN", "expected_norma": "1112591", "expected_articulo": "2°", "category": "alias_test"}
+{"query": "qué es la IEP", "expected_norma": "1149788", "expected_articulo": "4º", "category": "alias_test"}
+{"query": "qué es Pmax", "expected_norma": "1047565", "expected_articulo": "25", "category": "alias_test"}
+{"query": "qué es potencia firme", "expected_norma": "1047565", "expected_articulo": "29", "category": "alias_test"}
+{"query": "qué es potencia instalada", "expected_norma": "1038211", "expected_articulo": "149 ter", "category": "alias_test"}
+{"query": "qué es el Panel de Expertos", "expected_norma": "1010304", "expected_articulo": "20", "category": "alias_test"}
+{"query": "qué es la transmisión troncal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "alias_test"}
+{"query": "qué es la transmisión dedicada", "expected_norma": "1112591", "expected_articulo": "2°", "category": "alias_test"}
+{"query": "qué es una distribuidora", "expected_norma": "1047565", "expected_articulo": "34", "category": "alias_test"}
+{"query": "qué es la red de transmisión", "expected_norma": "1008692", "expected_articulo": "13", "category": "alias_test"}
+{"query": "qué es PdE", "expected_norma": "1032851", "expected_articulo": "segundo", "category": "alias_test"}
