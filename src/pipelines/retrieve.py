@@ -47,11 +47,37 @@ GRAPH_BOOST_FACTOR = {
 }
 
 
-def graph_boost(candidates: list[dict], query_concepts: list[str]) -> list[dict]:
+def graph_boost(candidates: list[dict], query_concepts: list) -> list[dict]:
     """Boost candidates whose articulo has a `referencias` edge to one of the
-    query concepts. Multiplies the candidate's score by a per-relation factor."""
+    query concepts.
+
+    `query_concepts` is either:
+      - list[str]  (legacy callers): concept names; no alias info.
+      - list[dict]: {"name": str, "matched_by_alias": bool}; the additive
+        define_termino boost applies ONLY to concepts that matched via alias
+        (e.g. "CNE" in the query → boost the def article for "Comisión").
+        Concepts matched via canonical name don't get the strong boost
+        because the canonical-name path was already finding the right doc.
+    """
     if not query_concepts or not candidates:
         return candidates
+
+    # Normalize input. alias_matched_names = set of canonical names that
+    # came from an alias match (eligible for additive define_termino boost).
+    # Legacy str-list callers don't carry alias info, so they fall back to
+    # the original multiplicative boost (preserves prior behavior + tests).
+    if query_concepts and isinstance(query_concepts[0], dict):
+        all_names = [qc["name"] for qc in query_concepts]
+        alias_matched_names = {
+            qc["name"].lower() for qc in query_concepts
+            if qc.get("matched_by_alias")
+        }
+        legacy_caller = False
+    else:
+        all_names = list(query_concepts)
+        alias_matched_names = set()
+        legacy_caller = True
+
     art_ids = [c["articulo_id"] for c in candidates]
 
     with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
@@ -61,7 +87,7 @@ def graph_boost(candidates: list[dict], query_concepts: list[str]) -> list[dict]
             JOIN conceptos c ON c.id = r.destino_concepto_id
             WHERE r.origen_articulo_id = ANY(%s::bigint[])
               AND lower(c.nombre) = ANY(%s::text[])
-        """, (art_ids, [n.lower() for n in query_concepts]))
+        """, (art_ids, [n.lower() for n in all_names]))
         edges_by_art: dict[int, list[dict]] = {}
         for row in cur.fetchall():
             edges_by_art.setdefault(row["origen_articulo_id"], []).append(row)
@@ -70,19 +96,33 @@ def graph_boost(candidates: list[dict], query_concepts: list[str]) -> list[dict]
     for c in candidates:
         edges = edges_by_art.get(c["articulo_id"], [])
         if edges:
-            tipos = {e["tipo_relacion"] for e in edges}
             new = dict(c)
-            # `define_termino` is the strongest signal: this article literally
-            # defines a concept the query is asking about. Promote with a large
-            # additive boost so it can leapfrog top candidates from RRF, even
-            # when the per-doc score is small (e.g. identity reranker = 1/i).
-            # Multiplicative 2.0× is too weak when score difference is order-of-
-            # magnitude (top=1.0 vs pos-10=0.1).
-            if "define_termino" in tipos:
+            # define_termino boost only applies if the linked concept was
+            # alias-matched in the query (avoids false positives like
+            # "Comisión de acreedores" hijacking the boost via the eléctrica
+            # "Comisión" alias when the canonical-name path already worked).
+            define_via_alias = any(
+                e["tipo_relacion"] == "define_termino"
+                and (e["concepto_nombre"] or "").lower() in alias_matched_names
+                for e in edges
+            )
+            if define_via_alias:
                 new["score"] = c["score"] + 10.0
-                new["graph_boost_factor"] = "define_termino+10"
+                new["graph_boost_factor"] = "define_termino+10 (alias)"
+            elif legacy_caller:
+                # Legacy: original multiplicative behavior (define_termino=2.0)
+                factor = max(GRAPH_BOOST_FACTOR.get(e["tipo_relacion"], 1.0) for e in edges)
+                new["score"] = c["score"] * factor
+                new["graph_boost_factor"] = factor
             else:
-                factor = max(GRAPH_BOOST_FACTOR.get(t, 1.0) for t in tipos)
+                # Dict caller without alias match: skip define_termino factor
+                # (it would over-promote on canonical-name matches like
+                # "Comisión de acreedores" hijacking the eléctrica boost).
+                factor = max(
+                    (GRAPH_BOOST_FACTOR.get(e["tipo_relacion"], 1.0)
+                     for e in edges if e["tipo_relacion"] != "define_termino"),
+                    default=1.0,
+                )
                 new["score"] = c["score"] * factor
                 new["graph_boost_factor"] = factor
             out.append(new)
@@ -138,17 +178,30 @@ def hierarchical_expand(candidates: list[dict]) -> list[dict]:
 # Step 4: Query concept extraction
 # ---------------------------------------------------------------------------
 
-def extract_query_concepts(query: str, conceptos: list[dict]) -> list[str]:
-    """Return the names of concepts (with optional aliases) found verbatim
-    (case-insensitive, word-bounded) in the query."""
+def extract_query_concepts(query: str, conceptos: list[dict]) -> list[dict]:
+    """Return concepts (with optional aliases) found verbatim in the query.
+
+    Each entry: {"name": canonical_name, "matched_by_alias": bool}.
+    `matched_by_alias=True` means the query mentioned an alias (e.g. "CNE"),
+    not the canonical name (e.g. "Comisión"). Downstream graph_boost uses
+    this flag to apply the strong define_termino boost only when an alias
+    triggered the match — queries that already use the canonical name
+    don't benefit from the boost (they were already finding the right doc).
+    """
     out = []
     for c in conceptos:
-        names = [c["nombre"]] + (c.get("aliases") or [])
-        for n in names:
+        canonical = c["nombre"]
+        aliases = c.get("aliases") or []
+        # Check canonical first
+        if _re.search(r"\b" + _re.escape(canonical) + r"\b", query, _re.IGNORECASE):
+            out.append({"name": canonical, "matched_by_alias": False})
+            continue
+        # Then aliases
+        for n in aliases:
             if not n:
                 continue
             if _re.search(r"\b" + _re.escape(n) + r"\b", query, _re.IGNORECASE):
-                out.append(c["nombre"])
+                out.append({"name": canonical, "matched_by_alias": True})
                 break
     return out
 

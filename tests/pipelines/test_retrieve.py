@@ -17,11 +17,18 @@ def test_rrf_combines_two_rankings():
 def test_extract_query_concepts():
     from src.pipelines.retrieve import extract_query_concepts
     conceptos = [
-        {"nombre": "COMA", "aliases": []},
+        {"nombre": "Comisión", "aliases": ["CNE"]},
         {"nombre": "potencia firme", "aliases": []},
     ]
-    found = extract_query_concepts("¿cómo se calcula el COMA?", conceptos)
-    assert "COMA" in found
+    # Canonical-name match
+    found = extract_query_concepts("¿qué hace la Comisión?", conceptos)
+    coma = next(c for c in found if c["name"] == "Comisión")
+    assert coma["matched_by_alias"] is False
+
+    # Alias match
+    found_alias = extract_query_concepts("qué es la CNE", conceptos)
+    coma_alias = next(c for c in found_alias if c["name"] == "Comisión")
+    assert coma_alias["matched_by_alias"] is True
 
 
 # ----------------------- Integration tests -----------------------
