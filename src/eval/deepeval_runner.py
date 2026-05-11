@@ -175,7 +175,12 @@ def run_deepeval(
             if should_generate:
                 t1 = time.time()
                 try:
-                    result = generate_answer(q["query"], docs, llm=llm, model=model)
+                    # Retry-on-fail: first try uses top top_k docs, retry widens to all retrieved.
+                    initial = min(10, len(docs)) if len(docs) > 10 else None
+                    result = generate_answer(
+                        q["query"], docs, llm=llm, model=model,
+                        initial_top=initial,
+                    )
                     answer_text = result["text"]
                     grounding_pass = result["grounding_pass"]
                 except Exception as exc:  # pragma: no cover - defensive

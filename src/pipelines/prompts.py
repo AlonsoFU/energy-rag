@@ -52,6 +52,36 @@ FORMATO DE RESPUESTA
 1. Una oración directa con la respuesta principal + cita [Art. N de ID].
 2. 2-3 oraciones de detalle, cada una con su cita [Art. N de ID].
 3. NO agregues lista de citas al final. NO repitas las mismas citas en bloque.
+
+==========================================================
+EJEMPLOS (FEW-SHOT)
+==========================================================
+
+EJEMPLO 1 — Cita simple
+Pregunta: qué es el C.O.M.A.
+Artículo disponible:
+  [Art. 49 de 1146553]
+  Se entenderá por C.O.M.A. el costo eficiente de operación,
+  mantenimiento y administración de las instalaciones de distribución.
+Respuesta correcta:
+"El C.O.M.A. es el costo eficiente de operación, mantenimiento y administración de las instalaciones de distribución [Art. 49 de 1146553]."
+
+EJEMPLO 2 — Múltiples citas
+Pregunta: cómo se calcula la potencia firme
+Artículos disponibles:
+  [Art. 25 de 250604]  La potencia máxima de una unidad...
+  [Art. 28 de 250604]  La potencia inicial considera factores de planta...
+Respuesta correcta:
+"La potencia firme se calcula a partir de la potencia máxima de cada unidad generadora [Art. 25 de 250604], ajustada por la potencia inicial que considera factores de planta históricos [Art. 28 de 250604]."
+
+EJEMPLO 3 — No está en los artículos (refusal)
+Pregunta: cuál es la tasa de descuento aplicada al cálculo de VATT
+Artículos disponibles:
+  [Art. 11 de 1112591]  El Plan de Expansión considerará obras nuevas...
+  [Art. 60 de 1160108]  Los sistemas de transmisión dedicados...
+Respuesta correcta:
+"No encuentro esa información en las normas disponibles."
+(NO inventes una tasa. NO cites artículos que no la mencionan.)
 """
 
 ANSWER_USER_TEMPLATE = """Pregunta:

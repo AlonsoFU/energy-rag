@@ -243,10 +243,18 @@ class SimpleRetriever:
                 top_k=self.top_rerank,
             )
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
-        # 5. Auto-detect concepts if not provided
+        # 5. Auto-detect concepts if not provided. Filter out off-domain concepts
+        # (regulatorio_otros, energía_otra, indeterminado) so an alias match on,
+        # say, "Deudor" from concursal/ley_20720 doesn't pollute an electrical query.
+        # Unclassified concepts (metadata.domain_primary IS NULL) are included as a
+        # safe default since many DB concepts predate the YAML hierarchy.
         if query_concepts is None:
             with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
-                cur.execute("SELECT nombre, aliases FROM conceptos")
+                cur.execute(
+                    "SELECT nombre, aliases FROM conceptos "
+                    "WHERE metadata->>'domain_primary' = 'electricidad' "
+                    "   OR metadata->>'domain_primary' IS NULL"
+                )
                 all_concepts = cur.fetchall()
             query_concepts = extract_query_concepts(query, all_concepts)
         # 6. Graph boost
@@ -297,10 +305,14 @@ class ComplexRetriever(SimpleRetriever):
             )
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
 
-        # 4. Auto-detect concepts if not provided
+        # 4. Auto-detect concepts if not provided (same domain filter as SimpleRetriever)
         if query_concepts is None:
             with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
-                cur.execute("SELECT nombre, aliases FROM conceptos")
+                cur.execute(
+                    "SELECT nombre, aliases FROM conceptos "
+                    "WHERE metadata->>'domain_primary' = 'electricidad' "
+                    "   OR metadata->>'domain_primary' IS NULL"
+                )
                 all_c = cur.fetchall()
             query_concepts = extract_query_concepts(query, all_c)
 

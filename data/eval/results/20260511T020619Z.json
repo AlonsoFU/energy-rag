@@ -1,0 +1,355 @@
+{
+  "n_queries": 15,
+  "n_positive": 15,
+  "n_negative": 0,
+  "n_with_generation": 2,
+  "retrieval": {
+    "recall_at_5": 0.13333333333333333,
+    "recall_norma_only": 0.3333333333333333
+  },
+  "generation": {
+    "grounding_pass": 1.0,
+    "answered": 1.0,
+    "negative_correct": 0.0
+  },
+  "latency_ms": {
+    "p50": 62,
+    "p95": 49734,
+    "p99": 84298
+  },
+  "per_query": [
+    {
+      "query": "qué es la CNE",
+      "category": "alias_test",
+      "expected_norma": "1005169",
+      "expected_articulo": "11",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 692,
+      "retrieval_ms": 692,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "2"
+      },
+      "error": null
+    },
+    {
+      "query": "qué hace la SEC",
+      "category": "alias_test",
+      "expected_norma": "1005169",
+      "expected_articulo": "3º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 179,
+      "retrieval_ms": 179,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "4"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el CEN",
+      "category": "alias_test",
+      "expected_norma": "1023143",
+      "expected_articulo": "29",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 63,
+      "retrieval_ms": 63,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "2"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el SEN",
+      "category": "alias_test",
+      "expected_norma": "1099982",
+      "expected_articulo": "4",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 62,
+      "retrieval_ms": 62,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "duodécimo"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el STN",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 54,
+      "retrieval_ms": 54,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la IEP",
+      "category": "alias_test",
+      "expected_norma": "1149788",
+      "expected_articulo": "4º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 55,
+      "retrieval_ms": 55,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "31"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pmax",
+      "category": "alias_test",
+      "expected_norma": "1047565",
+      "expected_articulo": "25",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 54,
+      "retrieval_ms": 54,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia firme",
+      "category": "alias_test",
+      "expected_norma": "1047565",
+      "expected_articulo": "29",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 59,
+      "retrieval_ms": 59,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia instalada",
+      "category": "alias_test",
+      "expected_norma": "1038211",
+      "expected_articulo": "149 ter",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 58,
+      "retrieval_ms": 58,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1149788",
+        "articulo_numero": "4º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el Panel de Expertos",
+      "category": "alias_test",
+      "expected_norma": "1010304",
+      "expected_articulo": "20",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 55,
+      "retrieval_ms": 55,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1047565",
+        "articulo_numero": "44"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la transmisión troncal",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 69,
+      "retrieval_ms": 69,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la transmisión dedicada",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 31218,
+      "retrieval_ms": 58,
+      "generation_ms": 31160,
+      "answer": "Los Sistemas de Transmisión Dedicados son aquellos constituidos por líneas y subestaciones eléctricas radiales interconectadas al Sistema Eléctrico, dispuestas esencialmente para el suministro de energía a usuarios no sometidos a regulación de precios o para inyectar la producción de centrales generadoras [Art. 2° de 1112591]. Asimismo, pertenecen a estos sistemas las instalaciones enmalladas que estén dispuestas para los fines señalados anteriormente, siempre que su operación no produzca impactos significativos en el resto del sistema [Art. 2° de 1112591]. Un tramo de transporte o subestación asociado a instalaciones radiales de uso mixto será calificado como perteneciente al Sistema de Transmisión Dedicado si está siendo utilizado para el suministro a usuarios no regulados y para inyectar la producción de centrales generadoras [Art. 23 de 1146553].",
+      "citations": [
+        [
+          "1112591",
+          "2"
+        ],
+        [
+          "1112591",
+          "2"
+        ],
+        [
+          "1146553",
+          "23"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "2°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es una distribuidora",
+      "category": "alias_test",
+      "expected_norma": "1047565",
+      "expected_articulo": "34",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 117,
+      "retrieval_ms": 117,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1102690",
+        "articulo_numero": "primero"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la red de transmisión",
+      "category": "alias_test",
+      "expected_norma": "1008692",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 54,
+      "retrieval_ms": 54,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es PdE",
+      "category": "alias_test",
+      "expected_norma": "1032851",
+      "expected_articulo": "segundo",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 92940,
+      "retrieval_ms": 52,
+      "generation_ms": 92888,
+      "answer": "Según los artículos provistos, los montos de inyección y peajes de retiro se liquidan mensualmente por la DP, indexados y expresados en moneda nacional con el dólar promedio del mes devengado, debiendo ser facturados por las empresas de transmisión troncal a las generadoras en los dos días hábiles siguientes. Los costos de transmisión traspasables a tarifas reguladas son calculados por la Comisión Nacional de Energía. Las reliquidaciones y otros pagos deben ser abonados en una sola cuota en un plazo no superior a 30 días corridos desde que sean exigibles, y las acciones jurisdiccionales no obstarán al pago de los peajes. Las empresas deben entregar la información solicitada por la DP para determinar pagos y cumplir con la transparencia. Los CDEC deben publicar un registro público de empresas usuarias y un sistema de información con datos técnicos y comerciales para el cálculo de peajes en un plazo de 60 días tras la publicación del decreto. La información técnica debe incluir rangos de potencia, barras de conexión, consumos históricos, datos de subestaciones y facturación. La información económica debe detallar V.I., A.V.I., COMA, VATT, fórmulas de indexación, ingresos tarifarios, peajes totales, cuentas de pagos y reliquidaciones, cargos únicos de retiro y peajes unitarios. El Usuario de Sitio Electrónico Unificado de Tarifas y Peajes debe tener acceso a consultar convenios, copias de convenios de pago de deuda, datos de documentos de cobro, informes de transacción, cuentas con desglose, estado de mora, tránsitos facturados y no facturados, pagos realizados, estado de dispositivos, tránsitos no pagados de usuarios poco frecuentes, suscripción de envío de documentos, formas de pago, pago de cuentas y tránsitos, pago de cuotas de convenios de deuda, suscripción de convenios de pago de deuda, cobros para usuarios de sistema complementario, convenios de multa TAG, no pago de cuotas y adhesión a convenios de pago automático. El decreto supremo N° 4T modificado define el Peaje DX-AT y DX-BT, establece los precios de nudo Pe y Pe s/e, incorpora el Cargo MPC y el Factor de participación del Mecanismo de Protección al Cliente, y regula la aplicación del cargo al que se refiere el artículo 9° de la ley N° 21.472 para clientes que cambiaron al régimen de precios libres. [Art. 19 de 1207690] [Art. primero de 1212738]",
+      "citations": [
+        [
+          "1207690",
+          "19"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "5°"
+      },
+      "error": null
+    }
+  ]
+}

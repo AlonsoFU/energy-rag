@@ -5,14 +5,14 @@
 > Para editar: modificar `glossary/concepts.yaml`, después correr `python scripts/render_glossary.py`.
 
 
-**Total conceptos:** 215
+**Total conceptos:** 191
 
-- **Reviewed**: 22 / 215
-- **Validated aliases**: 41 / 88
+- **Reviewed**: 27 / 191
+- **Validated aliases**: 52 / 75
 
 # ⚡ Electricidad
 
-*(165 conceptos)*
+*(175 conceptos)*
 
 ## ernc/ley_20365 *(6)*
 
@@ -1125,7 +1125,7 @@
 ---
 
 ### Sistema Eléctrico
-**Status:** ⏳ not_reviewed · **Refs:** 88
+**Status:** ✅ ok · **Refs:** 88
 
 **Definición:**
 > conjunto de instalaciones de centrales eléctricas generadoras, líneas de transporte, subestaciones eléctricas y líneas de distribución, interconectadas entre sí, que permite generar, transportar y distribuir energía eléctrica;
@@ -1134,7 +1134,7 @@
 
 **Aliases:**
 
-- 🟡 `sistema eléctrico interconectado` — medium, ⏳
+- 🔒 `sistema eléctrico interconectado` — high, ✅
 - ⚠️ `red eléctrica` — low, ⏳
 
 ---
@@ -1256,8 +1256,6 @@
 **Aliases:**
 
 - 🔒 `potencia instalada` — high, ✅
-- 🟡 `kW instalados` — medium, ⏳
-- 🟡 `capacidad nominal del parque` — medium, ⏳
 
 ---
 
@@ -1272,8 +1270,8 @@
 **Aliases:**
 
 - 🔒 `generación conjunta` — high, ✅
-- 🟡 `generación compartida` — medium, ⏳
-- 🟡 `equipamiento conjunto` — medium, ⏳
+- 🔒 `generación compartida` — high, ✅
+- 🔒 `equipamiento conjunto` — high, ✅
 
 ---
 
@@ -1288,12 +1286,11 @@
 **Aliases:**
 
 - 🔒 `potencia de inyección` — high, ✅
-- 🟡 `inyección máxima` — medium, ⏳
 
 ---
 
 ### Capacidad Instalada Permitida
-**Status:** ⏳ not_reviewed · **Refs:** 13
+**Status:** ✅ ok · **Refs:** 13
 
 **Definición:**
 > Cálculo de la capacidad del equipamiento de generación máxima que puede conectar un usuario final en un punto de conexión de la red de distribución eléctrica, sin requerir la realización de estudios adicionales para determinar el impacto del equipamiento de generación en la red ni de la realización de obras adicionales, adecuaciones o ajustes, expresada en kilowatts;
@@ -1302,13 +1299,13 @@
 
 **Aliases:**
 
-- 🟡 `capacidad permitida` — medium, ⏳
-- 🟡 `límite de capacidad de conexión` — medium, ⏳
+- 🔒 `capacidad permitida` — high, ✅
+- 🔒 `límite de capacidad de conexión` — high, ✅
 
 ---
 
 ### Cargos por Suministro Eléctrico
-**Status:** ⏳ not_reviewed · **Refs:** 13
+**Status:** ✅ ok · **Refs:** 13
 
 **Definición:**
 > Cargos tarifarios correspondientes a las distintas opciones tarifarias de acuerdo a lo establecido en el decreto 11T, de 2016, del Ministerio de Energía, que fija fórmulas tarifarias aplicables a los suministros sujetos a precios regulados que se señalan, efectuados por las empresas concesionarias de distribución que se indican, o el que lo reemplace;
@@ -1317,8 +1314,7 @@
 
 **Aliases:**
 
-- 🟡 `cargos tarifarios` — medium, ⏳
-- 🟡 `cargos por suministro` — medium, ⏳
+- 🔒 `cargos por suministro` — high, ✅
 - ⚠️ `tarifa eléctrica` — low, ⏳
 
 ---
@@ -1334,8 +1330,7 @@
 **Aliases:**
 
 - 🔒 `IEP` — high, ✅
-- 🟡 `inyección permitida` — medium, ⏳
-- 🟡 `límite de inyección` — medium, ⏳
+- 🔒 `inyección permitida` — high, ✅
 
 ---
 
@@ -1460,6 +1455,140 @@
 
 ---
 
+## transmisión/plan_expansión *(9)*
+
+### Obras de Ampliación
+**Status:** ⏳ not_reviewed · **Refs:** 35
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=35 category=concepto técnico reason=El término 'Obras de Ampliación' es un concepto técnico específico utilizado en la normativa chilena (como el DFL 442) p
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Obras de Expansión
+**Status:** ⏳ not_reviewed · **Refs:** 31
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=31 category=concepto técnico reason=El término 'Obras de Expansión' es un concepto técnico específico utilizado en la normativa chilena (como el D.S. 594/20
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Sistema de Transmisión Nacional
+**Status:** ✅ ok · **Refs:** 24
+
+**Definición:**
+> Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de se
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:**
+
+- 🔒 `STN` — high, ✅
+- 🔒 `transmisión troncal` — high, ✅
+- 🔒 `red troncal` — high, ✅
+
+---
+
+### Sistemas de Transmisión Dedicados
+**Status:** ✅ ok · **Refs:** 20
+
+**Definición:**
+> son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso ante
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:**
+
+- 🔒 `transmisión dedicada` — high, ✅
+- ⚠️ `STX` — low, ⏳
+- ⚠️ `transmisión adicional` — low, ⏳
+
+---
+
+### Obras Nuevas
+**Status:** ⏳ not_reviewed · **Refs:** 17
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=17 category=concepto técnico reason=El término 'Obras Nuevas' es un concepto jurídico-técnico específico definido en el Código de Comercio chileno (Art. 244
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### Planificación Energética
+**Status:** ⏳ not_reviewed · **Refs:** 13
+
+**Definición:**
+> Proceso de planificación energética de largo plazo que debe realizar el Ministerio de Energía, en conformidad a lo dispuesto en el artículo 83º de la Ley;
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Sistemas de Transmisión Zonal
+**Status:** ⏳ not_reviewed · **Refs:** 10
+
+**Definición:**
+> son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### Escenario
+**Status:** ⏳ not_reviewed · **Refs:** 9
+
+**Definición:**
+> Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;
+
+**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+
+**Aliases:** _sin propuestas todavía_
+
+---
+
+### fecha de concreción de un proyecto
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=Es un término técnico específico utilizado en la normativa chilena para definir el momento exacto en que se ejecuta una
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
 ## distribución/general *(4)*
 
 ### Empresa distribuidora
@@ -1501,12 +1630,12 @@
 **Aliases:**
 
 - 🔒 `obras de adecuación` — high, ✅
-- 🟡 `adecuaciones de conexión` — medium, ⏳
+- 🔒 `adecuaciones de conexión` — high, ✅
 
 ---
 
 ### Obras Adicionales
-**Status:** ⏳ not_reviewed · **Refs:** 22
+**Status:** ✅ ok · **Refs:** 22
 
 **Definición:**
 > Obras físicas mayores y trabajos en la red de distribución eléctrica, necesarias para la conexión de un Equipamiento de Generación;
@@ -1515,8 +1644,7 @@
 
 **Aliases:**
 
-- 🟡 `obras adicionales de conexión` — medium, ⏳
-- 🟡 `obras complementarias` — medium, ⏳
+- 🔒 `obras adicionales de conexión` — high, ✅
 
 ---
 
@@ -1785,7 +1913,7 @@
 
 ---
 
-## generación/general *(1)*
+## generación/general *(2)*
 
 ### Unidad Generadora
 **Status:** ⏳ not_reviewed · **Refs:** 88
@@ -1803,73 +1931,19 @@
 
 ---
 
-## transmisión/plan_expansión *(5)*
-
-### Sistema de Transmisión Nacional
-**Status:** ✅ ok · **Refs:** 24
+### precalificación energética
+**Status:** ⏳ not_reviewed · **Refs:** 1
 
 **Definición:**
-> Es aquel que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de transmisión, y estará constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del Sistema Eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de se
+> 
 
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:**
-
-- 🔒 `STN` — high, ✅
-- 🔒 `transmisión troncal` — high, ✅
-- 🔒 `red troncal` — high, ✅
-
----
-
-### Sistemas de Transmisión Dedicados
-**Status:** ✅ ok · **Refs:** 20
-
-**Definición:**
-> son aquellos que están constituidos por las líneas y subestaciones eléctricas radiales, que encontrándose interconectadas al Sistema Eléctrico, están dispuestas esencialmente para el suministro de energía eléctrica a usuarios no sometidos a regulación de precios o para inyectar la producción de las centrales generadoras al Sistema Eléctrico. Asimismo, pertenecerán a los sistemas de transmisión dedicada aquellas instalaciones enmalladas que estén dispuestas para lo que se señala en el inciso ante
-
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:**
-
-- 🔒 `transmisión dedicada` — high, ✅
-- ⚠️ `STX` — low, ⏳
-- ⚠️ `transmisión adicional` — low, ⏳
-
----
-
-### Planificación Energética
-**Status:** ⏳ not_reviewed · **Refs:** 13
-
-**Definición:**
-> Proceso de planificación energética de largo plazo que debe realizar el Ministerio de Energía, en conformidad a lo dispuesto en el artículo 83º de la Ley;
-
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
+**Fuente:** [detected via definition_pattern, varios]()
 
 **Aliases:** _sin propuestas todavía_
 
----
+**Notas:** freq=1 category=concepto técnico reason=La expresión 'precalificación energética' es un término técnico específico utilizado en el contexto de la normativa chil
 
-### Sistemas de Transmisión Zonal
-**Status:** ⏳ not_reviewed · **Refs:** 10
-
-**Definición:**
-> son aquéllos que están constituidos por las líneas y subestaciones eléctricas dispuestas esencialmente para el abastecimiento actual o futuro de clientes regulados, territorialmente identificables, sin perjuicio del uso por parte de clientes libres o medios de generación conectados directamente o a través de sistemas de transmisión dedicada a dichos sistemas de transmisión;
-
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Escenario
-**Status:** ⏳ not_reviewed · **Refs:** 9
-
-**Definición:**
-> Conjunto de centrales generadoras factibles de ser incorporadas al sistema eléctrico, considerando sus plazos de construcción y demanda eléctrica del sistema;
-
-**Fuente:** [RESOLUCIÓN 711, 2°](https://www.bcn.cl/leychile/navegar?idNorma=1112591)
-
-**Aliases:** _sin propuestas todavía_
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
 
 ---
 
@@ -1904,7 +1978,7 @@
 
 ---
 
-## tarifas/general *(7)*
+## tarifas/general *(10)*
 
 ### Ingresos Tarifarios Reales
 **Status:** ⏳ not_reviewed · **Refs:** 19
@@ -1923,7 +1997,7 @@
 ---
 
 ### AR
-**Status:** ⏳ not_reviewed · **Refs:** 14
+**Status:** ✅ ok · **Refs:** 14
 
 **Definición:**
 > Ajuste o recargo aplicable a los clientes
@@ -1932,8 +2006,8 @@
 
 **Aliases:**
 
-- 🟡 `Ajuste y Recargo` — medium, ⏳
-- 🟡 `ajuste o recargo` — medium, ⏳
+- 🔒 `Ajuste y Recargo` — high, ✅
+- 🔒 `ajuste o recargo` — high, ✅
 - ⚠️ `ajustes tarifarios` — low, ⏳
 
 ---
@@ -2015,6 +2089,60 @@
 **Notas:** freq=1 category=concepto técnico reason=Los valores de FEPE (Fondo de Estabilización de Precios de Energía) y FEPP (Fondo de Estabilización de Precios de Potenc
 
 **Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
+
+---
+
+### Costo de Falla de Corta Duración
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `CFCD` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de gastos de administración de la quiebra regulada en el artículo 13 d
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### Costo de Falla de Larga Duración
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `CFLD` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de costos contemplada en la Ley 20.720 de Concursos y Quiebras, utiliz
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
+
+---
+
+### Valorización del Ajuste
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via paren_pair, varios]()
+
+**Aliases:**
+
+- 🔒 `VA` — high, ⏳
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'Valorización del Ajuste' es un concepto técnico específico utilizado en la normativa chilena de quiebras y c
+
+**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
 
 ---
 
@@ -2208,7 +2336,6 @@
 - 🔒 `pellets` — high, ⏳
 - 🔒 `leña` — high, ⏳
 - 🔒 `briquetas` — high, ⏳
-- 🟡 `combustibles sólidos` — medium, ⏳
 
 ---
 
@@ -2260,6 +2387,40 @@
 **Notas:** freq=17 category=institución reason=El término 'Panel de Expertos' es un concepto técnico-administrativo real utilizado en la normativa chilena para designa
 
 **Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+## distribución/conexión *(2)*
+
+### Informe de Autorización de Conexión
+**Status:** ⏳ not_reviewed · **Refs:** 15
+
+**Definición:**
+> 
+
+**Fuente:** [detected via multi_phrase, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=15 category=norma legal reason=Es un documento técnico-administrativo específico definido en la normativa chilena (Decreto Supremo 594) que certifica l
+
+**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
+
+---
+
+### solución de conexión
+**Status:** ⏳ not_reviewed · **Refs:** 1
+
+**Definición:**
+> 
+
+**Fuente:** [detected via definition_pattern, varios]()
+
+**Aliases:** _sin propuestas todavía_
+
+**Notas:** freq=1 category=concepto técnico reason=El término 'solución de conexión' es un concepto técnico específico utilizado en la normativa chilena (especialmente en
+
+**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
 
 ---
 
@@ -2503,7 +2664,7 @@
 
 # 📋 Otros dominios regulatorios
 
-*(47 conceptos)*
+*(16 conceptos)*
 
 ## habilitaciones/ley_marco *(16)*
 
@@ -2714,566 +2875,6 @@
 **Fuente:** [DFL 1, 1 D](https://www.bcn.cl/leychile/navegar?idNorma=1007469)
 
 **Aliases:** _sin propuestas todavía_
-
----
-
-## concursal/ley_20720 *(21)*
-
-### Sociedad Concesionaria
-**Status:** ⏳ not_reviewed · **Refs:** 37
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=37 category=concepto técnico reason=La expresión 'Sociedad Concesionaria' es un término técnico-jurídico específico definido en la normativa chilena (como e
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Obras de Ampliación
-**Status:** ⏳ not_reviewed · **Refs:** 35
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=35 category=concepto técnico reason=El término 'Obras de Ampliación' es un concepto técnico específico utilizado en la normativa chilena (como el DFL 442) p
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Consejo de Concesiones
-**Status:** ⏳ not_reviewed · **Refs:** 31
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=31 category=institución reason=El Consejo de Concesiones es un órgano técnico-administrativo real definido en la normativa chilena (Decreto Supremo 594
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Obras de Expansión
-**Status:** ⏳ not_reviewed · **Refs:** 31
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=31 category=concepto técnico reason=El término 'Obras de Expansión' es un concepto técnico específico utilizado en la normativa chilena (como el D.S. 594/20
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Deudor
-**Status:** ⏳ not_reviewed · **Refs:** 30
-
-**Definición:**
-> Toda Empresa Deudora o Persona Deudora, atendido el Procedimiento Concursal de que se trate y la naturaleza de la disposición a que se refiera.
-
-**Fuente:** [LEY 20410, 28 ter](https://www.bcn.cl/leychile/navegar?idNorma=1010304)
-
-**Aliases:**
-
-- 🟡 `el Deudor` — medium, ⏳
-
----
-
-### Correo electrónico
-**Status:** ⏳ not_reviewed · **Refs:** 27
-
-**Definición:**
-> medio de comunicación electrónica que permite el envío y recepción de información y documentos electrónicos.
-
-**Fuente:** [LEY 20720, 2º](https://www.bcn.cl/leychile/navegar?idNorma=1058072)
-
-**Aliases:** _sin propuestas todavía_
-
----
-
-### Sociedades Concesionarias
-**Status:** ⏳ not_reviewed · **Refs:** 27
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=27 category=norma legal reason=Es un término técnico específico definido en la Ley de Concesiones de Servicios Públicos (Ley 19.850) que designa a las
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Dirección General de Concesiones de Obras Públicas
-**Status:** ⏳ not_reviewed · **Refs:** 25
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=25 category=institución reason=Es una entidad legal real y específica del sector de obras públicas en Chile, aunque su competencia principal no es estr
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Proceso de Licitación
-**Status:** ⏳ not_reviewed · **Refs:** 22
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=22 category=institución reason=El término 'Proceso de Licitación' es un concepto técnico-jurídico fundamental en la normativa chilena que regula el pro
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Obras Nuevas
-**Status:** ⏳ not_reviewed · **Refs:** 17
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=17 category=concepto técnico reason=El término 'Obras Nuevas' es un concepto jurídico-técnico específico definido en el Código de Comercio chileno (Art. 244
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Informe de Autorización de Conexión
-**Status:** ⏳ not_reviewed · **Refs:** 15
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=15 category=norma legal reason=Es un documento técnico-administrativo específico definido en la normativa chilena (Decreto Supremo 594) que certifica l
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Procedimiento Concursal
-**Status:** ⏳ not_reviewed · **Refs:** 10
-
-**Definición:**
-> cualquiera de los regulados en esta ley, denominados, indistintamente, Procedimiento Concursal de Reorganización de la Empresa Deudora, Procedimiento Concursal de Liquidación de la Empresa Deudora, Procedimiento Concursal de Renegociación de la Persona Deudora
-
-**Fuente:** [LEY 20416, 6°](https://www.bcn.cl/leychile/navegar?idNorma=1010668)
-
-**Aliases:**
-
-- 🔒 `proceso concursal` — high, ⏳
-- 🟡 `quiebra` — medium, ⏳
-- ⚠️ `concurso de acreedores` — low, ⏳
-
----
-
-### adjudicado
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=El término 'adjudicado' es un concepto jurídico-administrativo real utilizado en el contexto de licitaciones y concursos
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### Costo de Falla de Corta Duración
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via paren_pair, varios]()
-
-**Aliases:**
-
-- 🔒 `CFCD` — high, ⏳
-
-**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de gastos de administración de la quiebra regulada en el artículo 13 d
-
-**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
-
----
-
-### Costo de Falla de Larga Duración
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via paren_pair, varios]()
-
-**Aliases:**
-
-- 🔒 `CFLD` — high, ⏳
-
-**Notas:** freq=1 category=concepto técnico reason=El término corresponde a una categoría específica de costos contemplada en la Ley 20.720 de Concursos y Quiebras, utiliz
-
-**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
-
----
-
-### fecha de concreción de un proyecto
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=Es un término técnico específico utilizado en la normativa chilena para definir el momento exacto en que se ejecuta una
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### micro empresa
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=El término 'micro empresa' es un concepto jurídico definido en la Ley 20.720 de Quiebras y Concursos de Chile, utilizado
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### obra pública fiscal
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=Es un término jurídico-administrativo real definido en la Ley de Bases del Estado y la Ley de Obras Públicas que designa
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### precalificación energética
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=La expresión 'precalificación energética' es un término técnico específico utilizado en el contexto de la normativa chil
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### solución de conexión
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=El término 'solución de conexión' es un concepto técnico específico utilizado en la normativa chilena (especialmente en
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### Valorización del Ajuste
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via paren_pair, varios]()
-
-**Aliases:**
-
-- 🔒 `VA` — high, ⏳
-
-**Notas:** freq=1 category=concepto técnico reason=El término 'Valorización del Ajuste' es un concepto técnico específico utilizado en la normativa chilena de quiebras y c
-
-**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
-
----
-
-## tránsito/ley_18290 *(7)*
-
-### Servicio Nacional de Menores
-**Status:** ⏳ not_reviewed · **Refs:** 21
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=21 category=institución reason=El Servicio Nacional de Menores (SENAME) es una institución pública específica del Estado de Chile con funciones legales
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Registro de Vehículos Motorizados
-**Status:** ⏳ not_reviewed · **Refs:** 20
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=20 category=institución reason=Aunque el término es real, no pertenece al dominio eléctrico ni a la normativa chilena de este sector, por lo que no es
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Código del Trabajo
-**Status:** ⏳ not_reviewed · **Refs:** 19
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=19 category=norma legal reason=El Código del Trabajo es una norma legal fundamental en Chile que regula las relaciones laborales, por lo que constituye
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Registro de Multas de Tránsito No Pagadas
-**Status:** ⏳ not_reviewed · **Refs:** 15
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=15 category=institución reason=El término no pertenece al dominio eléctrico chileno, sino al de tránsito y multas, por lo que no es relevante para un g
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=low
-
----
-
-### PATENTE
-**Status:** ⏳ not_reviewed · **Refs:** 3
-
-**Definición:**
-> 
-
-**Fuente:** [detected via acronym, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=3 category=institución reason=La palabra 'PATENTE' es un término técnico y legal específico en la normativa chilena que se refiere a la autorización a
-
-**Dificultad de extracción:** detected via acronym; LLM confidence=high
-
----
-
-### remuneración líquida
-**Status:** ⏳ not_reviewed · **Refs:** 2
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=2 category=concepto técnico reason=El término 'remuneración líquida' es un concepto técnico-jurídico real definido en el Código del Trabajo chileno (artícu
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### remuneración bruta
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=concepto técnico reason=El término 'remuneración bruta' es un concepto legal y contable real definido en la normativa chilena (como el Código de
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-## concesiones_viales/telepeaje *(3)*
-
-### Tarifas y Peajes
-**Status:** ⏳ not_reviewed · **Refs:** 34
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=34 category=concepto técnico reason=Se trata de un término técnico y legal específico que agrupa conceptos normativos sobre la estructura de costos en el se
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### Registro Nacional de Usuarios de Telepeaje
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via paren_pair, varios]()
-
-**Aliases:**
-
-- 🔒 `RNUT` — high, ⏳
-
-**Notas:** freq=1 category=institución reason=El término se refiere a un registro oficial gestionado por la Comisión Nacional de Energía (CNE) para usuarios de telepe
-
-**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
-
----
-
-### Sitio Electrónico Unificado de Tarifas y Peajes al Registro Nacional de Usuarios de Telepeaje
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via paren_pair, varios]()
-
-**Aliases:**
-
-- 🔒 `RNUT` — high, ⏳
-
-**Notas:** freq=1 category=institución reason=Se trata de un nombre propio específico de un sistema digital oficial gestionado por la Superintendencia de Electricidad
-
-**Dificultad de extracción:** detected via paren_pair; LLM confidence=high
-
----
-
-# ❓ Indeterminado / off-domain
-
-*(3 conceptos)*
-
-## no_aplica *(3)*
-
-### Servicio Nacional de Reinserción Social Juvenil
-**Status:** ⏳ not_reviewed · **Refs:** 42
-
-**Definición:**
-> 
-
-**Fuente:** [detected via multi_phrase, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=42 category=institución reason=El término corresponde a una institución pública específica del sistema de justicia juvenil chileno, no siendo un concep
-
-**Dificultad de extracción:** detected via multi_phrase; LLM confidence=high
-
----
-
-### aporte monetario
-**Status:** ⏳ not_reviewed · **Refs:** 2
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=2 category=concepto técnico reason=El término 'aporte monetario' es un concepto jurídico-económico real utilizado en la normativa chilena (como en el Códig
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
-
----
-
-### exención
-**Status:** ⏳ not_reviewed · **Refs:** 1
-
-**Definición:**
-> 
-
-**Fuente:** [detected via definition_pattern, varios]()
-
-**Aliases:** _sin propuestas todavía_
-
-**Notas:** freq=1 category=institución reason=La palabra 'exención' es un término legal genérico que no posee una definición técnica específica ni un significado únic
-
-**Dificultad de extracción:** detected via definition_pattern; LLM confidence=high
 
 ---
 

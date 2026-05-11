@@ -42,6 +42,18 @@ PROMOTE = {
     ("PNEP", "precio nudo energía"),                                       # full form
     ("Potencia Máxima", "capacidad nominal"),                              # technical equivalent
     ("Potencia Máxima", "potencia nominal"),                               # technical equivalent
+    # Round 2 — second curation pass (2026-05-11)
+    ("Adecuaciones", "adecuaciones de conexión"),                          # qualifier-only
+    ("Obras Adicionales", "obras adicionales de conexión"),                # qualifier-only legal term
+    ("Equipamiento de Generación Conjunto", "generación compartida"),       # direct synonym in PMGD
+    ("Equipamiento de Generación Conjunto", "equipamiento conjunto"),       # shortform
+    ("Capacidad Instalada Permitida", "capacidad permitida"),              # shortform of CIP
+    ("Capacidad Instalada Permitida", "límite de capacidad de conexión"),  # operational synonym
+    ("Cargos por Suministro Eléctrico", "cargos por suministro"),          # shortform
+    ("Inyección de Excedentes Permitida", "inyección permitida"),          # shortform of IEP
+    ("Sistema Eléctrico", "sistema eléctrico interconectado"),             # pre-LGSE-2016 term (SIC/SING era interconectado)
+    ("AR", "Ajuste y Recargo"),                                            # full expansion of acronym
+    ("AR", "ajuste o recargo"),                                            # case variant
 }
 
 REMOVE = {
@@ -54,6 +66,14 @@ REMOVE = {
     # (defined as max_power × min_plant_factor for PV/wind), not a synonym of
     # Potencia de Suficiencia.
     ("Potencia de Suficiencia", "potencia inicial"),
+    # Round 2 removals — not real aliases
+    ("Capacidad Instalada", "kW instalados"),                              # unidad de medida, no alias
+    ("Capacidad Instalada", "capacidad nominal del parque"),               # demasiado específico (parque solar/eólico)
+    ("Biocombustibles sólidos", "combustibles sólidos"),                   # genérico — incluye carbón también
+    ("Cargos por Suministro Eléctrico", "cargos tarifarios"),              # genérico — cualquier cargo tarifario, no este
+    ("Capacidad de Inyección", "inyección máxima"),                         # contextual, no alias estable
+    ("Inyección de Excedentes Permitida", "límite de inyección"),          # describe el límite, no es el concepto
+    ("Obras Adicionales", "obras complementarias"),                        # concepto distinto en LGSE
 }
 
 

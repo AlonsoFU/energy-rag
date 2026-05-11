@@ -37,8 +37,19 @@ def generate_answer(
     llm: LLMProvider | None = None,
     model: str | None = None,
     max_retries: int = 1,
+    initial_top: int | None = None,
 ) -> dict:
     """Generate a grounded answer with citation verification.
+
+    Args:
+        docs: Pool of retrieved documents (caller controls this size).
+        initial_top: If set, the first attempt uses only `docs[:initial_top]`.
+            Retries widen to the full pool. This implements "retry-on-fail with
+            wider context": ask with a focused top-k first, and if grounding
+            fails (LLM cited outside its allowed set), give it more room to
+            find the right article. Caller controls the widening by sizing
+            `docs` larger than `initial_top` (e.g. retrieve top_k=15, pass
+            initial_top=10 → first try sees 10, retry sees 15).
 
     Returns dict with keys: text, grounding_pass, model, tokens_in, tokens_out.
     """
@@ -47,23 +58,27 @@ def generate_answer(
     model = model or cfg.settings.llm_default
 
     system = get_answer_system()
-    base_prompt = build_answer_prompt(query, docs)
-
-    # Build JSON schema only when we have docs; an empty enum would force
-    # the model into impossible territory.
-    response_format: dict | None = None
-    if docs:
-        citations = extract_valid_citations(docs)
-        if citations:
-            response_format = build_json_schema(citations)
 
     response_text = ""
     grounding_pass = False
     tokens_in = tokens_out = 0
     used_model = model
-    prompt = base_prompt
+    extra_instruction = ""
 
     for attempt in range(max_retries + 1):
+        # On retry, widen the doc pool if caller provided a larger one.
+        if attempt == 0 and initial_top is not None and len(docs) > initial_top:
+            active_docs = docs[:initial_top]
+        else:
+            active_docs = docs
+
+        prompt = build_answer_prompt(query, active_docs) + extra_instruction
+        response_format: dict | None = None
+        if active_docs:
+            citations = extract_valid_citations(active_docs)
+            if citations:
+                response_format = build_json_schema(citations)
+
         resp = llm.generate(
             prompt, model=model, system=system,
             temperature=0.0, max_tokens=2000,
@@ -74,22 +89,19 @@ def generate_answer(
         tokens_out += resp.tokens_out
         used_model = resp.model
 
-        # When response_format was applied, parse JSON to natural-text form.
         if response_format:
             try:
                 parsed = json.loads(raw)
                 response_text = _format_as_text(parsed)
             except (json.JSONDecodeError, TypeError):
-                # Fallback: treat raw as text. Verifier may still find inline cites.
                 response_text = raw
         else:
             response_text = raw
 
-        if verify_citations(response_text, docs):
+        if verify_citations(response_text, active_docs):
             grounding_pass = True
             break
-        # On failure, escalate prompt
-        prompt = base_prompt + (
+        extra_instruction = (
             "\n\nIMPORTANTE: Tu respuesta anterior contenía citas inválidas. "
             "Cita SOLO artículos provistos arriba, verbatim."
         )
