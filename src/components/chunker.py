@@ -52,7 +52,11 @@ class SemanticChunker:
          contained retrieval.
     """
 
-    SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑ])")
+    # Sentence boundary: punctuation followed by whitespace + capital/lowercase-list-item.
+    # Includes ';' because Chilean legal text uses semicolons to separate list items
+    # (e.g. "a) Foo; b) Bar; c) Baz") which otherwise wouldn't split — the old
+    # regex (period+capital only) collapsed 800-word articles into 4 sentences.
+    SENT_SPLIT = re.compile(r"(?<=[.!?;])\s+(?=[A-ZÁÉÍÓÚÑa-z])")
     PARAGRAPH = re.compile(r"\n\s*\n+")
 
     def __init__(
