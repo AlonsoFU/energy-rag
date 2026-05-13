@@ -1,0 +1,492 @@
+{
+  "n_queries": 15,
+  "n_positive": 15,
+  "n_negative": 0,
+  "n_with_generation": 7,
+  "retrieval": {
+    "recall_at_5": 0.4666666666666667,
+    "recall_norma_only": 0.5333333333333333
+  },
+  "generation": {
+    "grounding_pass": 0.42857142857142855,
+    "answered": 1.0,
+    "negative_correct": 0.0
+  },
+  "latency_ms": {
+    "p50": 31804,
+    "p95": 352476,
+    "p99": 355738
+  },
+  "per_query": [
+    {
+      "query": "qué es la CNE",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 23154,
+      "retrieval_ms": 23154,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "6857",
+        "articulo_numero": "6º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué hace la SEC",
+      "category": "alias_test",
+      "expected_norma": "1146553",
+      "expected_articulo": "5",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 23907,
+      "retrieval_ms": 23907,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1216930",
+        "articulo_numero": "41"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el CEN",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 31804,
+      "retrieval_ms": 31804,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "6857",
+        "articulo_numero": "6º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el SEN",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 24536,
+      "retrieval_ms": 24536,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "1°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el STN",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 70961,
+      "retrieval_ms": 45108,
+      "generation_ms": 25853,
+      "answer": "El Sistema de Transmisión Nacional es aquel Sistema de Transmisión que permite la conformación de un mercado eléctrico común, interconectando los demás segmentos de la transmisión, constituido por las líneas y subestaciones eléctricas que permiten el desarrollo de este mercado y posibilitan el abastecimiento de la totalidad de la demanda del sistema eléctrico, frente a diferentes escenarios de disponibilidad de las instalaciones de generación, incluyendo situaciones de contingencia y falla, considerando las exigencias de calidad y seguridad de servicio establecidas en la Ley, los reglamentos y las normas técnicas [Art. 5 de 1146553].",
+      "citations": [
+        [
+          "1146553",
+          "5"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la IEP",
+      "category": "alias_test",
+      "expected_norma": "1149788",
+      "expected_articulo": "4º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 24107,
+      "retrieval_ms": 24107,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "244803",
+        "articulo_numero": "17"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pmax",
+      "category": "alias_test",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 320154,
+      "retrieval_ms": 20043,
+      "generation_ms": 300111,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es potencia firme",
+      "category": "alias_test",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 350729,
+      "retrieval_ms": 23642,
+      "generation_ms": 327087,
+      "answer": "",
+      "citations": [],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es potencia instalada",
+      "category": "alias_test",
+      "expected_norma": "1149788",
+      "expected_articulo": "4º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 24837,
+      "retrieval_ms": 24837,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1149788",
+        "articulo_numero": "47º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el Panel de Expertos",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 320053,
+      "retrieval_ms": 19953,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es la transmisión troncal",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 24166,
+      "retrieval_ms": 24166,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1032851",
+        "articulo_numero": "primero"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la transmisión dedicada",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 198929,
+      "retrieval_ms": 21687,
+      "generation_ms": 177242,
+      "answer": "Los Sistemas de Transmisión Dedicados son aquellos constituidos por líneas y subestaciones eléctricas radiales interconectadas al Sistema Eléctrico, dispuestas esencialmente para el suministro de energía a usuarios no sometidos a regulación de precios o para inyectar la producción de centrales generadoras al sistema [Art. 2° de 1112591]. Asimismo, pertenecen a estos sistemas las instalaciones enmalladas dispuestas para los fines señalados, siempre que su operación no produzca impactos significativos en el resto del sistema [Art. 2° de 1112591]. También se definen como aquellos sistemas de transmisión constituidos por líneas y subestaciones eléctricas radiales interconectadas al sistema eléctrico, destinadas al suministro a usuarios no regulados o para inyectar producción de generación [Art. dd de 1146553]. La capacidad técnica de transmisión disponible de un Sistema de Transmisión Dedicado existe cuando la capacidad de diseño sea mayor que su uso máximo esperado, considerando la operación de las instalaciones a interconectar del interesado en estado normal del Sistema Eléctrico [Art. 63 de 1160108]. Para determinar esta capacidad, el Coordinador debe considerar las instalaciones existentes y la información de diseño entregada por el propietario o explotador [Art. 60 de 1160108]. Los propietarios o explotadores están obligados a proporcionar y actualizar toda la información requerida al Coordinador para determinar la capacidad técnica disponible, incluyendo contratos de transporte existentes, proyectos de uso de capacidad e información de diseño [Art. 61 de 1160108]. Asimismo, deben informar todo cambio en el uso estimado de la capacidad técnica disponible, incluyendo sus propios proyectos [Art. 62 de 1160108]. El uso de la capacidad técnica de los Sistemas de Transmisión Dedicados deberá ajustarse a los estándares de seguridad y calidad de servicio de la normativa vigente, sin degradar el desempeño de los estándares con los que fue diseñado el respectivo sistema [Art. 66 de 1160108]. En caso de que el sistema tenga un estándar de diseño superior a las exigencias normativas, el solicitante deberá ajustarse a ese estándar [Art. 66 de 1160108]. El estándar de diseño se determinará en base a la información de diseño entregada por el propietario, arrendatario, usufructuario o explotador de las instalaciones [Art. 66 de 1160108]. El Coordinador autorizará el uso de la capacidad técnica disponible, indicando al menos el plazo, cantidad, periodos u otros aspectos en que dicha capacidad podrá ser utilizada por terceros [Art. 60 de 1160108]. Los resultados de los Estudios de Valorización deberán especificar el Valor de Inversión (V.I.), la Anualidad del Valor de Inversión (A.V.I.), el Ajuste por efectos de impuestos a la renta (A.E.I.R.), los Costos anuales de operación, mantenimiento y administración (C.O.M.A.) y el Valor anual de la transmisión por Tramo (V.A.T.T.) por Tramo y propietario o explotador [Art. 114 de 1146553]. Para la transmisión para polos de desarrollo, se considerará solo la porción de las líneas y subestaciones dedicadas, nuevas o existentes, cuyas características técnicas hubiesen sido modificadas conforme a lo señalado en el artículo 88° de la Ley General de Servicios Eléctricos [Art. 114 de 1146553]. La omisión del deber de información o la entrega de información falsa, incompleta o errónea serán sancionadas por la Superintendencia [Art. 62 de 1160108]. La información respecto al estándar con el cual fue diseñado el respectivo sistema deberá ser informada con la ocasión y periodicidad requerida por parte del Coordinador, para efectos de incorporarla al sistema de información pública [Art. 66 de 1160108]. El Coordinador determinará fundadamente la capacidad técnica disponible de transmisión de los Sistemas de Transmisión Dedicados, sin considerar las congestiones de transmisión debido a limitaciones de capacidad de tramos de transmisión de servicio público, oyendo previamente al solicitante y al propietario, arrendatario, usufructuario o explotador de la instalación [Art. 60 de 1160108]. El uso de la capacidad técnica de los Sistemas de Transmisión Dedicados no podrá degradar el desempeño de los estándares de seguridad y calidad de servicio con los que fue diseñado el respectivo sistema [Art. 66 de 1160108]. El estándar con el cual fue diseñado el respectivo sistema se determinará en base a la información de diseño que se haya entregado por el propietario, arrendatario, usufructuario, o quien explote a cualquier título las instalaciones de transmisión dedicadas [Art. 66 de 1160108]. La capacidad de diseño de las instalaciones será determinada por el Coordinador en función de sus características técnicas, información solicitada al propietario, arrendatarios, usufructuarios o quienes exploten a cualquier título instalaciones de transmisión dedicadas y las condiciones de operación más exigentes para la zona de emplazamiento [Art. 63 de 1160108]. Se entenderá por uso máximo esperado al uso de capacidad de las instalaciones dedicadas, considerando los escenarios operacionales que determinen las condiciones de uso de capacidad técnica más exigentes para los sistemas analizados [Art. 63 de 1160108]. Los propietarios, arrendatarios, usufructuarios o quienes exploten a cualquier título las instalaciones de transmisión dedicadas deberán poner en conocimiento del Coordinador los contratos de transporte existentes, los proyectos que impliquen el uso de la capacidad del sistema dedicado y la información de diseño de la instalación de transmisión dedicada [Art. 61 de 1160108]. Asimismo, deberán remitir copia autorizada ante notario de los contratos que se celebren por uso de las instalaciones de transmisión dedicada a la Comisión, el Coordinador y la Superintendencia, al quinto día de su celebración [Art. 61 de 1160108]. Los propietarios, arrendatarios, usufructuarios o quienes exploten a cualquier título instalaciones de transmisión dedicadas estarán obligados a proporcionar oportunamente al Coordinador y actualizar toda la información, en forma cabal, completa y veraz, que les requiera para efectos de determinar la capacidad técnica disponible de las mismas [Art. 62 de 1160108]. El Coordinador definirá los plazos de entrega de la información [Art. 62 de 1160108]. Los propietarios, arrendatarios, usufructuarios o quienes exploten a cualquier título las instalaciones de transmisión dedicadas que correspondan, deberán informar al Coordinador todo cambio en el uso estimado de la capacidad técnica disponible [Art. 62 de 1160108]. Para efectos de lo anterior, deberán informar sus proyectos propios, de acuerdo a la dispuesto en el Artículo 49.- del presente reglamento [Art. 62 de 1160108]. El o los propietarios, arrendatarios, usufructuarios o quienes exploten a cualquier título las instalaciones de transmisión dedicadas, se verán exceptuados de solicitar uso de capacidad técnica disponible para sus propias instalaciones de acuerdo al procedimiento señalado en el Párrafo anterior en tanto no se interfiera con una solicitud de un tercero en curso [Art. 62 de 1160108]. La omisión del deber de información, sea que medie requerimiento de información o cuando proceda sin mediar aquél, así como la entrega de información falsa, incompleta o manifiestamente errónea, serán sancionadas por la Superintendencia [Art. 62 de 1160108]. El uso de la capacidad técnica de los Sistemas de Transmisión Dedicados deberá ajustarse a los estándares de seguridad y calidad de servicio de la normativa vigente y no podrá degradar el desempeño de los estándares de seguridad y calidad de servicio con los que fue diseñado el respectivo sistema [Art. 66 de 1160108]. En caso que el Sistema de Transmisión Dedicado tenga un estándar de diseño superior a las exigencias normativas, el solicitante deberá ajustarse a éste [Art. 66 de 1160108]. El estándar con el cual fue diseñado el respectivo sistema se determinará en base a la información de diseño que se haya entregado por el propietario, arrendatario, usufructuario, o quien explote a cualquier título las instalaciones de transmisión dedicadas, según corresponda [Art. 66 de 1160108]. La información respecto al estándar con el cual fue diseñado el respectivo sistema deberá ser informado con la ocasión y periodicidad requerida por parte del Coordinador, para efectos de incorporarla al sistema de información pública a que se refiere el artículo 72º-8 de la Ley [Art. 66 de 1160108]. El Coordinador, de acuerdo a la normativa vigente, determinará fundadamente la capacidad técnica disponible de transmisión de los Sistemas de Transmisión Dedicados, sin considerar las congestiones de transmisión debido a limitaciones de capacidad de tramos de transmisión de servicio público, oyendo previamente al solicitante y al propietario, arrendatario, usufructuario o quien explote a cualquier título la instalación del Sistema de Transmisión Dedicado respecto de la que se requiere el uso de capacidad técnica disponible [Art. 60 de 1160108]. Para determinar la capacidad técnica disponible, el Coordinador deberá considerar las instalaciones de transmisión dedicadas existentes [Art. 60 de 1160108]. Le corresponderá al Coordinador autorizar el uso de la capacidad técnica de transmisión disponible de los Sistemas de Transmisión Dedicados, indicando al menos el plazo, cantidad, periodos u otros aspectos en que dicha capacidad podrá ser utilizada por terceros [Art. 60 de 1160108]. Los resultados del o los Estudios de Valorización deberán especificar y distinguir para las instalaciones calificadas como de transmisión nacional, zonal, para polos de desarrollo y dedicadas utilizadas por parte de los usuarios sometidos a regulación de precios, a lo menos, lo siguiente: a. El V.I., A.V.I., A.E.I.R., C.O.M.A. y V.A.T.T. por Tramo y propietario o explotador; b. La determinación de las correspondientes fórmulas de indexación y su forma de aplicación para los valores indicados anteriormente, durante el periodo de cuatro años; y c. Porcentajes de uso de instalaciones de transmisión dedicadas por parte de clientes sometidos a regulación de precio [Art. 114 de 1146553]. Para el caso de la transmisión para polos de desarrollo, se considerará sólo la porción de las líneas y subestaciones dedicadas, nuevas o existentes, según corresponda, cuyas características técnicas hubiesen sido modificadas conforme a lo señalado en el artículo 88° de la Ley General de Servicios Eléctricos [Art. 114 de 1146553].\"}",
+      "citations": [
+        [
+          "1112591",
+          "2"
+        ],
+        [
+          "1112591",
+          "2"
+        ],
+        [
+          "1160108",
+          "63"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1160108",
+          "61"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1146553",
+          "114"
+        ],
+        [
+          "1146553",
+          "114"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "63"
+        ],
+        [
+          "1160108",
+          "63"
+        ],
+        [
+          "1160108",
+          "61"
+        ],
+        [
+          "1160108",
+          "61"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "62"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "66"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1160108",
+          "60"
+        ],
+        [
+          "1146553",
+          "114"
+        ],
+        [
+          "1146553",
+          "114"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "2°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es una distribuidora",
+      "category": "alias_test",
+      "expected_norma": "1047565",
+      "expected_articulo": "34",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 22318,
+      "retrieval_ms": 22318,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1149788",
+        "articulo_numero": "50º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la red de transmisión",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 356554,
+      "retrieval_ms": 26309,
+      "generation_ms": 330245,
+      "answer": "",
+      "citations": [],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "2°"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es PdE",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 92326,
+      "retrieval_ms": 44909,
+      "generation_ms": 47417,
+      "answer": "Según el artículo 19, el Usuario de Sitio Electrónico Unificado de Tarifas y Peajes debe tener acceso a las siguientes funcionalidades en el Ambiente Privado del Sitio:\n\n1. Consultar Convenios vigentes y no vigentes.\n2. Solicitar copia de Convenios de Pago de Deuda.\n3. Consultar datos de documentos de cobro (últimos seis meses).\n4. Consultar y solicitar envío de documentos de cobro impagos y vigentes.\n5. Solicitar Informe de Transacción de Tarifa o Peaje (últimos seis meses).\n6. Consultar Cuentas de Tarifas o Peajes con desglose.\n7. Consultar estado de Mora para acceder a beneficios.\n8. Visualizar y descargar detalle de tránsitos facturados y no facturados.\n9. Consultar pagos realizados (últimos doce meses).\n10. Consultar estado habilitado o inhabilitado de dispositivos electrónicos o Televía.\n11. Consultar tránsitos no pagados de usuarios poco frecuentes.\n12. Suscribir envío de Documentos de Cobro al correo electrónico.\n13. Consultar formas o alternativas de pago.\n14. Realizar pago conjunto o separado de Cuentas de Tarifas o Peajes.\n15. Realizar pago de tránsitos sin Contrato de Televía.\n16. Realizar pago de cuotas pactadas en Convenios de Pago de Deuda.\n17. Adherirse a Convenio de Pago de Deuda y solicitar copia.\n18. Consultar información sobre cobros para Usuarios de Sistema Complementario.\n19. Consultar información sobre Convenios de Multa TAG.\n20. Consultar información sobre no pago oportuno de cuotas o retardo en Convenio de Multa TAG.\n21. Adherirse, modificar o eliminar convenio de pago automático por Cuenta de Contrato TAG. [Art. 19 de 1207690]",
+      "citations": [
+        [
+          "1207690",
+          "19"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "2°"
+      },
+      "error": null
+    }
+  ]
+}
