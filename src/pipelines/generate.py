@@ -112,6 +112,12 @@ def generate_answer(
         else:
             response_text = raw
 
+        # A valid refusal (LLM says "No encuentro esa información") is also a
+        # grounded response — it's the correct answer when docs don't contain
+        # the query's topic. Not a hallucination.
+        if REFUSAL_TEXT.lower() in response_text.lower():
+            grounding_pass = True
+            break
         if verify_citations(response_text, active_docs):
             grounding_pass = True
             break
