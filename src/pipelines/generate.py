@@ -14,6 +14,7 @@ from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.prompts import build_answer_prompt, get_answer_system
 from src.pipelines.grounding import verify_citations
 from src.pipelines.grammar import extract_valid_citations, build_json_schema
+from src.pipelines.off_topic import is_off_topic, REFUSAL_TEXT
 
 
 def _format_as_text(parsed: dict) -> str:
@@ -56,6 +57,19 @@ def generate_answer(
     from src.core import config as cfg
     llm = llm or get_llm_provider()
     model = model or cfg.settings.llm_default
+
+    # Pre-LLM off-topic check: if the query's significant words don't appear
+    # in the corpus vocabulary, refuse directly without burning an LLM call.
+    # Catches trap queries like "xenobalbúrgico" or "receta pisco sour" where
+    # the LLM tends to hallucinate instead of refusing.
+    if is_off_topic(query):
+        return {
+            "text": REFUSAL_TEXT,
+            "grounding_pass": True,  # refusal is a valid response, not an alucination
+            "model": model,
+            "tokens_in": 0,
+            "tokens_out": 0,
+        }
 
     system = get_answer_system()
 
