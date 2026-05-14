@@ -93,6 +93,10 @@ class LiteLLMProvider:
             kwargs.pop("max_tokens", None)
             # 8k context fits our largest prompts (Contextual Retrieval + 10 docs)
             kwargs["num_ctx"] = 8192
+            # Disable reasoning/thinking mode for Qwen3+ series. Without this,
+            # the model burns minutes "thinking" before producing tokens —
+            # contextual enrichment of 3,318 chunks would take days.
+            kwargs["think"] = False
 
         # Pass JSON schema through to API providers (Anthropic/OpenAI handle natively).
         if response_format and not model.startswith("ollama/"):

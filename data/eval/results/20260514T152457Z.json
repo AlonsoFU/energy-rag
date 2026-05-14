@@ -1,0 +1,418 @@
+{
+  "n_queries": 15,
+  "n_positive": 15,
+  "n_negative": 0,
+  "n_with_generation": 5,
+  "retrieval": {
+    "recall_at_5": 0.3333333333333333,
+    "recall_norma_only": 0.4666666666666667
+  },
+  "generation": {
+    "grounding_pass": 1.0,
+    "answered": 1.0,
+    "negative_correct": 0.0
+  },
+  "latency_ms": {
+    "p50": 131,
+    "p95": 94509,
+    "p99": 137439
+  },
+  "per_query": [
+    {
+      "query": "qué es la CNE",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 131,
+      "retrieval_ms": 131,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "tercero"
+      },
+      "error": null
+    },
+    {
+      "query": "qué hace la SEC",
+      "category": "alias_test",
+      "expected_norma": "1146553",
+      "expected_articulo": "5",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 70,
+      "retrieval_ms": 70,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el CEN",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 78,
+      "retrieval_ms": 78,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1047565",
+        "articulo_numero": "5º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el SEN",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 64,
+      "retrieval_ms": 64,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1216930",
+        "articulo_numero": "43"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el STN",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 72,
+      "retrieval_ms": 72,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la IEP",
+      "category": "alias_test",
+      "expected_norma": "1149788",
+      "expected_articulo": "4º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 90,
+      "retrieval_ms": 90,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1187684",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pmax",
+      "category": "alias_test",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 71511,
+      "retrieval_ms": 59,
+      "generation_ms": 71452,
+      "answer": "No se puede responder la pregunta con los artículos proporcionados, ya que el texto incluye instrucciones de modificación de un reglamento (artículos 11 al 26, 33, 34 bis, 37, 37 bis, 38) y definiciones de demanda (Art. 47, Art. 46), pero no contiene el texto base del reglamento original al que se aplican dichas modificaciones, ni el artículo específico que define el 'Sistema de Almacenamiento de Energía' en su totalidad para poder citar su contenido final. Los artículos citados son instrucciones de cambio o definiciones parciales de demanda, no la definición completa del sistema solicitado. [Art. 47 de 202975] [Art. 46 de 250604] [Art. 9º de 250604] [Art. 65 de 250604] [Art. 22 de 244803] [Art. 25 de 1146553]",
+      "citations": [
+        [
+          "202975",
+          "47"
+        ],
+        [
+          "250604",
+          "46"
+        ],
+        [
+          "250604",
+          "9"
+        ],
+        [
+          "250604",
+          "65"
+        ],
+        [
+          "244803",
+          "22"
+        ],
+        [
+          "1146553",
+          "25"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia firme",
+      "category": "alias_test",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 23202,
+      "retrieval_ms": 123,
+      "generation_ms": 23079,
+      "answer": "La potencia firme se refiere a la Potencia Máxima que puede sostener de manera continua una Unidad Generadora o Sistema de Almacenamiento de Energía [Art. 13 de 250604]. Esta potencia se determina considerando las restricciones en sus componentes o instalaciones, así como la verificación que realice el Coordinador a través de pruebas [Art. 13 de 250604]. Además, la Potencia Inicial se calcula como la Potencia Máxima asociada al Insumo Principal, ponderada por la disponibilidad de dicho insumo [Art. 31 de 250604].",
+      "citations": [
+        [
+          "250604",
+          "13"
+        ],
+        [
+          "250604",
+          "13"
+        ],
+        [
+          "250604",
+          "31"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia instalada",
+      "category": "alias_test",
+      "expected_norma": "1149788",
+      "expected_articulo": "4º",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 134,
+      "retrieval_ms": 134,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "202975",
+        "articulo_numero": "173"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el Panel de Expertos",
+      "category": "alias_test",
+      "expected_norma": "1160108",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 56,
+      "retrieval_ms": 56,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1099982",
+        "articulo_numero": "4"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la transmisión troncal",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 57,
+      "retrieval_ms": 57,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1047565",
+        "articulo_numero": "14"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la transmisión dedicada",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 36044,
+      "retrieval_ms": 55,
+      "generation_ms": 35989,
+      "answer": "Según los artículos proporcionados, los Sistemas de Transmisión Dedicados son aquellos constituidos por líneas y subestaciones eléctricas radiales interconectadas al sistema eléctrico, destinadas esencialmente al suministro de energía a usuarios no sometidos a regulación de precios o para inyectar producción de centrales generadoras, siempre que su operación no produzca impactos significativos en el resto del sistema. También incluyen instalaciones enmalladas que cumplan los mismos fines y no afecten significativamente la operación del sistema. La capacidad técnica disponible de estas instalaciones debe ser publicada anualmente por el Coordinador en su sitio web con un horizonte de diez años, actualizándose mensualmente si hay modificaciones. [Art. 5 de 1146553] [Art. 37 de 1146553] [Art. 65 de 1160108]",
+      "citations": [
+        [
+          "1146553",
+          "5"
+        ],
+        [
+          "1146553",
+          "37"
+        ],
+        [
+          "1160108",
+          "65"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "2°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es una distribuidora",
+      "category": "alias_test",
+      "expected_norma": "1047565",
+      "expected_articulo": "34",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 148172,
+      "retrieval_ms": 139,
+      "generation_ms": 148033,
+      "answer": "Según los artículos provistos, el modelo de contrato de conexión debe contener las menciones siguientes:\n\na) Identificación de las partes, esto es, el o los Usuarios Finales y la Empresa Distribuidora;\nb) Número de identificación de o los servicios correspondientes a los inmuebles o instalaciones donde se instalará el Equipamiento de Generación, donde se realizarán los descuentos en caso de un Equipamiento de Generación Conjunto y donde se realizarán los descuentos remotos en caso de Equipamiento de Generación Individual con Descuentos Remotos, según corresponda;\nc) Opción tarifaria establecida en conformidad a la normativa vigente;\nd) Capacidad Instalada y Capacidad de Inyección del Equipamiento de Generación;\ne) Características técnicas esenciales del Equipamiento de Generación que deberán ser consistentes con las principales características de dicho equipamiento consignadas en la SCR, de acuerdo a lo establecido en la normativa vigente o en las instrucciones de carácter general que al efecto dicte la Superintendencia;\nf) Ubicación del o los empalmes, según corresponda;\ng) Fecha de conexión del Equipamiento de Generación;\nh) Causales de término anticipado o resolución del contrato de conexión, entre ellas, aquella señalada en el artículo 81º del presente reglamento;\ni) El mecanismo al que opta el Cliente para el pago de los remanentes no descontados señalados en el inciso final del artículo 60º de este reglamento, su periodicidad y la fecha en la que la Empresa Distribuidora debe realizar dicho pago, de acuerdo a las disposiciones legales vigentes, cuando esto corresponda;\nj) Vigencia del contrato;\nk) Medio de comunicación acordado;\nl) Modalidad de operación del Equipamiento de Generación; y\nm) Porcentaje de repartición de inyecciones para cada número de identificación de servicio en los casos que corresponda.\n\nAdicionalmente, la respuesta a la Solicitud de Conexión (SCR) debe incluir:\na) La ubicación geográfica del punto de conexión del Equipamiento de Generación a su red de distribución eléctrica, de acuerdo al número de identificación de servicio correspondiente;\nb) La capacidad del empalme asociado al número de identificación de servicio correspondiente, expresada en kilowatts;\nc) La Capacidad Instalada Permitida y la Inyección de Excedentes Permitida, establecidas según lo indicado en el Título IV de este reglamento, salvo que no se requiera de acuerdo a lo señalado en el artículo 44º del presente reglamento;\nd) Las Obras Adicionales, Adecuaciones o Ajustes necesarios para la conexión del Equipamiento de Generación, si se requiriesen, junto a sus costos, plazo de ejecución y modalidad de pago, en conformidad con la normativa vigente;\ne) El modelo de contrato de conexión, sin perjuicio que éste pueda ser posteriormente modificado por mutuo acuerdo de las partes;\nf) El costo de las actividades necesarias para efectuar la conexión del Equipamiento de Generación señalada en el inciso primero del artículo 29º del presente reglamento;\ng) La suma de la Capacidad Instalada y de la Capacidad de Inyección de los Equipamientos de Generación ya conectados al mismo transformador de distribución donde se solicita la conexión del Equipamiento de Generación; y\nh) La cantidad de SCR asociadas al mismo transformador de distribución donde se solicita la conexión del Equipamiento de Generación, que se encuentran en trámite al momento de responder la SCR, así como la suma de la Capacidad Instalada y la Capacidad de Inyección de dichas solicitudes.\n\nAsimismo, la Empresa Distribuidora deberá entregar al Usuario Final los supuestos y cálculos considerados al momento de evaluar la conexión de un Equipamiento de Generación.\n\nEn caso de que el Usuario Final requiera información que la Empresa Distribuidora no haya puesto a disposición de los interesados según se establece en el inciso primero del presente artículo y que ésta sea necesaria para el adecuado diseño e instalación del Equipamiento de Generación, el Usuario Final podrá solicitarla y ésta deberá ser puesta a disposición por parte de la Empresa Distribuidora en los formatos que la Superintendencia destine al efecto y en un plazo máximo de 10 días contados desde la recepción del requerimiento por parte de la Empresa Distribuidora.\n\nLa Empresa Distribuidora deberá responder a la NC en función de la fecha y hora de presentación de las mismas.\n\nSi al conectar o supervisar la conexión del Equipamiento de Generación, la Empresa Distribuidora detectare divergencias respecto a lo indicado en la NC, deberá informar al Usuario Final conforme al medio de comunicación elegido por el usuario, en un plazo no mayor a 5 días desde la fecha en que debió efectuarse la conexión, las razones que fundamentan las divergencias encontradas e impidan la conexión.\n\nSi el Usuario Final no estuviere de acuerdo con las observaciones efectuadas por la Empresa Distribuidora, podrá, a su elección, resolver las discrepancias directamente con la Empresa Distribuidora o recurrir ante la Superintendencia, la que resolverá de acuerdo al procedimiento establecido en la normativa vigente.\n\nSi el Usuario Final efectuare modificaciones al Equipamiento de Generación corrigiendo las divergencias planteadas por la Empresa Distribuidora, deberá efectuar una nueva comunicación de energización ante la Superintendencia en los términos dispuestos en el artículo 26º del presente reglamento y presentar una nueva NC, de acuerdo al procedimiento señalado en el inciso primero del presente artículo.\n\nDe persistir las divergencias o aparecer nuevas condiciones impuestas por la Empresa Distribuidora, el Usuario Final podrá formular su reclamo ante la Superintendencia, la que resolverá de acuerdo al procedimiento establecido en la normativa vigente.\n\nEn caso de requerirse, la Empresa Distribuidora deberá señalar detalladamente aquellas Obras Adicionales, Adecuaciones o Ajustes necesarios técnicamente para una correcta conexión del Equipamiento de Generación a la red de distribución eléctrica, en virtud de lo prescrito en el artículo 149 bis de la ley y de acuerdo a lo que señale la normativa vigente.\n\nPara los casos previstos en el primer inciso del artículo 14º y en el artículo 16º del presente reglamento, las modificaciones a las redes de distribución existentes o las nuevas redes de distribución que deban ejecutarse para efectos de otorgar suministro a un proyecto inmobiliario o para otorgar suministro a un inmueble cuando la solicitud de conexión de suministro de energía o la ampliación de servicios se realice en forma conjunta a la SCR, éstas no serán consideradas como Obras Adicionales, Adecuaciones o Ajustes y serán de cargo de la Empresa Distribuidora, en concordancia con la normativa vigente.\n\nEn el caso contemplado en el presente inciso, la Empresa Distribuidora deberá establecer un plazo de ejecución conjunto para realizar las modificaciones a la red de distribución existente o construir las nuevas redes de distribución y las Obras Adicionales, Adecuaciones o Ajustes, si es que los hubiere, y deberá indicar los costos asociados a dichas obras, de acuerdo a la normativa vigente.\n\nLos plazos para la ejecución de las Obras Adicionales, Adecuaciones o Ajustes y para la ejecución de las modificaciones a la red de distribución a las que se refiere el inciso anterior, comenzarán a regir desde la presentación por parte del Usuario Final de la manifestación de conformidad según lo establecido en el Artículo 19º del presente reglamento.\n\nLa determinación del costo de las Obras Adicionales, Adecuaciones y Ajustes deberá calcularse considerando los requerimientos necesarios para mantener los estándares de seguridad y calidad de suministro establecidos por la normativa vigente. Dicho cálculo deberá considerar los valores de cada uno de los componentes de las Obras Adicionales y Adecuaciones, las labores de Ajustes necesarios, los costos de montaje asociados, y los recargos establecidos en el procedimiento de determinación del Valor Nuevo de Reemplazo vigente, en adelante [Art. 30º de 1149788] [Art. 17º de 1149788] [Art. 12º de 1149788] [Art. 29º de 1149788] [Art. 41º de 1149788] [Art. 31 de 1047565]",
+      "citations": [
+        [
+          "1149788",
+          "30"
+        ],
+        [
+          "1149788",
+          "17"
+        ],
+        [
+          "1149788",
+          "12"
+        ],
+        [
+          "1149788",
+          "29"
+        ],
+        [
+          "1149788",
+          "41"
+        ],
+        [
+          "1047565",
+          "31"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1047565",
+        "articulo_numero": "34"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es la red de transmisión",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 36972,
+      "retrieval_ms": 110,
+      "generation_ms": 36862,
+      "answer": "Los artículos proporcionados establecen los derechos de cobro por recepción de instalaciones (centrales, líneas, redes, interiores), tarifas para telegrafos, teléfonos y estaciones de radiocomunicaciones, así como derechos por verificación de instrumentos, ensayos de materiales y derechos de carnet. No contienen información sobre fórmulas tarifarias específicas para expansión de pérdidas, valor anual de activos o factores de ajuste de inyección en el contexto de sistemas de transmisión adicionales regulados, ya que esos detalles (como FEPETxA, VASTxA, FAIE) aparecen en un texto fragmentado que no corresponde a los artículos numerados de la Ley (Art. 218, Art. 1160108) ni a sus reglamentos adjuntos en el documento proporcionado. [Art. 218 de 202975] [Art. primero de 1160108]",
+      "citations": [
+        [
+          "202975",
+          "218"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "5"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es PdE",
+      "category": "alias_test",
+      "expected_norma": "1112591",
+      "expected_articulo": "2°",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 134,
+      "retrieval_ms": 134,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "5°"
+      },
+      "error": null
+    }
+  ]
+}
