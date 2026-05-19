@@ -4,7 +4,7 @@ merged_from:
 - glossary/concepts.yaml
 - glossary/incoming/auto-extracted-clean.yaml
 - glossary/incoming/1146553.yaml
-total_concepts: 215
+total_concepts: 191
 by_source:
   manual_curated: 80
   llm_validated: 118
@@ -486,20 +486,20 @@ concepts:
   aliases:
   - alias: distribuidora
     confidence: high
-    validated: false
+    validated: true
   - alias: concesionaria de distribución
     confidence: high
-    validated: false
+    validated: true
   - alias: empresa concesionaria
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1047565'
     norm_label: DECRETO 130
     article: '34'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -548,17 +548,17 @@ concepts:
   aliases:
   - alias: obras de adecuación
     confidence: high
-    validated: false
+    validated: true
   - alias: adecuaciones de conexión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1010668'
     norm_label: LEY 20416
     article: Primero
     url: https://www.bcn.cl/leychile/navegar?idNorma=1010668
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -579,18 +579,15 @@ concepts:
     de Generación;
   aliases:
   - alias: obras adicionales de conexión
-    confidence: medium
-    validated: false
-  - alias: obras complementarias
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1010304'
     norm_label: LEY 20410
     article: 1º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1010304
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -665,20 +662,14 @@ concepts:
   aliases:
   - alias: potencia instalada
     confidence: high
-    validated: false
-  - alias: kW instalados
-    confidence: medium
-    validated: false
-  - alias: capacidad nominal del parque
-    confidence: medium
-    validated: false
+    validated: true
   source:
     norm_id: '1038211'
     norm_label: LEY 20571
     article: 149 ter
     url: https://www.bcn.cl/leychile/navegar?idNorma=1038211
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -702,20 +693,20 @@ concepts:
   aliases:
   - alias: generación conjunta
     confidence: high
-    validated: false
+    validated: true
   - alias: generación compartida
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: equipamiento conjunto
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1149788'
     norm_label: DECRETO 57
     article: 4º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -736,17 +727,14 @@ concepts:
   aliases:
   - alias: potencia de inyección
     confidence: high
-    validated: false
-  - alias: inyección máxima
-    confidence: medium
-    validated: false
+    validated: true
   source:
     norm_id: '1047565'
     norm_label: DECRETO 130
     article: '11'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -769,18 +757,18 @@ concepts:
     en kilowatts;
   aliases:
   - alias: capacidad permitida
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: límite de capacidad de conexión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1149788'
     norm_label: DECRETO 57
     article: 4º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -801,12 +789,9 @@ concepts:
     11T, de 2016, del Ministerio de Energía, que fija fórmulas tarifarias aplicables a los suministros sujetos a precios regulados
     que se señalan, efectuados por las empresas concesionarias de distribución que se indican, o el que lo reemplace;
   aliases:
-  - alias: cargos tarifarios
-    confidence: medium
-    validated: false
   - alias: cargos por suministro
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: tarifa eléctrica
     confidence: low
     validated: false
@@ -816,7 +801,7 @@ concepts:
     article: 2º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -840,20 +825,17 @@ concepts:
   aliases:
   - alias: IEP
     confidence: high
-    validated: false
+    validated: true
   - alias: inyección permitida
-    confidence: medium
-    validated: false
-  - alias: límite de inyección
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1149788'
     norm_label: DECRETO 57
     article: 4º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1149788
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -954,10 +936,10 @@ concepts:
   aliases:
   - alias: Ministerio de Energía
     confidence: high
-    validated: false
+    validated: true
   - alias: MinEnergía
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: Ministerio del ramo
     confidence: low
     validated: false
@@ -967,7 +949,7 @@ concepts:
     article: 8º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -988,20 +970,17 @@ concepts:
   aliases:
   - alias: CNE
     confidence: high
-    validated: false
+    validated: true
   - alias: Comisión Nacional de Energía
     confidence: high
-    validated: false
-  - alias: la Comisión
-    confidence: medium
-    validated: false
+    validated: true
   source:
     norm_id: '1005169'
     norm_label: LEY 20365
     article: '11'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1022,20 +1001,17 @@ concepts:
   aliases:
   - alias: SEC
     confidence: high
-    validated: false
+    validated: true
   - alias: Superintendencia de Electricidad y Combustibles
     confidence: high
-    validated: false
-  - alias: la Superintendencia
-    confidence: medium
-    validated: false
+    validated: true
   source:
     norm_id: '1005169'
     norm_label: LEY 20365
     article: 3º
     url: https://www.bcn.cl/leychile/navegar?idNorma=1005169
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1192,10 +1168,7 @@ concepts:
   aliases:
   - alias: potencia firme
     confidence: high
-    validated: false
-  - alias: potencia inicial
-    confidence: medium
-    validated: false
+    validated: true
   - alias: potencia eficiente
     confidence: low
     validated: false
@@ -1205,7 +1178,7 @@ concepts:
     article: '29'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -1255,21 +1228,21 @@ concepts:
     Centrales Renovables c
   aliases:
   - alias: potencia nominal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: Pmax
     confidence: high
-    validated: false
+    validated: true
   - alias: capacidad nominal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1047565'
     norm_label: DECRETO 130
     article: '25'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1047565
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3018,8 +2991,8 @@ concepts:
     y líneas de distribución, interconectadas entre sí, que permite generar, transportar y distribuir energía eléctrica;
   aliases:
   - alias: sistema eléctrico interconectado
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: red eléctrica
     confidence: low
     validated: false
@@ -3029,7 +3002,7 @@ concepts:
     article: segundo
     url: https://www.bcn.cl/leychile/navegar?idNorma=1032851
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3102,8 +3075,8 @@ concepts:
     un tanque de almacenamiento cuando no exista acometida, hasta la entrada del regulador de servicio.
   aliases:
   - alias: empalme eléctrico
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: conexión a la red
     confidence: low
     validated: false
@@ -3113,7 +3086,7 @@ concepts:
     article: primero
     url: https://www.bcn.cl/leychile/navegar?idNorma=1115627
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3191,17 +3164,17 @@ concepts:
   aliases:
   - alias: Panel de Expertos
     confidence: high
-    validated: false
+    validated: true
   - alias: Panel de Expertos Eléctrico
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1010304'
     norm_label: LEY 20410
     article: '20'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1010304
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3685,9 +3658,6 @@ concepts:
   - alias: briquetas
     confidence: high
     validated: false
-  - alias: combustibles sólidos
-    confidence: medium
-    validated: false
   source:
     norm_id: '1183783'
     norm_label: LEY 21499
@@ -3715,8 +3685,8 @@ concepts:
     para la elaboración de biocombustibles sólidos.
   aliases:
   - alias: biomasa sólida
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: materia orgánica energética
     confidence: low
     validated: false
@@ -3726,7 +3696,7 @@ concepts:
     article: '2'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1183783
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3773,10 +3743,10 @@ concepts:
   aliases:
   - alias: SEN
     confidence: high
-    validated: false
+    validated: true
   - alias: Sistema Eléctrico Nacional Chileno
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: SIC
     confidence: low
     validated: false
@@ -3789,7 +3759,7 @@ concepts:
     article: '4'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1099982
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -3864,11 +3834,11 @@ concepts:
   definition: Ajuste o recargo aplicable a los clientes
   aliases:
   - alias: Ajuste y Recargo
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: ajuste o recargo
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: ajustes tarifarios
     confidence: low
     validated: false
@@ -3878,7 +3848,7 @@ concepts:
     article: PRIMERO
     url: https://www.bcn.cl/leychile/navegar?idNorma=1067875
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4029,20 +3999,20 @@ concepts:
   aliases:
   - alias: Precio de Nudo de la Energía Promedio
     confidence: high
-    validated: false
+    validated: true
   - alias: precio nudo energía
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: PNE promedio
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1067875'
     norm_label: DECRETO 2
     article: PRIMERO
     url: https://www.bcn.cl/leychile/navegar?idNorma=1067875
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4063,20 +4033,20 @@ concepts:
   aliases:
   - alias: Precio de Nudo de Potencia de Punta Promedio
     confidence: high
-    validated: false
+    validated: true
   - alias: precio nudo potencia
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: PNP promedio
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1067875'
     norm_label: DECRETO 2
     article: PRIMERO
     url: https://www.bcn.cl/leychile/navegar?idNorma=1067875
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4255,23 +4225,17 @@ concepts:
   aliases:
   - alias: CEN
     confidence: high
-    validated: false
+    validated: true
   - alias: Coordinador Eléctrico Nacional
     confidence: high
-    validated: false
-  - alias: el Coordinador
-    confidence: medium
-    validated: false
-  - alias: Coordinador del Sistema
-    confidence: medium
-    validated: false
+    validated: true
   source:
     norm_id: '1023143'
     norm_label: LEY 20500
     article: '29'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1023143
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4292,18 +4256,18 @@ concepts:
     a prestar el servicio público de distribución.
   aliases:
   - alias: transmisión eléctrica
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: red de transmisión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1008692'
     norm_label: LEY 20402
     article: '13'
     url: https://www.bcn.cl/leychile/navegar?idNorma=1008692
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4327,20 +4291,20 @@ concepts:
   aliases:
   - alias: Plan de Expansión de la Transmisión
     confidence: high
-    validated: false
+    validated: true
   - alias: PdE
     confidence: high
-    validated: false
+    validated: true
   - alias: plan anual de expansión
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1032851'
     norm_label: DECRETO 61
     article: segundo
     url: https://www.bcn.cl/leychile/navegar?idNorma=1032851
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4443,20 +4407,20 @@ concepts:
   aliases:
   - alias: STN
     confidence: high
-    validated: false
+    validated: true
   - alias: transmisión troncal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: red troncal
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   source:
     norm_id: '1112591'
     norm_label: RESOLUCIÓN 711
     article: 2°
     url: https://www.bcn.cl/leychile/navegar?idNorma=1112591
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4480,8 +4444,8 @@ concepts:
     el inciso ante
   aliases:
   - alias: transmisión dedicada
-    confidence: medium
-    validated: false
+    confidence: high
+    validated: true
   - alias: STX
     confidence: low
     validated: false
@@ -4494,7 +4458,7 @@ concepts:
     article: 2°
     url: https://www.bcn.cl/leychile/navegar?idNorma=1112591
   domain_context: electricidad
-  status: not_reviewed
+  status: ok
   relations:
     related: []
     broader: []
@@ -4590,116 +4554,6 @@ concepts:
     primary: electricidad
     secondary: transmisión/plan_expansión
 - id: null
-  name: Tarifas y Peajes
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=34 category=concepto técnico reason=Se trata de un término técnico y legal específico que agrupa conceptos normativos
-    sobre la estructura de costos en el se
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 34
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concesiones_viales/telepeaje
-- id: null
-  name: Registro Nacional de Usuarios de Telepeaje
-  definition: ''
-  aliases:
-  - alias: RNUT
-    confidence: high
-    validated: false
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via paren_pair
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=institución reason=El término se refiere a un registro oficial gestionado por la Comisión Nacional
-    de Energía (CNE) para usuarios de telepe
-  extraction_difficulty: detected via paren_pair; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concesiones_viales/telepeaje
-- id: null
-  name: Sitio Electrónico Unificado de Tarifas y Peajes al Registro Nacional de Usuarios de Telepeaje
-  definition: ''
-  aliases:
-  - alias: RNUT
-    confidence: high
-    validated: false
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via paren_pair
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=institución reason=Se trata de un nombre propio específico de un sistema digital oficial gestionado
-    por la Superintendencia de Electricidad
-  extraction_difficulty: detected via paren_pair; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concesiones_viales/telepeaje
-- id: null
-  name: Sociedad Concesionaria
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=37 category=concepto técnico reason=La expresión 'Sociedad Concesionaria' es un término técnico-jurídico específico
-    definido en la normativa chilena (como e
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 37
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
   name: Obras de Ampliación
   definition: ''
   aliases: []
@@ -4708,7 +4562,7 @@ concepts:
     norm_label: detected via multi_phrase
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -4723,34 +4577,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: Consejo de Concesiones
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=31 category=institución reason=El Consejo de Concesiones es un órgano técnico-administrativo real definido en
-    la normativa chilena (Decreto Supremo 594
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 31
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: transmisión/plan_expansión
 - id: null
   name: Obras de Expansión
   definition: ''
@@ -4760,7 +4588,7 @@ concepts:
     norm_label: detected via multi_phrase
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -4775,140 +4603,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: 141
-  name: Deudor
-  definition: Toda Empresa Deudora o Persona Deudora, atendido el Procedimiento Concursal de que se trate y la naturaleza
-    de la disposición a que se refiera.
-  aliases:
-  - alias: el Deudor
-    confidence: medium
-    validated: false
-  source:
-    norm_id: '1010304'
-    norm_label: LEY 20410
-    article: 28 ter
-    url: https://www.bcn.cl/leychile/navegar?idNorma=1010304
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: ''
-  extraction_difficulty: ''
-  metadata:
-    refs_count: 30
-    last_reviewed_by: auto
-    last_reviewed_date: '2026-05-02'
-    source_extraction: manual_curated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: 139
-  name: Correo electrónico
-  definition: medio de comunicación electrónica que permite el envío y recepción de información y documentos electrónicos.
-  aliases: []
-  source:
-    norm_id: '1058072'
-    norm_label: LEY 20720
-    article: 2º
-    url: https://www.bcn.cl/leychile/navegar?idNorma=1058072
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: ''
-  extraction_difficulty: ''
-  metadata:
-    refs_count: 27
-    last_reviewed_by: auto
-    last_reviewed_date: '2026-05-02'
-    source_extraction: manual_curated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: Sociedades Concesionarias
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: 'freq=27 category=norma legal reason=Es un término técnico específico definido en la Ley de Concesiones de Servicios
-    Públicos (Ley 19.850) que designa a las '
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 27
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: Dirección General de Concesiones de Obras Públicas
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=25 category=institución reason=Es una entidad legal real y específica del sector de obras públicas en Chile,
-    aunque su competencia principal no es estr
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 25
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: Proceso de Licitación
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=22 category=institución reason=El término 'Proceso de Licitación' es un concepto técnico-jurídico fundamental
-    en la normativa chilena que regula el pro
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 22
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: transmisión/plan_expansión
 - id: null
   name: Obras Nuevas
   definition: ''
@@ -4918,7 +4614,7 @@ concepts:
     norm_label: detected via multi_phrase
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -4933,8 +4629,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: transmisión/plan_expansión
 - id: null
   name: Informe de Autorización de Conexión
   definition: ''
@@ -4944,7 +4640,7 @@ concepts:
     norm_label: detected via multi_phrase
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -4959,70 +4655,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: 154
-  name: Procedimiento Concursal
-  definition: cualquiera de los regulados en esta ley, denominados, indistintamente, Procedimiento Concursal de Reorganización
-    de la Empresa Deudora, Procedimiento Concursal de Liquidación de la Empresa Deudora, Procedimiento Concursal de Renegociación
-    de la Persona Deudora
-  aliases:
-  - alias: proceso concursal
-    confidence: high
-    validated: false
-  - alias: quiebra
-    confidence: medium
-    validated: false
-  - alias: concurso de acreedores
-    confidence: low
-    validated: false
-  source:
-    norm_id: '1010668'
-    norm_label: LEY 20416
-    article: 6°
-    url: https://www.bcn.cl/leychile/navegar?idNorma=1010668
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: ''
-  extraction_difficulty: ''
-  metadata:
-    refs_count: 10
-    last_reviewed_by: auto
-    last_reviewed_date: '2026-05-02'
-    source_extraction: manual_curated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: adjudicado
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=concepto técnico reason=El término 'adjudicado' es un concepto jurídico-administrativo real utilizado
-    en el contexto de licitaciones y concursos
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: distribución/conexión
 - id: null
   name: Costo de Falla de Corta Duración
   definition: ''
@@ -5035,7 +4669,7 @@ concepts:
     norm_label: detected via paren_pair
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5050,8 +4684,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: tarifas/general
 - id: null
   name: Costo de Falla de Larga Duración
   definition: ''
@@ -5064,7 +4698,7 @@ concepts:
     norm_label: detected via paren_pair
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5079,8 +4713,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: tarifas/general
 - id: null
   name: fecha de concreción de un proyecto
   definition: ''
@@ -5090,7 +4724,7 @@ concepts:
     norm_label: detected via definition_pattern
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5105,60 +4739,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: micro empresa
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=concepto técnico reason=El término 'micro empresa' es un concepto jurídico definido en la Ley 20.720
-    de Quiebras y Concursos de Chile, utilizado
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
-- id: null
-  name: obra pública fiscal
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=concepto técnico reason=Es un término jurídico-administrativo real definido en la Ley de Bases del
-    Estado y la Ley de Obras Públicas que designa
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: transmisión/plan_expansión
 - id: null
   name: precalificación energética
   definition: ''
@@ -5168,7 +4750,7 @@ concepts:
     norm_label: detected via definition_pattern
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5183,8 +4765,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: generación/general
 - id: null
   name: solución de conexión
   definition: ''
@@ -5194,7 +4776,7 @@ concepts:
     norm_label: detected via definition_pattern
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5209,8 +4791,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: distribución/conexión
 - id: null
   name: Valorización del Ajuste
   definition: ''
@@ -5223,7 +4805,7 @@ concepts:
     norm_label: detected via paren_pair
     article: varios
     url: ''
-  domain_context: regulatorio_otros
+  domain_context: electricidad
   status: not_reviewed
   relations:
     related: []
@@ -5238,8 +4820,8 @@ concepts:
     last_reviewed_date: '2026-05-02'
     source_extraction: llm_validated
   domain:
-    primary: regulatorio_otros
-    secondary: concursal/ley_20720
+    primary: electricidad
+    secondary: tarifas/general
 - id: 253
   name: Vehículo
   definition: Medio motorizado o no motorizado con el
@@ -5666,266 +5248,6 @@ concepts:
   domain:
     primary: regulatorio_otros
     secondary: habilitaciones/ley_marco
-- id: null
-  name: Servicio Nacional de Menores
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=21 category=institución reason=El Servicio Nacional de Menores (SENAME) es una institución pública específica
-    del Estado de Chile con funciones legales
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 21
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: Registro de Vehículos Motorizados
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: 'freq=20 category=institución reason=Aunque el término es real, no pertenece al dominio eléctrico ni a la normativa
-    chilena de este sector, por lo que no es '
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 20
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: Código del Trabajo
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=19 category=norma legal reason=El Código del Trabajo es una norma legal fundamental en Chile que regula las
-    relaciones laborales, por lo que constituye
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 19
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: Registro de Multas de Tránsito No Pagadas
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=15 category=institución reason=El término no pertenece al dominio eléctrico chileno, sino al de tránsito y multas,
-    por lo que no es relevante para un g
-  extraction_difficulty: detected via multi_phrase; LLM confidence=low
-  metadata:
-    refs_count: 15
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: PATENTE
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via acronym
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=3 category=institución reason=La palabra 'PATENTE' es un término técnico y legal específico en la normativa
-    chilena que se refiere a la autorización a
-  extraction_difficulty: detected via acronym; LLM confidence=high
-  metadata:
-    refs_count: 3
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: remuneración líquida
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=2 category=concepto técnico reason=El término 'remuneración líquida' es un concepto técnico-jurídico real definido
-    en el Código del Trabajo chileno (artícu
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 2
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: remuneración bruta
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: regulatorio_otros
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=concepto técnico reason=El término 'remuneración bruta' es un concepto legal y contable real definido
-    en la normativa chilena (como el Código de
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: regulatorio_otros
-    secondary: tránsito/ley_18290
-- id: null
-  name: Servicio Nacional de Reinserción Social Juvenil
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via multi_phrase
-    article: varios
-    url: ''
-  domain_context: indeterminado
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=42 category=institución reason=El término corresponde a una institución pública específica del sistema de justicia
-    juvenil chileno, no siendo un concep
-  extraction_difficulty: detected via multi_phrase; LLM confidence=high
-  metadata:
-    refs_count: 42
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: indeterminado
-    secondary: no_aplica
-- id: null
-  name: aporte monetario
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: indeterminado
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=2 category=concepto técnico reason=El término 'aporte monetario' es un concepto jurídico-económico real utilizado
-    en la normativa chilena (como en el Códig
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 2
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: indeterminado
-    secondary: no_aplica
-- id: null
-  name: exención
-  definition: ''
-  aliases: []
-  source:
-    norm_id: extracted_from_corpus
-    norm_label: detected via definition_pattern
-    article: varios
-    url: ''
-  domain_context: indeterminado
-  status: not_reviewed
-  relations:
-    related: []
-    broader: []
-    narrower: []
-  notes: freq=1 category=institución reason=La palabra 'exención' es un término legal genérico que no posee una definición
-    técnica específica ni un significado únic
-  extraction_difficulty: detected via definition_pattern; LLM confidence=high
-  metadata:
-    refs_count: 1
-    last_reviewed_by: auto+LLM
-    last_reviewed_date: '2026-05-02'
-    source_extraction: llm_validated
-  domain:
-    primary: indeterminado
-    secondary: no_aplica
 domain_hierarchy:
   schema: primary > secondary (path-style strings)
   primary_values:

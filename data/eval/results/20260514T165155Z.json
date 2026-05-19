@@ -1,0 +1,1642 @@
+{
+  "n_queries": 50,
+  "n_positive": 48,
+  "n_negative": 2,
+  "n_with_generation": 47,
+  "retrieval": {
+    "recall_at_5": 0.9375,
+    "recall_norma_only": 0.9583333333333334
+  },
+  "generation": {
+    "grounding_pass": 0.7446808510638298,
+    "answered": 0.9787234042553191,
+    "negative_correct": 0.5
+  },
+  "latency_ms": {
+    "p50": 34134,
+    "p95": 300333,
+    "p99": 330059
+  },
+  "per_query": [
+    {
+      "query": "qué es Plan de obra de generación y transmisión",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 246779,
+      "retrieval_ms": 110,
+      "generation_ms": 246669,
+      "answer": "La Planificación de la Transmisión debe considerar, al menos, un horizonte de veinte años, y contemplará las Obras de Expansión necesarias del Sistema de Transmisión Nacional, de Polos de Desarrollo, Zonal y Dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro, según corresponda. [Art. 70 de 1160108] El proceso de planificación se iniciará con una etapa de Análisis Preliminar, la cual tiene por objeto: a) revisar la totalidad de los antecedentes disponibles y determinar en base a aquéllos la información que se utilizará en el proceso de planificación; b) efectuar un diagnóstico del sistema con el objeto de detectar eventuales necesidades de expansión; c) determinar preliminarmente los proyectos propuestos por el Coordinador y promotores que deberán someterse al Análisis de Suficiencia; y d) determinar los proyectos propuestos por el Coordinador y promotores que, por su naturaleza, deberán someterse directamente al Análisis de Seguridad y Resiliencia. [Art. 16° de 1112591] Posteriormente, y en base al resultado de la etapa anterior, se procederá a realizar un Análisis de Suficiencia, a fin de determinar las necesidades de expansión de los sistemas de transmisión que se requieren para reducir posibles congestiones o desabastecimientos de la demanda. Concluido el análisis anterior, se deberá efectuar un Análisis de Seguridad y Resiliencia mediante la simulación de ciertas contingencias y/o eventualidades, de manera de determinar las necesidades de transmisión que permitan otorgar el nivel de seguridad necesario para el abastecimiento de la demanda de clientes finales, de acuerdo a lo establecido en la Norma Técnica de Seguridad y Calidad de Servicio y a lo dispuesto en el literal a) del artículo 87º de la Ley. Considerando las necesidades de expansión que se han determinado en las etapas anteriores, se efectuará un Análisis de Mercado Común, cuya finalidad será medir que dichas expansiones promuevan las condiciones de oferta y faciliten la competencia, permitiendo el abastecimiento de la demanda a mínimo costo y el suministro a mínimo precio. Efectuados los análisis anteriores, se procederá a realizar un Análisis Técnico Económico de los proyectos, con la finalidad de determinar la conveniencia en términos económicos de la incorporación de los proyectos bajo análisis al Plan de Expansión. Aquellos proyectos que resulten finalmente propuestos conformarán el Plan de Expansión Anual de la transmisión que se contendrá el Informe Técnico Preliminar a que se refiere el inciso cuarto del artículo 91º de la Ley. [Art. 16° de 1112591] La Comisión deberá considerar, al menos, un horizonte de veinte años, y contemplará las Obras de Expansión necesarias del Sistema de Transmisión Nacional, de Polos de Desarrollo, Zonal y Dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro, según corresponda. [Art. 70 de 1160108] En especial, para efectuar la Planificación de la Transmisión, la Comisión deberá considerar: a. Proyección de precios de combustibles: corresponderá a la proyección de precios de los combustibles, para todo el horizonte de análisis que se haya definido para el Proceso de Planificación. Para estos efectos, se utilizarán para los primeros diez o menos años del horizonte de análisis según lo defina la Comisión, las proyecciones efectuadas en el informe de proyecciones de precios de combustibles vigente al inicio del proceso de planificación. Para los siguientes años, se realizará un ejercicio de extensión de dichos precios, utilizando los antecedentes de proyección de precios, tales como las tasas de variación, valores absolutos u otros antecedentes contenidos en los respectivos Escenarios Energéticos de la Planificación Energética considerados por la Comisión, de acuerdo a lo establecido en el Capítulo 3 del Título III del presente reglamento. b. Proyección de demanda de clientes libres: corresponderá a la previsión de la demanda de energía eléctrica para los clientes libres del Sistema Eléctrico Nacional, para todo el horizonte de análisis que se haya definido para el Proceso de Planificación. Para estos efectos, se utilizará para los primeros diez o menos años del horizonte de análisis, según lo defina la Comisión, la información contenida en el informe definitivo de la previsión de demanda vigente a la fecha de inicio del Proceso de Planificación. Para los siguientes años, se realizará un ejercicio de extensión de dicha información, utilizando los antecedentes de proyección de demanda, tales como las tasas de crecimiento, valores absolutos u otros antecedentes contenidos en los respectivos Escenarios Energéticos de la Planificación Energética considerados por la Comisión, de acuerdo a lo establecido en el Capítulo 3 del Título III del presente reglamento. c. Proyección de demanda de clientes regulados: corresponderá a la previsión de la demanda de energía eléctrica para los clientes regulados del Sistema Eléctrico Nacional, para todo el horizonte de análisis que se haya definido para el Proceso de Planificación. Para estos efectos, se utilizará para los primeros diez o menos años del horizonte de análisis, según lo defina la Comisión, la información contenida en el informe definitivo de la previsión de demanda vigente a la fecha de inicio del Proceso de Planificación. Para los siguientes años, se realizará un ejercicio de extensión de dicha información, utilizando los antecedentes de proyección de demanda, tales como las tasas de crecimiento, valores absolutos u otros antecedentes, contenidos en los respectivos Escenarios Energéticos de la Planificación Energética considerados por la Comisión, de acuerdo a lo establecido en el Capítulo 3 del Título III del presente reglamento. d. Plan de obras de generación, almacenamiento y transmisión: se conformará por las obras de generación, Sistemas de Almacenamiento de Energía y de transmisión que hayan sido declaradas en construcción por la Comisión, de acuerdo a lo establecido en el artículo 72º-17 de la Ley. Se incluirán también las obras de transmisión nacional, zonal y para polos de desarrollo que hayan sido incluidas en algún Plan de Expansión anterior o autorizadas de acuerdo al artículo 102º de la Ley. Asimismo, se considerarán aquellos proyectos de generación que se encuentren comprometidos en virtud de las licitaciones de suministro para clientes regulados y aquellos cuyos titulares hubiesen suscrito contratos para el suministro de clientes libres, que se hayan comunicado a la Comisión al inicio del Proceso de Planificación, según los criterios que defina la Comisión. De igual forma, se deberá considerar la desconexión de unidades generadoras o de instalaciones de transmisión, de acuerdo a los antecedentes conocidos a la fecha en que se realice el proceso anual de planificación de la transmisión. e. Modelamiento de la demanda: corresponderá a la representación de los perfiles de demanda de energía eléctrica de cada barra del sistema. Para estos efectos se considerará, como base, la información histórica de los retiros de energía horarias de cada barra del sistema. Para las proyecciones de demanda que puedan presentar un comportamiento distinto respecto de la información histórica disponible, tales como, la demanda derivada de transporte eléctrico, producción de hidrógeno, climatización eléctrica, entre otros, se considerarán los antecedentes contenidos en los respectivos Escenarios Energéticos de la Planificación Energética considerados por la Comisión, de acuerdo a lo establecido en el Capítulo 3 del Título III del presente reglamento. f. Modelamiento de generación de fuentes renovables: corresponderá a la representación de los perfiles de inyección de las unidades de generación renovables. Para estos efectos la Comisión podrá considerar antecedentes históricos de generación, información estadística, así como todos aquellos antecedentes que permitan una adecuada representación de las fuentes de generación renovables. g. Disponibilidad de combustibles de centrales térmicas: corresponderá a la disponibilidad de combustibles de centrales térmicas, para todo el horizonte de análisis, que se haya definido para el Proceso de Planificación. Para estos efectos, para los primeros diez años o menos, corresponderá a la disponibilidad de combustibles de acuerdo a la información contenida en el informe técnico definitivo del proceso de fijación de precios de nudo de corto plazo que lleva a cabo la Comisión, correspondiente al primer semestre de cada año. Para los siguientes años se realizará un ejercicio de extensión de dicha información, el que deberá ser respaldado y justificado en el respectivo informe técnico. h. Parámetros y variables del Sistema Eléctrico: corresponderán a los parámetros y características técnicas de las instalaciones de transmisión a modelar en el Proceso de Planificación, las que se obtendrán, para instalaciones existentes, de los sistemas de información pública del Coordinador, referidos en el artículo 72º-8 de la Ley. i. Costo de falla de corta duración: valor del costo de falla de corta duración que haya sido fijado por la Comisión, en US$/MWh. j. Costo de falla de larga duración: valor del costo de falla de larga duración que haya sido fijado por la Comisión, en US$/MWh. k. Tasas de falla de instalaciones de transmisión: corresponderán a las tasas de falla que provoquen indisponibilidad de los elementos de transmisión, de acuerdo a la información que la Comisión disponga o solicite a quienes estime pertinente. En caso de que la información necesaria para efectuar la Planificación de la Transmisión no esté disponible para todo el horizonte de análisis que se haya definido para el proceso, la Comisión podrá complementar los antecedentes mediante la realización de proyecciones o ajustes de dicha información, los cuales deberán estar debidamente respaldados y justificados en el respectivo informe técnico. [Art. 78 de 1160108] La Comisión utilizará la información y antecedentes señalados en el presente Capítulo que estén disponibles al momento de inicio de la Planificación de la Transmisión, pudiendo ser actualizados durante el desarrollo de la misma, de acuerdo al estado de avance de los procesos de los cuales se obtiene dicha información y antecedentes, en cuyo caso la Comisión deberá individualizarlos en el informe técnico que contenga el Plan de Expansión. Se entenderá, para estos efectos, que el Proceso de Planificación se inicia con la entrega por parte del Coordinador de su propuesta de expansión para los distintos segmentos. [Art. 82 de 1160108] La Comisión deberá incorporar los Sistemas de Transmisión para Polos de Desarrollo en la resolución de calificación que corresponda. [Art. 98 de 1160108] Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de esa misma fecha se remunerarán una vez que éstas hayan sido valorizadas en el correspondiente proceso de valorización. Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran ser modificadas, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de la fecha de entrada en operación de la Obra de Expansión que la interviene, se remunerará la instalación existente previa a su modificación, una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, serán calificadas luego de su entrada en operación. A partir de esa misma fecha se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran modificaciones respecto de sus características originales, serán calificadas luego de su entrada en operación. A partir de esa misma fecha la instalación previa a ser modificada se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Para efectos de lo anterior, en el caso de instalaciones dedicadas existentes, la Comisión deberá considerar la capacidad contratada de dicha instalación y los proyectos propios del propietario que hayan sido acreditados de forma fehaciente ante la Comisión. Adicionalmente, deberá cumplirse con lo establecido en el Artículo 95.- del presente reglamento en lo que se refiere a la intervención de los Sistemas de Transmisión Dedicada. La Comisión deberá incorporar los Sistemas de Transmisión para Polos de Desarrollo en la resolución de calificación que corresponda. [Art. 98 de 1160108] La Comisión podrá incorporar en la Planificación de la Transmisión, como Sistemas de Transmisión para Polos de Desarrollo, líneas y subestaciones dedicadas, nuevas o existentes, con el objeto de permitir su uso por nuevos proyectos de generación, pudiendo modificar sus características técnicas, como trazado, nivel de tensión o capacidad de transporte en magnitudes mayores a las previstas originalmente. Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de esa misma fecha se remunerarán una vez que éstas hayan sido valorizadas en el correspondiente proceso de valorización. Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran ser modificadas, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de la fecha de entrada en operación de la Obra de Expansión que la interviene, se remunerará la instalación existente previa a su modificación, una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, serán calificadas luego de su entrada en operación. A partir de esa misma fecha se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran modificaciones respecto de sus características originales, serán calificadas luego de su entrada en operación. A partir de esa misma fecha la instalación previa a ser modificada se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Para efectos de lo anterior, en el caso de instalaciones dedicadas existentes, la Comisión deberá considerar la capacidad contratada de dicha instalación y los proyectos propios del propietario que hayan sido acreditados de forma fehaciente ante la Comisión. Adicionalmente, deberá cumplirse con lo establecido en el Artículo 95.- del presente reglamento en lo que se refiere a la intervención de los Sistemas de Transmisión Dedicada. La Comisión deberá incorporar los Sistemas de Transmisión para Polos de Desarrollo en la resolución de calificación que corresponda. [Art. 98 de 1160108] La Comisión podrá incorporar en la Planificación de la Transmisión, como Sistemas de Transmisión para Polos de Desarrollo, líneas y subestaciones dedicadas, nuevas o existentes, con el objeto de permitir su uso por nuevos proyectos de generación, pudiendo modificar sus características técnicas, como trazado, nivel de tensión o capacidad de transporte en magnitudes mayores a las previstas originalmente. Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de esa misma fecha se remunerarán una vez que éstas hayan sido valorizadas en el correspondiente proceso de valorización. Las instalaciones dedicadas existentes incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran ser modificadas, cambiarán su calificación al momento de la publicación de los decretos a que hace referencia el artículo 92º de la Ley. A partir de la fecha de entrada en operación de la Obra de Expansión que la interviene, se remunerará la instalación existente previa a su modificación, una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que no requieran modificaciones, serán calificadas luego de su entrada en operación. A partir de esa misma fecha se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. Las instalaciones dedicadas en construcción incorporadas al Plan de Expansión como Sistemas de Transmisión para Polos de Desarrollo que requieran modificaciones respecto de sus características originales, serán calificadas luego de su entrada en operación. A partir de esa misma fecha la instalación previa a ser modificada se remunerará una vez que ésta haya sido valorizada en el correspondiente proceso de valorización. La Obra de Expansión que la interviene se remunerará a partir de su entrada en operación de acuerdo al V.I. adjudicado. Para efectos de lo anterior, en el caso de instalaciones dedicadas existentes, la Comisión deberá considerar la capacidad contratada de dicha instalación y los proyectos propios del propietario que hayan sido acreditados de forma fehaciente ante la Comisión. Adicionalmente, deberá cumplirse con lo establecido en el Artículo 95.- del presente reglamento en lo que se refiere a la intervención de los Sistemas de Transmisión Dedicada. La Comisión deberá incorporar los Sistemas de Transmisión para Polos de Desarrollo en la resolución de calificación que corresponda. [Art. 98 de 1160108] La Comisión podrá incorporar en la Planificación de la Transmisión, como Sistemas de Transmisión para Polos de Desarrollo, líneas y subestaciones dedicadas, nuevas o existentes, con el objeto de permitir su uso por nuevos proyectos de generación, pudiendo modificar sus características técnicas, como trazado, nivel de tensión o capacidad de transporte en magnitudes mayores a las previstas originalmente. Las instalaciones dedicadas existentes incorporadas al text",
+      "citations": [
+        [
+          "1160108",
+          "70"
+        ],
+        [
+          "1112591",
+          "16"
+        ],
+        [
+          "1112591",
+          "16"
+        ],
+        [
+          "1160108",
+          "70"
+        ],
+        [
+          "1160108",
+          "78"
+        ],
+        [
+          "1160108",
+          "82"
+        ],
+        [
+          "1160108",
+          "98"
+        ],
+        [
+          "1160108",
+          "98"
+        ],
+        [
+          "1160108",
+          "98"
+        ],
+        [
+          "1160108",
+          "98"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Modelamiento de las unidades solares y eólicas",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 70714,
+      "retrieval_ms": 113,
+      "generation_ms": 70601,
+      "answer": "Para determinar la indisponibilidad forzada de las Unidades Generadoras o Sistemas de Almacenamiento de Energía, se debe seguir el siguiente procedimiento según los artículos proporcionados:\n\n1. **Estimación inicial (Primer año):** La indisponibilidad forzada se estimará en base a estadísticas nacionales o internacionales aplicables al tipo de tecnología, o las que garantice el fabricante. Esto aplica cuando la unidad es considerada por primera vez en las transferencias de potencia [Art. 55 de 250604].\n\n2. **Periodo intermedio (Segundo a cuarto año):** Entre el segundo y cuarto año de incorporada la unidad, la indisponibilidad forzada se obtendrá como el promedio ponderado entre los valores observados para cada año transcurrido y el valor proveniente de las estadísticas nacionales, internacionales o las que garantice el fabricante [Art. 55 de 250604].\n\n3. **Periodo estable (A partir del quinto año):** Luego del quinto año de incorporada la unidad, se aplicará lo indicado en los Artículos 52 y siguientes del reglamento [Art. 55 de 250604].\n\n4. **Cálculo de la Potencia Inicial para la Potencia de Suficiencia:** Para el cálculo de la Potencia de Suficiencia preliminar, la Potencia Inicial se determinará considerando la indisponibilidad, periodo de mantenimiento y consumos propios. Si la unidad ha acumulado información estadística de Estados Deteriorados, la Potencia Inicial será el mínimo entre la Potencia Inicial determinada conforme al Capítulo 1 y la potencia equivalente (promedio ponderado de Estados Deteriorados y Estado Disponible) [Art. 49 de 250604].\n\n5. **Determinación de la Potencia Inicial para nuevas incorporaciones o falta de datos:** En el caso de unidades que se incorporen al sistema o cuando no se disponga de información estadística suficiente, la Potencia Inicial se determinará conforme al peor escenario de disponibilidad media anual del Insumo Principal en la zona o región, según la información estadística disponible [Art. 36 de 250604].\n\n6. **Actualización anual de la disponibilidad:** Para los años siguientes, la disponibilidad media anual se obtendrá reemplazando sucesivamente la información anual señalada en el inciso anterior por la información de la disponibilidad media anual efectiva del Insumo Principal de la Unidad Generadora incorporada al sistema eléctrico, manteniendo siempre un periodo de control de 5 años [Art. 36 de 250604].\n\n7. **Control estadístico de estados operativos:** El Coordinador llevará un control estadístico de los estados operativos (Disponibles, No Disponibles, Deteriorados) para construir la indisponibilidad forzada [Art. 25 de 250604].\n\n8. **Control estadístico de insumos:** Además del control de estados operativos, el Coordinador llevará un control estadístico de la disponibilidad del Insumo Principal e Insumo Alternativo utilizado por las Unidades Generadoras, en base al nivel diario de restricción [Art. 26 de 250604].\n\n9. **Establecimiento del año de menor disponibilidad:** A partir de lo anterior, el Coordinador establecerá el año de menor disponibilidad media anual para cada unidad generadora en forma independiente [Art. 26 de 250604].",
+      "citations": [
+        [
+          "250604",
+          "55"
+        ],
+        [
+          "250604",
+          "55"
+        ],
+        [
+          "250604",
+          "55"
+        ],
+        [
+          "250604",
+          "49"
+        ],
+        [
+          "250604",
+          "36"
+        ],
+        [
+          "250604",
+          "36"
+        ],
+        [
+          "250604",
+          "25"
+        ],
+        [
+          "250604",
+          "26"
+        ],
+        [
+          "250604",
+          "26"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1112591",
+        "articulo_numero": "11°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Comisión de acreedores",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 38358,
+      "retrieval_ms": 137,
+      "generation_ms": 38221,
+      "answer": "No se puede responder la pregunta porque no has incluido el enunciado de la pregunta en tu mensaje. Solo has proporcionado una lista de artículos de leyes (Ley 21563, Ley 20720, etc.) y definiciones.\n\nPor favor, escribe la pregunta que deseas que responda utilizando únicamente la información de los artículos citados (por ejemplo: '¿Quién preside el Comité de Autorizaciones Sectoriales e Inversión?' o '¿Qué es un Acuerdo de Reorganización Judicial?'), y yo generaré la respuesta citando el formato [Art. NUMERO de ID] correspondiente. [Art. 2º de 1058072] [Art. 47 de 1216930] [Art. 23 de 1010668] [Art. 46 de 1216930] [Art. 100 de 1146553]",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1216930",
+          "47"
+        ],
+        [
+          "1010668",
+          "23"
+        ],
+        [
+          "1216930",
+          "46"
+        ],
+        [
+          "1146553",
+          "100"
+        ]
+      ],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "36 bis"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Pequeño Centro de Procesamiento de Biomasa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1183783",
+      "expected_articulo": "2",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 18914,
+      "retrieval_ms": 128,
+      "generation_ms": 18786,
+      "answer": "El Pequeño Centro de Procesamiento de Biomasa es el Centro de Procesamiento de Biomasa que tiene capacidad para producir y comercializar anualmente una cantidad igual o inferior a 500 m3st de leña al año, o su equivalente en peso u otra unidad de medida de otros tipos de biocombustibles sólidos provenientes de la biomasa, según lo determine el reglamento [Art. 2 de 1183783].",
+      "citations": [
+        [
+          "1183783",
+          "2"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1183783",
+        "articulo_numero": "2"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Martillero Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300231,
+      "retrieval_ms": 131,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Parámetros y variables del Sistema Eléctrico Nacional",
+      "category": "concept_definition_auto",
+      "expected_norma": "1112591",
+      "expected_articulo": "11°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 95267,
+      "retrieval_ms": 181,
+      "generation_ms": 95086,
+      "answer": "Según los artículos proporcionados, los objetivos y criterios generales de la planificación de la transmisión se definen en el Capítulo 3 del Título II. Los artículos relevantes son:\n\n[Art. 1160108]\n\nEl artículo 2 de este reglamento define términos clave como:\n- **Plan de Expansión**: Resultado del proceso anual de planificación, que deberá contener las Obras de Expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas, utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro, según corresponda.\n- **Planificación de la Transmisión o Proceso de Planificación**: Proceso anual de planificación de la transmisión que debe realizar la Comisión, en conformidad a lo dispuesto en el artículo 87º de la Ley.\n- **Escenario Energético**: Escenario que permite abastecer la o las proyecciones de demanda energética de forma eficiente de acuerdo, al menos, a las circunstancias actuales y tendencias previstas en materia de precios y costos relevantes para el sector, disponibilidad física de recursos energéticos, usos esperados de energía, prospectiva de cambios tecnológicos y las condicionantes ambientales y territoriales. Cada escenario deberá de considerar una oferta de energía para tales fines.\n\nEl artículo 2° de la resolución [Art. 1112591] también define términos similares:\n- **Plan de Expansión**: Resultado del Proceso de Planificación de la Transmisión, que podrá contener las obras de expansión necesarias del sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas utilizadas por concesionarias de servicio público de distribución para el suministro de usuarios sometidos a regulación de precios, o necesarias para entregar dicho suministro.\n- **Planificación de la Transmisión o Proceso de Planificación**: Proceso de planificación de la transmisión que debe realizar la Comisión Nacional de Energía, en conformidad a lo dispuesto en el artículo 87º de la Ley.\n- **Escenario Energético**: De acuerdo a lo establecido en el decreto supremo Nº 134, del Ministerio de Energía, de 14 de octubre de 2016, que Aprueba Reglamento de Planificación Energética de Largo Plazo, corresponde al escenario que permite abastecer la o las proyecciones de demanda energética de forma eficiente de acuerdo, al menos, a las circunstancias actuales y tendencias previstas en materia de precios y costos relevantes para el sector, disponibilidad física de recursos energéticos, usos esperados de energía, prospectiva de cambios tecnológicos y las condicionantes ambientales y territoriales. Cada escenario deberá de considerar una oferta de energía para tales fines.\n\nEstos artículos establecen que la planificación de la transmisión tiene como objetivo determinar las obras de expansión necesarias para el sistema de transmisión nacional, de polos de desarrollo, zonal y dedicadas, considerando la demanda eléctrica del sistema y la oferta de energía factible de ser incorporada al sistema eléctrico. Los criterios generales incluyen la eficiencia en el abastecimiento de la demanda energética, el uso eficiente del territorio nacional, la seguridad y calidad de servicio, y la consideración de las condicionantes ambientales y territoriales. [Art. 11° de 1112591] [Art. 2 de 1160108] [Art. 2° de 1112591]",
+      "citations": [
+        [
+          "1112591",
+          "11"
+        ],
+        [
+          "1160108",
+          "2"
+        ],
+        [
+          "1112591",
+          "2"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "18"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Cuenta final de administración",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 22743,
+      "retrieval_ms": 194,
+      "generation_ms": 22549,
+      "answer": "La Cuenta final de administración es la rendición de cuentas de su gestión que debe efectuar tanto el Veedor como el Liquidador en la oportunidad prevista en la ley, ante el tribunal [Art. 2º de 1058072]. En dicha rendición deberá observarse la normativa contable, tributaria y financiera aplicable, así como la de la ley [Art. 2º de 1058072]. Esta cuenta se presenta en la oportunidad que la ley establezca para los procedimientos concursales [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Colector Solar Térmico",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 27986,
+      "retrieval_ms": 138,
+      "generation_ms": 27848,
+      "answer": "El Colector Solar Térmico es un dispositivo que forma parte de un Sistema Solar Térmico, diseñado para captar la radiación solar incidente, transformarla en energía térmica y transmitir la energía térmica producida a un fluido de trabajo que circula por su interior [Art. 2º de 1005169]. Este dispositivo integra el sistema junto con un Depósito Acumulador y otros componentes encargados de realizar las funciones de captar la radiación solar, transformarla directamente en energía térmica, la que se transmite a un fluido de trabajo y, por último, almacenar dicha energía térmica [Art. 2º de 1005169]. El reglamento indicará los componentes que integran el Sistema Solar Térmico, el cual incluye al Colector Solar Térmico [Art. 2º de 1005169].",
+      "citations": [
+        [
+          "1005169",
+          "2"
+        ],
+        [
+          "1005169",
+          "2"
+        ],
+        [
+          "1005169",
+          "2"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Árbitros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 76951,
+      "retrieval_ms": 126,
+      "generation_ms": 76825,
+      "answer": "Según los artículos proporcionados, la Comisión Arbitral tiene las siguientes facultades y características:\n\n1. **Facultad de llamar a conciliación:** La Comisión puede llamar a conciliación de oficio o a solicitud de alguna de las partes, antes de la citación para oír sentencia, y proponer bases de arreglo dentro de los 30 días corridos siguientes a la notificación de la resolución que llama a conciliación. [Art. 36]\n\n2. **Facultad de apreciar la prueba:** La Comisión Arbitral tiene las facultades de árbitro arbitrador en cuanto al procedimiento y apreciará la prueba conforme a las reglas de la sana crítica. Además de los medios de prueba indicados en el artículo 341 del Código de Procedimiento Civil, puede admitir cualquier otro medio, indicio o antecedente que considere apto para establecer los hechos sustanciales, pertinentes y controvertidos. [Art. 36]\n\n3. **Facultad de dictar sentencia definitiva:** La Comisión tiene un plazo de 60 días hábiles, contado desde que se cite a las partes al efecto, para dictar sentencia definitiva con arreglo a derecho. Esta sentencia debe ser fundada y enunciar las consideraciones de hecho, de derecho, técnicas y económicas sobre cuya base se haya pronunciado. [Art. 36]\n\n4. **Facultad de suspender efectos del acto administrativo (sujeta a condiciones):** El concesionario puede solicitar la suspensión de los efectos del acto administrativo reclamado ante la Comisión Arbitral desde que esta esté constituida. Para decretar dicha suspensión, deben existir motivos graves y calificados, debiendo acompañarse comprobantes que constituyan a lo menos presunción grave del derecho que se reclama. No obstante, la Comisión no podrá autorizar la paralización de la construcción de las obras o de la prestación del servicio por un plazo superior a sesenta días, a menos que exista acuerdo entre las partes en cuanto a mantener dicha paralización. [Art. 36 ter]\n\n5. **Facultad de publicar sentencias y actuaciones:** La sentencia definitiva y todos los escritos, documentos y actuaciones de cualquier especie que se presenten o verifiquen en el curso del procedimiento serán publicados en la forma que establezca el reglamento. [Art. 36]\n\n6. **Facultad de aplicar procedimiento ante Corte de Apelaciones:** En caso de recurrir ante la Corte de Apelaciones, se aplicará el procedimiento establecido en los artículos 69 a 71 de la ley N° 18.840, con las siguientes disposiciones específicas: no será exigible boleta de consignación y el traslado del recurso se dará al Director General de Obras Públicas. [Art. 36]\n\n7. **Facultad de establecer criterios de evaluación en licitaciones:** El Ministerio de Obras Públicas, en las Bases de Licitación, podrá establecer uno o más de los siguientes factores para evaluar las ofertas técnicamente aceptables: estructura tarifaria, plazo de concesión, subsidio del Estado, pagos ofrecidos por el oferente, ingresos garantizados, grado de compromiso de riesgo, fórmula de reajuste, puntaje técnico, oferta de reducción de tarifas o pagos extraordinarios, calificación de otros servicios adicionales, consideraciones ambientales y ecológicas, y ingresos totales de la concesión. [Art. 7]\n\n8. **Facultad de solicitar aclaraciones a oferentes:** El Director General de Concesiones de Obras Públicas, con visto bueno del Ministro de Obras Públicas, podrá solicitar a los oferentes, hasta antes de la apertura de la oferta económica, aclaraciones, rectificaciones por errores de forma u omisiones, y la entrega de antecedentes, con el objeto de clarificar y precisar el correcto sentido y alcance de la oferta. [Art. 7]} [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 36 bis de 16121] [Art. 7° de 16121] [Art. 7° de 16121]",
+      "citations": [
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "36 bis"
+        ],
+        [
+          "16121",
+          "7"
+        ],
+        [
+          "16121",
+          "7"
+        ]
+      ],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia Inicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 33303,
+      "retrieval_ms": 109,
+      "generation_ms": 33194,
+      "answer": "Según los artículos proporcionados, la competencia para el conocimiento de los asuntos a que se refiere el inciso primero del artículo 102 A corresponde al tribunal del lugar en que se hubiere ejecutado el hecho. Tratándose de los asuntos a que se refiere el numeral 10 del artículo 8º, será competente el tribunal del domicilio del menor, sin perjuicio de la potestad cautelar que pudiere corresponder al tribunal que inicialmente conozca del asunto en razón del lugar donde se cometió el hecho. [Art. 102 C de 244803]",
+      "citations": [
+        [
+          "244803",
+          "102 C"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Simple",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 43040,
+      "retrieval_ms": 148,
+      "generation_ms": 42892,
+      "answer": "Según los artículos proporcionados, el Panel Técnico está integrado por dos abogados, dos ingenieros y un profesional en ciencias económicas o financieras, todos con destacada trayectoria y sin inhabilidades o incompatibilidades (relaciones con empresas concesionarias, constructoras o el Ministerio de Obras Públicas en los 12 meses previos y hasta un año después de terminado su período). Son nombrados por el Consejo de Alta Dirección Pública mediante concurso público de antecedentes en un plazo máximo de 60 días, con renovación parcial cada tres años empezando por los abogados. El presidente es elegido por los integrantes por tres años, con dedicación exclusiva. El quórum mínimo es de tres integrantes (al menos dos no abogados si la discrepancia es durante la construcción), decidiendo por simple mayoría. El Ministerio de Obras Públicas financia la administración y la mitad de los honorarios, mientras los concesionarios pagan la otra mitad. La remuneración del presidente es de 150 unidades tributarias mensuales más 25 por sesión (tope 300), los demás integrantes reciben 100 unidades mensuales más 20 por sesión (tope 200), y el secretario abogado recibe 150 unidades mensuales. El Panel se constituye y dicta sus normas de funcionamiento. [Art. 102 de 1146553] [Art. 102 de 1146553]",
+      "citations": [
+        [
+          "1146553",
+          "102"
+        ],
+        [
+          "1146553",
+          "102"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Nómina de Martilleros Concursales",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 58806,
+      "retrieval_ms": 108,
+      "generation_ms": 58698,
+      "answer": "Según [Art. 1 Nº 19 de 20410], las tarifas ofrecidas, con su correspondiente reajuste, serán entendidas como tarifas máximas, por lo que el concesionario podrá reducirlas. [Art. 1º de 1058072]",
+      "citations": [
+        [
+          "1058072",
+          "1"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es DEPÓSITOS TURÍSTICOS",
+      "category": "concept_definition_auto",
+      "expected_norma": "220208",
+      "expected_articulo": "3º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 18722,
+      "retrieval_ms": 140,
+      "generation_ms": 18582,
+      "answer": "Los DEPÓSITOS TURÍSTICOS son depósitos de venta de bebidas alcohólicas de fabricación nacional, para ser consumidos fuera del local, ubicadas en terminales aéreos y marítimos con tráfico internacional [Art. 3º de 220208].",
+      "citations": [
+        [
+          "220208",
+          "3"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "220208",
+        "articulo_numero": "3º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Quórum Especial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 78545,
+      "retrieval_ms": 130,
+      "generation_ms": 78415,
+      "answer": "Según los artículos provistos, la tramitación ágil de iniciativas de inversión estratégicas implica la reducción a la mitad de los plazos máximos de tramitación de autorizaciones sectoriales [Art. 74 de 1216930]. Para que una iniciativa se sujete a esta tramitación, debe ser calificada como estratégica por la Oficina de Autorizaciones Sectoriales e Inversión, la cual convocará la postulación al menos una vez al año [Art. 74 de 1216930]. La Oficina calculará y asignará puntaje a las postulaciones en base a factores objetivos de evaluación y elaborará una nómina en orden decreciente [Art. 74 de 1216930]. La selección de las iniciativas estratégicas se presentará a los ministros o ministras de Economía, Fomento y Turismo; de Hacienda; del Interior; de Desarrollo Social y Familia; y del Medio Ambiente, considerando criterios de equilibrio regional [Art. 74 de 1216930]. La decisión final se formalizará mediante resolución de la Oficina a más tardar dentro de los treinta días siguientes a la recepción de la nómina [Art. 74 de 1216930]. Además, las iniciativas de inversión estratégica pasarán a formar parte del catastro de la Oficina, a la que le corresponderá hacer seguimiento a la tramitación de las autorizaciones sectoriales [Art. 74 de 1216930]. No obstante, lo señalado no será aplicable respecto de las autorizaciones de competencia de municipalidades o de direcciones de obra municipales, pero se entenderá que la iniciativa calificada como estratégica satisface las razones de interés público para efectos del artículo 63 de la ley N° 19.880 [Art. 74 de 1216930].",
+      "citations": [
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ],
+        [
+          "1216930",
+          "74"
+        ]
+      ],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Certificado de Nominación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 19690,
+      "retrieval_ms": 105,
+      "generation_ms": 19585,
+      "answer": "El Certificado de Nominación es aquel emitido por la Superintendencia de Insolvencia y Reemprendimiento, en el cual consta la nominación del Veedor o Liquidador, titular y suplente [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1010668",
+        "articulo_numero": "17"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Audiencia de Fallo",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300285,
+      "retrieval_ms": 184,
+      "generation_ms": 300101,
+      "answer": "",
+      "citations": [],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1168803",
+        "articulo_numero": "6º"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Liquidación Voluntaria",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 35501,
+      "retrieval_ms": 209,
+      "generation_ms": 35292,
+      "answer": "La Liquidación Voluntaria es aquella solicitada por el Deudor, conforme al Párrafo 1 del Título 1 del Capítulo IV, o al Párrafo 1 del Título 2 del Capítulo V de esta ley [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Depósito Acumulador",
+      "category": "concept_definition_auto",
+      "expected_norma": "1005169",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 24472,
+      "retrieval_ms": 142,
+      "generation_ms": 24330,
+      "answer": "El Depósito Acumulador es el depósito que forma parte de un Sistema Solar Térmico, donde se acumula la energía térmica producida por los Colectores Solares Térmicos [Art. 2º de 1005169]. Este componente integra el sistema junto con un Colector Solar Térmico y otros elementos encargados de captar la radiación solar y almacenar la energía térmica para su uso en agua caliente sanitaria [Art. 2º de 1005169]. Además, la Superintendencia de Electricidad y Combustibles administra un registro específico de Colectores Solares Térmicos y Depósitos Acumuladores para acceder a beneficios tributarios y subsidios [Art. 9º de 1005169].",
+      "citations": [
+        [
+          "1005169",
+          "2"
+        ],
+        [
+          "1005169",
+          "2"
+        ],
+        [
+          "1005169",
+          "9"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1005169",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acuerdo de Reorganización Judicial",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 23429,
+      "retrieval_ms": 152,
+      "generation_ms": 23277,
+      "answer": "El Acuerdo de Reorganización Judicial es aquel que se suscribe entre una Empresa Deudora y sus acreedores con el fin de reestructurar sus activos y pasivos [Art. 2º de 1058072]. Este acuerdo se realiza con sujeción a los procedimientos establecidos en los Títulos 1 y 2 del Capítulo III, y en el Título 3 del Capítulo V [Art. 2º de 1058072]. Para los efectos de la ley, se denominará indistintamente 'Acuerdo de Reorganización Judicial' o 'Acuerdo' [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Persona Relacionada",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 36588,
+      "retrieval_ms": 116,
+      "generation_ms": 36472,
+      "answer": "Según los artículos proporcionados, la inhabilidad para postular a licitaciones o participar en nuevas concesiones tras un incumplimiento grave grave del contrato de concesión recae sobre la sociedad concesionaria y sus personas relacionadas. Esta inhabilidad regirá por un plazo de 5 años, contados desde la fecha en que sea dictada la sentencia que declara el incumplimiento grave. Durante este período, los recursos que se entablen en contra de la sociedad no suspenderán el cómputo del plazo de la inhabilidad ni sus efectos. Las personas relacionadas se definen conforme al artículo 100 de la ley 18.045 (salvo parientes de la letra c) y aquellas que lo hayan sido en los dos años anteriores a la solicitud de declaración de incumplimiento grave. [Art. 28 bis de 16121]",
+      "citations": [
+        [
+          "16121",
+          "28 bis"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "141599",
+        "articulo_numero": "2°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Informe del Veedor",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 17857,
+      "retrieval_ms": 134,
+      "generation_ms": 17723,
+      "answer": "El Informe del Veedor es aquel relativo al Acuerdo de Reorganización Judicial, regulado en el número 8) del artículo 57 de esta ley [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Liquidación Forzosa",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 14070,
+      "retrieval_ms": 136,
+      "generation_ms": 13934,
+      "answer": "La Liquidación Forzosa es una demanda presentada por cualquier acreedor del Deudor, conforme al Párrafo 2 del Título 1 del Capítulo IV o al Párrafo 2 del Título 2 del Capítulo V de esta ley [Art. 2º de 1058072].",
+      "citations": [
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Protección Financiera Concursal",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 52946,
+      "retrieval_ms": 134,
+      "generation_ms": 52812,
+      "answer": "La Protección Financiera Concursal es el período que la ley otorga al Deudor que se somete al Procedimiento Concursal de Reorganización o al Procedimiento Concursal de Reorganización Simplificada [Art. 31 de 1058072]. Durante este período no podrá solicitarse ni declararse su liquidación, ni podrán iniciarse en su contra juicios ejecutivos, ejecuciones de cualquier clase o restituciones en los juicios de arrendamiento [Art. 31 de 1058072]. Dicho período será el comprendido entre la notificación de la Resolución de Reorganización y el Acuerdo de Reorganización Judicial, o el plazo fijado por la ley si este último no se acuerda [Art. 31 de 1058072]. [Art. 2º de 1058072] [Art. 1º de 1058072] [Art. 6º de 1058072] [Art. 4º D de 258171] [Art. 15 de 1092269] [Art. 25 de 1010668] [Art. sexto de 1111297] [Art. 20 de 1199483]",
+      "citations": [
+        [
+          "1058072",
+          "31"
+        ],
+        [
+          "1058072",
+          "31"
+        ],
+        [
+          "1058072",
+          "31"
+        ],
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "1"
+        ],
+        [
+          "1058072",
+          "6"
+        ],
+        [
+          "258171",
+          "4 D"
+        ],
+        [
+          "1092269",
+          "15"
+        ],
+        [
+          "1010668",
+          "25"
+        ],
+        [
+          "1199483",
+          "20"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Infracciones menos graves",
+      "category": "concept_definition_auto",
+      "expected_norma": "1155887",
+      "expected_articulo": "4°",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 23150,
+      "retrieval_ms": 136,
+      "generation_ms": 23014,
+      "answer": "Las infracciones menos graves son aquellas que, según el artículo 201, se clasifican como tales dentro del régimen de sanciones administrativas [Art. 201 de 1007469]. También se consideran infracciones menos graves los actos u omisiones de evaluadores energéticos que no cumplan con los plazos establecidos o que sean sancionados al menos tres veces en un mismo año por infracciones leves [Art. 4° de 1155887]. Además, las infracciones menos graves en el ámbito de la calificación energética conllevan una suspensión del registro de uno a treinta días y una multa de hasta cinco unidades tributarias anuales [Art. 4° de 1155887]. Por último, las infracciones menos graves se refieren a transgresiones de la ley que no están enumeradas en los artículos anteriores [Art. 202 de 1007469].",
+      "citations": [
+        [
+          "1007469",
+          "201"
+        ],
+        [
+          "1155887",
+          "4"
+        ],
+        [
+          "1155887",
+          "4"
+        ],
+        [
+          "1007469",
+          "202"
+        ]
+      ],
+      "n_docs": 7,
+      "top_doc": {
+        "id_norma": "1007469",
+        "articulo_numero": "201"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Valor afecto a bono",
+      "category": "concept_definition_auto",
+      "expected_norma": "1199483",
+      "expected_articulo": "33",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 32516,
+      "retrieval_ms": 132,
+      "generation_ms": 32384,
+      "answer": "Los artículos proporcionados no contienen información sobre la Etapa de Análisis de Resiliencia. El único párrafo que menciona esta etapa es el 'Párrafo VII' dentro del Artículo 91 del documento con ID 1160108, pero este párrafo no desarrolla el contenido de dicha etapa, sino que actúa como un encabezado o título sin cuerpo descriptivo en el texto provisto. [Art. 91 de 1160108]",
+      "citations": [
+        [
+          "1160108",
+          "91"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "1199483",
+        "articulo_numero": "33"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Reorganización",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 34965,
+      "retrieval_ms": 149,
+      "generation_ms": 34816,
+      "answer": "El Procedimiento Concursal de Reorganización es aquel regulado en el Capítulo III de la ley [Art. 29 de 1058072]. Este procedimiento tiene como objetivo reorganizar los pasivos y activos de una Empresa Deudora [Art. 1º de 1058072]. También permite repactar los pasivos y/o liquidar los activos de una Persona Deudora [Art. 1º de 1058072]. [Art. 2º de 1058072] [Art. 2º de 1058072]",
+      "citations": [
+        [
+          "1058072",
+          "29"
+        ],
+        [
+          "1058072",
+          "1"
+        ],
+        [
+          "1058072",
+          "1"
+        ],
+        [
+          "1058072",
+          "2"
+        ],
+        [
+          "1058072",
+          "2"
+        ]
+      ],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Procedimiento Concursal de Renegociación",
+      "category": "concept_definition_auto",
+      "expected_norma": "1058072",
+      "expected_articulo": "2º",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300240,
+      "retrieval_ms": 140,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1058072",
+        "articulo_numero": "2º"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Deuda de Tarifa o Peaje",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 27414,
+      "retrieval_ms": 273,
+      "generation_ms": 27141,
+      "answer": "La Deuda de Tarifa o Peaje se refiere al incumplimiento por parte del Usuario de Sistema Interoperable en el pago de la Tarifa o Peaje correspondiente al uso de una obra pública fiscal concesionada [Art. 3 de 1207690]. El concesionario podrá cobrar judicialmente la Deuda de Tarifa o Peaje, reajustada según la variación del índice de precios al consumidor, más los intereses máximos convencionales y las costas [Art. 3 de 1207690]. Cuando el usuario de una obra dada en concesión no cumpla con el pago de su tarifa o peaje, el concesionario podrá cobrarlo judicialmente, reajustado según la variación del Índice de Precios al Consumidor, más los intereses máximos convencionales y las costas [Art. 42 de 16121].",
+      "citations": [
+        [
+          "1207690",
+          "3"
+        ],
+        [
+          "1207690",
+          "3"
+        ],
+        [
+          "16121",
+          "42"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Estado Deteriorado",
+      "category": "concept_definition_auto",
+      "expected_norma": "250604",
+      "expected_articulo": "13",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 26958,
+      "retrieval_ms": 132,
+      "generation_ms": 26826,
+      "answer": "El Estado Deteriorado es la condición de operación de una Unidad Generadora o Sistema de Almacenamiento de Energía en la cual se limita su Potencia Máxima producto de restricciones en sus componentes o instalaciones, independiente de la disponibilidad de su Insumo Principal y Alternativo [Art. i de 250604]. También se considera Estado Deteriorado cuando la Unidad Generadora presenta restricciones asociadas a las condiciones señaladas en el Artículo 25 quáter del presente reglamento para ser convocada por el Coordinador al despacho [Art. i de 250604]. Esta definición se establece en el Artículo primero N° 8, inciso i) del Decreto 70, ENERGÍA [Art. i de 250604]. [Art. 13 de 250604] [Art. 49 de 250604] [Art. 25 de 250604] [Art. 55 ter de 250604]",
+      "citations": [
+        [
+          "250604",
+          "13"
+        ],
+        [
+          "250604",
+          "49"
+        ],
+        [
+          "250604",
+          "25"
+        ],
+        [
+          "250604",
+          "55 ter"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "13"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Convenio o Contrato TAG o Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 18052,
+      "retrieval_ms": 127,
+      "generation_ms": 17925,
+      "answer": "El Convenio o Contrato TAG o Televía es el acuerdo suscrito entre una Sociedad Concesionaria y el Usuario de Sistema Interoperable, mediante el cual se regula el uso del Televía que, a cualquier título, es entregado por la Sociedad Concesionaria y recibido por el Usuario de Sistema Interoperable, en los términos y condiciones señalados en dicho convenio y en las respectivas Condiciones Generales de Uso de TAG y Cobro de Tarifa de Peajes [Art. 3 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "3"
+        ]
+      ],
+      "n_docs": 4,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Inhabilitar",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 66494,
+      "retrieval_ms": 131,
+      "generation_ms": 66363,
+      "answer": "Según los artículos proporcionados, las penas accesorias para los responsables de los delitos señalados en los artículos 6º, 6º A y 6º B son:\n\na) La inhabilitación hasta por quince años para ser dirigente de un club deportivo de fútbol profesional.\n\nb) La prohibición de asistir a cualquier espectáculo de fútbol profesional y a las inmediaciones en que éste se realice, por un período de uno a dos años (o entre tres y quince años en casos específicos de reincidencia o gravedad). El quebrantamiento de esta pena será castigado con la pena de presidio menor en su grado mínimo.\n\nc) La inhabilitación especial temporal, durante el tiempo de la condena, para asociarse a un club de fútbol profesional, no inferior a dieciocho meses.\n\nAdicionalmente, la resolución que imponga estas prohibiciones debe ser comunicada a los clubes de fútbol profesional, a Carabineros de Chile y a la Asociación Nacional de Fútbol Profesional. [Art. 6º D de 1043725]",
+      "citations": [
+        [
+          "1043725",
+          "6 D"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "25"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Documento de Cobro",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300240,
+      "retrieval_ms": 140,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 3,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Cuenta de Tarifas o Peajes",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 25780,
+      "retrieval_ms": 384,
+      "generation_ms": 25396,
+      "answer": "La Cuenta de Tarifas o Peajes es aquella que corresponde a las cantidades adeudadas por el Usuario de Sistema Interoperable por concepto de Tarifas o Peajes, intereses y otros cargos de conformidad a la legislación vigente, con cada una de las Sociedades Concesionarias reflejados en los respectivos Documentos de Cobro [Art. 3 de 1207690]. El Sitio Electrónico Unificado de Tarifas y Peajes permite consultar las Cuentas de Tarifas o Peajes, con el desglose de lo adeudado a cada Sociedad Concesionaria [Art. 19 de 1207690]. Además, el usuario puede realizar conjunta o separadamente el pago de sus Cuentas de Tarifas o Peajes correspondientes a las distintas Sociedades Concesionarias o Multioperador [Art. 19 de 1207690].",
+      "citations": [
+        [
+          "1207690",
+          "3"
+        ],
+        [
+          "1207690",
+          "19"
+        ],
+        [
+          "1207690",
+          "19"
+        ]
+      ],
+      "n_docs": 4,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 17362,
+      "retrieval_ms": 131,
+      "generation_ms": 17231,
+      "answer": "Los Sistemas de Almacenamiento de Energía intensivos en energía son aquellos cuyo propósito sea permitir el abastecimiento de la demanda de una zona específica, perteneciente a alguno de los Sistemas de Transmisión Zonal, y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 5 [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Multioperador o Multioperadora",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 28477,
+      "retrieval_ms": 109,
+      "generation_ms": 28368,
+      "answer": "Multioperador o Multioperadora es la empresa o Sociedad Concesionaria que realiza labores de servicio al Usuario de Sistema Interoperable relativos a la facturación, recaudación y cobranza de peajes de otra Sociedad Concesionaria [Art. 18 de 1207690]. [Art. 19 de 1207690] [Art. 23 de 1146553]",
+      "citations": [
+        [
+          "1207690",
+          "18"
+        ],
+        [
+          "1207690",
+          "19"
+        ],
+        [
+          "1146553",
+          "23"
+        ]
+      ],
+      "n_docs": 5,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "29"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Usuario de Sistema Complementario",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 327932,
+      "retrieval_ms": 148,
+      "generation_ms": 327784,
+      "answer": "",
+      "citations": [],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "19"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Televía o TAG",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300374,
+      "retrieval_ms": 275,
+      "generation_ms": 300099,
+      "answer": "",
+      "citations": [],
+      "n_docs": 4,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es Usuario de Televía",
+      "category": "concept_definition_auto",
+      "expected_norma": "1207690",
+      "expected_articulo": "3",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 65425,
+      "retrieval_ms": 341,
+      "generation_ms": 65084,
+      "answer": "Según los artículos proporcionados, las funciones y características del Sitio Electrónico Unificado de Tarifas y Peajes son las siguientes:\n\n1.  **Objetivo principal:** Permitir que los usuarios (con o sin contrato de televía) realicen de manera conjunta o separada el pago de sus cuentas de tarifas o peajes correspondientes a las distintas concesionarias [Art. 1 D de 16121].\n2.  **Acceso a información de deuda:** Habilitar la consulta de estados de deuda para usuarios y funcionarios municipales autorizados, con fines de procedimientos ante juzgados de policía local [Art. 1 D de 16121].\n3.  **Definición de mora:** Establecer que un solicitante se encuentra en mora cuando existen cobros impagos en un plazo igual o inferior a 5 años, considerando el período entre la fecha de vencimiento/pago y la solicitud de rebaja [Art. 1 D de 16121].\n4.  **Costos:** No implicar recargo alguno de costos para los usuarios [Art. 1 D de 16121].\n5.  **Requerimientos técnicos y de seguridad:** Ajustarse a requerimientos técnicos, operativos, de contenido, autenticación, seguridad y privacidad establecidos por los ministerios de Obras Públicas y de Economía, Fomento y Turismo [Art. 1 D de 16121].\n6.  **Contenido de la información:** Deberá contemplar el valor cobrado por cada concesionaria al usuario [Art. 1 D de 16121].\n7.  **Limitación de consulta:** El sitio solo habilitará las consultas a los datos propios del solicitante. Para funcionarios municipales, se requiere habilitación previa [Art. 1 D de 16121].\n8.  **Responsabilidad de costos:** A falta de acuerdo entre concesionarias, los costos serán soportados entre ellas en proporción a su facturación del año calendario anterior [Art. 1 D de 16121].\n9.  **Cumplimiento normativo:** Las concesionarias deben adoptar resguardos para cumplir con el decreto con fuerza de ley N° 1 (defensa de la libre competencia) y garantizar condiciones de acceso no discriminatorias y confidenciales [Art. 1 D de 16121].\n10. **Adhesión:** Toda nueva concesionaria que disponga de sistema electrónico de cobro deberá adherirse al sitio a su entero costo [Art. 1 D de 16121].\n\nAdicionalmente, los artículos citados establecen que el Ministerio de Transportes y Telecomunicaciones define y regula la confección, entrega, condiciones y procedimiento de uso de instrumentos de transporte público, incluyendo la creación de un \"Registro de Usuarios\" reservado para proteger la privacidad de los datos, especialmente de menores, y gestionar beneficios como pases escolares o exenciones tarifarias [Art. 88 bis de 1007469], [Art. 88 bis de 1116754].",
+      "citations": [
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "16121",
+          "1 D"
+        ],
+        [
+          "1007469",
+          "88 bis"
+        ],
+        [
+          "1116754",
+          "88 bis"
+        ]
+      ],
+      "n_docs": 6,
+      "top_doc": {
+        "id_norma": "1207690",
+        "articulo_numero": "3"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "102",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 19017,
+      "retrieval_ms": 130,
+      "generation_ms": 18887,
+      "answer": "Los Sistemas de Almacenamiento de Energía intensivos en potencia son aquellos cuyo propósito sea aumentar la capacidad segura de transmisión y cuyo cociente entre su capacidad de almacenamiento de energía y su potencia nominal sea menor o igual a 0,5 [Art. 102 de 1160108].",
+      "citations": [
+        [
+          "1160108",
+          "102"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1160108",
+        "articulo_numero": "102"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es Acometida",
+      "category": "concept_definition_auto",
+      "expected_norma": "1160108",
+      "expected_articulo": "16",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300242,
+      "retrieval_ms": 142,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "28"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es C.O.M.A.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "49",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 40744,
+      "retrieval_ms": 174,
+      "generation_ms": 40570,
+      "answer": "Según los artículos proporcionados, los elementos que se consideran para la planificación de la transmisión son:\n\n1. **Elementos de la etapa de Análisis de Suficiencia y Eficiencia Operacional**: Aquellos que hayan resultado de la etapa de Análisis de Suficiencia y Eficiencia Operacional a que hace referencia en el literal a) del Artículo 88 del reglamento, y aquellos proyectos de transmisión que hayan resultado de la etapa de Análisis de Seguridad y Calidad de Servicio, cuyo objetivo sea garantizar la seguridad y calidad de servicio.\n\n2. **Elementos de la etapa de Análisis Económico**: Los V.I. (Valor de Inversión), A.V.I. (Anualidad del Valor de Inversión), A.E.I.R, C.O.M.A. (Costo de Operación, Mantenimiento y Administración) y V.A.T.T. (Valor Anual de la Transmisión por Tramo).\n\nEstos elementos serán reajustados conforme a las fórmulas de indexación contenidas en los decretos correspondientes, según lo establecido en el Artículo 55. [Art. 2° de 1112591] [Art. 55 de 1146553] [Art. primero de 1032851]",
+      "citations": [
+        [
+          "1112591",
+          "2"
+        ],
+        [
+          "1146553",
+          "55"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1146553",
+        "articulo_numero": "49"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es V.A.T.T.",
+      "category": "concept_definition_manual",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 27303,
+      "retrieval_ms": 129,
+      "generation_ms": 27174,
+      "answer": "El V.A.T.T. es el valor anual de transmisión por tramos que se determina considerando la suma del A.V.I. de la obra, su C.O.M.A. y el ajuste por efecto de impuesto a la renta [Art. 21° de 1112591]. Para las Obras Nuevas, el V.A.T.T. corresponde al resultado de la licitación para la adjudicación de los derechos de ejecución y explotación de dichas obras [Art. 46 de 1146553]. En el caso de las Obras de Ampliación, el V.A.T.T. será igual a la suma del A.V.I., el C.O.M.A. y el A.E.I.R. [Art. 46 de 1146553].",
+      "citations": [
+        [
+          "1112591",
+          "21"
+        ],
+        [
+          "1146553",
+          "46"
+        ],
+        [
+          "1146553",
+          "46"
+        ]
+      ],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1215040",
+        "articulo_numero": "tercero"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es potencia inicial",
+      "category": "concept_definition_manual",
+      "expected_norma": "250604",
+      "expected_articulo": "28",
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 332104,
+      "retrieval_ms": 122,
+      "generation_ms": 331982,
+      "answer": "",
+      "citations": [],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "9º"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "Artículo 99 de la Ley 18410",
+      "category": "specific_article",
+      "expected_norma": "29819",
+      "expected_articulo": "99",
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 280,
+      "retrieval_ms": 280,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "5°"
+      },
+      "error": null
+    },
+    {
+      "query": "qué leyes regulan las concesiones eléctricas",
+      "category": "multi_norma",
+      "expected_norma": "1007469",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": false,
+      "latency_ms": 56,
+      "retrieval_ms": 56,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "29819",
+        "articulo_numero": "3°"
+      },
+      "error": null
+    },
+    {
+      "query": "cómo se calcula el VATT",
+      "category": "tariff",
+      "expected_norma": "1146553",
+      "expected_articulo": "50",
+      "branch": "complejo",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 13295,
+      "retrieval_ms": 13295,
+      "generation_ms": 0,
+      "answer": "",
+      "citations": [],
+      "n_docs": 10,
+      "top_doc": {
+        "id_norma": "1032851",
+        "articulo_numero": "segundo"
+      },
+      "error": null
+    },
+    {
+      "query": "qué es el coordinador del sistema eléctrico",
+      "category": "coordinator",
+      "expected_norma": "1146553",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": true,
+      "latency_ms": 25441,
+      "retrieval_ms": 57,
+      "generation_ms": 25384,
+      "answer": "El Coordinador es el Coordinador independiente del sistema eléctrico nacional al que se refiere el artículo 212º-1 de la Ley [Art. 5 de 1146553]. Corresponde a este Coordinador verificar el cumplimiento de los compromisos de los Participantes del Balance de Potencia para la Demanda de Punta [Art. 3º de 250604]. Asimismo, las disposiciones del reglamento son aplicables al coordinador independiente del sistema eléctrico nacional [Art. 2 de 1146553].",
+      "citations": [
+        [
+          "1146553",
+          "5"
+        ],
+        [
+          "250604",
+          "3"
+        ],
+        [
+          "1146553",
+          "2"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "1047565",
+        "articulo_numero": "primero"
+      },
+      "error": null
+    },
+    {
+      "query": "transferencias de potencia",
+      "category": "power_transfers",
+      "expected_norma": "250604",
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": true,
+      "retrieval_norma_only_hit": true,
+      "grounding_pass": false,
+      "latency_ms": 300223,
+      "retrieval_ms": 123,
+      "generation_ms": 300100,
+      "answer": "",
+      "citations": [],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "250604",
+        "articulo_numero": "19"
+      },
+      "error": "generate_error: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"
+    },
+    {
+      "query": "qué es xenobalbúrgico",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": true,
+      "latency_ms": 63462,
+      "retrieval_ms": 305,
+      "generation_ms": 63157,
+      "answer": "Según los artículos provistos, la venta de bebidas alcohólicas a cualquier establecimiento no autorizado para venderlas será sancionada con multa de quince a veinte unidades tributarias mensuales. Con la misma pena se sancionará a los distribuidores, si conocieren o no pudieren menos que conocer el destino de la mercadería. El vehículo y cualquier otro medio utilizado para cometer esta infracción será retenido por Carabineros y devuelto una vez que se deposite en la unidad policial respectiva el valor equivalente al mínimo de la multa y sus recargos. [Art. 44 de 220208]",
+      "citations": [
+        [
+          "220208",
+          "44"
+        ]
+      ],
+      "n_docs": 9,
+      "top_doc": {
+        "id_norma": "16121",
+        "articulo_numero": "5°"
+      },
+      "error": null
+    },
+    {
+      "query": "cuál es la receta del pisco sour",
+      "category": "negative",
+      "expected_norma": null,
+      "expected_articulo": null,
+      "branch": "simple",
+      "retrieval_hit": false,
+      "retrieval_norma_only_hit": false,
+      "grounding_pass": true,
+      "latency_ms": 19846,
+      "retrieval_ms": 126,
+      "generation_ms": 19720,
+      "answer": "No encuentro esa información en las normas disponibles. [Art. 13 de 220208] [Art. 5° de 16121] [Art. 3º de 200301] [Art. 58 de 220208] [Art. 3º de 220208] [Art. 42 de 220208] [Art. 39 de 220208] [Art. 43 de 220208]",
+      "citations": [
+        [
+          "220208",
+          "13"
+        ],
+        [
+          "16121",
+          "5"
+        ],
+        [
+          "200301",
+          "3"
+        ],
+        [
+          "220208",
+          "58"
+        ],
+        [
+          "220208",
+          "3"
+        ],
+        [
+          "220208",
+          "42"
+        ],
+        [
+          "220208",
+          "39"
+        ],
+        [
+          "220208",
+          "43"
+        ]
+      ],
+      "n_docs": 8,
+      "top_doc": {
+        "id_norma": "220208",
+        "articulo_numero": "13"
+      },
+      "error": null
+    }
+  ]
+}

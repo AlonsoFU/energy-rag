@@ -1,0 +1,647 @@
+schema_version: 1
+archived_at: '2026-05-11'
+reason: Off-domain for energy-RAG (concursal/tránsito/concesiones_viales/indeterminado)
+total_concepts: 24
+concepts:
+- id: null
+  name: Tarifas y Peajes
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=34 category=concepto técnico reason=Se trata de un término técnico y legal específico que agrupa conceptos normativos
+    sobre la estructura de costos en el se
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 34
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concesiones_viales/telepeaje
+- id: null
+  name: Registro Nacional de Usuarios de Telepeaje
+  definition: ''
+  aliases:
+  - alias: RNUT
+    confidence: high
+    validated: false
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via paren_pair
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=institución reason=El término se refiere a un registro oficial gestionado por la Comisión Nacional
+    de Energía (CNE) para usuarios de telepe
+  extraction_difficulty: detected via paren_pair; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concesiones_viales/telepeaje
+- id: null
+  name: Sitio Electrónico Unificado de Tarifas y Peajes al Registro Nacional de Usuarios de Telepeaje
+  definition: ''
+  aliases:
+  - alias: RNUT
+    confidence: high
+    validated: false
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via paren_pair
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=institución reason=Se trata de un nombre propio específico de un sistema digital oficial gestionado
+    por la Superintendencia de Electricidad
+  extraction_difficulty: detected via paren_pair; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concesiones_viales/telepeaje
+- id: null
+  name: Sociedad Concesionaria
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=37 category=concepto técnico reason=La expresión 'Sociedad Concesionaria' es un término técnico-jurídico específico
+    definido en la normativa chilena (como e
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 37
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: Consejo de Concesiones
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=31 category=institución reason=El Consejo de Concesiones es un órgano técnico-administrativo real definido en
+    la normativa chilena (Decreto Supremo 594
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 31
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: 141
+  name: Deudor
+  definition: Toda Empresa Deudora o Persona Deudora, atendido el Procedimiento Concursal de que se trate y la naturaleza
+    de la disposición a que se refiera.
+  aliases:
+  - alias: el Deudor
+    confidence: medium
+    validated: false
+  source:
+    norm_id: '1010304'
+    norm_label: LEY 20410
+    article: 28 ter
+    url: https://www.bcn.cl/leychile/navegar?idNorma=1010304
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: ''
+  extraction_difficulty: ''
+  metadata:
+    refs_count: 30
+    last_reviewed_by: auto
+    last_reviewed_date: '2026-05-02'
+    source_extraction: manual_curated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: 139
+  name: Correo electrónico
+  definition: medio de comunicación electrónica que permite el envío y recepción de información y documentos electrónicos.
+  aliases: []
+  source:
+    norm_id: '1058072'
+    norm_label: LEY 20720
+    article: 2º
+    url: https://www.bcn.cl/leychile/navegar?idNorma=1058072
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: ''
+  extraction_difficulty: ''
+  metadata:
+    refs_count: 27
+    last_reviewed_by: auto
+    last_reviewed_date: '2026-05-02'
+    source_extraction: manual_curated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: Sociedades Concesionarias
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: 'freq=27 category=norma legal reason=Es un término técnico específico definido en la Ley de Concesiones de Servicios
+    Públicos (Ley 19.850) que designa a las '
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 27
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: Dirección General de Concesiones de Obras Públicas
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=25 category=institución reason=Es una entidad legal real y específica del sector de obras públicas en Chile,
+    aunque su competencia principal no es estr
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 25
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: Proceso de Licitación
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=22 category=institución reason=El término 'Proceso de Licitación' es un concepto técnico-jurídico fundamental
+    en la normativa chilena que regula el pro
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 22
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: 154
+  name: Procedimiento Concursal
+  definition: cualquiera de los regulados en esta ley, denominados, indistintamente, Procedimiento Concursal de Reorganización
+    de la Empresa Deudora, Procedimiento Concursal de Liquidación de la Empresa Deudora, Procedimiento Concursal de Renegociación
+    de la Persona Deudora
+  aliases:
+  - alias: proceso concursal
+    confidence: high
+    validated: false
+  - alias: quiebra
+    confidence: medium
+    validated: false
+  - alias: concurso de acreedores
+    confidence: low
+    validated: false
+  source:
+    norm_id: '1010668'
+    norm_label: LEY 20416
+    article: 6°
+    url: https://www.bcn.cl/leychile/navegar?idNorma=1010668
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: ''
+  extraction_difficulty: ''
+  metadata:
+    refs_count: 10
+    last_reviewed_by: auto
+    last_reviewed_date: '2026-05-02'
+    source_extraction: manual_curated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: adjudicado
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=concepto técnico reason=El término 'adjudicado' es un concepto jurídico-administrativo real utilizado
+    en el contexto de licitaciones y concursos
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: micro empresa
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=concepto técnico reason=El término 'micro empresa' es un concepto jurídico definido en la Ley 20.720
+    de Quiebras y Concursos de Chile, utilizado
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: obra pública fiscal
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=concepto técnico reason=Es un término jurídico-administrativo real definido en la Ley de Bases del
+    Estado y la Ley de Obras Públicas que designa
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: concursal/ley_20720
+- id: null
+  name: Servicio Nacional de Menores
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=21 category=institución reason=El Servicio Nacional de Menores (SENAME) es una institución pública específica
+    del Estado de Chile con funciones legales
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 21
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: Registro de Vehículos Motorizados
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: 'freq=20 category=institución reason=Aunque el término es real, no pertenece al dominio eléctrico ni a la normativa
+    chilena de este sector, por lo que no es '
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 20
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: Código del Trabajo
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=19 category=norma legal reason=El Código del Trabajo es una norma legal fundamental en Chile que regula las
+    relaciones laborales, por lo que constituye
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 19
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: Registro de Multas de Tránsito No Pagadas
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=15 category=institución reason=El término no pertenece al dominio eléctrico chileno, sino al de tránsito y multas,
+    por lo que no es relevante para un g
+  extraction_difficulty: detected via multi_phrase; LLM confidence=low
+  metadata:
+    refs_count: 15
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: PATENTE
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via acronym
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=3 category=institución reason=La palabra 'PATENTE' es un término técnico y legal específico en la normativa
+    chilena que se refiere a la autorización a
+  extraction_difficulty: detected via acronym; LLM confidence=high
+  metadata:
+    refs_count: 3
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: remuneración líquida
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=2 category=concepto técnico reason=El término 'remuneración líquida' es un concepto técnico-jurídico real definido
+    en el Código del Trabajo chileno (artícu
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 2
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: remuneración bruta
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: regulatorio_otros
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=concepto técnico reason=El término 'remuneración bruta' es un concepto legal y contable real definido
+    en la normativa chilena (como el Código de
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: regulatorio_otros
+    secondary: tránsito/ley_18290
+- id: null
+  name: Servicio Nacional de Reinserción Social Juvenil
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via multi_phrase
+    article: varios
+    url: ''
+  domain_context: indeterminado
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=42 category=institución reason=El término corresponde a una institución pública específica del sistema de justicia
+    juvenil chileno, no siendo un concep
+  extraction_difficulty: detected via multi_phrase; LLM confidence=high
+  metadata:
+    refs_count: 42
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: indeterminado
+    secondary: no_aplica
+- id: null
+  name: aporte monetario
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: indeterminado
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=2 category=concepto técnico reason=El término 'aporte monetario' es un concepto jurídico-económico real utilizado
+    en la normativa chilena (como en el Códig
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 2
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: indeterminado
+    secondary: no_aplica
+- id: null
+  name: exención
+  definition: ''
+  aliases: []
+  source:
+    norm_id: extracted_from_corpus
+    norm_label: detected via definition_pattern
+    article: varios
+    url: ''
+  domain_context: indeterminado
+  status: not_reviewed
+  relations:
+    related: []
+    broader: []
+    narrower: []
+  notes: freq=1 category=institución reason=La palabra 'exención' es un término legal genérico que no posee una definición
+    técnica específica ni un significado únic
+  extraction_difficulty: detected via definition_pattern; LLM confidence=high
+  metadata:
+    refs_count: 1
+    last_reviewed_by: auto+LLM
+    last_reviewed_date: '2026-05-02'
+    source_extraction: llm_validated
+  domain:
+    primary: indeterminado
+    secondary: no_aplica

@@ -93,6 +93,10 @@ class LiteLLMProvider:
             kwargs.pop("max_tokens", None)
             # 8k context fits our largest prompts (Contextual Retrieval + 10 docs)
             kwargs["num_ctx"] = 8192
+            # Disable reasoning/thinking mode for Qwen3+ series. Without this,
+            # the model burns minutes "thinking" before producing tokens —
+            # contextual enrichment of 3,318 chunks would take days.
+            kwargs["think"] = False
 
         # Pass JSON schema through to API providers (Anthropic/OpenAI handle natively).
         if response_format and not model.startswith("ollama/"):
@@ -138,16 +142,38 @@ class LiteLLMProvider:
         if system:
             body["system"] = system
         host = getattr(_config.settings, "ollama_host", "http://localhost:11434")
-        # 300s instead of 180: qwen3.5:9b in tight VRAM occasionally needs >180s
-        # for long prompts; the prior 180 limit caused 14% query loss in eval.
-        resp = requests.post(f"{host}/api/generate", json=body, timeout=300)
-        data = resp.json()
-        return LLMResponse(
-            text=data.get("response", ""),
-            model=model,
-            tokens_in=data.get("prompt_eval_count", 0),
-            tokens_out=data.get("eval_count", 0),
-        )
+
+        # Ollama occasionally HANGS on a request (0 tokens generated, connection
+        # held open) — non-deterministic, ~7/50 queries in eval, NOT correlated
+        # with query, n_docs or category. A fresh retry almost never re-hangs.
+        # So: short per-attempt timeout + retries instead of one 300s wait that
+        # loses the query entirely. Turns a 300s total loss into ~per_timeout +
+        # a fast successful retry. Empty response also triggers a retry (a hung
+        # generation sometimes returns 200 with response="").
+        per_timeout = getattr(_config.settings, "ollama_attempt_timeout", 150)
+        attempts = getattr(_config.settings, "ollama_max_attempts", 3)
+        last_exc: Exception | None = None
+        for attempt in range(attempts):
+            try:
+                resp = requests.post(
+                    f"{host}/api/generate", json=body, timeout=per_timeout
+                )
+                data = resp.json()
+                text = data.get("response", "")
+                if text.strip():
+                    return LLMResponse(
+                        text=text,
+                        model=model,
+                        tokens_in=data.get("prompt_eval_count", 0),
+                        tokens_out=data.get("eval_count", 0),
+                    )
+                # empty → treat as a hang, retry fresh
+                last_exc = RuntimeError("ollama returned empty response")
+            except (requests.exceptions.Timeout,
+                    requests.exceptions.ConnectionError) as e:
+                last_exc = e
+        # All attempts hung/failed: return empty (caller handles as before).
+        return LLMResponse(text="", model=model, tokens_in=0, tokens_out=0)
 
 
 @dataclass
