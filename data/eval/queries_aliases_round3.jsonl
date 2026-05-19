@@ -1,0 +1,10 @@
+{"query": "qué es COMA", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_acronym"}
+{"query": "qué es el VATT", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_acronym"}
+{"query": "qué es AVI", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_acronym"}
+{"query": "qué es el VI", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_acronym"}
+{"query": "qué significa C.O.M.A", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_dotvariant"}
+{"query": "qué es V.A.T.T", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_dotvariant"}
+{"query": "qué es la transmisión zonal", "expected_norma": "1146553", "expected_articulo": null, "category": "round3_morpho"}
+{"query": "qué es la reserva estratégica", "expected_norma": "250604", "expected_articulo": null, "category": "round3_morpho"}
+{"query": "qué es el PELP", "expected_norma": "1112591", "expected_articulo": null, "category": "round3_morpho"}
+{"query": "qué es la Planificación Energética de Largo Plazo", "expected_norma": "1112591", "expected_articulo": null, "category": "round3_morpho"}
