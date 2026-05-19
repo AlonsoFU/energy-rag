@@ -34,6 +34,19 @@ def _corpus_vocab() -> frozenset[str]:
         words: set[str] = set()
         for (text,) in cur.fetchall():
             words.update(m.group(0).lower() for m in _TOKEN_RE.finditer(text))
+        # Also treat curated concept names + aliases as in-vocabulary. A
+        # glossary alias (e.g. "PELP" for "Planificación Energética") is by
+        # definition a domain term, but the corpus body may only ever spell
+        # out the full name — so the acronym would be flagged off-topic and
+        # the query refused before the alias can fire. Legal-safe: aliases
+        # are human-curated, not fuzzy.
+        cur.execute("SELECT nombre, aliases FROM conceptos")
+        for nombre, aliases in cur.fetchall():
+            for blob in (nombre, *(aliases or [])):
+                if blob:
+                    words.update(
+                        m.group(0).lower() for m in _TOKEN_RE.finditer(blob)
+                    )
     return frozenset(words)
 
 
