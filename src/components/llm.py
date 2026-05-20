@@ -91,8 +91,10 @@ class LiteLLMProvider:
         # num_ctx via litellm extra params instead.
         if model.startswith("ollama/"):
             kwargs.pop("max_tokens", None)
-            # 8k context fits our largest prompts (Contextual Retrieval + 10 docs)
-            kwargs["num_ctx"] = 8192
+            # num_ctx MUST exceed our largest prompt (~15k tokens: 10 docs +
+            # Contextual enrichment). At 8192 the prompt overflows and the
+            # schema-constrained sampler deadlocks (deterministic hang).
+            kwargs["num_ctx"] = getattr(_config.settings, "ollama_num_ctx", 16384)
             # Disable reasoning/thinking mode for Qwen3+ series. Without this,
             # the model burns minutes "thinking" before producing tokens —
             # contextual enrichment of 3,318 chunks would take days.
@@ -135,7 +137,9 @@ class LiteLLMProvider:
             "think": False,
             "stream": False,
             "options": {
-                "num_ctx": 8192,
+                # 8192 overflows our ~15k-token prompts → schema-constrained
+                # sampler deadlocks (the deterministic Ollama hang). See config.
+                "num_ctx": getattr(_config.settings, "ollama_num_ctx", 16384),
                 "temperature": temperature,
             },
         }

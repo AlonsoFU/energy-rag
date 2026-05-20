@@ -15,6 +15,12 @@ data/downloads/
 data/download_progress.json
 data/processed/
 
+# Eval run artifacts. The eval SETS (data/eval/queries_*.jsonl) are versioned;
+# only per-run outputs (logs + result JSONs) are ignored. They're reproducible
+# from code + set.
+data/eval/*.log
+data/eval/results/
+
 # IDE
 .vscode/
 .idea/
