@@ -37,6 +37,14 @@
 | **Eval por dominio** | `queries_chilean_electric` estaba 36% contaminado con concursal (cuelga Ollama); medir el producto = medir su dominio | hecho: `queries_electrico.jsonl` |
 | **Sin API paga** | decisión del usuario; mantener 100% local salvo que pregunte por costo | vigente |
 | **Auditar composición del eval ANTES de medir** | se gastaron horas midiendo contra instrumento contaminado; validar el instrumento es prerequisito | lección |
+| **Patrón híbrido: NO usar JSON-schema en Ollama, validar post-hoc** | Ollama qwen3.5 deadlockea con `format` JSON-schema (issues #15540, #15260). `verify_citations` post-hoc + retry con prompt estricto enforce la misma garantía legal sin el bug del runtime | firme; flag `use_constrained_decoding=False` |
+| **num_ctx = 16384** (NO 8192) | prompts grandes (10 docs + Contextual) llegan a ~15k tokens; 8k desborda y dispara el cuelgue del sampler | firme |
+| **Char budget de 45000 sobre el bloque de artículos** | recorte determinista del tail si el pool excede ctx; previene futuros overflow sin depender del techo del modelo | firme |
+| **Verifier en 2 capas: in-pool → corpus** | la cita debe ser real. Capa 1: presente en docs retrieved (estricto). Capa 2: si no, ¿existe en la DB completa? Si sí → válida (legal-safe, strict-exact, sin fuzzy). Mismatch retrieval-cita = no es alucinación si la cita es real | firme |
+| **Strip de citas malformadas en el texto entregado** | `[Art. ag de NORMA]` (identificador no-numérico) son inventos del LLM; la regex estricta ya los ignora, ahora se borran del texto al usuario para que no confundan | firme |
+| **Set canónico `queries_balanced.jsonl` (80q, 3 categorías)** | mide 3 comportamientos distintos por separado: in_domain (energía), off_domain_corpus (lo cargado pero off-product), off_corpus (lo NO cargado). NO agregar el % | firme |
+| **No subir pool RRF a 100** | medido: -2pp answered, -4pp recall. Pool más grande mete ruido en el ranking. Mantener pool=50 | empírico |
+| **No subir top-k a 15** | medido: idéntico al baseline. El runner skip-ea LLM por full_hit en top-5; ampliar top_k no cambia el skip | empírico |
 
 ---
 
@@ -47,12 +55,17 @@
 - Medir contra `queries_chilean_electric.jsonl` crudo → 36% ruido off-domain.
 - Retry de Ollama esperando que arregle cuelgues **deterministas** → los empeora (450-900s).
 - Usar latencia como proxy de calidad → falso (cuelgue = bug de runtime, no dificultad).
+- Confiar en `queries_electrico.jsonl` (31q) como "instrumento limpio" → seguía 35% contaminado con telepeaje vial + Ley Tránsito + sueldos sector público; auditar por DB-clase, no por keyword.
+- Confiar en `grounding_pass` agregado como métrica única — es guardrail, no calidad; bajo constrained-decoding casi tautológico; el denominador `n_with_generation` esconde los cuelgues.
+- Asumir que el cuelgue de Ollama era off-domain-only → falso, también pega en términos in-domain (Acometida 900s). Causa raíz: JSON-schema + `think=false`.
+- Subir el pool RRF de 50→100 → -2pp answered, -4pp recall. Más candidatos ≠ mejor ranking.
 
 ---
 
 ## Blockers estructurales
 
-1. **Ollama qwen3.5:9b cuelga determinista 400-900s** en queries off-domain. Sin causa raíz (no es n_docs, categoría ni constrained-decoding).
-2. **Varianza Ollama ±3pp** entre runs idénticos → 1 run no concluyente, promediar 2-3.
-3. **Techo local ~70-75%** grounding eléctrico con qwen3.5:9b.
-4. **Vigencia/temporalidad real** (parsing derogaciones) sin implementar — T-C es solo proxy por fecha.
+1. ~~**Ollama qwen3.5:9b cuelga determinista 400-900s** en queries off-domain. Sin causa raíz~~ → **RESUELTO 2026-05-20**: causa = JSON-schema constrained-decoding + `think=false`. Fix = patrón híbrido (sin schema, verificador post-hoc).
+2. ~~**Varianza Ollama ±3pp**~~ → **RESUELTO** con el patrón híbrido: varianza ≈ 0 entre corridas idénticas.
+3. **Techo recall+art = 76%** en in_domain (12/50 queries tienen el artículo definidor fuera del top-5). Las 12 que no llegan al top-5, el eval runner skip-ea el LLM. Atacar con re-ranker concepto-específico o mini-chunks de summary.
+4. **El runner skip-ea LLM cuando `full_hit=False`** (`deepeval_runner.py:174`) → métricas como "answered_rate in_domain" están limitadas por el techo de `recall+art`, no miden el comportamiento real del sistema. Cambio trivial pendiente.
+5. **Vigencia/temporalidad real** (parsing derogaciones) sin implementar — T-C es solo proxy por fecha. Otro proyecto.
