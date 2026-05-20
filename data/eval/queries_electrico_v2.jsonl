@@ -1,0 +1,20 @@
+{"query": "qué es Plan de obra de generación y transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "concept_definition_auto"}
+{"query": "qué es Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "concept_definition_auto"}
+{"query": "qué es Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "concept_definition_auto"}
+{"query": "qué es Parámetros y variables del Sistema Eléctrico Nacional", "expected_norma": "1112591", "expected_articulo": "11°", "category": "concept_definition_auto"}
+{"query": "qué es Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "concept_definition_auto"}
+{"query": "qué es Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "concept_definition_auto"}
+{"query": "qué es Infracciones menos graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "concept_definition_auto"}
+{"query": "qué es Estado Deteriorado", "expected_norma": "250604", "expected_articulo": "13", "category": "concept_definition_auto"}
+{"query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía", "expected_norma": "1160108", "expected_articulo": "102", "category": "concept_definition_auto"}
+{"query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "concept_definition_auto"}
+{"query": "qué es Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "concept_definition_auto"}
+{"query": "qué es C.O.M.A.", "expected_norma": "1146553", "expected_articulo": "49", "category": "concept_definition_manual"}
+{"query": "qué es V.A.T.T.", "expected_norma": "1146553", "expected_articulo": "50", "category": "concept_definition_manual"}
+{"query": "qué es potencia inicial", "expected_norma": "250604", "expected_articulo": "28", "category": "concept_definition_manual"}
+{"query": "Artículo 99 de la Ley 18410", "expected_norma": "29819", "expected_articulo": "99", "category": "specific_article"}
+{"query": "cómo se calcula el VATT", "expected_norma": "1146553", "expected_articulo": "50", "category": "tariff"}
+{"query": "qué es el coordinador del sistema eléctrico", "expected_norma": "1146553", "expected_articulo": null, "category": "coordinator"}
+{"query": "transferencias de potencia", "expected_norma": "250604", "expected_articulo": null, "category": "power_transfers"}
+{"query": "qué es xenobalbúrgico", "expected_norma": null, "expected_articulo": null, "category": "negative"}
+{"query": "cuál es la receta del pisco sour", "expected_norma": null, "expected_articulo": null, "category": "negative"}

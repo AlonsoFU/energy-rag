@@ -1,0 +1,80 @@
+{"query": "qué es Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
+{"query": "qué es Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Plan de obra de generación y transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión Dedicados", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Declaración jurada", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué es Estado Deteriorado", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Central Renovable con Capacidad de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "qué es Aviso", "expected_norma": "250604", "expected_articulo": "25 ter", "category": "in_domain"}
+{"query": "qué es Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain"}
+{"query": "qué es Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Proyecto", "expected_norma": "1112591", "expected_articulo": "21°", "category": "in_domain"}
+{"query": "qué es Vivienda", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué es Actividad", "expected_norma": "29819", "expected_articulo": "3º A", "category": "in_domain"}
+{"query": "qué es Riesgo", "expected_norma": "29819", "expected_articulo": "15", "category": "in_domain"}
+{"query": "qué es Potencia de Suficiencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión para Polos de Desarrollo", "expected_norma": "1146553", "expected_articulo": "151", "category": "in_domain"}
+{"query": "qué es Energía de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Parámetros y variables del Sistema Eléctrico Nacional", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Estado Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain"}
+{"query": "qué es Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain"}
+{"query": "qué es Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "qué es DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué es Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Insumo Principal", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es TON", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué es Titular", "expected_norma": "1160108", "expected_articulo": "95", "category": "in_domain"}
+{"query": "qué es Multa TAG", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Deuda de Tarifa o Peaje", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Mora", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Tarifa o Peaje", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Declaración jurada", "expected_norma": "1199483", "expected_articulo": "72", "category": "off_domain_corpus"}
+{"query": "qué es Convenio de Pago de Multa TAG", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Veedor", "expected_norma": "1207690", "expected_articulo": "46", "category": "off_domain_corpus"}
+{"query": "qué es Convenio o Contrato TAG o Televía", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Coordinadora para el Proceso de Licitación", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Consulta de Estado de Deuda", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Aviso", "expected_norma": "1007469", "expected_articulo": "165 D", "category": "off_domain_corpus"}
+{"query": "qué es Inhabilitar", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Reposición", "expected_norma": "1199483", "expected_articulo": "72", "category": "off_domain_corpus"}
+{"query": "qué es Sitio Electrónico Unificado de Tarifas y Peajes", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Usuario Funcionario Municipal", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es xenobalbúrgico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuál es la receta del pisco sour", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se cura la diabetes tipo 1", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "quién ganó el mundial de fútbol 1962", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la teoría de la relatividad", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "fórmula química del ácido sulfúrico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuántos kilómetros mide la Gran Muralla China", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se prepara una paella valenciana", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el síndrome de Asperger", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "biografía de Pablo Neruda", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo funciona un motor de combustión interna", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la fotosíntesis", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "horario del metro de Santiago", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "precio del dólar hoy", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es Bitcoin", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
