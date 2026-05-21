@@ -23,6 +23,22 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
 
+    # Curated concept-definition injection. When the query matches a
+    # definitional pattern ("qué es X" / "definición de X" / ...) AND X is
+    # an exact match (normalized) of a curated concept name in the DB, the
+    # defining article is force-prepended to the retrieved pool. Targets
+    # the recall+art ceiling (33% of in-domain queries miss the defining
+    # article in top-K). Legal-safe: strict-exact normalization, no fuzzy,
+    # curated edges only.
+    inject_curated_definitions: bool = True
+
+    # Eval runner: when True, the LLM is called even if retrieval didn't put
+    # the expected article in the top-K (full_hit=False). Measures the real
+    # production behavior (where the system always generates on retrieved
+    # docs). When False, the runner shortcuts to save time but inflates the
+    # "empty" bucket with eval-only artifacts. Default True (honest).
+    eval_always_generate: bool = True
+
     # Hybrid citation pattern: when False, generate plain (no JSON schema)
     # and validate citations post-hoc with verify_citations + retry-on-fail.
     # Set False by default because Ollama's JSON-schema constrained decoding

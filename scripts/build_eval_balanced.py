@@ -62,35 +62,68 @@ SELECT nombre, articulo_numero, id_norma, def_len
 # Hand-curated off-corpus queries. None of these terms should appear in the
 # corpus; the system MUST refuse (negative_correct).
 OFF_CORPUS = [
-    {"query": "qué es xenobalbúrgico"},                         # invented
-    {"query": "cuál es la receta del pisco sour"},              # cocktail
-    {"query": "cómo se cura la diabetes tipo 1"},                # medicine
-    {"query": "quién ganó el mundial de fútbol 1962"},           # sports/history
-    {"query": "qué es la teoría de la relatividad"},             # physics
-    {"query": "fórmula química del ácido sulfúrico"},            # chemistry
-    {"query": "cuántos kilómetros mide la Gran Muralla China"},  # geography
-    {"query": "cómo se prepara una paella valenciana"},          # cooking
-    {"query": "qué es el síndrome de Asperger"},                  # medicine
-    {"query": "biografía de Pablo Neruda"},                       # literature
-    {"query": "cómo funciona un motor de combustión interna"},    # mech eng
-    {"query": "qué es la fotosíntesis"},                          # biology
-    {"query": "horario del metro de Santiago"},                    # transit (not in corpus)
-    {"query": "precio del dólar hoy"},                             # finance
-    {"query": "qué es Bitcoin"},                                   # crypto
+    # Originales (15)
+    {"query": "qué es xenobalbúrgico"},
+    {"query": "cuál es la receta del pisco sour"},
+    {"query": "cómo se cura la diabetes tipo 1"},
+    {"query": "quién ganó el mundial de fútbol 1962"},
+    {"query": "qué es la teoría de la relatividad"},
+    {"query": "fórmula química del ácido sulfúrico"},
+    {"query": "cuántos kilómetros mide la Gran Muralla China"},
+    {"query": "cómo se prepara una paella valenciana"},
+    {"query": "qué es el síndrome de Asperger"},
+    {"query": "biografía de Pablo Neruda"},
+    {"query": "cómo funciona un motor de combustión interna"},
+    {"query": "qué es la fotosíntesis"},
+    {"query": "horario del metro de Santiago"},
+    {"query": "precio del dólar hoy"},
+    {"query": "qué es Bitcoin"},
+    # Expansión (15 más)
+    {"query": "cómo se hace una empanada chilena"},                # cocina
+    {"query": "qué es el ADN"},                                     # biología
+    {"query": "cuándo nació Einstein"},                             # historia
+    {"query": "qué es la inteligencia artificial"},                 # tech (no en corpus)
+    {"query": "cuál es la capital de Australia"},                   # geografía
+    {"query": "cómo se calcula el área de un triángulo"},          # matemática
+    {"query": "qué es el cambio climático"},                       # ambiental gen
+    {"query": "qué hace un cardiólogo"},                            # medicina
+    {"query": "cómo se conjuga el verbo haber"},                   # lingüística
+    {"query": "qué es el ratimagusto"},                             # palabra inventada
+    {"query": "cuál es la mejor pizza de Chile"},                   # opinión/gastronomía
+    {"query": "qué es el yoga"},                                    # bienestar
+    {"query": "cómo se hace pan amasado"},                          # cocina
+    {"query": "qué es la mecánica cuántica"},                       # física
+    {"query": "cuáles son las películas de Almodóvar"},             # cine
 ]
 
+# Multi-phrasing for in-domain to expand the set without inventing concepts.
+# Each concept generates N variants — same expected_norma+articulo.
+IN_DOMAIN_PHRASINGS = (
+    "qué es {x}",
+    "definición de {x}",
+    "qué significa {x}",
+)
 
-def fetch_by_normas(normas: tuple[str, ...], limit: int) -> list[dict]:
+
+def fetch_by_normas(normas: tuple[str, ...], limit: int,
+                    phrasings: tuple[str, ...] = ("qué es {x}",)) -> list[dict]:
+    """Fetch concepts and emit one row per (concept, phrasing) variant.
+
+    `limit` caps the number of DISTINCT concepts (not rows). Phrasings let us
+    expand the eval set without inventing terms — same concept asked 2-3 ways
+    produces N rows pointing to the same expected_norma+articulo.
+    """
     out = []
     with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
         cur.execute(SQL_AUTO, (list(normas), limit))
         for rec in cur.fetchall():
-            out.append({
-                "query": f"qué es {rec['nombre'].strip()}",
-                "expected_norma": rec["id_norma"],
-                "expected_articulo": str(rec["articulo_numero"]).strip(),
-                "category": None,  # set by caller
-            })
+            for tpl in phrasings:
+                out.append({
+                    "query": tpl.format(x=rec["nombre"].strip()),
+                    "expected_norma": rec["id_norma"],
+                    "expected_articulo": str(rec["articulo_numero"]).strip(),
+                    "category": None,
+                })
     return out
 
 
@@ -102,7 +135,9 @@ def main():
                    default=Path("data/eval/queries_balanced.jsonl"))
     a = p.parse_args()
 
-    in_dom = fetch_by_normas(ENERGY_NORMAS, a.n_in)
+    # in_domain: cap CONCEPTS (not rows), then expand with phrasings.
+    in_dom = fetch_by_normas(ENERGY_NORMAS, a.n_in,
+                              phrasings=IN_DOMAIN_PHRASINGS)
     for r in in_dom: r["category"] = "in_domain"
 
     off_in = fetch_by_normas(OFF_DOMAIN_NORMAS, a.n_off_corpus_in_domain)

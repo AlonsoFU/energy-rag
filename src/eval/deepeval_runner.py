@@ -119,6 +119,7 @@ def run_deepeval(
     # Lazy imports keep this module cheap to import (used by tests)
     from src.pipelines.generate import generate_answer
     from src.pipelines.grounding import extract_citations
+    from src.core import config as _cfg
 
     eval_file = Path(eval_file)
     queries = [
@@ -171,7 +172,17 @@ def run_deepeval(
         citations: list[tuple[str, str]] = []
         gen_ms = 0
         if llm is not None and docs:
-            should_generate = (expected_norma is None) or full_hit
+            # `eval_always_generate=True` (default) → real production behavior:
+            # the LLM ALWAYS sees the retrieved docs, even when full_hit is
+            # False. Eval-only shortcut (False) skips the LLM call when the
+            # expected article isn't in top-K to save time; that's faster but
+            # inflates the "empty" bucket with eval artifacts (the system in
+            # production has no such skip).
+            should_generate = (
+                _cfg.settings.eval_always_generate
+                or (expected_norma is None)
+                or full_hit
+            )
             if should_generate:
                 t1 = time.time()
                 try:

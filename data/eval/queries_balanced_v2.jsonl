@@ -1,0 +1,339 @@
+{"query": "qué es Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
+{"query": "definición de Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
+{"query": "qué significa Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
+{"query": "qué es Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Plan de obra de generación y transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Plan de obra de generación y transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Plan de obra de generación y transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión Dedicados", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Sistemas de Transmisión Dedicados", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Sistemas de Transmisión Dedicados", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Declaración jurada", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "definición de Declaración jurada", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué significa Declaración jurada", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué es Estado Deteriorado", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Estado Deteriorado", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Estado Deteriorado", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Central Renovable con Capacidad de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Central Renovable con Capacidad de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Central Renovable con Capacidad de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "definición de Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "qué significa Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "qué es Aviso", "expected_norma": "250604", "expected_articulo": "25 ter", "category": "in_domain"}
+{"query": "definición de Aviso", "expected_norma": "250604", "expected_articulo": "25 ter", "category": "in_domain"}
+{"query": "qué significa Aviso", "expected_norma": "250604", "expected_articulo": "25 ter", "category": "in_domain"}
+{"query": "qué es Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "definición de Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué significa Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain"}
+{"query": "definición de Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain"}
+{"query": "qué significa Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain"}
+{"query": "qué es Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Proyecto", "expected_norma": "1112591", "expected_articulo": "21°", "category": "in_domain"}
+{"query": "definición de Proyecto", "expected_norma": "1112591", "expected_articulo": "21°", "category": "in_domain"}
+{"query": "qué significa Proyecto", "expected_norma": "1112591", "expected_articulo": "21°", "category": "in_domain"}
+{"query": "qué es Vivienda", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "definición de Vivienda", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué significa Vivienda", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué es Actividad", "expected_norma": "29819", "expected_articulo": "3º A", "category": "in_domain"}
+{"query": "definición de Actividad", "expected_norma": "29819", "expected_articulo": "3º A", "category": "in_domain"}
+{"query": "qué significa Actividad", "expected_norma": "29819", "expected_articulo": "3º A", "category": "in_domain"}
+{"query": "qué es Riesgo", "expected_norma": "29819", "expected_articulo": "15", "category": "in_domain"}
+{"query": "definición de Riesgo", "expected_norma": "29819", "expected_articulo": "15", "category": "in_domain"}
+{"query": "qué significa Riesgo", "expected_norma": "29819", "expected_articulo": "15", "category": "in_domain"}
+{"query": "qué es Potencia de Suficiencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Potencia de Suficiencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Potencia de Suficiencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistemas de Transmisión para Polos de Desarrollo", "expected_norma": "1146553", "expected_articulo": "151", "category": "in_domain"}
+{"query": "definición de Sistemas de Transmisión para Polos de Desarrollo", "expected_norma": "1146553", "expected_articulo": "151", "category": "in_domain"}
+{"query": "qué significa Sistemas de Transmisión para Polos de Desarrollo", "expected_norma": "1146553", "expected_articulo": "151", "category": "in_domain"}
+{"query": "qué es Energía de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Energía de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Energía de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Parámetros y variables del Sistema Eléctrico Nacional", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Parámetros y variables del Sistema Eléctrico Nacional", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Parámetros y variables del Sistema Eléctrico Nacional", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Sistemas de Almacenamiento de Energía intensivos en energía", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "definición de Sistemas de Almacenamiento de Energía intensivos en energía", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué significa Sistemas de Almacenamiento de Energía intensivos en energía", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Estado Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Estado Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Estado Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain"}
+{"query": "definición de Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain"}
+{"query": "qué significa Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain"}
+{"query": "qué es Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain"}
+{"query": "definición de Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain"}
+{"query": "qué significa Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain"}
+{"query": "qué es Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "definición de Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "qué significa Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "qué es DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "definición de DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué significa DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué es Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "definición de Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué significa Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Insumo Principal", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Insumo Principal", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Insumo Principal", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es TON", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "definición de TON", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué significa TON", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué es Titular", "expected_norma": "1160108", "expected_articulo": "95", "category": "in_domain"}
+{"query": "definición de Titular", "expected_norma": "1160108", "expected_articulo": "95", "category": "in_domain"}
+{"query": "qué significa Titular", "expected_norma": "1160108", "expected_articulo": "95", "category": "in_domain"}
+{"query": "qué es Informe Definitivo", "expected_norma": "1160108", "expected_articulo": "78", "category": "in_domain"}
+{"query": "definición de Informe Definitivo", "expected_norma": "1160108", "expected_articulo": "78", "category": "in_domain"}
+{"query": "qué significa Informe Definitivo", "expected_norma": "1160108", "expected_articulo": "78", "category": "in_domain"}
+{"query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "definición de Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué significa Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "definición de Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué significa Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Biomasa", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "definición de Biomasa", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "qué significa Biomasa", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "qué es Planificación Energética", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Planificación Energética", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Planificación Energética", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Biocombustibles sólidos", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "definición de Biocombustibles sólidos", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "qué significa Biocombustibles sólidos", "expected_norma": "1183783", "expected_articulo": "3", "category": "in_domain"}
+{"query": "qué es Planificación de la Transmisión o Proceso de Planificación", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Planificación de la Transmisión o Proceso de Planificación", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Planificación de la Transmisión o Proceso de Planificación", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain"}
+{"query": "definición de Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain"}
+{"query": "qué significa Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain"}
+{"query": "qué es Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
+{"query": "definición de Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
+{"query": "qué significa Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
+{"query": "qué es Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Barra de Transferencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Barra de Transferencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Barra de Transferencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Infracciones gravísimas", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "definición de Infracciones gravísimas", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué significa Infracciones gravísimas", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué es Año de Cálculo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Año de Cálculo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Año de Cálculo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Coordinador", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Coordinador", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Coordinador", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "definición de DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué significa DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué es Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "definición de Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "qué significa Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "qué es Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "definición de Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué significa Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain"}
+{"query": "qué es Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "definición de Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué significa Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué es Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain"}
+{"query": "definición de Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain"}
+{"query": "qué significa Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain"}
+{"query": "qué es Costo de Falla de Larga Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Costo de Falla de Larga Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Costo de Falla de Larga Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Costo de Falla de Corta Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "definición de Costo de Falla de Corta Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué significa Costo de Falla de Corta Duración", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Infracciones menos graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "definición de Infracciones menos graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué significa Infracciones menos graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué es LOLPdm", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de LOLPdm", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa LOLPdm", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
+{"query": "definición de Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
+{"query": "qué significa Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
+{"query": "qué es TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "definición de TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué significa TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué es C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "definición de Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué significa Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
+{"query": "definición de Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
+{"query": "qué significa Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
+{"query": "qué es A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Comisión", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "definición de Comisión", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué significa Comisión", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es IFOR", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "definición de IFOR", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué significa IFOR", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
+{"query": "qué es Ministerio", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "definición de Ministerio", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué significa Ministerio", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Infracciones leves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "definición de Infracciones leves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué significa Infracciones leves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
+{"query": "qué es Deuda de Tarifa o Peaje", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Mora", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Multa TAG", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Tarifa o Peaje", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Declaración jurada", "expected_norma": "1199483", "expected_articulo": "72", "category": "off_domain_corpus"}
+{"query": "qué es Convenio de Pago de Multa TAG", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Veedor", "expected_norma": "1207690", "expected_articulo": "46", "category": "off_domain_corpus"}
+{"query": "qué es Convenio o Contrato TAG o Televía", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Coordinadora para el Proceso de Licitación", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Consulta de Estado de Deuda", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Aviso", "expected_norma": "1007469", "expected_articulo": "165 D", "category": "off_domain_corpus"}
+{"query": "qué es Inhabilitar", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Reposición", "expected_norma": "1199483", "expected_articulo": "72", "category": "off_domain_corpus"}
+{"query": "qué es Sitio Electrónico Unificado de Tarifas y Peajes", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Usuario Funcionario Municipal", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Estado de Deuda", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Adecuaciones", "expected_norma": "1199483", "expected_articulo": "92", "category": "off_domain_corpus"}
+{"query": "qué es Documento de Cobro", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Sistema Complementario", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Administrador del Sitio", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Sistema Interoperable", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Usuario Administrador Municipal", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Actividad", "expected_norma": "1007469", "expected_articulo": "224", "category": "off_domain_corpus"}
+{"query": "qué es Conductor", "expected_norma": "1007469", "expected_articulo": "198 D", "category": "off_domain_corpus"}
+{"query": "qué es Cuenta de Tarifas o Peajes", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Riesgo", "expected_norma": "1007469", "expected_articulo": "57 D", "category": "off_domain_corpus"}
+{"query": "qué es Usuarios Acreditados", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Convenio de Pago de Deuda", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Multioperador o Multioperadora", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es Detención", "expected_norma": "1207690", "expected_articulo": "3", "category": "off_domain_corpus"}
+{"query": "qué es xenobalbúrgico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuál es la receta del pisco sour", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se cura la diabetes tipo 1", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "quién ganó el mundial de fútbol 1962", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la teoría de la relatividad", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "fórmula química del ácido sulfúrico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuántos kilómetros mide la Gran Muralla China", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se prepara una paella valenciana", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el síndrome de Asperger", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "biografía de Pablo Neruda", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo funciona un motor de combustión interna", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la fotosíntesis", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "horario del metro de Santiago", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "precio del dólar hoy", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es Bitcoin", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se hace una empanada chilena", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el ADN", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuándo nació Einstein", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la inteligencia artificial", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuál es la capital de Australia", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se calcula el área de un triángulo", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el cambio climático", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué hace un cardiólogo", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se conjuga el verbo haber", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el ratimagusto", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuál es la mejor pizza de Chile", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el yoga", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se hace pan amasado", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la mecánica cuántica", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuáles son las películas de Almodóvar", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}

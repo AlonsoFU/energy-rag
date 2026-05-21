@@ -45,6 +45,9 @@
 | **Set canónico `queries_balanced.jsonl` (80q, 3 categorías)** | mide 3 comportamientos distintos por separado: in_domain (energía), off_domain_corpus (lo cargado pero off-product), off_corpus (lo NO cargado). NO agregar el % | firme |
 | **No subir pool RRF a 100** | medido: -2pp answered, -4pp recall. Pool más grande mete ruido en el ranking. Mantener pool=50 | empírico |
 | **No subir top-k a 15** | medido: idéntico al baseline. El runner skip-ea LLM por full_hit en top-5; ampliar top_k no cambia el skip | empírico |
+| **Runner SIEMPRE genera** (`eval_always_generate=True`) | el shortcut `should_generate = full_hit or no expected_norma` inflaba el bucket "empty" con artefactos del eval; el sistema en producción no tiene ese skip; medido +27pp answered in_domain sin alucinaciones inducidas en off_corpus | firme; default True |
+| **Inyección curada de definiciones** (`inject_curated_definitions=True`) | si query matchea patrón definicional ("qué es X" / "definición de X" / "qué significa X") y X = nombre de concepto curado bajo normalización estricta → inyecta el artículo definidor en posición 1. Legal-safe: strict-exact, sin fuzzy, datos curados. Medido +4pp recall+art y +1pp answered in_domain, +7pp recall+art off_domain | firme; default True |
+| **Set canónico v2 = 339 queries** (queries_balanced_v2.jsonl) | el set de 80q estaba sesgado por def_len; con 339 (279 in_domain × 3 phrasings + 30 + 30) los números bajan -11pp answered y reflejan la realidad del sistema. Poder estadístico: 1 query ≈ 0.4pp en in_domain | firme |
 
 ---
 
