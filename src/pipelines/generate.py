@@ -12,7 +12,9 @@ parsing fails, we fall back to the unconstrained text path with retry.
 import json
 from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.prompts import build_answer_prompt, get_answer_system
-from src.pipelines.grounding import verify_citations
+from src.pipelines.grounding import (
+    verify_citations, verify_citations_against_corpus, strip_malformed_citations,
+)
 from src.pipelines.grammar import extract_valid_citations, build_json_schema
 from src.pipelines.off_topic import is_off_topic, REFUSAL_TEXT
 
@@ -86,9 +88,24 @@ def generate_answer(
         else:
             active_docs = docs
 
+        # Context budget: drop tail docs until the prompt fits the LLM ctx.
+        # MUST be applied BEFORE building the schema — otherwise the JSON
+        # enum would force the model to cite docs the prompt no longer shows
+        # (the constrained sampler would deadlock or hallucinate).
+        budget = getattr(cfg.settings, "prompt_doc_char_budget", 0)
+        if budget and budget > 0:
+            from src.pipelines.prompts import fit_docs_to_budget
+            active_docs = fit_docs_to_budget(active_docs, budget)
+
         prompt = build_answer_prompt(query, active_docs) + extra_instruction
         response_format: dict | None = None
-        if active_docs:
+        # Hybrid pattern (default): skip JSON-schema constrained decoding —
+        # Ollama deadlocks on qwen3.5 (issues #15540, #15260). Generate plain;
+        # `verify_citations` below + the retry-on-fail loop with stricter
+        # `extra_instruction` enforces the legal guarantee (citations must
+        # appear verbatim from the retrieved pool). Industry-recommended
+        # pattern when constrained decoding isn't reliable in the runtime.
+        if cfg.settings.use_constrained_decoding and active_docs:
             citations = extract_valid_citations(active_docs)
             if citations:
                 response_format = build_json_schema(citations)
@@ -121,10 +138,28 @@ def generate_answer(
         if verify_citations(response_text, active_docs):
             grounding_pass = True
             break
+        # In-pool verify failed. Try corpus fallback: cite may be a real
+        # article that retrieval just didn't surface in the top-k. Still
+        # strict-exact (no fuzzy) — only legitimizes citations whose
+        # (id_norma, articulo_numero) actually exist in the DB.
+        try:
+            from src.storage.connection import with_connection
+            with with_connection() as _conn:
+                if verify_citations_against_corpus(response_text, _conn):
+                    grounding_pass = True
+                    break
+        except Exception:
+            pass  # DB issues: stay strict, fall through to retry
         extra_instruction = (
             "\n\nIMPORTANTE: Tu respuesta anterior contenía citas inválidas. "
             "Cita SOLO artículos provistos arriba, verbatim."
         )
+
+    # Clean up: drop bracket patterns the strict CITATION_PATTERN can't parse
+    # (e.g. `[Art. ag de 1160108]` — LLM hallucinated a non-numeric article id).
+    # Valid citations are kept verbatim. Only affects the rendered text; the
+    # grounding_pass decision above has already been made.
+    response_text = strip_malformed_citations(response_text)
 
     return {
         "text": response_text,

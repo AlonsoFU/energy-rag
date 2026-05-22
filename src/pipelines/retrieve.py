@@ -398,5 +398,14 @@ class AdaptiveRetriever:
     def retrieve(self, query: str, top_k: int = 10):
         branch = self.router.classify(query)
         if branch == "simple":
-            return branch, self.simple.retrieve(query, top_k=top_k)
-        return branch, self.complejo.retrieve(query, top_k=top_k)
+            docs = self.simple.retrieve(query, top_k=top_k)
+        else:
+            docs = self.complejo.retrieve(query, top_k=top_k)
+        # Curated concept-definition injection (legal-safe, exact-normalized).
+        # When query is "qué es X" and X matches a curated concept exactly,
+        # prepend the defining article to docs even if retrieval missed it.
+        from src.core import config as _cfg
+        if getattr(_cfg.settings, "inject_curated_definitions", False):
+            from src.pipelines.concept_injection import inject_definition
+            docs = inject_definition(query, docs)[:top_k]
+        return branch, docs

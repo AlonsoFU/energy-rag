@@ -176,11 +176,14 @@ def eval_cmd(
         from src.components.reranker import Qwen3Reranker
         e, r = Qwen3Embedder(), Qwen3Reranker()
 
+    from src.core import config as cfg
+    pool = cfg.settings.retrieval_pool_depth
+
     store = PostgresStore()
     llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
-    simple = SimpleRetriever(store, e, r)
-    complejo = ComplexRetriever(store, e, r, llm=llm)
+    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool)
+    complejo = ComplexRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
 
     def _progress(i: int, n: int, row: dict) -> None:

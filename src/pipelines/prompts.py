@@ -44,7 +44,7 @@ REGLAS DE CONTENIDO
 - NO mezcles información entre artículos sin citarlos a ambos.
 - Si la respuesta NO está en los artículos provistos, responde EXACTAMENTE:
   "No encuentro esa información en las normas disponibles."
-  Devuelve `citations: []` (array vacío) y NO agregues citas ni prosa adicional.
+  Y NADA MÁS — no agregues citas, prosa adicional, ni rastros de formato JSON.
 
 ==========================================================
 CUÁNDO RECHAZAR (CRÍTICO)
@@ -62,7 +62,7 @@ EXAMPLES de cuándo rechazar:
   - "qué es el cribado neonatal" → médico, no eléctrico → rechazar
 
 ⚠️ Si vas a rechazar: responde EXACTA y SOLO con "No encuentro esa información
-en las normas disponibles.", citations=[], punto.
+en las normas disponibles." y nada más. Ni citas, ni listas, ni JSON.
 
 ==========================================================
 FORMATO DE RESPUESTA
@@ -130,12 +130,50 @@ Artículos disponibles (cada uno empieza con su encabezado [Art. NUMERO de ID]):
 Responde la pregunta usando solo estos artículos, citando con el formato [Art. NUMERO de ID] exactamente como aparece en cada encabezado."""
 
 
-def build_answer_prompt(query: str, docs: list[dict]) -> str:
+def fit_docs_to_budget(docs: list[dict], char_budget: int) -> list[dict]:
+    """Trim from the tail (lowest-ranked) until the joined block fits the budget.
+
+    Why: Ollama's JSON-schema-constrained sampler deadlocks (0 tokens, hangs
+    forever) when the prompt overflows num_ctx. Char-based budgeting is a
+    deterministic guard: chars are linear in tokens (Spanish + qwen BPE ≈ 3.5
+    chars/token), and we use a conservative ratio so we never overflow.
+    Top-ranked docs are kept; tail dropped because retrieval already ordered
+    by relevance.
+    """
+    if char_budget <= 0:
+        return docs
+    sep_len = len("\n\n")
+    total = 0
+    kept: list[dict] = []
+    for d in docs:
+        piece = (f"[Art. {d['articulo_numero']} de {d['id_norma']}]\n"
+                 f"{d['articulo_text']}")
+        add = len(piece) + (sep_len if kept else 0)
+        if total + add > char_budget:
+            break
+        kept.append(d)
+        total += add
+    return kept or docs[:1]  # always keep at least 1; if even #1 exceeds,
+                              # caller's num_ctx is misconfigured (truncating
+                              # silently here would hide that).
+
+
+def build_answer_prompt(query: str, docs: list[dict],
+                        char_budget: int | None = None) -> str:
     """Build the user-side prompt with the query plus a block of articles.
 
     Each article is introduced by its citable header `[Art. N de ID]` so the
     LLM can copy the exact format (and the same ID it sees) into its citations.
+    If `char_budget` is given, drop tail docs until the article block fits.
     """
+    if char_budget is None:
+        try:
+            from src.core import config as _cfg
+            char_budget = getattr(_cfg.settings, "prompt_doc_char_budget", 0)
+        except Exception:
+            char_budget = 0
+    if char_budget and char_budget > 0:
+        docs = fit_docs_to_budget(docs, char_budget)
     block = "\n\n".join(
         f"[Art. {d['articulo_numero']} de {d['id_norma']}]\n{d['articulo_text']}"
         for d in docs
