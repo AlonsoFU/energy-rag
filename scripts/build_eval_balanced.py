@@ -42,13 +42,18 @@ WITH ranked AS (
          length(c.definicion) AS def_len,
          ROW_NUMBER() OVER (
            PARTITION BY c.id
-           ORDER BY length(coalesce(a.texto,'')) DESC, a.orden ASC
+           -- Most-recent (vigente) defining norma wins, same rule as inject.
+           ORDER BY n.fecha_publicacion DESC NULLS LAST, a.id_norma, a.orden
          ) AS rn
     FROM conceptos c
+    -- ONLY define_termino edges: the expected article must be where the term
+    -- is DEFINED, not merely mentioned. This makes expected_norma well-defined
+    -- instead of an arbitrary mention.
     JOIN referencias r ON r.destino_concepto_id = c.id
+                      AND r.tipo_relacion = 'define_termino'
     JOIN articulos   a ON a.id = r.origen_articulo_id
-   WHERE length(coalesce(c.definicion,'')) > 20
-     AND length(c.nombre) BETWEEN 3 AND 60
+    JOIN normas      n ON n.id_norma = a.id_norma
+   WHERE length(c.nombre) BETWEEN 3 AND 60
      AND c.nombre NOT LIKE '%%clasificados%%'
      AND a.id_norma = ANY(%s::text[])
 )

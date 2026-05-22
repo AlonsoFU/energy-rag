@@ -50,29 +50,40 @@ def _concept_index() -> dict[str, tuple[str, str]]:
     """
     out: dict[str, tuple[str, str]] = {}
     with with_connection() as conn, conn.cursor() as cur:
+        # ONLY define_termino edges — true definitions, not mentions/citations
+        # (the 'cita' edges point to articles that merely use the term).
+        # Ordered by fecha_publicacion DESC so when a term is defined in
+        # several normas, the MOST RECENT (vigente) definition wins. NULLS
+        # LAST so dated normas beat undated ones.
         cur.execute(
             """
             SELECT c.nombre, a.id_norma, a.numero
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
+                                AND r.tipo_relacion = 'define_termino'
               JOIN articulos a ON a.id = r.origen_articulo_id
-             ORDER BY c.nombre, a.id_norma, a.numero
+              JOIN normas n ON n.id_norma = a.id_norma
+             ORDER BY c.nombre, n.fecha_publicacion DESC NULLS LAST,
+                      a.id_norma, a.numero
             """
         )
         for nombre, id_norma, articulo in cur.fetchall():
             key = normalize_for_match(nombre)
-            # Keep the FIRST defining article per concept (deterministic).
+            # Keep FIRST per concept = most recent definition (vigencia).
             if key and key not in out:
                 out[key] = (str(id_norma), str(articulo))
-        # Also index aliases — same article, multiple lookup keys.
+        # Aliases → same most-recent defining article.
         cur.execute(
             """
             SELECT c.nombre, c.aliases, a.id_norma, a.numero
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
+                                AND r.tipo_relacion = 'define_termino'
               JOIN articulos a ON a.id = r.origen_articulo_id
+              JOIN normas n ON n.id_norma = a.id_norma
              WHERE c.aliases IS NOT NULL
-             ORDER BY c.nombre, a.id_norma, a.numero
+             ORDER BY c.nombre, n.fecha_publicacion DESC NULLS LAST,
+                      a.id_norma, a.numero
             """
         )
         for _nombre, aliases, id_norma, articulo in cur.fetchall():
