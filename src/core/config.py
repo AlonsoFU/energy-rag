@@ -32,6 +32,23 @@ class Settings(BaseSettings):
     # curated edges only.
     inject_curated_definitions: bool = True
 
+    # When True (and inject_curated_definitions is on), the injected doc carries
+    # the FOCUSED curated definition (conceptos.definicion, ~300 chars) instead
+    # of the FULL defining article. Glossary articles (e.g. art 13 de 250604 =
+    # ~10k chars defining ~50 terms) bury the relevant definition far from its
+    # citable [Art. N de ID] header, so the model reproduces the definition but
+    # cites a tighter sibling article. A focused chunk co-locates the verbatim
+    # definition with its exact citation header → the model copies the right
+    # cite. Legal-safe: definition is verbatim glossary text, citation is the
+    # real defining article. The full article (if retrieved) is replaced by the
+    # focused chunk to avoid two docs sharing one header.
+    # DORMANT (default False): the A/B (2026-05-22) showed this recovers
+    # glossary-buried citations but REGRESSES entity-collision cases (it shrinks
+    # our target below a competing definition → position-forces the wrong pick).
+    # Needs competitor-aware gating before enabling — see spec
+    # docs/superpowers/specs/2026-05-22-canonical-concept-names-design.md §10.
+    inject_focused_definition: bool = False
+
     # Eval runner: when True, the LLM is called even if retrieval didn't put
     # the expected article in the top-K (full_hit=False). Measures the real
     # production behavior (where the system always generates on retrieved

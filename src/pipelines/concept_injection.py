@@ -40,15 +40,16 @@ def extract_definitional_term(query: str) -> Optional[str]:
 
 
 @lru_cache(maxsize=1)
-def _concept_index() -> dict[str, tuple[str, str]]:
-    """Build a `{normalized_concept_name: (id_norma, articulo_numero)}` map.
+def _concept_index() -> dict[str, tuple[str, str, str]]:
+    """Build a `{normalized_name: (id_norma, articulo_numero, definicion)}` map.
 
     Cached in-process. Reading the whole table is cheap (~thousands of rows)
     and avoids a DB roundtrip on every query. If a concept has multiple
     defining articles, we keep the FIRST one returned by ORDER BY — strictly
-    deterministic across runs.
+    deterministic across runs. `definicion` is the curated glossary text used
+    by the focused-injection path.
     """
-    out: dict[str, tuple[str, str]] = {}
+    out: dict[str, tuple[str, str, str]] = {}
     with with_connection() as conn, conn.cursor() as cur:
         # ONLY define_termino edges — true definitions, not mentions/citations
         # (the 'cita' edges point to articles that merely use the term).
@@ -57,7 +58,7 @@ def _concept_index() -> dict[str, tuple[str, str]]:
         # LAST so dated normas beat undated ones.
         cur.execute(
             """
-            SELECT c.nombre, a.id_norma, a.numero
+            SELECT c.nombre, a.id_norma, a.numero, c.definicion
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -67,15 +68,15 @@ def _concept_index() -> dict[str, tuple[str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for nombre, id_norma, articulo in cur.fetchall():
+        for nombre, id_norma, articulo, definicion in cur.fetchall():
             key = normalize_for_match(nombre)
             # Keep FIRST per concept = most recent definition (vigencia).
             if key and key not in out:
-                out[key] = (str(id_norma), str(articulo))
+                out[key] = (str(id_norma), str(articulo), definicion or "")
         # Aliases → same most-recent defining article.
         cur.execute(
             """
-            SELECT c.nombre, c.aliases, a.id_norma, a.numero
+            SELECT c.nombre, c.aliases, a.id_norma, a.numero, c.definicion
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -86,17 +87,17 @@ def _concept_index() -> dict[str, tuple[str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for _nombre, aliases, id_norma, articulo in cur.fetchall():
+        for _nombre, aliases, id_norma, articulo, definicion in cur.fetchall():
             for alias in (aliases or []):
                 key = normalize_for_match(str(alias))
                 if key and key not in out:
-                    out[key] = (str(id_norma), str(articulo))
+                    out[key] = (str(id_norma), str(articulo), definicion or "")
     return out
 
 
-def find_curated_definition(query: str) -> Optional[tuple[str, str]]:
-    """Return `(id_norma, articulo_numero)` if the query's term matches a
-    curated concept; else None. No fuzzy.
+def find_curated_definition(query: str) -> Optional[tuple[str, str, str]]:
+    """Return `(id_norma, articulo_numero, definicion)` if the query's term
+    matches a curated concept; else None. No fuzzy.
     """
     term = extract_definitional_term(query)
     if term is None:
@@ -137,17 +138,55 @@ def fetch_article_doc(id_norma: str, articulo_numero: str) -> Optional[dict]:
         }
 
 
+def _focused_doc(id_norma: str, articulo: str, definicion: str) -> dict:
+    """A doc whose body is the FOCUSED curated definition, labeled with the
+    real defining article's citation header. Co-locating the verbatim
+    definition with `[Art. N de ID]` lets the model copy the correct citation
+    instead of attaching it to a tighter sibling article in the pool."""
+    return {
+        "id_norma": str(id_norma),
+        "articulo_numero": str(articulo),
+        "articulo_text": definicion,
+        "contextual_text": definicion,
+        "score": 9999.0,
+        "_injected": True,
+        "_focused": True,
+    }
+
+
 def inject_definition(query: str, docs: list[dict]) -> list[dict]:
     """If query is definitional and we have a curated answer, prepend the
     defining article to `docs` (deduped by (id_norma, articulo_numero)).
+
+    With `inject_focused_definition` (default), the injected body is the
+    curated definition text (~300 chars) rather than the full — possibly
+    glossary-sized — article, and any full copy of that article already in the
+    pool is REPLACED by the focused chunk (so the model sees one short,
+    citable definition, not a 10k-char block burying it).
 
     Returns the same list type. If no injection applies, returns docs unchanged.
     """
     hit = find_curated_definition(query)
     if hit is None:
         return docs
-    id_norma, articulo = hit
-    # Already in pool? Move to front instead of duplicating.
+    id_norma, articulo, definicion = hit
+
+    # Lazy import keeps this module import-cheap and avoids a cycle.
+    from src.core import config as _cfg
+    focused = bool(getattr(_cfg.settings, "inject_focused_definition", False)
+                   and definicion.strip())
+
+    if focused:
+        # Drop any existing copy of the defining article (full or not) so its
+        # citation header isn't duplicated, then prepend the focused chunk.
+        rest = [
+            d for d in docs
+            if not (str(d.get("id_norma")) == id_norma
+                    and str(d.get("articulo_numero")) == articulo)
+        ]
+        return [_focused_doc(id_norma, articulo, definicion)] + rest
+
+    # Non-focused (legacy): move existing full article to front, or fetch it.
     for i, d in enumerate(docs):
         if (str(d.get("id_norma")) == id_norma
                 and str(d.get("articulo_numero")) == articulo):

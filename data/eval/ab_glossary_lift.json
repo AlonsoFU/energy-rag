@@ -1,0 +1,137 @@
+[
+  {
+    "query": "qué es la CNE",
+    "top1_a": "1112591/segundo",
+    "top1_b": "1160108/2",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué hace la SEC",
+    "top1_a": "1207690/4",
+    "top1_b": "1207690/4",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es el CEN",
+    "top1_a": "1160108/2",
+    "top1_b": "1160108/2",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es el SEN",
+    "top1_a": "1187684/duodécimo",
+    "top1_b": "1187684/duodécimo",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es el STN",
+    "top1_a": "16121/5°",
+    "top1_b": "1146553/5",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es la IEP",
+    "top1_a": "1187684/31",
+    "top1_b": "1187684/31",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es Pmax",
+    "top1_a": "250604/31",
+    "top1_b": "250604/13",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es potencia firme",
+    "top1_a": "250604/13",
+    "top1_b": "250604/13",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es potencia instalada",
+    "top1_a": "202975/173",
+    "top1_b": "1149788/4º",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es el Panel de Expertos",
+    "top1_a": "1047565/44",
+    "top1_b": "1047565/44",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es la transmisión troncal",
+    "top1_a": "1047565/14",
+    "top1_b": "1146553/5",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es la transmisión dedicada",
+    "top1_a": "1160108/60",
+    "top1_b": "1112591/2°",
+    "top1_changed": true,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es una distribuidora",
+    "top1_a": "1102690/primero",
+    "top1_b": "1102690/primero",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es la red de transmisión",
+    "top1_a": "250604/13",
+    "top1_b": "250604/13",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  },
+  {
+    "query": "qué es PdE",
+    "top1_a": "16121/5°",
+    "top1_b": "16121/5°",
+    "top1_changed": false,
+    "set_changed": false,
+    "new_in_b": [],
+    "only_in_a": []
+  }
+]
