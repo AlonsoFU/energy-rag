@@ -18,7 +18,8 @@ def _set_focused(monkeypatch, value):
 
 
 def test_focused_replaces_full_article_with_definition(monkeypatch):
-    _patch_hit(monkeypatch, ("250604", "13", "Definición corta del término."))
+    # 4-tuple: canonical == query term ("algo") → NOT an alias → focused path.
+    _patch_hit(monkeypatch, ("250604", "13", "Definición corta del término.", "algo"))
     _set_focused(monkeypatch, True)
     docs = [
         {"id_norma": "250604", "articulo_numero": "13",
@@ -38,7 +39,7 @@ def test_focused_replaces_full_article_with_definition(monkeypatch):
 
 
 def test_focused_prepends_when_article_absent(monkeypatch):
-    _patch_hit(monkeypatch, ("1146553", "5", "Otra definición."))
+    _patch_hit(monkeypatch, ("1146553", "5", "Otra definición.", "x"))
     _set_focused(monkeypatch, True)
     docs = [{"id_norma": "999", "articulo_numero": "1", "articulo_text": "z"}]
     out = ci.inject_definition("qué es x", docs)
@@ -47,7 +48,7 @@ def test_focused_prepends_when_article_absent(monkeypatch):
 
 
 def test_legacy_path_when_flag_off(monkeypatch):
-    _patch_hit(monkeypatch, ("250604", "13", "def"))
+    _patch_hit(monkeypatch, ("250604", "13", "def", "algo"))
     _set_focused(monkeypatch, False)
     docs = [
         {"id_norma": "A", "articulo_numero": "1", "articulo_text": "a"},
@@ -70,7 +71,7 @@ def test_no_injection_when_no_hit(monkeypatch):
 def test_focused_falls_back_when_definition_empty(monkeypatch):
     # Empty curated definition -> focused mode is a no-op-ish: must not inject
     # an empty body; legacy fetch path handles it (here article absent).
-    _patch_hit(monkeypatch, ("250604", "13", "   "))
+    _patch_hit(monkeypatch, ("250604", "13", "   ", "algo"))
     _set_focused(monkeypatch, True)
     docs = [{"id_norma": "250604", "articulo_numero": "13", "articulo_text": "FULL"}]
     out = ci.inject_definition("qué es algo", docs)
