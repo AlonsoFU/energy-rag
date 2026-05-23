@@ -8,54 +8,12 @@ so we can validate the design before committing the spec.
 """
 from __future__ import annotations
 
-import re
-import unicodedata
 from collections import Counter
 
+# Single source of truth for rule A (was inlined here; now imported so the
+# dry-run and the production runner can never diverge).
+from src.extraction.canonical_names import _na, extract_canonical
 from src.storage.connection import with_connection
-
-
-def _na(s: str) -> str:
-    s = unicodedata.normalize("NFKD", s.lower())
-    return "".join(c for c in s if not unicodedata.combining(c))
-
-
-# Boundaries where the canonical noun phrase ends (cut BEFORE the match).
-_BOUNDARY = re.compile(
-    r"(?:[.;:,]"
-    r"|\b(?:a\s+que|al\s+que|a\s+los\s+que|a\s+las\s+que|a\s+la\s+que"
-    r"|que\s+se\s+refiere|que\s+establece|que\s+fija|que\s+indica"
-    r"|que\s+se\s+\w+|en\s+adelante|seg[uú]n|conforme)\b"
-    r"|\b(?:establecid[oa]s?|definid[oa]s?|constituid[oa]s?|conformad[oa]s?"
-    r"|integrad[oa]s?|denominad[oa]s?|es|son|ser[aá]n?|consiste|corresponde"
-    r"|comprende|contemplad[oa]s?|se\s+entender[aá])\b)",
-    re.IGNORECASE,
-)
-
-
-def extract_canonical(nombre: str, definicion: str):
-    """Return (canonical, confidence) or (None, 'no-fire')."""
-    if not definicion:
-        return None, "no-fire"
-    defi = definicion.strip()
-    n_na = _na(nombre).strip()
-    # Definition must START with the concept name (word-aligned).
-    if not _na(defi).startswith(n_na):
-        return None, "no-fire"
-    # Must EXTEND: the char right after the name is a space + more words.
-    after = defi[len(nombre):]
-    if not after[:1].isspace():
-        return None, "no-fire"
-    # Find the first boundary in the part after the name.
-    m = _BOUNDARY.search(after)
-    if not m:
-        return None, "low"  # no clean cut within the definition → review
-    canonical = (nombre + after[: m.start()]).strip().rstrip(" ,;:.")
-    extra_words = len(canonical.split()) - len(nombre.split())
-    if extra_words <= 0:
-        return None, "no-fire"  # boundary right after name → already canonical
-    conf = "high" if 1 <= extra_words <= 8 else "low"
-    return canonical, conf
 
 
 def main() -> None:
