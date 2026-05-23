@@ -8,6 +8,15 @@ Fecha: 2026-05-23 · Sub-proyecto de resolución de entidades (sección A del ro
 > y UX de ambigüedad a specs propios (ver §9). Bases verificadas en memoria
 > [[reference_chilean_norm_hierarchy]] y handoff-2026-05-20 (addenda 2026-05-23).
 
+> **REFINAMIENTO 2026-05-23 (post-implementación, corrección del usuario):** la regla
+> de `select_authoritative` NO rompe empates de rango por fecha cuando el rango promueve
+> una norma de **posible otro contexto/ámbito**. Solo auto-resuelve si el ganador por
+> rango es TAMBIÉN el más reciente de todos (rango+fecha coinciden = mismo contexto, lex
+> posterior); en caso contrario → `conflict` → se pregunta al usuario. Razón: mismo
+> concepto en distinto contexto puede ser definición distinta; en dominio legal no se
+> adivina. Resultado real: 26 resueltos, 2 conflictos (Ministerio, Superintendencia).
+> Ver handoff ADDENDUM 2026-05-23c y [[reference_chilean_norm_hierarchy]].
+
 ## 1. Problema
 
 Un término puede estar definido en varias normas (28 conceptos hoy). El sistema

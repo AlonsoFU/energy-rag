@@ -5,9 +5,17 @@ def C(norma, art, rank, fecha):
     return {"id_norma": norma, "articulo": art, "rank": rank, "fecha": fecha}
 
 
-def test_higher_rank_beats_more_recent():
-    # LEY 1183783 (no date) vs DECRETO 1160108 (2021): rank wins.
+def test_higher_rank_but_older_is_conflict():
+    # LEY 1183783 (no date, possibly different context) vs DECRETO 1160108 (2021):
+    # rank winner != recency winner → not sure → ask (refined rule).
     r = select_authoritative([C("1183783", "2", 3, None), C("1160108", "2", 2, "2021-05-25")])
+    assert r["status"] == "conflict"
+    assert {c["id_norma"] for c in r["candidates"]} == {"1183783", "1160108"}
+
+
+def test_higher_rank_and_most_recent_resolves():
+    # LEY is ALSO the most recent → rank and recency agree → resolve to the LEY.
+    r = select_authoritative([C("1183783", "2", 3, "2022-01-01"), C("1160108", "2", 2, "2021-05-25")])
     assert r["status"] == "resolved" and r["id_norma"] == "1183783"
 
 
