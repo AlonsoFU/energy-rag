@@ -225,6 +225,33 @@ GraphRAG extrae "claims" sobre entidades con estado TRUE/FALSE/SUSPECTED. Para
 legal sería útil (ej. "este artículo está vigente/derogado"), pero es avanzado.
 No construir hasta tener el grafo base + evidencia de necesidad.
 
+## Estado y orden de ejecución (consolidado 2026-05-23)
+
+Backlog ordenado. Cada item gateado por medición. **GraphRAG (Fases 3-6) sigue
+preservado abajo** como inversión grande del final, condicionada a medir queries
+multi-hop reales.
+
+| iter | qué | estado | doc |
+|---|---|---|---|
+| Fase 0 | correctitud dura (strict 85.7%) | ✅ hecho | handoff 2026-05-22 |
+| **A** | nombres canónicos (6 renames, idempotente, ingesta) | ✅ **hecho+aplicado** | specs/plans 2026-05-22-canonical-* |
+| fix | alias-aware (acrónimos: alias_sigla 78→97% / 63→95%) | ✅ **hecho** | handoff 2026-05-23b |
+| **B1** | resolución de autoridad (rango→fecha→flag) + corrige gold del eval | 📋 **spec+plan listos, NO ejecutado** | specs/plans 2026-05-23-authority-resolution |
+| B-ámbito | lex specialis (desempate por dominio) | ⏳ diferido (corpus casi todo energía) | — |
+| B2 | derogación/vigencia (BCN obtxml + parse 175 "Reemplázase" + flag tácitas) | ⏳ diferido (mayoría fuera del corpus, bajo ROI) | Exp T / Fase 2 abajo |
+| B3 | UX de ambigüedad (mostrar opciones + pedir precisar) | ⏳ diferido | — |
+| C | gating del chunk enfocado (focused solo sin competidor) | ⏳ flag dormido, pendiente gating | config inject_focused_definition |
+| D | aliases/siglas automáticos | ⏳ 46 manuales | Fase 1 abajo |
+| E | truncamientos "descriptivos" (Escenario) → C-LLM verbatim o revisión | ⏳ diferido | — |
+| F | aplicar la cola de revisión `glossary/incoming/canonical_review.yaml` | ⏳ pendiente | — |
+| G | **GraphRAG relacional** (Fases 3-6 abajo) | ⏳ diferido, "sí o sí más adelante" | este doc |
+
+**Orden recomendado:** B1 (lever de citas + arregla el eval) → C (focused gating)
+→ D (aliases) → medir distribución real de preguntas → si hay multi-hop, GraphRAG.
+
+**Hallazgo transversal clave:** el ground-truth del eval es **ingenuo de autoridad**
+(espera glosarios-decreto cuando lo correcto es la Ley) → B1 lo corrige.
+
 ## No-objetivos (YAGNI)
 
 - No construir community summaries (Fase 6) sin evidencia de preguntas globales.
