@@ -1,0 +1,68 @@
+{"query": "qué es Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Ley", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Cantidad de Horas de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Cantidad de Horas de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Cantidad de Horas de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Máxima Energía de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Máxima Energía de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Máxima Energía de Almacenamiento", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Estado Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Estado de Reserva Estratégica", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Insumo Principal", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Tramo", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué es Comité", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué significa Comité", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "definición de Unidad Generadora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué significa Unidad Generadora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema Eléctrico Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Informe Técnico de Valorización", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué es Orden Económico", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "definición de Sistema de Generación-Consumo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Decreto de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Comité", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué significa Sistemas de Transmisión Dedicados", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "qué significa Coordinado", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Panel de Expertos o Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Biocombustibles sólidos", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Coordinados", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué es Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "definición de Barra de Transferencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Escenario", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
+{"query": "qué es Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "definición de Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Coordinados", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué es Ingresos Tarifarios Reales", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué es Usuarios e Instituciones Interesadas", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Coordinado", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es Vivienda", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
+{"query": "definición de Coordinados", "expected_norma": "1146553", "expected_articulo": "5", "category": "in_domain"}
+{"query": "qué significa Planificación Energética", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Usuarios e Instituciones Interesadas", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué significa Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "definición de Panel de Expertos o Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain"}
+{"query": "qué es xenobalbúrgico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuál es la receta del pisco sour", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se cura la diabetes tipo 1", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "quién ganó el mundial de fútbol 1962", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es la teoría de la relatividad", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "fórmula química del ácido sulfúrico", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cuántos kilómetros mide la Gran Muralla China", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "cómo se prepara una paella valenciana", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "qué es el síndrome de Asperger", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
+{"query": "biografía de Pablo Neruda", "expected_norma": null, "expected_articulo": null, "category": "off_corpus"}
