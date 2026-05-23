@@ -70,7 +70,7 @@
 {"query": "qué se entiende por Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "explícame qué es Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
-{"query": "qué es Panel", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
+{"query": "qué es Panel de Expertos", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "qué es Sistemas de Transmisión Zonal", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
 {"query": "qué es Sistema de Generación-Consumo", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "qué es Plan de Expansión", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
@@ -88,12 +88,15 @@
 {"query": "qué es Sistema de Transmisión para Polos de Desarrollo", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "qué es Potencia de Suficiencia", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "qué es Sistemas de Transmisión para Polos de Desarrollo", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "qué es SEC", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Superintendencia»"}
-{"query": "qué es Superintendencia de Electricidad y Combustibles", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Superintendencia»"}
-{"query": "qué es CNE", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión»"}
-{"query": "qué es Comisión Nacional de Energía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión»"}
-{"query": "qué es CEN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador»"}
-{"query": "qué es Coordinador Eléctrico Nacional", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador»"}
+{"query": "qué es SEC", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es Superintendencia", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es Superintendencia de Electricidad y Combustibles", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es CNE", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es Comisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es Comisión Nacional de Energía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es CEN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
+{"query": "qué es Coordinador", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
+{"query": "qué es Coordinador Eléctrico Nacional", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
 {"query": "qué es reserva estratégica", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Estado de Reserva Estratégica»"}
 {"query": "qué es potencia firme", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia de Suficiencia»"}
 {"query": "qué es potencia nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
@@ -101,10 +104,11 @@
 {"query": "qué es capacidad nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
 {"query": "qué es transmisión eléctrica", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
 {"query": "qué es red de transmisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
-{"query": "qué es Ministerio de Energía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Ministerio»"}
-{"query": "qué es MinEnergía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Ministerio»"}
-{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel»"}
-{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel»"}
+{"query": "qué es Ministerio de Energía", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Ministerio»"}
+{"query": "qué es MinEnergía", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Ministerio»"}
+{"query": "qué es Panel", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
 {"query": "qué es biomasa sólida", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biomasa»"}
 {"query": "qué es biocombustible sólido", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biocombustibles sólidos»"}
 {"query": "qué es AVI", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «A.V.I.»"}
@@ -129,6 +133,8 @@
 {"query": "qué es V.A.T.T", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.A.T.T.»"}
 {"query": "qué es VI", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.I.»"}
 {"query": "qué es V.I", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.I.»"}
+{"query": "qué es Informe Técnico de Valorización", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Informe Técnico de Valorización de las instalaciones»"}
+{"query": "qué es Registro de Participación", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Registro de Participación ciudadana»"}
 {"query": "qué es Comité", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
 {"query": "qué es Comisión", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
 {"query": "qué es Coordinado", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
