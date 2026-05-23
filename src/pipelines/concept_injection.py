@@ -39,6 +39,25 @@ def extract_definitional_term(query: str) -> Optional[str]:
     return m.group(1).strip() if m else None
 
 
+def authoritative_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]:
+    """Return `(id_norma, articulo)` from `metadata.authoritative` if B1 resolved
+    a single authoritative defining norm; else None.
+
+    A conflict (`authoritative` absent/None, only `authority_conflict` set) is
+    NOT forced here — inject falls back to the fecha-based pick and ambiguity UX
+    is deferred to B3. Written by scripts/resolve_authority.py.
+    """
+    if not metadata:
+        return None
+    auth = metadata.get("authoritative")
+    if not auth:
+        return None
+    norma, art = auth.get("id_norma"), auth.get("articulo")
+    if norma is None or art is None:
+        return None
+    return (str(norma), str(art))
+
+
 @lru_cache(maxsize=1)
 def _concept_index() -> dict[str, tuple[str, str, str, str]]:
     """Build a `{normalized_name_or_alias: (id_norma, articulo_numero,
@@ -60,7 +79,7 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
         # LAST so dated normas beat undated ones.
         cur.execute(
             """
-            SELECT c.nombre, a.id_norma, a.numero, c.definicion
+            SELECT c.nombre, a.id_norma, a.numero, c.definicion, c.metadata
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -70,15 +89,18 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for nombre, id_norma, articulo, definicion in cur.fetchall():
+        for nombre, id_norma, articulo, definicion, metadata in cur.fetchall():
             key = normalize_for_match(nombre)
-            # Keep FIRST per concept = most recent definition (vigencia).
+            # Keep FIRST per concept = most recent definition (vigencia), unless
+            # B1 resolved an authoritative norm by rank → that overrides fecha.
             if key and key not in out:
-                out[key] = (str(id_norma), str(articulo), definicion or "", nombre)
+                auth = authoritative_pointer(metadata)
+                norma_f, art_f = auth if auth else (str(id_norma), str(articulo))
+                out[key] = (norma_f, art_f, definicion or "", nombre)
         # Aliases → same most-recent defining article.
         cur.execute(
             """
-            SELECT c.nombre, c.aliases, a.id_norma, a.numero, c.definicion
+            SELECT c.nombre, c.aliases, a.id_norma, a.numero, c.definicion, c.metadata
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -89,11 +111,13 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for _nombre, aliases, id_norma, articulo, definicion in cur.fetchall():
+        for _nombre, aliases, id_norma, articulo, definicion, metadata in cur.fetchall():
+            auth = authoritative_pointer(metadata)
+            norma_f, art_f = auth if auth else (str(id_norma), str(articulo))
             for alias in (aliases or []):
                 key = normalize_for_match(str(alias))
                 if key and key not in out:
-                    out[key] = (str(id_norma), str(articulo), definicion or "", _nombre)
+                    out[key] = (norma_f, art_f, definicion or "", _nombre)
     return out
 
 
