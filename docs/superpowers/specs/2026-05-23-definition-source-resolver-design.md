@@ -9,10 +9,13 @@ Bases legales verificadas en [[reference_chilean_norm_hierarchy]] y §3.
 > glosario, no al artículo donde el concepto se define de verdad — p.ej. SEC apunta
 > a un glosario circular, no a la Ley 18410 que la crea).
 >
-> **Principio rector (regla de oro):** determinista por defecto; el criterio del
-> LLM entra **sólo** como **propuesta tentativa de baja confianza** para el residuo
-> que la regla no resuelve, y **nunca cierra solo** — queda en cola para el humano.
-> Todo —lo auto-resuelto y lo propuesto— se registra de forma auditable.
+> **Principio rector (regla de oro):** determinista por defecto. Para el residuo
+> que la regla no resuelve, el criterio del LLM entra como **decisión tentativa**
+> que **SÍ se aplica al glosario** (el sistema la usa de inmediato) pero queda
+> **marcada `needs_review`** y listada en un lugar visible, para que el humano la
+> revise y corrija. Nada se "cierra" en silencio: lo tentativo es reversible y
+> siempre señalado. Todo —lo determinista y lo tentativo— se registra de forma
+> auditable; lo tentativo además lleva bandera de revisión.
 
 ## 1. Problema
 
@@ -75,12 +78,13 @@ conceptos (con define_termino y/o candidatos por nombre)
    └────┬───────────────────────────┬──────────────────┘
    resuelto (ALTA confianza)        │ no resuelve (empate / nada sirve)
         │                      ┌────▼─────────────────────────────────┐
-        │                      │ CAPA 2 — Propuesta tentativa (LLM)    │  BAJA confianza
-        │                      │   propone con fundamento; NO cierra   │  → cola humano
+        │                      │ CAPA 2 — Decisión tentativa (LLM)     │  BAJA confianza
+        │                      │   decide con fundamento; reversible   │
         │                      └────┬─────────────────────────────────┘
         ▼                           ▼
-   aplica marca               queda en cola de revisión
+   aplica marca (alta)        aplica marca + flag needs_review (baja)
         └───────────── CAPA 3 — Registro auditable (TODO) ────────────┘
+              (lo needs_review se lista aparte para tu revisión)
 ```
 
 ## 5. Capa 0 — Detección de sospecha (qué mirar, no la respuesta)
@@ -112,27 +116,32 @@ Entre los candidatos `{id_norma, articulo, rank, fecha, ámbito?, def_text}`:
 Reusa y respeta el refinamiento de B1: rango que promueve una norma de posible otro
 contexto (rango ≠ recencia) **no** auto-resuelve → va a Capa 2.
 
-## 7. Capa 2 — Propuesta tentativa (LLM local, baja confianza)
+## 7. Capa 2 — Decisión tentativa (LLM local, baja confianza)
 
 Sólo para el residuo. El LLM (Ollama, sin API paga) recibe los candidatos + el
-nombre/aliases del concepto y **propone** el artículo más probable, **citando qué
+nombre/aliases del concepto y **elige** el artículo más probable, **citando qué
 criterio legal lo sustenta** (jerarquía/fecha/especialidad/sustancia) y, si corresponde,
-señalando un artículo fuera del set de `define_termino` (p.ej. la ley orgánica) como
-candidato a marca nueva. Restricciones:
-- Devuelve `{propuesta:{id_norma,articulo}, criterio, fundamento, confianza:"baja"}`.
-- **Nunca aplica.** Va a la cola de revisión.
-- Determinista en la temperatura/seed posible; pero su salida SIEMPRE es tentativa.
+señalando un artículo fuera del set de `define_termino` (p.ej. la ley orgánica). Política
+(decisión del usuario):
+- Devuelve `{id_norma, articulo, criterio, fundamento, confianza:"baja"}`.
+- **SÍ se aplica** al glosario (apuntador `definition_source`) para que el sistema lo use
+  de inmediato, pero con **`needs_review: true`** + el fundamento.
+- Es **reversible** y queda **listado aparte** para revisión humana. No se "cierra" solo.
+- Temperatura/seed fijos para reproducibilidad; pero la marca SIEMPRE va con `needs_review`.
 
 ## 8. Capa 3 — Confianza y registro auditable
 
 **Confianza atada al criterio que disparó, NO un número inventado por el LLM:**
-- `alta` = la decidió una regla determinista (Capa 1). → se aplica.
-- `baja` = propuesta del LLM (Capa 2). → NO se aplica, va a cola.
+- `alta` = la decidió una regla determinista (Capa 1). → se aplica, sin bandera.
+- `baja` = decisión del LLM (Capa 2). → **se aplica igual**, pero con `needs_review: true`.
+
+Ambas escriben el apuntador `conceptos.metadata.definition_source = {id_norma, articulo,
+criterio, confianza, needs_review}`. La diferencia es la **bandera**, no si se aplica.
 
 **Registro (TODO, no sólo dudas):** `glossary/incoming/definition_source_review.yaml` con,
-por concepto tocado: estado (`applied`/`proposed`), artículo elegido/propuesto, **criterio**,
-**fundamento**, señales de sospecha, y candidatos. Lo `applied` queda registrado para
-auditoría posterior; lo `proposed` espera tu confirmación.
+por concepto tocado: confianza, `needs_review`, artículo elegido, **criterio**,
+**fundamento**, señales de sospecha y candidatos. Lo `needs_review: true` se lista
+destacado para tu revisión; al confirmarlo, se limpia la bandera (idempotente).
 
 ## 9. Componentes (archivos) — el "skill"
 
@@ -140,9 +149,9 @@ auditoría posterior; lo `proposed` espera tu confirmación.
 |---|---|
 | `src/extraction/definition_quality.py` (NUEVO, puro) | Capa 0: `is_label(nombre, definicion)`, `is_remission(def)`, `substance_score(nombre, def)`, `suspect_definition(...) -> (bool, reasons)`. Sin DB. |
 | `src/extraction/definition_source.py` (NUEVO, puro) | Capa 1: `resolve_definition_source(candidates) -> {status, id_norma?, articulo?, criterio?, confianza}`. Reusa `derive_rank`/`select_authoritative`. Descarta etiquetas; aplica jerarquía→fecha→(especialidad). |
-| `src/extraction/definition_proposer.py` (NUEVO) | Capa 2: arma el prompt con los candidatos + criterios legales (§3), llama al LLM local (`get_llm_provider`), parsea `{propuesta,criterio,fundamento,confianza:"baja"}`. Aislado para poder testear con un LLM mock. |
-| `scripts/resolve_definition_sources.py` (NUEVO, runner) | Orquesta capas 0→3 sobre todos los conceptos. `--apply` mueve la marca de definición autoritativa (puntero en `conceptos.metadata.definition_source={id_norma,articulo,criterio}`); escribe el YAML de auditoría. Idempotente (`metadata.def_source_resolved`). Dry-run por defecto. |
-| `src/pipelines/concept_injection.py` (MODIFICAR) | El inject prefiere `metadata.definition_source` (más específico que `authoritative` de B1) cuando existe y es de alta confianza. |
+| `src/extraction/definition_proposer.py` (NUEVO) | Capa 2: arma el prompt con los candidatos + criterios legales (§3), llama al LLM local (`get_llm_provider`), parsea `{id_norma,articulo,criterio,fundamento,confianza:"baja"}`. Aislado para poder testear con un LLM mock. |
+| `scripts/resolve_definition_sources.py` (NUEVO, runner) | Orquesta capas 0→3 sobre todos los conceptos. `--apply` escribe el puntero `conceptos.metadata.definition_source={id_norma,articulo,criterio,confianza,needs_review}` (alta sin bandera; baja con `needs_review`); escribe el YAML de auditoría. Idempotente (`metadata.def_source_resolved`). Dry-run por defecto. |
+| `src/pipelines/concept_injection.py` (MODIFICAR) | El inject prefiere `metadata.definition_source` (más específico que `authoritative` de B1) cuando existe — **incluida la baja confianza** (el sistema usa lo tentativo de inmediato; la bandera `needs_review` es para curación, no bloquea el uso). |
 | `SKILL.md` del sub-proyecto (NUEVO, opcional) | Documenta el procedimiento del skill (capas, criterios, confianza) para reusarlo/ajustarlo a futuro. |
 
 ## 10. Especialidad / ámbito (parcial hoy, honesto)
@@ -161,19 +170,24 @@ re-disparan la detección y, si aplica, una nueva propuesta a la cola.
 
 ## 12. Legal-safety
 
-- Lo que **aplica** es siempre determinista (Capa 1) y trazable al criterio.
-- El criterio del LLM **nunca** se auto-aplica; entra como propuesta de baja confianza.
+- Lo determinista (Capa 1) se aplica sin bandera y es trazable al criterio.
+- El criterio del LLM **se aplica provisionalmente** pero SIEMPRE con `needs_review` +
+  fundamento, **reversible** y **destacado** para revisión humana — nunca se presenta
+  como definición confirmada ni se cierra en silencio (≈ exigencia legal de fundamentación
+  y de revisión). Es un **apuntador de curación**, no contenido generado por el modelo.
 - Detección de sospecha = sólo enruta, no concluye.
-- Todo queda registrado y es revisable (≈ exigencia legal de fundamentación).
+- Todo queda registrado y es auditable; lo tentativo, además, marcado.
 
 ## 13. Errores / edge cases
 
-- Concepto sin candidatos sustantivos en el corpus → propuesta vacía, queda en cola.
-- Definición floja PERO sin alternativa mejor → se conserva la actual, marcada "débil,
-  sin reemplazo" (no se rompe nada).
-- LLM no disponible / salida no parseable → se omite la Capa 2, el concepto queda en cola
-  con las señales de sospecha (fail-open, sin aplicar nada).
-- Idempotencia: 2ª corrida no cambia lo ya `applied` ni re-propone lo ya confirmado.
+- Concepto sin candidatos sustantivos en el corpus → no se cambia la marca; se registra
+  `needs_review` con "sin alternativa mejor".
+- Definición floja PERO sin alternativa mejor → se conserva la actual, marcada
+  `needs_review` ("débil, sin reemplazo"). No se rompe nada.
+- LLM no disponible / salida no parseable → se omite la Capa 2; la marca actual se conserva
+  y el concepto queda `needs_review` con las señales de sospecha (fail-open).
+- Idempotencia: 2ª corrida no cambia lo de alta confianza ni re-marca lo ya confirmado
+  (bandera limpiada). Lo `needs_review` sin confirmar se mantiene estable.
 
 ## 14. Tests
 
@@ -183,14 +197,15 @@ re-disparan la detección y, si aplica, una nueva propuesta a la cola.
 - `definition_source`: dos candidatos (etiqueta vs sustantivo) → elige el sustantivo;
   dos sustantivos distinto rango mismo contexto → gana el mayor; rango≠recencia → no
   resuelve (pasa a Capa 2); un solo sustantivo → resolved alta confianza.
-- `definition_proposer`: con LLM mock → devuelve confianza "baja" y propuesta nunca se
-  marca `applied`.
-- Integración (DB): tras `--apply`, SEC/CNE/Ministerio quedan `proposed` (no `applied`)
-  con candidato a ley orgánica + fundamento; el YAML de auditoría lista criterio y razón.
+- `definition_proposer`: con LLM mock → devuelve `confianza:"baja"`; el runner aplica el
+  puntero PERO con `needs_review: true`.
+- Integración (DB): tras `--apply`, SEC/CNE/Ministerio tienen `definition_source` aplicado
+  con `needs_review: true`, candidato a ley orgánica + fundamento; el YAML de auditoría los
+  lista destacados con criterio y razón.
 
 ## 15. Diferido
 
 - B-ámbito completo (derivar materia/organismo) para que la especialidad sea determinista.
-- Aplicar automáticamente lo `proposed` tras confirmación masiva del usuario (otro paso).
+- Flujo de confirmación masiva: revisar lo `needs_review` y limpiar banderas en lote.
 - Crear aristas `define_termino` nuevas hacia leyes orgánicas (hoy sólo puntero en
   metadata; promover a arista es un paso posterior).
