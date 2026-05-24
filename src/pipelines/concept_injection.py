@@ -139,6 +139,53 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
     return out
 
 
+@lru_cache(maxsize=1)
+def _all_concepts() -> list[dict]:
+    """[{nombre, aliases}] for every concept (phrasing-agnostic detection)."""
+    with with_connection() as conn, conn.cursor() as cur:
+        cur.execute("SELECT nombre, aliases FROM conceptos")
+        return [{"nombre": n, "aliases": a or []} for n, a in cur.fetchall()]
+
+
+def _matched_term(query_norm: str, c: dict):
+    """Literal term (canonical or alias) by which concept c matched, + is_alias."""
+    from src.pipelines.retrieve import find_term_in_query
+    if find_term_in_query(c["nombre"], query_norm):
+        return c["nombre"], False
+    for a in (c["aliases"] or []):
+        if a and find_term_in_query(a, query_norm):
+            return a, True
+    return None, False
+
+
+def find_subject_concept(query: str):
+    """Return (id_norma, articulo, definicion, canonical, alias_or_None) when the
+    query centers on a SINGLE curated concept with a defining article; else None.
+    Phrasing-agnostic; guards substring over-matching by keeping the LONGEST
+    matched term and dropping others contained in it. A distinct (non-contained)
+    second concept → relational → None.
+    """
+    nq = normalize_for_match(query)
+    matched = []  # (canonical, term, is_alias)
+    for c in _all_concepts():
+        term, is_alias = _matched_term(nq, c)
+        if term:
+            matched.append((c["nombre"], term, is_alias))
+    if not matched:
+        return None
+    matched.sort(key=lambda m: len(m[1]), reverse=True)
+    subject = matched[0]
+    subj_term_n = normalize_for_match(subject[1])
+    for _canon, term, _is in matched[1:]:
+        if normalize_for_match(term) not in subj_term_n:
+            return None
+    entry = _concept_index().get(normalize_for_match(subject[0]))
+    if entry is None:
+        return None
+    id_norma, articulo, definicion, canon = entry
+    return (id_norma, articulo, definicion, canon, subject[1] if subject[2] else None)
+
+
 def find_curated_definition(query: str) -> Optional[tuple[str, str, str, str]]:
     """Return `(id_norma, articulo_numero, definicion, nombre_canonico)` if the
     query's term matches a curated concept; else None. No fuzzy.
