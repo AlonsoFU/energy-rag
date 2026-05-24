@@ -1,0 +1,118 @@
+- id: 88
+  nombre: Superintendencia de Electricidad y Combustibles
+  id_norma: '29819'
+  articulo: '23'
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo 23 de la Ley N° 18.410 (id_norma=29819) es la norma fundacional
+    que define la naturaleza jurídica de la entidad, estableciendo explícitamente
+    que la Superintendencia de Electricidad y Combustibles es la 'sucesora legal'
+    del Servicio anterior, lo cual constituye la definición sustantiva de su identidad
+    y origen. Los demás artículos citados se refieren a funciones específicas, dotación
+    de personal, sanciones o modificaciones posteriores, por lo que no definen qué
+    ES la entidad en su esencia.
+  reasons:
+  - label
+- id: 96
+  nombre: Comisión Nacional de Energía
+  id_norma: '1146553'
+  articulo: '5'
+  criterio: jerarquia
+  confianza: baja
+  needs_review: true
+  fundamento: La norma de mayor jerarquía (Ley) que define la naturaleza y funciones
+    de la Comisión Nacional de Energía es la Ley 20.936 (Decreto Ley 20.936), promulgada
+    el 1 de febrero de 2019 (id_norma=1146553). El artículo 5 de esta ley establece
+    que la Comisión es el organismo regulador del sector eléctrico y de gas, definiendo
+    su esencia institucional, a diferencia de las normas de menor jerarquía (decretos
+    o resoluciones) que solo mencionan su nombre en contextos administrativos específicos
+    o de traspaso de personal.
+  reasons:
+  - label
+- id: 171
+  nombre: Ministerio
+  id_norma: '1008692'
+  articulo: 1º
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo 1º de la norma 1008692 (Ley 19.900) establece la creación
+    del Ministerio de Energía y define su naturaleza esencial como 'el órgano superior
+    de colaboración del Presidente de la República en las funciones de gobierno y
+    administración del sector de energía', lo cual constituye la definición sustantiva
+    de la entidad. Los demás artículos seleccionados son posteriores (fecha), de menor
+    jerarquía (decretos) o se refieren a atribuciones específicas, reemplazos de nombre
+    o funciones operativas, sin definir qué ES el Ministerio en su esencia.
+  reasons:
+  - label
+- id: 264
+  nombre: A.V.I.
+  id_norma: '1215040'
+  articulo: primero
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo primero de la norma 1215040 (fecha 2025-05-27) es el que
+    mejor define el concepto porque establece explícitamente la fijación de los valores
+    de A.V.I. (Anualidad del Valor de Inversión) y define el periodo de aplicación,
+    siendo una norma específica, posterior y de mayor jerarquía en la materia que
+    los demás candidatos.
+  reasons:
+  - label
+- id: 268
+  nombre: GNL
+  id_norma: '1112591'
+  articulo: 2°
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo 2° de la norma 1112591 define explícitamente el concepto
+    de GNL como 'Gas Natural Licuado', estableciendo su naturaleza jurídica y física,
+    mientras que los demás artículos o normas mencionadas se refieren a procedimientos
+    administrativos, derogaciones, o contextos ajenos a la definición sustantiva del
+    término.
+  reasons:
+  - label
+- id: 279
+  nombre: V.I.
+  id_norma: null
+  articulo: null
+  criterio: ninguno
+  confianza: baja
+  needs_review: true
+  fundamento: sin propuesta (regla no resolvió, LLM no propuso)
+  reasons:
+  - label
+- id: 398
+  nombre: Informe Técnico de Valorización de las instalaciones
+  id_norma: '1146553'
+  articulo: '5'
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo 5 es la definición sustantiva del concepto, estableciendo
+    explícitamente qué es el 'Informe técnico de valorización de las instalaciones'
+    y su relación con el artículo 112 de la Ley, mientras que los demás artículos
+    se refieren a plazos, procedimientos de audiencia, discrepancias o aspectos específicos
+    de la elaboración del informe.
+  reasons:
+  - remission
+  - label
+- id: 421
+  nombre: Registro de Participación ciudadana
+  id_norma: '1099982'
+  articulo: 29 quinquies
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo 29 quinquies de la norma 1099982 (fecha 2017) es el único
+    que define sustantivamente el concepto, estableciendo explícitamente que 'la Comisión
+    deberá llevar un registro de participación ciudadana' para efectos de notificaciones
+    y comunicaciones, mientras que los demás artículos o bien remiten a la Ley (art.
+    90), describen procedimientos de inscripción (art. 118, 119), actualizaciones
+    (art. 123) o requisitos de documentación (art. 119), sin definir la naturaleza
+    del registro en sí mismo.
+  reasons:
+  - remission
+  - label
