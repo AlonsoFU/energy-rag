@@ -21,6 +21,7 @@ from pathlib import Path
 import yaml
 from psycopg.rows import dict_row
 
+from src.extraction.candidate_gather import gather_candidates
 from src.extraction.definition_quality import suspect_definition
 from src.extraction.definition_source import resolve_definition_source
 from src.extraction.definition_proposer import propose_definition_source
@@ -30,7 +31,7 @@ from src.storage.connection import with_connection
 REVIEW_PATH = Path("glossary/incoming/definition_source_review.yaml")
 
 SQL = """
-SELECT c.id AS concepto_id, c.nombre, c.definicion,
+SELECT c.id AS concepto_id, c.nombre, c.definicion, c.aliases,
        a.id_norma, a.numero AS articulo, a.texto,
        n.tipo, n.titulo, n.fecha_publicacion
 FROM conceptos c
@@ -55,12 +56,60 @@ def build_candidates(rows: list[dict]) -> list[dict]:
     return out
 
 
+def _build_store():
+    """Construct the PostgresStore, mirroring src/cli.py."""
+    from src.components.vectorstore import PostgresStore
+    return PostgresStore()
+
+
+def _build_retriever():
+    """Build the real GPU-backed retriever, mirroring src/cli.py."""
+    from src.components.embedder import Qwen3Embedder
+    from src.components.reranker import Qwen3Reranker
+    from src.pipelines.retrieve import SimpleRetriever
+    store = _build_store()
+    return SimpleRetriever(store, Qwen3Embedder(), Qwen3Reranker())
+
+
+def _retrieved_candidates(retriever, cur, nombre, aliases, norma_cache, top_k=8):
+    """Run retrieval for the concept name + aliases; enrich each hit with
+    rank/fecha (looked up from `normas`) so it is a valid candidate. origin is
+    added later by gather_candidates."""
+    queries = [nombre] + [str(a) for a in (aliases or [])]
+    seen = set()
+    out = []
+    for q in queries:
+        for doc in retriever.retrieve(q, top_k=top_k):
+            idn, art = str(doc.get("id_norma")), str(doc.get("articulo_numero"))
+            if not idn or not art or (idn, art) in seen:
+                continue
+            seen.add((idn, art))
+            if idn not in norma_cache:
+                cur.execute("SELECT tipo, titulo, fecha_publicacion FROM normas WHERE id_norma = %s", (idn,))
+                row = cur.fetchone()
+                norma_cache[idn] = row
+            n = norma_cache.get(idn)
+            if not n:
+                continue
+            rank, _ = derive_rank(n["tipo"], n["titulo"])
+            out.append({
+                "id_norma": idn, "articulo": art, "rank": rank,
+                "fecha": n["fecha_publicacion"].isoformat() if n["fecha_publicacion"] else None,
+                "definicion": (doc.get("text") or "")[:2000],
+            })
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true", help="write to DB + YAML (default dry-run)")
+    ap.add_argument("--with-retrieval", action="store_true",
+                    help="for unresolved concepts, also gather candidates via corpus retrieval (GPU)")
     args = ap.parse_args()
 
     decisions: list[dict] = []
+    retriever = _build_retriever() if args.with_retrieval else None
+    norma_cache: dict = {}
     with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
         cur.execute(SQL)
         by_concept: dict[tuple, list[dict]] = defaultdict(list)
@@ -68,7 +117,7 @@ def main() -> None:
         for row in cur.fetchall():
             key = (row["concepto_id"], row["nombre"])
             by_concept[key].append(row)
-            meta.setdefault(key, {"definicion": row["definicion"]})
+            meta.setdefault(key, {"definicion": row["definicion"], "aliases": row.get("aliases") or []})
 
         for (cid, nombre), rows in by_concept.items():
             definicion = meta[(cid, nombre)]["definicion"] or ""
@@ -83,7 +132,13 @@ def main() -> None:
                      "confianza": "alta", "needs_review": False,
                      "fundamento": "", "reasons": reasons}
             else:
-                prop = propose_definition_source(nombre, cands)
+                cands_for_proposer = cands
+                if args.with_retrieval and retriever is not None:
+                    retrieved = _retrieved_candidates(retriever, cur, nombre,
+                                                       meta[(cid, nombre)].get("aliases"),
+                                                       norma_cache)
+                    cands_for_proposer = gather_candidates(cands, retrieved)
+                prop = propose_definition_source(nombre, cands_for_proposer)
                 if prop.get("status") != "proposed":
                     d = {"id": cid, "nombre": nombre, "id_norma": None,
                          "articulo": None, "criterio": "ninguno",
