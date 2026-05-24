@@ -20,13 +20,21 @@ def test_authoritative_pointer_conflict_not_forced():
 
 
 def test_inject_uses_authoritative_article(monkeypatch):
-    # Index resolves the alias "sec" to the AUTHORITATIVE LEY article (1183783),
+    # Index resolves the alias "SEC" to the AUTHORITATIVE LEY article (1183783),
     # not a fecha-based decreto. inject must cite that article.
     monkeypatch.setattr(ci, "_concept_index", lambda: {
         "sec": ("1183783", "2",
                 "la Superintendencia de Electricidad y Combustibles.",
                 "Superintendencia de Electricidad y Combustibles"),
+        "superintendencia de electricidad y combustibles": (
+            "1183783", "2",
+            "la Superintendencia de Electricidad y Combustibles.",
+            "Superintendencia de Electricidad y Combustibles"),
     })
+    monkeypatch.setattr(ci, "_all_concepts", lambda: [
+        {"nombre": "Superintendencia de Electricidad y Combustibles",
+         "aliases": ["SEC"]},
+    ])
     out = ci.inject_definition("qué es SEC", [])
     assert out[0]["id_norma"] == "1183783"
     assert out[0]["articulo_numero"] == "2"

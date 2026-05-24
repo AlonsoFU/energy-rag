@@ -285,23 +285,18 @@ def inject_definition(query: str, docs: list[dict]) -> list[dict]:
 
     Returns the same list type. If no injection applies, returns docs unchanged.
     """
-    hit = find_curated_definition(query)
-    if hit is None:
+    subject = find_subject_concept(query)
+    if subject is None:
         return docs
-    id_norma, articulo, definicion, canonical = hit
-
-    # Alias query? The matched term (what the user typed) differs from the
-    # concept's canonical name under orthographic normalization.
-    term = extract_definitional_term(query)
-    is_alias = bool(term and canonical
-                    and normalize_for_match(term) != normalize_for_match(canonical))
+    id_norma, articulo, definicion, canonical, alias = subject
+    is_alias = alias is not None
     if is_alias and definicion.strip():
         rest = [
             d for d in docs
             if not (str(d.get("id_norma")) == id_norma
                     and str(d.get("articulo_numero")) == articulo)
         ]
-        return [_alias_link_doc(term.strip(), canonical, definicion,
+        return [_alias_link_doc(alias.strip(), canonical, definicion,
                                 id_norma, articulo)] + rest
 
     # Lazy import keeps this module import-cheap and avoids a cycle.

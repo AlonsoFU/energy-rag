@@ -17,6 +17,13 @@ def test_definition_source_used_even_if_low_confidence(monkeypatch):
     monkeypatch.setattr(ci, "_concept_index", lambda: {
         "sec": ("29819", "23", "entidad que sucedió legalmente…",
                 "Superintendencia de Electricidad y Combustibles"),
+        "superintendencia de electricidad y combustibles": (
+            "29819", "23", "entidad que sucedió legalmente…",
+            "Superintendencia de Electricidad y Combustibles"),
     })
+    monkeypatch.setattr(ci, "_all_concepts", lambda: [
+        {"nombre": "Superintendencia de Electricidad y Combustibles",
+         "aliases": ["SEC"]},
+    ])
     out = ci.inject_definition("qué es SEC", [])
     assert out[0]["id_norma"] == "29819" and out[0]["articulo_numero"] == "23"

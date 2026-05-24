@@ -8,7 +8,13 @@ from src.pipelines import concept_injection as ci
 
 
 def _patch_hit(monkeypatch, hit):
-    monkeypatch.setattr(ci, "find_curated_definition", lambda q: hit)
+    # hit is a 4-tuple (id_norma, articulo, definicion, canonical) or None;
+    # find_subject_concept returns a 5-tuple with alias as the 5th element.
+    if hit is None:
+        monkeypatch.setattr(ci, "find_subject_concept", lambda q: None)
+    else:
+        monkeypatch.setattr(ci, "find_subject_concept",
+                            lambda q: (hit[0], hit[1], hit[2], hit[3], None))
 
 
 def _set_focused(monkeypatch, value):
