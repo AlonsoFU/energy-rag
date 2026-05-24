@@ -58,6 +58,24 @@ def authoritative_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]
     return (str(norma), str(art))
 
 
+def definition_source_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]:
+    """Return (id_norma, articulo) from metadata.definition_source if present.
+
+    Used even when confianza is 'baja' (needs_review): the system uses the
+    tentative source immediately; the flag is a curation marker, not a gate.
+    More specific than authoritative_pointer — prefer it when both exist.
+    """
+    if not metadata:
+        return None
+    ds = metadata.get("definition_source")
+    if not ds:
+        return None
+    norma, art = ds.get("id_norma"), ds.get("articulo")
+    if norma is None or art is None:
+        return None
+    return (str(norma), str(art))
+
+
 @lru_cache(maxsize=1)
 def _concept_index() -> dict[str, tuple[str, str, str, str]]:
     """Build a `{normalized_name_or_alias: (id_norma, articulo_numero,
@@ -94,8 +112,8 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
             # Keep FIRST per concept = most recent definition (vigencia), unless
             # B1 resolved an authoritative norm by rank → that overrides fecha.
             if key and key not in out:
-                auth = authoritative_pointer(metadata)
-                norma_f, art_f = auth if auth else (str(id_norma), str(articulo))
+                ptr = definition_source_pointer(metadata) or authoritative_pointer(metadata)
+                norma_f, art_f = ptr if ptr else (str(id_norma), str(articulo))
                 out[key] = (norma_f, art_f, definicion or "", nombre)
         # Aliases → same most-recent defining article.
         cur.execute(
@@ -112,8 +130,8 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
             """
         )
         for _nombre, aliases, id_norma, articulo, definicion, metadata in cur.fetchall():
-            auth = authoritative_pointer(metadata)
-            norma_f, art_f = auth if auth else (str(id_norma), str(articulo))
+            ptr = definition_source_pointer(metadata) or authoritative_pointer(metadata)
+            norma_f, art_f = ptr if ptr else (str(id_norma), str(articulo))
             for alias in (aliases or []):
                 key = normalize_for_match(str(alias))
                 if key and key not in out:
