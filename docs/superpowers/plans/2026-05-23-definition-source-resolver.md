@@ -180,9 +180,13 @@ def test_substantive_beats_label_same_rank():
     assert r["confianza"] == "alta" and r["criterio"] == "sustancia"
 
 def test_higher_rank_substantive_wins():
+    # LEY (rank 3) that is ALSO the most recent beats the older DECRETO: rank and
+    # recency AGREE → safe to resolve by hierarchy. A higher-rank-but-OLDER norm
+    # is instead unresolved (see test_rank_disagrees_with_recency_is_unresolved) —
+    # rank must not auto-win over a more-recent norm of possibly different context.
     r = resolve_definition_source(NAME, [
-        C("A", "2", 2, "2021-01-01", SUBSTANCE),
-        C("B", "5", 3, "2020-01-01", SUBSTANCE + " Ley."),
+        C("A", "2", 2, "2020-01-01", SUBSTANCE),
+        C("B", "5", 3, "2021-01-01", SUBSTANCE + " Ley."),
     ])
     assert r["status"] == "resolved" and r["id_norma"] == "B"
     assert r["criterio"] == "jerarquia"
@@ -248,10 +252,10 @@ def resolve_definition_source(nombre: str, candidates: list[dict]) -> dict:
     ])
     if auth["status"] != "resolved":
         return {"status": "unresolved", "reason": "rank-recency-conflict"}
-    # Did rank decide, or was it a single top-rank? Tag the criterion.
+    # Tag the criterion: unique top rank → jerarquía; otherwise fecha broke the tie.
     best_rank = max(c["rank"] for c in subs)
     top = [c for c in subs if c["rank"] == best_rank]
-    criterio = "jerarquia" if len(top) == 1 and len(subs) > 1 else "fecha"
+    criterio = "jerarquia" if len(top) == 1 else "fecha"
     return {"status": "resolved", "id_norma": auth["id_norma"],
             "articulo": auth["articulo"], "confianza": "alta",
             "criterio": criterio}
