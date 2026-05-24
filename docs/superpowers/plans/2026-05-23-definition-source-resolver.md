@@ -625,6 +625,34 @@ Then in BOTH SELECT loops of `_concept_index`, replace the pointer-selection lin
 
 ---
 
+## EXTENSIÓN (2026-05-24) — ampliar candidatos por retrieval
+
+Motivo: el proposer sólo veía candidatos `define_termino` (todos etiquetas para
+instituciones) → no alcanzaba la ley orgánica (18410/20402). Ampliamos los
+candidatos con artículos traídos por retrieval del corpus. **Regla legal-safe:**
+los candidatos `retrieved` son fuzzy → SÓLO los ve la Capa 2 (proposer, baja
+confianza); la Capa 1 determinista IGNORA lo retrieved (nunca auto-aplica algo
+fuzzy). Cada candidato lleva `origin: "curated" | "retrieved"`.
+
+### Task 7: merge puro + Capa 1 ignora retrieved
+**Files:** Create `src/extraction/candidate_gather.py`; Modify `src/extraction/definition_source.py`; Test `tests/extraction/test_candidate_gather.py`, update `tests/extraction/test_definition_source.py`.
+
+- [ ] `gather_candidates(curated: list[dict], retrieved: list[dict]) -> list[dict]`: tag `origin="curated"`/`"retrieved"`, dedup por `(id_norma, articulo)` prefiriendo curated. Pure.
+- [ ] `definition_source.resolve_definition_source`: filtra a `origin != "retrieved"` ANTES de la lógica determinista (candidato sin `origin` = curated, retrocompat). Un candidato sustantivo SÓLO retrieved → NO resuelve (queda para Capa 2).
+- [ ] Tests: merge dedup+tag+precedencia; `resolve_definition_source` con un sustantivo retrieved-only → `unresolved`.
+
+### Task 8: wire retrieval en el runner
+**Files:** Modify `scripts/resolve_definition_sources.py`.
+
+- [ ] Flag `--with-retrieval` (default off). Cuando on y un concepto NO resuelve determinista: construir retriever lazy (`SimpleRetriever(store, Qwen3Embedder(), Qwen3Reranker())`, como `src/cli.py:42-49`), `retrieve(nombre, top_k=8)` (+ por cada alias), enriquecer cada doc retrieved con `rank=derive_rank(n.tipo,n.titulo)` y `fecha` vía lookup a `normas`, `definicion=articulo_text`, `origin="retrieved"`; `gather_candidates(curated, retrieved)`; pasar el merge al proposer.
+- [ ] Sin `--with-retrieval` el comportamiento es idéntico al actual (sólo curated).
+- [ ] Validación: import compila; el subagente NO corre GPU.
+
+### Task 9 (la corro yo, GPU): aplicar + eval antes/después
+- [ ] BEFORE: generar set dirigido (~34 conceptos tocados + aliases + controles) y correr eval SIN aplicar (estado B1).
+- [ ] `--apply --with-retrieval`.
+- [ ] AFTER: re-correr el mismo set; comparar por concepto/categoría; verificar SEC/Ministerio.
+
 ## Self-Review
 
 - **Cobertura del spec:** §5 Capa 0 → Task 1 ✓ · §6 Capa 1 → Task 2 ✓ · §7 Capa 2 → Task 3 ✓ · §8 confianza/registro (puntero + YAML + needs_review) → Task 4 ✓ · §9 inject → Task 5 ✓ · §11 correr en cadena + §14 integración → Task 6 ✓ · §12 legal-safety (alta sin bandera / baja con needs_review, fail-open) → Tasks 3,4 ✓.
