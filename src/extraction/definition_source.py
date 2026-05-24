@@ -18,7 +18,10 @@ def _substantive(name: str, cands: list[dict]) -> list[dict]:
 
 
 def resolve_definition_source(nombre: str, candidates: list[dict]) -> dict:
-    subs = _substantive(nombre, candidates)
+    # Deterministic layer trusts only curated candidates; retrieved (fuzzy) ones
+    # are left for the tentative proposer (legal-safety: no auto-resolve on fuzzy).
+    curated = [c for c in candidates if c.get("origin", "curated") != "retrieved"]
+    subs = _substantive(nombre, curated)
     if not subs:
         return {"status": "unresolved", "reason": "no-substantive-candidate"}
     if len(subs) == 1:

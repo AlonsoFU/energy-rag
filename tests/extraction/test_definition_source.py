@@ -47,3 +47,21 @@ def test_only_labels_is_unresolved():
 def test_single_substantive_resolves():
     r = resolve_definition_source(NAME, [C("A", "2", 2, "2019-01-01", SUBSTANCE)])
     assert r["status"] == "resolved" and r["id_norma"] == "A"
+
+
+def test_retrieved_only_substantive_does_not_resolve():
+    # A substantive candidate that came from RETRIEVAL (fuzzy) must NOT trigger a
+    # high-confidence deterministic resolution — it is only for the LLM layer.
+    r = resolve_definition_source(NAME, [
+        {"id_norma": "A", "articulo": "2", "rank": 2, "fecha": "2020-01-01",
+         "definicion": LABEL, "origin": "curated"},
+        {"id_norma": "B", "articulo": "23", "rank": 3, "fecha": "2021-01-01",
+         "definicion": SUBSTANCE, "origin": "retrieved"},
+    ])
+    assert r["status"] == "unresolved"
+
+
+def test_curated_without_origin_still_works():
+    # Backward-compat: candidates with no 'origin' key are treated as curated.
+    r = resolve_definition_source(NAME, [C("A", "2", 2, "2019-01-01", SUBSTANCE)])
+    assert r["status"] == "resolved"
