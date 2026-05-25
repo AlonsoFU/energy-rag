@@ -17,3 +17,9 @@
   nombre: Ministerio
   id_norma: '1008692'     # Ley 20402 (crea el Ministerio de Energía)
   articulo: 1º
+- concepto_id: 264
+  nombre: A.V.I.
+  id_norma: '1146553'     # Reglamento de Valorización (Decreto 10)
+  articulo: '48'          # método: "El A.V.I. se determinará a partir de su V.I.,
+                          # considerando la vida útil (art 104) y la tasa (art 118) de la Ley"
+                          # (definición=método estable; los VALORES por línea/decreto son otra capa)

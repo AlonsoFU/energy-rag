@@ -111,8 +111,8 @@
 {"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
 {"query": "qué es biomasa sólida", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biomasa»"}
 {"query": "qué es biocombustible sólido", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biocombustibles sólidos»"}
-{"query": "qué es AVI", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «A.V.I.»"}
-{"query": "qué es A.V.I", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «A.V.I.»"}
+{"query": "qué es AVI", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "48", "note": "alias de «A.V.I.»"}
+{"query": "qué es A.V.I", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "48", "note": "alias de «A.V.I.»"}
 {"query": "qué es COMA", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «C.O.M.A.»"}
 {"query": "qué es C.O.M.A", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «C.O.M.A.»"}
 {"query": "qué es Plan de Expansión de la Transmisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Plan de Expansión»"}
