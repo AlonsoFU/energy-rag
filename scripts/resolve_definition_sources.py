@@ -64,9 +64,16 @@ def build_candidates(rows: list[dict]) -> list[dict]:
         origin = "curated" if r["tipo_relacion"] == "define_termino" else "cita"
         out.append({
             "id_norma": r["id_norma"], "articulo": r["articulo"],
-            "numero": r.get("norma_numero"), "rank": rank, "origin": origin,
+            "numero": r.get("norma_numero"), "titulo": r.get("titulo"),
+            "rank": rank, "origin": origin,
             "fecha": r["fecha_publicacion"].isoformat() if r["fecha_publicacion"] else None,
-            "definicion": (r["texto"] or r["definicion"] or "")[:2000],
+            # `definicion` = the concept's MARKED definition (same per concept):
+            # this is what is_label inspects in Capa 1, so a glossary article that
+            # only labels the concept ("Comisión: CNE") routes to Capa 2, not a
+            # false high-confidence resolve. `texto` = the article body, used by
+            # definitoriedad scoring and shown to the proposer.
+            "definicion": (r["definicion"] or "")[:2000],
+            "texto": (r["texto"] or "")[:2000],
         })
     return out
 
@@ -115,8 +122,9 @@ def _retrieved_candidates(retriever, cur, nombre, aliases, norma_cache, top_k=8)
             rank, _ = derive_rank(n["tipo"], n["titulo"])
             out.append({
                 "id_norma": idn, "articulo": art, "rank": rank,
+                "numero": n.get("numero"), "titulo": n.get("titulo"),
                 "fecha": n["fecha_publicacion"].isoformat() if n["fecha_publicacion"] else None,
-                "definicion": (doc.get("text") or "")[:2000],
+                "definicion": "", "texto": (doc.get("text") or "")[:2000],
             })
     return out
 
@@ -179,10 +187,13 @@ def main() -> None:
                          "fundamento": "sin propuesta (regla no resolvió, LLM no propuso)",
                          "reasons": reasons}
                 else:
+                    fund = prop["fundamento"]
+                    if prop.get("fundamento_warning"):
+                        fund = "[fundamento_inconsistente con la norma elegida] " + fund
                     d = {"id": cid, "nombre": nombre, "id_norma": prop["id_norma"],
                          "articulo": prop["articulo"], "criterio": prop["criterio"],
                          "confianza": "baja", "needs_review": True,
-                         "fundamento": prop["fundamento"], "reasons": reasons}
+                         "fundamento": fund, "reasons": reasons}
             decisions.append(d)
 
         applied = [d for d in decisions if d["id_norma"]]

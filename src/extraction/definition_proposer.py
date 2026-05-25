@@ -24,18 +24,26 @@ def _norm_numbers(text: str) -> set[str]:
     return {m.group(0).replace(".", "") for m in _NORM_NUM.finditer(text or "")}
 
 
-def _fundamento_consistent(fundamento: str, picked_numero: Optional[str]) -> bool:
-    """Anti-hallucination guard: if the justification cites norm numbers but
-    NONE matches the picked norm's own number, the justification is unmoored
-    from the pick (e.g. picked Decreto 10 but argued about "Ley 20.936") → reject.
-    If no norm number is cited (can't verify) or we lack the picked number, allow.
+def _fundamento_consistent(fundamento: str, pick: dict) -> bool:
+    """Anti-hallucination signal: does the justification cite the SAME norm it
+    picked? Compares numbers cited in the fundamento against the numbers in the
+    picked norm's TITLE (reliable) and `numero` field (often mislabeled, e.g.
+    DL 2224 stored as 20776 — so the title is the source of truth). If the
+    fundamento cites norm numbers but none matches → inconsistent.
+
+    NOT used to reject (these picks are all needs_review anyway, and bad data
+    would drop good picks); the runner annotates the inconsistency for the human.
     """
-    if not picked_numero:
-        return True
     cited = _norm_numbers(fundamento)
     if not cited:
-        return True
-    return str(picked_numero).replace(".", "") in cited
+        return True  # nothing to verify
+    own = _norm_numbers(pick.get("titulo") or "")
+    num = str(pick.get("numero") or "").replace(".", "")
+    if num:
+        own.add(num)
+    if not own:
+        return True  # can't verify against this norm
+    return bool(cited & own)
 
 _SYSTEM = (
     "Eres un asistente jurídico. Te dan un concepto y varios artículos que lo "
@@ -51,9 +59,10 @@ _SYSTEM = (
 def _candidates_block(cands: list[dict]) -> str:
     lines = []
     for c in cands:
+        cuerpo = (c.get("texto") or c.get("definicion") or "")[:300]
         lines.append(
             f"- id_norma={c['id_norma']} articulo={c['articulo']} "
-            f"rank={c['rank']} fecha={c['fecha']}: {c.get('definicion','')[:300]}")
+            f"rank={c['rank']} fecha={c['fecha']}: {cuerpo}")
     return "\n".join(lines)
 
 
@@ -72,10 +81,10 @@ def propose_definition_source(nombre: str, candidates: list[dict],
     if pick not in by_key:
         return {"status": "no-proposal"}
     fundamento = data.get("fundamento", "")
-    # Guard A: reject a justification that argues about a different norm number
-    # than the one picked (caught the CNE hallucination generically).
-    if not _fundamento_consistent(fundamento, by_key[pick].get("numero")):
-        return {"status": "no-proposal", "reason": "fundamento-mismatch"}
+    # Guard A (advisory, not a reject): flag a justification that argues about a
+    # different norm than the one picked (the CNE "Ley 20.936" hallucination).
+    consistent = _fundamento_consistent(fundamento, by_key[pick])
     return {"status": "proposed", "id_norma": pick[0], "articulo": pick[1],
             "criterio": data.get("criterio", "llm"),
-            "fundamento": fundamento, "confianza": "baja"}
+            "fundamento": fundamento, "confianza": "baja",
+            "fundamento_warning": not consistent}

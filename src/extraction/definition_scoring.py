@@ -47,7 +47,8 @@ def score_definitoriedad(nombre: str, candidates: list[dict],
     """
     if not candidates:
         return candidates
-    texts = [_probe(nombre)] + [(c.get("definicion") or "") for c in candidates]
+    texts = [_probe(nombre)] + [
+        (c.get("texto") or c.get("definicion") or "") for c in candidates]
     vecs = embed_fn(texts)
     qv = vecs[0]
     for c, v in zip(candidates, vecs[1:]):
