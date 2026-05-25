@@ -28,7 +28,7 @@ import json
 from pathlib import Path
 
 from psycopg.rows import dict_row
-from src.pipelines.concept_injection import authoritative_pointer
+from src.pipelines.concept_injection import authoritative_pointer, definition_source_pointer
 from src.storage.connection import with_connection
 
 # Energy-domain normas (verified earlier) — keep in_domain categories clean.
@@ -150,8 +150,8 @@ def main() -> None:
     for i, c in enumerate(concepts):
         # Authority-based gold: if B1 resolved an authoritative norm, use it
         # (the fecha-based pick is naive of legal rank). Single source of truth.
-        auth = authoritative_pointer(c.get("metadata"))
-        norma, art = auth if auth else (c["id_norma"], str(c["articulo"]).strip())
+        ptr = definition_source_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
         nm = c["nombre"].strip()
         rows.append({"query": f"qué es {nm}", "category": "definicional_canonico",
                      "expected_norma": norma, "expected_articulo": art})
@@ -167,8 +167,8 @@ def main() -> None:
         alias_concepts = cur.fetchall()
     seen_alias: set[str] = set()
     for c in alias_concepts:
-        auth = authoritative_pointer(c.get("metadata"))
-        norma, art = auth if auth else (c["id_norma"], str(c["articulo"]).strip())
+        ptr = definition_source_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
         for alias in (c["aliases"] or []):
             alias = str(alias).strip()
             key = alias.lower()
