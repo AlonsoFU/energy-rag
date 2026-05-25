@@ -70,7 +70,7 @@
 {"query": "qué se entiende por Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "explícame qué es Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
-{"query": "qué es Panel de Expertos", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
+{"query": "qué es Panel de Expertos", "category": "definicional_canonico", "expected_norma": "1146553", "expected_articulo": "5"}
 {"query": "qué es Sistemas de Transmisión Zonal", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
 {"query": "qué es Sistema de Generación-Consumo", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "qué es Plan de Expansión", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
@@ -88,12 +88,12 @@
 {"query": "qué es Sistema de Transmisión para Polos de Desarrollo", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "qué es Potencia de Suficiencia", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "qué es Sistemas de Transmisión para Polos de Desarrollo", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "qué es SEC", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
-{"query": "qué es Superintendencia", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
-{"query": "qué es Superintendencia de Electricidad y Combustibles", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
-{"query": "qué es CNE", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
-{"query": "qué es Comisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
-{"query": "qué es Comisión Nacional de Energía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es SEC", "category": "alias_sigla", "expected_norma": "29819", "expected_articulo": "2°", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es Superintendencia", "category": "alias_sigla", "expected_norma": "29819", "expected_articulo": "2°", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es Superintendencia de Electricidad y Combustibles", "category": "alias_sigla", "expected_norma": "29819", "expected_articulo": "2°", "note": "alias de «Superintendencia de Electricidad y Combustibles»"}
+{"query": "qué es CNE", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es Comisión", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
+{"query": "qué es Comisión Nacional de Energía", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
 {"query": "qué es CEN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
 {"query": "qué es Coordinador", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
 {"query": "qué es Coordinador Eléctrico Nacional", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
@@ -104,11 +104,11 @@
 {"query": "qué es capacidad nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
 {"query": "qué es transmisión eléctrica", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
 {"query": "qué es red de transmisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
-{"query": "qué es Ministerio de Energía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Ministerio»"}
-{"query": "qué es MinEnergía", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Ministerio»"}
-{"query": "qué es Panel", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
-{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
-{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Ministerio de Energía", "category": "alias_sigla", "expected_norma": "1008692", "expected_articulo": "1º", "note": "alias de «Ministerio»"}
+{"query": "qué es MinEnergía", "category": "alias_sigla", "expected_norma": "1008692", "expected_articulo": "1º", "note": "alias de «Ministerio»"}
+{"query": "qué es Panel", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
 {"query": "qué es biomasa sólida", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biomasa»"}
 {"query": "qué es biocombustible sólido", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biocombustibles sólidos»"}
 {"query": "qué es AVI", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «A.V.I.»"}
