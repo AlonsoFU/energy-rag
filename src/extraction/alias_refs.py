@@ -4,10 +4,8 @@ Looks up informal names from each NormaEntry.aliases (e.g., "LGSE" -> DFL_4)
 inside the input text and emits ExtractedRef per match.
 """
 
-import re
-
 from src.core.catalogo import Catalogo
-from src.extraction.regex_refs import ExtractedRef
+from src.extraction.regex_refs import ExtractedRef, whole_term_pattern
 
 
 def extract_alias_refs(text: str, catalogo: Catalogo) -> list[ExtractedRef]:
@@ -24,8 +22,7 @@ def extract_alias_refs(text: str, catalogo: Catalogo) -> list[ExtractedRef]:
         for alias in entry.aliases:
             if not alias:
                 continue
-            pattern = re.compile(r"\b" + re.escape(alias) + r"\b", re.IGNORECASE)
-            m = pattern.search(text)
+            m = whole_term_pattern(alias).search(text)
             if m:
                 seen.add(entry.id_canonico)
                 refs.append(ExtractedRef(

@@ -18,9 +18,10 @@ def _substantive(name: str, cands: list[dict]) -> list[dict]:
 
 
 def resolve_definition_source(nombre: str, candidates: list[dict]) -> dict:
-    # Deterministic layer trusts only curated candidates; retrieved (fuzzy) ones
-    # are left for the tentative proposer (legal-safety: no auto-resolve on fuzzy).
-    curated = [c for c in candidates if c.get("origin", "curated") != "retrieved"]
+    # Deterministic layer trusts ONLY curated (define_termino) candidates; cita
+    # mentions and retrieved (fuzzy) ones are left for the tentative proposer
+    # (legal-safety: no high-confidence auto-resolve on non-definitional sources).
+    curated = [c for c in candidates if c.get("origin", "curated") == "curated"]
     subs = _substantive(nombre, curated)
     if not subs:
         return {"status": "unresolved", "reason": "no-substantive-candidate"}
