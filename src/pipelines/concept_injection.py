@@ -39,6 +39,43 @@ def extract_definitional_term(query: str) -> Optional[str]:
     return m.group(1).strip() if m else None
 
 
+def authoritative_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]:
+    """Return `(id_norma, articulo)` from `metadata.authoritative` if B1 resolved
+    a single authoritative defining norm; else None.
+
+    A conflict (`authoritative` absent/None, only `authority_conflict` set) is
+    NOT forced here — inject falls back to the fecha-based pick and ambiguity UX
+    is deferred to B3. Written by scripts/resolve_authority.py.
+    """
+    if not metadata:
+        return None
+    auth = metadata.get("authoritative")
+    if not auth:
+        return None
+    norma, art = auth.get("id_norma"), auth.get("articulo")
+    if norma is None or art is None:
+        return None
+    return (str(norma), str(art))
+
+
+def definition_source_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]:
+    """Return (id_norma, articulo) from metadata.definition_source if present.
+
+    Used even when confianza is 'baja' (needs_review): the system uses the
+    tentative source immediately; the flag is a curation marker, not a gate.
+    More specific than authoritative_pointer — prefer it when both exist.
+    """
+    if not metadata:
+        return None
+    ds = metadata.get("definition_source")
+    if not ds:
+        return None
+    norma, art = ds.get("id_norma"), ds.get("articulo")
+    if norma is None or art is None:
+        return None
+    return (str(norma), str(art))
+
+
 @lru_cache(maxsize=1)
 def _concept_index() -> dict[str, tuple[str, str, str, str]]:
     """Build a `{normalized_name_or_alias: (id_norma, articulo_numero,
@@ -60,7 +97,7 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
         # LAST so dated normas beat undated ones.
         cur.execute(
             """
-            SELECT c.nombre, a.id_norma, a.numero, c.definicion
+            SELECT c.nombre, a.id_norma, a.numero, c.definicion, c.metadata
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -70,15 +107,18 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for nombre, id_norma, articulo, definicion in cur.fetchall():
+        for nombre, id_norma, articulo, definicion, metadata in cur.fetchall():
             key = normalize_for_match(nombre)
-            # Keep FIRST per concept = most recent definition (vigencia).
+            # Keep FIRST per concept = most recent definition (vigencia), unless
+            # B1 resolved an authoritative norm by rank → that overrides fecha.
             if key and key not in out:
-                out[key] = (str(id_norma), str(articulo), definicion or "", nombre)
+                ptr = definition_source_pointer(metadata) or authoritative_pointer(metadata)
+                norma_f, art_f = ptr if ptr else (str(id_norma), str(articulo))
+                out[key] = (norma_f, art_f, definicion or "", nombre)
         # Aliases → same most-recent defining article.
         cur.execute(
             """
-            SELECT c.nombre, c.aliases, a.id_norma, a.numero, c.definicion
+            SELECT c.nombre, c.aliases, a.id_norma, a.numero, c.definicion, c.metadata
               FROM conceptos c
               JOIN referencias r ON r.destino_concepto_id = c.id
                                 AND r.tipo_relacion = 'define_termino'
@@ -89,12 +129,61 @@ def _concept_index() -> dict[str, tuple[str, str, str, str]]:
                       a.id_norma, a.numero
             """
         )
-        for _nombre, aliases, id_norma, articulo, definicion in cur.fetchall():
+        for _nombre, aliases, id_norma, articulo, definicion, metadata in cur.fetchall():
+            ptr = definition_source_pointer(metadata) or authoritative_pointer(metadata)
+            norma_f, art_f = ptr if ptr else (str(id_norma), str(articulo))
             for alias in (aliases or []):
                 key = normalize_for_match(str(alias))
                 if key and key not in out:
-                    out[key] = (str(id_norma), str(articulo), definicion or "", _nombre)
+                    out[key] = (norma_f, art_f, definicion or "", _nombre)
     return out
+
+
+@lru_cache(maxsize=1)
+def _all_concepts() -> list[dict]:
+    """[{nombre, aliases}] for every concept (phrasing-agnostic detection)."""
+    with with_connection() as conn, conn.cursor() as cur:
+        cur.execute("SELECT nombre, aliases FROM conceptos")
+        return [{"nombre": n, "aliases": a or []} for n, a in cur.fetchall()]
+
+
+def _matched_term(query_norm: str, c: dict):
+    """Literal term (canonical or alias) by which concept c matched, + is_alias."""
+    from src.pipelines.retrieve import find_term_in_query
+    if find_term_in_query(c["nombre"], query_norm):
+        return c["nombre"], False
+    for a in (c["aliases"] or []):
+        if a and find_term_in_query(a, query_norm):
+            return a, True
+    return None, False
+
+
+def find_subject_concept(query: str):
+    """Return (id_norma, articulo, definicion, canonical, alias_or_None) when the
+    query centers on a SINGLE curated concept with a defining article; else None.
+    Phrasing-agnostic; guards substring over-matching by keeping the LONGEST
+    matched term and dropping others contained in it. A distinct (non-contained)
+    second concept → relational → None.
+    """
+    nq = normalize_for_match(query)
+    matched = []  # (canonical, term, is_alias)
+    for c in _all_concepts():
+        term, is_alias = _matched_term(nq, c)
+        if term:
+            matched.append((c["nombre"], term, is_alias))
+    if not matched:
+        return None
+    matched.sort(key=lambda m: len(m[1]), reverse=True)
+    subject = matched[0]
+    subj_term_n = normalize_for_match(subject[1])
+    for _canon, term, _is in matched[1:]:
+        if normalize_for_match(term) not in subj_term_n:
+            return None
+    entry = _concept_index().get(normalize_for_match(subject[0]))
+    if entry is None:
+        return None
+    id_norma, articulo, definicion, canon = entry
+    return (id_norma, articulo, definicion, canon, subject[1] if subject[2] else None)
 
 
 def find_curated_definition(query: str) -> Optional[tuple[str, str, str, str]]:
@@ -196,23 +285,18 @@ def inject_definition(query: str, docs: list[dict]) -> list[dict]:
 
     Returns the same list type. If no injection applies, returns docs unchanged.
     """
-    hit = find_curated_definition(query)
-    if hit is None:
+    subject = find_subject_concept(query)
+    if subject is None:
         return docs
-    id_norma, articulo, definicion, canonical = hit
-
-    # Alias query? The matched term (what the user typed) differs from the
-    # concept's canonical name under orthographic normalization.
-    term = extract_definitional_term(query)
-    is_alias = bool(term and canonical
-                    and normalize_for_match(term) != normalize_for_match(canonical))
+    id_norma, articulo, definicion, canonical, alias = subject
+    is_alias = alias is not None
     if is_alias and definicion.strip():
         rest = [
             d for d in docs
             if not (str(d.get("id_norma")) == id_norma
                     and str(d.get("articulo_numero")) == articulo)
         ]
-        return [_alias_link_doc(term.strip(), canonical, definicion,
+        return [_alias_link_doc(alias.strip(), canonical, definicion,
                                 id_norma, articulo)] + rest
 
     # Lazy import keeps this module import-cheap and avoids a cycle.

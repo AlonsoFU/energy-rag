@@ -28,7 +28,18 @@ import json
 from pathlib import Path
 
 from psycopg.rows import dict_row
+from src.pipelines.concept_injection import authoritative_pointer, definition_source_pointer
 from src.storage.connection import with_connection
+
+
+def _gold_pointer(metadata):
+    """definition_source as gold ONLY when high-confidence (not needs_review).
+    Tentative picks must NOT become gold — that would make the eval pass on an
+    unconfirmed (possibly wrong) pick. Tentative → fall back to authority/fecha."""
+    ds = (metadata or {}).get("definition_source")
+    if ds and ds.get("needs_review") is False:
+        return definition_source_pointer(metadata)
+    return None
 
 # Energy-domain normas (verified earlier) — keep in_domain categories clean.
 ENERGY_NORMAS = ("1146553", "1112591", "250604", "1160108",
@@ -36,7 +47,7 @@ ENERGY_NORMAS = ("1146553", "1112591", "250604", "1160108",
 
 SQL_DEF = """
 WITH ranked AS (
-  SELECT c.nombre, c.aliases, a.id_norma, a.numero AS articulo,
+  SELECT c.nombre, c.aliases, c.metadata, a.id_norma, a.numero AS articulo,
          length(c.definicion) AS def_len,
          ROW_NUMBER() OVER (PARTITION BY c.id
            ORDER BY n.fecha_publicacion DESC NULLS LAST, a.id_norma, a.orden) AS rn
@@ -47,7 +58,7 @@ WITH ranked AS (
    WHERE length(c.nombre) BETWEEN 4 AND 60
      AND a.id_norma = ANY(%s::text[])
 )
-SELECT nombre, aliases, id_norma, articulo FROM ranked WHERE rn=1
+SELECT nombre, aliases, metadata, id_norma, articulo FROM ranked WHERE rn=1
  ORDER BY def_len DESC LIMIT %s;
 """
 
@@ -55,7 +66,7 @@ SELECT nombre, aliases, id_norma, articulo FROM ranked WHERE rn=1
 # the alias_sigla category includes the key acronyms (CNE, SEC, SEN, CEN, …).
 SQL_ALIAS = """
 WITH ranked AS (
-  SELECT c.nombre, c.aliases, a.id_norma, a.numero AS articulo,
+  SELECT c.nombre, c.aliases, c.metadata, a.id_norma, a.numero AS articulo,
          ROW_NUMBER() OVER (PARTITION BY c.id
            ORDER BY n.fecha_publicacion DESC NULLS LAST, a.id_norma, a.orden) AS rn
     FROM conceptos c
@@ -65,7 +76,7 @@ WITH ranked AS (
    WHERE c.aliases IS NOT NULL AND array_length(c.aliases,1)>0
      AND a.id_norma = ANY(%s::text[])
 )
-SELECT nombre, aliases, id_norma, articulo FROM ranked WHERE rn=1;
+SELECT nombre, aliases, metadata, id_norma, articulo FROM ranked WHERE rn=1;
 """
 
 FRASEOS = (
@@ -147,7 +158,11 @@ def main() -> None:
 
     # definicional_canonico (1 per concept) + fraseo_variado (subset × templates)
     for i, c in enumerate(concepts):
-        nm, norma, art = c["nombre"].strip(), c["id_norma"], str(c["articulo"]).strip()
+        # Authority-based gold: if B1 resolved an authoritative norm, use it
+        # (the fecha-based pick is naive of legal rank). Single source of truth.
+        ptr = _gold_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
+        nm = c["nombre"].strip()
         rows.append({"query": f"qué es {nm}", "category": "definicional_canonico",
                      "expected_norma": norma, "expected_articulo": art})
         if i < 12:  # only first 12 get the phrasing fan-out (keeps set balanced)
@@ -162,7 +177,8 @@ def main() -> None:
         alias_concepts = cur.fetchall()
     seen_alias: set[str] = set()
     for c in alias_concepts:
-        norma, art = c["id_norma"], str(c["articulo"]).strip()
+        ptr = _gold_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
         for alias in (c["aliases"] or []):
             alias = str(alias).strip()
             key = alias.lower()
