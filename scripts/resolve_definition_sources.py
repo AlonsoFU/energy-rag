@@ -30,6 +30,17 @@ from src.extraction.norm_rank import derive_rank
 from src.storage.connection import with_connection
 
 REVIEW_PATH = Path("glossary/incoming/definition_source_review.yaml")
+CONFIRMED_PATH = Path("glossary/confirmed_definition_sources.yaml")
+
+
+def load_confirmed() -> dict[int, dict]:
+    """Human-confirmed definition sources (durable, in git). Keyed by concepto_id.
+    These override the resolver: written with needs_review=false and never
+    recomputed, so manual curation survives every --apply run."""
+    if not CONFIRMED_PATH.exists():
+        return {}
+    items = yaml.safe_load(CONFIRMED_PATH.read_text(encoding="utf-8")) or []
+    return {int(it["concepto_id"]): it for it in items}
 
 # Candidates come from ANY article where the concept appears (`define_termino`
 # OR `cita`), not just the glossary-phrased `define_termino` edges. This is what
@@ -153,7 +164,18 @@ def main() -> None:
             by_concept[key].append(row)
             meta.setdefault(key, {"definicion": row["definicion"], "aliases": row.get("aliases") or []})
 
+        confirmed = load_confirmed()
         for (cid, nombre), rows in by_concept.items():
+            # Human-confirmed sources win and are never recomputed (durable).
+            if cid in confirmed:
+                cf = confirmed[cid]
+                decisions.append({
+                    "id": cid, "nombre": nombre, "id_norma": str(cf["id_norma"]),
+                    "articulo": str(cf["articulo"]), "criterio": "confirmado_humano",
+                    "confianza": "alta", "needs_review": False,
+                    "fundamento": "confirmado por humano (glossary/confirmed_definition_sources.yaml)",
+                    "reasons": ["confirmado"]})
+                continue
             definicion = meta[(cid, nombre)]["definicion"] or ""
             suspect, reasons = suspect_definition(nombre, definicion)
             if not suspect:
