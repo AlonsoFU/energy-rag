@@ -31,6 +31,16 @@ from psycopg.rows import dict_row
 from src.pipelines.concept_injection import authoritative_pointer, definition_source_pointer
 from src.storage.connection import with_connection
 
+
+def _gold_pointer(metadata):
+    """definition_source as gold ONLY when high-confidence (not needs_review).
+    Tentative picks must NOT become gold — that would make the eval pass on an
+    unconfirmed (possibly wrong) pick. Tentative → fall back to authority/fecha."""
+    ds = (metadata or {}).get("definition_source")
+    if ds and ds.get("needs_review") is False:
+        return definition_source_pointer(metadata)
+    return None
+
 # Energy-domain normas (verified earlier) — keep in_domain categories clean.
 ENERGY_NORMAS = ("1146553", "1112591", "250604", "1160108",
                  "1005169", "1183783", "1155887", "29819")
@@ -150,7 +160,7 @@ def main() -> None:
     for i, c in enumerate(concepts):
         # Authority-based gold: if B1 resolved an authoritative norm, use it
         # (the fecha-based pick is naive of legal rank). Single source of truth.
-        ptr = definition_source_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        ptr = _gold_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
         norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
         nm = c["nombre"].strip()
         rows.append({"query": f"qué es {nm}", "category": "definicional_canonico",
@@ -167,7 +177,7 @@ def main() -> None:
         alias_concepts = cur.fetchall()
     seen_alias: set[str] = set()
     for c in alias_concepts:
-        ptr = definition_source_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
+        ptr = _gold_pointer(c.get("metadata")) or authoritative_pointer(c.get("metadata"))
         norma, art = ptr if ptr else (c["id_norma"], str(c["articulo"]).strip())
         for alias in (c["aliases"] or []):
             alias = str(alias).strip()
