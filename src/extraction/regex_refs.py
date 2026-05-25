@@ -10,6 +10,24 @@ from dataclasses import dataclass, field
 
 from src.core.catalogo import Catalogo
 
+# Letters (incl. accented/ñ) and digits that, if flanking a term, mean we are
+# inside a larger token. Used to build whole-term matchers that — unlike `\b` —
+# work for terms ending/starting in punctuation, e.g. dotted acronyms "A.V.I.",
+# "V.A.T.T.". `\b` fails there because the boundary after a "." is non-word→
+# non-word, so those acronyms never matched. This is general (any term), not a
+# per-acronym rule.
+_TERM_FLANK = r"0-9A-Za-zÀ-ÿ"
+
+
+def whole_term_pattern(term: str) -> re.Pattern:
+    """Case-insensitive matcher for `term` as a standalone token, robust to
+    terms that begin/end with punctuation (dotted acronyms) while still
+    rejecting partial matches inside a longer word."""
+    return re.compile(
+        rf"(?<![{_TERM_FLANK}])" + re.escape(term) + rf"(?![{_TERM_FLANK}])",
+        re.IGNORECASE,
+    )
+
 
 @dataclass
 class ExtractedRef:

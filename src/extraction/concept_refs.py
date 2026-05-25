@@ -5,9 +5,7 @@ the conceptos table, emit an ExtractedRef linking origen_articulo_id ->
 concepto.id.
 """
 
-import re
-
-from src.extraction.regex_refs import ExtractedRef
+from src.extraction.regex_refs import ExtractedRef, whole_term_pattern
 
 
 def extract_concept_refs(
@@ -31,8 +29,7 @@ def extract_concept_refs(
         for name in names:
             if not name:
                 continue
-            pattern = re.compile(r"\b" + re.escape(name) + r"\b", re.IGNORECASE)
-            m = pattern.search(text)
+            m = whole_term_pattern(name).search(text)
             if m:
                 seen.add(c["id"])
                 refs.append(ExtractedRef(

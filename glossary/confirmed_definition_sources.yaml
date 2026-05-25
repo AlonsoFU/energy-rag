@@ -1,0 +1,25 @@
+# Fuentes de definición CONFIRMADAS por un humano (decisión legal, no tentativa).
+# El runner scripts/resolve_definition_sources.py respeta estas entradas:
+#   - escribe el apuntador tal cual con needs_review=false (alta confianza)
+#   - NO deja que el proposer/Capa-2 las sobrescriba en cada --apply
+# Así la curación humana persiste en git (no solo en la DB) y no se pierde al re-correr.
+#
+# Verificadas contra el texto del artículo (2026-05-25):
+- concepto_id: 96
+  nombre: Comisión Nacional de Energía
+  id_norma: '6857'        # DL 2224 (título dice "DECRETO LEY 2224"; numero DB mal=20776)
+  articulo: 6º            # "La CNE será una persona jurídica de derecho público…"
+- concepto_id: 88
+  nombre: Superintendencia de Electricidad y Combustibles
+  id_norma: '29819'       # Ley 18410
+  articulo: 2°            # "El objeto de la SEC será fiscalizar y supervigilar…"
+- concepto_id: 171
+  nombre: Ministerio
+  id_norma: '1008692'     # Ley 20402 (crea el Ministerio de Energía)
+  articulo: 1º
+- concepto_id: 264
+  nombre: A.V.I.
+  id_norma: '1146553'     # Reglamento de Valorización (Decreto 10)
+  articulo: '48'          # método: "El A.V.I. se determinará a partir de su V.I.,
+                          # considerando la vida útil (art 104) y la tasa (art 118) de la Ley"
+                          # (definición=método estable; los VALORES por línea/decreto son otra capa)

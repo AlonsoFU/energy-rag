@@ -23,20 +23,39 @@ from psycopg.rows import dict_row
 
 from src.extraction.candidate_gather import gather_candidates
 from src.extraction.definition_quality import suspect_definition
+from src.extraction.definition_scoring import score_definitoriedad
 from src.extraction.definition_source import resolve_definition_source
 from src.extraction.definition_proposer import propose_definition_source
 from src.extraction.norm_rank import derive_rank
 from src.storage.connection import with_connection
 
 REVIEW_PATH = Path("glossary/incoming/definition_source_review.yaml")
+CONFIRMED_PATH = Path("glossary/confirmed_definition_sources.yaml")
 
+
+def load_confirmed() -> dict[int, dict]:
+    """Human-confirmed definition sources (durable, in git). Keyed by concepto_id.
+    These override the resolver: written with needs_review=false and never
+    recomputed, so manual curation survives every --apply run."""
+    if not CONFIRMED_PATH.exists():
+        return {}
+    items = yaml.safe_load(CONFIRMED_PATH.read_text(encoding="utf-8")) or []
+    return {int(it["concepto_id"]): it for it in items}
+
+# Candidates come from ANY article where the concept appears (`define_termino`
+# OR `cita`), not just the glossary-phrased `define_termino` edges. This is what
+# makes constitutive ("la X será una persona jurídica…") and methodological
+# ("el A.V.I. se determinará…") definitions reachable — they were tagged `cita`
+# because they don't say "se entenderá por". The deterministic layer (Capa 1)
+# still trusts ONLY `define_termino`; `cita` candidates feed the tentative
+# layer (Capa 2), ranked by definitoriedad, and stay needs_review.
 SQL = """
 SELECT c.id AS concepto_id, c.nombre, c.definicion, c.aliases,
-       a.id_norma, a.numero AS articulo, a.texto,
-       n.tipo, n.titulo, n.fecha_publicacion
+       a.id_norma, a.numero AS articulo, a.texto, r.tipo_relacion,
+       n.tipo, n.numero AS norma_numero, n.titulo, n.fecha_publicacion
 FROM conceptos c
 JOIN referencias r ON r.destino_concepto_id = c.id
-                  AND r.tipo_relacion = 'define_termino'
+                  AND r.tipo_relacion IN ('define_termino', 'cita')
 JOIN articulos a ON a.id = r.origen_articulo_id
 JOIN normas n ON n.id_norma = a.id_norma
 ORDER BY c.id, a.id_norma, a.numero
@@ -45,13 +64,27 @@ ORDER BY c.id, a.id_norma, a.numero
 
 def build_candidates(rows: list[dict]) -> list[dict]:
     out = []
+    seen: set[tuple] = set()
     for r in rows:
+        key = (str(r["id_norma"]), str(r["articulo"]))
+        if key in seen:
+            continue
+        seen.add(key)
         rank, _ = derive_rank(r["tipo"], r["titulo"])
+        # `define_termino` → curated (Capa 1 may trust); `cita` → tentative only.
+        origin = "curated" if r["tipo_relacion"] == "define_termino" else "cita"
         out.append({
             "id_norma": r["id_norma"], "articulo": r["articulo"],
-            "rank": rank,
+            "numero": r.get("norma_numero"), "titulo": r.get("titulo"),
+            "rank": rank, "origin": origin,
             "fecha": r["fecha_publicacion"].isoformat() if r["fecha_publicacion"] else None,
-            "definicion": (r["definicion"] or r["texto"] or "")[:2000],
+            # `definicion` = the concept's MARKED definition (same per concept):
+            # this is what is_label inspects in Capa 1, so a glossary article that
+            # only labels the concept ("Comisión: CNE") routes to Capa 2, not a
+            # false high-confidence resolve. `texto` = the article body, used by
+            # definitoriedad scoring and shown to the proposer.
+            "definicion": (r["definicion"] or "")[:2000],
+            "texto": (r["texto"] or "")[:2000],
         })
     return out
 
@@ -69,6 +102,12 @@ def _build_retriever():
     from src.pipelines.retrieve import SimpleRetriever
     store = _build_store()
     return SimpleRetriever(store, Qwen3Embedder(), Qwen3Reranker())
+
+
+def _build_embed_fn():
+    """Return the real embedder's `embed` (GPU) for definitoriedad scoring."""
+    from src.components.embedder import Qwen3Embedder
+    return Qwen3Embedder().embed
 
 
 def _retrieved_candidates(retriever, cur, nombre, aliases, norma_cache, top_k=8):
@@ -94,8 +133,9 @@ def _retrieved_candidates(retriever, cur, nombre, aliases, norma_cache, top_k=8)
             rank, _ = derive_rank(n["tipo"], n["titulo"])
             out.append({
                 "id_norma": idn, "articulo": art, "rank": rank,
+                "numero": n.get("numero"), "titulo": n.get("titulo"),
                 "fecha": n["fecha_publicacion"].isoformat() if n["fecha_publicacion"] else None,
-                "definicion": (doc.get("text") or "")[:2000],
+                "definicion": "", "texto": (doc.get("text") or "")[:2000],
             })
     return out
 
@@ -105,10 +145,15 @@ def main() -> None:
     ap.add_argument("--apply", action="store_true", help="write to DB + YAML (default dry-run)")
     ap.add_argument("--with-retrieval", action="store_true",
                     help="for unresolved concepts, also gather candidates via corpus retrieval (GPU)")
+    ap.add_argument("--score", action="store_true",
+                    help="rank Capa-2 candidates by semantic definitoriedad (embedder, GPU)")
+    ap.add_argument("--top-k", type=int, default=8,
+                    help="how many top-definitoriedad candidates feed the proposer")
     args = ap.parse_args()
 
     decisions: list[dict] = []
     retriever = _build_retriever() if args.with_retrieval else None
+    embed_fn = _build_embed_fn() if args.score else None
     norma_cache: dict = {}
     with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
         cur.execute(SQL)
@@ -119,25 +164,43 @@ def main() -> None:
             by_concept[key].append(row)
             meta.setdefault(key, {"definicion": row["definicion"], "aliases": row.get("aliases") or []})
 
+        confirmed = load_confirmed()
         for (cid, nombre), rows in by_concept.items():
+            # Human-confirmed sources win and are never recomputed (durable).
+            if cid in confirmed:
+                cf = confirmed[cid]
+                decisions.append({
+                    "id": cid, "nombre": nombre, "id_norma": str(cf["id_norma"]),
+                    "articulo": str(cf["articulo"]), "criterio": "confirmado_humano",
+                    "confianza": "alta", "needs_review": False,
+                    "fundamento": "confirmado por humano (glossary/confirmed_definition_sources.yaml)",
+                    "reasons": ["confirmado"]})
+                continue
             definicion = meta[(cid, nombre)]["definicion"] or ""
             suspect, reasons = suspect_definition(nombre, definicion)
             if not suspect:
                 continue
             cands = build_candidates(rows)
-            res = resolve_definition_source(nombre, cands)
+            # Capa 1 (deterministic, high confidence) trusts ONLY define_termino.
+            curated = [c for c in cands if c["origin"] == "curated"]
+            res = resolve_definition_source(nombre, curated)
             if res["status"] == "resolved":
                 d = {"id": cid, "nombre": nombre, "id_norma": res["id_norma"],
                      "articulo": res["articulo"], "criterio": res["criterio"],
                      "confianza": "alta", "needs_review": False,
                      "fundamento": "", "reasons": reasons}
             else:
+                # Capa 2 (tentative): the full pool — define_termino + cita
+                # (+ retrieval) — ranked by definitoriedad, top-K to the proposer.
                 cands_for_proposer = cands
                 if args.with_retrieval and retriever is not None:
                     retrieved = _retrieved_candidates(retriever, cur, nombre,
                                                        meta[(cid, nombre)].get("aliases"),
                                                        norma_cache)
                     cands_for_proposer = gather_candidates(cands, retrieved)
+                if embed_fn is not None:
+                    score_definitoriedad(nombre, cands_for_proposer, embed_fn)
+                    cands_for_proposer = cands_for_proposer[:args.top_k]
                 prop = propose_definition_source(nombre, cands_for_proposer)
                 if prop.get("status") != "proposed":
                     d = {"id": cid, "nombre": nombre, "id_norma": None,
@@ -146,10 +209,13 @@ def main() -> None:
                          "fundamento": "sin propuesta (regla no resolvió, LLM no propuso)",
                          "reasons": reasons}
                 else:
+                    fund = prop["fundamento"]
+                    if prop.get("fundamento_warning"):
+                        fund = "[fundamento_inconsistente con la norma elegida] " + fund
                     d = {"id": cid, "nombre": nombre, "id_norma": prop["id_norma"],
                          "articulo": prop["articulo"], "criterio": prop["criterio"],
                          "confianza": "baja", "needs_review": True,
-                         "fundamento": prop["fundamento"], "reasons": reasons}
+                         "fundamento": fund, "reasons": reasons}
             decisions.append(d)
 
         applied = [d for d in decisions if d["id_norma"]]
