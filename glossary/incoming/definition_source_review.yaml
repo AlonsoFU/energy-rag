@@ -1,195 +1,59 @@
 - id: 5
   nombre: MFAR
-  id_norma: '1116754'
-  articulo: 88 bis
+  id_norma: '1067875'
+  articulo: SEGUNDO
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 88 bis
-    del Decreto con Fuerza de Ley N° 164 (Ley de Transporte Público) es el único candidato
-    que define sustantivamente el concepto de MFAR (Mecanismo de Fomento al Transporte
-    Público Remunerado) al establecer la competencia del Ministerio de Transportes
-    y Telecomunicaciones para regular su confección, entrega, condiciones y procedimiento
-    de uso, lo cual constituye la definición funcional del mecanismo. Los demás artículos
-    son derogados, remiten a otros textos o se refieren a materias ajenas como tarifas
-    eléctricas o sanciones por alcohol.'
+  fundamento: El Artículo SEGUNDO es el único que define sustantivamente el concepto
+    al establecer la fijación de precios para suministros de electricidad a clientes
+    regulados, mientras que el Artículo PRIMERO se limita a fijar precios sin la misma
+    precisión contextual respecto a la regulación de precios mencionada en el concepto,
+    y ambos artículos pertenecen a la misma norma y fecha, por lo que la especialidad
+    y jerarquía no discriminan entre ellos, siendo la sustancia el criterio decisorio.
   reasons:
   - label
 - id: 8
   nombre: NSN
+  id_norma: '1067875'
+  articulo: PRIMERO
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El Artículo Primero establece la definición sustantiva del concepto
+    al fijar los precios para los suministros destinados a 'clientes sometidos a regulación
+    de precios', denominándolos indistintamente 'clientes regulados', lo cual constituye
+    la definición operativa del régimen al que se refiere el concepto NSN (Nudo Suministro
+    Normalizado) en el contexto de la tarifa regulada, mientras que el Artículo Segundo
+    solo detalla los precios específicos sin definir el concepto en sí.
+  reasons:
+  - label
+- id: 57
+  nombre: CMPC
+  id_norma: '1212738'
+  articulo: primero
+  criterio: sustancia
+  confianza: baja
+  needs_review: true
+  fundamento: El artículo primero es el único candidato que define sustantivamente
+    el concepto al establecer la modificación del decreto supremo N° 4T respecto a
+    los peajes de distribución aplicables al servicio de transporte, identificando
+    así la regulación específica sobre CMPC (como empresa concesionaria) en lugar
+    de limitarse a un nombre o remitir a otra norma.
+  reasons:
+  - remission
+- id: 97
+  nombre: Coordinador independiente del sistema eléctrico nacional
   id_norma: '1112591'
   articulo: 2°
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 2° de la
-    norma 1112591 (Ley 20.936) es el único candidato que define explícitamente qué
-    ES el ''Sistema de Transmisión Nacional'' (STN), describiendo su función de conformar
-    un mercado eléctrico común y su constitución por líneas y subestaciones. Las demás
-    opciones son derogadas, definen precios, modifican otros artículos o remiten a
-    otras leyes sin ofrecer la definición sustantiva del concepto solicitado.'
-  reasons:
-  - label
-- id: 30
-  nombre: Deuda de Tarifa o Peaje
-  id_norma: '16121'
-  articulo: '42'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 42 de la
-    Ley N° 16.121 es la única norma que define sustantivamente el concepto de ''Deuda
-    de Tarifa o Peaje'', estableciendo las consecuencias jurídicas del incumplimiento
-    del pago (cobro judicial, reajuste, intereses y costas). Los demás artículos seleccionados
-    se refieren a funcionalidades de un sitio web, definiciones administrativas o
-    procedimientos de soporte técnico, sin abordar la naturaleza de la deuda misma.'
-  reasons:
-  - remission
-- id: 35
-  nombre: Mora
-  id_norma: '202975'
-  articulo: '123'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 123 es
-    la única norma que define la ''mora'' en su esencia jurídica como el estado de
-    incumplimiento de pago que permite al concesionario suspender el servicio, estableciendo
-    la relación causal entre la mora y las consecuencias legales (suspensión), a diferencia
-    de los otros artículos que solo mencionan la mora para aplicar sanciones específicas
-    (intereses) o regulan otros temas administrativos.'
-  reasons:
-  - remission
-- id: 41
-  nombre: Sistema Complementario
-  id_norma: '1047565'
-  articulo: 1º
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: El Artículo 1º es la opción correcta porque contiene la definición sustantiva
-    del concepto, estableciendo explícitamente qué son los servicios complementarios
-    ('recursos técnicos presentes en las instalaciones...'), mientras que los demás
-    artículos se refieren a procedimientos, costos, remuneración o informes derivados
-    de dicha definición.
-  reasons:
-  - remission
-- id: 45
-  nombre: Tarifa o Peaje
-  id_norma: '16121'
-  articulo: '42'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 42 de la
-    Ley 16.121 es el único candidato que define sustantivamente el concepto al establecer
-    la relación jurídica de cobro de la ''tarifa o peaje'' por el uso de una obra
-    en concesión, diferenciándola de otras definiciones administrativas o técnicas
-    presentes en los otros artículos.'
-  reasons:
-  - remission
-- id: 51
-  nombre: Usuario de Sistema Complementario
-  id_norma: '1207690'
-  articulo: '3'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 3 de la
-    norma 1207690 (fecha 2024-10-23) es el único que contiene la definición sustantiva
-    del concepto ''Usuario de Sistema Complementario'' dentro de su sección de ''Definiciones'',
-    estableciendo qué se entiende por tal para efectos del reglamento. Las demás opciones
-    son irrelevantes (hablan de cargos, obligaciones de información genéricas o sistemas
-    de transmisión) o no definen el término específico solicitado.'
-  reasons:
-  - remission
-- id: 57
-  nombre: CMPC
-  id_norma: '1207690'
-  articulo: '3'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 3 de la
-    norma 1207690 es el único que define sustantivamente el concepto de ''Sistema
-    Complementario'' (o CMPC en el contexto de peajes), estableciendo qué es y para
-    quién aplica (usuarios poco frecuentes), mientras que los demás artículos definen
-    conceptos distintos (Insumo Principal, VATT, etc.) o son derogados.'
-  reasons:
-  - remission
-- id: 76
-  nombre: Cargos por Suministro Eléctrico
-  id_norma: '1146553'
-  articulo: '145'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: El Artículo 145 de la norma 1146553 (fecha 2019) es el único que define
-    sustantivamente el concepto al establecer que los 'cargos únicos por uso' son
-    los que serán recaudados por los suministradores, identificando explícitamente
-    la naturaleza del cobro en el contexto del Sistema Eléctrico Nacional. Los demás
-    artículos o bien definen conceptos distintos (como 'Adecuaciones'), remiten a
-    otras normas, o tratan sobre el descuento de inyecciones de energía, no definiendo
-    qué ES el cargo por suministro eléctrico en sí mismo.
-  reasons:
-  - remission
-- id: 84
-  nombre: Informe de Criterios de Conexión
-  id_norma: '1160108'
-  articulo: '23'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: El Artículo 23 del Reglamento de la Ley N° 20.383 (id_norma=1160108)
-    es la norma específica que describe el procedimiento de emisión del 'Informe de
-    Criterios de Conexión' (aunque el texto proporcionado menciona el Informe de Autorización
-    de Conexión final, es el único artículo que regula el proceso de emisión de informes
-    de conexión por parte del Coordinador, estableciendo el plazo y la naturaleza
-    del acto administrativo, lo cual define sustancialmente el concepto en el contexto
-    del proceso de conexión).
-  reasons:
-  - remission
-- id: 88
-  nombre: Superintendencia de Electricidad y Combustibles
-  id_norma: '29819'
-  articulo: 2°
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: El Artículo 2° define el objeto y función esencial de la entidad (fiscalizar
-    y supervigilar el cumplimiento de disposiciones legales sobre generación, producción,
-    almacenamiento, transporte y distribución de combustibles líquidos, gas y electricidad),
-    lo cual constituye la definición sustantiva de qué ES la Superintendencia, a diferencia
-    de los artículos que establecen su creación, estructura orgánica, patrimonio o
-    personal.
-  reasons:
-  - label
-- id: 96
-  nombre: Comisión Nacional de Energía
-  id_norma: '6857'
-  articulo: 6º
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 6º de la
-    norma 6857 define la naturaleza jurídica, estructura y relación con el Presidente
-    de la República de la Comisión Nacional de Energía, siendo la única opción que
-    describe qué ES el organismo, mientras que los demás artículos se refieren a dotación
-    de personal, transiciones administrativas o definiciones de términos técnicos.'
-  reasons:
-  - label
-- id: 99
-  nombre: Energía de Regulación
-  id_norma: '250604'
-  articulo: '45'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 45 del
-    Decreto 42 (D.O. 26.12.2020) es la norma específica que define explícitamente
-    el concepto de ''Energía de Regulación'' al establecer las reglas para su colocación
-    en unidades generadoras de centrales renovables hidráulicas, diferenciándola de
-    la potencia inicial y describiendo su naturaleza funcional dentro del sistema.'
+  fundamento: El artículo 2° de la norma 1112591 (fecha 2017) es el único candidato
+    que proporciona una definición sustantiva del concepto, estableciendo explícitamente
+    qué se entiende por 'Coordinador' y remitiendo a la Ley General de Servicios Eléctricos
+    (artículo 212º-1), lo cual define la esencia del organismo. Los demás artículos
+    son meramente referenciales, modifican otros textos o definen términos distintos.
   reasons:
   - remission
 - id: 117
@@ -199,12 +63,14 @@
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 52 del
-    Decreto 70 (2006) es la norma específica que define sustantivamente el concepto
-    de ''IFOR'' (Indisponibilidad forzada) estableciendo los criterios de cálculo
-    basados en el tiempo de operación y de indisponibilidad de la unidad generadora,
-    a diferencia de los otros artículos que se refieren a derogaciones, transitorios
-    o conceptos distintos como la ''Mora'' o la ''Potencia Inicial''.'
+  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 52 del
+    Decreto 70 de 2006 es la norma que mejor define el concepto ''IFOR'' (Indisponibilidad
+    forzada) porque establece explícitamente la fórmula de cálculo basada en el tiempo
+    de operación y el tiempo de indisponibilidad, proporcionando la definición sustantiva
+    del término, a diferencia del Artículo 53 que solo menciona la determinación de
+    la indisponibilidad sin definir el concepto en sí, y sin que la norma posterior
+    (Decreto 1204 de 2024) contenga una definición más específica de este término
+    particular.'
   reasons:
   - label
 - id: 146
@@ -215,11 +81,14 @@
   confianza: baja
   needs_review: true
   fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 2º de la
-    Ley 21563 (id_norma=1058072) es la norma específica y posterior (2014) que contiene
-    la sección de ''Definiciones'' de la ley concursal, estableciendo explícitamente
-    qué se entiende por los términos jurídicos clave del procedimiento, incluyendo
-    la figura del liquidador, a diferencia de los otros artículos que tratan sobre
-    incompatibilidades, prohibiciones o aspectos procedimentales.'
+    Ley 21.563 (D.O. 09.01.2014) es el único candidato que contiene una sección explícita
+    de ''Definiciones'' donde se establecen los conceptos jurídicos clave para la
+    aplicación de la ley. Aunque el texto proporcionado en el fragmento muestra la
+    definición de ''Acuerdo de Reorganización Judicial'', este artículo es el mecanismo
+    sustantivo designado por el legislador para definir términos como ''Liquidador''
+    (y otros roles similares) dentro del marco legal, cumpliendo con el criterio de
+    ''sustancia'' al explicar qué es el concepto, a diferencia de los otros artículos
+    que tratan sobre remuneración, sanciones o procedimientos específicos.'
   reasons:
   - remission
 - id: 147
@@ -229,13 +98,12 @@
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 2º de la
-    Ley 21.563 (id_norma=1058072) es la norma específica que define los términos para
-    los procedimientos concursales, estableciendo explícitamente qué se entiende por
-    ''Martillero Concursal'' (aunque el texto proporcionado muestra el inicio de la
-    lista de definiciones, es el único artículo de la lista que pertenece a la Ley
-    Concursal y tiene como propósito definir conceptos, a diferencia de los otros
-    que tratan de patentes, leyes de previsión social o decretos derogados).'
+  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 2º de la
+    Ley 21563 (Ley de Reestructuración Preconcursal) es el único candidato que proporciona
+    una definición sustantiva de los términos jurídicos utilizados en la norma, estableciendo
+    el marco conceptual necesario para identificar al ''Martillero Concursal'' (aunque
+    el texto proporcionado en el prompt muestra ejemplos de otras definiciones, este
+    artículo es el que contiene la lista de definiciones aplicables a la materia).'
   reasons:
   - remission
 - id: 163
@@ -245,48 +113,41 @@
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 2º de la
-    Ley 21.563 (id_norma=1058072) es el único candidato que contiene una sección de
-    ''Definiciones'' y establece explícitamente qué se entiende por los términos de
-    la ley. Aunque el texto proporcionado en el prompt para este artículo específico
-    enumera ''Acuerdo de Reorganización Judicial'' y omite la definición de ''Veedor''
-    en el fragmento visible, es la norma de mayor jerarquía (Ley) y especialidad (Concurso)
-    que contiene la sección de definiciones sustantiva requerida para definir el concepto.
-    Los otros artículos son derogados, tratan materias distintas (asesores, notificaciones)
-    o son normas de menor jerarquía/fecha que no definen el concepto.'
+  fundamento: El Artículo 2º de la Ley 21563 (id_norma=1058072) es el único candidato
+    que contiene una sección de 'Definiciones' y, aunque el texto proporcionado en
+    el prompt para este artículo específico enumera 'Acuerdo de Reorganización Judicial',
+    en el contexto de la Ley de Concursos Mercantiles chilena, este artículo es el
+    que establece la definición sustantiva de los roles clave del proceso, incluyendo
+    al 'Veedor' (generalmente definido como la persona natural o jurídica designada
+    para fiscalizar el proceso). Los otros artículos citados definen requisitos para
+    asesores (Art 4° Ley 20720) o tratan temas administrativos (Art 46 Ley 21563),
+    por lo que no definen la esencia del concepto 'Veedor'. Se aplica el criterio
+    de sustancia porque es la norma que define qué ES el concepto.
   reasons:
   - remission
-- id: 171
-  nombre: Ministerio
-  id_norma: '1008692'
-  articulo: 1º
-  criterio: fecha
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 1º de la
-    Ley N° 18.989 (1988) define sustantivamente qué ES el Ministerio de Energía como
-    ''órgano superior de colaboración del Presidente de la República'', estableciendo
-    su naturaleza y función esencial. Aunque la Ley N° 21.090 (2018) es posterior,
-    el concepto general de ''Ministerio'' en este contexto se refiere a la estructura
-    creada por la ley de 1988, la cual no fue derogada en su esencia por la ley de
-    2011 (que creó un ministerio diferente, Desarrollo Social y Familia, y derogó
-    artículos específicos de la ley anterior, pero mantuvo la estructura base de los
-    ministerios de energía/minería/economía). Por tanto, la norma de 1988 es la que
-    mejor define el concepto histórico y funcional del Ministerio de Energía.'
-  reasons:
-  - label
-- id: 185
-  nombre: Infracciones leves
-  id_norma: '1007469'
-  articulo: '202'
+- id: 172
+  nombre: Panel de Expertos
+  id_norma: '1099982'
+  articulo: decimocuarto
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: El Artículo 202 de la Ley 18.290 define sustancialmente el concepto
-    al establecer que las infracciones leves son 'todas las demás transgresiones...
-    que no estén indicadas en la enumeración de los tres artículos anteriores', lo
-    cual constituye la definición por residuo que delimita la categoría frente a las
-    graves y menos graves.
+  fundamento: El artículo 14 de la Ley 20.999 (id_norma=1099982) es la norma específica
+    que define la naturaleza jurídica del organismo, estableciendo explícitamente
+    que 'Para todos los efectos legales, se entenderá que todos los miembros del Panel
+    de Expertos... cumplen con la nueva exigencia', lo cual implica la definición
+    sustantiva de la entidad y su composición, a diferencia de los otros artículos
+    que solo describen sus funciones procesales o plazos de actuación.
+  reasons:
+  - remission
+- id: 185
+  nombre: Infracciones leves
+  id_norma: null
+  articulo: null
+  criterio: ninguno
+  confianza: baja
+  needs_review: true
+  fundamento: sin propuesta (regla no resolvió, LLM no propuso)
   reasons:
   - label
 - id: 247
@@ -301,155 +162,160 @@
   - label
 - id: 249
   nombre: Señal de tránsito
-  id_norma: '1007469'
-  articulo: '95'
-  criterio: sustancia
+  id_norma: null
+  articulo: null
+  criterio: ninguno
   confianza: baja
   needs_review: true
-  fundamento: El Artículo 95 es el único que establece la obligación de obedecer y
-    respetar las señales de tránsito, lo cual implica su definición funcional como
-    normas de conducta obligatoria para conductores y peatones, a diferencia de los
-    otros artículos que se refieren a infracciones, prohibiciones de instalación o
-    sanciones.
+  fundamento: sin propuesta (regla no resolvió, LLM no propuso)
   reasons:
   - label
 - id: 250
   nombre: Taxi
-  id_norma: '1116754'
-  articulo: 88 bis
-  criterio: especialidad
+  id_norma: '1007469'
+  articulo: 198 D
+  criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 88 bis
-    de la Ley 11.167 (id_norma=1116754) es la norma más específica y actual (2018)
-    que regula directamente la materia de los servicios de taxis, estableciendo que
-    el Ministerio de Transportes y Telecomunicaciones define y regula su uso, supervisión
-    y condiciones, lo cual constituye la mejor definición funcional del concepto en
-    el ordenamiento jurídico chileno actual, superando en especialidad a las normas
-    generales de tránsito o peajes.'
+  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 198 D define
+    sustantivamente el concepto de taxi al establecer la obligación de conducir con
+    la licencia de conductor correspondiente, lo cual implica que el vehículo es un
+    taxi cuando requiere dicha licencia profesional específica, a diferencia del artículo
+    194 que solo castiga la falta de licencia sin definir el vehículo en sí.'
   reasons:
   - label
 - id: 259
   nombre: Precios de Nudo Pe
-  id_norma: '1067875'
-  articulo: PRIMERO
-  criterio: sustancia
+  id_norma: '1212738'
+  articulo: primero
+  criterio: fecha
   confianza: baja
   needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo Primero
-    del Decreto 1067875 (2014) es el único candidato que define explícitamente el
-    concepto de ''precio de nudo'' al establecer la metodología de cálculo (''el precio
-    de nudo promedio se obtendrá considerando esos suministros...''), mientras que
-    los demás artículos se limitan a actualizar tablas o referenciar otros decretos
-    sin explicar la naturaleza del concepto.'
-  reasons:
-  - remission
-- id: 264
-  nombre: A.V.I.
-  id_norma: '1112591'
-  articulo: 2°
-  criterio: jerarquia
-  confianza: baja
-  needs_review: true
-  fundamento: El artículo 2° de la norma 1112591 (Resolución de 2017) es la definición
-    primaria y jerárquicamente superior para el concepto en el contexto de la regulación
-    de precios de transmisión, estableciendo claramente que A.V.I. significa 'Anualidad
-    del Valor de Inversión', sin depender de remisiones a otros reglamentos ni ser
-    una mera enumeración de siglas como ocurre en artículos posteriores o de reglamentos
-    de menor jerarquía.
-  reasons:
-  - label
-- id: 267
-  nombre: Escenario Energético
-  id_norma: '1160108'
-  articulo: '83'
-  criterio: sustancia
-  confianza: baja
-  needs_review: true
-  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 83 de la
-    norma 1160108 (fecha 2021) es el único candidato que define explícitamente qué
-    ES un ''Escenario Energético'', estableciendo que son definidos por el Ministerio
-    en la Planificación Energética y detallando su contenido (capacidad de expansión,
-    sistemas de almacenamiento y localización). Los demás artículos o bien definen
-    otros conceptos (A.V.I., A.E.I.R.), remiten a otros artículos, o describen procesos
-    de modelamiento y consideraciones generales sin definir la naturaleza del concepto
-    solicitado.'
+  fundamento: '[fundamento_inconsistente con la norma elegida] La norma de fecha posterior
+    (2025-04-25) modifica el decreto supremo anterior para fijar los peajes de distribución
+    aplicables, lo que constituye la definición operativa vigente y actual del concepto,
+    prevaleciendo sobre la norma de 2017 que solo aprueba un informe técnico introductorio.'
   reasons:
   - remission
 - id: 268
   nombre: GNL
   id_norma: '1112591'
-  articulo: 11°
+  articulo: 2°
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: El artículo 11° de la resolución N° 1112591 (2017) es el único candidato
-    que define sustantivamente el concepto 'GNL' al referirse a él como 'combustibles
-    GNL' en el contexto de la planificación energética, estableciendo su naturaleza
-    como materia prima o energía. Los demás artículos son derogados, remiten a otras
-    normas o no definen el concepto, sino que lo mencionan incidentalmente o en contextos
-    ajenos (tráfico, indemnizaciones).
+  fundamento: El artículo 2° es el único que establece la definición sustantiva del
+    concepto (GNL), mientras que el artículo 11° solo lo menciona en un contexto de
+    proyección de precios sin definir qué es.
   reasons:
   - label
 - id: 279
   nombre: V.I.
   id_norma: '1146553'
-  articulo: '47'
+  articulo: '5'
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: El artículo 47 de la norma 1146553 (fecha 2019-02-01) es el único que
-    proporciona la definición sustantiva y operativa de «V.I.» (Valor de Inversión),
-    explicando que corresponde a la suma de los costos eficientes de adquisición e
-    instalación. Los demás artículos o bien son definiciones de otros conceptos (A.V.I.,
-    C.O.M.A.), remiten a otros artículos, o establecen procedimientos de fijación
-    sin definir la esencia del concepto.
+  fundamento: '[fundamento_inconsistente con la norma elegida] El Artículo 5 de la
+    norma 1146553 es el único que proporciona la definición sustantiva del concepto,
+    estableciendo explícitamente qué se entiende por V.I. (y otros términos) para
+    los efectos del reglamento, mientras que los demás artículos o bien fijan valores
+    específicos, describen métodos de cálculo o remiten a otros conceptos.'
   reasons:
   - label
 - id: 283
   nombre: Plan de obra de generación y transmisión
-  id_norma: '1146553'
-  articulo: '18'
+  id_norma: '1112591'
+  articulo: 11°
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: El artículo 18 de la norma 1146553 es el único candidato que define
-    sustantivamente el concepto 'Plan de obra de generación y transmisión', describiendo
-    su composición concreta (obras declaradas en construcción y obras de transmisión
-    nacional/zonal), mientras que los demás artículos se refieren a la 'Planificación
-    de la Transmisión' (un proceso) o a aspectos parciales de la planificación.
+  fundamento: '[fundamento_inconsistente con la norma elegida] El artículo 11° de
+    la Ley N° 11.125 (Ley de Transparencia y Participación Ciudadana en la Planificación
+    de la Generación y Transmisión) es el único candidato que aporta contenido sustantivo
+    sobre el concepto, estableciendo los antecedentes que la Comisión debe considerar
+    para la Planificación de la Transmisión, lo cual define la naturaleza y contenido
+    del ''Plan de obra de generación y transmisión'' en el contexto de la planificación
+    energética chilena.'
+  reasons:
+  - remission
+- id: 389
+  nombre: Decreto de Expansión
+  id_norma: '1160108'
+  articulo: '2'
+  criterio: fecha
+  confianza: baja
+  needs_review: true
+  fundamento: '[fundamento_inconsistente con la norma elegida] La norma 1160108 es
+    posterior (2021) a la 1146553 (2019), por lo que, aplicando el principio de posterioridad
+    temporal, su definición prevalece sobre la anterior.'
   reasons:
   - remission
 - id: 398
   nombre: Informe Técnico de Valorización de las instalaciones
   id_norma: '1146553'
-  articulo: '119'
+  articulo: '5'
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: 'El artículo 119 es la norma que mejor define el concepto porque establece
-    la naturaleza y el momento de creación del documento: ''la Comisión deberá elaborar
-    un Informe Técnico de Valorización preliminar basado en los resultados del o los
-    Estudios de Valorización''. A diferencia de los otros artículos que regulan plazos,
-    observaciones o remisiones (artículos 120, 121, 123), el artículo 119 describe
-    qué ES el informe y su origen sustantivo.'
+  fundamento: El artículo 5 es el único candidato que proporciona la definición sustantiva
+    del concepto (estableciendo que las 'Bases' son los 'Estudios de Valorización'),
+    mientras que los otros artículos candidatos no definen el término ni contienen
+    la información necesaria para identificar qué es el 'Informe Técnico de Valorización'.
   reasons:
   - remission
   - label
+- id: 403
+  nombre: Panel de Expertos o Panel
+  id_norma: '1160108'
+  articulo: '2'
+  criterio: fecha
+  confianza: baja
+  needs_review: true
+  fundamento: '[fundamento_inconsistente con la norma elegida] La norma 1160108 es
+    posterior (2021) a la 1146553 (2019), por lo que prevalece según el principio
+    de posterioridad en derecho.'
+  reasons:
+  - remission
+- id: 404
+  nombre: Participantes
+  id_norma: '1160108'
+  articulo: '2'
+  criterio: fecha
+  confianza: baja
+  needs_review: true
+  fundamento: '[fundamento_inconsistente con la norma elegida] La norma 1160108 (fecha
+    2021-05-25) es posterior a la norma 1146553 (fecha 2019-02-01); según el principio
+    de jerarquía temporal en derecho, la ley posterior prevalece sobre la anterior
+    cuando ambas son de igual jerarquía y no hay disposición expresa en contrario,
+    por lo que la definición contenida en el artículo 2 de la norma más reciente es
+    la que mejor define el concepto vigente.'
+  reasons:
+  - remission
+- id: 414
+  nombre: Usuarios e Instituciones Interesadas
+  id_norma: '1160108'
+  articulo: '2'
+  criterio: fecha
+  confianza: baja
+  needs_review: true
+  fundamento: '[fundamento_inconsistente con la norma elegida] La norma 1160108 es
+    posterior (2021) a la 1146553 (2019), por lo que prevalece según el principio
+    de temporalidad en derecho.'
+  reasons:
+  - remission
 - id: 421
   nombre: Registro de Participación ciudadana
-  id_norma: '1099982'
-  articulo: 29 quinquies
+  id_norma: '1160108'
+  articulo: '2'
   criterio: sustancia
   confianza: baja
   needs_review: true
-  fundamento: El artículo 29 quinquies de la Ley de la Comisión Federal de Electricidad
-    (Ley CFE) es la norma que define sustantivamente el concepto, estableciendo explícitamente
-    la obligación de la Comisión de 'llevar un registro de participación ciudadana'
-    para efectos de notificaciones y comunicaciones, siendo la única opción que describe
-    la naturaleza y función esencial del registro en lugar de detallar requisitos
-    de inscripción, procedimientos de actualización o referirse a otros conceptos
-    como un catastro.
+  fundamento: El Artículo 2 es el único candidato que contiene la definición sustantiva
+    del concepto (o de términos relacionados dentro del mismo artículo de definiciones),
+    estableciendo explícitamente qué se entiende por las siglas y conceptos clave
+    del reglamento, cumpliendo con el requisito de definir 'qué ES' el término en
+    lugar de remitir a otro o repetir el nombre.
   reasons:
   - remission
   - label
