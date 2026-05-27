@@ -65,6 +65,14 @@ ORDER BY c.id, a.id_norma, a.numero
 def build_candidates(rows: list[dict]) -> list[dict]:
     out = []
     seen: set[tuple] = set()
+    # When the SAME article carries both a `define_termino` and a `cita` edge,
+    # the definitional one MUST win the dedup. Otherwise the real definition is
+    # mislabeled `cita` and dropped from the trusted Capa 1 (the deterministic
+    # layer only trusts `define_termino`), so a worse candidate resolves. The
+    # SQL does not order by tipo_relacion, so we stable-sort `define_termino`
+    # first here; nothing else is reordered.
+    _prio = {"define_termino": 0, "cita": 1}
+    rows = sorted(rows, key=lambda r: _prio.get(r["tipo_relacion"], 9))
     for r in rows:
         key = (str(r["id_norma"]), str(r["articulo"]))
         if key in seen:

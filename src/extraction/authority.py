@@ -41,6 +41,15 @@ def select_authoritative(candidates: list[dict]) -> dict:
     if len(top) > 1 and _recency(top[0]) == _recency(top[1]):
         return _conflict(top)
 
+    # Same top rank held by DIFFERENT normas: "newer wins" (lex-posterior, same
+    # context) is indistinguishable from parallel definitions in a different
+    # ámbito (two reglamentos defining the same body) without ámbito detection
+    # → ask. (user rule: contexto manda sobre rango; si no hay seguridad,
+    # preguntar). E.g. Panel de Expertos defined in DECRETO 10/2019 (Valorización)
+    # and DECRETO 37/2021 (Transmisión): same rank, different context.
+    if len({c["id_norma"] for c in top}) > 1:
+        return _conflict(top)
+
     rank_winner = top[0]
     recency_winner = sorted(candidates, key=_recency, reverse=True)[0]
     # Rank and recency agree → same-context lex-posterior, safe to resolve.

@@ -61,14 +61,20 @@ def authoritative_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]
 def definition_source_pointer(metadata: Optional[dict]) -> Optional[tuple[str, str]]:
     """Return (id_norma, articulo) from metadata.definition_source if present.
 
-    Used even when confianza is 'baja' (needs_review): the system uses the
-    tentative source immediately; the flag is a curation marker, not a gate.
+    GATE (2026-05-26): only CONFIRMED / high-confidence sources are injected.
+    A `needs_review=True` pick is a tentative, unreviewed guess; injecting it can
+    actively displace a correct citation the LLM would otherwise get from
+    retrieval (measured: it dragged alias/def down). So we return None for those
+    and let normal retrieval answer until a human/skill confirms the source
+    (flips needs_review→False), at which point it is injected again.
     More specific than authoritative_pointer — prefer it when both exist.
     """
     if not metadata:
         return None
     ds = metadata.get("definition_source")
     if not ds:
+        return None
+    if ds.get("needs_review"):
         return None
     norma, art = ds.get("id_norma"), ds.get("articulo")
     if norma is None or art is None:
