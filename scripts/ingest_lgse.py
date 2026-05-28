@@ -29,7 +29,26 @@ from src.storage.connection import with_connection, close_pool
 
 NS = {"n": "http://www.leychile.cl/esquemas"}
 ID_NORMA = "258171"
-_ART_RE = re.compile(r"Art[íi]culo\s+([\w°º]+(?:\s+(?:bis|ter|quáter|qu1nquies))?)\s*[.\-]", re.I)
+# Article number at the start of <Texto>. Captures: base digits + optional bare
+# degree sign + optional "-M" suffix (the Coordinador título "72°-1 … 72°-17",
+# "212°-1") + optional latin ordinal. BUG FIX (2026-05-28): the old class
+# `[\w°º]+` captured "72°-1" as "72°" → cleaned to "72" → collided with art 72
+# → deduped → the WHOLE "Nº-M" block (Coordinador título, 212°-1, …) was DROPPED;
+# and the suffix list had a typo "qu1nquies" so "quinquies" articles were lost.
+_ART_RE = re.compile(
+    r"Art[íi]culo\s+(\d+\s*[°º]?(?:\s*-\s*\d+)?"
+    r"(?:\s+(?:bis|ter|qu[áa]ter|quinquies|sexies|septies|octies|nonies|decies))?)\s*[.\-]",
+    re.I)
+
+
+def _norm_art_num(raw: str) -> str:
+    """Normalize an article number consistently: drop degree signs, tighten the
+    "-M" suffix, single-space latin ordinals. "72°-1"→"72-1", "225°"→"225",
+    "149  bis"→"149 bis". The SAME normalization must be used wherever article
+    references are parsed (e.g. follow_remissions) so refs resolve to articles."""
+    n = re.sub(r"[°º]", "", raw)
+    n = re.sub(r"\s*-\s*", "-", n)
+    return re.sub(r"\s+", " ", n).strip()
 
 
 def parse_articulos(xml_path: str) -> list[tuple[str, str]]:
@@ -46,7 +65,7 @@ def parse_articulos(xml_path: str) -> list[tuple[str, str]]:
         m = _ART_RE.match(txt)
         if not m:
             continue
-        num = m.group(1).strip().replace("°", "").replace("º", "")
+        num = _norm_art_num(m.group(1))
         # de-dup: same article can appear twice (consolidated + original tag)
         if num in seen:
             continue

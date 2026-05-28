@@ -35,16 +35,22 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from src.storage.connection import with_connection  # noqa: E402
+from scripts.ingest_lgse import _norm_art_num  # noqa: E402  (shared art-number normalization)
 
 LGSE_NORMA = "258171"
 _LGSE_CITE = re.compile(
     r"(ley general de servicios el[ée]ctricos|"
     r"(?:fuerza de ley|DFL)\s*N?°?\s*4\s*/?\s*20\.?018)", re.I)
 # Article-level remission to the law: "...artículo N° ... de la Ley" or
-# "...del decreto con fuerza de ley N°4/20.018".
+# "...del decreto con fuerza de ley N°4/20.018". The number captures suffixes
+# ("212º-1", "72º-2", "149 bis") — BUG FIX (2026-05-28): the old `(\d+)`
+# truncated "212º-1"→"212" (Panel financing), pointing the Coordinador's
+# remission at the WRONG article. Normalized with the SAME _norm_art_num as
+# the ingester so the ref resolves to the article numero.
 _ART_LEY = re.compile(
-    r"art[íi]culo\s+(\d+)\s*[°º]?\b[^.]{0,40}?"
-    r"\bde(?:l)?\s+(?:la\s+Ley\b|decreto con fuerza de ley\s*N?°?\s*4)", re.I)
+    r"art[íi]culo\s+(\d+\s*[°º]?(?:\s*-\s*\d+)?"
+    r"(?:\s+(?:bis|ter|qu[áa]ter|quinquies|sexies|septies))?)"
+    r"\s*[^.]{0,30}?\bde(?:l)?\s+(?:la\s+Ley\b|decreto con fuerza de ley\s*N?°?\s*4)", re.I)
 _TITULO_LEY = re.compile(r"T[íi]tulo\s+[IVXLC]+\b[^.]{0,40}?\bde(?:l)?\s+"
                          r"(?:la\s+Ley\b|decreto con fuerza de ley\s*N?°?\s*4)", re.I)
 
@@ -96,7 +102,7 @@ def main() -> None:
         if not (origin.get(c["id"], set()) & reglas):
             no_ctx.append(c["nombre"])
             continue
-        art = m.group(1)
+        art = _norm_art_num(m.group(1))
         aid = lgse_art_id.get(art)
         if aid is None:
             continue
