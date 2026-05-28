@@ -19,6 +19,33 @@ from src.pipelines.grammar import extract_valid_citations, build_json_schema
 from src.pipelines.off_topic import is_off_topic, REFUSAL_TEXT
 
 
+def _anchor_authoritative_citation(query: str, text: str) -> str:
+    """Post-hoc, DETERMINISTIC citation anchoring (no model, no thresholds).
+
+    When the query centers on a SINGLE curated concept whose authoritative
+    defining article A is known (high-confidence: define_termino + authority, or
+    a confirmed definition_source — find_subject_concept only surfaces gated
+    pointers), and the generated answer cited NOTHING from A's norma, append a
+    curated line naming A. The LLM writes the prose; the CITATION is anchored to
+    the curated source — closing the attribution gap where the law's article is
+    injected at the top but the LLM cites the reglamento instead.
+
+    Guard (general-vs-detalle, e.g. AVI): only fires when the answer cited no
+    article AT ALL from A's norma — if the LLM already cited that law, we do not
+    override its (possibly more specific) choice.
+    """
+    from src.pipelines.concept_injection import find_subject_concept
+    from src.pipelines.grounding import extract_citations
+    res = find_subject_concept(query)
+    if not res:
+        return text
+    norma, art = str(res[0]), str(res[1])
+    cited = extract_citations(text)
+    if any(str(n) == norma for n, _a in cited):  # already cited that norma → leave it
+        return text
+    return text.rstrip() + f"\n\nFuente autoritativa de la definición: [Art. {art} de {norma}]."
+
+
 def _format_as_text(parsed: dict) -> str:
     """Convert {answer: str, citations: [str]} into a single text with inline cites.
 
@@ -160,6 +187,12 @@ def generate_answer(
     # Valid citations are kept verbatim. Only affects the rendered text; the
     # grounding_pass decision above has already been made.
     response_text = strip_malformed_citations(response_text)
+
+    # Deterministic citation anchoring (flag-gated, default off). Only on a
+    # grounded, non-refusal answer — never fabricate a source for a refusal.
+    if (getattr(cfg.settings, "anchor_authoritative_citation", False)
+            and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()):
+        response_text = _anchor_authoritative_citation(query, response_text)
 
     return {
         "text": response_text,

@@ -32,6 +32,15 @@ class Settings(BaseSettings):
     # curated edges only.
     inject_curated_definitions: bool = True
 
+    # Post-hoc DETERMINISTIC citation anchoring (generate._anchor_authoritative_
+    # citation): when a query centers on a single curated concept whose
+    # authoritative article A is known and the answer cited NOTHING from A's
+    # norma, append a curated "[Art. A de N]". Monotonic on cita_ok (only adds a
+    # citation, never removes) → cannot regress the metric. Guarded against
+    # general-vs-detalle (skips if the answer already cited A's norma). Off by
+    # default until measured.
+    anchor_authoritative_citation: bool = False
+
     # When True (and inject_curated_definitions is on), the injected doc carries
     # the FOCUSED curated definition (conceptos.definicion, ~300 chars) instead
     # of the FULL defining article. Glossary articles (e.g. art 13 de 250604 =
