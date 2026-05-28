@@ -5,12 +5,14 @@ def C(norma, art, rank, fecha):
     return {"id_norma": norma, "articulo": art, "rank": rank, "fecha": fecha}
 
 
-def test_higher_rank_but_older_is_conflict():
-    # LEY 1183783 (no date, possibly different context) vs DECRETO 1160108 (2021):
-    # rank winner != recency winner → not sure → ask (refined rule).
+def test_higher_rank_wins_regardless_of_recency():
+    # Refined 2026-05-28 ("jerarquía chilena"): a LEY (rank 3) strictly outranks a
+    # DECRETO (rank 2). lex SUPERIOR governs across tiers; recency does not cross
+    # tiers, so a newer DECRETO (2021) does NOT beat an older/undated LEY. Resolve
+    # to the LEY. Real case: Sistema de Transmisión Nacional — LGSE art 74 (DFL,
+    # 2006) beats DECRETO 37/2021 (Reglamento de Transmisión) that implements it.
     r = select_authoritative([C("1183783", "2", 3, None), C("1160108", "2", 2, "2021-05-25")])
-    assert r["status"] == "conflict"
-    assert {c["id_norma"] for c in r["candidates"]} == {"1183783", "1160108"}
+    assert r["status"] == "resolved" and r["id_norma"] == "1183783"
 
 
 def test_higher_rank_and_most_recent_resolves():

@@ -10,18 +10,18 @@
 {"query": "qué se entiende por Sistema de Almacenamiento de Energía", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "explícame qué es Sistema de Almacenamiento de Energía", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "Sistema de Almacenamiento de Energía", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "qué es Sistema de Transmisión Nacional", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "a qué se refiere Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "cómo se define Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "qué se entiende por Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "explícame qué es Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "qué es Sistemas de Transmisión Dedicados", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "a qué se refiere Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "cómo se define Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "qué se entiende por Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "explícame qué es Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "1112591", "expected_articulo": "2°"}
-{"query": "Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "1112591", "expected_articulo": "2°"}
+{"query": "qué es Sistema de Transmisión Nacional", "category": "definicional_canonico", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "a qué se refiere Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "cómo se define Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "qué se entiende por Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "explícame qué es Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "Sistema de Transmisión Nacional", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "qué es Sistemas de Transmisión Dedicados", "category": "definicional_canonico", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "a qué se refiere Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "cómo se define Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "qué se entiende por Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "explícame qué es Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "Sistemas de Transmisión Dedicados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "76"}
 {"query": "qué es Suficiencia de Potencia", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "a qué se refiere Suficiencia de Potencia", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "cómo se define Suficiencia de Potencia", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
@@ -70,7 +70,7 @@
 {"query": "qué se entiende por Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "explícame qué es Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "Central Renovable con Capacidad de Almacenamiento", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
-{"query": "qué es Panel de Expertos", "category": "definicional_canonico", "expected_norma": "1146553", "expected_articulo": "5"}
+{"query": "qué es Panel de Expertos", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
 {"query": "qué es Sistemas de Transmisión Zonal", "category": "definicional_canonico", "expected_norma": "1112591", "expected_articulo": "2°"}
 {"query": "qué es Sistema de Generación-Consumo", "category": "definicional_canonico", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "qué es Plan de Expansión", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
@@ -102,13 +102,13 @@
 {"query": "qué es potencia nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
 {"query": "qué es Pmax", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
 {"query": "qué es capacidad nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
-{"query": "qué es transmisión eléctrica", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
-{"query": "qué es red de transmisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión»"}
+{"query": "qué es transmisión eléctrica", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "73", "note": "alias de «Sistema de Transmisión»"}
+{"query": "qué es red de transmisión", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "73", "note": "alias de «Sistema de Transmisión»"}
 {"query": "qué es Ministerio de Energía", "category": "alias_sigla", "expected_norma": "1008692", "expected_articulo": "1º", "note": "alias de «Ministerio»"}
 {"query": "qué es MinEnergía", "category": "alias_sigla", "expected_norma": "1008692", "expected_articulo": "1º", "note": "alias de «Ministerio»"}
-{"query": "qué es Panel", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
-{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
-{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
+{"query": "qué es Panel de Expertos Eléctrico", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Panel de Expertos»"}
 {"query": "qué es biomasa sólida", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biomasa»"}
 {"query": "qué es biocombustible sólido", "category": "alias_sigla", "expected_norma": "1183783", "expected_articulo": "2", "note": "alias de «Biocombustibles sólidos»"}
 {"query": "qué es AVI", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "48", "note": "alias de «A.V.I.»"}
@@ -120,13 +120,13 @@
 {"query": "qué es plan anual de expansión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Plan de Expansión»"}
 {"query": "qué es Planificación Energética de Largo Plazo", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Planificación Energética»"}
 {"query": "qué es PELP", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Planificación Energética»"}
-{"query": "qué es STN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión Nacional»"}
-{"query": "qué es transmisión troncal", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión Nacional»"}
-{"query": "qué es red troncal", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema de Transmisión Nacional»"}
-{"query": "qué es transmisión dedicada", "category": "alias_sigla", "expected_norma": "1112591", "expected_articulo": "2°", "note": "alias de «Sistemas de Transmisión Dedicados»"}
+{"query": "qué es STN", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
+{"query": "qué es transmisión troncal", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
+{"query": "qué es red troncal", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
+{"query": "qué es transmisión dedicada", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "76", "note": "alias de «Sistemas de Transmisión Dedicados»"}
 {"query": "qué es Sistema de Transmisión Zonal", "category": "alias_sigla", "expected_norma": "1112591", "expected_articulo": "2°", "note": "alias de «Sistemas de Transmisión Zonal»"}
 {"query": "qué es transmisión zonal", "category": "alias_sigla", "expected_norma": "1112591", "expected_articulo": "2°", "note": "alias de «Sistemas de Transmisión Zonal»"}
-{"query": "qué es sistema eléctrico interconectado", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema Eléctrico»"}
+{"query": "qué es sistema eléctrico interconectado", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "225", "note": "alias de «Sistema Eléctrico»"}
 {"query": "qué es SEN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema Eléctrico Nacional»"}
 {"query": "qué es Sistema Eléctrico Nacional Chileno", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Sistema Eléctrico Nacional»"}
 {"query": "qué es VATT", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.A.T.T.»"}

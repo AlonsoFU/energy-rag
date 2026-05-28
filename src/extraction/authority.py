@@ -1,17 +1,29 @@
 """Select the authoritative defining article among candidates.
 
-Rule (B1, refined 2026-05-23 per user): different rank → the higher rank wins
-(LEY > DECRETO …). BUT rank alone is not enough when context (ámbito) may differ:
-the same term defined in a different-context norm can be a different concept. We
-have no ámbito detection yet, so we only auto-resolve when we are SURE:
+Rule (B1, refined 2026-05-28 per user — "lo que dice la jerarquía chilena"):
 
+Chilean norm hierarchy: LEY ≡ DFL ≡ DL > DECRETO > RESOLUCIÓN. Two doctrines
+combine, and they apply at DIFFERENT scopes:
+
+  - *lex SUPERIOR* governs ACROSS tiers: a higher-tier norm always prevails. A
+    reglamento (DECRETO) only implements/details the law and can never derogate
+    or override it (tacit derogation, CC art. 52-53, requires equal-or-higher
+    rank). So recency is IRRELEVANT across tiers: a newer DECRETO does NOT beat
+    an older LEY.
+  - *lex POSTERIOR* (newer wins) operates only WITHIN a tier, and only when the
+    context (ámbito) is the same. We cannot detect ámbito, so among same-tier
+    peers we do NOT guess.
+
+Therefore:
   - single candidate → resolved.
-  - the rank winner is ALSO the most-recent overall → rank and recency agree,
-    same-context lex-posterior → resolved.
-  - otherwise (rank promotes an older/undated norm of possibly different context,
-    OR a genuine same-rank+same-fecha tie) → CONFLICT → ask the user (B3 UX).
+  - exactly ONE norma holds the top tier → it strictly outranks every other
+    candidate (all lower tier) → lex superior → resolved (recency ignored).
+    Among that norma's own articles, the most-recent/last wins.
+  - TWO+ distinct normas share the top tier → same-tier peers, ámbito may differ
+    → CONFLICT → ask the user (B3 UX). E.g. Panel de Expertos in DECRETO 10/2019
+    (Valorización) vs DECRETO 37/2021 (Transmisión).
 
-Derogation and explicit ámbito derivation are deferred (B2 / B-ámbito).
+Derogation/vigencia (B2) and explicit ámbito derivation are deferred.
 """
 from __future__ import annotations
 
@@ -35,26 +47,19 @@ def select_authoritative(candidates: list[dict]) -> dict:
         return {"status": "resolved", "id_norma": w["id_norma"], "articulo": w["articulo"]}
 
     best_rank = max(c["rank"] for c in candidates)
+    # Articles at the top tier, most-recent first (for same-norma article choice).
     top = sorted((c for c in candidates if c["rank"] == best_rank),
                  key=_recency, reverse=True)
-    # Genuine tie within the top rank (same fecha) → ask.
-    if len(top) > 1 and _recency(top[0]) == _recency(top[1]):
-        return _conflict(top)
 
-    # Same top rank held by DIFFERENT normas: "newer wins" (lex-posterior, same
-    # context) is indistinguishable from parallel definitions in a different
-    # ámbito (two reglamentos defining the same body) without ámbito detection
-    # → ask. (user rule: contexto manda sobre rango; si no hay seguridad,
-    # preguntar). E.g. Panel de Expertos defined in DECRETO 10/2019 (Valorización)
-    # and DECRETO 37/2021 (Transmisión): same rank, different context.
+    # TWO+ distinct normas share the top tier → same-tier peers. lex posterior
+    # only holds within the same ámbito, which we cannot detect → ask. (Panel:
+    # DECRETO 10/2019 Valorización vs DECRETO 37/2021 Transmisión.)
     if len({c["id_norma"] for c in top}) > 1:
         return _conflict(top)
 
-    rank_winner = top[0]
-    recency_winner = sorted(candidates, key=_recency, reverse=True)[0]
-    # Rank and recency agree → same-context lex-posterior, safe to resolve.
-    if rank_winner["id_norma"] == recency_winner["id_norma"]:
-        return {"status": "resolved", "id_norma": rank_winner["id_norma"],
-                "articulo": rank_winner["articulo"]}
-    # Higher rank but NOT the most recent → possible different context, not sure → ask.
-    return _conflict([rank_winner, recency_winner])
+    # Exactly ONE norma holds the top tier → it strictly outranks every other
+    # candidate (all lower tier). lex SUPERIOR governs across tiers; recency
+    # (lex posterior) does not cross tiers, so a newer subordinate norm cannot
+    # displace it. Resolve to it; its most-recent article wins (top is sorted).
+    w = top[0]
+    return {"status": "resolved", "id_norma": w["id_norma"], "articulo": w["articulo"]}

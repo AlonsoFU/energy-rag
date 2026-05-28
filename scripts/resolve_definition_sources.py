@@ -157,6 +157,11 @@ def main() -> None:
                     help="rank Capa-2 candidates by semantic definitoriedad (embedder, GPU)")
     ap.add_argument("--top-k", type=int, default=8,
                     help="how many top-definitoriedad candidates feed the proposer")
+    ap.add_argument("--capa1-only", action="store_true",
+                    help="skip Capa 2 (LLM proposer) entirely → CPU-only. Unresolved "
+                         "concepts stay needs_review (gated from injection AND gold, so "
+                         "the eval is identical); existing tentative metadata is preserved "
+                         "(unresolved rows have id_norma=None → the apply loop skips them).")
     args = ap.parse_args()
 
     decisions: list[dict] = []
@@ -197,6 +202,14 @@ def main() -> None:
                      "articulo": res["articulo"], "criterio": res["criterio"],
                      "confianza": "alta", "needs_review": False,
                      "fundamento": "", "reasons": reasons}
+            elif args.capa1_only:
+                # CPU-only: no LLM. Unresolved → needs_review, no proposal. These
+                # are gated from injection and gold, so the eval is unchanged; the
+                # apply loop skips id_norma=None rows, preserving prior tentatives.
+                d = {"id": cid, "nombre": nombre, "id_norma": None,
+                     "articulo": None, "criterio": "ninguno",
+                     "confianza": "baja", "needs_review": True,
+                     "fundamento": "capa1-only: Capa 2 (LLM) omitida", "reasons": reasons}
             else:
                 # Capa 2 (tentative): the full pool — define_termino + cita
                 # (+ retrieval) — ranked by definitoriedad, top-K to the proposer.
@@ -255,10 +268,14 @@ def main() -> None:
         conn.commit()
         print(f"\nAplicado: {len(applied)} apuntadores ({len(review)} con needs_review).")
 
-    REVIEW_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REVIEW_PATH.write_text(
-        yaml.safe_dump(review, allow_unicode=True, sort_keys=False), encoding="utf-8")
-    print(f"Escrito {len(review)} pendientes -> {REVIEW_PATH}")
+    # --capa1-only has NO LLM proposals to offer, so writing the review queue
+    # here would wipe the richer tentatives a full run produced (and that are
+    # still in the DB). Leave the human-review file untouched in that mode.
+    if not args.capa1_only:
+        REVIEW_PATH.parent.mkdir(parents=True, exist_ok=True)
+        REVIEW_PATH.write_text(
+            yaml.safe_dump(review, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        print(f"Escrito {len(review)} pendientes -> {REVIEW_PATH}")
 
 
 if __name__ == "__main__":
