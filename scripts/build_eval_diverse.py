@@ -28,8 +28,11 @@ import json
 from pathlib import Path
 
 from psycopg.rows import dict_row
+from scripts.glossary_define_edges import extract_defined_terms
 from src.pipelines.concept_injection import authoritative_pointer, definition_source_pointer
 from src.storage.connection import with_connection
+
+LGSE_NORMA = "258171"  # DFL 4 — the law itself (not in ENERGY_NORMAS reglamentos)
 
 
 def _gold_pointer(metadata):
@@ -145,6 +148,36 @@ OFF_CORPUS = [
 ]
 
 
+def lgse_definicional_rows(cur) -> list[dict]:
+    """Queries about terms the LGSE ITSELF defines — its glossary (art 225) and
+    its "Definición de X" articles. Gold = the actual LGSE article, located by
+    the same STRUCTURAL parser used to build the edges (the law's own text, not
+    our concept edges → not circular).
+
+    Why a separate category: ENERGY_NORMAS are the reglamentos; the law's own
+    fundamental definitions (Autoproductor, Curva de carga, Margen de reserva…)
+    were a blind spot — never tested. Most are NOT concepts in our DB, so these
+    stress RETRIEVAL of the law's glossary (art 225 is a 10KB article → exposes
+    whether it needs per-entry chunking), not injection.
+    """
+    cur.execute("SELECT numero, texto FROM articulos WHERE id_norma=%s", (LGSE_NORMA,))
+    seen: set[str] = set()
+    rows: list[dict] = []
+    for a in cur.fetchall():
+        for term, _pat in extract_defined_terms(a["texto"] or ""):
+            # skip too-short and compound titles ("V.A.T.T., V.I., A.V.I")
+            if not (4 <= len(term) <= 55) or "," in term:
+                continue
+            k = term.lower()
+            if k in seen:
+                continue
+            seen.add(k)
+            rows.append({"query": f"qué es {term}", "category": "lgse_definicional",
+                         "expected_norma": LGSE_NORMA,
+                         "expected_articulo": str(a["numero"]).strip()})
+    return rows
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-def", type=int, default=30, help="distinct concepts for def/fraseo")
@@ -203,6 +236,12 @@ def main() -> None:
     for q in OFF_CORPUS:
         rows.append({"query": q, "category": "off_corpus", "expected_norma": None,
                      "expected_articulo": None})
+
+    # lgse_definicional: terms the law itself defines (structural, gold = the
+    # LGSE article). Pure addition — existing categories unchanged so the 89%
+    # baseline stays comparable.
+    with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+        rows.extend(lgse_definicional_rows(cur))
 
     a.output.parent.mkdir(parents=True, exist_ok=True)
     with a.output.open("w", encoding="utf-8") as fh:

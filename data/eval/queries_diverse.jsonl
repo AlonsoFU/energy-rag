@@ -186,3 +186,45 @@
 {"query": "precio del dólar hoy", "category": "off_corpus", "expected_norma": null, "expected_articulo": null}
 {"query": "qué es el yoga", "category": "off_corpus", "expected_norma": null, "expected_articulo": null}
 {"query": "cuántos kilómetros mide la Gran Muralla China", "category": "off_corpus", "expected_norma": null, "expected_articulo": null}
+{"query": "qué es Sistema de Transmisión para Polos de Desarrollo", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "75"}
+{"query": "qué es Sistema de Transmisión", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "73"}
+{"query": "qué es Sistema de Transmisión Nacional", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "74"}
+{"query": "qué es Sistemas de Transmisión Dedicados", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "76"}
+{"query": "qué es Sistema de Transmisión Zonal", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "77"}
+{"query": "qué es Acceso Abierto", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "79"}
+{"query": "qué es Sistema de Interconexión Internacional", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "78"}
+{"query": "qué es Polos de Desarrollo de Generación Eléctrica", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "85"}
+{"query": "qué es Sistema eléctrico", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Autoproductor", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Curva de carga", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Potencia de punta", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Margen de reserva teórico", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Costo marginal de suministro", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Tasa de actualización", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Costo total actualizado", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Instalación económicamente adaptada", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Línea de distribución de servicio público", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Usuario o consumidor final", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Potencia conectada", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Áreas típicas de distribución", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Sectores de distribución", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Aportes de terceros", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Subestación de distribución primaria", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Momento de carga", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Usuario o cliente", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Confiabilidad", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Suficiencia", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Seguridad de servicio", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Calidad de servicio", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Calidad del producto", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Calidad del suministro", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Calidad de servicio comercial", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Energía Firme", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Servicios complementarios", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Medios de generación renovables no convencionales", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Energía renovable no convencional", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Instalación de cogeneración eficiente", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Factor de Intensidad", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Sistema de Almacenamiento de Energía", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Comuna Intensiva en Generación", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Sistema generación-consumo", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
