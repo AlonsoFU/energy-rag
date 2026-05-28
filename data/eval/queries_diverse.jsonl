@@ -40,18 +40,18 @@
 {"query": "qué se entiende por Potencia Máxima", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "explícame qué es Potencia Máxima", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
 {"query": "Potencia Máxima", "category": "fraseo_variado", "expected_norma": "250604", "expected_articulo": "13"}
-{"query": "qué es Coordinado", "category": "definicional_canonico", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "a qué se refiere Coordinado", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "cómo se define Coordinado", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "qué se entiende por Coordinado", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "explícame qué es Coordinado", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "Coordinado", "category": "fraseo_variado", "expected_norma": "1160108", "expected_articulo": "2"}
-{"query": "qué es Coordinados", "category": "definicional_canonico", "expected_norma": "1146553", "expected_articulo": "5"}
-{"query": "a qué se refiere Coordinados", "category": "fraseo_variado", "expected_norma": "1146553", "expected_articulo": "5"}
-{"query": "cómo se define Coordinados", "category": "fraseo_variado", "expected_norma": "1146553", "expected_articulo": "5"}
-{"query": "qué se entiende por Coordinados", "category": "fraseo_variado", "expected_norma": "1146553", "expected_articulo": "5"}
-{"query": "explícame qué es Coordinados", "category": "fraseo_variado", "expected_norma": "1146553", "expected_articulo": "5"}
-{"query": "Coordinados", "category": "fraseo_variado", "expected_norma": "1146553", "expected_articulo": "5"}
+{"query": "qué es Coordinado", "category": "definicional_canonico", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "a qué se refiere Coordinado", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "cómo se define Coordinado", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "qué se entiende por Coordinado", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "explícame qué es Coordinado", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "Coordinado", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "qué es Coordinados", "category": "definicional_canonico", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "a qué se refiere Coordinados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "cómo se define Coordinados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "qué se entiende por Coordinados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "explícame qué es Coordinados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "Coordinados", "category": "fraseo_variado", "expected_norma": "258171", "expected_articulo": "72"}
 {"query": "qué es Organismo de Certificación", "category": "definicional_canonico", "expected_norma": "1183783", "expected_articulo": "2"}
 {"query": "a qué se refiere Organismo de Certificación", "category": "fraseo_variado", "expected_norma": "1183783", "expected_articulo": "2"}
 {"query": "cómo se define Organismo de Certificación", "category": "fraseo_variado", "expected_norma": "1183783", "expected_articulo": "2"}
@@ -94,9 +94,9 @@
 {"query": "qué es CNE", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
 {"query": "qué es Comisión", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
 {"query": "qué es Comisión Nacional de Energía", "category": "alias_sigla", "expected_norma": "6857", "expected_articulo": "6º", "note": "alias de «Comisión Nacional de Energía»"}
-{"query": "qué es CEN", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
-{"query": "qué es Coordinador", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
-{"query": "qué es Coordinador Eléctrico Nacional", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
+{"query": "qué es CEN", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "212", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
+{"query": "qué es Coordinador", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "212", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
+{"query": "qué es Coordinador Eléctrico Nacional", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "212", "note": "alias de «Coordinador independiente del sistema eléctrico nacional»"}
 {"query": "qué es reserva estratégica", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Estado de Reserva Estratégica»"}
 {"query": "qué es potencia firme", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia de Suficiencia»"}
 {"query": "qué es potencia nominal", "category": "alias_sigla", "expected_norma": "250604", "expected_articulo": "13", "note": "alias de «Potencia Máxima»"}
@@ -118,8 +118,8 @@
 {"query": "qué es Plan de Expansión de la Transmisión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Plan de Expansión»"}
 {"query": "qué es PdE", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Plan de Expansión»"}
 {"query": "qué es plan anual de expansión", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Plan de Expansión»"}
-{"query": "qué es Planificación Energética de Largo Plazo", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Planificación Energética»"}
-{"query": "qué es PELP", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Planificación Energética»"}
+{"query": "qué es Planificación Energética de Largo Plazo", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "83", "note": "alias de «Planificación Energética»"}
+{"query": "qué es PELP", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "83", "note": "alias de «Planificación Energética»"}
 {"query": "qué es STN", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
 {"query": "qué es transmisión troncal", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
 {"query": "qué es red troncal", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "74", "note": "alias de «Sistema de Transmisión Nacional»"}
@@ -133,8 +133,8 @@
 {"query": "qué es V.A.T.T", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.A.T.T.»"}
 {"query": "qué es VI", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.I.»"}
 {"query": "qué es V.I", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «V.I.»"}
-{"query": "qué es Informe Técnico de Valorización", "category": "alias_sigla", "expected_norma": "1146553", "expected_articulo": "5", "note": "alias de «Informe Técnico de Valorización de las instalaciones»"}
-{"query": "qué es Registro de Participación", "category": "alias_sigla", "expected_norma": "1160108", "expected_articulo": "2", "note": "alias de «Registro de Participación ciudadana»"}
+{"query": "qué es Informe Técnico de Valorización", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "112", "note": "alias de «Informe Técnico de Valorización de las instalaciones»"}
+{"query": "qué es Registro de Participación", "category": "alias_sigla", "expected_norma": "258171", "expected_articulo": "90", "note": "alias de «Registro de Participación ciudadana»"}
 {"query": "qué es Comité", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
 {"query": "qué es Comisión", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
 {"query": "qué es Coordinado", "category": "ambiguo", "expected_norma": null, "expected_articulo": null, "ambiguous": true}
@@ -228,3 +228,17 @@
 {"query": "qué es Sistema de Almacenamiento de Energía", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
 {"query": "qué es Comuna Intensiva en Generación", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
 {"query": "qué es Sistema generación-consumo", "category": "lgse_definicional", "expected_norma": "258171", "expected_articulo": "225"}
+{"query": "qué es Comité", "category": "remision", "expected_norma": "258171", "expected_articulo": "108"}
+{"query": "qué es Coordinado", "category": "remision", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "qué es Coordinador independiente del sistema eléctrico nacional", "category": "remision", "expected_norma": "258171", "expected_articulo": "212"}
+{"query": "qué es Coordinados", "category": "remision", "expected_norma": "258171", "expected_articulo": "72"}
+{"query": "qué es Decreto de Expansión", "category": "remision", "expected_norma": "258171", "expected_articulo": "92"}
+{"query": "qué es Equipamiento de Generación Individual con Descuentos Remotos", "category": "remision", "expected_norma": "258171", "expected_articulo": "149"}
+{"query": "qué es Informe de Calificación", "category": "remision", "expected_norma": "258171", "expected_articulo": "101"}
+{"query": "qué es Informe de Vidas Útiles", "category": "remision", "expected_norma": "258171", "expected_articulo": "104"}
+{"query": "qué es Informe Técnico de Valorización de las instalaciones", "category": "remision", "expected_norma": "258171", "expected_articulo": "112"}
+{"query": "qué es Participantes", "category": "remision", "expected_norma": "258171", "expected_articulo": "90"}
+{"query": "qué es Planificación de la Transmisión o Proceso de Planificación", "category": "remision", "expected_norma": "258171", "expected_articulo": "87"}
+{"query": "qué es Planificación Energética", "category": "remision", "expected_norma": "258171", "expected_articulo": "83"}
+{"query": "qué es Registro de Participación ciudadana", "category": "remision", "expected_norma": "258171", "expected_articulo": "90"}
+{"query": "qué es Resolución de Calificación", "category": "remision", "expected_norma": "258171", "expected_articulo": "100"}

@@ -178,6 +178,25 @@ def lgse_definicional_rows(cur) -> list[dict]:
     return rows
 
 
+def remision_rows(cur) -> list[dict]:
+    """Concepts whose definition is a REMISSION to the law ("X a que se refiere
+    el art N de la Ley") and that authority resolved to the LGSE (via
+    follow_remissions). Gold = the LGSE article the remission points to. Tests
+    that the system follows the remission to the law's real definition instead
+    of citing the reglamento that merely points there."""
+    cur.execute("""
+        SELECT nombre, metadata->'authoritative'->>'id_norma' AS n,
+               metadata->'authoritative'->>'articulo' AS a
+          FROM conceptos
+         WHERE definicion ~* 'art[íi]culo[[:space:]]+[0-9]+[^.]{0,40}de la Ley'
+           AND metadata->'authoritative'->>'id_norma' = %s
+         ORDER BY nombre
+    """, (LGSE_NORMA,))
+    return [{"query": f"qué es {r['nombre'].strip()}", "category": "remision",
+             "expected_norma": r["n"], "expected_articulo": r["a"]}
+            for r in cur.fetchall()]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n-def", type=int, default=30, help="distinct concepts for def/fraseo")
@@ -242,6 +261,7 @@ def main() -> None:
     # baseline stays comparable.
     with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
         rows.extend(lgse_definicional_rows(cur))
+        rows.extend(remision_rows(cur))
 
     a.output.parent.mkdir(parents=True, exist_ok=True)
     with a.output.open("w", encoding="utf-8") as fh:
