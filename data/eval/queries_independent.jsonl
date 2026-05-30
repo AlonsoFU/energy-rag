@@ -1,13 +1,49 @@
-{"query": "¿qué significa que una central aporte suficiencia de potencia al sistema?", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario donde se define; anchor debe ayudar"}
-{"query": "en el reglamento de transferencias, cómo definen la potencia máxima", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario"}
-{"query": "qué quiere decir 'energía firme' en la ley eléctrica", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
-{"query": "a grandes rasgos, qué es un autoproductor", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
-{"query": "explícame qué hace el coordinador independiente del sistema", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "212-1", "note": "art con sufijo"}
-{"query": "qué es una curva de carga en términos eléctricos", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
-{"query": "cómo se define el margen de reserva teórico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
-{"query": "cómo se calcula el VATT de una línea de transmisión", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "el usuario pide MÉTODO → reglamento, NO la ley. guard NO debe sobre-corregir"}
-{"query": "qué fórmula se usa para obtener el AVI", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "método → reglamento"}
-{"query": "quién es el organismo que fiscaliza electricidad y combustibles", "category": "indep_alias", "expected_norma": "29819", "expected_articulo": "2", "note": "SEC funcional"}
-{"query": "qué es el comité", "category": "indep_ambiguo", "expected_norma": null, "expected_articulo": null, "note": "ambiguo → no forzar"}
-{"query": "cómo cocino un asado a la parrilla", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
-{"query": "cuál es la temperatura del sol", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
+{"query": "una central que genera para su propio consumo y vende lo que sobra, ¿qué es?", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "autoproductor (glosario LGSE)"}
+{"query": "¿qué es el costo marginal de suministro?", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "a qué se le dice 'instalación económicamente adaptada'", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "definición legal de potencia de punta", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "qué se entiende por servicios complementarios en el sistema eléctrico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "qué es una comuna intensiva en generación", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "cómo define la ley el sistema de transmisión nacional", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "74", "note": "def-article"}
+{"query": "qué son los sistemas de transmisión dedicados", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "76", "note": "def-article"}
+{"query": "qué se entiende por acceso abierto en transmisión", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "79", "note": "def-article"}
+{"query": "qué hace el coordinador independiente del sistema eléctrico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "212-1", "note": "art con sufijo"}
+{"query": "qué es la suficiencia de potencia de una unidad", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario 250604 (cluster atribución)"}
+{"query": "a qué llaman 'energía firme' en el reglamento de transferencias", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario 250604"}
+{"query": "qué es el estado deteriorado de una unidad generadora", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario 250604"}
+{"query": "cómo se calcula el AVI de una instalación de transmisión", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "MÉTODO → reglamento; guard NO debe sobre-corregir"}
+{"query": "con qué fórmula se valoriza el VATT", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "método → reglamento"}
+{"query": "cómo se determina el valor de inversión VI de una línea", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "método → reglamento"}
+{"query": "quién fiscaliza a las empresas de electricidad y combustibles", "category": "indep_alias", "expected_norma": "29819", "expected_articulo": "2°", "note": "SEC funcional"}
+{"query": "qué organismo elabora la planificación energética de largo plazo", "category": "indep_alias", "expected_norma": "258171", "expected_articulo": "83", "note": "Planificación Energética"}
+{"query": "qué es la comisión", "category": "indep_ambiguo", "expected_norma": null, "expected_articulo": null, "note": "ambiguo → no forzar"}
+{"query": "qué significa coordinado", "category": "indep_ambiguo", "expected_norma": null, "expected_articulo": null, "note": "ambiguo"}
+{"query": "cuántos planetas tiene el sistema solar", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
+{"query": "receta de pan amasado", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
+{"query": "quién ganó el mundial 2022", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
+{"query": "si una distribuidora incumple la normativa, ¿qué organismo la fiscaliza y sanciona?", "category": "indep_complex", "expected_norma": "29819", "expected_articulo": "2°", "note": "situacional → SEC"}
+{"query": "una empresa quiere conectar su línea a un sistema de transmisión de otro dueño, ¿qué principio se lo permite?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "79", "note": "acceso abierto (paráfrasis)"}
+{"query": "cada cuánto y quién hace el plan de obras de transmisión a largo plazo", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "83", "note": "planificación energética"}
+{"query": "el ente que resuelve discrepancias entre el coordinador y las empresas, ¿cómo se financia?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "212", "note": "panel financiamiento"}
+{"query": "qué pasa con el voltaje cuando una subestación lo baja del nivel de transporte al de distribución", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "225", "note": "subestación distribución primaria"}
+{"query": "cómo se reparte la plata que pagan los usuarios dentro de un sistema de transmisión", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "117", "note": "repartición de ingresos"}
+{"query": "el coordinador tiene que vigilar que haya competencia en el sector, ¿en qué artículo?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "72-10", "note": "monitoreo competencia (sufijo)"}
+{"query": "máxima cantidad de energía que un sistema de almacenamiento puede entregar, definición", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "225", "note": "máxima energía almacenamiento"}
+{"query": "qué se necesita para que una central se considere de cogeneración eficiente", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "225", "note": "cogeneración eficiente"}
+{"query": "un cliente que puede negociar libremente su precio de electricidad, ¿qué categoría es?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "147", "note": "cliente libre"}
+{"query": "qué es la calidad de servicio de un sistema eléctrico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "definición de seguridad de servicio", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué se entiende por confiabilidad de un sistema eléctrico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué es la tasa de actualización según la ley", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué son las áreas típicas de distribución", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué es un usuario o consumidor final", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "definición de aportes de terceros", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué es la energía renovable no convencional", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE (fácil)"}
+{"query": "qué es el sistema de transmisión zonal", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "77", "note": "def-article (fácil)"}
+{"query": "qué es el sistema de transmisión para polos de desarrollo", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "75", "note": "def-article (fácil)"}
+{"query": "qué es un sistema de interconexión internacional", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "78", "note": "def-article (fácil)"}
+{"query": "una línea nueva que aumenta la capacidad de una subestación existente, ¿qué tipo de obra es?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "99", "note": "obras de ampliación (paráfrasis)"}
+{"query": "quién aprueba finalmente el plan de expansión de la transmisión", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "92", "note": "decreto de expansión"}
+{"query": "el documento que fija los precios de nudo de corto plazo, ¿en qué se basa?", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "162", "note": "precios de nudo"}
+{"query": "qué obligación tiene el coordinador respecto a la cadena de pagos", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "72-11", "note": "monitoreo cadena de pagos (sufijo)"}
+{"query": "cómo se clasifican las instalaciones de transmisión en segmentos", "category": "indep_complex", "expected_norma": "258171", "expected_articulo": "73", "note": "sistema de transmisión"}
