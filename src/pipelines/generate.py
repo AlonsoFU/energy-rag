@@ -30,19 +30,33 @@ def _anchor_authoritative_citation(query: str, text: str) -> str:
     the curated source — closing the attribution gap where the law's article is
     injected at the top but the LLM cites the reglamento instead.
 
-    Guard (general-vs-detalle, e.g. AVI): only fires when the answer cited no
-    article AT ALL from A's norma — if the LLM already cited that law, we do not
-    override its (possibly more specific) choice.
+    Guard — two modes (cfg.anchor_guard_exact_article):
+      - False (norma-level, default): skip if the answer cited ANY article from
+        A's norma. Conservative: never overrides the LLM's article choice within
+        the right law (protects general-vs-detalle, e.g. AVI method article).
+      - True (article-level): skip only if the answer cited A EXACTLY (norma+art).
+        Fixes intra-norma attribution: when the law defines the term in a glossary
+        article (e.g. 250604/13) but the LLM cited an operative sibling
+        (250604/56), anchor the real defining article. Trade-off: may re-anchor
+        where the reglamento's article was the wanted answer → MEASURE A/B.
     """
+    from src.core import config as cfg
     from src.pipelines.concept_injection import find_subject_concept
-    from src.pipelines.grounding import extract_citations
+    from src.pipelines.grounding import extract_citations, _normalize_art
     res = find_subject_concept(query)
     if not res:
         return text
     norma, art = str(res[0]), str(res[1])
     cited = extract_citations(text)
-    if any(str(n) == norma for n, _a in cited):  # already cited that norma → leave it
-        return text
+    if getattr(cfg.settings, "anchor_guard_exact_article", False):
+        # article-level: only skip if A (norma+art) is already cited exactly
+        tgt_art = _normalize_art(art)
+        if any(str(n) == norma and _normalize_art(a) == tgt_art for n, a in cited):
+            return text
+    else:
+        # norma-level (default): skip if any article from A's norma is cited
+        if any(str(n) == norma for n, _a in cited):
+            return text
     return text.rstrip() + f"\n\nFuente autoritativa de la definición: [Art. {art} de {norma}]."
 
 

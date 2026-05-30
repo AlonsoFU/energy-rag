@@ -41,6 +41,13 @@ class Settings(BaseSettings):
     # default until measured.
     anchor_authoritative_citation: bool = False
 
+    # Guard mode for the anchor (only relevant when the anchor is on). False =
+    # norma-level (skip if any article from A's norma is cited; conservative).
+    # True = article-level (skip only if A's exact norma+art is cited) → fixes
+    # intra-norma attribution (glossary art 13 vs operative sibling 56) but may
+    # re-anchor where the reglamento article was wanted. Off until A/B-measured.
+    anchor_guard_exact_article: bool = False
+
     # When True (and inject_curated_definitions is on), the injected doc carries
     # the FOCUSED curated definition (conceptos.definicion, ~300 chars) instead
     # of the FULL defining article. Glossary articles (e.g. art 13 de 250604 =
