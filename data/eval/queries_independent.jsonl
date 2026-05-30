@@ -1,0 +1,13 @@
+{"query": "¿qué significa que una central aporte suficiencia de potencia al sistema?", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario donde se define; anchor debe ayudar"}
+{"query": "en el reglamento de transferencias, cómo definen la potencia máxima", "category": "indep_def", "expected_norma": "250604", "expected_articulo": "13", "note": "glosario"}
+{"query": "qué quiere decir 'energía firme' en la ley eléctrica", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "a grandes rasgos, qué es un autoproductor", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "explícame qué hace el coordinador independiente del sistema", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "212-1", "note": "art con sufijo"}
+{"query": "qué es una curva de carga en términos eléctricos", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "cómo se define el margen de reserva teórico", "category": "indep_def", "expected_norma": "258171", "expected_articulo": "225", "note": "glosario LGSE"}
+{"query": "cómo se calcula el VATT de una línea de transmisión", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "el usuario pide MÉTODO → reglamento, NO la ley. guard NO debe sobre-corregir"}
+{"query": "qué fórmula se usa para obtener el AVI", "category": "indep_gral_detalle", "expected_norma": "1146553", "expected_articulo": "48", "note": "método → reglamento"}
+{"query": "quién es el organismo que fiscaliza electricidad y combustibles", "category": "indep_alias", "expected_norma": "29819", "expected_articulo": "2", "note": "SEC funcional"}
+{"query": "qué es el comité", "category": "indep_ambiguo", "expected_norma": null, "expected_articulo": null, "note": "ambiguo → no forzar"}
+{"query": "cómo cocino un asado a la parrilla", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
+{"query": "cuál es la temperatura del sol", "category": "indep_offcorpus", "expected_norma": null, "expected_articulo": null, "note": "off-corpus → rechazo"}
