@@ -299,15 +299,21 @@ class SimpleRetriever:
 
     def retrieve(self, query: str, top_k: int = 5,
                  query_concepts: list[str] | None = None) -> list[dict]:
-        search_text = self._search_text(query)
-        # 1. BM25
-        bm25 = self.store.search_bm25(search_text, top_k=self.top_bm25)
-        # 2. Vector
-        q_emb = self.embedder.embed([search_text])[0]
+        # HyDE is VECTOR-ONLY: the hypothetical legal paragraph augments the
+        # embedding (semantic bridge for paraphrases) but NOT BM25 (its
+        # hallucinated tokens would add lexical noise; BM25 wants the user's
+        # real query terms). Fusion weights use the embedded text's length so a
+        # HyDE-augmented (long) vector side gets its due weight instead of being
+        # down-weighted as if the query were a short keyword lookup.
+        vec_text = self._search_text(query)
+        # 1. BM25 — original query terms only
+        bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
+        # 2. Vector — HyDE-augmented when the flag is on
+        q_emb = self.embedder.embed([vec_text])[0]
         vec = self.store.search_vector(q_emb, top_k=self.top_vector)
         # 3. RRF (length-weighted: short→BM25, long→vectors)
         fused = rrf_fusion([bm25, vec], k=60,
-                           weights=_length_weights(query))[: self.top_bm25]
+                           weights=_length_weights(vec_text))[: self.top_bm25]
         # 4. Rerank
         if fused:
             scored = self.reranker.rerank(
