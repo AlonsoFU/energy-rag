@@ -46,7 +46,7 @@ def ask(
     llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
 
-    simple = SimpleRetriever(store, embedder, reranker)
+    simple = SimpleRetriever(store, embedder, reranker, llm=llm)
     complejo = ComplexRetriever(store, embedder, reranker, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
 
@@ -182,7 +182,7 @@ def eval_cmd(
     store = PostgresStore()
     llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
-    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool)
+    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
     complejo = ComplexRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
 

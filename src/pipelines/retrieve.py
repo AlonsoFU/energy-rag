@@ -272,20 +272,38 @@ class SimpleRetriever:
     """
 
     def __init__(self, store, embedder, reranker,
-                 top_bm25: int = 50, top_vector: int = 50, top_rerank: int = 10):
+                 top_bm25: int = 50, top_vector: int = 50, top_rerank: int = 10,
+                 llm: LLMProvider | None = None):
         self.store = store
         self.embedder = embedder
         self.reranker = reranker
         self.top_bm25 = top_bm25
         self.top_vector = top_vector
         self.top_rerank = top_rerank
+        self.llm = llm  # only needed when hyde_in_simple is on
+
+    def _search_text(self, query: str) -> str:
+        """Query text used for BM25+vector. With ``hyde_in_simple`` on, append a
+        hypothetical legal paragraph so a PARAPHRASED query lands near the
+        article it describes (the original query is kept for rerank/concepts).
+        Legal-safe: changes only retrieval, never the citation."""
+        from src.core import config as _cfg
+        if not getattr(_cfg.settings, "hyde_in_simple", False):
+            return query
+        try:
+            from src.pipelines.expansion import hyde as _hyde
+            h = _hyde(query, llm=self.llm)
+        except Exception:
+            return query  # LLM hiccup: degrade to plain query, never break retrieval
+        return f"{query}\n{h}" if h else query
 
     def retrieve(self, query: str, top_k: int = 5,
                  query_concepts: list[str] | None = None) -> list[dict]:
+        search_text = self._search_text(query)
         # 1. BM25
-        bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
+        bm25 = self.store.search_bm25(search_text, top_k=self.top_bm25)
         # 2. Vector
-        q_emb = self.embedder.embed([query])[0]
+        q_emb = self.embedder.embed([search_text])[0]
         vec = self.store.search_vector(q_emb, top_k=self.top_vector)
         # 3. RRF (length-weighted: short→BM25, long→vectors)
         fused = rrf_fusion([bm25, vec], k=60,
