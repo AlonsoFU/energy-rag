@@ -54,13 +54,25 @@ Retrieval-only gold∈pool, BGE rr30, dev + extremo:
   DOMINANTE que no es el sujeto (ej. "coordinador" → pregunta por el panel), ese término secuestra
   el retrieval; BGE no lo arregla (el distractor matchea de verdad). Es **comprensión/descomposición
   de query**, no reranking.
-- NOTA: el sweep es SimpleRetriever-only; el ComplexRetriever (multi_query/step_back) podría ayudar
-  a multi-parte en el pipeline completo — verificar con generación antes de invertir en un lever nuevo.
+### Verificación: ¿la rama compleja cubre el frente? NO (HECHO, 2026-06)
+AdaptiveRetriever completo (multi_query/step_back) + BGE sobre el extremo (`A_adaptive_bge_extremo`):
+| categoría | Simple+BGE @5 | Adaptive+BGE @5 |
+|---|---|---|
+| ext_sufijo | 2/3 | **3/3** |
+| ext_distractor | 0/3 | 0/3 (1 a @10) |
+| ext_multiparte | 0/2 | 0/2 (1 a @10) |
+| total | 11/18 | 12/18 |
+- La rama compleja recuperó 1 sufijo, pero **distractor y multi-parte siguen 0 a @5**. El pipeline
+  completo (con expansión de query Y BGE) **NO resuelve queries compositivas** → se necesita un
+  **lever NUEVO**, no la maquinaria existente.
 
-### Frente actualizado (reemplaza "situacional" genérico)
-**Distractor + multi-parte (queries compositivas)**: detectar el SUJETO vs el término-contexto, o
-descomponer la query. Conecta con `find_subject_concept` (Paso 1/2 previo). Candidatos: usar la rama
-compleja para estas; o un paso de descomposición. NO max_length, NO más reranking.
+### Frente actualizado (CONFIRMADO sin solución actual)
+**Distractor + multi-parte (queries compositivas)**: cuando la query nombra un término dominante que
+NO es el sujeto, ese término secuestra el retrieval — ni RRF, ni graph_boost, ni BGE, ni
+multi_query/step_back lo arreglan. Lever candidato (próxima sesión, ciclo completo del skill):
+**detección de sujeto / descomposición de query** (separar sub-preguntas, retrieve por cada una,
+o identificar el concepto-sujeto y no el contexto). Conecta con `find_subject_concept` (Paso 1/2).
+NO max_length, NO más reranking, NO expansión genérica (ya probados).
 
 ## Orden recomendado
 Fase 1 (ya) → Fase 2 → [Fase 0: decisión PR] → Fase 3 → Fase 4.
