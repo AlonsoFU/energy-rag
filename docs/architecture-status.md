@@ -1,11 +1,18 @@
 # Architecture Status — Energy-RAG vs 2026 Meta
 
-> **Última actualización**: 2026-05-12
-> **Branch**: `feat/postgres-rag-v1`
-> **PR abierto**: [#2](https://github.com/AlonsoFU/energy-rag/pull/2)
+> **Última actualización**: 2026-06-01 (campaña BGE)
+> **Branch**: `feat/definition-source-resolver`
+> **Doc de campaña**: `docs/campaign-2026-06-01.md`
 
 Este documento mapea el estado actual del pipeline RAG contra el "meta" de
 industria 2026 (lo que usan Glean, Perplexity, Cohere, Anthropic API).
+
+> **NOVEDAD 2026-06-01 — GAP CRÍTICO #1 (reranker) RESUELTO.** El cross-encoder
+> `bge-reranker-v2-m3` fue validado en campaña con set held-out: recall@5 dev
+> 25→33, holdout 15→17; cita_ok (generación) dev 25→**32**, holdout 14→**17**
+> con top_k=10; **grounding intacto** (43/44, 18/18). Cableado flag-gated
+> (`use_bge_reranker`+`top_rerank_override`, OFF por default). Ver §8.
+> HyDE y graph_boost_all se DESCARTARON por overfit (el held-out lo reveló).
 
 ---
 
@@ -38,13 +45,14 @@ USUARIO escribe query
    │
    ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. CROSS-ENCODER RERANKING  ⭐ GAP CRÍTICO #1                │
+│ 3. CROSS-ENCODER RERANKING  ✅ RESUELTO (2026-06-01)         │
 │ ────────────────────────────                                 │
-│ ❌ Qwen3-Reranker carga PERO el classifier head está vacío  │
-│ ❌ Hoy: identity rerank → NO reordena nada                  │
-│ ◯ Falta: bge-reranker-v2-m3 (OSS, funcional)                │
-│                                                              │
-│ Lift esperado: +5 a +15 pp grounding                         │
+│ ✅ bge-reranker-v2-m3 (CPU; Pascal sm_61 sin kernels GPU)    │
+│ ✅ get_reranker(): BGE si use_bge_reranker, si no Identity   │
+│ ✅ top_rerank_override≈30 (el rerank cortaba el pool a 10    │
+│    ANTES del boost → ahora deja sobrevivir el gold profundo) │
+│ ⚠️  Default OFF (costo: latencia CPU ~+seg/query)            │
+│ Medido: cita_ok dev 25→32, holdout 14→17; grounding intacto  │
 └─────────────────────────────────────────────────────────────┘
    │
    ▼
@@ -109,7 +117,7 @@ USUARIO recibe respuesta con citas
 | Capa | Status | Notas |
 |---|---|---|
 | **Foundation** (BM25 + dense + RRF + grounding) | ✅ **Completo** | Al nivel del meta |
-| **Cross-encoder reranking** | ❌ **Roto** | Modelo carga pero classifier head vacío → identity rerank |
+| **Cross-encoder reranking** | ✅ **Resuelto (flag, OFF)** | bge-reranker-v2-m3 validado: +cita_ok dev 25→32 / holdout 14→17, grounding intacto. CPU. |
 | **Contextual chunks** | ⚠️ **Estructura sin contenido** | Columna existe, hoy = text + preamble |
 | **Graph augmentation** | ✅ **Avanzado** | Tabla `referencias` con 4,300 edges, una de las cosas más adelantadas del proyecto |
 | **Generation con citas** | ✅ **Completo** | Constrained decoding + verifier verbatim |
@@ -180,14 +188,53 @@ Lista cronológica de commits en `feat/postgres-rag-v1`:
 
 ---
 
+## 8. Pipeline vigente tras la campaña 2026-06-01 (lógicas y algoritmos)
+
+Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
+
+1. **Off-topic gate** (`off_topic.is_off_topic`): si las palabras significativas de la
+   query no están en el vocabulario del corpus → rechazo directo, sin LLM. Anti-alucinación.
+2. **Router** (`AdaptiveRouter`, TF-IDF + LinearSVC): clasifica `simple` vs `complejo`.
+   - `complejo` → `ComplexRetriever`: expande con **HyDE + step_back + multi_query** (LLM local)
+     y fusiona por RRF sobre todas las variantes. (OJO: HyDE aquí es del Complex, distinto del
+     flag `hyde_in_simple` que se DESCARTÓ por overfit.)
+   - `simple` → `SimpleRetriever`.
+3. **Retrieval híbrido** (ambas ramas): **BM25** (tsvector) + **denso** (Qwen3-Embedding-0.6B,
+   pgvector HNSW) → **RRF fusion** ponderada por largo de query (`_length_weights`: query corta
+   pesa BM25, larga pesa vectores). Pool = `retrieval_pool_depth` (50).
+4. **Rerank** (`get_reranker`): **NUEVO** — `BGEReranker` (cross-encoder bge-reranker-v2-m3, CPU)
+   reordena el pool por relevancia semántica query↔doc cuando `use_bge_reranker=True`; si no,
+   `IdentityReranker` (preserva orden RRF). `top_rerank_override` (≈30) controla cuántos
+   candidatos sobreviven a esta etapa (antes 10 fijo → truncaba el gold profundo).
+5. **Concept extraction + graph_boost**: detecta conceptos del glosario en la query y sube los
+   artículos con arista `define_termino`/`cita` a esos conceptos. El boost fuerte (+10) aplica a
+   match por **alias**; `graph_boost_all` (extenderlo a match canónico) se PROBÓ y DESCARTÓ (overfit).
+6. **Hierarchical expand**: fragmento → artículo padre.
+7. **Inject curado** (`inject_definition`, solo queries definicionales "qué es X" con match exacto
+   de concepto): antepone el artículo-definición curado, aun si retrieval lo perdió. Legal-safe
+   (normalización estricta, aristas curadas). Para alias inyecta el link «alias»→«canónico».
+8. **Generación** (`generate_answer`, Ollama qwen3.5:9b, top_k=10 recomendado): prompt few-shot;
+   patrón híbrido (sin JSON-schema, que deadlockea en Ollama) + **verify_citations** post-hoc.
+9. **Anti-alucinación**: cada cita se verifica verbatim contra el pool; si falla, retry con
+   instrucción más estricta; fallback a verificación contra corpus (existe (norma,art) en DB).
+10. **Anchor determinista** (`_anchor_authoritative_citation`, flag OFF): si la query centra en
+    un concepto con artículo autoritativo A y la respuesta no citó la norma de A, anexa la cita
+    curada. Monótono sobre cita_ok.
+
+**Config recomendada por la campaña**: `use_bge_reranker=True` + `top_rerank_override=30` +
+`--top-k 10`. Descartados por held-out: `hyde_in_simple`, `graph_boost_all`. Nulos: pool_depth>50.
+
 ## 7. Conclusión
 
 **Estás más cerca del meta de lo que parece.** La foundation es sólida (hybrid
-search, grounding verifier, glosario curado, referencias graph). Faltan **2
-piezas mayores** para llegar al meta completo:
+search, grounding verifier, glosario curado, referencias graph).
 
-1. **Reranker funcional** (gap crítico #1)
-2. **Contextual Retrieval real** (gap crítico #2)
+- ✅ **Gap #1 (reranker) RESUELTO** (2026-06-01): bge-reranker-v2-m3 validado con held-out,
+  +cita_ok sin perder grounding. Flag-gated (OFF). Falta decisión de producto por la latencia CPU.
+- ◯ **Gap #2 (Contextual Retrieval real)** sigue pendiente: hoy `contextual_text` = text + preamble.
+  Es el próximo lift de recall (resumen del artículo por LLM, antepuesto al chunk antes de embeddear)
+  — ataca directo el fallo "operativo no glosario / paráfrasis no matchea".
 
-Cualquiera de las dos da lift medible. Las dos juntas ponen el sistema al
-nivel de productos comerciales para Q&A factual.
+**Lección de método de la campaña**: medir SIEMPRE en un set held-out independiente (gold leído de
+la ley, no del propio sistema). Reveló que HyDE y graph_boost_all eran overfit — habrían sido
+adoptados mirando solo el set de desarrollo.
