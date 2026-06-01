@@ -9,7 +9,7 @@ app = typer.Typer(help="Energy-RAG CLI for Chilean electrical regulations")
 @app.command()
 def ask(
     query: str,
-    top_k: int = typer.Option(5, "--top-k", "-k"),
+    top_k: int = typer.Option(10, "--top-k", "-k"),  # 2026-06: 10 mejor con BGE (campaña)
     verbose: bool = typer.Option(False, "--verbose", "-v"),
     model: str | None = typer.Option(None, "--model"),
     mock: bool = typer.Option(False, "--mock", help="Use mock embedder + reranker (no GPU/downloads)"),

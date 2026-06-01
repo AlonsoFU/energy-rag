@@ -112,7 +112,8 @@ class Settings(BaseSettings):
     # (10) CORTA el pool a 10 antes de graph_boost/hierarchical → el gold en
     # rango 11-20 se descarta antes de poder promoverlo. >0 lo sobreescribe para
     # dejar sobrevivir candidatos más profundos al boost. 0 = default (10).
-    top_rerank_override: int = 0
+    # ACTIVADO 2026-06 (campaña): 30 para que BGE rerankee un pool suficiente.
+    top_rerank_override: int = 30
 
     # EXP (campaña 2026-06): extiende el boost fuerte define_termino (+10) de
     # graph_boost a conceptos por NOMBRE canónico, no solo alias. Promueve el
@@ -126,7 +127,10 @@ class Settings(BaseSettings):
     # situacional. Default OFF hasta que la eval de generación confirme que el
     # +recall se traduce en +cita_ok (BGE históricamente bajaba el grounding).
     # Requiere top_rerank_override ~30 para que BGE rerankee un pool suficiente.
-    use_bge_reranker: bool = False
+    # ACTIVADO 2026-06 (campaña): validado cita_ok dev 25→32, holdout 14→17,
+    # grounding intacto. COSTO: BGE en CPU (~+seg/query). Revertir a False si la
+    # latencia no es aceptable en producción.
+    use_bge_reranker: bool = True
 
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
