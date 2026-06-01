@@ -1,78 +1,58 @@
 ---
 name: experimentar-cambio-rag
-description: Use when making ANY change to the RAG pipeline architecture (retrieval, reranker, chunking, fusion weights, query expansion, generation params, injection, graph boost). Enforces the discipline of researching the current standard + its limitations BEFORE the change, measuring cheap-first on TWO sets (dev + held-out gold-from-law) to catch overfit, checking no-regression on grounding, landing flag-gated, and documenting wins AND rejections. Energy-RAG / regulación eléctrica chilena, stack Postgres+pgvector+Qwen3+Ollama local.
+description: Use when about to change ANY part of the Energy-RAG retrieval/generation pipeline (reranker, chunking, BM25/dense/RRF, fusion weights, query expansion/HyDE, top_k/top_rerank/pool_depth, curated inject, graph_boost, generation params, prompts). Triggers when a change is proposed "because it sounds better" without a measured before/after on an independent set, or when adopting a result seen only on the development eval.
 ---
 
 # Experimentar un cambio de arquitectura RAG (con evidencia)
 
-> **Regla de oro**: ningún cambio de arquitectura entra "porque suena bien". Cada
-> cambio se **investiga** (qué hace el estándar, qué límites tiene la técnica y la
-> actual), se **mide en dos sets** (dev + held-out independiente para cazar overfit),
-> se verifica **no-regresión** (grounding), entra **flag-gated** (default OFF), y se
-> **documenta** — incluyendo lo que se DESCARTÓ y por qué.
+**Principio**: ningún cambio de arquitectura entra sin evidencia. Se **investiga** el
+estándar y los **límites duros** de la técnica, se **mide en dev + held-out** (para cazar
+overfit), no debe **regresar el grounding**, entra **flag-gated**, y se **documenta** —
+incluyendo lo que se DESCARTÓ.
 
-Esta disciplina nació de la campaña 2026-06-01: HyDE y graph_boost_all parecían ganar
-en el set de desarrollo pero el **held-out** los reveló como overfit; BGE generalizó.
-Sin el held-out se habrían adoptado por error.
+Esto NO reemplaza los skills genéricos; los usa. Lo propio de este proyecto es: dos sets
+(dev + held-out gold-de-la-ley), grounding como métrica legal, y los gotchas del stack.
 
-## Cuándo se activa
+## Procedimiento
 
-Cualquier toque al pipeline: reranker, chunking/re-chunk, BM25/dense/RRF, pesos de
-fusión, HyDE/multi-query/step-back, top_k/top_rerank/pool_depth, inject curado,
-graph_boost, params de generación, prompts. NO para fixes de bug puntuales.
+1. **Leer el contexto del proyecto PRIMERO** — `docs/architecture-status.md` (§8 pipeline
+   vigente + límites por componente), el último `docs/campaign-*.md`/`handoff-*.md`, y la
+   memoria `project_energy_rag_state`. Saber qué ya se probó y descartó.
+2. **Investigar el estándar y los límites** — qué hace la industria 2026 para ese componente
+   y los **límites duros** de la técnica nueva (ventana de tokens, hardware, latencia). Usar
+   WebSearch / context7 para docs actuales. Escribir la **hipótesis**: qué CLASE de fallo
+   arregla (def directa / situacional / alias / autoridad / negativo-trampa).
+3. **Diseñar el experimento** → **REQUIRED SUB-SKILL: superpowers:brainstorming** (un lever por
+   experimento; nunca varios cambios juntos).
+4. **Medir cheap-first** — retrieval-only (`scripts/campaign_sweep.py`, gold∈pool@5/10/20) ANTES
+   de generación (`scripts/campaign_generation_eval.py`, cita_ok/grounding). Recursos: gating
+   GPU/RAM ≥5 min libres (drivers `campaign_*driver*.sh`); no matar entrenamientos ajenos.
+5. **Dos sets** — dev `queries_independent.jsonl` + held-out `queries_holdout.jsonl` (gold LEÍDO
+   de la ley, nunca derivado del sistema). **Generaliza = sube en AMBOS. Sube solo en dev =
+   overfit → DESCARTAR.**
+6. **No-regresión** — `grounding_pass` no baja (alucinación = error crítico legal), rechazos de
+   negativos no se rompen. Revisar **por categoría**, no solo el global.
+7. **Aterrizar flag-gated** — flag en `src/core/config.py` default OFF + A/B por env var; nunca
+   flipear un default de producción en silencio (latencia/comportamiento = decisión de producto).
+8. **Documentar y cerrar** → **REQUIRED SUB-SKILL: superpowers:verification-before-completion**.
+   Actualizar `architecture-status.md` + doc de campaña + memoria, registrando wins **y rechazos**
+   (overfit/nulo valen tanto como los wins). Commit al cambiar comportamiento, no al final.
 
-## Procedimiento (en orden, no saltarse pasos)
+## Gotchas verificados del stack (no re-descubrir)
 
-### 1. INVESTIGAR el estándar y los límites (antes de tocar código)
-- ¿Qué hace la industria 2026 para este componente? (ver `docs/architecture-status.md`,
-  y WebSearch / context7 para docs actuales de la técnica/modelo).
-- **Límites duros de la técnica nueva**: ventana de tokens, compatibilidad de hardware,
-  costo/latencia, supuestos. Ej. reales ya cazados:
-  - `bge-reranker-v2-m3` aguanta 8192 tok pero estaba clavado en `max_length=512` →
-    ~30% de los chunks (>1800 chars) se truncaban.
-  - Cross-encoder NO corre en GPU GTX 1080 (Pascal sm_61, "no kernel image") → CPU.
-  - Ollama deadlockea con JSON-schema constrained decoding en qwen3.5 → patrón híbrido.
-  - `transformers` golpea la API de HF Hub en cada carga → `HF_HUB_OFFLINE=1`.
-- Escribir la **hipótesis**: qué CLASE de fallo debería arreglar (def directa /
-  situacional-paráfrasis / alias / autoridad / negativo-trampa) y por qué.
-- Mirar las limitaciones del approach ACTUAL para ese componente (qué pierde hoy).
+| Gotcha | Realidad |
+|---|---|
+| BGE cross-encoder `max_length=512` | trunca ~30% de chunks (>1800 chars); el modelo aguanta 8192 |
+| BGE en GPU GTX 1080 (Pascal sm_61) | "no kernel image" → correr en CPU |
+| Ollama + JSON-schema constrained decoding | deadlock en qwen3.5 → patrón híbrido (verify post-hoc) |
+| `transformers` cuelga al cargar | golpea API de HF Hub → `HF_HUB_OFFLINE=1` antes de importar |
+| Postgres `energy_rag_pg` caído | eval da 0% FALSO → `docker start` + SELECT de sanidad antes |
+| waiter `pgrep -f "src eval"` | se auto-matchea → deadlock; esperar por PID/archivo, no pgrep |
 
-### 2. INSTRUMENTAR cheap-first
-- Medir **retrieval-only** (`scripts/campaign_sweep.py`: gold∈pool@5/10/20) ANTES de
-  gastar generación. Es 10× más barato y aísla el efecto en el retrieval.
-- Solo si retrieval mejora sin regresión → medir **generación** (`campaign_generation_eval.py`:
-  cita_ok / grounding / answered).
-- Recursos: gating GPU/RAM ≥5 min libres antes de evals largos (drivers `campaign_*driver*.sh`).
-  NO matar el entrenamiento de otros proyectos; esperar. NO usar `pgrep -f` que se auto-matchea.
+## Red flags (estás por violar la disciplina)
 
-### 3. MEDIR EN DOS SETS (lo que caza overfit)
-- **dev** = `data/eval/queries_independent.jsonl` (44q, set de iteración).
-- **held-out** = `data/eval/queries_holdout.jsonl` (set reservado, gold LEÍDO de la ley,
-  NUNCA usado para ajustar). Si un set nuevo se gasta iterando, deja de ser held-out.
-- **Generaliza** = sube en AMBOS. **Overfit** = sube en dev y queda igual/baja en held-out → DESCARTAR.
-- Gold por **lectura de la ley** (que el término/respuesta esté en el artículo), NUNCA derivado
-  de la propia curación/sistema (eso mide consistencia, no correctitud — infla).
-
-### 4. NO-REGRESIÓN (legal-safe)
-- `grounding_pass` no debe bajar (alucinación = error crítico en RAG legal).
-- Rechazos de negativos/off-corpus no deben romperse.
-- Revisar por categoría, no solo el global (un global plano puede esconder +X/−X).
-
-### 5. ATERRIZAR flag-gated
-- Cambio detrás de flag en `src/core/config.py`, **default OFF**, hasta medido.
-- Factory/patrón que permita A/B por env var (ej. `get_reranker()` + `USE_BGE_RERANKER`).
-- Nunca flipear un default de producción en silencio (latencia/comportamiento = decisión de producto).
-
-### 6. DOCUMENTAR (wins Y rechazos)
-- `docs/architecture-status.md`: marcar el componente, sus límites medidos, los números.
-- Doc de campaña/handoff del día con la tabla dev vs held-out, retrieval y generación.
-- Memoria `project_energy_rag_state` (lo más vigente arriba).
-- **Registrar lo DESCARTADO y por qué** (overfit/nulo) — vale tanto como los wins; evita repetirlo.
-- Commit por cambio (ADR + handoff se actualizan al cambiar comportamiento, no al final).
-
-## Anti-patrones (no hacer)
-- Adoptar mirando solo el set de desarrollo. → usar held-out.
-- Subir un número global sin mirar categorías ni grounding.
-- Cambiar varias cosas a la vez (no sabés cuál movió la aguja). → un lever por experimento.
-- Gold derivado del propio sistema/curación. → leer la ley.
-- Asumir límites de la técnica sin verificarlos (tokens, hardware, latencia). → investigar.
+- "Mejora en el set de desarrollo, lo adopto" → falta held-out (HyDE/graph_boost_all eran overfit).
+- "El global sube" sin mirar grounding ni categorías.
+- Cambiar 2+ cosas a la vez → no sabés cuál movió la aguja.
+- Gold derivado del propio sistema/curación (mide consistencia, no correctitud → infla).
+- Asumir límites de la técnica (tokens/hardware/latencia) sin verificarlos.
