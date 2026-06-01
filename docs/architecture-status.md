@@ -231,8 +231,15 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
   (solo Ollama usaba la GPU). NO era la GPU ni el modelo: era el build de torch.
 - **PROBADO**: `torch 2.7.1+cu118` (trae PTX sm_60 → JIT a sm_61) corre **BGE en la GTX 1080**:
   30 pares en **0.16s** (vs minutos en CPU). La latencia de BGE —único costo de adoptarlo— DESAPARECE.
-- Instalado en venv aparte `venv-gpu/` (gitignored) para no tocar el venv principal. Decisión
-  pendiente: usar `venv-gpu` para correr el RAG, o migrar el venv principal a cu118.
+- Instalado en venv aparte `venv-gpu/` (gitignored) para no tocar el venv principal.
+- **COEXISTENCIA PROBADA (fp16)**: el techo real no era torch sino la **VRAM (8GB)**. Solución:
+  BGE en **fp16** = **1.16 GB** (vs ~2GB fp32, calidad ranking ~igual: score 0.989 vs 0.997).
+  Query real end-to-end: **9b (5.9GB) + BGE fp16 (1.8GB) = 7.75 GB / 8 GB, SIN OOM**, embedder
+  en CPU. Respuesta correcta citando el art gold. Margen ~450MB (ajustado pero estable; vigilar
+  con contextos largos).
+- **Config GPU (en `venv-gpu`)**: `USE_BGE_RERANKER=1 BGE_DEVICE=cuda BGE_FP16=1 EMBEDDER_DEVICE=cpu`
+  + `--top-k 10`. El venv principal (cu130) NO puede usar la GPU para torch → se queda con BGE en CPU.
+  Wiring: `BGEReranker` usa fp16 cuando `BGE_DEVICE=cuda` (`src/components/reranker.py`).
 
 **Solo MÁS LENTO** (corre en CPU/tarda más → se mide igual, la latencia es dato de costo, no bloqueo):
 

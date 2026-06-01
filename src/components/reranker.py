@@ -58,7 +58,15 @@ class BGEReranker:
         from sentence_transformers import CrossEncoder
         dev = device or os.environ.get("BGE_DEVICE", "cpu")
         ml = int(os.environ.get("BGE_MAX_LENGTH", "512"))
-        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=ml)
+        mk = {}
+        # En GPU usar fp16: ~1.16GB (vs ~2GB fp32) → entra junto al 9b en 8GB.
+        # Calidad ~igual para ranking (score 0.989 vs 0.997). Requiere torch con
+        # soporte de la GPU (p.ej. cu118 en venv-gpu para Pascal sm_61).
+        if dev == "cuda" and os.environ.get("BGE_FP16", "1") == "1":
+            import torch
+            mk["torch_dtype"] = torch.float16
+        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=ml,
+                              model_kwargs=mk)
 
     def rerank(self, query, docs, top_k):
         if not docs:
