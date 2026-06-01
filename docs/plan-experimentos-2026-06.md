@@ -45,6 +45,7 @@ Retrieval-only gold∈pool, BGE rr30, dev + extremo:
 |---|---|---|---|
 | ml=512 | 33/44 | 11/18 | 6/6 |
 | ml=1024 | 32/44 | 11/18 | 6/6 |
+| ml=2048 | 32/44 | 11/18 | 6/6 |
 - **`max_length` no mueve nada** (512≈1024). `ext_hundida` ya 6/6 a 512: el retrieval es por
   CHUNK, cada def vive en su fragmento chico → el truncado no pierde respuestas. El "30% truncado"
   no se traduce en fallos. **Descartado.**
