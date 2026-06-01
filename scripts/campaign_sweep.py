@@ -9,12 +9,35 @@ retrieval de cada lever. Guarda JSON en data/eval/results/campaign/.
 Uso: python -m scripts.campaign_sweep <config_label> [set1.jsonl set2.jsonl ...]
 """
 import json
+import os
 import sys
 from pathlib import Path
 from collections import defaultdict
 
-from src.components.embedder import Qwen3Embedder
+from src.components.embedder import Qwen3Embedder  # sets HF_HUB_OFFLINE
 from src.components.reranker import Qwen3Reranker
+
+
+class BGEReranker:
+    """Cross-encoder reranker (EXP). Reorders the pool by semantic (query, doc)
+    relevance — the lever for paraphrase→operative-article (situacional), which
+    RRF/graph-boost can't promote. Retrieval-only test; NOT the production
+    reranker (BGE hurt the LLM's citation discipline historically, but that was
+    grounding, not recall@5 — measure recall here)."""
+
+    def __init__(self, device: str | None = None):
+        from sentence_transformers import CrossEncoder
+        # Pascal (GTX 1080, sm_61): el cross-encoder BGE tira "no kernel image"
+        # en GPU (a diferencia del embedder Qwen que evita fp16). CPU por default.
+        dev = device or os.environ.get("BGE_DEVICE", "cpu")
+        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=512)
+
+    def rerank(self, query, docs, top_k):
+        if not docs:
+            return []
+        scores = self.m.predict([(query, d) for d in docs])
+        order = sorted(range(len(docs)), key=lambda i: float(scores[i]), reverse=True)
+        return [(i, float(scores[i])) for i in order[:top_k]]
 from src.components.vectorstore import PostgresStore
 from src.components.llm import get_llm_provider
 from src.pipelines.retrieve import SimpleRetriever
@@ -64,7 +87,9 @@ def main():
     }
     pool = cfg.settings.retrieval_pool_depth
     e = Qwen3Embedder()
-    r = Qwen3Reranker()
+    rk = os.environ.get("CAMPAIGN_RERANKER", "identity").lower()
+    r = BGEReranker() if rk == "bge" else Qwen3Reranker()
+    config["reranker"] = rk
     store = PostgresStore()
     llm = get_llm_provider()
     retr = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
