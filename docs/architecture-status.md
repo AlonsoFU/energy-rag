@@ -224,6 +224,18 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 **Config recomendada por la campaña**: `use_bge_reranker=True` + `top_rerank_override=30` +
 `--top-k 10`. Descartados por held-out: `hyde_in_simple`, `graph_boost_all`. Nulos: pool_depth>50.
 
+## 8b. Mejoras teóricas BLOQUEADAS por hardware (registro — "no medible hoy" ≠ "no sirve")
+
+Levers prometedores que hoy no se pueden medir/aplicar por CPU/RAM/GPU. Quedan anotados para
+cuando cambie el hardware (ver skill `experimentar-cambio-rag`).
+
+| Lever | Hipótesis (por qué ayudaría) | Bloqueo de hardware | Qué lo desbloquea |
+|---|---|---|---|
+| **BGE en GPU** | reranker cross-encoder ~10-50× más rápido → elimina el único costo (latencia) que frena adoptarlo por default | GTX 1080 (Pascal sm_61) no tiene kernels para el cross-encoder ("no kernel image") → corre en CPU | GPU Turing+ / Ampere (RTX 20xx+) |
+| **BGE `max_length` 512→2048** | ~30% de chunks (>1800 chars) se truncan a 512 hoy; subirlo cubriría la cola que el reranker no ve | en CPU, 2048 tok ≈ 4× cómputo por par query-doc → latencia inaceptable | misma GPU compatible (en GPU el costo es marginal) |
+| **Contextual chunks reales (gap #2)** | resumen del artículo por LLM antepuesto a cada chunk → +recall en queries descriptivas/paráfrasis | re-ingesta de ~3.900 chunks con LLM local = horas de cómputo | tiempo de cómputo Ollama (no es bloqueo duro, es costo) |
+| **Re-chunk glosario fino (art 225)** | 1 definición = 1 fragmento → cada def cabe entera en el reranker (hoy el glosario gigante se trunca) | re-ingesta + re-embed | tiempo de cómputo (no bloqueo duro) |
+
 ## 7. Conclusión
 
 **Estás más cerca del meta de lo que parece.** La foundation es sólida (hybrid
