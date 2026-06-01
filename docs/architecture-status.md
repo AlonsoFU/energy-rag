@@ -226,11 +226,13 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 
 ## 8b. Registro de límites de hardware (distinguir "bloqueado" de "solo más lento")
 
-**Bloqueo DURO** (literalmente no ejecuta hoy → mejora teórica para cuando cambie el hardware):
-
-| Lever | Hipótesis | Bloqueo | Qué lo desbloquea |
-|---|---|---|---|
-| **BGE (y embedder) en GPU** | reranker ~10-50× más rápido → elimina el costo de latencia; embedder también acelera | **El PyTorch instalado NO soporta sm_61** (soporta sm_75+). NO es la GPU ni el modelo: es el build de torch. Hoy embedder y BGE corren en CPU; solo Ollama usa la GPU (runtime propio). | **Reinstalar PyTorch con wheel CUDA que incluya sm_61** (p.ej. cu118: sm_37–sm_90). NO requiere GPU nueva. |
+**RESUELTO 2026-06 — BGE/embedder en GPU** (era "bloqueo duro", se desbloqueó sin hardware nuevo):
+- El torch del venv principal (**2.11+cu130**) NO soporta Pascal sm_61 → embedder y BGE caían a CPU
+  (solo Ollama usaba la GPU). NO era la GPU ni el modelo: era el build de torch.
+- **PROBADO**: `torch 2.7.1+cu118` (trae PTX sm_60 → JIT a sm_61) corre **BGE en la GTX 1080**:
+  30 pares en **0.16s** (vs minutos en CPU). La latencia de BGE —único costo de adoptarlo— DESAPARECE.
+- Instalado en venv aparte `venv-gpu/` (gitignored) para no tocar el venv principal. Decisión
+  pendiente: usar `venv-gpu` para correr el RAG, o migrar el venv principal a cu118.
 
 **Solo MÁS LENTO** (corre en CPU/tarda más → se mide igual, la latencia es dato de costo, no bloqueo):
 
