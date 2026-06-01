@@ -76,13 +76,21 @@ recuperan ni como candidatos (212, 92, 1146553/48). No es ranking: es **recall/c
 artículo operativo no comparte vocabulario con la query) y/o **gold discutible** (ej. financiamiento
 del panel quizá es 212-13, no 212). → diagnóstico por-query antes que otro lever ciego.
 
-### Frente actualizado (CONFIRMADO sin solución actual)
-**Distractor + multi-parte (queries compositivas)**: cuando la query nombra un término dominante que
-NO es el sujeto, ese término secuestra el retrieval — ni RRF, ni graph_boost, ni BGE, ni
-multi_query/step_back lo arreglan. Lever candidato (próxima sesión, ciclo completo del skill):
-**detección de sujeto / descomposición de query** (separar sub-preguntas, retrieve por cada una,
-o identificar el concepto-sujeto y no el contexto). Conecta con `find_subject_concept` (Paso 1/2).
-NO max_length, NO más reranking, NO expansión genérica (ya probados).
+### Diagnóstico por-query de los 5 fallos distractor/multi-parte (2026-06): el "0/3" estaba INFLADO
+Leyendo la ley, 2 de los golds que puse en el set extremo están MAL/discutibles:
+- "qué organismo resuelve discrepancias" gold 258171/212 → **212 es el FINANCIAMIENTO del Panel**,
+  no su función de resolver. Gold equivocado mío.
+- "cliente que negocia libremente su precio" gold 258171/147 → **147 lista los REGULADOS**; el
+  cliente libre es por contraste (≈149/def). Gold discutible.
+- Reales (gold OK pero recall gap): 92 (decreto expansión) y 1146553/48 (VATT método) no se
+  recuperan; 29819/2 (SEC) quedó en rank 6 (casi).
+
+**Conclusión corregida**: el frente "distractor" estaba inflado por gold malo. Prioridad real:
+1. **Fase 4 (AHORA primero): curar/verificar el gold del set extremo + permitir múltiples gold
+   válidos por pregunta.** Medir con gold malo lleva a perseguir levers fantasma.
+2. Recall genuino de artículos OPERATIVOS (92, 1146553/48): no comparten vocabulario con la query
+   → candidato = aristas concepto→artículo-operativo (curación), NO otro reranking.
+LEVERS YA DESCARTADOS para esto: max_length, multi_query/step_back (rama compleja), descomposición.
 
 ## Orden recomendado
 Fase 1 (ya) → Fase 2 → [Fase 0: decisión PR] → Fase 3 → Fase 4.
