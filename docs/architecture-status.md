@@ -240,6 +240,10 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 - **Config GPU (en `venv-gpu`)**: `USE_BGE_RERANKER=1 BGE_DEVICE=cuda BGE_FP16=1 EMBEDDER_DEVICE=cpu`
   + `--top-k 10`. El venv principal (cu130) NO puede usar la GPU para torch → se queda con BGE en CPU.
   Wiring: `BGEReranker` usa fp16 cuando `BGE_DEVICE=cuda` (`src/components/reranker.py`).
+- **VALIDADO end-to-end (84 queries, 3 sets, 2026-06)**: cita_ok dev **32/44** (= CPU fp32, sin
+  regresión), holdout **16/18** (vs 17 = ruido Ollama; grounding 18/18), extremo **14/18** (grounding
+  18/18, 4/4 rechazos off-corpus). **0 OOM** en las 84 queries → la config GPU 7.75/8GB es estable.
+  fp16 NO degrada la calidad de citas; la latencia de BGE desaparece. Recomendado para uso real.
 
 **Solo MÁS LENTO** (corre en CPU/tarda más → se mide igual, la latencia es dato de costo, no bloqueo):
 
