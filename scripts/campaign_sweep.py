@@ -29,8 +29,11 @@ class BGEReranker:
         from sentence_transformers import CrossEncoder
         # Pascal (GTX 1080, sm_61): el cross-encoder BGE tira "no kernel image"
         # en GPU (a diferencia del embedder Qwen que evita fp16). CPU por default.
+        # max_length por env (EXP Fase 2): bge-reranker-v2-m3 aguanta 8192; 512
+        # trunca ~30% de chunks. Subirlo = más cómputo en CPU (costo, no bloqueo).
         dev = device or os.environ.get("BGE_DEVICE", "cpu")
-        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=512)
+        ml = int(os.environ.get("BGE_MAX_LENGTH", "512"))
+        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=ml)
 
     def rerank(self, query, docs, top_k):
         if not docs:

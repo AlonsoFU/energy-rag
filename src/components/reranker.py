@@ -57,7 +57,8 @@ class BGEReranker:
         import os
         from sentence_transformers import CrossEncoder
         dev = device or os.environ.get("BGE_DEVICE", "cpu")
-        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=512)
+        ml = int(os.environ.get("BGE_MAX_LENGTH", "512"))
+        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=ml)
 
     def rerank(self, query, docs, top_k):
         if not docs:
