@@ -38,9 +38,9 @@ def ask(
         reranker = _MockReranker()
     else:
         from src.components.embedder import Qwen3Embedder
-        from src.components.reranker import Qwen3Reranker
+        from src.components.reranker import get_reranker
         embedder = Qwen3Embedder()
-        reranker = Qwen3Reranker()
+        reranker = get_reranker()
 
     store = PostgresStore()
     llm = get_llm_provider()
@@ -173,8 +173,8 @@ def eval_cmd(
         e, r = _ME(), _MR()
     else:
         from src.components.embedder import Qwen3Embedder
-        from src.components.reranker import Qwen3Reranker
-        e, r = Qwen3Embedder(), Qwen3Reranker()
+        from src.components.reranker import get_reranker
+        e, r = Qwen3Embedder(), get_reranker()
 
     from src.core import config as cfg
     pool = cfg.settings.retrieval_pool_depth

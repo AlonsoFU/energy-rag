@@ -120,6 +120,14 @@ class Settings(BaseSettings):
     # existía para evitar falsos positivos; se mide en dev+holdout).
     graph_boost_all: bool = False
 
+    # EXP (campaña 2026-06): usar el cross-encoder BGE como reranker de
+    # producción (src.components.reranker.get_reranker). En el sweep retrieval-only
+    # subió gold∈pool@5 en dev (25→33) y holdout (15→17) y destapó la clase
+    # situacional. Default OFF hasta que la eval de generación confirme que el
+    # +recall se traduce en +cita_ok (BGE históricamente bajaba el grounding).
+    # Requiere top_rerank_override ~30 para que BGE rerankee un pool suficiente.
+    use_bge_reranker: bool = False
+
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
     # via env (RETRIEVAL_POOL_DEPTH) to test whether grounding is recall-limited
