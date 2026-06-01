@@ -66,6 +66,16 @@ AdaptiveRetriever completo (multi_query/step_back) + BGE sobre el extremo (`A_ad
   completo (con expansión de query Y BGE) **NO resuelve queries compositivas** → se necesita un
   **lever NUEVO**, no la maquinaria existente.
 
+### Lever DESCOMPOSICIÓN de query — PROBADO, DESCARTADO (2026-06)
+Prototipo retrieval-only (`scripts/diag_decompose.py`, LLM parte en sub-preguntas → unión de pools
+→ BGE) sobre el extremo: TOTAL **12→10/18 (−2)**. No ayuda distractor (0/3) ni multi-parte (0/2),
+y **regresa ext_hundida 6→4** (partir queries limpias mete ruido). El LLM además no descompone los
+distractores (subs=1). Descartado.
+**Hallazgo dentro del fallo:** varios gold de distractor/multi-parte salen `base_rk=None` — NO se
+recuperan ni como candidatos (212, 92, 1146553/48). No es ranking: es **recall/cobertura** (el
+artículo operativo no comparte vocabulario con la query) y/o **gold discutible** (ej. financiamiento
+del panel quizá es 212-13, no 212). → diagnóstico por-query antes que otro lever ciego.
+
 ### Frente actualizado (CONFIRMADO sin solución actual)
 **Distractor + multi-parte (queries compositivas)**: cuando la query nombra un término dominante que
 NO es el sujeto, ese término secuestra el retrieval — ni RRF, ni graph_boost, ni BGE, ni

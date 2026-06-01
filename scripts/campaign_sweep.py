@@ -95,7 +95,20 @@ def main():
     config["reranker"] = rk
     store = PostgresStore()
     llm = get_llm_provider()
-    retr = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
+    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
+    if os.environ.get("CAMPAIGN_RETRIEVER", "simple").lower() == "adaptive":
+        from src.pipelines.retrieve import ComplexRetriever, AdaptiveRetriever
+        from src.routing.adaptive import AdaptiveRouter
+        complejo = ComplexRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
+        router = AdaptiveRouter(); router.train_default()
+        adaptive = AdaptiveRetriever(simple, complejo, router)
+        config["retriever"] = "adaptive"
+        class _Wrap:  # AdaptiveRetriever.retrieve devuelve (branch, docs)
+            def retrieve(self, q, top_k=5): return adaptive.retrieve(q, top_k=top_k)[1]
+        retr = _Wrap()
+    else:
+        config["retriever"] = "simple"
+        retr = simple
 
     OUTDIR.mkdir(parents=True, exist_ok=True)
     print(f"=== CONFIG {label} === {config}")
