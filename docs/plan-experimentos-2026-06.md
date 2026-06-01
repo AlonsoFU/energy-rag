@@ -92,6 +92,15 @@ Leyendo la ley, 2 de los golds que puse en el set extremo están MAL/discutibles
    → candidato = aristas concepto→artículo-operativo (curación), NO otro reranking.
 LEVERS YA DESCARTADOS para esto: max_length, multi_query/step_back (rama compleja), descomposición.
 
+### Fase 4 — golds corregidos + re-medición (HECHO, 2026-06)
+Corregido gold panel (212→**208**, verificado) + multi-gold cliente [147,149] + soporte `also_gold`
+en el harness. Re-medido Adaptive+BGE en extremo: **distractor 0/3 → 1/3, total 12→13/18.**
+Detalle del residuo (gold ya correcto): panel 208 **rank 2 ✓** (era puro gold malo); 92 (decreto
+expansión) None y VATT 1146553/48 None = **recall gap real** (artículo operativo sin vocab compartido);
+147 cliente rank 10 (distractor lo hunde); SEC 29819/2 rank 7 (near-miss). → el frente real son
+**~2 recall-gaps de artículos operativos** (curación de aristas concepto→operativo) + **distractor
+genuino** (147). NO un lever de reranking. Confirma: arreglar el medidor cambió el diagnóstico.
+
 ## Orden recomendado
 Fase 1 (ya) → Fase 2 → [Fase 0: decisión PR] → Fase 3 → Fase 4.
 Pausar y revisar resultado al final de cada fase antes de seguir.
