@@ -38,15 +38,21 @@ Esto NO reemplaza los skills genéricos; los usa. Lo propio de este proyecto es:
    Actualizar `architecture-status.md` + doc de campaña + memoria, registrando wins **y rechazos**
    (overfit/nulo valen tanto como los wins). Commit al cambiar comportamiento, no al final.
 
-## Registrar lo bloqueado por hardware (no descartar en silencio)
+## Hardware: distinguir "BLOQUEADO" de "solo más lento"
 
-Si un lever es **teóricamente prometedor pero hoy no se puede medir/aplicar por CPU/RAM/GPU**
-(no porque no sirva), NO lo borres: registralo como **mejora teórica futura** en
-`architecture-status.md` (sección de límites por componente), con: (a) la hipótesis y por qué
-debería ayudar, (b) el límite de hardware exacto que lo bloquea, (c) qué lo desbloquearía.
-Ejemplos vivos: BGE en GPU (GTX 1080 Pascal no tiene kernels → una GPU Turing+/Ampere lo corre);
-BGE `max_length` alto (4× cómputo en CPU → barato con GPU compatible); contextual chunks por LLM
-(costo de re-ingesta). "No medible hoy" ≠ "no sirve" — queda anotado para cuando cambie el hardware.
+Dos cosas distintas — no confundirlas:
+
+- **Solo más lento** (corre en CPU/tarda más, pero ejecuta): **NO es bloqueo → MEDÍLO IGUAL**, en
+  background y con gating de recursos. La lentitud es un dato de **costo/latencia** (decisión de
+  producto, mejora con mejor hardware), NO una razón para saltarse el experimento. Ej.: BGE
+  `max_length` 512→2048 (4× cómputo en CPU pero corre); re-chunk/contextual chunks (re-ingesta lenta).
+- **Bloqueo duro** (literalmente no ejecuta en este hardware): registralo como **mejora teórica
+  futura** en `architecture-status.md §8b`, con (a) hipótesis y por qué ayudaría, (b) el límite
+  exacto que lo bloquea, (c) qué lo desbloquearía. Ej. real: BGE en GPU (GTX 1080 Pascal sm_61,
+  "no kernel image" → necesita GPU Turing+/Ampere).
+
+Regla: "tarda más" ⇒ se mide igual (paciencia). "No arranca" ⇒ se registra para el futuro.
+"No medible hoy" ≠ "no sirve".
 
 ## Gotchas verificados del stack (no re-descubrir)
 
