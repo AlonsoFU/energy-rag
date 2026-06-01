@@ -236,7 +236,7 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 
 | Lever | Hipótesis | Costo hoy | Acción |
 |---|---|---|---|
-| **BGE `max_length` 512→2048** | cubre el ~30% de chunks (>1800 chars) que hoy se truncan a 512 | CPU ~4× cómputo por par | **medible ahora** (background); latencia = decisión de producto |
+| ~~**BGE `max_length` 512→2048**~~ | ~~cubre el ~30% de chunks truncados~~ | — | **PROBADO NULO (2026-06)**: 512≈1024 en dev+extremo; `ext_hundida` ya 6/6 a 512. El retrieval es POR CHUNK (cada def vive en su fragmento chico) → el truncado no pierde respuestas. El stat "30% truncado" era real pero engañoso. NO adoptar. |
 | **Contextual chunks (gap #2)** | resumen del artículo por LLM antepuesto a cada chunk → +recall en paráfrasis | re-ingesta ~3.900 chunks = horas Ollama | medible (re-ingesta lenta, no bloqueo) |
 | **Re-chunk glosario fino (art 225)** | 1 def = 1 fragmento → cada def cabe entera en el reranker | re-ingesta + re-embed | medible (lento, no bloqueo) |
 

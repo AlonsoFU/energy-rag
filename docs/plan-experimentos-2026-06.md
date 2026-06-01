@@ -37,6 +37,30 @@ Categorías adversariales:
 - Aceptar **múltiples artículos gold válidos** por pregunta → arregla el fallo "gold discutible"
   (hoy cuenta MISS aunque la respuesta sea razonable).
 
+## RESULTADOS
+
+### Fase 2 — BGE `max_length` (HECHO, 2026-06): lever NULO + frente nuevo
+Retrieval-only gold∈pool, BGE rr30, dev + extremo:
+| | dev @5 | extremo @5 | ext_hundida @5 |
+|---|---|---|---|
+| ml=512 | 33/44 | 11/18 | 6/6 |
+| ml=1024 | 32/44 | 11/18 | 6/6 |
+- **`max_length` no mueve nada** (512≈1024). `ext_hundida` ya 6/6 a 512: el retrieval es por
+  CHUNK, cada def vive en su fragmento chico → el truncado no pierde respuestas. El "30% truncado"
+  no se traduce en fallos. **Descartado.**
+- **El set extremo destapó el frente REAL** (por categoría, @5): ext_hundida 6/6, sufijo 2/3,
+  autoridad 2/3, pero **distractor 0/3 y multi-parte 0/2**. Cuando la query nombra un concepto
+  DOMINANTE que no es el sujeto (ej. "coordinador" → pregunta por el panel), ese término secuestra
+  el retrieval; BGE no lo arregla (el distractor matchea de verdad). Es **comprensión/descomposición
+  de query**, no reranking.
+- NOTA: el sweep es SimpleRetriever-only; el ComplexRetriever (multi_query/step_back) podría ayudar
+  a multi-parte en el pipeline completo — verificar con generación antes de invertir en un lever nuevo.
+
+### Frente actualizado (reemplaza "situacional" genérico)
+**Distractor + multi-parte (queries compositivas)**: detectar el SUJETO vs el término-contexto, o
+descomponer la query. Conecta con `find_subject_concept` (Paso 1/2 previo). Candidatos: usar la rama
+compleja para estas; o un paso de descomposición. NO max_length, NO más reranking.
+
 ## Orden recomendado
 Fase 1 (ya) → Fase 2 → [Fase 0: decisión PR] → Fase 3 → Fase 4.
 Pausar y revisar resultado al final de cada fase antes de seguir.
