@@ -52,10 +52,21 @@ OUTDIR = Path("data/eval/results/campaign")
 DEFAULT_SETS = ["data/eval/queries_independent.jsonl", "data/eval/queries_holdout.jsonl"]
 
 
-def _rank(docs, norma, art):
-    ta = _normalize_art(str(art))
+def _golds(q):
+    """Lista de (norma, art) aceptados: expected + also_gold (multi-gold). Una
+    pregunta puede tener varios artículos válidos (gold discutible/complementario)."""
+    out = [(str(q["expected_norma"]), str(q["expected_articulo"]))]
+    for g in q.get("also_gold") or []:
+        n, a = str(g).split("/", 1)
+        out.append((n, a))
+    return out
+
+
+def _rank(docs, golds):
+    """Mejor (menor) rango entre cualquiera de los gold aceptados."""
+    norm = {(str(n), _normalize_art(str(a))) for n, a in golds}
     for i, d in enumerate(docs):
-        if str(d.get("id_norma")) == str(norma) and _normalize_art(str(d.get("articulo_numero"))) == ta:
+        if (str(d.get("id_norma")), _normalize_art(str(d.get("articulo_numero")))) in norm:
             return i + 1
     return None
 
@@ -68,7 +79,7 @@ def run_set(retr, path):
     for q in pos:
         gold = (str(q["expected_norma"]), str(q["expected_articulo"]))
         docs = retr.retrieve(q["query"], top_k=max(KS))
-        rk = _rank(docs, *gold)
+        rk = _rank(docs, _golds(q))
         cat = q["category"]
         by_cat[cat]["n"] += 1
         for k in KS:

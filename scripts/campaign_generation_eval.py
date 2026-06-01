@@ -25,9 +25,17 @@ from src.core import config as cfg
 OUTDIR = Path("data/eval/results/campaign")
 
 
-def _cited(citations, norma, art):
-    ta = _normalize_art(str(art))
-    return any(str(n) == str(norma) and _normalize_art(str(a)) == ta for n, a in citations)
+def _cited(citations, golds):
+    """cita_ok si se cita CUALQUIERA de los gold aceptados (multi-gold)."""
+    norm = {(str(n), _normalize_art(str(a))) for n, a in golds}
+    return any((str(n), _normalize_art(str(a))) in norm for n, a in citations)
+
+
+def _golds(q):
+    out = [(str(q["expected_norma"]), str(q["expected_articulo"]))]
+    for g in q.get("also_gold") or []:
+        n, a = str(g).split("/", 1); out.append((n, a))
+    return out
 
 
 def main():
@@ -71,7 +79,7 @@ def main():
         c = by_cat[cat]; c["n"] += 1
         c["answered"] += (not refused)
         c["grounded"] += bool(res["grounding_pass"])
-        ok = _cited(cits, exp_n, exp_a)
+        ok = _cited(cits, _golds(q))
         c["cita_ok"] += ok
         detail.append({"q": q["query"], "cat": cat, "gold": f"{exp_n}/{exp_a}",
                        "cita_ok": ok, "refused": refused, "cits": [f"{n}/{a}" for n, a in cits]})
