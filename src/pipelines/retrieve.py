@@ -69,7 +69,8 @@ GRAPH_BOOST_FACTOR = {
 }
 
 
-def graph_boost(candidates: list[dict], query_concepts: list) -> list[dict]:
+def graph_boost(candidates: list[dict], query_concepts: list,
+                boost_all: bool = False) -> list[dict]:
     """Boost candidates whose articulo has a `referencias` edge to one of the
     query concepts.
 
@@ -99,6 +100,15 @@ def graph_boost(candidates: list[dict], query_concepts: list) -> list[dict]:
         all_names = list(query_concepts)
         alias_matched_names = set()
         legacy_caller = True
+
+    # EXP graph_boost_all: extend the strong define_termino +10 boost to
+    # concepts matched by CANONICAL name (not only aliases). Tests whether
+    # promoting a query concept's defining article to the top recovers the
+    # situational/definitional misses (gold survives rerank but loses top-5).
+    # Risk = canonical-name false positives (the alias gate existed for that);
+    # measured on dev+holdout before adopting.
+    if boost_all and not legacy_caller:
+        alias_matched_names = {n.lower() for n in all_names}
 
     art_ids = [c["articulo_id"] for c in candidates]
 
@@ -272,30 +282,57 @@ class SimpleRetriever:
     """
 
     def __init__(self, store, embedder, reranker,
-                 top_bm25: int = 50, top_vector: int = 50, top_rerank: int = 10):
+                 top_bm25: int = 50, top_vector: int = 50, top_rerank: int = 10,
+                 llm: LLMProvider | None = None):
         self.store = store
         self.embedder = embedder
         self.reranker = reranker
         self.top_bm25 = top_bm25
         self.top_vector = top_vector
         self.top_rerank = top_rerank
+        self.llm = llm  # only needed when hyde_in_simple is on
+
+    def _search_text(self, query: str) -> str:
+        """Query text used for BM25+vector. With ``hyde_in_simple`` on, append a
+        hypothetical legal paragraph so a PARAPHRASED query lands near the
+        article it describes (the original query is kept for rerank/concepts).
+        Legal-safe: changes only retrieval, never the citation."""
+        from src.core import config as _cfg
+        if not getattr(_cfg.settings, "hyde_in_simple", False):
+            return query
+        try:
+            from src.pipelines.expansion import hyde as _hyde
+            h = _hyde(query, llm=self.llm)
+        except Exception:
+            return query  # LLM hiccup: degrade to plain query, never break retrieval
+        return f"{query}\n{h}" if h else query
 
     def retrieve(self, query: str, top_k: int = 5,
                  query_concepts: list[str] | None = None) -> list[dict]:
-        # 1. BM25
+        # HyDE is VECTOR-ONLY: the hypothetical legal paragraph augments the
+        # embedding (semantic bridge for paraphrases) but NOT BM25 (its
+        # hallucinated tokens would add lexical noise; BM25 wants the user's
+        # real query terms). Fusion weights use the embedded text's length so a
+        # HyDE-augmented (long) vector side gets its due weight instead of being
+        # down-weighted as if the query were a short keyword lookup.
+        vec_text = self._search_text(query)
+        # 1. BM25 — original query terms only
         bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
-        # 2. Vector
-        q_emb = self.embedder.embed([query])[0]
+        # 2. Vector — HyDE-augmented when the flag is on
+        q_emb = self.embedder.embed([vec_text])[0]
         vec = self.store.search_vector(q_emb, top_k=self.top_vector)
         # 3. RRF (length-weighted: short→BM25, long→vectors)
         fused = rrf_fusion([bm25, vec], k=60,
-                           weights=_length_weights(query))[: self.top_bm25]
-        # 4. Rerank
+                           weights=_length_weights(vec_text))[: self.top_bm25]
+        # 4. Rerank. top_rerank_override (EXP) widens the survivors so graph_boost
+        # can promote a deeper gold instead of it being truncated here.
+        from src.core import config as _cfg
+        _tr = getattr(_cfg.settings, "top_rerank_override", 0) or self.top_rerank
         if fused:
             scored = self.reranker.rerank(
                 query,
                 [c["contextual_text"] for c in fused],
-                top_k=self.top_rerank,
+                top_k=_tr,
             )
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
         # 5. Auto-detect concepts if not provided. Filter out off-domain concepts
@@ -314,7 +351,10 @@ class SimpleRetriever:
             query_concepts = extract_query_concepts(query, all_concepts)
         # 6. Graph boost
         if query_concepts:
-            fused = graph_boost(fused, query_concepts=query_concepts)
+            fused = graph_boost(
+                fused, query_concepts=query_concepts,
+                boost_all=getattr(_cfg.settings, "graph_boost_all", False),
+            )
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
         return expanded[:top_k]

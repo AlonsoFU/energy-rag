@@ -9,7 +9,7 @@ app = typer.Typer(help="Energy-RAG CLI for Chilean electrical regulations")
 @app.command()
 def ask(
     query: str,
-    top_k: int = typer.Option(5, "--top-k", "-k"),
+    top_k: int = typer.Option(10, "--top-k", "-k"),  # 2026-06: 10 mejor con BGE (campaña)
     verbose: bool = typer.Option(False, "--verbose", "-v"),
     model: str | None = typer.Option(None, "--model"),
     mock: bool = typer.Option(False, "--mock", help="Use mock embedder + reranker (no GPU/downloads)"),
@@ -38,15 +38,15 @@ def ask(
         reranker = _MockReranker()
     else:
         from src.components.embedder import Qwen3Embedder
-        from src.components.reranker import Qwen3Reranker
+        from src.components.reranker import get_reranker
         embedder = Qwen3Embedder()
-        reranker = Qwen3Reranker()
+        reranker = get_reranker()
 
     store = PostgresStore()
     llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
 
-    simple = SimpleRetriever(store, embedder, reranker)
+    simple = SimpleRetriever(store, embedder, reranker, llm=llm)
     complejo = ComplexRetriever(store, embedder, reranker, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
 
@@ -173,8 +173,8 @@ def eval_cmd(
         e, r = _ME(), _MR()
     else:
         from src.components.embedder import Qwen3Embedder
-        from src.components.reranker import Qwen3Reranker
-        e, r = Qwen3Embedder(), Qwen3Reranker()
+        from src.components.reranker import get_reranker
+        e, r = Qwen3Embedder(), get_reranker()
 
     from src.core import config as cfg
     pool = cfg.settings.retrieval_pool_depth
@@ -182,7 +182,7 @@ def eval_cmd(
     store = PostgresStore()
     llm = get_llm_provider()
     router = AdaptiveRouter(); router.train_default()
-    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool)
+    simple = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
     complejo = ComplexRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
     adaptive = AdaptiveRetriever(simple, complejo, router)
 

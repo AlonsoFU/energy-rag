@@ -1,3 +1,13 @@
+# Force HuggingFace offline BEFORE importing sentence_transformers /
+# huggingface_hub. The models are already in the local HF cache; without this,
+# every model load issues an UNAUTHENTICATED request to the HF Hub API to check
+# for updates, which rate-limits / hangs (observed as multi-minute timeouts on
+# eval/retrieval runs). setdefault keeps it overridable for a deliberate
+# re-download (HF_HUB_OFFLINE=0). Must run before the imports below.
+import os
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 import torch
 from sentence_transformers import SentenceTransformer
 

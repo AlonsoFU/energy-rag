@@ -39,3 +39,39 @@ class IdentityReranker:
 
 # Backwards-compatible alias: existing code imports Qwen3Reranker.
 Qwen3Reranker = IdentityReranker
+
+
+class BGEReranker:
+    """BAAI/bge-reranker-v2-m3 cross-encoder. Reorders the pool by semantic
+    (query, doc) relevance — the lever that, in the 2026-06-01 campaign, lifted
+    gold∈pool@5 on BOTH dev (25→33) and a held-out set (15→17) and cracked the
+    situational/paraphrase class, where RRF/graph-boost/HyDE could not (HyDE
+    even overfit). Gated by `use_bge_reranker` (default OFF) until the
+    generation eval confirms the recall gain survives as cita_ok (BGE historically
+    hurt the LLM's citation discipline — that's what the eval checks).
+
+    CPU only: GTX 1080 (Pascal sm_61) lacks GPU kernels for this cross-encoder
+    ('no kernel image'). Lazy model load so importing this module stays cheap."""
+
+    def __init__(self, device: str | None = None):
+        import os
+        from sentence_transformers import CrossEncoder
+        dev = device or os.environ.get("BGE_DEVICE", "cpu")
+        ml = int(os.environ.get("BGE_MAX_LENGTH", "512"))
+        self.m = CrossEncoder("BAAI/bge-reranker-v2-m3", device=dev, max_length=ml)
+
+    def rerank(self, query, docs, top_k):
+        if not docs:
+            return []
+        scores = self.m.predict([(query, d) for d in docs])
+        order = sorted(range(len(docs)), key=lambda i: float(scores[i]), reverse=True)
+        return [(i, float(scores[i])) for i in order[:top_k]]
+
+
+def get_reranker():
+    """Production reranker factory. BGE when `use_bge_reranker` is on, else the
+    Identity no-op (preserves RRF order — the prior default)."""
+    from src.core.config import settings
+    if getattr(settings, "use_bge_reranker", False):
+        return BGEReranker()
+    return IdentityReranker()

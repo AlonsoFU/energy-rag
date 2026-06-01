@@ -19,6 +19,47 @@ from src.pipelines.grammar import extract_valid_citations, build_json_schema
 from src.pipelines.off_topic import is_off_topic, REFUSAL_TEXT
 
 
+def _anchor_authoritative_citation(query: str, text: str) -> str:
+    """Post-hoc, DETERMINISTIC citation anchoring (no model, no thresholds).
+
+    When the query centers on a SINGLE curated concept whose authoritative
+    defining article A is known (high-confidence: define_termino + authority, or
+    a confirmed definition_source — find_subject_concept only surfaces gated
+    pointers), and the generated answer cited NOTHING from A's norma, append a
+    curated line naming A. The LLM writes the prose; the CITATION is anchored to
+    the curated source — closing the attribution gap where the law's article is
+    injected at the top but the LLM cites the reglamento instead.
+
+    Guard — two modes (cfg.anchor_guard_exact_article):
+      - False (norma-level, default): skip if the answer cited ANY article from
+        A's norma. Conservative: never overrides the LLM's article choice within
+        the right law (protects general-vs-detalle, e.g. AVI method article).
+      - True (article-level): skip only if the answer cited A EXACTLY (norma+art).
+        Fixes intra-norma attribution: when the law defines the term in a glossary
+        article (e.g. 250604/13) but the LLM cited an operative sibling
+        (250604/56), anchor the real defining article. Trade-off: may re-anchor
+        where the reglamento's article was the wanted answer → MEASURE A/B.
+    """
+    from src.core import config as cfg
+    from src.pipelines.concept_injection import find_subject_concept
+    from src.pipelines.grounding import extract_citations, _normalize_art
+    res = find_subject_concept(query)
+    if not res:
+        return text
+    norma, art = str(res[0]), str(res[1])
+    cited = extract_citations(text)
+    if getattr(cfg.settings, "anchor_guard_exact_article", False):
+        # article-level: only skip if A (norma+art) is already cited exactly
+        tgt_art = _normalize_art(art)
+        if any(str(n) == norma and _normalize_art(a) == tgt_art for n, a in cited):
+            return text
+    else:
+        # norma-level (default): skip if any article from A's norma is cited
+        if any(str(n) == norma for n, _a in cited):
+            return text
+    return text.rstrip() + f"\n\nFuente autoritativa de la definición: [Art. {art} de {norma}]."
+
+
 def _format_as_text(parsed: dict) -> str:
     """Convert {answer: str, citations: [str]} into a single text with inline cites.
 
@@ -160,6 +201,12 @@ def generate_answer(
     # Valid citations are kept verbatim. Only affects the rendered text; the
     # grounding_pass decision above has already been made.
     response_text = strip_malformed_citations(response_text)
+
+    # Deterministic citation anchoring (flag-gated, default off). Only on a
+    # grounded, non-refusal answer — never fabricate a source for a refusal.
+    if (getattr(cfg.settings, "anchor_authoritative_citation", False)
+            and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()):
+        response_text = _anchor_authoritative_citation(query, response_text)
 
     return {
         "text": response_text,

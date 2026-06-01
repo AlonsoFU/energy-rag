@@ -18,7 +18,7 @@ CITATION_PATTERN = re.compile(
     r"\["
     r"(?:art[íi]culos?\.?|arts?\.)"                          # Art / Art. / Artículo / Artículos
     r"\s*"
-    r"(?P<art>\d+\s*[°º]?(?:\s*(?:bis|ter|quater|quinquies))?(?:\s*[A-Z])?)"
+    r"(?P<art>\d+\s*[°º]?(?:\s*-\s*\d+)?(?:\s*(?:bis|ter|qu[áa]ter|quinquies))?(?:\s*[A-Z])?)"  # +"-M" (72-1, 212-1)
     r"\s+(?:de|del)\s+"                                      # 'de' or 'del'
     r"(?P<norma>[A-Z_0-9]+)"
     r"\]",
@@ -29,6 +29,7 @@ CITATION_PATTERN = re.compile(
 def _normalize_art(s: str) -> str:
     """Drop degree signs and collapse whitespace so '5°' and '5' match."""
     s = s.replace("°", "").replace("º", "")
+    s = re.sub(r"\s*-\s*", "-", s)              # "72 - 1" / "72°-1" → "72-1"
     return re.sub(r"\s+", " ", s).strip()
 
 
