@@ -230,7 +230,7 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 
 | Lever | Hipótesis | Bloqueo | Qué lo desbloquea |
 |---|---|---|---|
-| **BGE en GPU** | reranker ~10-50× más rápido → elimina el costo de latencia que frena adoptarlo por default | GTX 1080 (Pascal sm_61) sin kernels para el cross-encoder ("no kernel image") | GPU Turing+/Ampere (RTX 20xx+) |
+| **BGE (y embedder) en GPU** | reranker ~10-50× más rápido → elimina el costo de latencia; embedder también acelera | **El PyTorch instalado NO soporta sm_61** (soporta sm_75+). NO es la GPU ni el modelo: es el build de torch. Hoy embedder y BGE corren en CPU; solo Ollama usa la GPU (runtime propio). | **Reinstalar PyTorch con wheel CUDA que incluya sm_61** (p.ej. cu118: sm_37–sm_90). NO requiere GPU nueva. |
 
 **Solo MÁS LENTO** (corre en CPU/tarda más → se mide igual, la latencia es dato de costo, no bloqueo):
 
