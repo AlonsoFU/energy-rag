@@ -101,6 +101,19 @@ expansión) None y VATT 1146553/48 None = **recall gap real** (artículo operati
 **~2 recall-gaps de artículos operativos** (curación de aristas concepto→operativo) + **distractor
 genuino** (147). NO un lever de reranking. Confirma: arreglar el medidor cambió el diagnóstico.
 
+## Items finales (2026-06)
+- **Item 1 (HECHO):** activado `use_bge_reranker=True` + `top_rerank_override=30` + `ask --top-k 10`
+  por default. Validado (cita_ok dev 25→32, holdout 14→17, grounding intacto). Costo: latencia CPU.
+- **Item 3 (INVESTIGADO → NO es curación):** los recall-gaps NO son data faltante. La arista
+  art 92→"Decreto de Expansión" YA existe; la query "quién aprueba el **plan** de expansión" matchea
+  "Plan de Expansión" (resolución 1112591), no "Decreto de Expansión" (92). Es **concept-matching/
+  detección de sujeto**, no aristas. Gold VATT dudoso (1146553/48 = AVI, no VATT). NO se fabrican
+  aristas para forzar el test. Cierra en: el frente real es subject-detection + revisión de gold.
+- **Item 2 (Fase 3, DIFERIDO):** re-chunk glosario + contextual chunks. (a) `ext_hundida` ya 6/6 →
+  no hay target medible en los sets actuales para el re-chunk del art 225; (b) contextual chunks =
+  pipeline de ingesta NUEVO (resumen LLM por chunk, ~3.900 calls, overnight) + debe medirse. Es un
+  build dedicado, NO entra en este PR. Próxima sesión, ciclo completo del skill.
+
 ## Orden recomendado
 Fase 1 (ya) → Fase 2 → [Fase 0: decisión PR] → Fase 3 → Fase 4.
 Pausar y revisar resultado al final de cada fase antes de seguir.
