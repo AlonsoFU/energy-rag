@@ -1,0 +1,89 @@
+"""Harness de la campaña de experimentación (retrieval-only).
+
+Para una CONFIG (controlada por env: HYDE_IN_SIMPLE, RETRIEVAL_POOL_DEPTH,
+GRAPH_BOOST_ALL, etc. + flags nuevos), mide el RANGO del gold y gold∈pool@5/10/20
+sobre los dos sets (dev=queries_independent, test=queries_holdout). Usa
+SimpleRetriever (determinista, sin ruteo) para comparar limpio el poder de
+retrieval de cada lever. Guarda JSON en data/eval/results/campaign/.
+
+Uso: python -m scripts.campaign_sweep <config_label> [set1.jsonl set2.jsonl ...]
+"""
+import json
+import sys
+from pathlib import Path
+from collections import defaultdict
+
+from src.components.embedder import Qwen3Embedder
+from src.components.reranker import Qwen3Reranker
+from src.components.vectorstore import PostgresStore
+from src.components.llm import get_llm_provider
+from src.pipelines.retrieve import SimpleRetriever
+from src.core import config as cfg
+from src.pipelines.grounding import _normalize_art
+
+KS = [5, 10, 20]
+OUTDIR = Path("data/eval/results/campaign")
+DEFAULT_SETS = ["data/eval/queries_independent.jsonl", "data/eval/queries_holdout.jsonl"]
+
+
+def _rank(docs, norma, art):
+    ta = _normalize_art(str(art))
+    for i, d in enumerate(docs):
+        if str(d.get("id_norma")) == str(norma) and _normalize_art(str(d.get("articulo_numero"))) == ta:
+            return i + 1
+    return None
+
+
+def run_set(retr, path):
+    rows = [json.loads(l) for l in Path(path).read_text().splitlines() if l.strip()]
+    pos = [r for r in rows if r.get("expected_norma")]
+    by_cat = defaultdict(lambda: {"n": 0, **{f"@{k}": 0 for k in KS}})
+    detail = []
+    for q in pos:
+        gold = (str(q["expected_norma"]), str(q["expected_articulo"]))
+        docs = retr.retrieve(q["query"], top_k=max(KS))
+        rk = _rank(docs, *gold)
+        cat = q["category"]
+        by_cat[cat]["n"] += 1
+        for k in KS:
+            if rk and rk <= k:
+                by_cat[cat][f"@{k}"] += 1
+        detail.append({"q": q["query"], "cat": cat, "gold": f"{gold[0]}/{gold[1]}", "rank": rk})
+    tot = {"n": len(pos), **{f"@{k}": sum(1 for d in detail if d["rank"] and d["rank"] <= k) for k in KS}}
+    return {"by_cat": dict(by_cat), "total": tot, "detail": detail}
+
+
+def main():
+    label = sys.argv[1] if len(sys.argv) > 1 else "unlabeled"
+    sets = sys.argv[2:] or DEFAULT_SETS
+    config = {
+        "hyde_in_simple": getattr(cfg.settings, "hyde_in_simple", False),
+        "retrieval_pool_depth": cfg.settings.retrieval_pool_depth,
+        "graph_boost_all": getattr(cfg.settings, "graph_boost_all", False),
+        "inject_curated_definitions": getattr(cfg.settings, "inject_curated_definitions", True),
+    }
+    pool = cfg.settings.retrieval_pool_depth
+    e = Qwen3Embedder()
+    r = Qwen3Reranker()
+    store = PostgresStore()
+    llm = get_llm_provider()
+    retr = SimpleRetriever(store, e, r, top_bm25=pool, top_vector=pool, llm=llm)
+
+    OUTDIR.mkdir(parents=True, exist_ok=True)
+    print(f"=== CONFIG {label} === {config}")
+    out = {"label": label, "config": config, "sets": {}}
+    for s in sets:
+        res = run_set(retr, s)
+        name = Path(s).stem
+        out["sets"][name] = res
+        t = res["total"]
+        print(f"\n[{name}] n={t['n']}  " + "  ".join(f"@{k}={t[f'@{k}']}/{t['n']}" for k in KS))
+        for cat, c in sorted(res["by_cat"].items()):
+            print(f"    {cat:20s} n={c['n']:2d}  " + " ".join(f"@{k}={c[f'@{k}']}" for k in KS))
+    fp = OUTDIR / f"{label}.json"
+    fp.write_text(json.dumps(out, ensure_ascii=False, indent=2))
+    print(f"\n-> {fp}")
+
+
+if __name__ == "__main__":
+    main()

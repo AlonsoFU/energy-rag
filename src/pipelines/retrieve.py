@@ -69,7 +69,8 @@ GRAPH_BOOST_FACTOR = {
 }
 
 
-def graph_boost(candidates: list[dict], query_concepts: list) -> list[dict]:
+def graph_boost(candidates: list[dict], query_concepts: list,
+                boost_all: bool = False) -> list[dict]:
     """Boost candidates whose articulo has a `referencias` edge to one of the
     query concepts.
 
@@ -99,6 +100,15 @@ def graph_boost(candidates: list[dict], query_concepts: list) -> list[dict]:
         all_names = list(query_concepts)
         alias_matched_names = set()
         legacy_caller = True
+
+    # EXP graph_boost_all: extend the strong define_termino +10 boost to
+    # concepts matched by CANONICAL name (not only aliases). Tests whether
+    # promoting a query concept's defining article to the top recovers the
+    # situational/definitional misses (gold survives rerank but loses top-5).
+    # Risk = canonical-name false positives (the alias gate existed for that);
+    # measured on dev+holdout before adopting.
+    if boost_all and not legacy_caller:
+        alias_matched_names = {n.lower() for n in all_names}
 
     art_ids = [c["articulo_id"] for c in candidates]
 
@@ -314,12 +324,15 @@ class SimpleRetriever:
         # 3. RRF (length-weighted: short→BM25, long→vectors)
         fused = rrf_fusion([bm25, vec], k=60,
                            weights=_length_weights(vec_text))[: self.top_bm25]
-        # 4. Rerank
+        # 4. Rerank. top_rerank_override (EXP) widens the survivors so graph_boost
+        # can promote a deeper gold instead of it being truncated here.
+        from src.core import config as _cfg
+        _tr = getattr(_cfg.settings, "top_rerank_override", 0) or self.top_rerank
         if fused:
             scored = self.reranker.rerank(
                 query,
                 [c["contextual_text"] for c in fused],
-                top_k=self.top_rerank,
+                top_k=_tr,
             )
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
         # 5. Auto-detect concepts if not provided. Filter out off-domain concepts
@@ -338,7 +351,10 @@ class SimpleRetriever:
             query_concepts = extract_query_concepts(query, all_concepts)
         # 6. Graph boost
         if query_concepts:
-            fused = graph_boost(fused, query_concepts=query_concepts)
+            fused = graph_boost(
+                fused, query_concepts=query_concepts,
+                boost_all=getattr(_cfg.settings, "graph_boost_all", False),
+            )
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
         return expanded[:top_k]

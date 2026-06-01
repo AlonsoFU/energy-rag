@@ -108,6 +108,18 @@ class Settings(BaseSettings):
     # definitional class (which already works at 83% and needs no expansion).
     hyde_in_simple: bool = False
 
+    # EXP (campaña 2026-06): top_rerank del SimpleRetriever. El default efectivo
+    # (10) CORTA el pool a 10 antes de graph_boost/hierarchical → el gold en
+    # rango 11-20 se descarta antes de poder promoverlo. >0 lo sobreescribe para
+    # dejar sobrevivir candidatos más profundos al boost. 0 = default (10).
+    top_rerank_override: int = 0
+
+    # EXP (campaña 2026-06): extiende el boost fuerte define_termino (+10) de
+    # graph_boost a conceptos por NOMBRE canónico, no solo alias. Promueve el
+    # artículo que define el concepto de la query. Default OFF (el gate de alias
+    # existía para evitar falsos positivos; se mide en dev+holdout).
+    graph_boost_all: bool = False
+
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
     # via env (RETRIEVAL_POOL_DEPTH) to test whether grounding is recall-limited
