@@ -222,7 +222,9 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
     curada. Monótono sobre cita_ok.
 
 **Config recomendada por la campaña**: `use_bge_reranker=True` + `top_rerank_override=30` +
-`--top-k 10`. Descartados por held-out: `hyde_in_simple`, `graph_boost_all`. Nulos: pool_depth>50.
+`--top-k 10`. Descartados por held-out: `hyde_in_simple`, `graph_boost_all`, **term-prefix de
+glosario** (2026-06-02: net≈0, held-out no mejora, regresión por competencia entre glosarios).
+Nulos: pool_depth>50, BGE max_length>512.
 
 ## 8b. Registro de límites de hardware (distinguir "bloqueado" de "solo más lento")
 
@@ -250,7 +252,7 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 | Lever | Hipótesis | Costo hoy | Acción |
 |---|---|---|---|
 | ~~**BGE `max_length` 512→2048**~~ | ~~cubre el ~30% de chunks truncados~~ | — | **PROBADO NULO (2026-06)**: 512≈1024 en dev+extremo; `ext_hundida` ya 6/6 a 512. El retrieval es POR CHUNK (cada def vive en su fragmento chico) → el truncado no pierde respuestas. El stat "30% truncado" era real pero engañoso. NO adoptar. |
-| **Contextual chunks (gap #2)** | resumen del artículo por LLM antepuesto a cada chunk → +recall en paráfrasis | re-ingesta ~3.900 chunks = horas Ollama | medible (re-ingesta lenta, no bloqueo) |
+| **Contextual chunks (gap #2)** | resumen del artículo por LLM antepuesto a cada chunk → +recall en paráfrasis | re-ingesta ~3.900 chunks = horas Ollama | PENDIENTE el resumen LLM full; la variante barata (term-prefix determinista de glosario, 88 chunks) se PROBÓ y DESCARTÓ 2026-06-02 (ver campaign-2026-06-02). Insight: el cuello es generación/cita, no recall |
 | **Re-chunk glosario fino (art 225)** | 1 def = 1 fragmento → cada def cabe entera en el reranker | re-ingesta + re-embed | medible (lento, no bloqueo) |
 
 ## 7. Conclusión
