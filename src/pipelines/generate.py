@@ -105,7 +105,16 @@ def generate_answer(
     # in the corpus vocabulary, refuse directly without burning an LLM call.
     # Catches trap queries like "xenobalbúrgico" or "receta pisco sour" where
     # the LLM tends to hallucinate instead of refusing.
-    if is_off_topic(query):
+    # Semantic variant (flag): use BGE max relevance over the retrieved pool
+    # instead of lexical OOV — the lexical guard wrongly refuses COLLOQUIAL
+    # in-domain queries that don't name the legal term. Needs BGE-ranked docs
+    # carrying `_bge_max` (see retrieve.py). Falls back to lexical if absent.
+    if getattr(cfg.settings, "semantic_offtopic_gate", False) and docs:
+        _bge = max((d.get("_bge_max", 0.0) for d in docs), default=0.0)
+        _off = _bge < getattr(cfg.settings, "offtopic_bge_threshold", 0.01)
+    else:
+        _off = is_off_topic(query)
+    if _off:
         return {
             "text": REFUSAL_TEXT,
             "grounding_pass": True,  # refusal is a valid response, not an alucination

@@ -328,12 +328,14 @@ class SimpleRetriever:
         # can promote a deeper gold instead of it being truncated here.
         from src.core import config as _cfg
         _tr = getattr(_cfg.settings, "top_rerank_override", 0) or self.top_rerank
+        bge_max = 0.0
         if fused:
             scored = self.reranker.rerank(
                 query,
                 [c["contextual_text"] for c in fused],
                 top_k=_tr,
             )
+            bge_max = max((s for _, s in scored), default=0.0)
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
         # 5. Auto-detect concepts if not provided. Filter out off-domain concepts
         # (regulatorio_otros, energía_otra, indeterminado) so an alias match on,
@@ -357,7 +359,10 @@ class SimpleRetriever:
             )
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
-        return expanded[:top_k]
+        out = expanded[:top_k]
+        for d in out:  # señal para el gate de off-topic semántico (generate.py)
+            d["_bge_max"] = bge_max
+        return out
 
 
 # ---------------------------------------------------------------------------
@@ -394,10 +399,12 @@ class ComplexRetriever(SimpleRetriever):
         fused = rrf_fusion(rankings, k=60)[: self.top_bm25]
 
         # 3. Rerank against the original query
+        bge_max = 0.0
         if fused:
             scored = self.reranker.rerank(
                 query, [c["contextual_text"] for c in fused], top_k=15
             )
+            bge_max = max((s for _, s in scored), default=0.0)
             fused = [{**fused[i], "score": float(s)} for i, s in scored]
 
         # 4. Auto-detect concepts if not provided (same domain filter as SimpleRetriever)
@@ -417,7 +424,10 @@ class ComplexRetriever(SimpleRetriever):
 
         # 6. Hierarchical expand
         expanded = hierarchical_expand(fused)
-        return expanded[:top_k]
+        out = expanded[:top_k]
+        for d in out:  # señal para el gate de off-topic semántico (generate.py)
+            d["_bge_max"] = bge_max
+        return out
 
 
 # ---------------------------------------------------------------------------

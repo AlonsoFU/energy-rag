@@ -132,6 +132,18 @@ class Settings(BaseSettings):
     # latencia no es aceptable en producción.
     use_bge_reranker: bool = True
 
+    # Gate de off-topic SEMÁNTICO (flag OFF). Reemplaza el guard léxico
+    # `is_off_topic` (bolsa de palabras OOV) por: rechazar si el mejor score de
+    # BGE sobre el pool < umbral. El léxico rechaza queries COLOQUIALES in-domain
+    # ("máquina para respirar"→electrodependiente) por no nombrar el término;
+    # el semántico usa la relevancia que BGE ya computa. Experimento 2026-06-03:
+    # coloquial cita_ok 4→6, answered 6→8, CERO regresión en rechazo off-topic
+    # (NEG claro 5/5) ni in-domain. Requiere use_bge_reranker=True (con Identity
+    # el score es 1/(rank) → el gate nunca dispara). Default OFF: es decisión de
+    # producto (cambia comportamiento de rechazo + cuesta un retrieval por query).
+    semantic_offtopic_gate: bool = False
+    offtopic_bge_threshold: float = 0.01
+
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
     # via env (RETRIEVAL_POOL_DEPTH) to test whether grounding is recall-limited
