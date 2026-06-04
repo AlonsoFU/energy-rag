@@ -188,12 +188,17 @@ Lista cronológica de commits en `feat/postgres-rag-v1`:
 
 ---
 
-## 8. Pipeline vigente tras la campaña 2026-06-01 (lógicas y algoritmos)
+## 8. Pipeline vigente (lógicas y algoritmos) — actualizado 2026-06-03
 
 Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 
-1. **Off-topic gate** (`off_topic.is_off_topic`): si las palabras significativas de la
-   query no están en el vocabulario del corpus → rechazo directo, sin LLM. Anti-alucinación.
+1. **Off-topic gate**: rechazo pre-LLM de queries fuera de dominio. Dos modos:
+   - Léxico (default, `off_topic.is_off_topic`): si las palabras significativas de la query no
+     están en el vocabulario del corpus → rechazo. Barato pero rechaza mal lenguaje COLOQUIAL
+     in-domain ("se corta la luz"→no nombra el término legal).
+   - **Semántico** (`semantic_offtopic_gate`, flag OFF, 2026-06-03): rechaza si el mejor score BGE
+     del pool < `offtopic_bge_threshold`. Arregla los falsos rechazos de coloquial (+2 v3, 0
+     regresión). Requiere `use_bge_reranker`. Ver `docs/campaign-2026-06-03.md`.
 2. **Router** (`AdaptiveRouter`, TF-IDF + LinearSVC): clasifica `simple` vs `complejo`.
    - `complejo` → `ComplexRetriever`: expande con **HyDE + step_back + multi_query** (LLM local)
      y fusiona por RRF sobre todas las variantes. (OJO: HyDE aquí es del Complex, distinto del
@@ -223,7 +228,13 @@ Orden real de ejecución de una query (rama `feat/definition-source-resolver`):
 
 **Config recomendada por la campaña**: `use_bge_reranker=True` + `top_rerank_override=30` +
 `--top-k 10`. Descartados por held-out: `hyde_in_simple`, `graph_boost_all`, **term-prefix de
-glosario** (2026-06-02: net≈0, held-out no mejora, regresión por competencia entre glosarios).
+glosario** (2026-06-02: net≈0, held-out no mejora, regresión por competencia entre glosarios),
+**swap embedder bge-m3** (2026-06-03: mismo tamaño que Qwen3-0.6B, no ayudó coloquial 5/11=igual,
+−2 neto, revertido). **Registro completo de técnicas de query/retrieval: `docs/tecnicas-query-retrieval.md`.**
+
+**Frentes documentados sin hacer** (`tecnicas-query-retrieval.md`, `handoff-2026-06-02.md`):
+intent/entity extraction (#6, próximo lever de query), embedder más grande (Qwen3-4B/8B; 8B no entra
+en GTX 1080), fine-tune Tulio/Patana (específico), router por confianza (bge_max) vs el TF-IDF actual.
 Nulos: pool_depth>50, BGE max_length>512.
 
 ## 8b. Registro de límites de hardware (distinguir "bloqueado" de "solo más lento")
