@@ -18,7 +18,7 @@ corpus. ⇒ La reformulación **no puede producir una cita falsa**; su único ri
 | 3 | **Step-Back** | Abstrae a la pregunta general/principio | **Activo** en `ComplexRetriever` (rama complejo) | empató (+1) en coloquial |
 | 4 | **Multi-Query / RAG-Fusion** | N variantes + fusión RRF | **Activo** en `ComplexRetriever` | empató (+1) |
 | 5 | **RePhraseQuery** | Reescribe coloquial → consulta limpia | No implementado | — |
-| 6 | **Intent + Entity extraction** ⭐ | Infiere el concepto/organismo legal y da términos formales | No implementado | — (el más prometedor + más seguro: da términos, no prosa) |
+| 6 | **Intent + Entity extraction** | Infiere el concepto/organismo legal y da términos formales | Probado retrieval-only (`exp_intent_extraction.py`), NO adoptado | marginal/wash: coloquial +1 (8→9/11), dev **−1** (drift: LLM extrae términos alucinados, ej. "NCh 1082"); el SEC duro afloró a rank 18, no top-10 |
 | 7 | **Decomposition / Sub-question** | Parte en sub-preguntas | **Descartada** (no está en el pipeline) | negativo: rompió ext_hundida (6→4) |
 | 8 | **CoT query** | Razona en voz alta y luego emite la consulta | No implementado | — (variante de #6) |
 | 9 | **Self-Query (filtros)** | Extrae filtros de metadata (norma/año) | Parcial: visto en `exp_authority` (detección de norma) | el boost por norma no discriminó (pool ya 60% de la norma) |
