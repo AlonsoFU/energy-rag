@@ -26,7 +26,7 @@ Métrica: **cita_ok** (¿el sistema cita el artículo gold?). Sets con gold: col
 | 3 | Embedder | ✓✓ AGOTADO (13 modelos) | Nada. 4b≈8b≈sfr end-to-end. Ni el 9B gana. |
 | 4 | BM25 | ✗ doc2query | Tunear **peso BM25 vs vector** en `_length_weights` (retrieve.py:131). Barato. |
 | 5 | Fusión RRF | ✓ grid corrido (2026-07-06) | **RESULTADO** ↓. Mejor k=10 peso BM25:Vec=2:1 = 188/309 top5 (+6 vs actual ~182). k y peso NO interactúan (tunear por separado bastaba). Favorecer BM25 gana en balanced; falta desglose coloquial + end-to-end antes de adoptar. |
-| 6 | **RERANKER** | ⏳ **HUECO** — solo depth + bge-v2-m3 | **Probar otros modelos**: Qwen3-Reranker (familia ganadora acá), bge-reranker-v2-gemma (2B), jina-reranker-v2. Chicos, RAM-safe. Editar `get_reranker()` / `BGEReranker` para parametrizar el modelo. ← ALTO VALOR: decide el orden final; puede convertir los golds que el embedder ya encuentra. |
+| 6 | **RERANKER** | ✓✓ AGOTADO (10 modelos, 2026-07-06) | **RESULTADO** ↓. Baseline **bge-v2-m3 sigue rey** (cx 32/dev 36). Nadie supera coloquial. bge-large empata suma (68) con trade (+3 dev,−3 cx). Nada que adoptar. Script `exp_reranker_bakeoff.py`. |
 | 7 | Pool/top_k | ✓ (10-15, 50/100/200) | Nada. |
 | 8 | Gate off-topic | ✓ AND (+4) | Nada. |
 | 9 | Generador | ✓ 30b-a3b (+9 local) · Claude prod | Decidir Claude (calidad, $) vs 30b-a3b (gratis, peor). No medido Claude vs 30b. |
@@ -48,17 +48,37 @@ k    BM25:Vec  top5  top10
 - **Favorecer BM25 (2:1, 3:1) gana; favorecer vector (1:2, 1:3) pierde** — en balanced (mayoría formal). k chico (10) apenas mejor.
 - Ganancia +6 top5 (+2%) = marginal, y el screen MIENTE. **NO adoptado**: falta (a) desglose por clase (coloquial puede querer más vector), (b) confirmación end-to-end cita_ok. Producción sigue con peso adaptativo-por-largo + k=60.
 
-## Orden recomendado (por valor/costo)
-1. **Reranker: otros modelos** (Qwen3-Reranker primero) — el hueco real, barato, ataca la conversión.
-2. ~~Fusión RRF~~ ✓ HECHO (marginal +2%, no adoptado; ver arriba).
-3. **Grafo concept→artículo** — rescata 76/212/149 (retrieval-miss estructurales).
-4. **Re-chunk art 225** — rescata los def buried.
-5. Fine-tune — el de raíz, pero último (caro).
+## Resultado experimento RERANKER (2026-07-06, `scripts/exp_reranker_bakeoff.py`, pipeline real, coloquial 39 + dev 44, gold∈topN)
+```
+reranker              cx_t5  dev_t5   nota
+bge-v2-m3 (baseline)    32     36     ← ADOPTADO, rey coloquial
+bge-reranker-large      29     39     trade: +3 dev, -3 cx (empata suma 68)
+identity (sin rerank)   29     30     control
+mxbai-large-v1          29     30
+qwen3-rerank-0.6b       27     33     generativo (yes/no logits)
+mmarco-miniLM-es        26     33     (español mMARCO)
+bge-reranker-base       19     33
+gte-modernbert          18     35
+jina-v2-multi           —      —      incompat transformers 5.9 (falta create_position_ids)
+bge-gemma2 (2B)         —      —      template distinto al Qwen → scores basura; descartado
+qwen3-rerank-4b (4B)    —      —      MURO RAM: HF/bnb carga fp16 8GB a RAM(14) → OOM-kill
+```
+- **Ningún reranker supera el baseline en coloquial (32).** El cross-encoder bge-v2-m3 se queda.
+- Generativos (Qwen3-Reranker): loader propio (logits yes/no, prompt Instruct/Query/Document). 0.6b < baseline; 4b no corrió (RAM). Su familia NO es superior acá.
+- Los grandes LLM-based (bge-gemma2, qwen3-4b) exigen GGUF/Ollama o 4-bit; 4-bit igual choca RAM al cargar shards fp16. Valor esperado bajo (el 0.6b ya perdió) → cerrado.
 
-Siguiente inmediato = **reranker (Qwen3-Reranker)**.
+## Orden recomendado (por valor/costo)
+1. ~~Reranker~~ ✓ AGOTADO (10 modelos, marginal/negativo; baseline se queda).
+2. ~~Fusión RRF~~ ✓ HECHO (marginal +2%, no adoptado; ver arriba).
+3. **Grafo concept→artículo** — rescata 76/212/149 (retrieval-miss estructurales). ← siguiente inmediato.
+4. **Re-chunk art 225** — rescata los def buried.
+5. **BM25 weight / doc2query** — tunear `_length_weights` (barato).
+6. Fine-tune — el de raíz, pero último (caro).
+
+Siguiente inmediato = **grafo concept→artículo** (etapa 11).
 
 ## AGOTADO (no rehacer, todo negativo medido)
-embedders (13 modelos, incl. 9B via GGUF) · ensemble retrieval (−3) · verify-cite (0/6) · quant q5/q6 (=q4) · pool depth · doc2query · citation_repair · concept_inference · HyDE · fine-tune 0.6B (overfit).
+embedders (13 modelos, incl. 9B via GGUF) · **rerankers (10 modelos: bge×3, mxbai, mmarco-es, gte-modernbert, qwen3-rerank-0.6b/4b, jina, bge-gemma2 — baseline bge-v2-m3 imbatible)** · ensemble retrieval (−3) · verify-cite (0/6) · quant q5/q6 (=q4) · pool depth · doc2query · citation_repair · concept_inference · HyDE · fine-tune 0.6B (overfit).
 
 ## Regla de oro (aprendida a la mala)
 El **screen (gold∈top5) MIENTE** — no predice cita_ok. Ej: 8b ganó screen (+2) y perdió end-to-end (−1). **Todo candidato se confirma end-to-end (cita_ok) o no cuenta.** Y con set grande (339q), no con 39.
