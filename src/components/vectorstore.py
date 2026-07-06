@@ -85,17 +85,109 @@ class PostgresStore:
             return cur.fetchall()
 
     def search_bm25(self, query: str, top_k: int = 50) -> list[dict]:
+        # bm25_doc2query (flag): busca sobre tsv_aug (contextual_text + preguntas
+        # doc2query generadas) en vez de tsv. "Despierta" BM25 para fraseo
+        # coloquial sin tocar el reranker (que sigue usando contextual_text).
+        # Cae a tsv si la columna no existe (corpus sin expandir).
+        from src.core import config as _cfg
+        col = "tsv"
+        if getattr(_cfg.settings, "bm25_doc2query", False):
+            with with_connection() as conn, conn.cursor() as _c:
+                _c.execute("SELECT 1 FROM information_schema.columns "
+                           "WHERE table_name='fragmentos' AND column_name='tsv_aug'")
+                if _c.fetchone():
+                    col = "tsv_aug"
         with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
-            cur.execute("""
+            cur.execute(f"""
                 SELECT f.id, f.articulo_id, f.text, f.contextual_text,
                        a.id_norma, a.numero AS articulo_numero,
-                       ts_rank_cd(f.tsv, plainto_tsquery('spanish', %s)) AS score
+                       ts_rank_cd(f.{col}, plainto_tsquery('spanish', %s)) AS score
                 FROM fragmentos f
                 JOIN articulos a ON a.id = f.articulo_id
-                WHERE f.tsv @@ plainto_tsquery('spanish', %s)
+                WHERE f.{col} @@ plainto_tsquery('spanish', %s)
                 ORDER BY score DESC
                 LIMIT %s
             """, (query, query, top_k))
+            return cur.fetchall()
+
+    def search_vector_bgem3(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+        """Búsqueda densa sobre la columna embedding_bgem3 (2do embedder del ensemble).
+        Devuelve [] si la columna no existe o está vacía (corpus sin embeber con bge-m3)."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(
+                "SELECT 1 FROM information_schema.columns "
+                "WHERE table_name='fragmentos' AND column_name='embedding_bgem3'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT f.id, f.articulo_id, f.text, f.contextual_text,
+                       a.id_norma, a.numero AS articulo_numero,
+                       1 - (f.embedding_bgem3 <=> %s::vector) AS score
+                FROM fragmentos f
+                JOIN articulos a ON a.id = f.articulo_id
+                WHERE f.embedding_bgem3 IS NOT NULL
+                ORDER BY f.embedding_bgem3 <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, top_k))
+            return cur.fetchall()
+
+    def search_vector_4b(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+        """KNN exacto sobre embedding_4b (Qwen3-Embedding-4B, 2560-dim, GGUF Ollama).
+        Sin índice ANN (pgvector no indexa >2000 dim) → seq scan exacto, OK en ~3900 filas.
+        Devuelve [] si la columna no existe o está vacía."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.columns "
+                        "WHERE table_name='fragmentos' AND column_name='embedding_4b'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT f.id, f.articulo_id, f.text, f.contextual_text,
+                       a.id_norma, a.numero AS articulo_numero,
+                       1 - (f.embedding_4b <=> %s::vector) AS score
+                FROM fragmentos f
+                JOIN articulos a ON a.id = f.articulo_id
+                WHERE f.embedding_4b IS NOT NULL
+                ORDER BY f.embedding_4b <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, top_k))
+            return cur.fetchall()
+
+    def search_vector_4b_1024(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+        """KNN sobre embedding_4b_1024 (MRL prefix 1024-dim, indexable HNSW). Query debe
+        venir ya truncada a 1024 + renormalizada. [] si la columna no existe."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.columns "
+                        "WHERE table_name='fragmentos' AND column_name='embedding_4b_1024'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT f.id, f.articulo_id, f.text, f.contextual_text,
+                       a.id_norma, a.numero AS articulo_numero,
+                       1 - (f.embedding_4b_1024 <=> %s::vector) AS score
+                FROM fragmentos f JOIN articulos a ON a.id = f.articulo_id
+                WHERE f.embedding_4b_1024 IS NOT NULL
+                ORDER BY f.embedding_4b_1024 <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, top_k))
+            return cur.fetchall()
+
+    def search_vector_8b(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+        """KNN exacto sobre embedding_8b (Qwen3-Embedding-8B, 4096-dim, GGUF Ollama).
+        Sin índice ANN (>2000 dim) → seq scan exacto. [] si la columna no existe."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.columns "
+                        "WHERE table_name='fragmentos' AND column_name='embedding_8b'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT f.id, f.articulo_id, f.text, f.contextual_text,
+                       a.id_norma, a.numero AS articulo_numero,
+                       1 - (f.embedding_8b <=> %s::vector) AS score
+                FROM fragmentos f JOIN articulos a ON a.id = f.articulo_id
+                WHERE f.embedding_8b IS NOT NULL
+                ORDER BY f.embedding_8b <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()
 
     # ---------- CONCEPTOS ----------

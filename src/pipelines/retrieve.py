@@ -40,6 +40,93 @@ def rrf_fusion(rankings: list[list[dict]], k: int = 60,
     return [items[i] for i in sorted(scores, key=lambda i: scores[i], reverse=True)]
 
 
+def _embed_4b_query(text: str, model: str = "qwen3-embedding:4b"):
+    """Embebe la query con un embedder Qwen3 vía Ollama (GGUF). [] si falla."""
+    import json as _json, urllib.request as _u
+    from src.core import config as _c
+    try:
+        payload = {"model": model, "input": [text]}
+        # embed_4b_cpu: fuerza el embed en CPU (num_gpu=0) para coexistir con el 9B en
+        # GPU sin swap (necesario en la ruta complejo, que usa el 9B para expansiones).
+        if getattr(_c.settings, "embed_4b_cpu", False):
+            payload["options"] = {"num_gpu": 0}
+        data = _json.dumps(payload).encode()
+        req = _u.Request("http://localhost:11434/api/embed", data=data,
+                         headers={"Content-Type": "application/json"})
+        with _u.urlopen(req, timeout=120) as r:
+            return _json.loads(r.read())["embeddings"][0]
+    except Exception:
+        return []
+
+
+def _vector_4b_search(text, store, top_k):
+    """Embebe `text` con 4B (Ollama) y busca; MRL-1024 (HNSW) o 2560 (seq-scan). [] si falla."""
+    from src.core import config as _c
+    emb = _embed_4b_query(text)
+    if not emb:
+        return []
+    if getattr(_c.settings, "embed_4b_dim", 2560) == 1024:
+        import math as _m
+        s = emb[:1024]
+        nrm = _m.sqrt(sum(x*x for x in s)) or 1.0
+        return store.search_vector_4b_1024([x/nrm for x in s], top_k=top_k)
+    return store.search_vector_4b(emb, top_k=top_k)
+
+
+def _vector_leg(text, embedder, store, top_k, raw_query=None):
+    """Pata densa: 4B (Ollama, embedding_4b) si embed_4b_dense, si no 0.6B (sentence-transf).
+
+    alias_union (flag, requiere 4B): si la query coloquial dispara un alias curado, embebe
+    TAMBIÉN la query reemplazada por el término legal y UNE (RRF) con la original. Protege
+    casos buenos (original) y rescata muros de vocabulario (alias). `raw_query` = query del
+    usuario sin augmentar (para el match del alias); si None, usa `text`."""
+    from src.core import config as _c
+    # embed_8b_dense (flag, 3090): pata densa 8B fp16/GGUF (embedding_8b, 4096-dim, seq-scan).
+    # Antes imposible en GTX 1080. Excluyente con 4B. Sin alias_union (experimento aislado del embedder).
+    if getattr(_c.settings, "embed_8b_dense", False):
+        emb = _embed_4b_query(text, model="qwen3-embedding:8b")
+        if emb:
+            res = store.search_vector_8b(emb, top_k=top_k)
+            if res:
+                return res
+    if getattr(_c.settings, "embed_4b_dense", False):
+        base = _vector_4b_search(text, store, top_k)
+        if base and getattr(_c.settings, "alias_union", False):
+            from src.pipelines.alias_map import apply_alias
+            q = raw_query if raw_query is not None else text
+            aug = apply_alias(q)
+            if aug != q:  # disparó un alias → busca con el término legal y une
+                alt = _vector_4b_search(aug, store, top_k)
+                if alt:
+                    return rrf_fusion([base, alt], k=60)[:top_k]
+        if base:
+            return base
+    return store.search_vector(embedder.embed([text])[0], top_k=top_k)
+
+
+_BGEM3 = None
+
+
+def _bgem3_leg(query: str, store, top_k: int) -> list[dict]:
+    """2da pata densa del ensemble: codifica la query con bge-m3 y busca sobre
+    embedding_bgem3. Embedder cargado perezosamente y cacheado. [] si algo falla
+    (degrada a 2 patas, nunca rompe el retrieval)."""
+    global _BGEM3
+    try:
+        if _BGEM3 is None:
+            from sentence_transformers import SentenceTransformer
+            import torch
+            dev = "cuda" if torch.cuda.is_available() else "cpu"
+            from src.core.config import settings as _s
+            dev = (_s.embedder_device if (_s.embedder_device or "auto") != "auto" else dev)
+            _BGEM3 = SentenceTransformer("BAAI/bge-m3", device=dev)
+            _BGEM3.max_seq_length = 512
+        qv = _BGEM3.encode([query], normalize_embeddings=True)[0].tolist()
+        return store.search_vector_bgem3(qv, top_k=top_k)
+    except Exception:
+        return []
+
+
 def _length_weights(query: str) -> list[float]:
     """[bm25_w, vec_w] biased by query length. Short queries (acronyms, exact
     legal terms) lean BM25; long descriptive queries lean vectors. Thresholds
@@ -293,19 +380,45 @@ class SimpleRetriever:
         self.llm = llm  # only needed when hyde_in_simple is on
 
     def _search_text(self, query: str) -> str:
-        """Query text used for BM25+vector. With ``hyde_in_simple`` on, append a
-        hypothetical legal paragraph so a PARAPHRASED query lands near the
-        article it describes (the original query is kept for rerank/concepts).
-        Legal-safe: changes only retrieval, never the citation."""
+        """Query text used for BM25+vector. Two optional, additive augmentations
+        (both flag-gated, both vector-only — the ORIGINAL query stays in BM25 via
+        retrieve(); rerank/concepts always use the original):
+
+        - ``selective_reform``: if the query is colloquial, append its legal-register
+          restatement so the everyday phrasing lands near the formal article text.
+          A query already in legal register is left untouched ("IGUAL").
+        - ``hyde_in_simple``: append a hypothetical legal paragraph.
+
+        Legal-safe: changes only WHAT is retrieved, never the citation."""
         from src.core import config as _cfg
-        if not getattr(_cfg.settings, "hyde_in_simple", False):
-            return query
-        try:
-            from src.pipelines.expansion import hyde as _hyde
-            h = _hyde(query, llm=self.llm)
-        except Exception:
-            return query  # LLM hiccup: degrade to plain query, never break retrieval
-        return f"{query}\n{h}" if h else query
+        text = query
+        self._last_concept_terms = ""
+        if getattr(_cfg.settings, "concept_inference", False):
+            try:
+                from src.pipelines.expansion import infer_legal_concept as _ilc
+                terms = _ilc(query, llm=self.llm)
+                if terms:
+                    self._last_concept_terms = terms
+                    text = f"{text} {terms}"
+            except Exception:
+                pass  # LLM hiccup: degrade to plain query, never break retrieval
+        if getattr(_cfg.settings, "selective_reform", False):
+            try:
+                from src.pipelines.expansion import selective_reform as _sr
+                rw = _sr(query, llm=self.llm)
+                if rw:  # "" cuando la query ya es legal (IGUAL) → no se toca
+                    text = f"{query} {rw}"
+            except Exception:
+                pass  # LLM hiccup: degrade to plain query, never break retrieval
+        if getattr(_cfg.settings, "hyde_in_simple", False):
+            try:
+                from src.pipelines.expansion import hyde as _hyde
+                h = _hyde(query, llm=self.llm)
+                if h:
+                    text = f"{text}\n{h}"
+            except Exception:
+                pass
+        return text
 
     def retrieve(self, query: str, top_k: int = 5,
                  query_concepts: list[str] | None = None) -> list[dict]:
@@ -318,20 +431,35 @@ class SimpleRetriever:
         vec_text = self._search_text(query)
         # 1. BM25 — original query terms only
         bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
-        # 2. Vector — HyDE-augmented when the flag is on
-        q_emb = self.embedder.embed([vec_text])[0]
-        vec = self.store.search_vector(q_emb, top_k=self.top_vector)
-        # 3. RRF (length-weighted: short→BM25, long→vectors)
-        fused = rrf_fusion([bm25, vec], k=60,
-                           weights=_length_weights(vec_text))[: self.top_bm25]
+        # 2. Vector — HyDE-augmented when the flag is on. Pata densa 0.6B o 4B (flag).
+        vec = _vector_leg(vec_text, self.embedder, self.store, self.top_vector, raw_query=query)
+        # 3. RRF (length-weighted: short→BM25, long→vectors). ensemble_bgem3:
+        # agrega una 3ra pata densa (bge-m3) complementaria al Qwen.
+        from src.core import config as _cfg0
+        legs, weights = [bm25, vec], _length_weights(vec_text)
+        if getattr(_cfg0.settings, "ensemble_bgem3", False):
+            bg = _bgem3_leg(query, self.store, self.top_vector)
+            if bg:
+                legs.append(bg)
+                weights = weights + [1.0]
+        fused = rrf_fusion(legs, k=60, weights=weights)[: self.top_bm25]
         # 4. Rerank. top_rerank_override (EXP) widens the survivors so graph_boost
         # can promote a deeper gold instead of it being truncated here.
         from src.core import config as _cfg
         _tr = getattr(_cfg.settings, "top_rerank_override", 0) or self.top_rerank
+        # alias_union: el alias rescata el gold al pool vectorial, pero el reranker lo
+        # bota si puntúa solo contra la query coloquial (el gold matchea el TÉRMINO legal,
+        # no la frase coloquial). Rerankeamos contra query+término (append) cuando dispara.
+        rerank_q = query
+        if getattr(_cfg.settings, "alias_union", False) and getattr(_cfg.settings, "embed_4b_dense", False):
+            from src.pipelines.alias_map import apply_alias as _aa
+            _alias = _aa(query)
+            if _alias != query:
+                rerank_q = f"{query} {_alias}"
         bge_max = 0.0
         if fused:
             scored = self.reranker.rerank(
-                query,
+                rerank_q,
                 [c["contextual_text"] for c in fused],
                 top_k=_tr,
             )
@@ -389,13 +517,47 @@ class ComplexRetriever(SimpleRetriever):
         mq = multi_query(query, llm=self.llm)
         all_queries = [query, sb, hd] + mq
 
+        # selective_reform (flag): legal-register restatement of a COLLOQUIAL query,
+        # applied ADITIVELY and VECTOR-ONLY to the original query (q index 0). BM25
+        # keeps the user's real terms; the reform only bridges the everyday↔legal
+        # register gap on the embedding side. "" when the query is already legal.
+        from src.core import config as _cfg
+        reform = ""
+        if getattr(_cfg.settings, "selective_reform", False):
+            try:
+                from src.pipelines.expansion import selective_reform as _sr
+                reform = _sr(query, llm=self.llm)
+            except Exception:
+                reform = ""
+
+        # concept_inference (flag): términos técnico-legales EXACTOS del concepto
+        # implícito, añadidos ADITIVO vector-only a la query original (q índice 0).
+        # Mismo cableado que reform; ataca el muro de vocabulario coloquial.
+        concept_terms = ""
+        if getattr(_cfg.settings, "concept_inference", False):
+            try:
+                from src.pipelines.expansion import infer_legal_concept as _ilc
+                concept_terms = _ilc(query, llm=self.llm)
+            except Exception:
+                concept_terms = ""
+        _aug0 = " ".join(t for t in (reform, concept_terms) if t)
+
         # 2. Run BM25+vector+RRF for each, then merge across queries via RRF
+        from src.core import config as _cfg0
+        _ens = getattr(_cfg0.settings, "ensemble_bgem3", False)
         rankings = []
-        for q in all_queries:
+        for i, q in enumerate(all_queries):
             bm25 = self.store.search_bm25(q, top_k=self.top_bm25)
-            q_emb = self.embedder.embed([q])[0]
-            vec = self.store.search_vector(q_emb, top_k=self.top_vector)
-            rankings.append(rrf_fusion([bm25, vec], k=60)[: self.top_bm25])
+            vec_text = f"{q} {_aug0}" if (i == 0 and _aug0) else q
+            # alias solo se evalúa contra la query original del usuario (i==0)
+            vec = _vector_leg(vec_text, self.embedder, self.store, self.top_vector,
+                              raw_query=(query if i == 0 else None))
+            legs = [bm25, vec]
+            if _ens:
+                bg = _bgem3_leg(q, self.store, self.top_vector)
+                if bg:
+                    legs.append(bg)
+            rankings.append(rrf_fusion(legs, k=60)[: self.top_bm25])
         fused = rrf_fusion(rankings, k=60)[: self.top_bm25]
 
         # 3. Rerank against the original query
@@ -446,11 +608,25 @@ class AdaptiveRetriever:
         self.router = router
 
     def retrieve(self, query: str, top_k: int = 10):
-        branch = self.router.classify(query)
-        if branch == "simple":
-            docs = self.simple.retrieve(query, top_k=top_k)
+        from src.core import config as _cfg
+        # CRAG-style routing (flag): hace retrieval BARATO primero (rama simple,
+        # SIN las 3 expansiones LLM); si el mejor score BGE es ALTO, responde con
+        # eso (se ahorra step-back+HyDE+multi-query); si es bajo, ESCALA a la rama
+        # compleja. Estándar adaptado (CRAG evaluate-then-branch + Adaptive-RAG
+        # escalate-to-multistep), reusando el score que el reranker ya computa.
+        if getattr(_cfg.settings, "crag_routing", False):
+            cheap = self.simple.retrieve(query, top_k=top_k)
+            bge = max((d.get("_bge_max", 0.0) for d in cheap), default=0.0)
+            if bge >= getattr(_cfg.settings, "crag_answer_threshold", 0.5):
+                branch, docs = "simple", cheap          # barato basta → no expandir
+            else:
+                branch, docs = "complejo", self.complejo.retrieve(query, top_k=top_k)
         else:
-            docs = self.complejo.retrieve(query, top_k=top_k)
+            branch = self.router.classify(query)
+            if branch == "simple":
+                docs = self.simple.retrieve(query, top_k=top_k)
+            else:
+                docs = self.complejo.retrieve(query, top_k=top_k)
         # Curated concept-definition injection (legal-safe, exact-normalized).
         # When query is "qué es X" and X matches a curated concept exactly,
         # prepend the defining article to docs even if retrieval missed it.

@@ -34,3 +34,6 @@ Thumbs.db
 *.key
 *.bak
 venv-gpu/
+
+.scratch/
+*.gguf

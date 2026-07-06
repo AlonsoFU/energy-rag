@@ -143,6 +143,88 @@ class Settings(BaseSettings):
     # producto (cambia comportamiento de rechazo + cuesta un retrieval por query).
     semantic_offtopic_gate: bool = False
     offtopic_bge_threshold: float = 0.01
+    # Modo del gate off-topic: "lexical" (OOV vocab), "semantic" (max BGE < τ),
+    # "and" (rechaza solo si AMBOS coinciden). ADOPTADO 2026-06-08 = "and":
+    # rescata coloquial in-domain (cita_ok 26→30) SIN regresión — verificado en
+    # los 6 sets: REGRESA_NEG=0 (rechazo off-topic 100% intacto), queries formales
+    # no se tocan (propiedad: AND ⊆ rechazos del léxico → solo puede rescatar).
+    # Requiere use_bge_reranker=True (con Identity el score no separa).
+    offtopic_gate_mode: str = "and"
+
+    # bm25_doc2query (flag OFF): BM25 busca sobre tsv_aug = contextual_text +
+    # preguntas coloquiales generadas offline por doc2query español (mT5). Ataca
+    # la ceguera de BM25 en coloquial (medido: BM25 None en las 13 fallas).
+    # Requiere haber poblado fragmentos.doc2query_text (scripts/doc2query_generate).
+    bm25_doc2query: bool = False
+
+    # crag_routing (flag OFF): routing CRAG-style. Retrieval barato (rama simple,
+    # sin expansión LLM) primero; si max BGE >= umbral, responde con eso (ahorra
+    # step-back+HyDE+multi-query); si no, escala a la rama compleja. Mide en exp.
+    crag_routing: bool = False
+    crag_answer_threshold: float = 0.5
+
+    # ensemble_bgem3 (flag OFF): agrega bge-m3 como 2da pata densa (RRF de 3:
+    # BM25 + Qwen + bge-m3). Complementarios (cada uno halla lo que el otro pierde).
+    # Retrieval gold∈top10 2026-06-09: coloquial 28→32, dev 37→40, holdout 17→18
+    # (sube TODO, cero regresión). Requiere fragmentos.embedding_bgem3 poblada
+    # (scripts/embed_bgem3). Costo a escala: +1 columna vector + 1 embed + 1 ANN/query.
+    ensemble_bgem3: bool = False
+
+    # Reformulación SELECTIVA coloquial→legal (flag OFF). Un call LLM condicional
+    # (expansion.selective_reform) que reescribe SOLO las queries en lenguaje
+    # cotidiano a registro legal formal; las ya-legales devuelven "IGUAL" y no se
+    # tocan. Se aplica ADITIVO y vector-only en Simple/ComplexRetriever: la query
+    # original queda en BM25/rerank, la reescritura solo aumenta la representación
+    # vectorial. Experimento retrieval 2026-06-05: coloquial gold∈top10 28→34/39
+    # (+6), dev 12→12 (cero regresión). Es el estándar 2025 (PreQRAG, "not all
+    # queries need rewriting"). Default OFF: cuesta 1 call LLM/query de latencia;
+    # se adopta solo si la eval de GENERACIÓN confirma +cita_ok sin regresión.
+    selective_reform: bool = False
+
+    # embed_4b_dense (flag OFF): usa Qwen3-Embedding-4B (GGUF Ollama, col embedding_4b)
+    # como pata densa en vez del 0.6B. El screen vector-only mostró gold∈top10 coloquial
+    # 26→33 (+7), dev +9, holdout −3. El 4B GGUF cuantizado SÍ cabe en la GTX 1080 (~4.9GB,
+    # a diferencia de fp16/bitsandbytes). Requiere fragmentos.embedding_4b poblada
+    # (scripts.embed_4b) + Ollama qwen3-embedding:4b. Mide si el +retrieval convierte a
+    # cita_ok + no-regresión holdout. Default OFF.
+    embed_4b_dense: bool = True   # ADOPTADO 2026-07-06: Qwen3-Embedding-4B campeón (vs 0.6B, +top5/dev; empata al 8B pero más barato/indexable)
+    embed_4b_dim: int = 1024      # MRL prefix 1024 (HNSW indexable, escala) — validado igual/mejor que 2560
+    embed_4b_cpu: bool = False  # fuerza el embed 4B en CPU (Ollama num_gpu=0) para coexistir con el 9B sin swap
+
+    # alias_union (flag OFF): vocabulario controlado coloquial→legal (query-side, sin DB,
+    # determinista). Si la query dispara un alias curado (src/pipelines/alias_map.py), se
+    # embebe TAMBIÉN la query reemplazada por el término legal y se UNE (RRF) con la original
+    # en la pata densa. Rescata muros de vocabulario (oráculo: 118/212 gold→top-2 con el término
+    # correcto). Screen exp_alias_screen: 87 17→3, 118 >50→9, 212 >50→6, caso2 8→9 (no rompe).
+    # Solo afecta retrieval, nunca la cita. CAVEAT: alias a mano = overfit; la versión que escala
+    # los deriva del corpus (Exp #2-AUTO). Requiere embed_4b_dense ON. Default OFF.
+    alias_union: bool = True   # ADOPTADO 2026-07-06: +3 coloquial (cita_ok 27→30), sin regresión. Requiere embed_4b_dense
+
+    # embed_8b_dense (flag OFF, requiere 3090/24GB): pata densa Qwen3-Embedding-8B (GGUF Ollama,
+    # col embedding_8b 4096-dim, seq-scan exacto). Antes "no cabía" en la GTX 1080 (8GB). En GGUF
+    # el screen lo daba ≈4B; con la 3090 se re-mide en gen completo. Excluyente con embed_4b_dense.
+    embed_8b_dense: bool = False
+
+    # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
+    # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
+    # TÉRMINOS técnico-legales exactos de una query coloquial (corto, sin alucinar leyes)
+    # y se añaden ADITIVO vector-only a la query (BM25/rerank usan la original). Ataca el
+    # muro de vocabulario coloquial (ej "tope de ganancia"→"tasa de descuento") que la
+    # reformulación verbosa (selective_reform) no cruzaba. Mide gold∈pool dev+holdout,
+    # no-regresión, default OFF. Cuesta 1 call LLM/query.
+    concept_inference: bool = False
+
+    # citation_repair (flag OFF): corrección de cita post-hoc (CiteFix-similarity,
+    # ACL 2025). Tras generar, puntúa RESPUESTA↔cada doc del pool con el
+    # cross-encoder BGE y, si el doc que MEJOR sostiene la respuesta no está
+    # citado, AÑADE su cita. Ataca el cuello medido: gold en el top-k pero el LLM
+    # cita el artículo vecino. SOLO AÑADE → cita_ok monótona (no regresa por
+    # construcción); el costo a vigilar es PRECISIÓN (citas de más). Requiere
+    # pasar un reranker a generate_answer (reusa el BGE ya cargado; cabe en la
+    # 1080 fp16). Mide cita_ok + precisión de citas añadidas + no-regresión.
+    citation_repair: bool = False
+    citation_repair_min_score: float = 0.0   # umbral cross-encoder para añadir
+    citation_repair_max_add: int = 1         # tope de citas añadidas por respuesta
 
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
