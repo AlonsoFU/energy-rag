@@ -87,8 +87,87 @@ def ck_slide500_100(art):
     return _slide(art["texto"], 500, 100)
 
 
+# --- marcadores extendidos (cubre §, N°, romano, ordinal, guion) ---
+_MARK2 = re.compile(
+    r"(?:^|\n|;)\s*(?:"
+    r"[a-zñ]{1,2}|\d{1,2}"           # a. 1.
+    r"|\d{1,2}[°º]"                    # 1°
+    r"|[IVXLC]{1,4}"                   # romano I. II.
+    r"|Primero|Segundo|Tercero|Cuarto|Quinto|Sexto|Séptimo|Octavo|Noveno|Décimo"
+    r")[.)\-]\s+"
+    r"|§\s*\d"
+)
+_SENT = re.compile(r"(?<=[.;])\s+(?=[A-ZÁÉÍÓÚÑ0-9])")
+HUGE = 3000
+
+
+def ck_inciso_robust(art):
+    t = art["texto"]
+    marks = list(_MARK2.finditer(t))
+    if len(marks) < 2:
+        return [t.strip()]
+    pieces = []
+    head = t[: marks[0].start()].strip()
+    if head:
+        pieces.append(head)
+    for i, mk in enumerate(marks):
+        s = mk.start(); e = marks[i + 1].start() if i + 1 < len(marks) else len(t)
+        p = t[s:e].strip()
+        if p:
+            pieces.append(p)
+    return pieces or [t.strip()]
+
+
+def _split_huge(piece):
+    """Parte un fragmento >HUGE por oración, acumulando ~HUGE chars."""
+    if len(piece) <= HUGE:
+        return [piece]
+    sents = _SENT.split(piece)
+    out, cur = [], ""
+    for s in sents:
+        if cur and len(cur) + len(s) > HUGE:
+            out.append(cur.strip()); cur = s
+        else:
+            cur = f"{cur} {s}".strip()
+    if cur:
+        out.append(cur.strip())
+    return out or [piece]
+
+
+def ck_inciso_maxsplit(art):
+    out = []
+    for p in ck_inciso_robust(art):
+        out.extend(_split_huge(p))
+    return out
+
+
+def ck_recursive(art, size=600, seps=("\n\n", "\n", ". ", "; ")):
+    """Recursive char split (estándar langchain-like): baja por separadores hasta
+    que los trozos caben en `size`. Para prosa larga sin marcadores legales."""
+    def rec(text, si):
+        text = text.strip()
+        if len(text) <= size or si >= len(seps):
+            return [text] if text else []
+        parts = text.split(seps[si])
+        out, cur = [], ""
+        for p in parts:
+            cand = f"{cur}{seps[si]}{p}" if cur else p
+            if len(cand) <= size:
+                cur = cand
+            else:
+                if cur:
+                    out.extend(rec(cur, si + 1))
+                cur = p
+        if cur:
+            out.extend(rec(cur, si + 1))
+        return out
+    return rec(art["texto"], 0) or [art["texto"].strip()]
+
+
 CHUNKERS = {"whole": ck_whole, "glossary": ck_glossary, "inciso": ck_inciso,
-            "slide1000_200": ck_slide1000_200, "slide500_100": ck_slide500_100}
+            "slide1000_200": ck_slide1000_200, "slide500_100": ck_slide500_100,
+            "inciso_robust": ck_inciso_robust, "inciso_maxsplit": ck_inciso_maxsplit,
+            "recursive": ck_recursive}
 
 
 # ---------- contexto: (art, frag) -> texto a embeber ----------
@@ -122,6 +201,12 @@ STRATS = {
     "slide500_100+light": ("slide500_100", "light"),
     "whole+none": ("whole", "none"),
     "glossary+none": ("glossary", "none"),
+    # --- ronda 2 (2026-07-07): cobertura de estructura del QA ---
+    "inciso_robust+path": ("inciso_robust", "path"),
+    "inciso_robust+light": ("inciso_robust", "light"),
+    "inciso_maxsplit+path": ("inciso_maxsplit", "path"),
+    "recursive+path": ("recursive", "path"),
+    "recursive+light": ("recursive", "light"),
 }
 
 
