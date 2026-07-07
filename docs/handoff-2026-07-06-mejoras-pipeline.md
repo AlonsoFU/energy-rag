@@ -21,7 +21,7 @@ Métrica: **cita_ok** (¿el sistema cita el artículo gold?). Sets con gold: col
 
 | # | Etapa | Estado | Próximo lever (cómo probar) |
 |---|-------|--------|------------------------------|
-| 1 | Chunking | ✓ contextual | **Re-chunkear art 225** (glosario gigante, 1 def=1 frag) → rescata 225-tasa/almacenamiento. Script tipo `reembed`+split. |
+| 1 | Chunking | ✓✓ SWEEP 2026-07-07 (12 estrategias) | **GANADOR screen = `inciso+path`** (partir por subdivisión legal + header-path): dev +10, cx +2. inciso subsume el re-chunk de glosarios. Slide(fijo) peor. `scripts/exp_chunk_sweep.py`. ⏳ PENDIENTE confirmar end-to-end (tabla `fragmentos_inciso` + gen). |
 | 2 | Query-side | ✓ alias (+3) · ✗ ensemble/rewrite (−3) | **LLM-rewrite con modelo CHICO (9b)** anclado al glosario (371 conceptos), unión RRF. El 30b se cuelga; usar 9b. |
 | 3 | Embedder | ✓✓ AGOTADO (13 modelos) | Nada. 4b≈8b≈sfr end-to-end. Ni el 9B gana. |
 | 4 | BM25 | ✗ doc2query | Tunear **peso BM25 vs vector** en `_length_weights` (retrieve.py:131). Barato. |
@@ -66,6 +66,25 @@ qwen3-rerank-4b (4B)    —      —      MURO RAM: HF/bnb carga fp16 8GB a RAM(
 - **Ningún reranker supera el baseline en coloquial (32).** El cross-encoder bge-v2-m3 se queda.
 - Generativos (Qwen3-Reranker): loader propio (logits yes/no, prompt Instruct/Query/Document). 0.6b < baseline; 4b no corrió (RAM). Su familia NO es superior acá.
 - Los grandes LLM-based (bge-gemma2, qwen3-4b) exigen GGUF/Ollama o 4-bit; 4-bit igual choca RAM al cargar shards fp16. Valor esperado bajo (el 0.6b ya perdió) → cerrado.
+
+## Resultado campaña CHUNKING (2026-07-07, `scripts/exp_chunk_sweep.py`, vector-screen 4b-1024, coloquial39+dev44)
+Barrido no-destructivo de 12 estrategias (chunker × contexto) re-chunkeando en memoria desde `articulos.texto`. Baseline `asis` (fragmentos actuales) = cx5 **27**, dev5 **28**.
+```
+estrategia            frags  cx5  dev5   Δcx5  Δdev5
+asis (baseline)        3907   27   28      +0    +0
+inciso+path            7087   29   38      +2   +10   ← GANADOR screen
+inciso+light           7087   28   37      +1    +9
+whole+path             2978   30   26      +3    -2
+glossary+path          3203   30   26      +3    -2
+glossary+light         3203   28   28      +1    +0
+slide1000_200+light    6255   25   32      -2    +4
+slide500_100+light    11080   25   33      -2    +5
+whole+none             2978   28   26      +1    -2
+```
+- **Regla 1 (section-aware) — GANA `inciso`** (partir por subdivisión legal a./1./incisos): dev **+10**, cx +2. Rescata pool-miss estructurales. La regla GENERAL (cualquier subdivisión) SUBSUME a la narrow (solo glosarios: dev +0).
+- **Regla 3 (context header-path) — ayuda**: en inciso, `light→path` = cx+1/dev+1 (estrictamente mejor). En `whole` el path sube cx pero baja dev (mezcla ruido de artículo entero).
+- **Slide (tamaño fijo) PEOR en cx** (−1/−2) → confirma el estándar: no romper la provisión.
+- **CAVEAT (regla de oro): es VECTOR-SCREEN, no cita_ok.** El +10 dev NO está confirmado end-to-end. Patrón histórico: más fragmentos (7087 vs 3907, 1.8×) sube recall pero puede NO convertir (distractores en generación, cf. ensemble −3). **PENDIENTE: confirmar `inciso+path` end-to-end** — requiere tabla paralela `fragmentos_inciso` (chunks+embedding+tsv) + eval gen. NO adoptado hasta eso.
 
 ## Orden recomendado (por valor/costo)
 1. ~~Reranker~~ ✓ AGOTADO (10 modelos, marginal/negativo; baseline se queda).
