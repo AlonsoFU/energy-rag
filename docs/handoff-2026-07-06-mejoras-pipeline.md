@@ -84,7 +84,18 @@ whole+none             2978   28   26      +1    -2
 - **Regla 1 (section-aware) — GANA `inciso`** (partir por subdivisión legal a./1./incisos): dev **+10**, cx +2. Rescata pool-miss estructurales. La regla GENERAL (cualquier subdivisión) SUBSUME a la narrow (solo glosarios: dev +0).
 - **Regla 3 (context header-path) — ayuda**: en inciso, `light→path` = cx+1/dev+1 (estrictamente mejor). En `whole` el path sube cx pero baja dev (mezcla ruido de artículo entero).
 - **Slide (tamaño fijo) PEOR en cx** (−1/−2) → confirma el estándar: no romper la provisión.
-- **CAVEAT (regla de oro): es VECTOR-SCREEN, no cita_ok.** El +10 dev NO está confirmado end-to-end. Patrón histórico: más fragmentos (7087 vs 3907, 1.8×) sube recall pero puede NO convertir (distractores en generación, cf. ensemble −3). **PENDIENTE: confirmar `inciso+path` end-to-end** — requiere tabla paralela `fragmentos_inciso` (chunks+embedding+tsv) + eval gen. NO adoptado hasta eso.
+- **RONDA 2 (2026-07-07, QA de estructura + chunkers robustos):** el QA (`scripts/exp_chunk_qa.py`) marcó: inciso deja 2442/2978 en 1 chunk; 378 arts grandes 1-chunk (367 prosa sin marcador); 152 frags >3000c; 29 arts con marcadores NO cubiertos (§14, N°11, guion3, romano1). Se agregaron chunkers y se midió:
+```
+estrategia            frags  cx5  dev5   Δcx  Δdev
+inciso+path            7087   29   38    +2   +10   ← techo
+inciso_robust+path     7141   29   38    +2   +10   ← MISMO score + cubre §/N°/romano (mejor escala)
+inciso_robust+light    7141   28   37    +1    +9
+inciso_maxsplit+path   7316   29   37    +2    +9    (partir gigantes NO ayuda)
+recursive+path         9979   27   31    +0    +3    (prosa: peor, chunks chicos = ruido)
+recursive+light        9979   25   32    -2    +4
+```
+- **GANADOR = `inciso_robust+path`** (empata inciso+path pero robusto a §/N°/romano → future-proof, cero downside). recursive/maxsplit descartados.
+- **CAVEAT (regla de oro): es VECTOR-SCREEN, no cita_ok.** El +10 es DEV (formal), coloquial (frente real) solo +2. Más frags (7141 vs 3907, 1.8×) sube recall pero puede NO convertir (distractor, cf. ensemble −3). **PENDIENTE confirmar `inciso_robust+path` end-to-end** — tabla paralela `fragmentos_inciso` (chunks+embedding+tsv) + eval gen. NO adoptado hasta eso.
 
 ## Orden recomendado (por valor/costo)
 1. ~~Reranker~~ ✓ AGOTADO (10 modelos, marginal/negativo; baseline se queda).
