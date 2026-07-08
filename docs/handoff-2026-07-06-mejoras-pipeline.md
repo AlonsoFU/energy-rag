@@ -21,7 +21,7 @@ Métrica: **cita_ok** (¿el sistema cita el artículo gold?). Sets con gold: col
 
 | # | Etapa | Estado | Próximo lever (cómo probar) |
 |---|-------|--------|------------------------------|
-| 1 | Chunking | ✓✓ SWEEP 2026-07-07 (12 estrategias) | **GANADOR screen = `inciso+path`** (partir por subdivisión legal + header-path): dev +10, cx +2. inciso subsume el re-chunk de glosarios. Slide(fijo) peor. `scripts/exp_chunk_sweep.py`. ⏳ PENDIENTE confirmar end-to-end (tabla `fragmentos_inciso` + gen). |
+| 1 | Chunking | ✓✓ AGOTADO (screen 17 estrat. + e2e) | Screen ganó `inciso_robust+path` (dev+10) pero **e2e NO convierte: cx−4/dev+2/NET−2 = ESPEJISMO**. Chunking `asis` se queda. `exp_chunk_sweep.py`/`exp_chunk_e2e.py`/`exp_chunk_qa.py`. |
 | 2 | Query-side | ✓ alias (+3) · ✗ ensemble/rewrite (−3) | **LLM-rewrite con modelo CHICO (9b)** anclado al glosario (371 conceptos), unión RRF. El 30b se cuelga; usar 9b. |
 | 3 | Embedder | ✓✓ AGOTADO (13 modelos) | Nada. 4b≈8b≈sfr end-to-end. Ni el 9B gana. |
 | 4 | BM25 | ✗ doc2query | Tunear **peso BM25 vs vector** en `_length_weights` (retrieve.py:131). Barato. |
@@ -94,8 +94,16 @@ inciso_maxsplit+path   7316   29   37    +2    +9    (partir gigantes NO ayuda)
 recursive+path         9979   27   31    +0    +3    (prosa: peor, chunks chicos = ruido)
 recursive+light        9979   25   32    -2    +4
 ```
-- **GANADOR = `inciso_robust+path`** (empata inciso+path pero robusto a §/N°/romano → future-proof, cero downside). recursive/maxsplit descartados.
-- **CAVEAT (regla de oro): es VECTOR-SCREEN, no cita_ok.** El +10 es DEV (formal), coloquial (frente real) solo +2. Más frags (7141 vs 3907, 1.8×) sube recall pero puede NO convertir (distractor, cf. ensemble −3). **PENDIENTE confirmar `inciso_robust+path` end-to-end** — tabla paralela `fragmentos_inciso` (chunks+embedding+tsv) + eval gen. NO adoptado hasta eso.
+- **GANADOR SCREEN = `inciso_robust+path`** (empata inciso+path pero robusto a §/N°/romano). recursive/maxsplit descartados.
+- **CONFIRMACIÓN END-TO-END (2026-07-08, `scripts/exp_chunk_e2e.py`, tabla paralela `fragmentos_inciso` 7141 chunks + pipeline REAL BM25+vec+RRF+BGE+gen 30b-a3b, gen solo en queries con top10 distinto): NO CONVIERTE = ESPEJISMO.**
+```
+              cita_ok asis   inciso   delta
+coloquial        31           27       -4   (39 difieren)
+dev              36           38       +2   (41 difieren, 3 iguales)
+NET              67           65       -2
+```
+- **El screen MINTIÓ otra vez:** prometía cx+2/dev+10 → e2e dio **cx−4 / dev+2 / NET −2**. El +10 dev se evaporó a +2; el +2 coloquial se volvió −4. Causa: 7141 chunks (1.8×) meten distractores → LLM cita vecino (idéntico a ensemble −3).
+- **VEREDICTO: inciso DESCARTADO end-to-end. Chunking de producción (`asis`) se queda.** Tabla `fragmentos_inciso` queda en la DB (paralela, no molesta; dropear si se quiere). Confirma N-ésima vez la regla de oro: subir retrieval/recall NO sube cita_ok. El cuello NO es chunking.
 
 ## Orden recomendado (por valor/costo)
 1. ~~Reranker~~ ✓ AGOTADO (10 modelos, marginal/negativo; baseline se queda).
