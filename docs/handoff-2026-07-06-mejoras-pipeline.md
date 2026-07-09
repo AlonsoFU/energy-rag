@@ -21,7 +21,7 @@ Métrica: **cita_ok** (¿el sistema cita el artículo gold?). Sets con gold: col
 
 | # | Etapa | Estado | Próximo lever (cómo probar) |
 |---|-------|--------|------------------------------|
-| 1 | Chunking | ✓✓ AGOTADO (screen 17 estrat. + e2e) | Screen ganó `inciso_robust+path` (dev+10) pero **e2e NO convierte: cx−4/dev+2/NET−2 = ESPEJISMO**. Chunking `asis` se queda. `exp_chunk_sweep.py`/`exp_chunk_e2e.py`/`exp_chunk_qa.py`. |
+| 1 | Chunking | ✓✓ CERRADO (screen 17 + e2e + **QA**) | Screen ganó `inciso+path` (dev+10) pero **e2e NO convierte: cx−4/dev+2/NET−2 = ESPEJISMO**. **El QA explica por qué**: inciso deja 464 chunks huérfanos (<50c, 8× whole) y parte **22.3%** de spans padre:hijo → cláusulas sin contexto = distractores. `asis` se queda. **Doc canónico: `docs/chunking-rules.md`.** Scripts: `exp_chunk_sweep.py`·`exp_chunk_e2e.py`·`exp_chunk_qa.py`·`qa_chunking.py`. |
 | 2 | Query-side | ✓ alias (+3) · ✗ ensemble/rewrite (−3) | **LLM-rewrite con modelo CHICO (9b)** anclado al glosario (371 conceptos), unión RRF. El 30b se cuelga; usar 9b. |
 | 3 | Embedder | ✓✓ AGOTADO (13 modelos) | Nada. 4b≈8b≈sfr end-to-end. Ni el 9B gana. |
 | 4 | BM25 | ✗ doc2query | Tunear **peso BM25 vs vector** en `_length_weights` (retrieve.py:131). Barato. |
