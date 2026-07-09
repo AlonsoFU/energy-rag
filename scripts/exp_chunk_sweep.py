@@ -185,7 +185,97 @@ def ctx_path(art, frag):
     return f"{p} {frag}"
 
 
-CTXS = {"none": ctx_none, "light": ctx_light, "path": ctx_path}
+# ---------- REGLA 4: cross-ref (inyección determinista, sin LLM) ----------
+# El QA mostró la patología: un chunk referencia algo que no contiene
+# ("conforme al artículo 225", "el Coordinador"). Le devolvemos ese contexto.
+# 53.7% de artículos tienen remisión real; 53.8% resuelven en la misma norma.
+_HEAD = re.compile(r"^\s*Art[íi]culo\s+[\dºª°]+[^\n]{0,20}", re.I)
+_REF = re.compile(r"(?:art[íi]culos?|art\.)\s*(\d{1,3})", re.I)
+REF_SNIP = 240   # chars del artículo referenciado que se anexan
+MAX_REFS = 2     # cuántas remisiones se anexan como máximo
+DEF_SNIP = 200   # chars de la definición inyectada
+MAX_DEFS = 2
+MIN_DEF_TERM = 10  # término debe ser específico (evita "energía"/"empresa" → 83% chunks)
+
+_ART_IDX: dict = {}   # (id_norma, numero_str) -> texto
+_DEF_IDX: dict = {}   # termino_lower -> definicion
+
+
+def build_indexes(arts):
+    """Índice de artículos (para remisiones) y de definiciones de glosario."""
+    _ART_IDX.clear(); _DEF_IDX.clear()
+    for a in arts:
+        _ART_IDX[(a["id_norma"], str(a["numero"]).strip())] = a["texto"]
+        if _GLOS.search(a["texto"]):
+            for frag in ck_glossary(a)[1:]:          # saltea el header
+                if ":" in frag:
+                    t, d = frag.split(":", 1)
+                    t = t.strip().lower()
+                    if 3 <= len(t) <= 60 and t not in _DEF_IDX:
+                        _DEF_IDX[t] = d.strip()
+
+
+def _refs_of(art):
+    body = _HEAD.sub("", art["texto"], count=1)       # sin su propio encabezado
+    own = re.sub(r"[^0-9]", "", str(art["numero"]))
+    out = []
+    for r in _REF.findall(body):
+        if r == own or r in out:
+            continue
+        if (art["id_norma"], r) in _ART_IDX:          # resolvible en la misma norma
+            out.append(r)
+        if len(out) >= MAX_REFS:
+            break
+    return out
+
+
+def _xref_adds(art):
+    """Snippets de los artículos que este artículo referencia."""
+    out = []
+    for r in _refs_of(art):
+        t = _HEAD.sub("", _ART_IDX[(art["id_norma"], r)], count=1).strip()
+        out.append(f"[Ref. art {r}: {t[:REF_SNIP]}]")
+    return out
+
+
+def _def_adds(frag):
+    """Definiciones de glosario de los términos que aparecen en el fragmento.
+
+    Solo términos ESPECÍFICOS: >=MIN_DEF_TERM chars y match por palabra completa.
+    Sin esto, términos genéricos ("energía", "empresa") disparan en el 83% de los
+    chunks y todos los embeddings convergen → retrieval peor, no mejor."""
+    low, out = frag.lower(), []
+    for term, d in _DEF_IDX.items():
+        if len(term) < MIN_DEF_TERM:
+            continue
+        if re.search(rf"\b{re.escape(term)}\b", low):
+            out.append(f"[Def. {term}: {d[:DEF_SNIP]}]")
+            if len(out) >= MAX_DEFS:
+                break
+    return out
+
+
+def _join(base, adds):
+    return base + (" " + " ".join(adds) if adds else "")
+
+
+def ctx_xref(art, frag):
+    """path + texto de los artículos que el chunk referencia."""
+    return _join(ctx_path(art, frag), _xref_adds(art))
+
+
+def ctx_defs(art, frag):
+    """path + definición de los términos de glosario que el chunk usa."""
+    return _join(ctx_path(art, frag), _def_adds(frag))
+
+
+def ctx_xref_defs(art, frag):
+    """path + remisiones + definiciones (regla 4 completa)."""
+    return _join(ctx_path(art, frag), _xref_adds(art) + _def_adds(frag))
+
+
+CTXS = {"none": ctx_none, "light": ctx_light, "path": ctx_path,
+        "xref": ctx_xref, "defs": ctx_defs, "xref_defs": ctx_xref_defs}
 
 # estrategia -> (chunker, ctx). 'asis' es especial (lee fragmentos de la DB).
 STRATS = {
@@ -207,6 +297,10 @@ STRATS = {
     "inciso_maxsplit+path": ("inciso_maxsplit", "path"),
     "recursive+path": ("recursive", "path"),
     "recursive+light": ("recursive", "light"),
+    # --- ronda 3 (2026-07-09): REGLA 4 cross-ref, sobre granularidad de producción ---
+    "whole+xref": ("whole", "xref"),
+    "whole+defs": ("whole", "defs"),
+    "whole+xref_defs": ("whole", "xref_defs"),
 }
 
 
@@ -228,6 +322,8 @@ def build_corpus(strat, arts):
         return keys, texts
     ck_name, ctx_name = STRATS[strat]
     ck, ctx = CHUNKERS[ck_name], CTXS[ctx_name]
+    if ctx_name in ("xref", "defs", "xref_defs") and not _ART_IDX:
+        build_indexes(arts)   # índices de remisiones y definiciones (regla 4)
     keys, texts = [], []
     for a in arts:
         k = (a["id_norma"], _normalize_art(str(a["numero"])))

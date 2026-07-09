@@ -15,7 +15,7 @@ Cuatro reglas que la literatura y los sistemas de producción convergen en usar:
 | 1 | **section-aware** | partir por la jerarquía propia del documento (artículo/inciso), NO por tamaño fijo | ✓ partimos por artículo. Probamos inciso → **descartado** (ver §4) |
 | 2 | **una provisión = un chunk** | no fundir 50 definiciones en un mega-chunk; no partir a mitad de provisión | ~parcial (glosarios siguen fundidos; el split no convirtió) |
 | 3 | **context enrichment (header-path)** | anteponer la ruta `[norma > título > art N]` al texto antes de embeber | ✓ `contextual_text` |
-| 4 | **cross-ref / late-chunking** | embeber el chunk con el contexto de lo que referencia ("el Coordinador definido en art X") | ✗ **NO PROBADA — única virgen** |
+| 4 | **cross-ref / late-chunking** | embeber el chunk con el contexto de lo que referencia ("el Coordinador definido en art X") | ~ variante **determinista PROBADA y NEGATIVA** (dosis-respuesta, §4). Late-chunking infeasible (Ollama sin token-emb). **Contextual Retrieval (LLM) sin probar.** |
 
 Evidencia externa: un estudio clínico midió chunking por límites lógicos = **87% accuracy
 vs 13%** para fixed-size. La regla 1 no es opinión.
@@ -149,6 +149,42 @@ no es la subdivisión sintáctica, es la **unidad que se sostiene sola**.
 
 ---
 
+### Regla 4 — cross-ref, variante DETERMINISTA (2026-07-09): NEGATIVA, dosis-respuesta
+Lever medido primero: **53.7%** de artículos tienen remisión real a otro artículo (3657 refs;
+53.8% resolvibles en la misma norma). Ojo: medir sin quitar el encabezado propio
+(`"Artículo 45.-"`) y la auto-referencia da **96.5% falso**.
+
+Inyección determinista (sin LLM) sobre granularidad de producción (`whole`), control = `whole+path`:
+```
+estrategia         inyectado   cx5  dev5   vs whole+path
+whole+path              0%      30    26   —  (control)
+whole+xref             36%      28    26   cx -2
+whole+defs             48%      29    23   dev -3
+whole+xref_defs        65%      27    22   cx -3, dev -4
+```
+**Monótono: más inyección → peor.** Relación dosis-respuesta, no ruido. Anexar texto ajeno
+(artículo referenciado, definición del término) **diluye el embedding del chunk**: el vector
+deja de representar la provisión y pasa a ser un promedio de ella + lo anexado.
+
+Muere en el **screen** — ni llega a e2e. (El screen es generoso; lo que pierde ahí no gana después.)
+
+Detalle de implementación: `_def_adds` con match por substring y sin mínimo de longitud
+dispara en **83%** de los chunks (términos genéricos: "energía", "empresa") → todos los
+embeddings convergen. Con `\b` word-boundary + `MIN_DEF_TERM=10` baja a 48%. Aun así pierde.
+
+**Lo que NO se probó de la regla 4** (sigue virgen):
+- **Late chunking** (Jina, [arXiv 2409.04701](https://arxiv.org/pdf/2409.04701)): embebe todos los
+  tokens del doc y mean-poolea por chunk → condiciona el embedding **sin agregar texto**.
+  *Infeasible acá*: el 4b vía Ollama no expone token-embeddings.
+- **Contextual Retrieval** (Anthropic): un LLM escribe 50-100 tokens que **resumen el rol** del
+  chunk en su documento (no anexa texto ajeno) y se anteponen antes de embeber. Reportan
+  +5-15% de precisión. Feasible (~2978 llamadas LLM). No corrido.
+
+La diferencia clave: ambos **condicionan/resumen**; la variante determinista **concatena**.
+Concatenar es lo que diluye.
+
+---
+
 ## 5. Consideraciones / trade-offs
 
 | eje | tensión |
@@ -177,11 +213,19 @@ solo cambia *qué* distractor cita el LLM.
 
 ## 7. Estado y próximo paso
 
-- **Producción: `asis` (sin cambios).** Chunking cerrado: sweep ✓, e2e ✓, QA ✓.
-- **Regla 4 (cross-ref / late-chunking) = única virgen.** Es además la que atacaría
-  justo la patología encontrada (chunk sin su contexto padre/referenciado).
+- **Producción: `asis` (sin cambios).** Chunking cerrado: sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓.
+- **Único candidato vivo de regla 4: Contextual Retrieval (LLM)** — resume el rol del chunk
+  en vez de concatenar texto ajeno. Prior bajo (6 fracasos retrieval-side seguidos) pero es
+  el que ataca la patología real y tiene evidencia externa (+5-15%).
 - Deuda menor: `glossary` pierde texto en 10 artículos; `_MARK2` tiene falsos positivos
   con romanos; `HUGE=3000` sin tunear; faltan `Coverage@k`/`Redundancy@k`/`MRR@k`.
+
+### Errores de medición cometidos (para no repetirlos)
+1. `start_lower` sin quitar el marcador `"a."` → **27.9% falso** vs **0.4%** real.
+2. densidad de remisiones sin quitar el encabezado propio → **96.5% falso** vs **53.7%** real.
+3. `_def_adds` sin word-boundary ni largo mínimo → inyectaba en **83%** de chunks.
+
+Los tres inflaban el efecto en la dirección que yo esperaba. **Medir mal es peor que no medir.**
 
 Scripts: `scripts/exp_chunk_sweep.py` (sweep) · `scripts/qa_chunking.py` (QA).
 Datos: `data/eval/results/chunk_sweep/result.json`.
