@@ -87,7 +87,9 @@ def main():
     rows = [q for q in rows if q.get("expected_norma")]
     arts = load_articles()
     llm = get_llm_provider()
-    ck = OUT / f"{stem}__{GENM.split('/')[-1].replace(':','-')}.json"
+    # MAX_PARENTS en el nombre: la variante de 5 padres NO debe pisar la de 10
+    tag = "" if MAX_PARENTS == 10 else f"__p{MAX_PARENTS}"
+    ck = OUT / f"{stem}__{GENM.split('/')[-1].replace(':','-')}{tag}.json"
     done = json.loads(ck.read_text()) if ck.exists() else {}
     print(f"{stem}: {len(rows)} queries · modos={modes} · cap={MAX_ART_CHARS}c/art, max {MAX_PARENTS} padres", flush=True)
     ntr = 0
