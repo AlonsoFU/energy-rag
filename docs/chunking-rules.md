@@ -227,19 +227,60 @@ solo cambia *qué* distractor cita el LLM.
 
 ## 7. Estado y próximo paso
 
-- **Producción: `asis` + Contextual Retrieval (LLM).** Sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓.
-- **⏳ SMALL-TO-BIG (parent document retrieval / auto-merging) — EN CURSO, el hueco grande.**
-  Buscar y responder tienen objetivos **opuestos**: buscar quiere chunks chicos (precisos),
-  responder quiere contexto grande (citable). Se separan: **se indexa chico, se le entrega al
-  LLM el artículo padre completo.** Es exactamente lo que explica nuestro resultado
-  (inciso: retrieval +10, citación −4). Estándar consolidado:
-  [small-to-big](https://medium.com/data-science/advanced-rag-01-small-to-big-retrieval-172181b396d4) ·
-  [auto-merging (Haystack)](https://haystack.deepset.ai/blog/improve-retrieval-with-auto-merging) ·
-  parent-document-retriever (LangChain) · AutoMergingRetriever (LlamaIndex).
-  Script: `scripts/exp_small_to_big.py`. Barato acá: cada fragmento ya apunta a su
-  `articulo_id`. Costo: más tokens al LLM (p50 ~13k chars) y algo de latencia.
-- **Rematch justo pendiente:** `inciso` + contexto LLM (recontextualizar 7141 chunks) para
-  quitar el confound descrito arriba.
+- **Producción: `asis` + Contextual Retrieval (LLM).** Sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓,
+  **small-to-big ✓ (ver §6b)**. Nada adoptado; producción es el mejor.
+- **Rematch justo pendiente:** `inciso` + contexto LLM (recontextualizar 7141 chunks).
+  ⚠️ **DEUDA:** la tabla `fragmentos_inciso` quedó **MEZCLADA** — 1248/7141 chunks se
+  recontextualizaron con phi4 antes de matar el job (ETA real 10h, no 2-3h). **No usarla**
+  hasta: (a) terminar el rematch, (b) revertir los 1248 al prefijo `[norma > art N]`, o
+  (c) dropear la tabla.
+
+---
+
+## 6b. SMALL-TO-BIG (parent document retrieval / auto-merging) — PROBADO, NO SIRVE
+
+Hipótesis (correcta en teoría, y estándar de la industria): buscar y responder tienen objetivos
+**opuestos**. Buscar quiere chunks chicos (precisos); responder quiere contexto grande (citable).
+Se separan: **se indexa chico, se le entrega al LLM el artículo padre completo.**
+Referencias: [small-to-big](https://medium.com/data-science/advanced-rag-01-small-to-big-retrieval-172181b396d4) ·
+[auto-merging (Haystack)](https://haystack.deepset.ai/blog/improve-retrieval-with-auto-merging) ·
+parent-document-retriever (LangChain) · AutoMergingRetriever (LlamaIndex).
+
+Script: `scripts/exp_small_to_big.py`. Reusa los pools ya cacheados; solo cambia QUÉ texto se
+sirve al generador. Padres deduplicados por artículo (auto-merging), cap 4000c/artículo.
+
+Métrica: **cita_ok** (end-to-end), gen `qwen3:30b-a3b`.
+```
+modo               qué sirve al LLM                         coloquial(39)   dev(44)   suma
+asis_chunk (PROD)  chunk = contexto LLM + texto                 31 (—)      36 (—)     67  ← MEJOR
+asis_big           artículo padre CRUDO                         31 (+0)     32 (-4)    63
+asis_bigprod       artículo padre CON contexto LLM              30 (-1)     34 (-2)    64
+inciso_big         artículo padre (índice fino)                 29 (-2)     34 (-2)    63
+inciso_bigprod     artículo padre + contexto (índice fino)      30 (-1)     33 (-3)    63
+inciso_big_ctx     padre + ctx del 1er fragmento                26 (-5)     34 (-2)    60
+inciso_chunk       el chunk fino mutilado                       27 (-4)     38 (+2)    65
+inciso_big 5-padres  solo 5 artículos                           24 (-7)      —          —
+```
+
+**Hallazgos:**
+1. **Nadie supera producción** (67). La mejor alternativa queda en 64.
+2. **La hipótesis tenía algo:** `inciso` sirviendo el chunk mutilado daba 27 en coloquial;
+   sirviendo el padre sube a 29 (**+2**). Small-to-big **sí** rescató parte del daño de los
+   chunks huérfanos. No alcanza.
+3. **Confound aislado y respondido.** `asis_big` (padre crudo) da **−4** en dev; `asis_bigprod`
+   (padre CON el contexto LLM) da **−2**. → El contexto LLM explica **2 de los 4** puntos;
+   los otros **2 son reales**: servir el artículo completo empeora la citación aun con contexto.
+4. **Recortar padres duele mucho más que el contexto:** 5 padres = **−7**. La cobertura de
+   artículos candidatos importa más que la riqueza de cada uno.
+
+**Por qué falla (hipótesis).** El chunk de producción es un **destilado**: resumen escrito por
+el LLM + texto enfocado. El artículo completo es más largo y difuso → el generador tiene más
+superficie donde perderse y cita un vecino. *El contexto que ayuda a citar no es "más texto",
+es "texto mejor apuntado".*
+
+> Esto cierra el ciclo con §5: **granularidad fina sube recall y baja citabilidad** — y
+> **granularidad gruesa al generar también baja citabilidad**. El óptimo no está en ninguno
+> de los dos extremos: está en el chunk destilado que ya tiene producción.
 - Deuda menor: `glossary` pierde texto en 10 artículos; `_MARK2` tiene falsos positivos
   con romanos; `HUGE=3000` sin tunear; faltan `Coverage@k`/`Redundancy@k`/`MRR@k`.
 
