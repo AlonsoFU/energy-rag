@@ -34,7 +34,15 @@ MODES = ["asis_big", "inciso_big", "inciso_big_ctx"]
 
 
 def load_articles():
-    """(id_norma, num_norm) -> {'texto', 'ctx'}  ctx = frase de contexto del LLM."""
+    """(id_norma, num_norm) -> {'texto', 'ctx', 'prod'}
+
+    texto = artículo CRUDO (articulos.texto)
+    ctx   = la frase de contexto que el LLM escribió (Contextual Retrieval)
+    prod  = los contextual_text de producción del artículo, concatenados.
+            Es el padre "justo": texto completo Y con el contexto del LLM.
+            Sin esto, comparar `asis_big` vs `asis_chunk` cambia DOS cosas a la vez
+            (más texto + se pierde el contexto LLM) y el resultado es confuso.
+    """
     idx = {}
     with with_connection() as c, c.cursor(row_factory=dict_row) as cur:
         cur.execute("SELECT id, id_norma, numero, texto FROM articulos")
@@ -42,31 +50,39 @@ def load_articles():
         byid = {}
         for r in rows:
             k = (str(r["id_norma"]), _normalize_art(str(r["numero"])))
-            idx[k] = {"texto": r["texto"] or "", "ctx": ""}
+            idx[k] = {"texto": r["texto"] or "", "ctx": "", "prod": ""}
             byid[r["id"]] = k
-        # contexto LLM: prefijo de contextual_text antes del "\n\n" del primer fragmento
-        cur.execute("""SELECT DISTINCT ON (articulo_id) articulo_id, contextual_text, text
+        cur.execute("""SELECT articulo_id, chunk_index, contextual_text, text
                        FROM fragmentos ORDER BY articulo_id, chunk_index""")
+        acc = {}
         for r in cur.fetchall():
             k = byid.get(r["articulo_id"])
+            if not k:
+                continue
             ct, tx = r["contextual_text"] or "", r["text"] or ""
-            if k and ct and ct != tx:
-                idx[k]["ctx"] = ct.split("\n\n", 1)[0].strip() if "\n\n" in ct else ""
+            acc.setdefault(k, []).append(ct or tx)
+            if r["chunk_index"] == 0 and ct and ct != tx and "\n\n" in ct:
+                idx[k]["ctx"] = ct.split("\n\n", 1)[0].strip()
+        for k, parts in acc.items():
+            idx[k]["prod"] = "\n\n".join(parts)
     return idx
 
 
-def parents(docs, arts, with_ctx=False):
-    """Chunks recuperados (en orden) -> artículos padre DISTINTOS (auto-merging)."""
+def parents(docs, arts, with_ctx=False, prod=False):
+    """Chunks recuperados (en orden) -> artículos padre DISTINTOS (auto-merging).
+
+    prod=True → el padre es el texto de PRODUCCIÓN (contextual_text concatenados):
+    aísla el efecto de 'servir grande' sin perder el contexto del LLM."""
     out, seen, trunc = [], set(), 0
     for d in docs:
         k = (str(d.get("id_norma")), _normalize_art(str(d.get("articulo_numero"))))
         if k in seen or k not in arts:
             continue
         seen.add(k)
-        t = arts[k]["texto"]
+        t = arts[k]["prod"] if (prod and arts[k]["prod"]) else arts[k]["texto"]
         if len(t) > MAX_ART_CHARS:
             t = t[:MAX_ART_CHARS]; trunc += 1
-        if with_ctx and arts[k]["ctx"]:
+        if with_ctx and not prod and arts[k]["ctx"]:
             t = f"{arts[k]['ctx']}\n\n{t}"
         out.append({"id_norma": k[0], "articulo_numero": d.get("articulo_numero"),
                     "articulo_text": t, "text": t, "contextual_text": t})
@@ -103,7 +119,9 @@ def main():
             if mode in rec:
                 continue
             src = "inciso" if mode.startswith("inciso") else "asis"
-            docs, tr = parents(cache[key][src], arts, with_ctx=mode.endswith("_ctx"))
+            docs, tr = parents(cache[key][src], arts,
+                               with_ctx=mode.endswith("_ctx"),
+                               prod=mode.endswith("_bigprod"))
             ntr += tr
             try:
                 rec[mode] = int(_ok(generate_answer(key, docs, llm=llm, model=GENM), golds))
