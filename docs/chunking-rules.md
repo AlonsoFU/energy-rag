@@ -14,7 +14,7 @@ Cuatro reglas que la literatura y los sistemas de producción convergen en usar:
 |---|-------|----------|----------------|
 | 1 | **section-aware** | partir por la jerarquía propia del documento (artículo/inciso), NO por tamaño fijo | ✓ partimos por artículo. Probamos inciso → **descartado** (ver §4) |
 | 2 | **una provisión = un chunk** | no fundir 50 definiciones en un mega-chunk; no partir a mitad de provisión | ~parcial (glosarios siguen fundidos; el split no convirtió) |
-| 3 | **context enrichment (header-path)** | anteponer la ruta `[norma > título > art N]` al texto antes de embeber | ✓ `contextual_text` |
+| 3 | **context enrichment** | anteponer contexto al texto antes de embeber | ✓✓ **Contextual Retrieval de Anthropic YA ADOPTADO**: un LLM (qwen3.5:9b) escribe 1-2 frases del rol del artículo → `contextual_text`. 2021/3907 fragmentos. Script `recontextualize_all.py` |
 | 4 | **cross-ref / late-chunking** | embeber el chunk con el contexto de lo que referencia ("el Coordinador definido en art X") | ~ variante **determinista PROBADA y NEGATIVA** (dosis-respuesta, §4). Late-chunking infeasible (Ollama sin token-emb). **Contextual Retrieval (LLM) sin probar.** |
 
 Evidencia externa: un estudio clínico midió chunking por límites lógicos = **87% accuracy
@@ -172,16 +172,30 @@ Detalle de implementación: `_def_adds` con match por substring y sin mínimo de
 dispara en **83%** de los chunks (términos genéricos: "energía", "empresa") → todos los
 embeddings convergen. Con `\b` word-boundary + `MIN_DEF_TERM=10` baja a 48%. Aun así pierde.
 
-**Lo que NO se probó de la regla 4** (sigue virgen):
+**Lo que NO se probó de la regla 4:**
 - **Late chunking** (Jina, [arXiv 2409.04701](https://arxiv.org/pdf/2409.04701)): embebe todos los
   tokens del doc y mean-poolea por chunk → condiciona el embedding **sin agregar texto**.
   *Infeasible acá*: el 4b vía Ollama no expone token-embeddings.
-- **Contextual Retrieval** (Anthropic): un LLM escribe 50-100 tokens que **resumen el rol** del
-  chunk en su documento (no anexa texto ajeno) y se anteponen antes de embeber. Reportan
-  +5-15% de precisión. Feasible (~2978 llamadas LLM). No corrido.
 
-La diferencia clave: ambos **condicionan/resumen**; la variante determinista **concatena**.
-Concatenar es lo que diluye.
+**Contextual Retrieval (Anthropic) YA ESTÁ EN PRODUCCIÓN** — corrección de un error de este doc.
+`scripts/recontextualize_all.py` llama a qwen3.5:9b, le pide 1-2 frases del rol del artículo y
+guarda `contextual_text = "{contexto}\n\n{texto}"`, que es lo que se embebe. 2021/3907 fragmentos
+lo tienen. Ejemplo real:
+```
+text          : "Artículo 3º.- Sólo darán derecho al crédito establecido en esta ley..."
+contextual_text: "El artículo 3º de la Ley 20.365 define los requisitos técnicos y administrativos
+                  para acceder a la franquicia tributaria en sistemas solares térmicos. ..."
+```
+
+La diferencia clave: Contextual Retrieval y late chunking **condensan/condicionan**; la variante
+determinista **concatena** texto ajeno. **Concatenar es lo que diluye.**
+
+> ⚠️ **CONFOUND del sweep de chunking (§4).** El baseline `asis` lleva el contexto escrito por LLM;
+> todos los chunkers nuevos solo llevaban el prefijo tonto `[norma > art N]` (`ctx_path`).
+> Se comparó **chunking fino con contexto pobre** vs **chunking grueso con contexto rico**.
+> `inciso` ganó el screen *con el handicap puesto* → el chunking fino es mejor de lo que la tabla
+> muestra. Y el −2 de e2e mezcla **dos causas** (chunks huérfanos + pérdida del contexto LLM) que
+> no se separaron. Un rematch justo requiere recontextualizar los 7141 chunks de inciso.
 
 ---
 
@@ -213,10 +227,19 @@ solo cambia *qué* distractor cita el LLM.
 
 ## 7. Estado y próximo paso
 
-- **Producción: `asis` (sin cambios).** Chunking cerrado: sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓.
-- **Único candidato vivo de regla 4: Contextual Retrieval (LLM)** — resume el rol del chunk
-  en vez de concatenar texto ajeno. Prior bajo (6 fracasos retrieval-side seguidos) pero es
-  el que ataca la patología real y tiene evidencia externa (+5-15%).
+- **Producción: `asis` + Contextual Retrieval (LLM).** Sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓.
+- **⏳ SMALL-TO-BIG (parent document retrieval / auto-merging) — EN CURSO, el hueco grande.**
+  Buscar y responder tienen objetivos **opuestos**: buscar quiere chunks chicos (precisos),
+  responder quiere contexto grande (citable). Se separan: **se indexa chico, se le entrega al
+  LLM el artículo padre completo.** Es exactamente lo que explica nuestro resultado
+  (inciso: retrieval +10, citación −4). Estándar consolidado:
+  [small-to-big](https://medium.com/data-science/advanced-rag-01-small-to-big-retrieval-172181b396d4) ·
+  [auto-merging (Haystack)](https://haystack.deepset.ai/blog/improve-retrieval-with-auto-merging) ·
+  parent-document-retriever (LangChain) · AutoMergingRetriever (LlamaIndex).
+  Script: `scripts/exp_small_to_big.py`. Barato acá: cada fragmento ya apunta a su
+  `articulo_id`. Costo: más tokens al LLM (p50 ~13k chars) y algo de latencia.
+- **Rematch justo pendiente:** `inciso` + contexto LLM (recontextualizar 7141 chunks) para
+  quitar el confound descrito arriba.
 - Deuda menor: `glossary` pierde texto en 10 artículos; `_MARK2` tiene falsos positivos
   con romanos; `HUGE=3000` sin tunear; faltan `Coverage@k`/`Redundancy@k`/`MRR@k`.
 
