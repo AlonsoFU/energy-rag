@@ -118,5 +118,7 @@ Estados: **✅ PROD** (en producción) · **🔬 probado, no convirtió** (flag 
 es estándar completo. Lo que falta se parte en: (a) **correctitud legal** (vigencia, metadata, autoridad),
 (b) **generación** (el cuello), (c) **grafo** (retrieval-fail), (d) **medición estándar** (RAGAS/obs).
 
-**Recomendación de orden:** vigencia+metadata (correctitud, barato) → RAGAS/faithfulness (medir bien) →
-generador fuerte + self-consistency (cuello real) → grafo (retrieval-fail) → fine-tune (raíz, caro, último).
+**Recomendación de orden (revisada tras auditar vigencia 2026-07-10):**
+RAGAS/faithfulness (accionable YA, mide misgrounded) → generador fuerte + self-consistency (cuello) →
+grafo (retrieval-fail) → metadata+autoridad (código prod) → vigencia (BLOQUEADO: `estado` vacío,
+89/95 DESCONOCIDO — derivar desde BCN primero) → fine-tune (raíz, caro, último).
