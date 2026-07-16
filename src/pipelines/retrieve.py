@@ -13,6 +13,45 @@ from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.expansion import hyde, multi_query, step_back
 from src.pipelines.normalize import normalize_for_match, find_term_in_query
 
+_NORMA_RANKS: dict | None = None
+
+
+def _norma_ranks() -> dict:
+    """id_norma(str) -> rank ∈ {3 LEGAL, 2 DECRETO, 1 RESOLUCIÓN}. Cacheado.
+
+    Rango derivado del TÍTULO (autoritativo) vía derive_rank; el tipo de la DB
+    no es confiable (ver reference_chilean_norm_hierarchy). Sin fila → 2 (DECRETO,
+    neutral) para no castigar normas sin metadata."""
+    global _NORMA_RANKS
+    if _NORMA_RANKS is None:
+        from src.extraction.norm_rank import derive_rank
+        m = {}
+        with with_connection() as c, c.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT id_norma, tipo, titulo FROM normas")
+            for r in cur.fetchall():
+                m[str(r["id_norma"])] = derive_rank(r.get("tipo") or "", r.get("titulo") or "")[0]
+        _NORMA_RANKS = m
+    return _NORMA_RANKS
+
+
+def authority_boost(candidates: list[dict], beta: float) -> list[dict]:
+    """Nudge multiplicativo por jerarquía normativa: score·(1+β·(rank-2)).
+
+    LEGAL(3)→×(1+β), DECRETO(2)→×1 (neutral), RESOLUCIÓN(1)→×(1-β). β chico para
+    reordenar empates sin pisar al reranker. NO mueve nada al pool: solo reordena
+    lo ya recuperado (ver caveat en config.authority_rank_boost)."""
+    if beta <= 0 or not candidates:
+        return candidates
+    ranks = _norma_ranks()
+    out = []
+    for c in candidates:
+        rk = ranks.get(str(c.get("id_norma")), 2)
+        new = dict(c)
+        new["score"] = c.get("score", 0.0) * (1.0 + beta * (rk - 2))
+        out.append(new)
+    out.sort(key=lambda x: x["score"], reverse=True)
+    return out
+
 
 # ---------------------------------------------------------------------------
 # Step 1: Reciprocal Rank Fusion
@@ -485,6 +524,11 @@ class SimpleRetriever:
                 fused, query_concepts=query_concepts,
                 boost_all=getattr(_cfg.settings, "graph_boost_all", False),
             )
+        # 6b. Authority/jerarquía boost (flag OFF por defecto). Reordena por rango
+        # normativo tras el reranker+grafo, antes de truncar a top_k.
+        _beta = getattr(_cfg.settings, "authority_rank_boost", 0.0)
+        if _beta:
+            fused = authority_boost(fused, _beta)
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
         out = expanded[:top_k]

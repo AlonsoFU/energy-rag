@@ -121,6 +121,16 @@ class Settings(BaseSettings):
     # existía para evitar falsos positivos; se mide en dev+holdout).
     graph_boost_all: bool = False
 
+    # EXP (2026-07-15): boost por AUTORIDAD/jerarquía normativa en el ranking.
+    # La jerarquía chilena (LEY≡DFL≡DL=3 > DECRETO/DS=2 > RESOLUCIÓN=1, ver
+    # src/extraction/norm_rank.derive_rank) se EXTRAE pero nunca pesó el ranking.
+    # authority_rank_boost=β aplica factor multiplicativo (1+β·(rank-2)) al score
+    # tras graph_boost: LEGAL ×(1+β), DECRETO ×1, RESOLUCIÓN ×(1-β). β pequeño
+    # (0.05-0.15) para nudge, no override del reranker. Default 0.0 (OFF).
+    # CAVEAT: mucha regla operativa vive en DECRETO (reglamentos); subir LEY a
+    # ciegas puede hundir el DECRETO correcto → medir dev+holdout, no-regresión.
+    authority_rank_boost: float = 0.0
+
     # EXP (campaña 2026-06): usar el cross-encoder BGE como reranker de
     # producción (src.components.reranker.get_reranker). En el sweep retrieval-only
     # subió gold∈pool@5 en dev (25→33) y holdout (15→17) y destapó la clase

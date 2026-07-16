@@ -68,7 +68,7 @@ Estados: **✅ PROD** (en producción) · **🔬 probado, no convirtió** (flag 
 | técnica | estándar | estado | nota |
 |---|---|---|---|
 | cita a artículo exacto + rastreable (`articulo_id`) | table-stakes | ✅ PROD | |
-| jerarquía/autoridad de norma | table-stakes (como metadata) | 🏗️ `extraction/authority.py` | extraído, **no pesa el ranking** |
+| jerarquía/autoridad de norma | table-stakes (como metadata) | 🔬 probado 2026-07-16, flat | flag `authority_rank_boost` (OFF). β∈{0,0.1,0.2}: cita_ok PLANO coloquial 25/dev 34. Corpus 76% LEGAL → pools mono-tier, boost no reordena. Ver exp-authority-2026-07-16.md |
 | defined-terms / glosario | advanced | ✅ PROD (parcial) | |
 | **vigencia / qué ley está EN FUERZA** | table-stakes legal | ❌ ausente (crítico) | `date_extraction.py` saca fecha_publicacion pero **NO se filtra derogadas**. Task #101 pendiente. **Citar ley muerta = error grave** |
 | derogación / amendment tracking | advanced | 🏗️ parcial | derogación CC 52-53 conocida; BCN vinculaciones VACÍAS en datos |
