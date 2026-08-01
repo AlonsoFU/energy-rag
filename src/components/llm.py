@@ -99,6 +99,13 @@ class LiteLLMProvider:
             # the model burns minutes "thinking" before producing tokens —
             # contextual enrichment of 3,318 chunks would take days.
             kwargs["think"] = False
+            # Ollama HANGS on ~some queries (0 tokens, connection held open) —
+            # non-deterministic, a fresh retry almost never re-hangs. The default
+            # litellm 600s timeout turns each hang into a 10min loss (fatal for
+            # big 30b/32b models). Bounded per-attempt timeout + retries recovers
+            # the query. Mirrors the _ollama_with_schema path. Flag-gated.
+            kwargs["timeout"] = getattr(_config.settings, "ollama_litellm_timeout", 300)
+            kwargs["num_retries"] = getattr(_config.settings, "ollama_litellm_retries", 2)
 
         # Pass JSON schema through to API providers (Anthropic/OpenAI handle natively).
         if response_format and not model.startswith("ollama/"):

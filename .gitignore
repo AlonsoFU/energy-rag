@@ -33,3 +33,7 @@ Thumbs.db
 .env
 *.key
 *.bak
+venv-gpu/
+
+.scratch/
+*.gguf

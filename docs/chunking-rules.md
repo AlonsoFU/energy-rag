@@ -1,0 +1,295 @@
+# Chunking — reglas, consideraciones y QA
+
+Doc canónico del chunking del corpus legal. Escrito 2026-07-09 tras la campaña
+(sweep 17 estrategias + end-to-end + QA). **Veredicto: producción se queda como está
+(`asis`). Ningún re-chunk adoptado.**
+
+---
+
+## 1. El estándar legal-RAG (investigado, no inventado)
+
+Cuatro reglas que la literatura y los sistemas de producción convergen en usar:
+
+| # | regla | qué dice | estado nuestro |
+|---|-------|----------|----------------|
+| 1 | **section-aware** | partir por la jerarquía propia del documento (artículo/inciso), NO por tamaño fijo | ✓ partimos por artículo. Probamos inciso → **descartado** (ver §4) |
+| 2 | **una provisión = un chunk** | no fundir 50 definiciones en un mega-chunk; no partir a mitad de provisión | ~parcial (glosarios siguen fundidos; el split no convirtió) |
+| 3 | **context enrichment** | anteponer contexto al texto antes de embeber | ✓✓ **Contextual Retrieval de Anthropic YA ADOPTADO**: un LLM (qwen3.5:9b) escribe 1-2 frases del rol del artículo → `contextual_text`. 2021/3907 fragmentos. Script `recontextualize_all.py` |
+| 4 | **cross-ref / late-chunking** | embeber el chunk con el contexto de lo que referencia ("el Coordinador definido en art X") | ~ variante **determinista PROBADA y NEGATIVA** (dosis-respuesta, §4). Late-chunking infeasible (Ollama sin token-emb). **Contextual Retrieval (LLM) sin probar.** |
+
+Evidencia externa: un estudio clínico midió chunking por límites lógicos = **87% accuracy
+vs 13%** para fixed-size. La regla 1 no es opinión.
+
+Fuentes:
+- [LegalBench-RAG (arXiv 2408.10343)](https://arxiv.org/pdf/2408.10343)
+- [Towards Reliable Retrieval in RAG for Large Legal Datasets (arXiv 2510.06999)](https://arxiv.org/pdf/2510.06999)
+- [CoFE-RAG — eval full-chain incl. chunking (arXiv 2410.12248)](https://arxiv.org/pdf/2410.12248)
+- [HOPE — eval automática domain-agnostic de chunking (arXiv 2505.02171)](https://arxiv.org/pdf/2505.02171)
+- [Chunking Strategies for Legal & Reference RAG — Edtek](https://edtek.ai/kb/chunking-strategies-legal-reference-documents/)
+
+---
+
+## 2. Reglas de estructura (los regex, antes sueltos en el código)
+
+Viven en `scripts/exp_chunk_sweep.py`. Detectan la estructura que la norma **ya tiene**
+(no inventan divisiones — eso es requisito legal-safe).
+
+| símbolo | regex | detecta | ejemplo | límite conocido |
+|---|---|---|---|---|
+| `_GLOS` | `se\s+entender[áa]\s+por\s*:` | inicio de artículo-glosario | *"...se entenderá por:"* | no cubre glosarios con otra fórmula ("Para efectos de...") |
+| `_MARK` | `(?:^\|\n\|;)\s*(?:[a-zñ]{1,2}\|\d{1,2})[.)]\s+` | subdivisión simple | `a. `, `b) `, `1. `, `12) ` | no cubre `1°`, romanos, ordinales, `§` |
+| `_MARK2` | `_MARK` + `\d{1,2}[°º]` + `[IVXLC]{1,4}` + `Primero..Décimo` + `§\s*\d` | subdivisión extendida | `1°`, `III.`, `Primero.-`, `§ 4` | falsos positivos con `I.` en siglas |
+| `_SENT` | `(?<=[.;])\s+(?=[A-ZÁÉÍÓÚÑ0-9])` | frontera de oración | corte de fragmentos gigantes | corta en abreviaturas (`art. 5`) |
+| `HUGE` | `3000` | umbral de mega-chunk | usado por `ck_inciso_maxsplit` | valor a ojo, no tuneado |
+
+**Trampa descubierta (y corregida):** un chunk de inciso empieza con el marcador `"a. …"`
+→ arranca en **minúscula**. Una métrica ingenua de "empieza en minúscula = cortado a mitad
+de frase" da **27.9% falso**; quitando el marcador primero (`_LEAD` en `qa_chunking.py`)
+el número real es **0.4%**. Medir mal es peor que no medir.
+
+---
+
+## 3. QA de chunking (`scripts/qa_chunking.py`)
+
+Chequeos que el sweep NUNCA hizo. El screen solo mide retrieval; no ve si el chunk está
+mutilado. Un chunk puede ser **nítido para buscar** y **basura para responder**.
+
+| métrica | qué mide | señal mala |
+|---|---|---|
+| **cobertura** | Σ chars(chunks) / chars(artículo) | `<1` = texto perdido · `>1` = redundancia (solape) |
+| **perdida_arts** | artículos con cobertura <0.99 | texto realmente perdido |
+| **tiny / huge** | chunks <50c / >3000c | huérfanos sin contenido / señal diluida |
+| **p10/p50/p90/max** | distribución de tamaños | colas extremas |
+| **start_lower%** | empieza en minúscula (tras quitar marcador) | corte a mitad de frase |
+| **no_end_punct%** | no termina en `.;:!?)` | corte a mitad de frase |
+| **defsCut%** | spans `PADRE: hijo` que NO aparecen íntegros en ningún chunk | cláusula hija separada de su padre |
+
+Del estándar (CoFE-RAG / span-based), pendientes de implementar: `Coverage@k`,
+`Redundancy@k`, `MRR@k` sobre spans gold.
+
+Correr: `./venv-gpu/bin/python -m scripts.qa_chunking`
+
+### Resultados QA (2026-07-09, 2978 artículos)
+```
+chunker           chunks  cobert  perdi   tiny  huge   p10   p50    p90    max startLo%  noEnd% defsCut%
+whole               2978   1.000      0     58   262   196   678   2749  41037      0.0    23.4      0.0
+glossary            3203   1.000     10     72   254   174   612   2561  41037      0.0    25.3      0.0
+inciso              7087   0.999      9    464   145    62   273   1288  11681      0.4    23.0     22.3
+inciso_robust       7141   0.999      9    466   142    62   272   1276  11681      0.4    23.0     22.3
+inciso_maxsplit     7316   0.999      9    466     0    63   280   1375   2988      0.4    22.4     22.3
+slide1000_200       6255   1.161      0    116     0   220   923    992   1000     47.1    59.0      0.0
+slide500_100       11080   1.200      0    264     0   178   489    499    500     65.7    74.1      3.7
+recursive           9979   0.998      0    236     0   154   408    566   1302      7.1    25.7     29.2
+```
+Lecturas:
+- `no_end_punct ≈ 23%` en **whole** también → es propiedad del **corpus** (artículos sin
+  puntuación final), NO patología del chunker. Baseline, no alarma.
+- **slide** rompe frases de verdad (`startLo` 47–66%) y **duplica 16–20%** de texto
+  (`cobert` 1.16/1.20). Explica su peor coloquial.
+- **inciso** NO corta frases (0.4%) pero deja **464 chunks huérfanos** (<50c, 8× más que
+  whole) y parte **22.3%** de spans padre:hijo.
+- `glossary` pierde texto en 10 artículos (cobert <0.99) — el parser descarta ítems sin `:`.
+
+### Cobertura de estructura (`scripts/exp_chunk_qa.py`, 2978 artículos)
+Complementario al anterior: ¿el regex se está perdiendo estructura que la norma SÍ tiene?
+```
+inciso_1chunk    2442   artículos sin subdivisión detectada (82%) → quedan enteros
+big_1chunk        378   artículos >1500c que quedan en 1 chunk (prosa, sin estructura)
+alt_markers        29   usan marcadores NO cubiertos por _MARK: § 14 · N° 11 · guion 3 · romano 1
+glos_noparse        2   parecen glosario pero no parsean defs
+degenerate          0
+```
+Lectura: la cobertura del regex es **buena** (solo 29/2978 usan marcadores no cubiertos).
+Los 378 `big_1chunk` no son un bug: son artículos de **prosa** sin subdivisión legal.
+`_MARK2` extiende a `§`/`N°`/romanos/ordinales y recoge esos 29.
+
+---
+
+## 4. Resultados medidos y VEREDICTO
+
+### Sweep de retrieval (screen, vector-only 4b-1024, coloquial 39 + dev 44)
+Baseline `asis` (fragmentos actuales) = cx5 **27**, dev5 **28**.
+```
+estrategia              frags  cx5  dv5  Δcx5  Δdv5
+inciso+path              7087   29   38    +2   +10   ← ganador SCREEN
+inciso_robust+path       7141   29   38    +2   +10
+inciso_maxsplit+path     7316   29   37    +2    +9
+inciso+light             7087   28   37    +1    +9
+slide500_100+light      11080   25   33    -2    +5
+recursive+path           9979   27   31    +0    +3
+whole+path               2978   30   26    +3    -2
+glossary+light           3203   28   28    +1    +0
+asis (baseline)          3907   27   28    +0    +0
+```
+
+### End-to-end (cita_ok) — lo único que cuenta
+```
+inciso:  coloquial -4  ·  dev +2  ·  NET -2   → ESPEJISMO, DESCARTADO (commit 2a76cfb)
+```
+
+### Por qué inciso ganó el screen y perdió el end-to-end
+El QA lo explica:
+```
+SCREEN  : el embedder ve trozos chicos y nítidos → el gold sube de rank (+10 dev)
+E2E     : el LLM recibe 464 chunks huérfanos + 22.3% de cláusulas sin su padre
+          → no puede citar bien → coloquial -4
+```
+Ejemplo real del daño (art 1199483/45):
+```
+original :  "1. En el artículo 1: a) Reemplázase en el inciso primero la expresión '2024' por..."
+inciso   →  chunk A: "1. En el artículo 1:"                    ← contexto sin acción
+            chunk B: "a) Reemplázase en el inciso primero..."  ← acción sin saber QUÉ artículo
+```
+El chunk B es un **distractor puro**: recuperable, ilegible, incitable. La regla 3
+(header-path) le pone `[norma > art 45]` pero **no le devuelve el padre** `"En el artículo 1:"`.
+
+**Moraleja:** *granularidad fina sube el recall y baja la citabilidad.* Un chunk debe ser
+**autocontenido**, no solo semánticamente puro. Es la regla 2 bien entendida: la "provisión"
+no es la subdivisión sintáctica, es la **unidad que se sostiene sola**.
+
+---
+
+### Regla 4 — cross-ref, variante DETERMINISTA (2026-07-09): NEGATIVA, dosis-respuesta
+Lever medido primero: **53.7%** de artículos tienen remisión real a otro artículo (3657 refs;
+53.8% resolvibles en la misma norma). Ojo: medir sin quitar el encabezado propio
+(`"Artículo 45.-"`) y la auto-referencia da **96.5% falso**.
+
+Inyección determinista (sin LLM) sobre granularidad de producción (`whole`), control = `whole+path`:
+```
+estrategia         inyectado   cx5  dev5   vs whole+path
+whole+path              0%      30    26   —  (control)
+whole+xref             36%      28    26   cx -2
+whole+defs             48%      29    23   dev -3
+whole+xref_defs        65%      27    22   cx -3, dev -4
+```
+**Monótono: más inyección → peor.** Relación dosis-respuesta, no ruido. Anexar texto ajeno
+(artículo referenciado, definición del término) **diluye el embedding del chunk**: el vector
+deja de representar la provisión y pasa a ser un promedio de ella + lo anexado.
+
+Muere en el **screen** — ni llega a e2e. (El screen es generoso; lo que pierde ahí no gana después.)
+
+Detalle de implementación: `_def_adds` con match por substring y sin mínimo de longitud
+dispara en **83%** de los chunks (términos genéricos: "energía", "empresa") → todos los
+embeddings convergen. Con `\b` word-boundary + `MIN_DEF_TERM=10` baja a 48%. Aun así pierde.
+
+**Lo que NO se probó de la regla 4:**
+- **Late chunking** (Jina, [arXiv 2409.04701](https://arxiv.org/pdf/2409.04701)): embebe todos los
+  tokens del doc y mean-poolea por chunk → condiciona el embedding **sin agregar texto**.
+  *Infeasible acá*: el 4b vía Ollama no expone token-embeddings.
+
+**Contextual Retrieval (Anthropic) YA ESTÁ EN PRODUCCIÓN** — corrección de un error de este doc.
+`scripts/recontextualize_all.py` llama a qwen3.5:9b, le pide 1-2 frases del rol del artículo y
+guarda `contextual_text = "{contexto}\n\n{texto}"`, que es lo que se embebe. 2021/3907 fragmentos
+lo tienen. Ejemplo real:
+```
+text          : "Artículo 3º.- Sólo darán derecho al crédito establecido en esta ley..."
+contextual_text: "El artículo 3º de la Ley 20.365 define los requisitos técnicos y administrativos
+                  para acceder a la franquicia tributaria en sistemas solares térmicos. ..."
+```
+
+La diferencia clave: Contextual Retrieval y late chunking **condensan/condicionan**; la variante
+determinista **concatena** texto ajeno. **Concatenar es lo que diluye.**
+
+> ⚠️ **CONFOUND del sweep de chunking (§4).** El baseline `asis` lleva el contexto escrito por LLM;
+> todos los chunkers nuevos solo llevaban el prefijo tonto `[norma > art N]` (`ctx_path`).
+> Se comparó **chunking fino con contexto pobre** vs **chunking grueso con contexto rico**.
+> `inciso` ganó el screen *con el handicap puesto* → el chunking fino es mejor de lo que la tabla
+> muestra. Y el −2 de e2e mezcla **dos causas** (chunks huérfanos + pérdida del contexto LLM) que
+> no se separaron. Un rematch justo requiere recontextualizar los 7141 chunks de inciso.
+
+---
+
+## 5. Consideraciones / trade-offs
+
+| eje | tensión |
+|---|---|
+| **granularidad vs distractores** | + fino → + recall (screen) → − citabilidad (e2e). El punto dulce NO es el más fino. |
+| **n_chunks vs costo** | inciso = 7087 vs 3907 (1.8×) → 1.8× storage, embed y latencia de rerank. |
+| **autocontención vs pureza semántica** | un chunk hijo es semánticamente puro pero no se sostiene solo. |
+| **screen vs e2e** | el screen MIENTE. Ver §6. |
+| **legal-safe** | solo partir por divisiones que la norma ya define. Nunca inventar. |
+
+---
+
+## 6. Lección: el screen MIENTE (3ª confirmación)
+
+| # | experimento | screen | end-to-end |
+|---|---|---|---|
+| 1 | embedder 8b | gold∈top5 **+2** | cita_ok **−1** |
+| 2 | ensemble retrieval | gold∈top10 **+8** | cita_ok **−3** |
+| 3 | **chunking inciso** | gold∈top5 **+10 dev** | cita_ok **NET −2** |
+
+**Regla dura del proyecto: ningún candidato se adopta por screen. Se confirma end-to-end
+(cita_ok) o no cuenta.** Subir el recall del pool sin cuidar la calidad del chunk
+solo cambia *qué* distractor cita el LLM.
+
+---
+
+## 7. Estado y próximo paso
+
+- **Producción: `asis` + Contextual Retrieval (LLM).** Sweep ✓, e2e ✓, QA ✓, regla-4-determinista ✓,
+  **small-to-big ✓ (ver §6b)**. Nada adoptado; producción es el mejor.
+- **Rematch justo pendiente:** `inciso` + contexto LLM (recontextualizar 7141 chunks).
+  ⚠️ **DEUDA:** la tabla `fragmentos_inciso` quedó **MEZCLADA** — 1248/7141 chunks se
+  recontextualizaron con phi4 antes de matar el job (ETA real 10h, no 2-3h). **No usarla**
+  hasta: (a) terminar el rematch, (b) revertir los 1248 al prefijo `[norma > art N]`, o
+  (c) dropear la tabla.
+
+---
+
+## 6b. SMALL-TO-BIG (parent document retrieval / auto-merging) — PROBADO, NO SIRVE
+
+Hipótesis (correcta en teoría, y estándar de la industria): buscar y responder tienen objetivos
+**opuestos**. Buscar quiere chunks chicos (precisos); responder quiere contexto grande (citable).
+Se separan: **se indexa chico, se le entrega al LLM el artículo padre completo.**
+Referencias: [small-to-big](https://medium.com/data-science/advanced-rag-01-small-to-big-retrieval-172181b396d4) ·
+[auto-merging (Haystack)](https://haystack.deepset.ai/blog/improve-retrieval-with-auto-merging) ·
+parent-document-retriever (LangChain) · AutoMergingRetriever (LlamaIndex).
+
+Script: `scripts/exp_small_to_big.py`. Reusa los pools ya cacheados; solo cambia QUÉ texto se
+sirve al generador. Padres deduplicados por artículo (auto-merging), cap 4000c/artículo.
+
+Métrica: **cita_ok** (end-to-end), gen `qwen3:30b-a3b`.
+```
+modo               qué sirve al LLM                         coloquial(39)   dev(44)   suma
+asis_chunk (PROD)  chunk = contexto LLM + texto                 31 (—)      36 (—)     67  ← MEJOR
+asis_big           artículo padre CRUDO                         31 (+0)     32 (-4)    63
+asis_bigprod       artículo padre CON contexto LLM              30 (-1)     34 (-2)    64
+inciso_big         artículo padre (índice fino)                 29 (-2)     34 (-2)    63
+inciso_bigprod     artículo padre + contexto (índice fino)      30 (-1)     33 (-3)    63
+inciso_big_ctx     padre + ctx del 1er fragmento                26 (-5)     34 (-2)    60
+inciso_chunk       el chunk fino mutilado                       27 (-4)     38 (+2)    65
+inciso_big 5-padres  solo 5 artículos                           24 (-7)      —          —
+```
+
+**Hallazgos:**
+1. **Nadie supera producción** (67). La mejor alternativa queda en 64.
+2. **La hipótesis tenía algo:** `inciso` sirviendo el chunk mutilado daba 27 en coloquial;
+   sirviendo el padre sube a 29 (**+2**). Small-to-big **sí** rescató parte del daño de los
+   chunks huérfanos. No alcanza.
+3. **Confound aislado y respondido.** `asis_big` (padre crudo) da **−4** en dev; `asis_bigprod`
+   (padre CON el contexto LLM) da **−2**. → El contexto LLM explica **2 de los 4** puntos;
+   los otros **2 son reales**: servir el artículo completo empeora la citación aun con contexto.
+4. **Recortar padres duele mucho más que el contexto:** 5 padres = **−7**. La cobertura de
+   artículos candidatos importa más que la riqueza de cada uno.
+
+**Por qué falla (hipótesis).** El chunk de producción es un **destilado**: resumen escrito por
+el LLM + texto enfocado. El artículo completo es más largo y difuso → el generador tiene más
+superficie donde perderse y cita un vecino. *El contexto que ayuda a citar no es "más texto",
+es "texto mejor apuntado".*
+
+> Esto cierra el ciclo con §5: **granularidad fina sube recall y baja citabilidad** — y
+> **granularidad gruesa al generar también baja citabilidad**. El óptimo no está en ninguno
+> de los dos extremos: está en el chunk destilado que ya tiene producción.
+- Deuda menor: `glossary` pierde texto en 10 artículos; `_MARK2` tiene falsos positivos
+  con romanos; `HUGE=3000` sin tunear; faltan `Coverage@k`/`Redundancy@k`/`MRR@k`.
+
+### Errores de medición cometidos (para no repetirlos)
+1. `start_lower` sin quitar el marcador `"a."` → **27.9% falso** vs **0.4%** real.
+2. densidad de remisiones sin quitar el encabezado propio → **96.5% falso** vs **53.7%** real.
+3. `_def_adds` sin word-boundary ni largo mínimo → inyectaba en **83%** de chunks.
+
+Los tres inflaban el efecto en la dirección que yo esperaba. **Medir mal es peor que no medir.**
+
+Scripts: `scripts/exp_chunk_sweep.py` (sweep) · `scripts/qa_chunking.py` (QA).
+Datos: `data/eval/results/chunk_sweep/result.json`.

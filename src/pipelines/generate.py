@@ -82,6 +82,7 @@ def generate_answer(
     model: str | None = None,
     max_retries: int = 1,
     initial_top: int | None = None,
+    reranker=None,
 ) -> dict:
     """Generate a grounded answer with citation verification.
 
@@ -105,7 +106,29 @@ def generate_answer(
     # in the corpus vocabulary, refuse directly without burning an LLM call.
     # Catches trap queries like "xenobalbúrgico" or "receta pisco sour" where
     # the LLM tends to hallucinate instead of refusing.
-    if is_off_topic(query):
+    # Semantic variant (flag): use BGE max relevance over the retrieved pool
+    # instead of lexical OOV — the lexical guard wrongly refuses COLLOQUIAL
+    # in-domain queries that don't name the legal term. Needs BGE-ranked docs
+    # carrying `_bge_max` (see retrieve.py). Falls back to lexical if absent.
+    # Gate mode (offtopic_gate_mode): "lexical" (default, OOV de vocabulario),
+    # "semantic" (max BGE < τ), o "and" (rechaza SOLO si léxico Y semántico
+    # coinciden en "fuera de dominio"). El barrido 2026-06-07 mostró que las
+    # distribuciones POS/NEG del score BGE se solapan (25% de in-domain <0.13,
+    # off-topic hasta 0.99) → no hay τ limpio; el "and" protege el coloquial
+    # in-domain (léxico-off, semántico-bajo) sin el daño colateral del semántico
+    # solo (queries formales que BGE puntúa bajo pero el léxico sí reconoce).
+    _mode = getattr(cfg.settings, "offtopic_gate_mode", "lexical")
+    _lex = is_off_topic(query)
+    if _mode in ("semantic", "and") and docs:
+        _bge = max((d.get("_bge_max", 0.0) for d in docs), default=0.0)
+        _sem = _bge < getattr(cfg.settings, "offtopic_bge_threshold", 0.01)
+        _off = (_lex and _sem) if _mode == "and" else _sem
+    elif getattr(cfg.settings, "semantic_offtopic_gate", False) and docs:
+        _bge = max((d.get("_bge_max", 0.0) for d in docs), default=0.0)
+        _off = _bge < getattr(cfg.settings, "offtopic_bge_threshold", 0.01)
+    else:
+        _off = _lex
+    if _off:
         return {
             "text": REFUSAL_TEXT,
             "grounding_pass": True,  # refusal is a valid response, not an alucination
@@ -208,10 +231,27 @@ def generate_answer(
             and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()):
         response_text = _anchor_authoritative_citation(query, response_text)
 
+    # Post-hoc citation repair (flag-gated, default off; CiteFix-similarity).
+    # Solo en respuesta groundeada y no-refusal. AÑADE la cita del doc que mejor
+    # sostiene la respuesta si el LLM no la citó. Requiere un reranker (reusa el
+    # BGE ya cargado). Monótono sobre cita_ok (solo añade). Ver citation_repair.py.
+    repair_info = None
+    if (getattr(cfg.settings, "citation_repair", False) and reranker is not None
+            and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()
+            and docs):
+        from src.pipelines.citation_repair import repair_citations
+        repair_info = repair_citations(
+            response_text, docs, reranker,
+            max_add=getattr(cfg.settings, "citation_repair_max_add", 1),
+            min_score=getattr(cfg.settings, "citation_repair_min_score", 0.0),
+        )
+        response_text = repair_info["text"]
+
     return {
         "text": response_text,
         "grounding_pass": grounding_pass,
         "model": used_model,
         "tokens_in": tokens_in,
         "tokens_out": tokens_out,
+        "repair": repair_info,  # None si el flag está off; {added, top_score, changed} si on
     }
