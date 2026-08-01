@@ -30,8 +30,9 @@ research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el traba
 disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
 medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza la config vigente de
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
-adopta cita_ok e2e.** Orden sugerido: M1 rerank 50-100 (gratis) → G1 grafo concepto→art cableado
-(infra ya existe, ataca 4 fallas) → M2 1def=1frag → E1 métrica RAGAS → RK1 upgrade reranker
+adopta cita_ok e2e.** Orden sugerido: **E0 robustez de eval (BLOQUEANTE — sets 39/44/18 no detectan Δ≤2; usar
+balanced_v2 339q + McNemar pareado + gen 2×)** → M1 rerank 50-100 (gratis) → G1 grafo concepto→art
+cableado (infra ya existe, ataca 4 fallas) → M2 1def=1frag → E1 métrica RAGAS → RK1 upgrade reranker
 Qwen3-Reranker (gap ~14pts, open, cabe en 3090) → M3 STARA → M4 step-back.
 Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
 HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
