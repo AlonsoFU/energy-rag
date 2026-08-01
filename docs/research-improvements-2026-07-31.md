@@ -170,6 +170,50 @@ estructurales/de datos y TODAS caben en la 3090.** El cuello real es RAM del hos
 backlog M1-M6. El límite futuro es RAM (escala) y una extensión de pgvector (multi-vector), ninguno
 se resuelve comprando una GPU más grande.
 
+## Tus modelos vs. frontera (deep-research verificado 3-votos, 2026-08-01)
+
+**Números citados de benchmarks públicos. Caveat: NO medido en la eval propia (101q) ni en
+retrieval legal-español chileno — es extrapolación.** Restricción: sin API paga → gap open-vs-
+frontera-REAL en extracción grounded NO tiene medición directa publicada.
+
+| componente | actual (3090) | vs frontera | veredicto |
+|---|---|---|---|
+| **embedder** | qwen3-embedding-4B MRL-1024 | MTEB multilingüe: Qwen3-emb-8B **70.58/70.88 (#1)**, 4B **69.45/69.60** > Gemini 68.37/67.71 > Cohere-v3 61.12/59.16 > OpenAI text-emb-3-large 58.93/59.27 | **TU embedder YA SUPERA a los frontera cerrados.** ⚠️ falta Voyage-law-2 (legal-específico) en el set |
+| **reranker** | bge-reranker-v2-m3 | MMTEB-R: bge-v2-m3 **58.36** vs Qwen3-Reranker-4B **72.74** / 8B **72.94** (gap **~14 pts**) | **TU RERANKER es el eslabón débil.** Upgrade OPEN disponible, cabe en 3090 → cola activa (RK1) |
+| **gen LLM** | qwen3:30b-a3b (30B/3B) | legal-QA: Qwen3-A3B **46.5%** ≈ GPT-4o-mini **47.2%** (p=0.19). Cita closed-book: Claude Sonnet 4.5 solo **6.80/100**, Llama-70B **3.82** ≈ 8B **1.47** | gap RAZONAMIENTO grande, gap EXTRACCIÓN chico. Tamaño/frontera NO da cita; el retrieval sí |
+
+**Conclusiones verificadas (3-0):**
+1. **Retrieval > generador.** Múltiples estudios (2510.06999 NLLP'25; 2605.14503 ACM FSE'26 peer-
+   reviewed, 7 retrievers × 6 generadores): "el retriever, sobre todo el algoritmo de recuperación,
+   influye más que la elección del generador". El fallo dominante (Document-Level Retrieval
+   Mismatch) es de recuperación, no de generación.
+2. **Escalar el LLM NO da cita.** Closed-book: ningún frontera pasa 7/100; Llama 8B→70B (9× más
+   grande) apenas sube. La cita correcta viene del retrieval, no del tamaño ni del conocimiento
+   paramétrico.
+3. **Tu embedder ya es frontera-o-superior** (Qwen3-emb). Truncar 2560→1024 (~60% reducción) está
+   en zona segura (paper "To MRL or not to MRL" 2605.16608 incluye Qwen3-4B explícito: sin
+   diferencia MRL a ningún nivel para modelos ~4B).
+4. **Frontera cerrada en gen no mueve la aguja** para extracción de cita con retrieval fijo →
+   rompería "sin API paga" para ganancia marginal. Solo como 1 diagnóstico de techo, nunca producción.
+
+**Único hallazgo accionable HOY (open, cabe en 3090, NO frontera):** upgrade reranker
+**bge-reranker-v2-m3 → Qwen3-Reranker-4B/8B** (gap ~14 pts en benchmark). Es el cambio de mayor
+retorno teórico sin probar en el sistema → **RK1 en el backlog.**
+
+**Caveats duros:** (1) números de embedder/reranker son self-report Qwen sobre benchmarks públicos
+(MTEB/MMTEB), NO legal-español chileno; (2) falta Voyage-law-2, el frontera legal-específico —
+única brecha donde la superioridad open NO está probada; (3) GPT-4o-mini NO es frontera real (es el
+barato de OpenAI) → el empate no dice nada de GPT-5/Opus/Gemini; (4) LegalCiteBench/ECtHR miden
+recuperación/predicción closed-book, más duras que extraer un N° de artículo de contexto YA
+recuperado → no leer como que cita_ok grounded es imposible, solo que sin retrieval nada funciona.
+
+**Orden de retorno esperado (teórico) si algún día escalo:**
+1. **Estructura/datos + grafo** (M1-M3, G1) — cuello real, gratis en 3090.
+2. **RK1 upgrade reranker Qwen3-Reranker** — open, cabe en 3090, gap ~14 pts. Mayor retorno de modelo.
+3. **Embedder 8B / full-dim** — cabe en 3090, upside chico (ya eres frontera).
+4. **LLM denso 70B+** (>24GB, NO cabe) — upside marginal en cita_ok (research: escalar no da cita).
+5. **Frontera cerrada (API)** — rompe "sin API paga", ganancia marginal. Solo diagnóstico.
+
 ## Fuentes principales
 - STARA (structure-aware statutory RAG): arxiv.org/html/2603.03300
 - SAC / DRM legal a escala: aclanthology.org/2025.nllp-1.3.pdf, arxiv.org/html/2510.06999v1

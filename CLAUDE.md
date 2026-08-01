@@ -25,13 +25,17 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**Backlog de mejoras (research verificado):** cola priorizada en `docs/backlog-mejoras.md`
-(deriva de `docs/research-improvements-2026-07-31.md`). Protocolo: cada mejora es flag-gated,
-se mide dev+holdout, y al terminar se anota como HECHO (con Δ medido). Si da MEJOR sin regresión
-→ **se adopta y reemplaza la config vigente de arriba**; si no → pasa a "Ya probado — NO repetir".
-Orden: M1 rerank 50-100 (gratis) → M2 1-def-1-frag+parent → M3 STARA → M4 step-back → M5 SAC →
-M6 ColBERT rerank. NO hacer: HyDE/multi-query (dañan cita_ok). El stack actual YA es el baseline
-SOTA legal 2024-26 — las ganancias son de datos/estructura, no swaps de modelo.
+**Backlog UNIFICADO de mejoras:** cola activa única en `docs/backlog-mejoras.md` — consolida el
+research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el trabajo futuro previo
+disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
+medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza la config vigente de
+arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
+adopta cita_ok e2e.** Orden sugerido: M1 rerank 50-100 (gratis) → G1 grafo concepto→art cableado
+(infra ya existe, ataca 4 fallas) → M2 1def=1frag → E1 métrica RAGAS → RK1 upgrade reranker
+Qwen3-Reranker (gap ~14pts, open, cabe en 3090) → M3 STARA → M4 step-back.
+Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
+HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
+datos/estructura, no swaps de modelo. Frontera solo como REFERENCIA "si escalo", no cola activa.
 
 **GOTCHA correr evals (post-reboot):** usar `env -i` limpio (el env heredado rompe HF offline aun con
 HF_HOME seteado) + PATH con `/usr/local/bin` (ollama) + `HF_HOME=/home/alonso/datos/hf`. Detached con
