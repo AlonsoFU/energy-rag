@@ -17,6 +17,17 @@ graphrag-roadmap, gap-analysis). Es la **cola activa única** — reemplaza back
 Test para cada item nuevo: *¿esto AGREGA el gold al pool, o solo mete ruido alrededor de un gold
 que ya estaba?* (`experimentos-registro.md`, `chunking-rules.md §6`).
 
+## ⚠️ ROBUSTEZ ESTADÍSTICA (los sets chicos NO detectan deltas chicos)
+Sets actuales: coloquial **39**, dev **44**, holdout **18** (~101). Ruido binomial ≈ **±2 queries
+= 1σ**; holdout ±2 casi inútil. El LLM **flickea ±1** por corrida (verificado). → **Δ≤2 es RUIDO,
+NO se adopta.** Los WINs grandes de la campaña (+7, +11) SÍ son reales (~4-5σ); de acá en adelante
+los deltas serán chicos (1-3) → hay que endurecer la medición:
+- **Set primario `balanced_v2` (339q)**, no coloquial (39q). Más n = menos ruido. (Ya existe.)
+- **McNemar pareado** (retrieval/pool fijo → pares): mirar los FLIPS, no 37/39 vs 38/39. Necesitas
+  **≥5-6 flips netos** para p<0.05. Reportar qué queries flipean.
+- **Gen 2× + promediar** (LLM flickea ±1).
+- Gold **se lee de la ley**, NO se deriva del sistema (`CLAUDE.md` principio 3).
+
 Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` probado-descartado ·
 `🏗️` infra existe, sin medir e2e · `❌` ausente · `⏳` diferido.
 
@@ -24,6 +35,9 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 
 ## PRIORIDAD RECOMENDADA (orden sugerido, todo cabe en 3090)
 
+0. **E0 · robustez de eval (BLOQUEANTE, hacer PRIMERO)** — sin esto los deltas chicos (1-3) no se
+   pueden medir. E0a (barato): adoptar `balanced_v2` 339q como set primario + McNemar pareado + gen
+   2×. E0b (ongoing): expandir con más pares coloquiales/dev REALES y variados, gold de la ley.
 1. **M1** rerank 50-100 candidatos (gratis, 1 param) — sube techo recall.
 2. **G1** grafo concepto→artículo cableado + medido (infra YA existe) — ataca 4 fallas retrieval quirúrgicamente.
 3. **M2** 1def=1frag + parent-doc (art 225).
@@ -148,6 +162,11 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 
 ## EVAL / OBSERVABILIDAD / INFRA
 
+- [ ] **E0 · robustez de eval (BLOQUEANTE)** — los sets chicos (39/44/18) no detectan Δ≤2 (ruido
+  ±2=1σ, LLM flickea ±1). **E0a barato:** usar `balanced_v2` (339q) como primario + McNemar pareado
+  (≥5-6 flips netos para significancia) + gen 2×. **E0b ongoing:** expandir con más queries
+  coloquiales/dev REALES y variadas (más ámbitos, más paráfrasis), gold leído de la ley (NO derivar
+  del sistema). Ver "ROBUSTEZ ESTADÍSTICA" arriba + D6.
 - [ ] **E1 · RAGAS/DeepEval faithfulness + context_precision** — hoy solo cita_ok casero, NO
   faithfulness estándar. "La medición más accionable ahora". ❌. `roadmap-gap-analysis #3`.
 - [ ] **E2 (dif) · observabilidad** (Langfuse/Phoenix), feedback loop, human-in-the-loop gate,
