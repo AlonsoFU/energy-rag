@@ -53,7 +53,24 @@ De las 106 fallas in_domain:
   RESUMIBLES (guardar por-query, saltar los ya hechos). `exp_rechunk_clean.py` lo implementa.
 - Correr 1 solo proceso (procesos duplicados se pelean ollama → lentísimo + result.json corrupto).
 
+## E0b — auditar/limpiar golds (HECHO, `scripts/audit_golds.py`)
+- `queries_balanced_v2_clean.jsonl`: **126 also_gold** agregados (conceptos definidos en varias
+  normas ahora aceptan la def alternativa válida). Fuente: `fragmentos_definicion` (donde se define X).
+- **EL WIN de la campaña.** Reveló que el recall real es **85%**, no 62%:
+  - **BGE gold@10 sobre eval limpio = 237/279 (85%)** (screen RK1).
+  - El "62%" de E0 era **injusticia de eval** (rechazaba defs alternativas válidas) + gen.
+
+## RK1 — reranker Qwen3-Reranker-4B (MUERTO, screen `scripts/exp_rk1_screen.py`)
+- gold@10: BGE **237/279** vs Qwen3 **239/279** → **Δ=+2 (ruido)**. Y Qwen3 **17× más lento**
+  (1591s vs 93s). El reranker NO es el muro — ambos meten ~85% de golds al top-10.
+- Los ~40 que faltan es que el gold **ni entra al pool** (retrieval), no reranking. NO adoptar.
+- Clase `Qwen3Reranker` queda en reranker.py (RERANKER_KIND=qwen3), OOM-safe (logits_to_keep=1).
+
+## Estado real (post-campaña)
+- **Frente retrieval/reranker AGOTADO:** M1/G1/M2/rechunk/RK1 todos negativos. Retrieval ya da 85% gold@10.
+- **El gap real ahora es GEN:** gold en top-10 (85%) pero el LLM no siempre lo cita. Ahí está el margen.
+
 ## Siguiente (orden)
-1. **E0b** — auditar golds de balanced_v2 (rotos + granularidad de letra + multi-norma→also_gold).
-   Barato, no sufre desconexiones, limpia la métrica para todo lo demás.
-2. **RK1** — upgrade reranker bge→Qwen3-Reranker, medido sobre el eval ya limpio. Ataca el muro 1.
+1. **Re-baseline cita_ok sobre eval LIMPIO** (todo se midió sobre el sucio → el número real es más alto).
+2. **Atacar el gap GEN** (gold@10 85% → cita_ok): self-consistency, lost-in-the-middle reorder, prompt.
+   El retrieval ya no es el cuello.

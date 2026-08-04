@@ -76,10 +76,52 @@ class BGEReranker:
         return [(i, float(scores[i])) for i in order[:top_k]]
 
 
+class Qwen3Reranker:
+    """RK1: Qwen/Qwen3-Reranker-4B (LLM-based reranker, yes/no logit). Research 2026-08:
+    gap ~14pts MMTEB-R vs bge-reranker-v2-m3. Interfaz igual a BGEReranker.rerank.
+    GPU fp16 (~8GB en 3090). Score = P('yes') en el ultimo token."""
+
+    def __init__(self, model="Qwen/Qwen3-Reranker-4B", device="cuda"):
+        import torch
+        from transformers import AutoTokenizer, AutoModelForCausalLM
+        self.tok = AutoTokenizer.from_pretrained(model, padding_side="left")
+        self.model = AutoModelForCausalLM.from_pretrained(model, dtype=torch.float16).to(device).eval()
+        self.dev = device
+        self.yes = self.tok.convert_tokens_to_ids("yes")
+        self.no = self.tok.convert_tokens_to_ids("no")
+        self.pre = ('<|im_start|>system\nJudge whether the Document meets the requirements based on '
+                    'the Query. Answer only "yes" or "no".<|im_end|>\n<|im_start|>user\n')
+        self.suf = "<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+
+    def rerank(self, query, docs, top_k):
+        if not docs:
+            return []
+        import torch
+        texts = [self.pre + f"<Query>: {query}\n<Document>: {d}" + self.suf for d in docs]
+        scores = []
+        bs = int(__import__("os").environ.get("RK_BATCH", "4"))
+        ml = int(__import__("os").environ.get("RK_MAXLEN", "1024"))
+        for i in range(0, len(texts), bs):
+            batch = texts[i:i + bs]
+            ids = self.tok(batch, return_tensors="pt", truncation=True, max_length=ml,
+                           padding=True).to(self.dev)
+            with torch.no_grad():
+                # logits_to_keep=1: solo el ultimo token -> evita lm_head sobre toda la seq (OOM)
+                lo = self.model(**ids, logits_to_keep=1).logits[:, -1, :]
+            y = lo[:, self.yes]; n = lo[:, self.no]
+            p = torch.softmax(torch.stack([n, y], dim=-1), dim=-1)[:, 1]
+            scores.extend(p.tolist())
+        order = sorted(range(len(docs)), key=lambda j: scores[j], reverse=True)
+        return [(j, float(scores[j])) for j in order[:top_k]]
+
+
 def get_reranker():
-    """Production reranker factory. BGE when `use_bge_reranker` is on, else the
-    Identity no-op (preserves RRF order — the prior default)."""
+    """Production reranker factory. Qwen3-Reranker (RK1) si RERANKER_KIND=qwen3; BGE si
+    `use_bge_reranker`; si no, Identity no-op (preserva orden RRF)."""
+    import os
     from src.core.config import settings
+    if os.environ.get("RERANKER_KIND") == "qwen3":
+        return Qwen3Reranker()
     if getattr(settings, "use_bge_reranker", False):
         return BGEReranker()
     return IdentityReranker()
