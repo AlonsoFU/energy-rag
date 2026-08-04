@@ -215,6 +215,18 @@ class Settings(BaseSettings):
     # el screen lo daba ≈4B; con la 3090 se re-mide en gen completo. Excluyente con embed_4b_dense.
     embed_8b_dense: bool = False
 
+    # def_fragments (flag OFF): M2 "1 definición = 1 fragmento". Tabla fragmentos_definicion
+    # (252 defs extraídas de 21 artículos-glosario densos, embedding_4b_1024). Se fusiona (RRF)
+    # con la pata densa 4B para que la def enterrada en un glosario de ~10k chars suba al top-k;
+    # mapea al artículo padre (cita [Art N de NORMA]). Ataca las fallas de RECALL de definiciones
+    # (89/106 fallas E0). Construir con scripts.build_def_fragments (WRITE=1). Requiere embed_4b_dim=1024.
+    def_fragments: bool = False
+
+    # glossary_exclude (flag OFF): parte del rechunk M2. Excluye del search 4b-1024 los chunks
+    # de los 62 artículos-glosario gigantes (re-fragmentados en fragmentos_definicion), para que
+    # el def-fragment los REEMPLACE en vez de competir/diluir. Rechunk = def_fragments + glossary_exclude.
+    glossary_exclude: bool = False
+
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
     # TÉRMINOS técnico-legales exactos de una query coloquial (corto, sin alucinar leyes)

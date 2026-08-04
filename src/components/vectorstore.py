@@ -152,21 +152,48 @@ class PostgresStore:
             """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()
 
-    def search_vector_4b_1024(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+    def search_vector_4b_1024(self, query_embedding: list[float], top_k: int = 50,
+                              exclude_glossary: bool = False) -> list[dict]:
         """KNN sobre embedding_4b_1024 (MRL prefix 1024-dim, indexable HNSW). Query debe
-        venir ya truncada a 1024 + renormalizada. [] si la columna no existe."""
+        venir ya truncada a 1024 + renormalizada. [] si la columna no existe.
+        exclude_glossary: parte del rechunk M2 — saca los chunks-glosario gigantes (re-fragmentados
+        en fragmentos_definicion) para que el def-fragment los REEMPLACE. Se gatea por-query (solo
+        queries de definición) desde _vector_4b_search, no global."""
         with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
             cur.execute("SELECT 1 FROM information_schema.columns "
                         "WHERE table_name='fragmentos' AND column_name='embedding_4b_1024'")
             if not cur.fetchone():
                 return []
-            cur.execute("""
+            excl = ""
+            if exclude_glossary:
+                excl = "AND f.articulo_id NOT IN (SELECT DISTINCT articulo_id FROM fragmentos_definicion)"
+            cur.execute(f"""
                 SELECT f.id, f.articulo_id, f.text, f.contextual_text,
                        a.id_norma, a.numero AS articulo_numero,
                        1 - (f.embedding_4b_1024 <=> %s::vector) AS score
                 FROM fragmentos f JOIN articulos a ON a.id = f.articulo_id
-                WHERE f.embedding_4b_1024 IS NOT NULL
+                WHERE f.embedding_4b_1024 IS NOT NULL {excl}
                 ORDER BY f.embedding_4b_1024 <=> %s::vector
+                LIMIT %s
+            """, (query_embedding, query_embedding, top_k))
+            return cur.fetchall()
+
+    def search_vector_def_4b_1024(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
+        """M2 (def_fragments): KNN sobre fragmentos_definicion (1 def = 1 fragmento, MRL-1024).
+        Mapea al ARTICULO PADRE (parent-doc) para que la cita sea [Art N de NORMA]. El text
+        devuelto es la definicion focalizada (mejor para rerank/gen que el glosario gigante).
+        id con offset 9e8 para no colisionar con fragmentos.id. [] si la tabla no existe."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.tables WHERE table_name='fragmentos_definicion'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT (900000000 + fd.id) AS id, fd.articulo_id, fd.texto AS text,
+                       fd.texto AS contextual_text, a.id_norma, a.numero AS articulo_numero,
+                       1 - (fd.embedding_4b_1024 <=> %s::vector) AS score
+                FROM fragmentos_definicion fd JOIN articulos a ON a.id = fd.articulo_id
+                WHERE fd.embedding_4b_1024 IS NOT NULL
+                ORDER BY fd.embedding_4b_1024 <=> %s::vector
                 LIMIT %s
             """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()

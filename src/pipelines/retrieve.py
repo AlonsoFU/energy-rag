@@ -98,6 +98,19 @@ def _embed_4b_query(text: str, model: str = "qwen3-embedding:4b"):
         return []
 
 
+import re as _re
+_DEF_INTENT = _re.compile(
+    r'\b(qu[eé]\s+es|qu[eé]\s+son|qu[eé]\s+significa|qu[eé]\s+se\s+entiende\s+por|'
+    r'definici[oó]n\s+de|concepto\s+de|significado\s+de|a\s+qu[eé]\s+se\s+refiere)\b',
+    _re.IGNORECASE)
+
+
+def _is_definition_query(text: str) -> bool:
+    """Gate M2: True si la query pide una DEFINICIÓN (no una consulta operativa). def_fragments
+    solo debe disparar aquí; sin gate contamina el resto (medido net -10)."""
+    return bool(_DEF_INTENT.search(text or ""))
+
+
 def _vector_4b_search(text, store, top_k):
     """Embebe `text` con 4B (Ollama) y busca; MRL-1024 (HNSW) o 2560 (seq-scan). [] si falla."""
     from src.core import config as _c
@@ -108,7 +121,19 @@ def _vector_4b_search(text, store, top_k):
         import math as _m
         s = emb[:1024]
         nrm = _m.sqrt(sum(x*x for x in s)) or 1.0
-        return store.search_vector_4b_1024([x/nrm for x in s], top_k=top_k)
+        qv = [x/nrm for x in s]
+        # M2 rechunk: en queries de DEFINICIÓN, reemplaza los glosarios gigantes por los
+        # def-fragments (1 def = 1 fragmento, mapea al artículo padre). GATE por intención:
+        # sin gate contamina las queries no-definición (medido: net -10). glossary_exclude saca
+        # el gigante (0.00, diluido) para que el def-fragment no compita, solo lo reemplace.
+        is_def = getattr(_c.settings, "def_fragments", False) and _is_definition_query(text)
+        excl = is_def and getattr(_c.settings, "glossary_exclude", False)
+        base = store.search_vector_4b_1024(qv, top_k=top_k, exclude_glossary=excl)
+        if is_def:
+            defr = store.search_vector_def_4b_1024(qv, top_k=top_k)
+            if defr:
+                return rrf_fusion([base, defr], k=60)[:top_k]
+        return base
     return store.search_vector_4b(emb, top_k=top_k)
 
 

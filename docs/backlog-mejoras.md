@@ -192,8 +192,22 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
   **query expansion sinónimos** (rompió off-topic), **fine-tune 0.6b** (overfit), **gemma2:27b** (roto),
   **8B embedder** (trade-off dev+5/coloq−4), **fusión RRF k×peso** (+2% marginal).
 
+## PROBADO — NO repetir (campaña def-recall 2026-08, detalle: `campaign-def-recall-2026-08.md`)
+- **M1** pool 50→100: +3, p=0.25 ruido. El gold no está en rank 50-100.
+- **G1** grafo concepto→art: MUERTO. 0/45 fallas tienen arista art-level correcta (solo 48/371 la tienen).
+- **M2** def_fragments inyección: −10 pero contaminado por ruido de gen (método malo).
+- **rechunk** (def_fragments+glossary_exclude, McNemar pareado limpio): **+7/−10, p=0.63 = FLAT**. No adoptar.
+- Infra def_fragments queda (flags OFF, 608 fragmentos): sirve, pero muro del reranker la limita.
+
+## Muros identificados (palancas reales pendientes)
+- **RK1 (reranker Qwen3):** el bge prefiere el artículo FUNCIONAL sobre la DEFINICIÓN (Coordinador
+  0.9985 vs 0.981). Es lo que limita def_fragments. Palanca prioritaria post-E0b.
+- **E0b (auditar golds):** balanced_v2 tiene golds rotos (mora 5°, vehículo 7°, Superintendencia 2 D)
+  → parte del 62% es ruido de eval. Barato, sin gen, limpia la métrica. HACER ANTES de RK1.
+
 ## HECHO / adoptado (esta campaña 3090)
 - Embedder qwen3-4B MRL-1024, alias_union, BGE-GPU, gate AND, gen qwen3:30b-a3b. Ver `handoff-2026-07-31.md`.
+- Método de eval robusto: balanced_v2 (339q) + McNemar pareado (ver `campaign-def-recall-2026-08.md`).
 
 ## REFERENCIA — SI ALGÚN DÍA ESCALO (NO es cola activa)
 Deep-research frontera verificado (2026-08-01), detalle: `docs/research-improvements-2026-07-31.md`
