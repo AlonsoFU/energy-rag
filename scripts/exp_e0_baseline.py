@@ -21,8 +21,10 @@ from src.core import config as cfg
 
 MODEL = "ollama/qwen3:30b-a3b"
 RUNS = int(os.environ.get("RUNS", "1"))
-SET = ("balanced_v2", "data/eval/queries_balanced_v2.jsonl")
-OUTDIR = Path("data/eval/results/e0_baseline")
+# SET_PATH env: apunta a otro eval (ej queries_balanced_v2_clean.jsonl con also_gold)
+_SP = os.environ.get("SET_PATH", "data/eval/queries_balanced_v2.jsonl")
+SET = (Path(_SP).stem, _SP)
+OUTDIR = Path("data/eval/results/" + os.environ.get("OUTNAME", "e0_baseline"))
 
 
 def _golds(q):
@@ -90,13 +92,29 @@ def main():
         c[f"err{run}"] = True  # marcado para no contaminar el baseline (ok=False pero flag)
         return False
 
+    # RESUME: si hay result.json parcial, retoma ok1 por query (solo RUNS=1)
+    prev = {}
+    rp = OUTDIR / "result.json"
+    if rp.exists():
+        try:
+            for c in json.load(open(rp)).get("detail", []):
+                if "ok1" in c:
+                    prev[c["q"]] = c["ok1"]
+            if prev:
+                print(f"[RESUME] {len(prev)} queries ya genradas, se saltan", flush=True)
+        except Exception:
+            pass
+
     runs = []
     for run in range(1, RUNS + 1):
         agg = {}
         print(f"=== GEN run {run}/{RUNS} con {MODEL} ===", flush=True)
         t0 = time.time()
         for j, c in enumerate(cache):
-            c[f"ok{run}"] = _gen_ok(c, run)
+            if run == 1 and c["q"] in prev:
+                c["ok1"] = prev[c["q"]]
+            else:
+                c[f"ok{run}"] = _gen_ok(c, run)
             agg.setdefault(c["cat"], {"n": 0, "ok": 0, "err": 0})
             agg[c["cat"]]["n"] += 1; agg[c["cat"]]["ok"] += c[f"ok{run}"]; agg[c["cat"]]["err"] += c.get(f"err{run}", False)
             if (j + 1) % 25 == 0:

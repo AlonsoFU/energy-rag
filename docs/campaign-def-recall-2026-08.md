@@ -70,7 +70,31 @@ De las 106 fallas in_domain:
 - **Frente retrieval/reranker AGOTADO:** M1/G1/M2/rechunk/RK1 todos negativos. Retrieval ya da 85% gold@10.
 - **El gap real ahora es GEN:** gold en top-10 (85%) pero el LLM no siempre lo cita. Ahí está el margen.
 
-## Siguiente (orden)
-1. **Re-baseline cita_ok sobre eval LIMPIO** (todo se midió sobre el sucio → el número real es más alto).
-2. **Atacar el gap GEN** (gold@10 85% → cita_ok): self-consistency, lost-in-the-middle reorder, prompt.
-   El retrieval ya no es el cuello.
+## RESULTADO FINAL — re-baseline sobre eval LIMPIO (`data/eval/results/e0_clean`)
+| categoría | LIMPIO (also_gold) | sucio (E0) | Δ |
+|-----------|--------------------|-----------|---|
+| in_domain | **226/279 (81%)** | 62% | **+19** |
+| rechazo (off_corpus) | 30/30 (100%) | 100% | = |
+| off_domain | 21/30 (70%) | 70% | = |
+
+**El +19 vino 100% de arreglar el eval (also_gold), CERO modelos.** El "62%" era injusticia de métrica.
+cita_ok limpio (81%) ≈ gold@10 (85%) → **casi no hay gap de GEN**: si el gold está en top-10, el LLM lo cita.
+
+## Audit de las 53 fallas restantes (in_domain limpio)
+- **11 GEN** (gold en top-10, no citó) — chico, ruido/prompt.
+- **42 RECALL** (gold ni en top-10), mezcla de:
+  - **golds AÚN rotos** (Mora `250604/5`=no existe, es 5°; Reposición `29819/2 D`=granularidad letra)
+    → el audit E0b fue laxo (palabra-en-art), quedan por limpiar → el techo real es >81%.
+  - **glosario-enterrado** (Estado Deteriorado, Cliente, Ajustes) → def_fragments los rescata pero
+    era net-flat (rescata unos, desplaza otros).
+
+## CONCLUSIÓN de la campaña
+- **El sistema real está en ~81% (probablemente ~85%+ con eval 100% limpio), NO roto en 62%.**
+- **Frente retrieval/reranker AGOTADO** (M1/G1/M2/rechunk/RK1 todos negativos) — no había mucho que ganar.
+- **La mejor "mejora" de toda la campaña fue arreglar la métrica** (E0b also_gold, +19).
+- Retorno decreciente. El 19% restante ≈ mitad eval-roto (limpiable), mitad retrieval-duro (glosario).
+
+## Siguiente (bajo retorno, opcional)
+1. Terminar de limpiar golds rotos (Mora, Reposición, letra-format) → techo real >81%.
+2. Los 11 GEN-fails: self-consistency / prompt (margen chico).
+3. Glosario-enterrado: def_fragments ayuda pero net-flat → no adoptar sin gating más fino.
