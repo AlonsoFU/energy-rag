@@ -88,6 +88,16 @@ cita_ok limpio (81%) ≈ gold@10 (85%) → **casi no hay gap de GEN**: si el gol
   - **glosario-enterrado** (Estado Deteriorado, Cliente, Ajustes) → def_fragments los rescata pero
     era net-flat (rescata unos, desplaza otros).
 
+## Golds AÚN rotos (audit v2, escaneo amplio de artículos-Definiciones)
+De las 29 concepts-falla in_domain: **10 tienen la def REAL ya en el top-10, solo el gold estaba
+errado** (Mora→realmente 1207690/3 no 250604/5; Reposición, Proyecto, Bases de Licitación, Costo
+de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). Son **15 queries**.
+- **Baseline corregido: 226+15 = 241/279 = ~86%** (estimado; el sistema YA recupera bien, el gold
+  mentía). Las otras 14 = retrieval real (glosario-enterrado); 5 = acrónimos/formato raro.
+- `audit_golds.py` v2 agrega escaneo amplio (`Concepto:` / `se entiende por Concepto`) → **159
+  also_gold** (antes 126). Eval `queries_balanced_v2_clean.jsonl` regenerado.
+- Nota: ~86% es límite superior estimado (cita_ok≈gold@10); confirmar exacto = re-generar sobre v2.
+
 ## CONCLUSIÓN de la campaña
 - **El sistema real está en ~81% (probablemente ~85%+ con eval 100% limpio), NO roto en 62%.**
 - **Frente retrieval/reranker AGOTADO** (M1/G1/M2/rechunk/RK1 todos negativos) — no había mucho que ganar.
