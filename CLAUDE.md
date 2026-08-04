@@ -25,6 +25,14 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
+**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real es **~81%** (eval limpio
+con `also_gold`, `data/eval/queries_balanced_v2_clean.jsonl`), NO el 62% que daba el eval sucio.
+El "62%" era **injusticia de eval** (rechazaba definiciones alternativas válidas). Frente
+retrieval/reranker AGOTADO: M1 pool, G1 grafo, M2 def_fragments, rechunk, RK1 Qwen3-Reranker →
+TODOS negativos/flat (medidos con McNemar pareado). La mejor mejora de la campaña fue **arreglar la
+métrica** (+19). cita_ok(81%)≈gold@10(85%) → casi no hay gap de gen. Antes de más experimentos:
+LIMPIAR EL EVAL (quedan golds rotos: Mora 250604/5, Reposición 29819/2 D). Detalle: `docs/campaign-def-recall-2026-08.md`.
+
 **Backlog UNIFICADO de mejoras:** cola activa única en `docs/backlog-mejoras.md` — consolida el
 research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el trabajo futuro previo
 disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
