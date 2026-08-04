@@ -1,6 +1,6 @@
-{"query": "qué es Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
-{"query": "definición de Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
-{"query": "qué significa Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain"}
+{"query": "qué es Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain", "also_gold": ["1207690/3"]}
+{"query": "definición de Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain", "also_gold": ["1207690/3"]}
+{"query": "qué significa Mora", "expected_norma": "250604", "expected_articulo": "5°", "category": "in_domain", "also_gold": ["1207690/3"]}
 {"query": "qué es Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "definición de Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "qué significa Escenario Energético", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
@@ -13,27 +13,27 @@
 {"query": "qué es Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
 {"query": "definición de Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
 {"query": "qué significa Modelamiento de las unidades solares y eólicas", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "qué es Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["258171/225"]}
-{"query": "definición de Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["258171/225"]}
-{"query": "qué significa Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["258171/225"]}
+{"query": "qué es Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero", "258171/225"]}
+{"query": "definición de Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero", "258171/225"]}
+{"query": "qué significa Suficiencia de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero", "258171/225"]}
 {"query": "qué es Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "250604/13"]}
 {"query": "definición de Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "250604/13"]}
 {"query": "qué significa Sistema de Transmisión Nacional", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "250604/13"]}
 {"query": "qué es Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Potencia Máxima", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué es Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "definición de Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "qué significa Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "qué es Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "definición de Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "qué significa Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "qué es Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "definición de Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "qué significa Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "qué es Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "definición de Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "qué significa Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "definición de Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "qué significa Proyección de demanda de clientes libres", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "qué es Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "definición de Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "qué significa Proyección de demanda de clientes regulados", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1149788/4º", "1160108/78"]}
+{"query": "qué es Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
+{"query": "definición de Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
+{"query": "qué significa Proyección de precios de combustibles", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
+{"query": "qué es Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1160108/78"]}
+{"query": "definición de Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1160108/78"]}
+{"query": "qué significa Tasas de falla de instalaciones de transmisión", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1160108/78"]}
 {"query": "qué es Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "definición de Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "qué significa Organismo de Certificación", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
@@ -49,9 +49,9 @@
 {"query": "qué es Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1146553/5"]}
 {"query": "definición de Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1146553/5"]}
 {"query": "qué significa Panel", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1146553/5"]}
-{"query": "qué es Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "definición de Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
-{"query": "qué significa Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain"}
+{"query": "qué es Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
+{"query": "definición de Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
+{"query": "qué significa Modelamiento de la demanda", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1146553/18", "1160108/78"]}
 {"query": "qué es Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
 {"query": "definición de Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
 {"query": "qué significa Sistemas de Transmisión Zonal", "expected_norma": "1112591", "expected_articulo": "2°", "category": "in_domain"}
@@ -61,18 +61,18 @@
 {"query": "qué es Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "definición de Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "qué significa Plan de Expansión", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
-{"query": "qué es Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
-{"query": "definición de Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
-{"query": "qué significa Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/4º"]}
+{"query": "definición de Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/4º"]}
+{"query": "qué significa Reposición", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/4º"]}
 {"query": "qué es Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "definición de Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "qué significa Adecuaciones", "expected_norma": "1146553", "expected_articulo": "52", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "qué es Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Central Renovable con Capacidad de Regulación", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué es Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "definición de Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué significa Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "definición de Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "qué significa Sistema de Distribución o Red de Distribución", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
 {"query": "qué es Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "definición de Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "qué significa Pequeño Centro de Procesamiento de Biomasa", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
@@ -112,30 +112,30 @@
 {"query": "qué es Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain", "also_gold": ["1216930/5"]}
 {"query": "definición de Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain", "also_gold": ["1216930/5"]}
 {"query": "qué significa Técnicas habilitantes alternativas", "expected_norma": "29819", "expected_articulo": "1º D", "category": "in_domain", "also_gold": ["1216930/5"]}
-{"query": "qué es Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "258171/225"]}
-{"query": "definición de Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "258171/225"]}
-{"query": "qué significa Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "258171/225"]}
-{"query": "qué es Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "definición de Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué significa Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "1212738/primero", "258171/225"]}
+{"query": "definición de Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "1212738/primero", "258171/225"]}
+{"query": "qué significa Cliente", "expected_norma": "250604", "expected_articulo": "14", "category": "in_domain", "also_gold": ["1149788/4º", "1212738/primero", "258171/225"]}
+{"query": "qué es Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "definición de Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "qué significa Subperíodo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1204012/primero"]}
 {"query": "qué es Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
 {"query": "definición de Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
 {"query": "qué significa Colector Solar Térmico", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
-{"query": "qué es DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
-{"query": "definición de DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
-{"query": "qué significa DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
-{"query": "qué es Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
-{"query": "definición de Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
-{"query": "qué significa Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
+{"query": "qué es DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "definición de DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "qué significa DIA", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "qué es Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1160108/78", "258171/225"]}
+{"query": "definición de Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1160108/78", "258171/225"]}
+{"query": "qué significa Sistema Eléctrico", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1160108/78", "258171/225"]}
 {"query": "qué es Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Retiro de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué es Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "definición de Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "qué significa Ajustes", "expected_norma": "1112591", "expected_articulo": "11°", "category": "in_domain", "also_gold": ["1149788/4º"]}
-{"query": "qué es Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
-{"query": "definición de Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
-{"query": "qué significa Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
+{"query": "qué es Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain", "also_gold": ["1207690/3", "16121/7°"]}
+{"query": "definición de Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain", "also_gold": ["1207690/3", "16121/7°"]}
+{"query": "qué significa Bases de Licitación", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain", "also_gold": ["1207690/3", "16121/7°"]}
 {"query": "qué es Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Insumo Alternativo", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
@@ -157,9 +157,9 @@
 {"query": "qué es Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
 {"query": "definición de Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
 {"query": "qué significa Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
-{"query": "qué es Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2"]}
-{"query": "definición de Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2"]}
-{"query": "qué significa Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2"]}
+{"query": "qué es Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
+{"query": "definición de Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
+{"query": "qué significa Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
 {"query": "qué es Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "definición de Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
 {"query": "qué significa Escenario", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°"]}
@@ -202,18 +202,18 @@
 {"query": "qué es Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "definición de Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
 {"query": "qué significa Comercializador", "expected_norma": "1183783", "expected_articulo": "2", "category": "in_domain"}
-{"query": "qué es DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
-{"query": "definición de DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
-{"query": "qué significa DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain"}
+{"query": "qué es DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "definición de DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
+{"query": "qué significa DIP", "expected_norma": "250604", "expected_articulo": "31", "category": "in_domain", "also_gold": ["1204012/primero"]}
 {"query": "qué es Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
 {"query": "definición de Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
 {"query": "qué significa Depósito Acumulador", "expected_norma": "1005169", "expected_articulo": "2º", "category": "in_domain"}
 {"query": "qué es Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain", "also_gold": ["1058072/2º"]}
 {"query": "definición de Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain", "also_gold": ["1058072/2º"]}
 {"query": "qué significa Avalúo Fiscal", "expected_norma": "1005169", "expected_articulo": "4º", "category": "in_domain", "also_gold": ["1058072/2º"]}
-{"query": "qué es Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
-{"query": "definición de Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
-{"query": "qué significa Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
+{"query": "qué es Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/11°", "1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
+{"query": "definición de Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/11°", "1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
+{"query": "qué significa Sistema Eléctrico Nacional", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/11°", "1112591/2°", "1146553/5", "1160108/2", "258171/225"]}
 {"query": "qué es Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Demanda de Punta", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
@@ -241,18 +241,18 @@
 {"query": "qué es Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué es Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
-{"query": "definición de Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
-{"query": "qué significa Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain"}
+{"query": "qué es Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
+{"query": "definición de Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
+{"query": "qué significa Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
 {"query": "qué es TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
 {"query": "definición de TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
 {"query": "qué significa TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
 {"query": "qué es C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "definición de C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "qué significa C.O.M.A.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
-{"query": "qué es Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2"]}
-{"query": "definición de Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2"]}
-{"query": "qué significa Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2"]}
+{"query": "qué es Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2", "1204012/primero"]}
+{"query": "definición de Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2", "1204012/primero"]}
+{"query": "qué significa Superintendencia", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "also_gold": ["1058072/2º", "1146553/5", "1149788/4º", "1160108/2", "1183783/2", "1204012/primero"]}
 {"query": "qué es Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Estado No Disponible", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}

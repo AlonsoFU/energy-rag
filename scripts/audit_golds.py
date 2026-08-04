@@ -49,6 +49,12 @@ def main():
         for t, locs in defmap.items():
             if t == cl or (len(cl) > 4 and (cl in t or t in cl)):
                 deflocs |= locs
+        # 1b) escaneo AMPLIO de articulos-Definiciones: patron 'Concepto:' o 'se entiende por Concepto'
+        # (pesca golds que el extractor de glosario-lista no agarro, ej Mora en 1207690/3).
+        esc = re.escape(c)
+        for n, num, txt in arts:
+            if re.search(rf'(^|[^a-zA-Z]){esc} ?:', txt) or re.search(rf'se entiende por.{{0,4}}{esc}\b', txt):
+                deflocs.add((str(n), str(num)))
         also = sorted({f"{n}/{a}" for n, a in deflocs if not (n == gN and _norm_num(a) == _norm_num(gA))})
         # 2) verifica gold: articulo existe + menciona el concepto
         gold_txt = ""
