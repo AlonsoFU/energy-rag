@@ -25,7 +25,7 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real es **~81%** (eval limpio
+**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real es ~84% (confirmado eval v2, 234/279) (eval limpio
 con `also_gold`, `data/eval/queries_balanced_v2_clean.jsonl`), NO el 62% que daba el eval sucio.
 El "62%" era **injusticia de eval** (rechazaba definiciones alternativas válidas). Frente
 retrieval/reranker AGOTADO: M1 pool, G1 grafo, M2 def_fragments, rechunk, RK1 Qwen3-Reranker →

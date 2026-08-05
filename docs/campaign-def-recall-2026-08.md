@@ -92,8 +92,8 @@ cita_ok limpio (81%) ≈ gold@10 (85%) → **casi no hay gap de GEN**: si el gol
 De las 29 concepts-falla in_domain: **10 tienen la def REAL ya en el top-10, solo el gold estaba
 errado** (Mora→realmente 1207690/3 no 250604/5; Reposición, Proyecto, Bases de Licitación, Costo
 de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). Son **15 queries**.
-- **Baseline corregido: 226+15 = 241/279 = ~86%** (estimado; el sistema YA recupera bien, el gold
-  mentía). Las otras 14 = retrieval real (glosario-enterrado); 5 = acrónimos/formato raro.
+- **Baseline corregido estimado ~86%; CONFIRMADO con re-run sobre eval v2 = 234/279 = 84%**
+  (8 de 15 recuperables flipearon). Las otras 14 = retrieval real (glosario-enterrado); 5 = acrónimos.
 - `audit_golds.py` v2 agrega escaneo amplio (`Concepto:` / `se entiende por Concepto`) → **159
   also_gold** (antes 126). Eval `queries_balanced_v2_clean.jsonl` regenerado.
 - Nota: ~86% es límite superior estimado (cita_ok≈gold@10); confirmar exacto = re-generar sobre v2.
