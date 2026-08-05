@@ -33,18 +33,39 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 
 ---
 
-## PRIORIDAD RECOMENDADA (actualizada 2026-08 con resultados)
+## PRIORIDAD RECOMENDADA (actualizada 2026-08-05 — plan por FASES)
 
 **HECHO esta campaña:** [x] E0/E0b (eval real 84%, no 62%) · [-] M1 (ruido) · [-] G1 crudo (aristas
 vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
 
-**Diagnóstico del buscador (2026-08):** recall@10 = 89%. De 32 fallas: 13 ranking + 19 embedding-miss
-(6 glosario / 2 acrónimos / 5 coloquial). Plan para exprimir el buscador:
-1. [~] **glossary_inject** — arista determinista término→artículo (GraphRAG-1-salto). Ataca 6 glosario. EN CURSO.
+**Diagnóstico del buscador (2026-08):** recall@10 = 89%. De 45 fails in_domain: 13 ranking +
+19 embedding-miss (6 glosario / 2 acrónimos / 5 coloquial) + ~13 gen.
+
+### FASE A — exprimir el buscador (local/barato)
+1. [~] **glossary_inject** — arista determinista término→artículo (GraphRAG-1-salto). Ataca 6 glosario. EN CURSO (parcial 7-0).
 2. [ ] **M1 re-test pool=100 sobre eval limpio** — ataca 13 ranking (gold en vector@50-100). Gratis.
 3. [ ] **D2 siglas** — extractor determinista para 2 acrónimos (TON, DIP).
-4. [ ] los 5 coloquiales = muro semántico (curación/fine-tune, no ingeniería).
-5. [ ] **D1 vigencia** (scrape BCN) · **E1 RAGAS** · escala (usuario: todavía no).
+4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
+5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
+   Techo teórico si TODO pega: 84% → ~93% retrieval-side.
+
+### FASE B — gap de GEN (~13 fails no-retrieval)
+6. [ ] **E1 RAGAS faithfulness** — medir QUÉ falla en gen ANTES de tocar gen.
+7. [ ] **GEN6 fix runner** (trivial) + **GEN3 reordering** (barato) + **GEN2 self-consistency** si E1 lo justifica.
+
+### FASE C — table-stakes legal pre-producción
+8. [ ] **D1 vigencia** (scrape BCN) — proyecto de DATOS, paralelo, sin GPU. Único error GRAVE del sistema (citar norma derogada).
+9. [ ] **R1 metadata filtering** + **GEN5 fallback≠rechazo**.
+
+### FASE D — gate GraphRAG
+10. [ ] **G9 eval multi-hop** — gold relacional para DECIDIR si G5-G10 valen. Sin esto no se invierte en traversal.
+
+**Diferido:** FT1/FT2, escala, frontera (referencia).
+
+### ADMIN / limpieza
+- [ ] **E0c · golds rotos restantes** — Mora 250604/5, Reposición 29819/2-D (nombrados en CLAUDE.md).
+- [ ] **ADM1 · merge PR #12 a main** — todo vive en `adopt-winners`, nada en main. Cerrar cuando glossary_inject decida.
+- [ ] **C2-drop · drop tabla `fragmentos_inciso`** mixta (1248/7141 phi4) — recomendado, deuda vieja (ver C2).
 
 > **Bloqueante legal aparte (D1 vigencia):** citar norma derogada = error grave. Es gap de DATOS,
 > no de código. No bloquea M1-M4 pero es prioritario antes de producción real.
