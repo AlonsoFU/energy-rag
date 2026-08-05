@@ -42,8 +42,12 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
 19 embedding-miss (6 glosario / 2 acrónimos / 5 coloquial) + ~13 gen.
 
 ### FASE A — exprimir el buscador (local/barato)
-1. [~] **glossary_inject** — arista determinista término→artículo (GraphRAG-1-salto). Ataca 6 glosario. EN CURSO (parcial 7-0).
-2. [ ] **M1 re-test pool=100 sobre eval limpio** — ataca 13 ranking (gold en vector@50-100). Gratis.
+1. [x] **glossary_inject** — ADOPTADO 2026-08-05 (default ON). **233→249/279 (+16, 0 pérdidas),
+   McNemar p=0.0000.** cita_ok in_domain 83.5% → **89.2%**. Mayor WIN de retrieval de la campaña.
+   Ganó más de lo diagnosticado (atacaba 6 glosario, ganó 16): también arregló casos "ranking"
+   donde el gold estaba en el pool pero el reranker lo enterraba.
+2. [ ] **M1 re-test pool=100 sobre eval limpio** — ataca los ranking-fails restantes. Gratis.
+   ⚠️ re-diagnosticar primero: glossary_inject ya se comió parte de esos 13.
 3. [ ] **D2 siglas** — extractor determinista para 2 acrónimos (TON, DIP).
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
@@ -124,11 +128,15 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 - [-] **G1 · grafo concepto→artículo cableado + MEDIDO e2e** — PROBADO 2026-08: las aristas
   `define_termino` art-level están vacías/mal (0/45 fallas tienen arista correcta). G1 CRUDO muerto.
   RENACE bien como `glossary_inject` (abajo) — arista determinista desde `fragmentos_definicion`.
-- [~] **G1b / glossary_inject · inyección DETERMINISTA término→artículo** (EN CURSO 2026-08). En query
-  de definición, concepto matchea EXACTO un término de glosario → inyecta el artículo padre al top-k,
-  sin desplazar (a diferencia de def_fragments RRF). Es GraphRAG-1-salto bien hecho. Smoke ✅ (mete
-  Infracciones/Estado Deteriorado). Ataca 6 embedding-miss de glosario. Midiendo cita_ok pareado.
+- [x] **G1b / glossary_inject · inyección DETERMINISTA término→artículo** — **ADOPTADO 2026-08-05,
+  default ON.** En query de definición, concepto matchea EXACTO un término de glosario → inyecta el
+  artículo padre al top-k, sin desplazar (a diferencia de def_fragments RRF). Es GraphRAG-1-salto
+  bien hecho. **MEDIDO (McNemar pareado, balanced_v2_clean 279q): 233→249 (+16, 0 pérdidas),
+  p=0.0000.** Ganadas: Coordinador, Superintendencia, Ministerio, Cliente, Titular, Solicitante,
+  Proyecto, Actividad, Ajustes, Estado Deteriorado, familia Infracciones (gravísimas/graves/menos
+  graves/leves ×2 fraseos). Sortea el muro del reranker que RK1 NO pudo romper.
   Flag `glossary_inject`, `vectorstore.def_exact`, `retrieve._definition_concept`.
+  **LECCIÓN: contra un cross-encoder que ordena mal, la inyección determinista gana; otro reranker no.**
 - [ ] **G2 · seguir cross-references / remisiones** en retrieval (`follow_remissions.py` existe, no
   cableado; ej AVI art48 remite a LGSE 104/118). 🏗️.
 - [ ] **G3 · fix dedup `build_candidates`**: `define_termino` debe ganar a `cita` para el mismo
@@ -224,14 +232,15 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 
 ## Muros identificados (estado final 2026-08)
 - **Reranker prefiere FUNCIONAL sobre DEFINICIÓN** (Coordinador 0.9985 vs 0.981) — probado que
-  Qwen3-Reranker NO lo arregla (RK1 dead). Es muro de cross-encoders, se sortea con inyección
-  determinista (glossary_inject), no con otro reranker.
+  Qwen3-Reranker NO lo arregla (RK1 dead). Es muro de cross-encoders. **RESUELTO 2026-08-05 con
+  inyección determinista `glossary_inject` (+16, p=0.0000)**, no con otro reranker.
 - **E0b golds** — RESUELTO: 159 also_gold, eval real 84%. Los residuos son 5 coloquiales (muro
   semántico) + acrónimos (D2).
 
 ## HECHO / adoptado (esta campaña 3090)
 - Embedder qwen3-4B MRL-1024, alias_union, BGE-GPU, gate AND, gen qwen3:30b-a3b. Ver `handoff-2026-07-31.md`.
 - Método de eval robusto: balanced_v2 (339q) + McNemar pareado (ver `campaign-def-recall-2026-08.md`).
+- **`glossary_inject` (2026-08-05): +16, p=0.0000 → cita_ok in_domain 83.5%→89.2%.**
 
 ## REFERENCIA — SI ALGÚN DÍA ESCALO (NO es cola activa)
 Deep-research frontera verificado (2026-08-01), detalle: `docs/research-improvements-2026-07-31.md`
