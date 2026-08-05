@@ -201,11 +201,12 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 - **rechunk** (def_fragments+glossary_exclude, McNemar pareado limpio): **+7/−10, p=0.63 = FLAT**. No adoptar.
 - Infra def_fragments queda (flags OFF, 608 fragmentos): sirve, pero muro del reranker la limita.
 
-## Muros identificados (palancas reales pendientes)
-- **RK1 (reranker Qwen3):** el bge prefiere el artículo FUNCIONAL sobre la DEFINICIÓN (Coordinador
-  0.9985 vs 0.981). Es lo que limita def_fragments. Palanca prioritaria post-E0b.
-- **E0b (auditar golds):** balanced_v2 tiene golds rotos (mora 5°, vehículo 7°, Superintendencia 2 D)
-  → parte del 62% es ruido de eval. Barato, sin gen, limpia la métrica. HACER ANTES de RK1.
+## Muros identificados (estado final 2026-08)
+- **Reranker prefiere FUNCIONAL sobre DEFINICIÓN** (Coordinador 0.9985 vs 0.981) — probado que
+  Qwen3-Reranker NO lo arregla (RK1 dead). Es muro de cross-encoders, se sortea con inyección
+  determinista (glossary_inject), no con otro reranker.
+- **E0b golds** — RESUELTO: 159 also_gold, eval real 84%. Los residuos son 5 coloquiales (muro
+  semántico) + acrónimos (D2).
 
 ## HECHO / adoptado (esta campaña 3090)
 - Embedder qwen3-4B MRL-1024, alias_union, BGE-GPU, gate AND, gen qwen3:30b-a3b. Ver `handoff-2026-07-31.md`.
@@ -220,8 +221,8 @@ sección "vs frontera". Resumen con números:
 - **Gen frontera NO mueve cita_ok**: escalar LLM no da cita (closed-book Claude Sonnet 4.5 6.8/100,
   Llama 70B≈8B). Retrieval > generador (2510.06999, 2605.14503 peer-reviewed). Rompería "sin API paga"
   por ganancia marginal. Solo diagnóstico de techo, nunca producción.
-- **Único upgrade de modelo con retorno real = RK1 reranker** (open, cabe en 3090) → ya está en cola
-  activa arriba, NO es "escalar".
+- ~~RK1 reranker~~ — PROBADO 2026-08: Δ+2 ruido, 17× lento. Ningún upgrade de modelo pendiente
+  con retorno real.
 - Cuello de escala real = **RAM host 14GB** (HNSW en RAM) + pgvector sin multi-vector indexado
   (VectorChord), **NO la GPU**. LLM denso 70B+ (>24GB) = upside marginal en cita_ok.
 - `ROADMAP_ESCALABILIDAD.txt` (abr-26) mayormente obsoleto (pgvector ya en prod).
