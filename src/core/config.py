@@ -227,6 +227,13 @@ class Settings(BaseSettings):
     # el def-fragment los REEMPLACE en vez de competir/diluir. Rechunk = def_fragments + glossary_exclude.
     glossary_exclude: bool = False
 
+    # glossary_inject (flag OFF): inyección DETERMINISTA término-glosario→artículo. En query de
+    # definición, si el concepto matchea EXACTO un término de `fragmentos_definicion`, garantiza el
+    # artículo padre en el top-k (lo inyecta al tope si falta). Alta precisión (exact-match) → NO
+    # desplaza como def_fragments RRF. Ataca los embedding-miss de términos-glosario (Infracciones,
+    # Estado Deteriorado, Informe Definitivo). Es G1/GraphRAG-1-salto bien hecho (como alias_map).
+    glossary_inject: bool = False
+
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
     # TÉRMINOS técnico-legales exactos de una query coloquial (corto, sin alucinar leyes)

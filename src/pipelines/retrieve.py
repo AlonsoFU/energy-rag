@@ -111,6 +111,27 @@ def _is_definition_query(text: str) -> bool:
     return bool(_DEF_INTENT.search(text or ""))
 
 
+_DEF_PREFIX = _re.compile(
+    r'^\s*[¿"\']*\s*(qu[eé]\s+es(\s+el|\s+la|\s+un|\s+una)?|qu[eé]\s+son|qu[eé]\s+significa|'
+    r'definici[oó]n\s+de|qu[eé]\s+se\s+entiende\s+por|concepto\s+de|significado\s+de|'
+    r'a\s+qu[eé]\s+se\s+le\s+dice)\s+', _re.IGNORECASE)
+
+
+def _definition_concept(text: str) -> str | None:
+    """glossary_inject: extrae el CONCEPTO de una query de definición ('qué es X' → 'X'),
+    o None si no es query de definición. Quita comillas/signos."""
+    if not _is_definition_query(text):
+        return None
+    c = _DEF_PREFIX.sub("", (text or "").strip())
+    c = c.strip().strip('¿?".\'').strip()
+    return c or None
+
+
+def _normalize_art_g(a):
+    from src.pipelines.grounding import _normalize_art as _na
+    return _na(a)
+
+
 def _vector_4b_search(text, store, top_k):
     """Embebe `text` con 4B (Ollama) y busca; MRL-1024 (HNSW) o 2560 (seq-scan). [] si falla."""
     from src.core import config as _c
@@ -554,6 +575,22 @@ class SimpleRetriever:
         _beta = getattr(_cfg.settings, "authority_rank_boost", 0.0)
         if _beta:
             fused = authority_boost(fused, _beta)
+        # 6c. glossary_inject (determinista): en query de DEFINICIÓN, si el concepto matchea
+        # EXACTO un término de glosario, garantiza el artículo padre en el pool (inyecta al tope
+        # si falta). Alta precisión (exact-match) → no desplaza como def_fragments RRF. Ataca los
+        # embedding-miss de términos-glosario (Infracciones, Estado Deteriorado, etc.).
+        if getattr(_cfg.settings, "glossary_inject", False):
+            _c = _definition_concept(query)
+            if _c:
+                inj = self.store.def_exact(_c)
+                if inj:
+                    key = (str(inj["id_norma"]), _normalize_art_g(str(inj["articulo_numero"])))
+                    present = any((str(d.get("id_norma")), _normalize_art_g(str(d.get("articulo_numero")))) == key
+                                  for d in fused[:top_k])
+                    if not present:
+                        top_score = fused[0]["score"] if fused else 1.0
+                        inj["score"] = float(top_score) + 0.01
+                        fused = [inj] + fused
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
         out = expanded[:top_k]

@@ -178,6 +178,23 @@ class PostgresStore:
             """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()
 
+    def def_exact(self, concepto: str) -> dict | None:
+        """glossary_inject: match EXACTO concepto→def-fragment (case-insensitive). Devuelve un
+        doc del artículo padre (parent-doc) o None. Determinista, alta precisión (no como el RRF
+        de def_fragments que desplazaba). id con offset 9e8 para no colisionar."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.tables WHERE table_name='fragmentos_definicion'")
+            if not cur.fetchone():
+                return None
+            cur.execute("""
+                SELECT (900000000 + fd.id) AS id, fd.articulo_id, fd.texto AS text,
+                       fd.texto AS contextual_text, a.id_norma, a.numero AS articulo_numero
+                FROM fragmentos_definicion fd JOIN articulos a ON a.id = fd.articulo_id
+                WHERE lower(fd.termino) = lower(%s)
+                ORDER BY length(fd.texto) DESC LIMIT 1
+            """, (concepto,))
+            return cur.fetchone()
+
     def search_vector_def_4b_1024(self, query_embedding: list[float], top_k: int = 50) -> list[dict]:
         """M2 (def_fragments): KNN sobre fragmentos_definicion (1 def = 1 fragmento, MRL-1024).
         Mapea al ARTICULO PADRE (parent-doc) para que la cita sea [Art N de NORMA]. El text

@@ -33,20 +33,18 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 
 ---
 
-## PRIORIDAD RECOMENDADA (orden sugerido, todo cabe en 3090)
+## PRIORIDAD RECOMENDADA (actualizada 2026-08 con resultados)
 
-0. **E0 · robustez de eval (BLOQUEANTE, hacer PRIMERO)** — sin esto los deltas chicos (1-3) no se
-   pueden medir. E0a (barato): adoptar `balanced_v2` 339q como set primario + McNemar pareado + gen
-   2×. E0b (ongoing): expandir con más pares coloquiales/dev REALES y variados, gold de la ley.
-1. **M1** rerank 50-100 candidatos (gratis, 1 param) — sube techo recall.
-2. **G1** grafo concepto→artículo cableado + medido (infra YA existe) — ataca 4 fallas retrieval quirúrgicamente.
-3. **M2** 1def=1frag + parent-doc (art 225).
-4. **E1** métrica RAGAS/faithfulness — para medir bien antes de seguir tuneando gen.
-5. **RK1** upgrade reranker → Qwen3-Reranker-4B/8B (gap ~14 pts, open, cabe en 3090) — el único
-   upgrade de MODELO con retorno real según research frontera.
-6. **M3** STARA (si M2 no cierra art 225).
-7. **M4** step-back rewriting (residuos coloquiales).
-8. Resto por tema abajo, según resultados.
+**HECHO esta campaña:** [x] E0/E0b (eval real 84%, no 62%) · [-] M1 (ruido) · [-] G1 crudo (aristas
+vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
+
+**Diagnóstico del buscador (2026-08):** recall@10 = 89%. De 32 fallas: 13 ranking + 19 embedding-miss
+(6 glosario / 2 acrónimos / 5 coloquial). Plan para exprimir el buscador:
+1. [~] **glossary_inject** — arista determinista término→artículo (GraphRAG-1-salto). Ataca 6 glosario. EN CURSO.
+2. [ ] **M1 re-test pool=100 sobre eval limpio** — ataca 13 ranking (gold en vector@50-100). Gratis.
+3. [ ] **D2 siglas** — extractor determinista para 2 acrónimos (TON, DIP).
+4. [ ] los 5 coloquiales = muro semántico (curación/fine-tune, no ingeniería).
+5. [ ] **D1 vigencia** (scrape BCN) · **E1 RAGAS** · escala (usuario: todavía no).
 
 > **Bloqueante legal aparte (D1 vigencia):** citar norma derogada = error grave. Es gap de DATOS,
 > no de código. No bloquea M1-M4 pero es prioritario antes de producción real.
@@ -55,8 +53,9 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 
 ## RETRIEVAL
 
-- [ ] **M1 · rerank 50-100 candidatos** (no top-10). 1 param (`retrieval_pool_depth` al rerank).
-  GPU ✅ trivial. Research 3-0. Ataca art 225 + residuos coloquiales bajo rank 10. **HACER YA.**
+- [-] **M1 · rerank 50-100 candidatos** (no top-10). 1 param (`retrieval_pool_depth` al rerank).
+  PROBADO 2026-08: +3 McNemar p=0.25 = RUIDO (no adoptado). El gold no está en rank 50-100.
+  NOTA: diagnóstico posterior mostró 13 ranking-fails (gold en vector@50-100) → re-probar con eval limpio.
 - [ ] **R1 · metadata filtering en `search_vector`** (WHERE por norma/tipo/fecha). Hoy recupera del
   corpus entero, sin filtro. Table-stakes a escala. `roadmap-gap-analysis`. ❌ ausente.
 - [ ] **R2 · authority_rank_boost** (LEY>DECRETO>RES en fusión). Flag existe, medido FLAT (corpus
@@ -70,18 +69,18 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
   redundantes de Complex). ⏳ decisión pendiente. `architecture-status 2026-06-16`.
 - [ ] **R7 · score-normalization fusion** (vs RRF+length-weight actual). ⏳. `roadmap-gap-analysis`.
 - [ ] **R8 · BM25 weight tuning** (`_length_weights` retrieve.py:131). ⏳ barato.
-- [ ] **RK1 · upgrade reranker bge-reranker-v2-m3 → Qwen3-Reranker-4B/8B** — research frontera:
-  gap **~14 pts** MMTEB-R (bge 58.36 vs Qwen3-Reranker-4B 72.74 / 8B 72.94). **OPEN, cabe en 3090,
-  NO frontera.** El cambio de MODELO de mayor retorno teórico sin probar. ⚠️ benchmark self-report
-  Qwen, no legal-español → medir e2e cita_ok. `research-improvements-2026-07-31 (vs frontera)`.
+- [-] **RK1 · upgrade reranker bge-reranker-v2-m3 → Qwen3-Reranker-4B/8B** — PROBADO 2026-08
+  (screen recall@10): BGE 237 vs Qwen3 239 = Δ+2 ruido, y Qwen3 17× más lento. El reranker NO es
+  el muro (ambos ~85% gold@10). NO adoptar. Clase `Qwen3Reranker` queda (RERANKER_KIND=qwen3, OOM-safe).
 - [ ] **R9 (dif) · MMR/diversity, self-query (NL→filtros), SPLADE, RAPTOR, CRAG routing** (flag OFF).
   ❌/🔬 estándar-avanzado, diferido.
 
 ## CHUNKING
 
-- [ ] **M2 · 1 def = 1 fragmento + parent-doc** para art 225. Preproc, sin VRAM. Ataca 4/8 dev.
-  ⚠️ ojo: **parent-doc genérico YA se probó y NO ganó** (small-to-big 64 vs prod 67) — esta versión
-  es NARROW (solo art 225), no el genérico. `chunking-rules §6b`.
+- [-] **M2 · 1 def = 1 fragmento + parent-doc** — PROBADO 2026-08 (`build_def_fragments.py`, 62
+  glosarios→608 defs, tabla `fragmentos_definicion`). Inyección RRF (`def_fragments`): −10 (ruido gen).
+  Rechunk limpio (`glossary_exclude`, McNemar pareado): +7/−10 p=0.63 FLAT. En dev: +1 p=1.0 flat.
+  MUERTO — el RRF desplaza. Infra queda (flags OFF). El fix bueno = `glossary_inject` determinista (ver abajo).
 - [ ] **C1 · Contextual Retrieval REAL** — resumen LLM por-chunk del artículo, prepend antes de
   embeder (~3900 chunks, overnight). Hoy `contextual_text` = texto+preámbulo, NO resumen LLM real.
   Nombrado "el próximo recall lift". Relacionado a SAC pero distinto (resumen de ART vs de NORMA).
@@ -101,10 +100,14 @@ Estado base: aristas define_termino (222) ✅; norma→norma 0; concepto→conce
 query-time; sin community detection; sin router. `graph_boost` existe pero **subalimentado**
 (vinculaciones BCN vacías en datos).
 
-- [ ] **G1 · grafo concepto→artículo cableado + MEDIDO e2e** — infra existe (`graph_builder.py`,
-  `follow_remissions.py`, `glossary_define_edges.py`), NUNCA medida e2e. Ataca las 4 fallas retrieval
-  quirúrgicamente (Panel→212/208, tope-ganancia→118, vida-útil→104, planif→87), como el alias, sin
-  distractores. 🏗️ **"siguiente inmediato" — el ítem previo de MÁS valor sin hacer.** `roadmap-gap-analysis #7`.
+- [-] **G1 · grafo concepto→artículo cableado + MEDIDO e2e** — PROBADO 2026-08: las aristas
+  `define_termino` art-level están vacías/mal (0/45 fallas tienen arista correcta). G1 CRUDO muerto.
+  RENACE bien como `glossary_inject` (abajo) — arista determinista desde `fragmentos_definicion`.
+- [~] **G1b / glossary_inject · inyección DETERMINISTA término→artículo** (EN CURSO 2026-08). En query
+  de definición, concepto matchea EXACTO un término de glosario → inyecta el artículo padre al top-k,
+  sin desplazar (a diferencia de def_fragments RRF). Es GraphRAG-1-salto bien hecho. Smoke ✅ (mete
+  Infracciones/Estado Deteriorado). Ataca 6 embedding-miss de glosario. Midiendo cita_ok pareado.
+  Flag `glossary_inject`, `vectorstore.def_exact`, `retrieve._definition_concept`.
 - [ ] **G2 · seguir cross-references / remisiones** en retrieval (`follow_remissions.py` existe, no
   cableado; ej AVI art48 remite a LGSE 104/118). 🏗️.
 - [ ] **G3 · fix dedup `build_candidates`**: `define_termino` debe ganar a `cita` para el mismo
@@ -162,11 +165,10 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 
 ## EVAL / OBSERVABILIDAD / INFRA
 
-- [ ] **E0 · robustez de eval (BLOQUEANTE)** — los sets chicos (39/44/18) no detectan Δ≤2 (ruido
-  ±2=1σ, LLM flickea ±1). **E0a barato:** usar `balanced_v2` (339q) como primario + McNemar pareado
-  (≥5-6 flips netos para significancia) + gen 2×. **E0b ongoing:** expandir con más queries
-  coloquiales/dev REALES y variadas (más ámbitos, más paráfrasis), gold leído de la ley (NO derivar
-  del sistema). Ver "ROBUSTEZ ESTADÍSTICA" arriba + D6.
+- [x] **E0 · robustez de eval (BLOQUEANTE)** — HECHO/ADOPTADO 2026-08. `balanced_v2` (339q) primario
+  + McNemar pareado (`exp_e0_baseline.py` resumible). Reveló que el eval MENTÍA: cita_ok in_domain
+  real = **84%** (234/279), no 62%. E0b (`audit_golds.py`): 159 also_gold → `queries_balanced_v2_clean.jsonl`.
+  El +22 fue 100% limpieza de eval. dev/coloquial/holdout NO estaban subestimados (solo balanced_v2).
 - [ ] **E1 · RAGAS/DeepEval faithfulness + context_precision** — hoy solo cita_ok casero, NO
   faithfulness estándar. "La medición más accionable ahora". ❌. `roadmap-gap-analysis #3`.
 - [ ] **E2 (dif) · observabilidad** (Langfuse/Phoenix), feedback loop, human-in-the-loop gate,
