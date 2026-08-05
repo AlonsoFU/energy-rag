@@ -60,7 +60,8 @@ def main():
     if rp.exists():
         try:
             for c in json.load(open(rp))["detail"]:
-                if "ok_on" in c: prev[c["q"]] = (c["ok_off"], c["ok_on"])
+                if c.get("ok_on") is not None and c.get("ok_off") is not None:
+                    prev[c["query"]] = (c["ok_off"], c["ok_on"])
             print(f"[RESUME] {len(prev)} ya genradas", flush=True)
         except Exception: pass
 
@@ -85,19 +86,21 @@ def main():
         return False
 
     print("=== FASE B: gen pareada (cambiados) ===", flush=True)
-    done = 0
-    for q in rows:
+    done = 0; nq = 0
+    for i, q in enumerate(rows):
         gs = golds(q)
         if q["query"] in prev:
             q["ok_off"], q["ok_on"] = prev[q["query"]]
-        elif q["_chg"]:
+            continue
+        if q["_chg"]:
             q["ok_off"] = gen(q["query"], q["_off"], gs); q["ok_on"] = gen(q["query"], q["_on"], gs); done += 1
-            if done % 5 == 0:
-                (OUTDIR / "result.json").write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
-                print(f"  gen {done}/{changed}", flush=True)
         else:
             # top-10 identico -> gen 1x (mismo resultado ambos)
             ok = gen(q["query"], q["_off"], gs); q["ok_off"] = q["ok_on"] = ok
+        nq += 1
+        if nq % 5 == 0:
+            (OUTDIR / "result.json").write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
+            print(f"  gen nuevas={nq} (chg {done}/{changed})  [{i+1}/{len(rows)}]", flush=True)
     (OUTDIR / "result.json").write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
 
     off_t = sum(q["ok_off"] for q in rows); on_t = sum(q["ok_on"] for q in rows)
