@@ -108,3 +108,15 @@ de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). 
 1. Terminar de limpiar golds rotos (Mora, Reposición, letra-format) → techo real >81%.
 2. Los 11 GEN-fails: self-consistency / prompt (margen chico).
 3. Glosario-enterrado: def_fragments ayuda pero net-flat → no adoptar sin gating más fino.
+
+## Cierre #1/#2 (2026-08, audit otros evals + vigencia)
+- **def_fragments en DEV** (`scripts/exp_deffrag_dev.py`): OFF 36/44 → ON 37/44 (gano 1 "seguridad
+  de servicio", perdió 0), McNemar p=1.0 = FLAT. Ni en glosario puro (dev = cluster art-225 LGSE)
+  convierte. El art-225 ya entra al top-10 (no es recall); es GEN y la def focalizada no ayuda a
+  citar confiable. **def_fragments MUERTO en todos lados.**
+- **#1 audit:** dev/coloquial/holdout NO subestimados como balanced_v2 (ya traen also_gold; art-225
+  se recupera bien). El −22 era específico de los golds auto-generados multi-norma de balanced_v2.
+- **#2 vigencia (D1):** `normas.estado` = 93/95 DESCONOCIDO/null → gap de datos TOTAL. Requiere
+  scrape BCN (proyecto de datos, no experimento). Alto valor legal, scope grande.
+- **FRENTE DEFINICIONES/RETRIEVAL DEFINITIVAMENTE CERRADO.** Sistema real ~84%, sano. Próximo
+  valor real = vigencia (scrape BCN) o escala, NO más ingeniería de retrieval/gen.
