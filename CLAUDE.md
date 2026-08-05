@@ -33,6 +33,11 @@ TODOS negativos/flat (medidos con McNemar pareado). La mejor mejora de la campa�
 métrica** (+19). cita_ok(81%)≈gold@10(85%) → casi no hay gap de gen. Antes de más experimentos:
 LIMPIAR EL EVAL (quedan golds rotos: Mora 250604/5, Reposición 29819/2 D). Detalle: `docs/campaign-def-recall-2026-08.md`.
 
+**REGLA — MARCAR EL BACKLOG (obligatorio):** al terminar CUALQUIER experimento, marcar su checkbox
+en `docs/backlog-mejoras.md` en el mismo commit: `[x]` adoptado / `[-]` probado-descartado / `[~]`
+en curso, con el Δ medido (ej "+3 McNemar p=0.25 ruido"). Si no está en el backlog, agregarlo. NUNCA
+dejar un experimento corrido sin su check — el backlog es la única fuente de "qué falta / qué ya se probó".
+
 **Backlog UNIFICADO de mejoras:** cola activa única en `docs/backlog-mejoras.md` — consolida el
 research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el trabajo futuro previo
 disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
