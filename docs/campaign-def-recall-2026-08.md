@@ -120,3 +120,54 @@ de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). 
   scrape BCN (proyecto de datos, no experimento). Alto valor legal, scope grande.
 - **FRENTE DEFINICIONES/RETRIEVAL DEFINITIVAMENTE CERRADO.** Sistema real ~84%, sano. Próximo
   valor real = vigencia (scrape BCN) o escala, NO más ingeniería de retrieval/gen.
+
+---
+
+## ⚠️ CORRECCIÓN (2026-08-05) — el frente NO estaba cerrado: `glossary_inject` +16
+
+Todo lo de arriba concluía "FRENTE RETRIEVAL DEFINITIVAMENTE CERRADO, sistema ~84%, próximo valor
+= vigencia o escala". **Eso resultó FALSO.** Un experimento más lo movió 5.7 puntos.
+
+### Resultado (`scripts/exp_glossary_inject.py`, McNemar pareado, balanced_v2_clean in_domain 279q)
+```
+OFF 233/279 (83.5%)  ->  ON 249/279 (89.2%)
+gano 16, perdio 0
+McNemar p=0.0000  (SIGNIFICATIVO)
+```
+**16 ganadas, CERO pérdidas.** Mayor WIN de retrieval de toda la campaña (embedder 4B fue +3,
+gate AND +4). ADOPTADO: flag `glossary_inject` default ON (`src/core/config.py`).
+
+Ganadas: Coordinador · Superintendencia · Ministerio · Cliente · Titular · Solicitante · Proyecto ·
+Actividad · Ajustes · Estado Deteriorado · Infracciones {gravísimas, graves ×2, menos graves,
+leves ×2 fraseos}.
+
+### Qué es
+Arista determinista término-glosario→artículo padre. En query de definición, si el concepto matchea
+EXACTO un término de `fragmentos_definicion`, se garantiza el artículo padre en el top-k (inyectado
+al tope si falta, sin desplazar nada más). Es GraphRAG-1-salto bien hecho, mismo patrón que
+`alias_map`. Piezas: `vectorstore.def_exact`, `retrieve._definition_concept`, bloque de inyección
+en `SimpleRetriever.retrieve` paso 6c.
+
+### Por qué funcionó donde def_fragments y RK1 fallaron
+- **def_fragments (RRF)** competía por score y DESPLAZABA buenos resultados → net flat.
+- **RK1 (Qwen3-Reranker)** no arregla el sesgo: ambos cross-encoders prefieren el artículo FUNCIONAL
+  sobre el DEFINITORIO (Coordinador: funcional 258171/212-1 = 0.9985 vs def 250604/13 = 0.981).
+- **glossary_inject** no pelea con el score: pasa por al lado con un match exacto de estructura.
+
+### Lecciones (las importantes)
+1. **Contra un ordenador sesgado, inyección determinista > mejor ordenador.** El muro del reranker
+   era real, pero la salida no era otro modelo — era usar la estructura de datos.
+2. **"Frente agotado" era una conclusión sobre los experimentos hechos, no sobre el problema.**
+   5 negativos seguidos hicieron parecer que no quedaba nada; faltaba el que atacaba la causa.
+3. **El diagnóstico subestimó el alcance:** se predijeron 6 fallas de glosario, ganó 16. También
+   arregló casos clasificados como "ranking" (gold en el pool pero enterrado por el reranker) →
+   los buckets del diagnóstico no eran independientes.
+4. **Bug de infra encontrado:** el resume del script leía `c["q"]` en vez de `c["query"]`, con el
+   KeyError tragado por `except: pass` → regeneraba las 279 desde cero en silencio. Fix en `a86a594`.
+   *Un `except: pass` sobre lógica de resume esconde horas de cómputo perdido.*
+
+### Estado real tras esto
+- cita_ok in_domain: **89.2%** (249/279). Rechazo off-domain/off-corpus: 100%.
+- Residual (30 fallas): acrónimos (D2), ~5 coloquiales (muro semántico), gen-fails, golds rotos (E0c).
+- Siguiente en cola: `docs/backlog-mejoras.md` FASE A item 2 (M1 re-test pool=100, **re-diagnosticar
+  primero** — glossary_inject ya se comió parte de los 13 ranking-fails).

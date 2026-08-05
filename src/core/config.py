@@ -227,12 +227,15 @@ class Settings(BaseSettings):
     # el def-fragment los REEMPLACE en vez de competir/diluir. Rechunk = def_fragments + glossary_exclude.
     glossary_exclude: bool = False
 
-    # glossary_inject (flag OFF): inyección DETERMINISTA término-glosario→artículo. En query de
-    # definición, si el concepto matchea EXACTO un término de `fragmentos_definicion`, garantiza el
-    # artículo padre en el top-k (lo inyecta al tope si falta). Alta precisión (exact-match) → NO
-    # desplaza como def_fragments RRF. Ataca los embedding-miss de términos-glosario (Infracciones,
-    # Estado Deteriorado, Informe Definitivo). Es G1/GraphRAG-1-salto bien hecho (como alias_map).
-    glossary_inject: bool = False
+    # glossary_inject (ADOPTADO 2026-08-05, default ON): inyección DETERMINISTA término-glosario→
+    # artículo. En query de definición, si el concepto matchea EXACTO un término de
+    # `fragmentos_definicion`, garantiza el artículo padre en el top-k (lo inyecta al tope si falta).
+    # Alta precisión (exact-match) → NO desplaza como def_fragments RRF. Es G1/GraphRAG-1-salto bien
+    # hecho (como alias_map).
+    # MEDIDO (McNemar pareado, balanced_v2_clean in_domain 279q): 233 -> 249 (+16, 0 pérdidas),
+    # p=0.0000. Mayor WIN de retrieval de la campaña. Sortea el muro del reranker (prefiere artículo
+    # FUNCIONAL sobre DEFINICIÓN) que RK1/Qwen3-Reranker NO pudo romper.
+    glossary_inject: bool = True
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los

@@ -11,6 +11,9 @@ ver `docs/architecture-status.md`.)
 **Config vigente (mejor medida, retrieval por flags default-OFF + gen en `.env`):**
 - embedder: `qwen3-embedding:4b` truncado MRL a 1024-dim (`embed_4b_dense`+`embed_4b_dim=1024`), col `embedding_4b_1024` (HNSW).
 - `alias_union` (flag): vocabulario controlado coloquial→legal query-side (`src/pipelines/alias_map.py`).
+- **`glossary_inject` (default ON desde 2026-08-05)**: inyección determinista término-glosario→artículo
+  padre en queries de definición (`vectorstore.def_exact` + `retrieve._definition_concept`).
+  **+16 queries, 0 pérdidas, McNemar p=0.0000** → cita_ok in_domain 83.5%→**89.2%**.
 - reranker BGE en GPU (`BGE_DEVICE=cuda`), gate off-topic `AND` (léxico+BGE).
 - gen LLM: **`qwen3:30b-a3b`** (`.env` LLM_DEFAULT) — ganó bake-off de 13 modelos.
 
@@ -25,13 +28,19 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real es ~84% (confirmado eval v2, 234/279) (eval limpio
-con `also_gold`, `data/eval/queries_balanced_v2_clean.jsonl`), NO el 62% que daba el eval sucio.
-El "62%" era **injusticia de eval** (rechazaba definiciones alternativas válidas). Frente
-retrieval/reranker AGOTADO: M1 pool, G1 grafo, M2 def_fragments, rechunk, RK1 Qwen3-Reranker →
-TODOS negativos/flat (medidos con McNemar pareado). La mejor mejora de la campaña fue **arreglar la
-métrica** (+19). cita_ok(81%)≈gold@10(85%) → casi no hay gap de gen. Antes de más experimentos:
-LIMPIAR EL EVAL (quedan golds rotos: Mora 250604/5, Reposición 29819/2 D). Detalle: `docs/campaign-def-recall-2026-08.md`.
+**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real era ~84% (eval limpio con
+`also_gold`, `data/eval/queries_balanced_v2_clean.jsonl`), NO el 62% que daba el eval sucio. El "62%"
+era **injusticia de eval** (rechazaba definiciones alternativas válidas). **Con `glossary_inject`
+adoptado (2026-08-05) el in_domain es 249/279 = 89.2%.**
+Probados y NEGATIVOS/flat (McNemar pareado): M1 pool, G1 grafo crudo, M2 def_fragments, rechunk,
+RK1 Qwen3-Reranker. Lo que SÍ movió: arreglar la métrica (+19) y `glossary_inject` (+16).
+Quedan golds rotos por limpiar: Mora 250604/5, Reposición 29819/2 D (item E0c del backlog).
+Detalle: `docs/campaign-def-recall-2026-08.md`.
+
+**LECCIÓN TRANSVERSAL (2026-08):** cuando el ordenador (cross-encoder) prefiere sistemáticamente el
+tipo de documento equivocado, **cambiar de reranker NO sirve** (RK1: Δ+2 ruido) — se sortea con
+**inyección determinista** basada en estructura de datos (`glossary_inject` +16, `alias_map` +3).
+Ganancias de DATOS/ESTRUCTURA, no swaps de modelo.
 
 **REGLA — MARCAR EL BACKLOG (obligatorio):** al terminar CUALQUIER experimento, marcar su checkbox
 en `docs/backlog-mejoras.md` en el mismo commit: `[x]` adoptado / `[-]` probado-descartado / `[~]`
@@ -43,10 +52,9 @@ research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el traba
 disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
 medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza la config vigente de
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
-adopta cita_ok e2e.** Orden sugerido: **E0 robustez de eval (BLOQUEANTE — sets 39/44/18 no detectan Δ≤2; usar
-balanced_v2 339q + McNemar pareado + gen 2×)** → M1 rerank 50-100 (gratis) → G1 grafo concepto→art
-cableado (infra ya existe, ataca 4 fallas) → M2 1def=1frag → E1 métrica RAGAS → RK1 upgrade reranker
-Qwen3-Reranker (gap ~14pts, open, cabe en 3090) → M3 STARA → M4 step-back.
+adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/backlog-mejoras.md` §PRIORIDAD**
+(A exprimir buscador · B gap de gen vía RAGAS · C table-stakes legal · D gate GraphRAG).
+Ya cerrados de ahí: E0/E0b ✅, glossary_inject ✅(+16); M1/G1/M2/rechunk/RK1 descartados.
 Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
 HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
 datos/estructura, no swaps de modelo. Frontera solo como REFERENCIA "si escalo", no cola activa.
