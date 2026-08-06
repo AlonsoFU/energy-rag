@@ -171,3 +171,64 @@ en `SimpleRetriever.retrieve` paso 6c.
 - Residual (30 fallas): acrónimos (D2), ~5 coloquiales (muro semántico), gen-fails, golds rotos (E0c).
 - Siguiente en cola: `docs/backlog-mejoras.md` FASE A item 2 (M1 re-test pool=100, **re-diagnosticar
   primero** — glossary_inject ya se comió parte de los 13 ranking-fails).
+
+---
+
+## M1 pool 50→100: MUERTO DEFINITIVO (2026-08-06) + 2 bugs de generación encontrados
+
+### M1 (`scripts/exp_m1_paired.py`, pareado, glossary_inject ON)
+```
+OFF 252/279  ->  ON 252/279   (gano 0, perdio 0)
+McNemar p=1.0000  (flat)   279/279 pares, 0 errores
+```
+41 top-10 cambiaron con pool=100 y **ninguno convirtió**. Cero flips en 279 queries no es "poca
+señal": es plano. El gold NO está escondido en rank 50-100. No re-probar sin hipótesis nueva.
+
+Se escribió script nuevo en vez de usar `exp_m1_pooldepth.py`: ese compara contra
+`e0_baseline/result.json` (pool=50, glossary_inject OFF) — comparar contra un baseline obsoleto
+mezclaría el efecto del pool con el del inject y el flicker del LLM (el error que contaminó M2).
+
+### Bug 1 — overflow de num_ctx → deadlock → FALSOS NEGATIVOS en el eval
+Prompts de queries "Costo de Falla": 48-50k chars ≈ 15.0-15.6k tokens. Con `max_tokens=2000` de
+salida da ~17.6k > `num_ctx=16384` → el sampler se cuelga hasta el timeout de litellm
+(300s × 3 reintentos = **900s perdidos por query**).
+Lo grave no es el tiempo: `gen()` devolvía `False` al agotar reintentos, así que **un timeout se
+anotaba como `cita_ok=False`**. Mismo patrón que el eval sucio: el sistema medía mal, no fallaba.
+Fix: `ollama_num_ctx=32768` (VRAM verificada 3090: 21510/24576 MiB) + `gen()` devuelve `(ok, err)`
+y los `err` se EXCLUYEN del McNemar.
+
+### Bug 2 — sin cap de salida, el generador se desboca (lo destapó el fix del bug 1)
+`llm.py` DESCARTA `max_tokens` para ollama (`kwargs.pop`), así que no había `num_predict`: ollama
+genera hasta LLENAR el contexto. Con `num_ctx=16384` el tope quedaba en ~1.3k tokens **por
+accidente**; al subirlo a 32768 la salida quedó suelta hasta ~17k tokens → 436s → timeout.
+*El fix del bug 1 causó el bug 2.*
+
+Causa de fondo (peor que el timeout): con `think=False` el modelo razona en el CUERPO de la
+respuesta y entra en **loop de deliberación**. Medido en "qué es Superintendencia":
+```
+eval_count=2000  done_reason=length   <- seguia deliberando al cortarse
+"...Pero necesito verificar si hay una definicion mas especifica para el contexto electrico..."
+28 citas extraidas, mayoria DUPLICADAS
+```
+Fix aplicado: `ollama_num_predict=2000`. Verificado que el bug viejo documentado en `llm.py`
+("num_predict trunca la salida") NO se reproduce en esta versión: 2000 tokens limpios con ctx 32768.
+
+### Consecuencias (más importantes que M1)
+1. **El baseline real subió 249 → 252/279 (89.2% → 90.3%)**: 3 queries que se colgaban y se
+   contaban `False` ahora generan. El sistema estaba mejor de lo que decía la métrica.
+2. **Riesgo de métrica NUEVO (item E3):** `cita_ok` da True si CUALQUIER cita pega. Una respuesta
+   que dispara 28 citas acierta por VOLUMEN, no por precisión. Hay que auditar cuántos de los 252
+   aciertos vienen de respuestas con muchas citas. *La métrica puede estar inflando.*
+3. **GEN8:** el cap evita el timeout pero la respuesta sigue siendo un monólogo truncado. El
+   generador no converge — arreglo real es de prompt/formato, no de tope de tokens.
+
+### Lección
+Perseguir un cuelgue de infraestructura rindió más que el experimento que lo destapó. Y un fix
+puede destapar el bug siguiente: subir el techo (num_ctx) sin acotar el contenido (num_predict)
+movió el problema en vez de resolverlo.
+
+### Caveat de honestidad sobre este run
+El run abarcó cambios de config a mitad de camino (idx 0-229 con ctx=16384, 230+ con 32768).
+El diseño **pareado** protege el veredicto —ambos brazos ven la misma config en cada query— pero
+los totales ABSOLUTOS de esta corrida no son comparables con otras. El 252/279 se debe re-confirmar
+en una corrida limpia con la config final (ctx 32768 + num_predict 2000).
