@@ -95,6 +95,16 @@ class LiteLLMProvider:
             # Contextual enrichment). At 8192 the prompt overflows and the
             # schema-constrained sampler deadlocks (deterministic hang).
             kwargs["num_ctx"] = getattr(_config.settings, "ollama_num_ctx", 16384)
+            # CAP DE SALIDA (2026-08-06). Sin esto ollama genera hasta LLENAR num_ctx.
+            # Con num_ctx=16384 el tope quedaba en ~1.3k tokens por accidente; al subir
+            # num_ctx a 32768 la salida quedo suelta hasta ~17k tokens -> >300s -> timeout.
+            # Causa de fondo: con think=False el modelo razona en el CUERPO de la respuesta
+            # y entra en loop de deliberacion ("pero necesito verificar si...") sin converger.
+            # Medido en 'que es Superintendencia': 2000 tokens y seguia deliberando,
+            # rociando 28 citas (mayoria duplicadas).
+            # El viejo bug del comentario de arriba (num_predict trunca) NO se reproduce en
+            # esta version: num_predict=2000 + num_ctx=32768 genero los 2000 sin truncar.
+            kwargs["num_predict"] = getattr(_config.settings, "ollama_num_predict", 2000)
             # Disable reasoning/thinking mode for Qwen3+ series. Without this,
             # the model burns minutes "thinking" before producing tokens —
             # contextual enrichment of 3,318 chunks would take days.

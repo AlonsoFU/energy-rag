@@ -104,6 +104,11 @@ class Settings(BaseSettings):
     # docs: con budget=45000 el prompt completo igual llegó a 50035 chars).
     ollama_num_ctx: int = 32768
 
+    # Tope de tokens de SALIDA en ollama. Obligatorio junto con num_ctx grande:
+    # sin num_predict, ollama genera hasta llenar el contexto. Ver llm.py para el
+    # diagnostico completo (loop de deliberacion con think=False).
+    ollama_num_predict: int = 2000
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the

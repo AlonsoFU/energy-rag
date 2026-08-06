@@ -46,14 +46,19 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
    McNemar p=0.0000.** cita_ok in_domain 83.5% → **89.2%**. Mayor WIN de retrieval de la campaña.
    Ganó más de lo diagnosticado (atacaba 6 glosario, ganó 16): también arregló casos "ranking"
    donde el gold estaba en el pool pero el reranker lo enterraba.
-2. [ ] **M1 re-test pool=100 sobre eval limpio** — ataca los ranking-fails restantes. Gratis.
-   ⚠️ re-diagnosticar primero: glossary_inject ya se comió parte de esos 13.
+2. [-] **M1 re-test pool=100 sobre eval limpio** — PROBADO 2026-08-06, **MUERTO DEFINITIVO**.
+   Pareado limpio (`scripts/exp_m1_paired.py`, ambos brazos misma sesión, glossary_inject ON):
+   **OFF 252/279 → ON 252/279, gano 0 perdio 0, McNemar p=1.0000.** 279/279 pares, 0 errores.
+   41 top-10 cambiaron y NINGUNO convirtió. El pool NO es el muro; el gold no está en rank 50-100.
+   No re-probar con otras profundidades sin una hipótesis nueva.
 3. [ ] **D2 siglas** — extractor determinista para 2 acrónimos (TON, DIP).
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
    Techo teórico si TODO pega: 84% → ~93% retrieval-side.
 
 ### FASE B — gap de GEN (~13 fails no-retrieval)
+5b. [ ] **E3 auditar efecto escopeta** (citas duplicadas inflando cita_ok) — PRIMERO, es métrica.
+5c. [ ] **GEN8 loop de deliberación** — el generador no converge, responde monólogo truncado.
 6. [ ] **E1 RAGAS faithfulness** — medir QUÉ falla en gen ANTES de tocar gen.
 7. [ ] **GEN6 fix runner** (trivial) + **GEN3 reordering** (barato) + **GEN2 self-consistency** si E1 lo justifica.
 
@@ -79,8 +84,9 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
 ## RETRIEVAL
 
 - [-] **M1 · rerank 50-100 candidatos** (no top-10). 1 param (`retrieval_pool_depth` al rerank).
-  PROBADO 2026-08: +3 McNemar p=0.25 = RUIDO (no adoptado). El gold no está en rank 50-100.
-  NOTA: diagnóstico posterior mostró 13 ranking-fails (gold en vector@50-100) → re-probar con eval limpio.
+  PROBADO 2026-08 (v1, baseline sucio): +3 McNemar p=0.25 = RUIDO.
+  **RE-PROBADO 2026-08-06 pareado sobre eval limpio + glossary_inject ON: 252→252, 0 flips,
+  p=1.0000. MUERTO DEFINITIVO.** El gold no está en rank 50-100.
 - [ ] **R1 · metadata filtering en `search_vector`** (WHERE por norma/tipo/fecha). Hoy recupera del
   corpus entero, sin filtro. Table-stakes a escala. `roadmap-gap-analysis`. ❌ ausente.
 - [ ] **R2 · authority_rank_boost** (LEY>DECRETO>RES en fusión). Flag existe, medido FLAT (corpus
@@ -181,6 +187,18 @@ query-time; sin community detection; sin router. `graph_boost` existe pero **sub
 - [ ] **GEN1 · head-to-head generador fuerte** (Claude Sonnet vs qwen3:30b-a3b, mismos pools) —
   NUNCA medido directo. ⚠️ rompe "sin API paga" → solo diagnóstico de techo. Ver research frontera.
   `roadmap-gap-analysis`, `handoff-07-10 Fase3`.
+- [ ] **GEN8 · loop de deliberación del generador (NUEVO 2026-08-06, prioritario)** — con
+  `think=False` qwen3:30b-a3b razona DENTRO del cuerpo de la respuesta y NO converge: medido en
+  "qué es Superintendencia" llegó a 2000 tokens todavía deliberando ("pero necesito verificar
+  si..."), rociando **28 citas, mayoría duplicadas**. Capado ya con `ollama_num_predict=2000`
+  (evita el timeout) pero **la respuesta sigue siendo un monólogo truncado, no una respuesta**.
+  Arreglo real: prompt/system que fuerce formato corto, o reactivar think con canal separado.
+- [ ] **E3 · efecto ESCOPETA en cita_ok (NUEVO 2026-08-06, riesgo de MÉTRICA)** — `cita_ok` marca
+  True si CUALQUIER cita del texto pega con el gold. Una respuesta que dispara 28 citas tiene alta
+  probabilidad de acertar por volumen, no por acierto real. **Auditar cuántos de los ~252 aciertos
+  vienen de respuestas con muchas citas** (ej >5) y considerar métrica de precisión de citas
+  (cita_ok ponderado / primera-cita-correcta). Mismo tipo de falla que el eval sucio: la métrica
+  puede estar inflando, no el sistema mejorando.
 - [ ] **GEN2 · self-consistency** (N samples + voto) — ataca 4 gen-fails, barato, ausente. ❌.
 - [ ] **GEN3 · lost-in-the-middle reordering** — barato, ausente. ❌.
 - [ ] **GEN4 · context compression (LLMLingua)** — menos ruido al LLM, ausente. ❌.
