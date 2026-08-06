@@ -88,13 +88,21 @@ class Settings(BaseSettings):
     # system (~1.5k tokens) + query + response in 16k ctx. 0 disables.
     prompt_doc_char_budget: int = 45000
 
-    # Ollama context window. MUST exceed the largest prompt (10 docs with full
-    # article text + Contextual enrichment ≈ 15k tokens). At 8192 the prompt
-    # overflows and the JSON-schema-constrained sampler DEADLOCKS (0 tokens,
-    # connection held forever) — the root cause of the "deterministic Ollama
-    # hang". 16384 fits the prompt; plain generation degraded gracefully but
-    # constrained decoding does not.
-    ollama_num_ctx: int = 16384
+    # Ollama context window. MUST exceed prompt + max_tokens de salida.
+    # At 8192 the prompt overflows and the JSON-schema-constrained sampler
+    # DEADLOCKS (0 tokens, connection held forever) — root cause of the
+    # "deterministic Ollama hang".
+    # 2026-08-06: 16384 VOLVIÓ A QUEDAR CORTO. Medido en balanced_v2, las queries
+    # "Costo de Falla" arman prompts de 48-50k chars ≈ 15.0-15.6k tokens; sumando
+    # max_tokens=2000 de salida da ~17.6k > 16384 → cuelgan hasta el timeout de
+    # litellm (300s × 3 reintentos = 900s perdidos por query, y el runner las
+    # anotaba como cita_ok=False, o sea FALSO NEGATIVO en el eval).
+    # 32768 da margen real (prompt tope ~15.6k + salida 2k + sistema).
+    # VRAM verificada en la 3090: 21510 MiB / 24576 con qwen3:30b-a3b cargado.
+    # ⚠️ A ESCALA: esto crece con el corpus. El techo NO es la solución de largo
+    # plazo — hay que acotar el contenido (prompt_doc_char_budget mide SOLO los
+    # docs: con budget=45000 el prompt completo igual llegó a 50035 chars).
+    ollama_num_ctx: int = 32768
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
