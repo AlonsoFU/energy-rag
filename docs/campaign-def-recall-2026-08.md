@@ -334,3 +334,56 @@ queries (TON ×2, DIP ×2, DIA ×3). Barato y con el patrón ya validado (glossa
 Historial: eval sucio (−22, E0b) · timeouts contados como False (−3) · golds mención-vs-definición
 (−11). **Auditar el gold ANTES de construir el fix.** Esta auditoría de ~20 min evitó escribir un
 extractor para 9 términos, de los cuales 4 simplemente no existen en el corpus.
+
+---
+
+## E0c HECHO (2026-08-07): 12 queries `unanswerable` → cita_ok real 94.4%
+
+`scripts/audit_unanswerable.py` auditó **las 279 in_domain** (no solo las fallas: una query que
+PASA con gold mención-only acertó por suerte y también ensucia).
+
+### Resultado
+```
+sanas: 267   imposibles: 12   gold-malo: 0
+```
+Las 12: `Gas licuado` ×3, `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×3.
+El corpus (2978 artículos) **no las define en ninguna parte**; el gold apunta a un artículo donde
+la palabra solo aparece. Marcadas con `unanswerable: true` en el jsonl (**golds INTACTOS**, solo
+metadata; verificado: 12 líneas tocadas, 0 cambios fuera del campo nuevo).
+
+### Cómo puntuaron esas 12 (antes de la marca)
+```
+8  rechazo correcto        <- el sistema hizo lo correcto y el eval lo penalizo
+3  fallo sin rechazar
+1  HIT POR SUERTE          <- "que significa Empresa distribuidora", 16 citas disparadas
+```
+Ese 1 confirma que **el efecto escopeta SÍ produce falsos positivos**, pero es raro (1/279) —
+coherente con el veredicto de E3 (métrica sana).
+
+### Métrica
+```
+antes (mezclando):  253/279 = 90.7%
+E0c aplicado:       contestables 252/267 = 94.4%   |  imposibles: rechazo correcto 8/12
+```
+
+### Dos falsos positivos de la PROPIA auditoría (corregidos ANTES de escribir el archivo)
+1. **Siglas con punto.** `_definition_concept` strippea el punto final (`C.O.M.A.`→`C.O.M.A`) y el
+   patrón `TERM\s*:` no matchea `C.O.M.A.:`. La 1ª pasada marcó imposibles a `C.O.M.A`, `A.V.I`,
+   `V.A.T.T` — que **SÍ están definidas** (1146553/5 `"C.O.M.A.: Costos anuales de operación..."`,
+   y 258171/103 se titula *"Definición de V.A.T.T., V.I., A.V.I. y C.O.M.A."*). Fix: punto opcional.
+2. **Patrón `TERM es/será` demasiado laxo.** Matchea frases incidentales — `"La Empresa
+   Distribuidora **será responsable de** obtener las medidas..."` (1149788/50º) se contaba como
+   definición, produciendo 9 "gold malo" fantasma. Fix: patrón eliminado.
+
+**Regla: auditar el eval exige usar las MISMAS normalizaciones que usa el eval** (ya había pasado
+con `_normalize_art` y los `º`/`°`). Las reglas quedan como docstring en el script.
+
+### Balance de la campaña
+Las 4 mejoras grandes vinieron de **arreglar la medición o los datos**, ninguna de un modelo mejor:
+```
+62%  -> 84%    E0b  also_gold (definiciones alternativas validas)
+84%  -> 89.2%  glossary_inject (inyeccion determinista; +16, p=0.0000)
+89.2%-> 90.7%  fixes de gen (num_ctx + num_predict; los timeouts contaban como False)
+90.7%-> 94.4%  E0c  unanswerable (12 queries imposibles)
+```
+Descartados en el mismo periodo: M1 pool, G1 grafo crudo, M2 def_fragments, rechunk, RK1.

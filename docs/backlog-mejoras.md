@@ -38,8 +38,8 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 **HECHO esta campaña:** [x] E0/E0b (eval real 84%, no 62%) · [-] M1 (ruido) · [-] G1 crudo (aristas
 vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
 
-**Diagnóstico VIGENTE (2026-08-07, post-E3 — reemplaza al de 2026-08):** cita_ok in_domain
-**253/279 (90.7%)**. De las **26 fallas** (`scripts/diag_refusals.py`):
+**Diagnóstico VIGENTE (2026-08-07, post-E3+E0c — reemplaza al de 2026-08):** cita_ok
+**contestables 252/267 = 94.4%**. De las **26 fallas brutas** (`scripts/diag_refusals.py`):
 Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 con **rank=0**).
 19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
 
@@ -47,13 +47,14 @@ Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 c
 - **15 REALES** (el gold sí define) → arreglables. `TON`, `DIP`, `DIA` (formato leyenda de
   variable: `SIGLA : descripción` tras "Donde:" — el extractor no lo maneja) + `Reposición`,
   `Informe Definitivo` ×3, `Infracciones graves`, `Tránsito` ×3.
-- **11 IMPOSIBLES** → `Gas licuado` ×3, `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×2.
+- **12 IMPOSIBLES** → `Gas licuado` ×3, `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×3
+  (11 fallas + 1 acierto espurio por escopeta).  Ya marcadas `unanswerable` (E0c HECHO).
   **El corpus NO define esos términos en ninguna parte** (verificado con 5 patrones: `TERM:`,
   `se entiende por`, `TERM es/será`, `se denomina`, `definición de`). El gold apunta a un artículo
   que solo MENCIONA la palabra. **Rechazar es la conducta CORRECTA y el eval la castiga.** → E0c.
 
-**cita_ok real descontando las imposibles: 253/268 = 94.4%** (o 264/279 = 94.6% contando el
-rechazo como acierto). Las fallas realmente atacables son **15, no 26**.
+**MÉTRICA VIGENTE (E0c aplicado): contestables 252/267 = 94.4%** · imposibles: rechazo
+correcto 8/12. Las fallas realmente atacables son **15, no 26**.
 ⚠️ Es la 4ª vez que el eval es parte del problema (eval sucio −22 · timeouts como False ·
 golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
 
@@ -75,9 +76,9 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
    ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
-   Hoy: 90.7% con 26 fallas → D2-ampliado ataca 16, GEN8 ataca 10.
+   Hoy: **94.4% con 15 fallas atacables** → D2 ataca ~7, GEN8 ataca ~8.
 
-### FASE B — gap de GEN (~13 fails no-retrieval)
+### FASE B — gap de GEN (~8 fails atacables, 6 con el gold en rank=0)
 5b. [x] **E3 auditar efecto escopeta** — HECHO 2026-08-07. **MÉTRICA SANA, no infla.**
    `cita_ok` 253/279 vs `hit_first` 243/279 → solo 11 queries (3.9%) dependen de una cita
    posterior (10 de ellas la 2ª). El 252-253/279 es defendible.
@@ -102,17 +103,24 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
 **Diferido:** FT1/FT2, escala, frontera (referencia).
 
 ### ADMIN / limpieza
-- [ ] **E0c · golds MENCIÓN-vs-DEFINICIÓN (ampliado 2026-08-07, SUBE A PRIORITARIO)** — 11 queries
-  del set in_domain piden definiciones que **el corpus no contiene**: `Gas licuado` ×3,
-  `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×2. El gold apunta a un artículo donde el
-  término solo APARECE (ej 1160108/16 "diagrama georreferenciado de la acometida"; 1155887/7°
-  "tratándose de vehículos motorizados"), no donde se define. Verificado con 5 patrones en los
-  2960 artículos: 0 definiciones reales. **El sistema rechaza CORRECTAMENTE y el eval lo penaliza.**
-  Acción: marcar esas 11 como `unanswerable` (rechazo = acierto) o sacarlas del set.
-  Impacto: cita_ok 253/279 (90.7%) → **253/268 = 94.4%**.
-  Anteriores ya nombrados en CLAUDE.md: Mora 250604/5, Reposición 29819/2-D.
-  **Regla que sale de acá: auditar el gold ANTES de construir el fix** (esta auditoría evitó
-  construir un extractor para 9 términos de los cuales 4 no existen en el corpus).
+- [x] **E0c · golds MENCIÓN-vs-DEFINICIÓN** — HECHO 2026-08-07 (`scripts/audit_unanswerable.py`).
+  **12 queries in_domain piden definiciones que el corpus NO contiene**: `Gas licuado` ×3,
+  `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×3. El gold apunta a un artículo donde el
+  término solo APARECE (1160108/16 "diagrama georreferenciado de la acometida"; 1155887/7°
+  "tratándose de vehículos motorizados"), no donde se define. Auditados los 2978 artículos.
+  **El sistema rechaza CORRECTAMENTE y el eval lo penalizaba.**
+  Marcadas con `unanswerable: true` en `queries_balanced_v2_clean.jsonl` (golds INTACTOS,
+  solo metadata). Deben puntuar **rechazo = acierto**, como `off_corpus`.
+  **MÉTRICA CORREGIDA: contestables 252/267 = 94.4%** · imposibles: rechazo correcto 8/12.
+  (antes se reportaba 253/279 = 90.7% mezclando ambas)
+  Se detectó **1 acierto espurio** ("qué significa Empresa distribuidora", 16 citas disparadas):
+  el efecto escopeta de E3 SÍ produce falsos positivos, pero es raro (1/279).
+  ⚠️ **Dos falsos positivos de la PROPIA auditoría, corregidos antes de escribir** — quedan como
+  regla en el script: (a) las siglas llegan sin punto final (`C.O.M.A.`→`C.O.M.A`) y el patrón
+  `TERM:` no matcheaba `C.O.M.A.:` → marcaba imposibles siglas SÍ definidas (C.O.M.A, A.V.I,
+  V.A.T.T en 1146553/5 y 258171/103); (b) el patrón `TERM es/será` matchea frases incidentales
+  ("La Empresa Distribuidora **será responsable de**...") → definiciones fantasma.
+  **Auditar el eval exige las MISMAS normalizaciones que usa el eval.**
 - [ ] **ADM1 · merge PR #12 a main** — todo vive en `adopt-winners`, nada en main. Cerrar cuando glossary_inject decida.
 - [ ] **C2-drop · drop tabla `fragmentos_inciso`** mixta (1248/7141 phi4) — recomendado, deuda vieja (ver C2).
 

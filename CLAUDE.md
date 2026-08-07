@@ -28,13 +28,16 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**REALIDAD DE LA MÉTRICA (2026-08, CRÍTICO):** el cita_ok in_domain real era ~84% (eval limpio con
-`also_gold`, `data/eval/queries_balanced_v2_clean.jsonl`), NO el 62% que daba el eval sucio. El "62%"
-era **injusticia de eval** (rechazaba definiciones alternativas válidas). **Con `glossary_inject`
-adoptado (2026-08-05) el in_domain es 249/279 = 89.2%.**
+**REALIDAD DE LA MÉTRICA (2026-08-07, CRÍTICO):** cita_ok **contestables 252/267 = 94.4%**
+(`data/eval/queries_balanced_v2_clean.jsonl`). Camino: 62% (eval sucio) → 84% (E0b `also_gold`) →
+89.2% (`glossary_inject` +16) → 90.7% (fixes de gen: num_ctx+num_predict, los timeouts se contaban
+como False) → **94.4% (E0c: 12 queries marcadas `unanswerable` — piden definiciones que el corpus
+NO contiene; el sistema rechaza CORRECTAMENTE y el eval lo penalizaba)**.
+⚠️ Las `unanswerable` deben puntuar **rechazo = acierto** (como `off_corpus`). Hoy 8/12.
 Probados y NEGATIVOS/flat (McNemar pareado): M1 pool, G1 grafo crudo, M2 def_fragments, rechunk,
 RK1 Qwen3-Reranker. Lo que SÍ movió: arreglar la métrica (+19) y `glossary_inject` (+16).
-Quedan golds rotos por limpiar: Mora 250604/5, Reposición 29819/2 D (item E0c del backlog).
+**REGLA (4 veces ya): auditar el gold ANTES de construir el fix.** El eval fue parte del problema
+en las 4 mejoras grandes; ninguna vino de un modelo mejor.
 Detalle: `docs/campaign-def-recall-2026-08.md`.
 
 **LECCIÓN TRANSVERSAL (2026-08):** cuando el ordenador (cross-encoder) prefiere sistemáticamente el
@@ -54,7 +57,8 @@ medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
 adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/backlog-mejoras.md` §PRIORIDAD**
 (A exprimir buscador · B gap de gen vía RAGAS · C table-stakes legal · D gate GraphRAG).
-Ya cerrados de ahí: E0/E0b ✅, glossary_inject ✅(+16); M1/G1/M2/rechunk/RK1 descartados.
+Ya cerrados: E0/E0b ✅, glossary_inject ✅(+16), E3 ✅(métrica sana), E0c ✅(12 `unanswerable`);
+M1/G1/M2/rechunk/RK1 descartados. Siguientes: D2 (leyenda de variable) · GEN8 (loop del generador).
 Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
 HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
 datos/estructura, no swaps de modelo. Frontera solo como REFERENCIA "si escalo", no cola activa.
