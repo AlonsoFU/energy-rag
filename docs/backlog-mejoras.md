@@ -40,14 +40,22 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
 
 **Diagnóstico VIGENTE (2026-08-07, post-E3 — reemplaza al de 2026-08):** cita_ok in_domain
 **253/279 (90.7%)**. De las **26 fallas** (`scripts/diag_refusals.py`):
-- **16 RETRIEVAL** — el gold nunca llega al pool. Términos NO capturados por el extractor de
-  glosario (`def_exact`=None): Acometida, Tránsito, TON, DIP, DIA, Gas licuado, Vehículo,
-  Empresa distribuidora, Reposición. → **es D2 ampliado, no solo siglas.**
-- **10 GEN** — el gold SÍ estaba en el pool y no lo usó; **6 de ellas con el gold en rank=0**
-  (Informe Definitivo ×3, Infracciones graves, Acometida, Tránsito). → **es GEN8.**
-- 19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
-- Golds auditados con normalización: 23 válidos, 3 dudosos (Vehículo 1155887/7 = art
-  modificatorio), **0 inexistentes**. Las fallas son REALES, no artefactos de eval.
+Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 con **rank=0**).
+19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
+
+**Pero el corte que MANDA es si el artículo gold DEFINE el término o solo lo MENCIONA:**
+- **15 REALES** (el gold sí define) → arreglables. `TON`, `DIP`, `DIA` (formato leyenda de
+  variable: `SIGLA : descripción` tras "Donde:" — el extractor no lo maneja) + `Reposición`,
+  `Informe Definitivo` ×3, `Infracciones graves`, `Tránsito` ×3.
+- **11 IMPOSIBLES** → `Gas licuado` ×3, `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×2.
+  **El corpus NO define esos términos en ninguna parte** (verificado con 5 patrones: `TERM:`,
+  `se entiende por`, `TERM es/será`, `se denomina`, `definición de`). El gold apunta a un artículo
+  que solo MENCIONA la palabra. **Rechazar es la conducta CORRECTA y el eval la castiga.** → E0c.
+
+**cita_ok real descontando las imposibles: 253/268 = 94.4%** (o 264/279 = 94.6% contando el
+rechazo como acierto). Las fallas realmente atacables son **15, no 26**.
+⚠️ Es la 4ª vez que el eval es parte del problema (eval sucio −22 · timeouts como False ·
+golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
 
 ### FASE A — exprimir el buscador (local/barato)
 1. [x] **glossary_inject** — ADOPTADO 2026-08-05 (default ON). **233→249/279 (+16, 0 pérdidas),
@@ -59,10 +67,11 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
    **OFF 252/279 → ON 252/279, gano 0 perdio 0, McNemar p=1.0000.** 279/279 pares, 0 errores.
    41 top-10 cambiaron y NINGUNO convirtió. El pool NO es el muro; el gold no está en rank 50-100.
    No re-probar con otras profundidades sin una hipótesis nueva.
-3. [ ] **D2 AMPLIADO · extender el extractor de glosario** (ya no "2 siglas"): E3 mostró **16
-   fallas de retrieval** por términos con `def_exact`=None → glossary_inject nunca dispara.
-   Faltantes confirmados: Acometida, Tránsito, TON, DIP, DIA, Gas licuado, Vehículo, Empresa
-   distribuidora, Reposición. Mismo patrón que ya rindió +16 → **el item de mayor ROI pendiente.**
+3. [ ] **D2 · extractor formato LEYENDA DE VARIABLE** — el hueco REAL (corregido 2026-08-07 tras
+   auditar los golds): `TON : Tiempo medio acumulado...` (250604/53) y `DIP: Menor disponibilidad
+   media anual...` (250604/31, tras "Donde:"). `build_def_fragments.py` no maneja ese formato.
+   Ataca **~7 queries** (TON ×2, DIP ×2, DIA ×3). Barato, patrón ya probado (glossary_inject +16).
+   ⚠️ NO son 16: el resto de los "faltantes" eran golds mención-vs-definición (ver E0c).
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
    ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
@@ -93,7 +102,17 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
 **Diferido:** FT1/FT2, escala, frontera (referencia).
 
 ### ADMIN / limpieza
-- [ ] **E0c · golds rotos restantes** — Mora 250604/5, Reposición 29819/2-D (nombrados en CLAUDE.md).
+- [ ] **E0c · golds MENCIÓN-vs-DEFINICIÓN (ampliado 2026-08-07, SUBE A PRIORITARIO)** — 11 queries
+  del set in_domain piden definiciones que **el corpus no contiene**: `Gas licuado` ×3,
+  `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×2. El gold apunta a un artículo donde el
+  término solo APARECE (ej 1160108/16 "diagrama georreferenciado de la acometida"; 1155887/7°
+  "tratándose de vehículos motorizados"), no donde se define. Verificado con 5 patrones en los
+  2960 artículos: 0 definiciones reales. **El sistema rechaza CORRECTAMENTE y el eval lo penaliza.**
+  Acción: marcar esas 11 como `unanswerable` (rechazo = acierto) o sacarlas del set.
+  Impacto: cita_ok 253/279 (90.7%) → **253/268 = 94.4%**.
+  Anteriores ya nombrados en CLAUDE.md: Mora 250604/5, Reposición 29819/2-D.
+  **Regla que sale de acá: auditar el gold ANTES de construir el fix** (esta auditoría evitó
+  construir un extractor para 9 términos de los cuales 4 no existen en el corpus).
 - [ ] **ADM1 · merge PR #12 a main** — todo vive en `adopt-winners`, nada en main. Cerrar cuando glossary_inject decida.
 - [ ] **C2-drop · drop tabla `fragmentos_inciso`** mixta (1248/7141 phi4) — recomendado, deuda vieja (ver C2).
 

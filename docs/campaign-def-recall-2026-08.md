@@ -282,3 +282,55 @@ Las fallas son REALES. *Auditar el eval requiere usar las MISMAS normalizaciones
 Ningún eval de la campaña guardaba el TEXTO de las respuestas, solo el booleano `ok` — por eso no
 se pudo auditar nada retroactivamente y hubo que regenerar. `exp_e3_shotgun.py` ya persiste `text`
 y `cits` por query. Adoptar ese patrón en los evals futuros.
+
+---
+
+## D2 pre-análisis (2026-08-07): auditar el gold ANTES de construir el fix
+
+Iba a extender el extractor de glosario para los 16 términos que E3 marcó como fallas de retrieval.
+Antes de escribir código, se revisó **qué dice realmente el artículo gold**. Resultado: **solo 15
+de las 26 fallas son atacables; 11 son imposibles.**
+
+### El corte que manda: ¿el gold DEFINE o solo MENCIONA?
+```
+DEFINE (arreglable):  15   TON, DIP, DIA, Reposicion, Informe Definitivo x3,
+                           Infracciones graves, Transito x3
+MENCIONA (imposible): 11   Gas licuado x3, Acometida x3, Vehiculo x3,
+                           Empresa distribuidora x2
+```
+
+Ejemplos de gold que solo MENCIONA:
+```
+Acometida   1160108/16  "...diagrama georreferenciado de la acometida a la subestacion"
+Vehiculo    1155887/7   "...tratandose de vehiculos motorizados livianos, medianos y pesados"
+Gas licuado 29819/2 D   "...envases, aparatos e instrumentos de gas licuado"
+Emp. distr. 250604/13   "...clientes no sometidos a regulacion de precios o empresas distribuidoras"
+```
+Búsqueda en los **2960 artículos** con 5 patrones (`TERM:`, `se entiende por`, `TERM es/será`,
+`se denomina`, `definición de`): **0 definiciones reales** de esos 4 términos. Los pocos matches de
+`TERM es/será` son frases incidentales ("La Empresa Distribuidora **será responsable de** obtener
+las medidas..."), no definiciones.
+
+**Conclusión: el sistema RECHAZA CORRECTAMENTE y el eval lo penaliza.** No hay nada que arreglar en
+el sistema para esas 11 — hay que arreglar el eval (E0c).
+
+### Métrica corregida
+```
+cita_ok reportado:                 253/279 = 90.7%
+descontando las 11 imposibles:     253/268 = 94.4%
+contando el rechazo como acierto:  264/279 = 94.6%
+```
+
+### El hueco REAL de D2: formato leyenda de variable
+Lo que sí falta capturar (`build_def_fragments.py` no lo maneja):
+```
+250604/53   "TON      : Tiempo medio acumulado en que la Unidad Generadora ... en operacion"
+250604/31   "Donde:  DIP: Menor disponibilidad media anual del Insumo Principal ..."
+```
+Formato `SIGLA : descripción`, típicamente tras "Donde:" en artículos con fórmulas. Ataca ~7
+queries (TON ×2, DIP ×2, DIA ×3). Barato y con el patrón ya validado (glossary_inject +16).
+
+### Lección (4ª vez que el eval es parte del problema)
+Historial: eval sucio (−22, E0b) · timeouts contados como False (−3) · golds mención-vs-definición
+(−11). **Auditar el gold ANTES de construir el fix.** Esta auditoría de ~20 min evitó escribir un
+extractor para 9 términos, de los cuales 4 simplemente no existen en el corpus.
