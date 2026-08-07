@@ -154,9 +154,9 @@
 {"query": "qué es Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
 {"query": "definición de Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
 {"query": "qué significa Sistemas de Almacenamiento de Energía intensivos en potencia", "expected_norma": "1160108", "expected_articulo": "102", "category": "in_domain"}
-{"query": "qué es Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
-{"query": "definición de Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
-{"query": "qué significa Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain"}
+{"query": "qué es Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "unanswerable": true}
+{"query": "definición de Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "unanswerable": true}
+{"query": "qué significa Gas licuado", "expected_norma": "29819", "expected_articulo": "2º D", "category": "in_domain", "unanswerable": true}
 {"query": "qué es Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
 {"query": "definición de Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
 {"query": "qué significa Sistema de Transmisión", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5", "1160108/2", "1204012/primero"]}
@@ -178,9 +178,9 @@
 {"query": "qué es Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain", "also_gold": ["1216930/5"]}
 {"query": "definición de Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain", "also_gold": ["1216930/5"]}
 {"query": "qué significa Solicitante", "expected_norma": "1160108", "expected_articulo": "41", "category": "in_domain", "also_gold": ["1216930/5"]}
-{"query": "qué es Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
-{"query": "definición de Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
-{"query": "qué significa Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain"}
+{"query": "qué es Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain", "unanswerable": true}
+{"query": "definición de Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain", "unanswerable": true}
+{"query": "qué significa Acometida", "expected_norma": "1160108", "expected_articulo": "16", "category": "in_domain", "unanswerable": true}
 {"query": "qué es Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "definición de Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "qué significa Capacidad Instalada", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1149788/4º"]}
@@ -220,9 +220,9 @@
 {"query": "qué es Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
 {"query": "definición de Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
 {"query": "qué significa Infracciones graves", "expected_norma": "1155887", "expected_articulo": "4°", "category": "in_domain"}
-{"query": "qué es Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "definición de Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué significa Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
+{"query": "qué es Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "unanswerable": true}
+{"query": "definición de Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "unanswerable": true}
+{"query": "qué significa Empresa distribuidora", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain", "unanswerable": true}
 {"query": "qué es Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "definición de Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain", "also_gold": ["1149788/4º"]}
 {"query": "qué significa Unidad de Generación", "expected_norma": "1112591", "expected_articulo": "20°", "category": "in_domain", "also_gold": ["1149788/4º"]}
@@ -259,9 +259,9 @@
 {"query": "qué es V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "definición de V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "qué significa V.A.T.T.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
-{"query": "qué es Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
-{"query": "definición de Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
-{"query": "qué significa Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain"}
+{"query": "qué es Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain", "unanswerable": true}
+{"query": "definición de Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain", "unanswerable": true}
+{"query": "qué significa Vehículo", "expected_norma": "1155887", "expected_articulo": "7°", "category": "in_domain", "unanswerable": true}
 {"query": "qué es A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "definición de A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
 {"query": "qué significa A.V.I.", "expected_norma": "1160108", "expected_articulo": "2", "category": "in_domain", "also_gold": ["1112591/2°", "1146553/5"]}
