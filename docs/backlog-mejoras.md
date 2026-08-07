@@ -38,8 +38,16 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 **HECHO esta campaña:** [x] E0/E0b (eval real 84%, no 62%) · [-] M1 (ruido) · [-] G1 crudo (aristas
 vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
 
-**Diagnóstico del buscador (2026-08):** recall@10 = 89%. De 45 fails in_domain: 13 ranking +
-19 embedding-miss (6 glosario / 2 acrónimos / 5 coloquial) + ~13 gen.
+**Diagnóstico VIGENTE (2026-08-07, post-E3 — reemplaza al de 2026-08):** cita_ok in_domain
+**253/279 (90.7%)**. De las **26 fallas** (`scripts/diag_refusals.py`):
+- **16 RETRIEVAL** — el gold nunca llega al pool. Términos NO capturados por el extractor de
+  glosario (`def_exact`=None): Acometida, Tránsito, TON, DIP, DIA, Gas licuado, Vehículo,
+  Empresa distribuidora, Reposición. → **es D2 ampliado, no solo siglas.**
+- **10 GEN** — el gold SÍ estaba en el pool y no lo usó; **6 de ellas con el gold en rank=0**
+  (Informe Definitivo ×3, Infracciones graves, Acometida, Tránsito). → **es GEN8.**
+- 19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
+- Golds auditados con normalización: 23 válidos, 3 dudosos (Vehículo 1155887/7 = art
+  modificatorio), **0 inexistentes**. Las fallas son REALES, no artefactos de eval.
 
 ### FASE A — exprimir el buscador (local/barato)
 1. [x] **glossary_inject** — ADOPTADO 2026-08-05 (default ON). **233→249/279 (+16, 0 pérdidas),
@@ -51,14 +59,27 @@ vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle
    **OFF 252/279 → ON 252/279, gano 0 perdio 0, McNemar p=1.0000.** 279/279 pares, 0 errores.
    41 top-10 cambiaron y NINGUNO convirtió. El pool NO es el muro; el gold no está en rank 50-100.
    No re-probar con otras profundidades sin una hipótesis nueva.
-3. [ ] **D2 siglas** — extractor determinista para 2 acrónimos (TON, DIP).
+3. [ ] **D2 AMPLIADO · extender el extractor de glosario** (ya no "2 siglas"): E3 mostró **16
+   fallas de retrieval** por términos con `def_exact`=None → glossary_inject nunca dispara.
+   Faltantes confirmados: Acometida, Tránsito, TON, DIP, DIA, Gas licuado, Vehículo, Empresa
+   distribuidora, Reposición. Mismo patrón que ya rindió +16 → **el item de mayor ROI pendiente.**
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
-   Techo teórico si TODO pega: 84% → ~93% retrieval-side.
+   ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
+   Hoy: 90.7% con 26 fallas → D2-ampliado ataca 16, GEN8 ataca 10.
 
 ### FASE B — gap de GEN (~13 fails no-retrieval)
-5b. [ ] **E3 auditar efecto escopeta** (citas duplicadas inflando cita_ok) — PRIMERO, es métrica.
-5c. [ ] **GEN8 loop de deliberación** — el generador no converge, responde monólogo truncado.
+5b. [x] **E3 auditar efecto escopeta** — HECHO 2026-08-07. **MÉTRICA SANA, no infla.**
+   `cita_ok` 253/279 vs `hit_first` 243/279 → solo 11 queries (3.9%) dependen de una cita
+   posterior (10 de ellas la 2ª). El 252-253/279 es defendible.
+   PERO calidad de cita mala: **precisión media 0.43, mediana 0.33** (143/253 hits con <0.5);
+   13.1 citas por respuesta, 4.2 únicas, máx 60. Citar normas erradas junto a la correcta es
+   problema legal aunque cita_ok dé True. → causa = GEN8, no la métrica.
+   `scripts/exp_e3_shotgun.py` (además PERSISTE el texto de cada respuesta — ningún eval previo
+   lo guardaba, por eso no se podía auditar hacia atrás).
+5c. [ ] **GEN8 loop de deliberación** — SUBE A PRIORITARIO: causa 10 fallas (6 con gold en rank=0)
+   y la precisión 0.43. El modelo delibera **en inglés** ("Okay, let's tackle this query...") y
+   termina rechazando pese a tener el artículo correcto de primero.
 6. [ ] **E1 RAGAS faithfulness** — medir QUÉ falla en gen ANTES de tocar gen.
 7. [ ] **GEN6 fix runner** (trivial) + **GEN3 reordering** (barato) + **GEN2 self-consistency** si E1 lo justifica.
 
