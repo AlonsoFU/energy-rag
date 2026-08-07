@@ -232,3 +232,53 @@ El run abarcó cambios de config a mitad de camino (idx 0-229 con ctx=16384, 230
 El diseño **pareado** protege el veredicto —ambos brazos ven la misma config en cada query— pero
 los totales ABSOLUTOS de esta corrida no son comparables con otras. El 252/279 se debe re-confirmar
 en una corrida limpia con la config final (ctx 32768 + num_predict 2000).
+
+---
+
+## E3 — auditoría del efecto escopeta (2026-08-07): la métrica SÍ está sana
+
+Sospecha (tras ver 28 citas duplicadas en una respuesta): `cita_ok` marca True si CUALQUIER cita
+pega → una respuesta que rocía citas podría acertar por VOLUMEN. Si eso fuera masivo, el 252/279
+estaría inflado y todo el plan estaría optimizando contra un número falso.
+
+### Resultado (`scripts/exp_e3_shotgun.py`, 279 in_domain, config vigente)
+```
+cita_ok (ALGUNA pega):   253/279  (90.7%)
+hit_first (la 1a pega):  243/279  (87.1%)
+citas por respuesta: media 13.1  unicas 4.2  max 60
+precision media EN HITS: 0.43   (mediana 0.33; 143/253 hits con <0.5)
+```
+**Veredicto: la métrica NO infla.** Solo **11 queries (3.9%)** aciertan por una cita no-primera, y
+10 de esas es la 2ª. El 252-253/279 es defendible. *A diferencia del eval sucio (−22) y de los
+timeouts contados como False, acá la sospecha NO se confirmó.*
+
+**Pero sí hay un problema de CALIDAD de cita:** precisión media 0.43 — de 4.2 artículos citados,
+menos de la mitad son correctos. En contexto legal, citar normas equivocadas junto a la correcta
+es dañino aunque `cita_ok` dé True. La causa es GEN8 (el loop), no la métrica.
+
+### Descomposición REAL de las 26 fallas (`scripts/diag_refusals.py`)
+```
+RETRIEVAL (gold nunca llego al pool): 16
+GEN       (gold en el pool, no lo uso): 10   <- 6 de ellas con gold en RANK=0
+19 de las 26 son RECHAZOS ("no encuentro la norma"), no citas erradas
+```
+Las 16 de retrieval son términos que el extractor de glosario NO capturó (`def_exact`=None para
+los 3 fraseos): Acometida, Tránsito, TON, DIP, DIA, Gas licuado, Vehículo, Empresa distribuidora,
+Reposición. **No es "2 siglas" como decía el backlog: es el extractor incompleto** → D2 AMPLIADO
+es el item de mayor ROI pendiente (mismo patrón que rindió +16 con glossary_inject).
+
+Las 10 de gen, con **6 con el gold de PRIMERO**, son GEN8 puro: el modelo delibera (en inglés:
+*"Okay, let's tackle this query..."*), cita 10-12 artículos y termina rechazando pese a tener el
+artículo correcto en la posición 0.
+
+### Falso positivo de análisis (anotado para no repetirlo)
+En la auditoría de golds se concluyó primero que 8 golds "NO EXISTÍAN" en la DB. **Era error del
+query de auditoría**, que comparaba `numero` exacto sin normalizar: en la DB son `2º D`, `7°`, `4º`
+—con º/°— y el eval sí normaliza vía `_normalize_art`. Re-auditado con normalización:
+**0 inexistentes, 23 válidos, 3 dudosos** (Vehículo 1155887/7 = artículo modificatorio).
+Las fallas son REALES. *Auditar el eval requiere usar las MISMAS normalizaciones que el eval.*
+
+### Gap de infra cerrado
+Ningún eval de la campaña guardaba el TEXTO de las respuestas, solo el booleano `ok` — por eso no
+se pudo auditar nada retroactivamente y hubo que regenerar. `exp_e3_shotgun.py` ya persiste `text`
+y `cits` por query. Adoptar ese patrón en los evals futuros.
