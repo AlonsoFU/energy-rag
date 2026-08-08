@@ -109,6 +109,17 @@ class Settings(BaseSettings):
     # diagnostico completo (loop de deliberacion con think=False).
     ollama_num_predict: int = 2000
 
+    # GEN8 (flag OFF, en prueba): razonamiento en CANAL SEPARADO.
+    # Con think=False el modelo qwen3 razona DENTRO del cuerpo de la respuesta -> loop de
+    # deliberacion ("pero necesito verificar si...") que (a) dispara 13.1 citas por respuesta
+    # (precision 0.43) y (b) termina en RECHAZO aunque el gold sea el documento #1 (medido:
+    # 6 fallas con rank_gold=0). El prompt YA pide respuesta corta y lo ignora, porque no
+    # tiene otro lugar donde pensar. Con think=True ollama devuelve el razonamiento en el
+    # campo `thinking` y deja `response` limpio.
+    # ⚠️ think=False se puso por VELOCIDAD (enriquecer 3318 chunks tardaria dias). Si esto
+    # se adopta, dejarlo ON solo en la ruta de RESPUESTA, no en la de indexado.
+    ollama_think: bool = False
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the
