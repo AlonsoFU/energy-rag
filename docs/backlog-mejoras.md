@@ -68,11 +68,20 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
    **OFF 252/279 → ON 252/279, gano 0 perdio 0, McNemar p=1.0000.** 279/279 pares, 0 errores.
    41 top-10 cambiaron y NINGUNO convirtió. El pool NO es el muro; el gold no está en rank 50-100.
    No re-probar con otras profundidades sin una hipótesis nueva.
-3. [ ] **D2 · extractor formato LEYENDA DE VARIABLE** — el hueco REAL (corregido 2026-08-07 tras
-   auditar los golds): `TON : Tiempo medio acumulado...` (250604/53) y `DIP: Menor disponibilidad
-   media anual...` (250604/31, tras "Donde:"). `build_def_fragments.py` no maneja ese formato.
-   Ataca **~7 queries** (TON ×2, DIP ×2, DIA ×3). Barato, patrón ya probado (glossary_inject +16).
-   ⚠️ NO son 16: el resto de los "faltantes" eran golds mención-vs-definición (ver E0c).
+3. [x] **D2 · extractor formato LEYENDA DE VARIABLE** — HECHO 2026-08-07, adoptado por
+   CORRECCIÓN DE DATOS (no por el Δ). `scripts/exp_d2_paired.py` (swap de tablas para el brazo OFF):
+   **OFF 252/267 → ON 254/267 (gano 3, perdio 1), McNemar p=0.6250 = NO significativo.**
+   Ganó: `definición de TON`, `qué significa TON`, `qué significa Infracciones graves`.
+   Perdió: `qué es Proyecto` (con el gold en rank=0 igual → flicker de gen).
+   Tabla `fragmentos_definicion` 608 → **713** (+103 símbolos de 20 artículos con leyenda).
+   **Se adopta pese a p=0.63 porque son dos correcciones objetivas, no un tuning:**
+   (a) BUG en `NOISE`: `Art\.`/`D\.O\.` seguidos de `\b` NUNCA matcheaban (tras '.' viene espacio,
+   entre dos no-palabra no hay frontera) → las líneas de enmienda se colaban DENTRO de las
+   definiciones y PARTÍAN palabras ('siguiente c'+ruido+'ociente:'), que era justo lo que rompía
+   el trigger de TON. Afectaba también al glosario clásico (608→610).
+   (b) TON/DIP/DIA están genuinamente definidos ahí y faltaban.
+   **CLAVE: tras D2, `rank_gold` = 0 para TON/DIP/DIA — el gold es el doc #1 y la gen igual falla.**
+   → el residuo de esas 5 queries es **100% GEN8**, no retrieval. Retrieval quedó óptimo acá.
 4. [ ] **G3 fix dedup** `build_candidates` — bug conocido, barato.
 5. [ ] **5 coloquiales** — curación manual de aliases (no ingeniería).
    ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
