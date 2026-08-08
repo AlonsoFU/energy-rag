@@ -188,6 +188,31 @@ def build_answer_prompt(query: str, docs: list[dict],
 # cross-encoder al rankear y que RK1 (Qwen3-Reranker) no logró romper: se sortea con reglas
 # deterministas, no con modelos más grandes. `glossary_inject` ya lo arregla en retrieval
 # (mete el artículo definitorio en rank 0); esto ataca la mitad de GENERACIÓN.
+# GEN9 (flag `citation_ordinal_words`, default OFF): artículos con ordinal EN PALABRA.
+# 267 de 2978 artículos (9% del corpus) se numeran "primero/segundo/DECIMOSÉPTIMO/...".
+# El header del prompt ya los muestra citables (`[Art. primero de 1204012]`) y el parser ya
+# los acepta (fix en grounding.py), pero el modelo NUNCA los cita: medido 0/267 respuestas.
+# Causa: el system prompt define NUMERO como número y da SOLO ejemplos numéricos
+# ("ej: 1, 5, 28, 49, 2º, 5°, 36 bis"), así que el modelo trata "primero" como inválido.
+# Explica fallas con el gold en rank 0: DIA ×3 (1204012/primero), Informe Definitivo ×3
+# (1160108/segundo), Tránsito (220208/tercero).
+ORDINAL_WORDS_BLOCK = """
+
+==========================================================
+ARTÍCULOS NUMERADOS CON PALABRA (¡TAMBIÉN SE CITAN!)
+==========================================================
+Algunos artículos se numeran con palabra en vez de cifra:
+"primero", "segundo", "tercero", ..., "decimoséptimo", "primero transitorio".
+
+Se citan EXACTAMENTE igual, copiando el encabezado tal cual:
+
+✅ "La DIA es la menor disponibilidad media anual [Art. primero de 1204012]."
+✅ "El Informe Definitivo se emite en ese plazo [Art. segundo de 1160108]."
+
+⚠️ NO los descartes por no ser una cifra, y NO los conviertas a número.
+Copia el identificador TAL CUAL aparece en el encabezado del artículo."""
+
+
 PREFER_DEFINITION_BLOCK = """
 
 ==========================================================
@@ -210,6 +235,9 @@ Si ambos aparecen entre los artículos provistos, el DEFINITORIO va primero."""
 def get_answer_system() -> str:
     """Return the system prompt with citation rules."""
     from src.core import config as _cfg
+    out = ANSWER_SYSTEM
+    if getattr(_cfg.settings, "citation_ordinal_words", False):
+        out += ORDINAL_WORDS_BLOCK
     if getattr(_cfg.settings, "prompt_prefer_definition", False):
-        return ANSWER_SYSTEM + PREFER_DEFINITION_BLOCK
-    return ANSWER_SYSTEM
+        out += PREFER_DEFINITION_BLOCK
+    return out

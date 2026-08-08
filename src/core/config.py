@@ -136,6 +136,22 @@ class Settings(BaseSettings):
     # glossary_inject ataca en RETRIEVAL.
     prompt_prefer_definition: bool = False
 
+    # GEN9 (flag OFF, en prueba): enseña al modelo que los artículos con ordinal EN PALABRA
+    # ("primero", "DECIMOSÉPTIMO", "primero transitorio") TAMBIÉN se citan. Son 267 de 2978
+    # artículos (9% del corpus) y el modelo los cita 0 veces en 267 respuestas medidas.
+    # Requiere el fix del parser en grounding.py (CITATION_PATTERN + _normalize_art), sin el
+    # cual la cita se extraería vacía y `strip_malformed_citations` la borraría del texto.
+    citation_ordinal_words: bool = False
+
+    # GEN10 (0 = sin límite, en prueba): cuántos documentos ve el GENERADOR (el retrieval
+    # sigue trayendo top_k=10). Motivación medida: en 11 de las 14 fallas restantes el gold
+    # es el documento #1 (`rank_gold=0`) y el modelo igual falla, rociando 13.2 citas
+    # repartidas entre los 10 docs (precisión 0.42). Con menos documentos tiene menos dónde
+    # dispersarse y más presión para comprometerse con los primeros.
+    # ⚠️ Riesgo simétrico: las queries cuyo gold cae en rank 5-9 se pierden. El experimento
+    # pareado lo mide directo (no asumir que gana).
+    answer_doc_limit: int = 0
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the

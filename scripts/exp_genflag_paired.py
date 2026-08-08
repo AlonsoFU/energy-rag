@@ -7,9 +7,11 @@ experimentos sucesivos sobre el mismo set no lo repiten. Solo cambia el flag baj
       venv/bin/python -m scripts.exp_genflag_paired
 
 Env:
-  FLAG   nombre del atributo en cfg.settings a togglear (OFF=False, ON=True)
-  NAME   subcarpeta de resultados en data/eval/results/<NAME>/
-  LIMIT  (opcional) recorta el set, para pruebas rapidas
+  FLAG     nombre del atributo en cfg.settings a togglear
+  NAME     subcarpeta de resultados en data/eval/results/<NAME>/
+  OFF_VAL  valor del brazo OFF (default False). Se castea al tipo del default del flag.
+  ON_VAL   valor del brazo ON  (default True).  Permite barrer enteros (ej top_k 10 -> 5).
+  LIMIT    (opcional) recorta el set, para pruebas rapidas
 
 Mide cita_ok pareado (McNemar) + calidad de cita (n_cits, n_uniq, precision) + segundos,
 y PERSISTE el texto de ambas respuestas (sin eso no se puede auditar despues — lección de E3).
@@ -32,6 +34,17 @@ SET = "data/eval/queries_balanced_v2_clean.jsonl"
 FLAG = os.environ["FLAG"]
 NAME = os.environ.get("NAME", FLAG)
 LIMIT = int(os.environ.get("LIMIT", "0"))
+
+
+def _cast(raw, default_kind):
+    """Castea OFF_VAL/ON_VAL al tipo del default del flag (bool o int)."""
+    if raw is None:
+        return None
+    if isinstance(default_kind, bool):
+        return str(raw).strip().lower() in ("1", "true", "yes", "on")
+    if isinstance(default_kind, int):
+        return int(raw)
+    return raw
 OUTDIR = Path(f"data/eval/results/{NAME}")
 DOCS_CACHE = Path("data/eval/results/_docs_cache_balanced_clean.json")
 
@@ -56,6 +69,12 @@ def main():
     if LIMIT: rows = rows[:LIMIT]
     OUTDIR.mkdir(parents=True, exist_ok=True)
     assert hasattr(cfg.settings, FLAG), f"flag inexistente: {FLAG}"
+    _default = getattr(cfg.settings, FLAG)
+    off_val = _cast(os.environ.get("OFF_VAL"), _default)
+    on_val = _cast(os.environ.get("ON_VAL"), _default)
+    if off_val is None: off_val = False if isinstance(_default, bool) else _default
+    if on_val is None: on_val = True if isinstance(_default, bool) else _default
+    print(f"[FLAG] {FLAG}: OFF={off_val!r}  ON={on_val!r}", flush=True)
     llm = get_llm_provider()
 
     # ---- retrieval: cache en disco (identico en ambos brazos y entre experimentos de gen) ----
@@ -96,8 +115,8 @@ def main():
         except Exception as ex:
             print(f"[RESUME] fallo: {type(ex).__name__}", flush=True)
 
-    def gen(qtext, docs, gs, on):
-        setattr(cfg.settings, FLAG, on)
+    def gen(qtext, docs, gs, val):
+        setattr(cfg.settings, FLAG, val)
         for a in (1, 2, 3):
             try:
                 t0 = time.time()
@@ -110,11 +129,11 @@ def main():
                         "prec": (len(good) / len(uniq)) if uniq else 0.0,
                         "secs": round(time.time() - t0, 1), "text": txt}, False
             except Exception as ex:
-                print(f"    ! fail '{qtext[:24]}' {FLAG}={on} {type(ex).__name__}", flush=True)
+                print(f"    ! fail '{qtext[:24]}' {FLAG}={val} {type(ex).__name__}", flush=True)
                 time.sleep(3)
         return {"ok": False, "n_cits": 0, "n_uniq": 0, "prec": 0.0, "secs": 0.0, "text": ""}, True
 
-    print(f"=== FASE B: gen pareada  OFF({FLAG}=False) / ON({FLAG}=True) ===", flush=True)
+    print(f"=== FASE B: gen pareada  OFF({FLAG}={off_val!r}) / ON({FLAG}={on_val!r}) ===", flush=True)
     nq = 0
     for i, q in enumerate(rows):
         if q["query"] in prev:
@@ -122,8 +141,8 @@ def main():
                 if k in prev[q["query"]]: q[k] = prev[q["query"]][k]
             continue
         gs = golds(q)
-        off, e1 = gen(q["query"], q["_docs"], gs, False)
-        on, e2 = gen(q["query"], q["_docs"], gs, True)
+        off, e1 = gen(q["query"], q["_docs"], gs, off_val)
+        on, e2 = gen(q["query"], q["_docs"], gs, on_val)
         q["ok_off"], q["ok_on"] = off["ok"], on["ok"]
         q["off_stats"], q["on_stats"], q["err"] = off, on, e1 or e2
         nq += 1
@@ -131,14 +150,14 @@ def main():
             (OUTDIR / "result.json").write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
             print(f"  gen nuevas={nq}  [{i+1}/{len(rows)}]", flush=True)
     (OUTDIR / "result.json").write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
-    setattr(cfg.settings, FLAG, False)
+    setattr(cfg.settings, FLAG, _default)
 
     valid = [q for q in rows if not q.get("err") and q.get("off_stats")]
     off_t = sum(q["ok_off"] for q in valid); on_t = sum(q["ok_on"] for q in valid)
     won = sum(1 for q in valid if not q["ok_off"] and q["ok_on"])
     lost = sum(1 for q in valid if q["ok_off"] and not q["ok_on"])
     p = _mcnemar_p(lost, won)
-    print(f"\n=== {NAME}: {FLAG} False -> True (in_domain contestables) ===", flush=True)
+    print(f"\n=== {NAME}: {FLAG} {off_val!r} -> {on_val!r} (in_domain contestables) ===", flush=True)
     print(f"  cita_ok  OFF {off_t}/{len(valid)} -> ON {on_t}/{len(valid)}  (gano {won}, perdio {lost})", flush=True)
     print(f"  McNemar p={p:.4f}  ({'SIGNIFICATIVO' if p < 0.05 else 'ruido/flat'})", flush=True)
     for lbl, k in (("citas/resp", "n_cits"), ("citas unicas", "n_uniq"), ("precision", "prec"), ("segundos", "secs")):

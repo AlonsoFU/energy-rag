@@ -161,6 +161,12 @@ def generate_answer(
             from src.pipelines.prompts import fit_docs_to_budget
             active_docs = fit_docs_to_budget(active_docs, budget)
 
+        # GEN10: recorta cuantos docs VE EL GENERADOR (el retrieval ya trajo top_k).
+        # Va DESPUES del budget para que el recorte sea el efectivo. Ver config.answer_doc_limit.
+        _dlim = getattr(cfg.settings, "answer_doc_limit", 0)
+        if _dlim and _dlim > 0:
+            active_docs = active_docs[:_dlim]
+
         prompt = build_answer_prompt(query, active_docs) + extra_instruction
         response_format: dict | None = None
         # Hybrid pattern (default): skip JSON-schema constrained decoding —

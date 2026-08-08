@@ -14,23 +14,54 @@ import re
 #   [art. 5° de 1146553]           ← lowercase
 #   [Art. 5 bis de 1146553]        ← bis/ter
 #   [Art. 36 D de 1146553]         ← letter suffix
+#   [Art. primero de 1204012]      ← ORDINAL EN PALABRA (ver abajo)
+#
+# BUG CORREGIDO 2026-08-08 — artículos numerados con PALABRA no se podían citar.
+# El grupo `art` solo aceptaba `\d+`, así que "[Art. primero de 1204012]" no matcheaba:
+# `extract_citations` devolvía [] Y `strip_malformed_citations` BORRABA la cita del texto
+# mostrado al usuario. No era solo un problema de eval: el sistema eliminaba citas legales
+# válidas de la respuesta final.
+# Alcance: **267 de 2978 artículos (9%) del corpus** usan ordinal en palabra, en 53 formas
+# (PRIMERO/Primero/primero, DECIMOSÉPTIMO, DUODÉCIMO, "primero transitorio", ...).
+# Explicaba fallas medidas: DIA ×3 (gold 1204012/primero), Informe Definitivo ×3
+# (1160108/segundo), Tránsito (220208/tercero).
+# Se usa una LISTA CERRADA de ordinales — no `\w+` — para no legitimar alucinaciones
+# tipo "[Art. ag de 1160108]" que `strip_malformed_citations` debe seguir borrando.
+_ORDINAL_WORDS = (
+    r"(?:d[ée]cimo|undécimo|und[ée]cimo|duod[ée]cimo|decimo)?"      # prefijos compuestos
+    r"(?:primero?|segundo?|tercero?|cuarto?|quinto?|sexto?|s[ée]ptimo?|octavo?|noveno?"
+    r"|d[ée]cimo|und[ée]cimo|duod[ée]cimo|vig[ée]simo)"
+    r"(?:\s+transitorios?)?"                                        # "primero transitorio"
+)
+
 CITATION_PATTERN = re.compile(
     r"\["
     r"(?:art[íi]culos?\.?|arts?\.)"                          # Art / Art. / Artículo / Artículos
     r"\s*"
-    r"(?P<art>\d+\s*[°º]?(?:\s*-\s*\d+)?(?:\s*(?:bis|ter|qu[áa]ter|quinquies))?(?:\s*[A-Z])?)"  # +"-M" (72-1, 212-1)
+    r"(?P<art>"
+    r"\d+\s*[°º]?(?:\s*-\s*\d+)?(?:\s*(?:bis|ter|qu[áa]ter|quinquies))?(?:\s*[A-Z])?"  # +"-M" (72-1, 212-1)
+    r"|" + _ORDINAL_WORDS +                                  # ordinal en palabra
+    r")"
     r"\s+(?:de|del)\s+"                                      # 'de' or 'del'
     r"(?P<norma>[A-Z_0-9]+)"
     r"\]",
     re.IGNORECASE,
 )
 
+_ACCENTS = str.maketrans("áéíóúÁÉÍÓÚ", "aeiouAEIOU")
+
 
 def _normalize_art(s: str) -> str:
-    """Drop degree signs and collapse whitespace so '5°' and '5' match."""
+    """Drop degree signs and collapse whitespace so '5°' and '5' match.
+
+    2026-08-08: además case-fold + sin acentos, para que los ordinales en palabra casen
+    entre la cita del LLM y la DB ('primero' vs 'PRIMERO', 'decimoséptimo' vs 'DECIMOSÉPTIMO').
+    Es inocuo para los numéricos y se aplica a AMBOS lados de toda comparación.
+    """
     s = s.replace("°", "").replace("º", "")
     s = re.sub(r"\s*-\s*", "-", s)              # "72 - 1" / "72°-1" → "72-1"
-    return re.sub(r"\s+", " ", s).strip()
+    s = re.sub(r"\s+", " ", s).strip()
+    return s.translate(_ACCENTS).lower() if re.search(r"[A-Za-zÁÉÍÓÚáéíóú]", s) else s
 
 
 def extract_citations(text: str) -> list[tuple[str, str]]:
