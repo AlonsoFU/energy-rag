@@ -108,7 +108,10 @@ class LiteLLMProvider:
             # Disable reasoning/thinking mode for Qwen3+ series. Without this,
             # the model burns minutes "thinking" before producing tokens —
             # contextual enrichment of 3,318 chunks would take days.
-            kwargs["think"] = False
+            # GEN8 (2026-08-07): flag-gated. think=False empuja el razonamiento al CUERPO de la
+            # respuesta -> loop de deliberacion -> 13.1 citas/respuesta y rechazos con el gold
+            # en rank 0. Con think=True el razonamiento va al campo `thinking` aparte.
+            kwargs["think"] = bool(getattr(_config.settings, "ollama_think", False))
             # Ollama HANGS on ~some queries (0 tokens, connection held open) —
             # non-deterministic, a fresh retry almost never re-hangs. The default
             # litellm 600s timeout turns each hang into a 10min loss (fatal for
