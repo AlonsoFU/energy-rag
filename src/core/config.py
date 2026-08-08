@@ -120,6 +120,15 @@ class Settings(BaseSettings):
     # se adopta, dejarlo ON solo en la ruta de RESPUESTA, no en la de indexado.
     ollama_think: bool = False
 
+    # Tope de salida CUANDO think=True. El razonamiento consume del MISMO presupuesto
+    # que la respuesta, asi que 2000 no alcanza: medido en "que es Plan de obra de
+    # generacion y transmision" -> thinking 8313 chars, done_reason=length, response=0
+    # (el modelo se quedo sin tokens ANTES de responder). Con 6000: thinking 16351,
+    # done=stop, response=630. Sin esto, think=True produce respuestas VACIAS de forma
+    # intermitente (~55% de las queries) y parece un resultado negativo cuando en
+    # realidad es un artefacto de configuracion.
+    ollama_num_predict_think: int = 6000
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the

@@ -104,14 +104,22 @@ class LiteLLMProvider:
             # rociando 28 citas (mayoria duplicadas).
             # El viejo bug del comentario de arriba (num_predict trunca) NO se reproduce en
             # esta version: num_predict=2000 + num_ctx=32768 genero los 2000 sin truncar.
-            kwargs["num_predict"] = getattr(_config.settings, "ollama_num_predict", 2000)
             # Disable reasoning/thinking mode for Qwen3+ series. Without this,
             # the model burns minutes "thinking" before producing tokens —
             # contextual enrichment of 3,318 chunks would take days.
             # GEN8 (2026-08-07): flag-gated. think=False empuja el razonamiento al CUERPO de la
             # respuesta -> loop de deliberacion -> 13.1 citas/respuesta y rechazos con el gold
             # en rank 0. Con think=True el razonamiento va al campo `thinking` aparte.
-            kwargs["think"] = bool(getattr(_config.settings, "ollama_think", False))
+            _think = bool(getattr(_config.settings, "ollama_think", False))
+            kwargs["think"] = _think
+            # OJO: con think=True el razonamiento sale del MISMO presupuesto que la
+            # respuesta -> hace falta un tope mayor o la respuesta queda VACIA
+            # (done_reason=length con response=0). Ver config.ollama_num_predict_think.
+            # (se lee el flag, NO kwargs["think"], para no depender del orden de asignacion)
+            kwargs["num_predict"] = (
+                getattr(_config.settings, "ollama_num_predict_think", 6000) if _think
+                else getattr(_config.settings, "ollama_num_predict", 2000)
+            )
             # Ollama HANGS on ~some queries (0 tokens, connection held open) —
             # non-deterministic, a fresh retry almost never re-hangs. The default
             # litellm 600s timeout turns each hang into a 10min loss (fatal for
