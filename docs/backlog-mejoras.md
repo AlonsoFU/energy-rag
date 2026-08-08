@@ -96,9 +96,25 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
    problema legal aunque cita_ok dé True. → causa = GEN8, no la métrica.
    `scripts/exp_e3_shotgun.py` (además PERSISTE el texto de cada respuesta — ningún eval previo
    lo guardaba, por eso no se podía auditar hacia atrás).
-5c. [ ] **GEN8 loop de deliberación** — SUBE A PRIORITARIO: causa 10 fallas (6 con gold en rank=0)
-   y la precisión 0.43. El modelo delibera **en inglés** ("Okay, let's tackle this query...") y
-   termina rechazando pese a tener el artículo correcto de primero.
+5c. [-] **GEN8a `think=True`** (razonamiento en canal separado) — PROBADO 2026-08-08, **NEGATIVO**.
+   `scripts/exp_gen8_paired.py`: **cita_ok 254→237 (gano 0, perdio 17)**.
+   Calidad de cita SÍ mejora: citas 13.23→2.55, únicas 4.04→1.80, **precisión 0.42→0.64**.
+   Coste: +23% de tiempo (19.8→24.4 s).
+   Desglose de las 17 pérdidas: **5 VACÍAS** (tecnico, ver abajo) · **2 def alternativa válida**
+   (injusticia de eval) · **10 ERROR REAL**. Aun descontando lo demás quedaría 254→244.
+   ⚠️ **CAVEAT de configuración (casi lo tomo como resultado):** el 1er intento dio 0/11 porque
+   con `think=True` el razonamiento sale del MISMO presupuesto que la respuesta y `num_predict=2000`
+   dejaba la respuesta VACÍA (`done_reason=length`, `response=0`). Fix `ollama_num_predict_think=6000`
+   → aun así quedan 5 vacías; subir más si se retoma.
+   **HALLAZGO: con `think=True` el modelo prefiere el artículo FUNCIONAL sobre el DEFINITORIO**
+   (`Infracciones gravísimas` → cita 29819/15 de sanciones en vez del gold 1155887/4 que define;
+   `Coordinador` → 258171/212-1). Es el MISMO sesgo del cross-encoder que RK1 no rompió. La
+   deliberación en el cuerpo, aunque fea, hacía que enumerara todo e incluyera el artículo inyectado.
+5d. [ ] **GEN8b · sesgo DEFINICIÓN-vs-FUNCIONAL en el generador** (siguiente): instrucción explícita
+   de citar el artículo que DEFINE cuando la query pide definición. Ataca la causa que GEN8a expuso.
+5e. [ ] **cita_ok premia ROCIAR** (consecuencia de GEN8a): con 4.04 citas la precisión es 0.42 y
+   acierta; con 1.80 sube a 0.64 y falla. El fix de fondo es una MÉTRICA con precisión, no más
+   prompt-engineering. Ver E1/E3.
 6. [ ] **E1 RAGAS faithfulness** — medir QUÉ falla en gen ANTES de tocar gen.
 7. [ ] **GEN6 fix runner** (trivial) + **GEN3 reordering** (barato) + **GEN2 self-consistency** si E1 lo justifica.
 
