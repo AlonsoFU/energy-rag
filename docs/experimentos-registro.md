@@ -34,6 +34,17 @@ holdout 18 · balanced_v2 339.
 | 16 | concept_inference | LLM infiere concepto legal → retrieval | retrieval +3 / **gen −1** | ✗ trade-off | ✗ |
 | 17 | Fine-tune 0.6B | embedder con pares | screen | overfit | ✗ |
 | 18 | LLM-rewrite (30b) | reformular query | — | se cuelga; con 9b entra al ensemble (#5) | ✗ |
+| 19 | **E0 · robustez de eval** | set primario `balanced_v2` 339q + McNemar pareado, gen resumible | metodo | los sets 39/44/18 NO detectan Δ≤2 (ruido binomial ±2 = 1σ) | ✅ **adoptado** (método) |
+| 20 | **E0b · `also_gold`** | auditar golds: definiciones alternativas válidas rechazadas | cita_ok | **62% → 84%** (+22, TODO por limpieza de eval) | ✅ **WIN** (era el eval, no el sistema) |
+| 21 | **glossary_inject** | arista determinista término-glosario→artículo padre, inyectado al top-k sin desplazar | cita_ok | **233→249 (+16, 0 pérdidas), McNemar p=0.0000** | ✅ **WIN mayor** (adoptado, default ON) |
+| 22 | M1 pool 50→100 (pareado limpio) | re-test sobre eval limpio + glossary_inject ON | cita_ok | **252→252, 0 flips, p=1.0000.** 41 top-10 cambiaron, ninguno convirtió | ✗ **muerto definitivo** |
+| 23 | RK1 · Qwen3-Reranker-4B | reemplazar BGE cross-encoder | recall@10 | BGE 237 vs Qwen3 239 = **Δ+2 ruido**, 17× más lento | ✗ el reranker no es el muro |
+| 24 | **E3 · auditoría efecto escopeta** | ¿cita_ok infla por citar mucho? `hit` vs `hit_first` | cita_ok | **253 vs 243** → solo 11 (3.9%) por cita no-primera. **Métrica SANA**. Pero precisión media **0.43** | ✅ medición (descartó la sospecha) |
+| 25 | **E0c · `unanswerable`** | 12 queries piden definiciones que el corpus NO contiene (auditados 2978 arts, 5 patrones) | cita_ok | **90.7% → 94.4%** (252/267). El sistema RECHAZA bien y el eval lo penalizaba | ✅ **WIN** (era el eval otra vez) |
+| 26 | **D2 · leyenda de variable** | extractor para `TON : ...` / `Donde: DIP: ...` (sin marcador `a)` ni trigger de glosario) | cita_ok | 252→254 (+2), **p=0.6250 NO significativo**. Tabla 608→713 | ⚠️ **adoptado por CORRECCIÓN de datos**, no por el Δ |
+| 27 | GEN8a · `think=True` | mover el razonamiento a canal separado (deja de contaminar la respuesta) | cita_ok | **254→237 (−17, 0 ganadas)**. Pero citas 13.2→2.6 y **precisión 0.42→0.64** | ✗ **negativo** (trade-off real) |
+| 28 | GEN8b · prompt prefer-definition | ordenar citar el artículo que DEFINE, no el que sanciona/regula | cita_ok | 253→254 (+1), **p=1.0 FLAT**. citas 13.19→13.09 | ✗ el prompt no mueve el comportamiento |
+| 29 | GEN9 · ordinales en palabra | parser + prompt para `[Art. primero de 1204012]` (9% del corpus no se podía citar) | cita_ok | ver §6 | ⚠️ parser adoptado por bug de producción |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -150,3 +161,69 @@ exp_ensemble_e2e.py    ensemble end-to-end
 exp_stage_split.py     diagnóstico: fallo-embedder vs fallo-reranker
 ```
 Resultados en `data/eval/results/<experimento>/result.json`.
+
+---
+
+## 6. Campaña 2026-08 — qué movió la aguja (y qué no)
+
+Detalle completo: `campaign-def-recall-2026-08.md`. Backlog vivo: `backlog-mejoras.md`.
+
+### Recorrido de la métrica
+```
+62%    eval sucio (rechazaba definiciones alternativas validas)
+84%    E0b  also_gold                                    +22  <- ERA EL EVAL
+89.2%  glossary_inject (inyeccion determinista)          +16  <- unica mejora de sistema
+90.7%  fixes de generacion (num_ctx + num_predict)        +3  <- ERA INFRA
+94.4%  E0c  unanswerable (12 queries imposibles)          +4  <- ERA EL EVAL
+94.8%  D2 leyenda de variable                            +2   (p=0.63, por correccion)
+```
+**De +33 puntos, ~29 vinieron de arreglar la MEDICIÓN o los DATOS.** Un solo cambio de sistema
+(`glossary_inject`) convirtió. Ningún cambio de MODELO convirtió nunca.
+
+### Bugs de infraestructura que se disfrazaban de resultados
+Los 4 se encontraron persiguiendo cuelgues, no buscándolos. Cada uno falseaba mediciones:
+
+| bug | efecto | cómo se veía |
+|---|---|---|
+| `num_ctx=16384` desbordado (prompt 15.6k + salida 2k) | cuelgue 900s; `gen()` devolvía `False` | queries "fallando" que eran timeouts |
+| sin `num_predict` | ollama genera hasta llenar ctx; el fix de num_ctx lo destapó | timeouts nuevos tras "arreglar" lo anterior |
+| `NOISE` regex: `Art\.`/`D\.O\.` + `\b` nunca matchea | líneas de enmienda DENTRO de definiciones, y palabras partidas | el trigger de TON no disparaba |
+| `CITATION_PATTERN` sin ordinales | 267/2978 arts (9%) no citables; `strip_malformed_citations` los BORRABA | citas legales válidas desaparecían de la respuesta |
+| resume con `c["q"]` vs `c["query"]` (except tragado) | regeneraba 279 queries desde cero, en silencio | "el experimento va lento" |
+| `num_predict=2000` con `think=True` | el razonamiento consume el presupuesto → `response=""` | GEN8a daba 0/11: parecía negativo rotundo |
+
+### Muros confirmados (no insistir sin hipótesis nueva)
+- **Pool/profundidad de retrieval** — 0 flips en 279 pares (#22).
+- **Reranker** — ningún cross-encoder rompe el sesgo funcional-vs-definitorio (#7, #23). Se sortea
+  con **inyección determinista**, no con modelos mejores.
+- **Prompt-engineering sobre el generador** — #28 flat, #29 marginal. Con `think=False` el modelo
+  delibera y cita todo lo que mira; las instrucciones no lo frenan.
+
+### Deuda de MEDICIÓN abierta (lo más importante que queda)
+**`cita_ok` premia ROCIAR.** Medido en #27: con 4.04 citas únicas la precisión es 0.42 y acierta;
+con 1.80 sube a 0.64 y falla. Mientras la métrica sea "¿alguna cita pega?", toda mejora de
+*calidad* de cita se verá como regresión. Antes de más trabajo de generación hay que cerrar
+**E1 (métrica con precisión / faithfulness)** — si no, se optimiza el número equivocado.
+
+### Reglas que salieron a los golpes
+1. **Auditar el gold ANTES de construir el fix** (evitó un extractor para 4 términos inexistentes).
+2. **Auditar el eval exige las MISMAS normalizaciones que usa el eval** (`_normalize_art`, `º`/`°`,
+   siglas con punto: `C.O.M.A.` vs `C.O.M.A`).
+3. **Medir pareado, ambos brazos en la misma sesión** — comparar contra un baseline en disco mezcla
+   el efecto con el flicker del LLM (fue lo que contaminó M2).
+4. **Persistir el TEXTO de las respuestas**, no solo el booleano — sin eso no se puede auditar nada
+   hacia atrás (se descubrió al intentar auditar #24 y hubo que regenerar todo).
+
+### Scripts nuevos
+```
+exp_e0_baseline.py       baseline robusto resumible
+audit_golds.py           E0b: also_gold
+audit_unanswerable.py    E0c: detecta definiciones que el corpus no contiene
+exp_glossary_inject.py   #21
+exp_m1_paired.py         #22 (pareado, no contra baseline en disco)
+exp_e3_shotgun.py        #24 (persiste texto + citas por query)
+diag_refusals.py         separa fallas de RETRIEVAL vs de GEN
+exp_d2_paired.py         #26 (swap de tablas para el brazo OFF)
+exp_gen8_paired.py       #27
+exp_genflag_paired.py    runner PAREADO reutilizable (FLAG/NAME) + cache de retrieval
+```
