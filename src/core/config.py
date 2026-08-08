@@ -129,6 +129,13 @@ class Settings(BaseSettings):
     # realidad es un artefacto de configuracion.
     ollama_num_predict_think: int = 6000
 
+    # GEN8b (flag OFF, en prueba): bloque de prompt que ordena citar el artículo DEFINITORIO
+    # y no el FUNCIONAL en preguntas de definición. Ver PREFER_DEFINITION_BLOCK en prompts.py
+    # para la evidencia (GEN8a: 'Infracciones gravísimas' -> cita el art de sanciones 29819/15
+    # en vez del gold 1155887/4 que define). Ataca en GENERACIÓN el mismo sesgo que
+    # glossary_inject ataca en RETRIEVAL.
+    prompt_prefer_definition: bool = False
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the

@@ -181,6 +181,35 @@ def build_answer_prompt(query: str, docs: list[dict],
     return ANSWER_USER_TEMPLATE.format(query=query, articulos_block=block)
 
 
+# GEN8b (flag `prompt_prefer_definition`, default OFF): sesgo DEFINICIÓN-vs-FUNCIONAL.
+# Medido en GEN8a: ante "qué es Infracciones gravísimas" el modelo cita 29819/15 (el artículo
+# que SANCIONA) en vez del gold 1155887/4 (el que DEFINE); ante "qué es Coordinador" cita
+# 258171/212-1 (funcional) en vez de 250604/13 (definitorio). Es el MISMO sesgo que muestra el
+# cross-encoder al rankear y que RK1 (Qwen3-Reranker) no logró romper: se sortea con reglas
+# deterministas, no con modelos más grandes. `glossary_inject` ya lo arregla en retrieval
+# (mete el artículo definitorio en rank 0); esto ataca la mitad de GENERACIÓN.
+PREFER_DEFINITION_BLOCK = """
+
+==========================================================
+PREGUNTAS DE DEFINICIÓN — QUÉ ARTÍCULO CITAR
+==========================================================
+Si la pregunta pide QUÉ ES / QUÉ SIGNIFICA / DEFINICIÓN DE un término:
+
+✅ CITA el artículo que DEFINE el término, es decir el que lo enuncia como:
+     "Término: descripción..."      (glosario o leyenda de variables)
+     "se entenderá por Término..."  /  "se entiende por Término..."
+
+❌ NO cites el artículo que solo USA, REGULA o SANCIONA el término.
+
+Ejemplo: para "qué es Infracciones gravísimas", cita el artículo que dice
+"Infracciones gravísimas: ..." — NO el que fija las multas por cometerlas.
+
+Si ambos aparecen entre los artículos provistos, el DEFINITORIO va primero."""
+
+
 def get_answer_system() -> str:
     """Return the system prompt with citation rules."""
+    from src.core import config as _cfg
+    if getattr(_cfg.settings, "prompt_prefer_definition", False):
+        return ANSWER_SYSTEM + PREFER_DEFINITION_BLOCK
     return ANSWER_SYSTEM

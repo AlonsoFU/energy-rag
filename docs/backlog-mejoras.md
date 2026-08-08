@@ -110,8 +110,13 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
    (`Infracciones gravísimas` → cita 29819/15 de sanciones en vez del gold 1155887/4 que define;
    `Coordinador` → 258171/212-1). Es el MISMO sesgo del cross-encoder que RK1 no rompió. La
    deliberación en el cuerpo, aunque fea, hacía que enumerara todo e incluyera el artículo inyectado.
-5d. [ ] **GEN8b · sesgo DEFINICIÓN-vs-FUNCIONAL en el generador** (siguiente): instrucción explícita
-   de citar el artículo que DEFINE cuando la query pide definición. Ataca la causa que GEN8a expuso.
+5d. [-] **GEN8b · sesgo DEFINICIÓN-vs-FUNCIONAL vía prompt** — PROBADO 2026-08-08, **FLAT**.
+   Flag `prompt_prefer_definition` (bloque `PREFER_DEFINITION_BLOCK` en prompts.py, +744 chars):
+   **cita_ok 253→254 (gano 2, perdio 1), McNemar p=1.0.** citas 13.19→13.09, únicas 4.04→3.93,
+   precisión 0.42→0.43, tiempo igual. **La instrucción NO mueve el comportamiento**: con
+   `think=False` el modelo delibera y cita todo lo que mira; decirle cuál preferir no lo frena.
+   → El sesgo definición-vs-funcional NO se arregla por prompt. Se arregla en RETRIEVAL con
+   inyección determinista (`glossary_inject`, +16). Mismo patrón que RK1: el fix no es el modelo.
 5e. [ ] **cita_ok premia ROCIAR** (consecuencia de GEN8a): con 4.04 citas la precisión es 0.42 y
    acierta; con 1.80 sube a 0.64 y falla. El fix de fondo es una MÉTRICA con precisión, no más
    prompt-engineering. Ver E1/E3.
