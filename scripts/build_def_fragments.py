@@ -14,7 +14,61 @@ ITEM = re.compile(r'(?m)^\s{1,}([a-z]{1,2}|\d{1,2})[.)](?:-)?\s+([^:\n]{2,80}?):
 # gatillo de articulo-definiciones (encabezado tipico)
 TRIGGER = re.compile(r'se entender[aá]|se entiende por|para (los )?efectos', re.I)
 # lineas de ruido de enmienda intercaladas (Decreto/Ley/Art./D.O.)
-NOISE = re.compile(r'(?m)^\s*(Decreto|Ley|DFL|Art\.|D\.O\.|LEY|DECRETO)\b.*$')
+# BUG CORREGIDO 2026-08-07: la version anterior era
+#   ^\s*(Decreto|Ley|DFL|Art\.|D\.O\.|LEY|DECRETO)\b.*$
+# y `Art\.`/`D\.O\.` seguidos de \b NUNCA matcheaban: tras el '.' viene un espacio y entre dos
+# caracteres no-palabra no hay frontera. Solo se borraba 'Decreto ...', y las lineas
+# 'Art. primero N° 38), i' / 'D.O. 05.06.2024' se colaban DENTRO de las definiciones y ademas
+# PARTIAN palabras ('siguiente c' + ruido + 'ociente:'). Afectaba tambien a los 608 fragmentos
+# del glosario clasico, no solo a D2.
+NOISE = re.compile(r'(?m)^[\s ]*(?:(?:Decreto|Ley|DFL|LEY|DECRETO)\b|Art\.|D\.O\.).*$')
+
+# ---- D2 (2026-08-07): formato LEYENDA DE VARIABLE ----
+# Articulos con formula + leyenda de simbolos. NO tienen marcador 'a)' ni TRIGGER de glosario,
+# por eso el extractor original los perdia. Dos variantes reales medidas:
+#   250604/53  'IFOR\xa0 \xa0 : Indisponibilidad forzada.'          <- token al inicio de linea
+#   250604/31  '\xa0 \xa0 DIP: Menor disponibilidad media anual...' <- sangrado con nbsp, tras 'Donde:'
+# El token debe PARECER variable (no prosa) o esto matchea 'TÍTULO II:' y cualquier frase.
+VARLEG = re.compile(r'(?m)^[\s ]*([A-ZÁÉÍÓÚÑ][A-Za-z0-9áéíóúñÁÉÍÓÚÑ.]{1,11})[\s ]*:[\s ]')
+# gatillo: el articulo declara una formula/leyenda
+VARLEG_TRIGGER = re.compile(
+    r'Donde\s*:|siguiente\s+(expresi[oó]n|cociente|f[oó]rmula)|de acuerdo a la siguiente', re.I)
+# encabezados estructurales que SI matchean la forma de token pero NO son variables
+VARLEG_STOP = {'TITULO', 'TÍTULO', 'CAPITULO', 'CAPÍTULO', 'PARRAFO', 'PÁRRAFO', 'ANEXO',
+               'ARTICULO', 'ARTÍCULO', 'NOTA', 'LEY', 'DECRETO', 'DFL', 'D.O.', 'ENERGIA',
+               'ENERGÍA', 'CONSIDERANDO', 'VISTO', 'VISTOS', 'RESUELVO', 'DECRETO.'}
+
+
+def _is_var_token(tok: str) -> bool:
+    """Token con pinta de variable: >=2 mayusculas o siglas con puntos. Filtra prosa
+    ('Artículo', 'Nota' tienen 1 sola mayuscula) y encabezados estructurales."""
+    if tok.upper().rstrip('.') in VARLEG_STOP:
+        return False
+    return sum(1 for ch in tok if ch.isupper()) >= 2 or '.' in tok
+
+
+def extract_varleg(texto):
+    """D2: [(simbolo, descripcion)] de un articulo con leyenda de variables, o []."""
+    clean = NOISE.sub('', texto)
+    # OJO: el gatillo se busca en el texto LIMPIO y SIN saltos, porque las lineas de enmienda
+    # PARTEN palabras. Real en 250604/53:
+    #   '...a partir del siguiente c\nDecreto 70, ENERGIA\n...\nociente:'
+    # es decir 'cociente' queda cortado -> buscarlo en el crudo daba 0 matches y se perdia TON.
+    flat = re.sub(r'[\n\r]+', '', clean)
+    if not VARLEG_TRIGGER.search(flat):
+        return []
+    ms = [m for m in VARLEG.finditer(clean) if _is_var_token(m.group(1))]
+    if len(ms) < 2:          # mismo gate que el glosario: >=2 items
+        return []
+    out = []
+    for i, m in enumerate(ms):
+        sym = m.group(1).strip().rstrip('.')
+        start = m.end()
+        end = ms[i + 1].start() if i + 1 < len(ms) else len(clean)
+        desc = re.sub(r'[\s ]+', ' ', clean[start:end]).strip().strip('.')
+        if sym and len(desc) > 15:   # descripcion real, no un resto de formula
+            out.append((sym, desc))
+    return out
 
 
 def extract_fragments(texto):
@@ -42,17 +96,30 @@ def main():
         cur.execute("SELECT id, id_norma, numero, texto FROM articulos WHERE texto IS NOT NULL;")
         arts = cur.fetchall()
     glos = 0; total_frags = 0; frag_records = []
+    varleg_arts = 0; varleg_frags = 0
     for aid, id_norma, numero, texto in arts:
         frags = extract_fragments(texto)
-        if not frags:
-            continue
-        glos += 1; total_frags += len(frags)
-        for termino, deftxt in frags:
-            frag_records.append({"articulo_id": int(aid), "id_norma": id_norma,
-                                 "numero": numero, "termino": termino,
-                                 "texto": f"{termino}: {deftxt}"})
+        if frags:
+            glos += 1; total_frags += len(frags)
+            for termino, deftxt in frags:
+                frag_records.append({"articulo_id": int(aid), "id_norma": id_norma,
+                                     "numero": numero, "termino": termino,
+                                     "texto": f"{termino}: {deftxt}"})
+        # D2: leyenda de variables (complementario; un articulo puede tener ambos)
+        vl = extract_varleg(texto)
+        if vl:
+            varleg_arts += 1
+            have = {t.lower() for t, _ in frags}
+            for sym, desc in vl:
+                if sym.lower() in have:      # ya capturado por el glosario clasico
+                    continue
+                varleg_frags += 1
+                frag_records.append({"articulo_id": int(aid), "id_norma": id_norma,
+                                     "numero": numero, "termino": sym,
+                                     "texto": f"{sym}: {desc}"})
     print(f"articulos-glosario detectados: {glos}")
     print(f"fragmentos-definicion totales:  {total_frags}")
+    print(f"[D2] articulos con leyenda de variable: {varleg_arts}  -> fragmentos nuevos: {varleg_frags}")
 
     # cobertura sobre los conceptos que fallan en E0
     try:
