@@ -49,6 +49,8 @@ holdout 18 · balanced_v2 339.
 | 31 | **GEN9c · quitar `<think>` del texto visible** | `think=False` NO suprime el razonamiento: el bloque queda DENTRO de `response` | cita_ok + precisión | **156/267 (58%) mostraban el monólogo al usuario**. Medido en corrida real: cita_ok 262→260 (**−2**), citas únicas 4.20→3.04, **precisión 0.42→0.58**, `<think>` visible 0/267 | ✅ **adoptado** (bug de producción) |
 | 32 | GEN10 · `answer_doc_limit=5` | ¿menos docs → el modelo se compromete con el #1? | cita_ok | 262→261 (gana 1, pierde 2), **p=1.0 FLAT**. precisión 0.42→0.45 | ✗ flat |
 | 33 | GEN11 · `answer_doc_limit=3` | idem, más agresivo | cita_ok | 260→261 (gana 3, pierde 2), **p=1.0 FLAT**. precisión 0.58→0.70, **tiempo 20.4→14.4 s (−30%)** | ✗ flat en calidad; ⏳ útil solo como palanca de LATENCIA |
+| 34 | **NO-REGRESIÓN** (dev/coloquial/holdout) | los 6 cambios adoptados solo se habían medido en `balanced_v2` | cita_ok | coloquial **36/39** (hist 37/39) · dev **37/44** (hist 36/44) · holdout **17/18** (hist 17/18) → **±1, SIN REGRESIÓN** | ✅ verificado |
+| 35 | GEN8a-v2 · `think=True` (comparación justa) | rehecho tras el fix de `<think>`: antes el brazo OFF contaba citas del bloque de razonamiento | cita_ok | **260→244 (gana 1, pierde 17), p=0.0001 SIGNIFICATIVO NEGATIVO**. precisión 0.58→0.66 | ✗ **confirmado negativo** (no era artefacto) |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -249,3 +251,47 @@ exp_d2_paired.py         #26 (swap de tablas para el brazo OFF)
 exp_gen8_paired.py       #27
 exp_genflag_paired.py    runner PAREADO reutilizable (FLAG/NAME) + cache de retrieval
 ```
+
+
+---
+
+## 7. No-regresión y caveats (2026-08-09)
+
+### #34 — los 6 cambios NO rompen nada fuera de `balanced_v2`
+```
+coloquial        36/39 = 92.3%   historico 37/39 (94.9%)   -1  (flicker LLM)
+dev_independent  37/44 = 84.1%   historico 36/44 (81.8%)   +1
+holdout          17/18 = 94.4%   historico 17/18 (94.4%)    =
+```
+Importa porque `glossary_inject` y D2 se **diseñaron mirando fallas de balanced_v2** — eran los
+candidatos naturales a overfit. No lo hay.
+
+**⚠️ Error propio, repetido:** la primera lectura del script daba holdout 17/24 = 70.8% y parecía
+regresión grave. Las 6 "fallas" extra eran queries de RECHAZO (`gold=None`: *"cómo hacer un queque
+de zanahoria"*, *"capital de Australia"*) y el script exigía una cita para darlas por buenas.
+**Es exactamente el error de E0c, que yo mismo documenté y volví a cometer**: un scorer que no
+distingue "contestable" de "hay que rechazar". Regla reforzada: *todo scorer nuevo debe declarar
+cómo puntúa el rechazo ANTES de correrlo.*
+
+### CAVEAT de `glossary_inject`: queries ambiguas de una palabra
+En dev y holdout hay 2 rechazos que el sistema ahora **responde**:
+```
+"qué es la comisión"      -> "La Comisión Nacional de Energía [Art. 5 de 1146553]"
+"qué significa coordinado" -> definicion de "Coordinado"
+```
+Causa verificada: `def_exact` matchea ambos (`comisión`→1146553/5, `coordinado`→1160108/2), o sea
+lo introdujo `glossary_inject`. **Los términos SÍ están definidos en el corpus**, así que la
+respuesta es defendible; pero el set los marcaba como test de rechazo, porque son queries vagas
+donde el usuario podría querer otra cosa ("comisión" también es una tarifa).
+
+**Es un trade-off legal, no un bug:** ante un match exacto, el sistema ahora afirma en vez de
+preguntar. Conecta directo con **D4 (UX de ambigüedad)**: cuando la query matchea varios conceptos
+o es de una sola palabra, mostrar opciones / preguntar en vez de adivinar. Queda como el caveat
+principal del mayor WIN de la campaña.
+
+### Estado final de la campaña
+- **cita_ok contestables: 260/267 = 97.4%** (`balanced_v2_clean`), citas visibles, precisión 0.58.
+- **7 fallas duras**: Reposición · DIA · Ajustes · Infracciones graves · Tránsito ×3.
+- Frentes AGOTADOS con las palancas disponibles: pool, reranker, think, prompts, recorte de docs.
+- Siguiente valor real: **E1 (métrica con precisión)** y **D1 (vigencia/derogación)** — el único
+  error *grave* que le queda al sistema es citar norma derogada.
