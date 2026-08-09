@@ -28,11 +28,13 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**REALIDAD DE LA MÉTRICA (2026-08-07, CRÍTICO):** cita_ok **contestables 252/267 = 94.4%**
+**REALIDAD DE LA MÉTRICA (2026-08-08, CRÍTICO):** cita_ok **contestables 260/267 = 97.4%**
 (`data/eval/queries_balanced_v2_clean.jsonl`). Camino: 62% (eval sucio) → 84% (E0b `also_gold`) →
 89.2% (`glossary_inject` +16) → 90.7% (fixes de gen: num_ctx+num_predict, los timeouts se contaban
 como False) → **94.4% (E0c: 12 queries marcadas `unanswerable` — piden definiciones que el corpus
 NO contiene; el sistema rechaza CORRECTAMENTE y el eval lo penalizaba)**.
+→ **97.4% (GEN9a: `CITATION_PATTERN` no aceptaba `[Art. primero de X]`; 9% del corpus no era
+citable y `strip_malformed_citations` BORRABA la cita de la respuesta. +7, p=0.016)**.
 ⚠️ Las `unanswerable` deben puntuar **rechazo = acierto** (como `off_corpus`). Hoy 8/12.
 Probados y NEGATIVOS/flat (McNemar pareado): M1 pool, G1 grafo crudo, M2 def_fragments, rechunk,
 RK1 Qwen3-Reranker. Lo que SÍ movió: arreglar la métrica (+19) y `glossary_inject` (+16).

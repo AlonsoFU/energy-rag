@@ -38,8 +38,8 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 **HECHO esta campaña:** [x] E0/E0b (eval real 84%, no 62%) · [-] M1 (ruido) · [-] G1 crudo (aristas
 vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
 
-**Diagnóstico VIGENTE (2026-08-07, post-E3+E0c — reemplaza al de 2026-08):** cita_ok
-**contestables 252/267 = 94.4%**. De las **26 fallas brutas** (`scripts/diag_refusals.py`):
+**Diagnóstico (2026-08-07, post-E3+E0c; la métrica quedó luego en 97.4% con GEN9a):** cita_ok
+contestables 252/267. De las **26 fallas brutas** (`scripts/diag_refusals.py`):
 Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 con **rank=0**).
 19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
 
@@ -53,10 +53,12 @@ Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 c
   `se entiende por`, `TERM es/será`, `se denomina`, `definición de`). El gold apunta a un artículo
   que solo MENCIONA la palabra. **Rechazar es la conducta CORRECTA y el eval la castiga.** → E0c.
 
-**MÉTRICA VIGENTE (E0c aplicado): contestables 252/267 = 94.4%** · imposibles: rechazo
-correcto 8/12. Las fallas realmente atacables son **15, no 26**.
-⚠️ Es la 4ª vez que el eval es parte del problema (eval sucio −22 · timeouts como False ·
-golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
+**MÉTRICA VIGENTE (2026-08-08, post-GEN9a): contestables 260/267 = 97.4%** · imposibles:
+rechazo correcto 8/12. Quedan **7 fallas**.
+⚠️ 5 de las 6 mejoras grandes fueron arreglar el EVAL, los DATOS o un BUG (eval sucio −22 ·
+timeouts como False · golds mención-vs-definición · parser de ordinales +7). Solo
+`glossary_inject` fue un cambio de sistema. **Ningún cambio de MODELO convirtió nunca.**
+**Auditar el gold ANTES de construir el fix.**
 
 ### FASE A — exprimir el buscador (local/barato)
 1. [x] **glossary_inject** — ADOPTADO 2026-08-05 (default ON). **233→249/279 (+16, 0 pérdidas),
