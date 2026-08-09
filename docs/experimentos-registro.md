@@ -46,7 +46,9 @@ holdout 18 · balanced_v2 339.
 | 28 | GEN8b · prompt prefer-definition | ordenar citar el artículo que DEFINE, no el que sanciona/regula | cita_ok | 253→254 (+1), **p=1.0 FLAT**. citas 13.19→13.09 | ✗ el prompt no mueve el comportamiento |
 | 29 | **GEN9a · parser de ordinales** | `CITATION_PATTERN` no aceptaba `[Art. primero de 1204012]`; 267/2978 arts (9%) no citables | cita_ok | **253→260 (+7, 0 pérdidas), p=0.016** | ✅ **WIN** (bug de producción) |
 | 30 | GEN9b · prompt de ordinales | además, enseñar al modelo que los ordinales se citan | cita_ok | 260→261 (+1), **p=1.0 FLAT** | ✗ el parser ya bastaba |
-| 31 | **GEN9c · quitar `<think>` del texto visible** | `think=False` NO suprime el razonamiento: el bloque queda DENTRO de `response` | cita_ok | **156/267 (58%) mostraban el monólogo al usuario**. cita_ok 260→**254** (6 acertaban por una cita que el usuario nunca vio); citas únicas 4.19→2.93 | ✅ **adoptado** (bug de producción; BAJA la métrica) |
+| 31 | **GEN9c · quitar `<think>` del texto visible** | `think=False` NO suprime el razonamiento: el bloque queda DENTRO de `response` | cita_ok + precisión | **156/267 (58%) mostraban el monólogo al usuario**. Medido en corrida real: cita_ok 262→260 (**−2**), citas únicas 4.20→3.04, **precisión 0.42→0.58**, `<think>` visible 0/267 | ✅ **adoptado** (bug de producción) |
+| 32 | GEN10 · `answer_doc_limit=5` | ¿menos docs → el modelo se compromete con el #1? | cita_ok | 262→261 (gana 1, pierde 2), **p=1.0 FLAT**. precisión 0.42→0.45 | ✗ flat |
+| 33 | GEN11 · `answer_doc_limit=3` | idem, más agresivo | cita_ok | 260→261 (gana 3, pierde 2), **p=1.0 FLAT**. precisión 0.58→0.70, **tiempo 20.4→14.4 s (−30%)** | ✗ flat en calidad; ⏳ útil solo como palanca de LATENCIA |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -179,9 +181,15 @@ Detalle completo: `campaign-def-recall-2026-08.md`. Backlog vivo: `backlog-mejor
 94.4%  E0c  unanswerable (12 queries imposibles)          +4  <- ERA EL EVAL
 94.8%  D2 leyenda de variable                            +2   (p=0.63, por correccion)
 97.4%  GEN9a parser de ordinales                         +7   <- ERA UN BUG DE CITAS
-95.1%  GEN9c quitar <think> del texto visible        -6   <- LA METRICA ESTABA INFLADA
+97.4%  GEN9c quitar <think> del texto visible        -2   <- corrige inflacion; precision 0.42->0.58
 ```
-**Número honesto final: 254/267 = 95.1%.**
+**Número final: 260/267 = 97.4%**, ahora con citas que el usuario REALMENTE VE.
+
+⚠️ **Corrección de una estimación mía:** calculé offline que quitar el bloque `<think>` costaría
+6 aciertos (260→254) recortando el texto y re-puntuando. Costó **2**. El cálculo no consideraba el
+BUCLE DE REINTENTO: cuando la respuesta visible queda sin citas válidas, `verify_citations` falla,
+el modelo regenera y produce una respuesta bien citada. **Re-puntuar texto viejo subestima el
+efecto de un cambio que altera el bucle de generación** — hay que correrlo de verdad.
 **De +35 puntos, ~29 vinieron de arreglar la MEDICIÓN o los DATOS y +7 de un BUG de citas.**
 Un solo cambio de sistema (`glossary_inject`) convirtió. **Ningún cambio de MODELO convirtió nunca.**
 
