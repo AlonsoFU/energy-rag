@@ -152,6 +152,23 @@ class Settings(BaseSettings):
     # pareado lo mide directo (no asumir que gana).
     answer_doc_limit: int = 0
 
+    # GEN12 (flag OFF, en prueba): HÍBRIDO de razonamiento.
+    # 1er intento con think=True (razonamiento en canal separado -> respuesta corta y precisa);
+    # si no deja una cita utilizable —o si RECHAZA— se reintenta con think=False (razonamiento
+    # en el cuerpo), que es el modo que rescata los golds.
+    # Evidencia (E1 + GEN8a-v2, 267q): think=True da precisión 0.66 vs 0.58 y +40 respuestas con
+    # TODAS las citas correctas, pero pierde 16 golds, casi siempre por rechazar. El reintento
+    # ataca ese modo de falla exacto.
+    # ⚠️ Cuesta una generación extra SOLO en las queries donde el 1er intento no sirve.
+    think_hybrid: bool = False
+
+    # GEN2 (0 = OFF, en prueba): SELF-CONSISTENCY de citas. Genera N respuestas con
+    # temperatura>0 y se queda con la que MÁS respalda el consenso de citas (las que
+    # aparecen en >=2 de las N). Ataca el problema medido por E1: `cita_ok` premia rociar
+    # y la precisión media es 0.58 — una cita que aparece en una sola pasada suele ser ruido.
+    # ⚠️ Cuesta N generaciones por query.
+    self_consistency_n: int = 0
+
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
     # paraphrased queries to SIMPLE, where the paraphrase embedding misses the

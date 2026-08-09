@@ -105,6 +105,41 @@ def _strip_think_block(text: str) -> str:
     return out.strip()
 
 
+def _self_consistency(query, docs, llm, model, kwargs, n):
+    """GEN2: N respuestas con temperatura>0; devuelve la que mejor respalda el CONSENSO.
+
+    Consenso = citas que aparecen en >=2 de las N respuestas. Se elige la respuesta cuya
+    proporción de citas-en-consenso sea mayor (desempate: más citas de consenso, luego más
+    corta). Ataca lo medido por E1: la precisión media es 0.58, y una cita que sale en una
+    sola pasada suele ser ruido de deliberación.
+    Si algo falla, devuelve None y el caller sigue por la ruta normal.
+    """
+    from collections import Counter
+    from src.pipelines.grounding import extract_citations as _xc, _normalize_art as _na
+    cands = []
+    for i in range(n):
+        try:
+            t = _strip_think_block(llm.generate(**{**kwargs, "temperature": 0.7}).text)
+        except Exception:
+            continue
+        cits = [(str(a), _na(str(b))) for a, b in _xc(t)]
+        cands.append((t, list(dict.fromkeys(cits))))
+    if not cands:
+        return None
+    freq = Counter(c for _, cits in cands for c in cits)
+    consenso = {c for c, k in freq.items() if k >= 2}
+    if not consenso:
+        return cands[0][0]
+
+    def _score(item):
+        _t, cits = item
+        if not cits:
+            return (-1.0, 0, 0)
+        buenas = [c for c in cits if c in consenso]
+        return (len(buenas) / len(cits), len(buenas), -len(_t))
+    return max(cands, key=_score)[0]
+
+
 def generate_answer(
     query: str,
     docs: list[dict],
@@ -169,6 +204,10 @@ def generate_answer(
 
     system = get_answer_system()
 
+    # El híbrido MUTA cfg.settings.ollama_think por intento; se restaura al salir para no
+    # filtrar estado a la siguiente query (bug clásico de flag global).
+    _think_orig = getattr(cfg.settings, "ollama_think", False)
+
     response_text = ""
     grounding_pass = False
     tokens_in = tokens_out = 0
@@ -197,6 +236,15 @@ def generate_answer(
         if _dlim and _dlim > 0:
             active_docs = active_docs[:_dlim]
 
+        # GEN12 HÍBRIDO think (flag `think_hybrid`): 1er intento razonando en canal separado
+        # (respuesta corta y precisa), y si NO deja una cita utilizable se reintenta con el
+        # modo actual (razonamiento en el cuerpo), que es el que rescata los golds.
+        # Evidencia: think=True da precisión 0.66 vs 0.58 y +40 respuestas con TODAS las citas
+        # correctas, pero pierde 16 golds — casi siempre por RECHAZAR o comprometerse mal.
+        # El reintento se dispara exactamente ahí. Ver `_accept_attempt` más abajo.
+        if getattr(cfg.settings, "think_hybrid", False):
+            cfg.settings.ollama_think = (attempt == 0)
+
         prompt = build_answer_prompt(query, active_docs) + extra_instruction
         response_format: dict | None = None
         # Hybrid pattern (default): skip JSON-schema constrained decoding —
@@ -216,6 +264,16 @@ def generate_answer(
             response_format=response_format,
         )
         raw = _strip_think_block(resp.text)
+        # GEN2 self-consistency: solo en el PRIMER intento (los reintentos ya llevan
+        # `extra_instruction` correctiva y mezclarlos rompería la señal de consenso).
+        _scn = getattr(cfg.settings, "self_consistency_n", 0)
+        if _scn and _scn > 1 and attempt == 0:
+            _alt = _self_consistency(
+                query, active_docs, llm, model,
+                {"prompt": prompt, "model": model, "system": system,
+                 "max_tokens": 2000, "response_format": response_format}, _scn)
+            if _alt:
+                raw = _strip_think_block(_alt)
         tokens_in += resp.tokens_in
         tokens_out += resp.tokens_out
         used_model = resp.model
@@ -232,7 +290,14 @@ def generate_answer(
         # A valid refusal (LLM says "No encuentro esa información") is also a
         # grounded response — it's the correct answer when docs don't contain
         # the query's topic. Not a hallucination.
+        # HÍBRIDO: en el PRIMER intento (think=True) el rechazo NO se acepta —
+        # es justo el modo de falla que hace perder los 16 golds. Se deja caer al
+        # reintento con el modo actual. En los intentos siguientes vale como siempre.
+        _hib_1er = getattr(cfg.settings, "think_hybrid", False) and attempt == 0
         if REFUSAL_TEXT.lower() in response_text.lower():
+            if _hib_1er and attempt < max_retries:
+                extra_instruction = ""      # sin reproche: el 2o intento es otro MODO, no un castigo
+                continue
             grounding_pass = True
             break
         if verify_citations(response_text, active_docs):
@@ -254,6 +319,9 @@ def generate_answer(
             "\n\nIMPORTANTE: Tu respuesta anterior contenía citas inválidas. "
             "Cita SOLO artículos provistos arriba, verbatim."
         )
+
+    if getattr(cfg.settings, "think_hybrid", False):
+        cfg.settings.ollama_think = _think_orig
 
     # Clean up: drop bracket patterns the strict CITATION_PATTERN can't parse
     # (e.g. `[Art. ag de 1160108]` — LLM hallucinated a non-numeric article id).
