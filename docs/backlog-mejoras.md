@@ -87,7 +87,17 @@ golds mención-vs-definición). **Auditar el gold ANTES de construir el fix.**
    ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
    Hoy: **94.4% con 15 fallas atacables** → D2 ataca ~7, GEN8 ataca ~8.
 
-### FASE B — gap de GEN (~8 fails atacables, 6 con el gold en rank=0)
+### FASE B — gap de GEN
+5a. [x] **GEN9a · parser de citas con ordinal en palabra** — ADOPTADO 2026-08-08 (bug de producción).
+   `CITATION_PATTERN` solo aceptaba `\d+` → `[Art. primero de 1204012]` no matcheaba y
+   `strip_malformed_citations` **borraba la cita de la respuesta al usuario**. 267/2978 artículos
+   (9% del corpus), 53 formas. **cita_ok 253→260 (+7, 0 pérdidas), p=0.016.**
+   Ganó: DIA ×2, Informe Definitivo ×3, DIP ×2 (golds `1204012/primero`, `1160108/segundo`).
+   ⚠️ El bug se escondía: el modelo citaba ordinales 0/267 veces en el texto final porque
+   `verify_citations` los rechazaba y el retry lo entrenaba a evitarlos DENTRO de la corrida.
+   Re-puntuar textos viejos daba +0; solo una corrida nueva lo reveló.
+5a2. [-] **GEN9b · prompt de ordinales** — FLAT (260→261, +1, p=1.0). El parser ya bastaba. Flag
+   `citation_ordinal_words` queda default OFF.
 5b. [x] **E3 auditar efecto escopeta** — HECHO 2026-08-07. **MÉTRICA SANA, no infla.**
    `cita_ok` 253/279 vs `hit_first` 243/279 → solo 11 queries (3.9%) dependen de una cita
    posterior (10 de ellas la 2ª). El 252-253/279 es defendible.

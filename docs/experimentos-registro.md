@@ -44,7 +44,8 @@ holdout 18 · balanced_v2 339.
 | 26 | **D2 · leyenda de variable** | extractor para `TON : ...` / `Donde: DIP: ...` (sin marcador `a)` ni trigger de glosario) | cita_ok | 252→254 (+2), **p=0.6250 NO significativo**. Tabla 608→713 | ⚠️ **adoptado por CORRECCIÓN de datos**, no por el Δ |
 | 27 | GEN8a · `think=True` | mover el razonamiento a canal separado (deja de contaminar la respuesta) | cita_ok | **254→237 (−17, 0 ganadas)**. Pero citas 13.2→2.6 y **precisión 0.42→0.64** | ✗ **negativo** (trade-off real) |
 | 28 | GEN8b · prompt prefer-definition | ordenar citar el artículo que DEFINE, no el que sanciona/regula | cita_ok | 253→254 (+1), **p=1.0 FLAT**. citas 13.19→13.09 | ✗ el prompt no mueve el comportamiento |
-| 29 | GEN9 · ordinales en palabra | parser + prompt para `[Art. primero de 1204012]` (9% del corpus no se podía citar) | cita_ok | ver §6 | ⚠️ parser adoptado por bug de producción |
+| 29 | **GEN9a · parser de ordinales** | `CITATION_PATTERN` no aceptaba `[Art. primero de 1204012]`; 267/2978 arts (9%) no citables | cita_ok | **253→260 (+7, 0 pérdidas), p=0.016** | ✅ **WIN** (bug de producción) |
+| 30 | GEN9b · prompt de ordinales | además, enseñar al modelo que los ordinales se citan | cita_ok | 260→261 (+1), **p=1.0 FLAT** | ✗ el parser ya bastaba |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -176,9 +177,19 @@ Detalle completo: `campaign-def-recall-2026-08.md`. Backlog vivo: `backlog-mejor
 90.7%  fixes de generacion (num_ctx + num_predict)        +3  <- ERA INFRA
 94.4%  E0c  unanswerable (12 queries imposibles)          +4  <- ERA EL EVAL
 94.8%  D2 leyenda de variable                            +2   (p=0.63, por correccion)
+97.4%  GEN9a parser de ordinales                         +7   <- ERA UN BUG DE CITAS
 ```
-**De +33 puntos, ~29 vinieron de arreglar la MEDICIÓN o los DATOS.** Un solo cambio de sistema
-(`glossary_inject`) convirtió. Ningún cambio de MODELO convirtió nunca.
+**De +35 puntos, ~29 vinieron de arreglar la MEDICIÓN o los DATOS y +7 de un BUG de citas.**
+Un solo cambio de sistema (`glossary_inject`) convirtió. **Ningún cambio de MODELO convirtió nunca.**
+
+### El caso GEN9a — por qué el bug se escondía
+El parser rechazaba `[Art. primero de 1204012]`. Medido sobre las respuestas guardadas, el modelo
+citaba ordinales **0 veces en 267** — parecía que simplemente no los usaba. La causa real es peor:
+el modelo SÍ los emitía, `verify_citations` los daba por inválidos, el bucle de reintento le decía
+*"tus citas eran inválidas"* y el modelo los evitaba en el siguiente intento. **El verificador roto
+entrenaba al modelo a no citar ordinales dentro de la propia corrida**, y el texto final —lo único
+que se guardaba— no dejaba rastro. Por eso re-puntuar los textos viejos daba +0 y solo una corrida
+nueva reveló el +7.
 
 ### Bugs de infraestructura que se disfrazaban de resultados
 Los 4 se encontraron persiguiendo cuelgues, no buscándolos. Cada uno falseaba mediciones:
