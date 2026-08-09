@@ -10,6 +10,7 @@ ID]` citations — we rebuild that from the structured JSON response. If JSON
 parsing fails, we fall back to the unconstrained text path with retry.
 """
 import json
+import re as _re
 from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.prompts import build_answer_prompt, get_answer_system
 from src.pipelines.grounding import (
@@ -73,6 +74,35 @@ def _format_as_text(parsed: dict) -> str:
     # Prevent duplicate citation appearance if model already inlined them
     suffix = " " + " ".join(cit for cit in cits if cit not in answer)
     return (answer + suffix).strip()
+
+
+_THINK_BLOCK = _re.compile(r"(?is)\s*<think>.*?</think>\s*")
+_THINK_ORPHAN = _re.compile(r"(?is)^.*?</think>\s*")
+
+
+def _strip_think_block(text: str) -> str:
+    """Quita el razonamiento del modelo del texto VISIBLE.
+
+    BUG CORREGIDO 2026-08-08. `think=False` en ollama NO suprime el razonamiento de qwen3:
+    solo deja de separarlo en el campo `thinking`, y el bloque `<think>...</think>` termina
+    DENTRO de `response`. Medido: **156 de 267 respuestas (58%)** llegaban al usuario con el
+    monólogo interno del modelo (en inglés) antes de la respuesta.
+
+    Además inflaba la métrica: `extract_citations` contaba las citas que el modelo menciona
+    MIENTRAS delibera, no las de su respuesta. Medido sobre las mismas 267 respuestas:
+        contando todo el texto  -> cita_ok 260/267, 4.19 citas únicas
+        solo respuesta visible  -> cita_ok 254/267, 2.93 citas únicas
+    Los 6 de diferencia acertaban por una cita que el usuario nunca vio.
+
+    Se contempla el caso de apertura ausente (`</think>` huérfano, que es lo que emite qwen3
+    cuando el prompt ya viene con el turno abierto).
+    """
+    if not text:
+        return text
+    out = _THINK_BLOCK.sub("", text)
+    if "</think>" in out:                      # cierre sin apertura
+        out = _THINK_ORPHAN.sub("", out)
+    return out.strip()
 
 
 def generate_answer(
@@ -185,7 +215,7 @@ def generate_answer(
             temperature=0.0, max_tokens=2000,
             response_format=response_format,
         )
-        raw = resp.text
+        raw = _strip_think_block(resp.text)
         tokens_in += resp.tokens_in
         tokens_out += resp.tokens_out
         used_model = resp.model

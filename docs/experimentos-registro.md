@@ -46,6 +46,7 @@ holdout 18 · balanced_v2 339.
 | 28 | GEN8b · prompt prefer-definition | ordenar citar el artículo que DEFINE, no el que sanciona/regula | cita_ok | 253→254 (+1), **p=1.0 FLAT**. citas 13.19→13.09 | ✗ el prompt no mueve el comportamiento |
 | 29 | **GEN9a · parser de ordinales** | `CITATION_PATTERN` no aceptaba `[Art. primero de 1204012]`; 267/2978 arts (9%) no citables | cita_ok | **253→260 (+7, 0 pérdidas), p=0.016** | ✅ **WIN** (bug de producción) |
 | 30 | GEN9b · prompt de ordinales | además, enseñar al modelo que los ordinales se citan | cita_ok | 260→261 (+1), **p=1.0 FLAT** | ✗ el parser ya bastaba |
+| 31 | **GEN9c · quitar `<think>` del texto visible** | `think=False` NO suprime el razonamiento: el bloque queda DENTRO de `response` | cita_ok | **156/267 (58%) mostraban el monólogo al usuario**. cita_ok 260→**254** (6 acertaban por una cita que el usuario nunca vio); citas únicas 4.19→2.93 | ✅ **adoptado** (bug de producción; BAJA la métrica) |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -178,7 +179,9 @@ Detalle completo: `campaign-def-recall-2026-08.md`. Backlog vivo: `backlog-mejor
 94.4%  E0c  unanswerable (12 queries imposibles)          +4  <- ERA EL EVAL
 94.8%  D2 leyenda de variable                            +2   (p=0.63, por correccion)
 97.4%  GEN9a parser de ordinales                         +7   <- ERA UN BUG DE CITAS
+95.1%  GEN9c quitar <think> del texto visible        -6   <- LA METRICA ESTABA INFLADA
 ```
+**Número honesto final: 254/267 = 95.1%.**
 **De +35 puntos, ~29 vinieron de arreglar la MEDICIÓN o los DATOS y +7 de un BUG de citas.**
 Un solo cambio de sistema (`glossary_inject`) convirtió. **Ningún cambio de MODELO convirtió nunca.**
 
