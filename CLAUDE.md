@@ -38,9 +38,19 @@ citable y `strip_malformed_citations` BORRABA la cita de la respuesta. +7, p=0.0
 ⚠️ Las `unanswerable` deben puntuar **rechazo = acierto** (como `off_corpus`). Hoy 8/12.
 Probados y NEGATIVOS/flat (McNemar pareado): M1 pool, G1 grafo crudo, M2 def_fragments, rechunk,
 RK1 Qwen3-Reranker. Lo que SÍ movió: arreglar la métrica (+19) y `glossary_inject` (+16).
-**REGLA (4 veces ya): auditar el gold ANTES de construir el fix.** El eval fue parte del problema
-en las 4 mejoras grandes; ninguna vino de un modelo mejor.
-Detalle: `docs/campaign-def-recall-2026-08.md`.
+**CALIDAD REAL (E1, `scripts/eval_metrics.py`): `cita_limpia` 169/267 = 63.3%** (acierta Y >50% de
+sus citas son correctas). 91 respuestas entregan el artículo bueno mezclado con otros que no aplican.
+**`cita_ok` PREMIA ROCIAR** — por eso `think=True` parecía negativo (−16 en cita_ok) cuando en
+métricas con precisión GANA en todos los umbrales (+11 a +40). **Decisión abierta, es de producto.**
+
+**REGLAS (cada una costó un error real):**
+1. Auditar el gold ANTES de construir el fix.
+2. Todo scorer nuevo declara cómo puntúa el RECHAZO antes de correrse (fallado 2 veces).
+3. Auditar el eval exige las MISMAS normalizaciones que usa el eval.
+4. Medir pareado, ambos brazos en la misma sesión.
+5. Persistir el TEXTO de las respuestas, no solo el booleano.
+6. Re-puntuar texto viejo SUBESTIMA cambios que alteran el bucle de generación.
+Detalle: **`docs/handoff-2026-08-09.md`** · `docs/experimentos-registro.md` §6-§8.
 
 **LECCIÓN TRANSVERSAL (2026-08):** cuando el ordenador (cross-encoder) prefiere sistemáticamente el
 tipo de documento equivocado, **cambiar de reranker NO sirve** (RK1: Δ+2 ruido) — se sortea con
@@ -59,8 +69,9 @@ medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
 adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/backlog-mejoras.md` §PRIORIDAD**
 (A exprimir buscador · B gap de gen vía RAGAS · C table-stakes legal · D gate GraphRAG).
-Ya cerrados: E0/E0b ✅, glossary_inject ✅(+16), E3 ✅(métrica sana), E0c ✅(12 `unanswerable`);
-M1/G1/M2/rechunk/RK1 descartados. Siguientes: D2 (leyenda de variable) · GEN8 (loop del generador).
+Ya cerrados: E0/E0b · glossary_inject(+16) · E3 · E0c · D2 · GEN9a parser ordinales(+7) ·
+strip `<think>` · E1 métricas · no-regresión ✅. Descartados: M1/G1/M2/rechunk/RK1/GEN8a/GEN8b/
+GEN9b/GEN10/GEN11. **Siguiente: decidir `think=True` (ver handoff §3.1) y D1 vigencia (sin GPU).**
 Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
 HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
 datos/estructura, no swaps de modelo. Frontera solo como REFERENCIA "si escalo", no cola activa.
