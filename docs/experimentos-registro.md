@@ -295,3 +295,58 @@ principal del mayor WIN de la campaña.
 - Frentes AGOTADOS con las palancas disponibles: pool, reranker, think, prompts, recorte de docs.
 - Siguiente valor real: **E1 (métrica con precisión)** y **D1 (vigencia/derogación)** — el único
   error *grave* que le queda al sistema es citar norma derogada.
+
+
+---
+
+## 8. E1 — métrica con precisión (2026-08-09) y la decisión que abre
+
+`scripts/eval_metrics.py`. No reemplaza `cita_ok` (rompería la comparabilidad de toda la campaña):
+la acompaña.
+
+```
+cita_ok      ¿alguna cita pega?                      (historica; PREMIA ROCIAR)
+cita_first   ¿la PRIMERA cita pega?
+precision    citas unicas correctas / citas unicas
+cita_limpia  pega Y precision >= umbral              <- candidata a metrica de adopcion
+rechazo_ok   en unanswerable/gold=None, rechazar ES el acierto
+```
+
+### Lo que revela sobre la config vigente
+```
+cita_ok      260/267 = 97.4%
+cita_first   250/267 = 93.6%
+cita_limpia  169/267 = 63.3%
+BRECHA: 91 respuestas aciertan pero con MAS DE LA MITAD de sus citas erradas
+```
+Ej: `definición de Estado Deteriorado` acierta con **10 citas únicas y precisión 0.10**. El artículo
+correcto llega enterrado entre nueve que no vienen al caso. Para uso legal eso no es un detalle.
+
+### ⚠️ REVIERTE EL VEREDICTO DE GEN8a (#27/#35)
+`think=True` fue descartado dos veces por `cita_ok` (−17 y −16, p=0.0001). Bajo métricas con
+precisión **gana, y en todos los umbrales**:
+```
+                       cita_ok   cita_limpia(0.5)   precision   citas_uniq
+think=False (vigente)   97.4%        63.3%            0.58         3.04
+think=True              91.4%        69.3%            0.66         1.84
+
+cita_limpia por umbral:  0.34   0.50   0.67   0.80   1.00
+        think=False       174    169     94     90     84
+        think=True        185    185    124    124    124
+        delta            +11    +16    +30    +34    +40
+```
+Con el criterio más estricto (**todas** las citas correctas): 124 vs 84.
+
+**No era un experimento negativo: era un trade-off que la métrica no sabía ver.** Es la
+confirmación del diagnóstico de #24/#27: `cita_ok` premia rociar.
+
+### DECISIÓN ABIERTA (de producto/legal, no técnica)
+```
+prioridad "nunca perder el articulo correcto"  -> think=False (config vigente). Pierde precision.
+prioridad "no citar normas equivocadas"        -> think=True.  Pierde 16 golds.
+```
+16 queries donde el sistema deja de dar el artículo correcto, contra 40 respuestas más sin ninguna
+cita errada. **No se adopta unilateralmente**: depende de si en el uso real es peor no encontrar la
+norma o entregarla mezclada con normas que no aplican.
+Camino intermedio no probado: `think=True` + reintento con `think=False` cuando la respuesta no
+cita nada válido (recupera golds sin reintroducir el ruido).
