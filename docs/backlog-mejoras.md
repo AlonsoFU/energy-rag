@@ -89,7 +89,22 @@ timeouts como False · golds mención-vs-definición · parser de ordinales +7).
    ⚠️ El "techo ~93%" del plan viejo quedó OBSOLETO (se calculó sobre 84%/45 fallas).
    Hoy: **94.4% con 15 fallas atacables** → D2 ataca ~7, GEN8 ataca ~8.
 
-### FASE B — gap de GEN
+### FASE B — gap de GEN  ✅ CERRADA
+- [x] **GEN2 self-consistency N=3 — ADOPTADO 2026-08-10** (`self_consistency_n=3`).
+  cita_ok 260→259 (p=1.0 plano) · **cita_limpia 170→188** · **cita_perfecta 85→114** ·
+  precisión 0.59→**0.66** · tiempo 20.8→**61.4 s**.
+  Único cambio que sube precisión SIN costar aciertos, y el único que rompe el sesgo
+  funcional-vs-definitorio (gana Coordinador, Infracciones graves, Energía de Regulación)
+  que resistió RK1, `think=True`, híbrido y dos prompts.
+- [-] **GEN12 híbrido `think`** — 260→250 (gana 1, pierde 11), p=0.0063 NEGATIVO. Recuperó
+  6 de los 16 golds de `think=True`, no alcanza. Los golds no se pierden solo por RECHAZAR:
+  también por comprometerse con el artículo funcional, y el reintento no lo detecta.
+- [x] **D3 trigger ampliado** (713→**743** frags) — 260→261, p=1.0 flat. Adoptado por
+  CORRECCIÓN de datos: convirtió `Reposición` (`1058072/4º`, formato "los recursos que siguen:").
+- [x] **E0c ampliado**: `Tránsito` ×3 → `unanswerable` (los golds solo NOMBRAN la ley 18.290).
+  Contestables 267 → **264**.
+
+### FASE B (histórico)
 5a. [x] **GEN9a · parser de citas con ordinal en palabra** — ADOPTADO 2026-08-08 (bug de producción).
    `CITATION_PATTERN` solo aceptaba `\d+` → `[Art. primero de 1204012]` no matcheaba y
    `strip_malformed_citations` **borraba la cita de la respuesta al usuario**. 267/2978 artículos

@@ -16,6 +16,12 @@ ver `docs/architecture-status.md`.)
   **+16 queries, 0 pérdidas, McNemar p=0.0000** → cita_ok in_domain 83.5%→**89.2%**.
 - reranker BGE en GPU (`BGE_DEVICE=cuda`), gate off-topic `AND` (léxico+BGE).
 - gen LLM: **`qwen3:30b-a3b`** (`.env` LLM_DEFAULT) — ganó bake-off de 13 modelos.
+- **`self_consistency_n=3` (ADOPTADO 2026-08-10)**: 3 generaciones a T=0.7, se elige la que más
+  respalda el consenso de citas (las que salen en ≥2 de 3). **cita_perfecta 85→114, precisión
+  0.59→0.66, cita_ok plano.** Rompe el sesgo funcional-vs-definitorio. ⚠️ COSTO: 3× latencia
+  (20.8→61.4 s) — bajar a 0 si la latencia manda.
+- `articulos.derogado` marcado en 2 artículos (D1 offline; la vigencia por NORMA sigue bloqueada
+  por BCN 429).
 
 **Resultados cita_ok:** coloquial ~26→**37/39** (95%), dev ~29→**36/44**, holdout **17/18** (sin regresión).
 Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
@@ -28,7 +34,7 @@ Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
 **Frentes ABIERTOS:** (1) dev cluster **art 225** (glosario LGSE, 4 fallas); (2) coloquial residual 104 (vida útil) + 250604/2 (planta solar); (3) commit del combo 3090 (NADA commiteado aún).
 
-**REALIDAD DE LA MÉTRICA (2026-08-08, CRÍTICO):** cita_ok **contestables 260/267 = 97.4%**
+**REALIDAD DE LA MÉTRICA (2026-08-10, CRÍTICO):** cita_ok **contestables 261/264 = 98.9%**
 (`data/eval/queries_balanced_v2_clean.jsonl`). Camino: 62% (eval sucio) → 84% (E0b `also_gold`) →
 89.2% (`glossary_inject` +16) → 90.7% (fixes de gen: num_ctx+num_predict, los timeouts se contaban
 como False) → **94.4% (E0c: 12 queries marcadas `unanswerable` — piden definiciones que el corpus
@@ -38,10 +44,11 @@ citable y `strip_malformed_citations` BORRABA la cita de la respuesta. +7, p=0.0
 ⚠️ Las `unanswerable` deben puntuar **rechazo = acierto** (como `off_corpus`). Hoy 8/12.
 Probados y NEGATIVOS/flat (McNemar pareado): M1 pool, G1 grafo crudo, M2 def_fragments, rechunk,
 RK1 Qwen3-Reranker. Lo que SÍ movió: arreglar la métrica (+19) y `glossary_inject` (+16).
-**CALIDAD REAL (E1, `scripts/eval_metrics.py`): `cita_limpia` 169/267 = 63.3%** (acierta Y >50% de
-sus citas son correctas). 91 respuestas entregan el artículo bueno mezclado con otros que no aplican.
-**`cita_ok` PREMIA ROCIAR** — por eso `think=True` parecía negativo (−16 en cita_ok) cuando en
-métricas con precisión GANA en todos los umbrales (+11 a +40). **Decisión abierta, es de producto.**
+**CALIDAD (E1, `scripts/eval_metrics.py`):** `cita_ok` **PREMIA ROCIAR** — mide "¿alguna cita pega?".
+Por eso `think=True` parecía negativo (−16) cuando en precisión ganaba. **RESUELTO 2026-08-10
+adoptando GEN2 self-consistency**, que sube precisión SIN costar aciertos:
+`cita_limpia` 170→**188/264** · `cita_perfecta` 85→**114** · precisión 0.59→**0.66**.
+`think=True` y el híbrido quedan DESCARTADOS (pierden 16 y 10 golds respectivamente).
 
 **REGLAS (cada una costó un error real):**
 1. Auditar el gold ANTES de construir el fix.
@@ -69,9 +76,11 @@ medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
 adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/backlog-mejoras.md` §PRIORIDAD**
 (A exprimir buscador · B gap de gen vía RAGAS · C table-stakes legal · D gate GraphRAG).
-Ya cerrados: E0/E0b · glossary_inject(+16) · E3 · E0c · D2 · GEN9a parser ordinales(+7) ·
-strip `<think>` · E1 métricas · no-regresión ✅. Descartados: M1/G1/M2/rechunk/RK1/GEN8a/GEN8b/
-GEN9b/GEN10/GEN11. **Siguiente: decidir `think=True` (ver handoff §3.1) y D1 vigencia (sin GPU).**
+Ya cerrados: E0/E0b · glossary_inject(+16) · E3 · E0c(+Tránsito) · D2 · D3 · GEN9a(+7) ·
+strip `<think>` · E1 métricas · no-regresión · **GEN2 self-consistency ADOPTADO** ·
+D1 mitad offline. Descartados: M1/G1/M2/rechunk/RK1/GEN8a/GEN8b/GEN9b/GEN10/GEN11/GEN12.
+**FRENTES DE RETRIEVAL Y GENERACIÓN AGOTADOS.** Siguiente valor: **D1 vigencia por NORMA**
+(BLOQUEADO: BCN `obtxml` da 429 de cuota) y **D4 UX de ambigüedad**.
 Bloqueante legal aparte: D1 vigencia/derogación (gap de DATOS, no citar norma derogada). NO hacer:
 HyDE/multi-query (dañan cita_ok). El stack actual YA es baseline SOTA legal 2024-26 — ganancias de
 datos/estructura, no swaps de modelo. Frontera solo como REFERENCIA "si escalo", no cola activa.
