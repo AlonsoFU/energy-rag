@@ -167,7 +167,15 @@ class Settings(BaseSettings):
     # aparecen en >=2 de las N). Ataca el problema medido por E1: `cita_ok` premia rociar
     # y la precisión media es 0.58 — una cita que aparece en una sola pasada suele ser ruido.
     # ⚠️ Cuesta N generaciones por query.
-    self_consistency_n: int = 0
+    # ADOPTADO 2026-08-10 (default 3). Medido en 264 contestables:
+    #   cita_ok 260->259 (p=1.0, plano) · cita_limpia 170->188 · cita_perfecta 85->114
+    #   precision 0.59->0.66 · tiempo 20.8->61.4 s
+    # Unico cambio que sube precision SIN costar aciertos, y el UNICO que rompe el sesgo
+    # funcional-vs-definitorio (gana Coordinador, Infracciones graves, Energia de Regulacion)
+    # que resistio RK1, think=True y dos prompts. La cita al articulo que REGULA no se repite
+    # entre pasadas; la del que DEFINE si.
+    # ⚠️ COSTO: 3x latencia. Bajar a 0 si la latencia manda.
+    self_consistency_n: int = 3
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
