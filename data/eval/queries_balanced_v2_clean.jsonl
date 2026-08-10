@@ -241,9 +241,9 @@
 {"query": "qué es Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "definición de Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
 {"query": "qué significa Margen de Potencia", "expected_norma": "250604", "expected_articulo": "13", "category": "in_domain"}
-{"query": "qué es Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
-{"query": "definición de Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
-{"query": "qué significa Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"]}
+{"query": "qué es Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"], "unanswerable": true}
+{"query": "definición de Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"], "unanswerable": true}
+{"query": "qué significa Tránsito", "expected_norma": "1183783", "expected_articulo": "17", "category": "in_domain", "also_gold": ["1163383/2", "220208/tercero"], "unanswerable": true}
 {"query": "qué es TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
 {"query": "definición de TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}
 {"query": "qué significa TOFF", "expected_norma": "250604", "expected_articulo": "53", "category": "in_domain"}

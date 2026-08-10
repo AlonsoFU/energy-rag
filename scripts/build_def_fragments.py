@@ -12,7 +12,15 @@ from src.storage.connection import with_connection
 # + Termino + ':'. Amplio: agarra 'a)', '1)', '1.', '1.-', 'i)', con 1+ espacios de sangria.
 ITEM = re.compile(r'(?m)^\s{1,}([a-z]{1,2}|\d{1,2})[.)](?:-)?\s+([^:\n]{2,80}?):\s')
 # gatillo de articulo-definiciones (encabezado tipico)
-TRIGGER = re.compile(r'se entender[aá]|se entiende por|para (los )?efectos', re.I)
+# 2026-08-10: ampliado. El original solo cubria glosarios clasicos ("se entendera por:"), y
+# perdia articulos que ENUMERAN definiciones sin esa formula. Caso medido: 1058072/4º dice
+# "los recursos que siguen:" y luego "1) Reposicion: Procedera contra..." -> definicion real
+# que def_exact no podia inyectar.
+# Riesgo medido antes de ampliar: +9 articulos / +31 fragmentos sobre 631 (crecimiento
+# controlado, no explota). El gate de >=2 items sigue filtrando articulos normales.
+TRIGGER = re.compile(
+    r'se entender[aá]|se entiende por|para (los )?efectos'
+    r'|que siguen\s*:|los siguientes\s*:|se indican\s*:', re.I)
 # lineas de ruido de enmienda intercaladas (Decreto/Ley/Art./D.O.)
 # BUG CORREGIDO 2026-08-07: la version anterior era
 #   ^\s*(Decreto|Ley|DFL|Art\.|D\.O\.|LEY|DECRETO)\b.*$

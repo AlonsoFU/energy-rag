@@ -2,7 +2,7 @@
 
 El cambio es de DATOS (tabla `fragmentos_definicion`: 608 -> 713), no de flag, así que el brazo OFF
 necesita la tabla VIEJA. Se hace SWAP de tablas entre las dos pasadas de retrieval:
-    fragmentos_definicion <-> fragmentos_definicion_bak
+    fragmentos_definicion <-> fragmentos_definicion_bak2
 Ambos brazos generan en LA MISMA sesión (pares limpios, sin flicker de LLM entre corridas).
 
 Robusto: el swap va en try/finally y al final SIEMPRE deja la tabla NUEVA como
@@ -28,15 +28,15 @@ from src.core import config as cfg
 
 MODEL = "ollama/qwen3:30b-a3b"
 SET = "data/eval/queries_balanced_v2_clean.jsonl"
-OUTDIR = Path("data/eval/results/d2_paired")
+OUTDIR = Path("data/eval/results/d3_trigger")
 
 
 def swap_tables():
-    """Intercambia fragmentos_definicion <-> fragmentos_definicion_bak."""
+    """Intercambia fragmentos_definicion <-> fragmentos_definicion_bak2."""
     with with_connection() as conn, conn.cursor() as cur:
         cur.execute("ALTER TABLE fragmentos_definicion RENAME TO _fd_swap_tmp")
-        cur.execute("ALTER TABLE fragmentos_definicion_bak RENAME TO fragmentos_definicion")
-        cur.execute("ALTER TABLE _fd_swap_tmp RENAME TO fragmentos_definicion_bak")
+        cur.execute("ALTER TABLE fragmentos_definicion_bak2 RENAME TO fragmentos_definicion")
+        cur.execute("ALTER TABLE _fd_swap_tmp RENAME TO fragmentos_definicion_bak2")
         conn.commit()
 
 
