@@ -92,10 +92,14 @@ def main(name: str, desc: str = ""):
     # lectura automatica: adoptar solo si no regresiona cita_ok y mejora precision
     d_ok = ok["on"] - ok["off"]
     d_lim = sum(s["limpia"][0.5] for s in agg["on"]) - sum(s["limpia"][0.5] for s in agg["off"])
-    if d_ok >= 0 and d_lim > 0:
-        lines.append(f"\n**LECTURA AUTOMATICA: candidato a ADOPTAR** (cita_ok {d_ok:+d}, cita_limpia {d_lim:+d}).")
-    elif d_ok < 0 and d_lim > 0:
-        lines.append(f"\n**LECTURA AUTOMATICA: TRADE-OFF** (cita_ok {d_ok:+d} pero cita_limpia {d_lim:+d}) — decision de producto, NO adoptar solo.")
+    # OJO: la caida de cita_ok solo es un TRADE-OFF real si es SIGNIFICATIVA. Un -1 con p=1.0
+    # es ruido, y tratarlo como trade-off esconde un WIN limpio (paso con GEN2 self-consistency:
+    # cita_ok -1 p=1.0 pero cita_limpia +18 -> es adoptable, no una decision de producto).
+    _ok_cae_de_verdad = d_ok < 0 and p < 0.05
+    if not _ok_cae_de_verdad and d_lim > 0:
+        lines.append(f"\n**LECTURA AUTOMATICA: candidato a ADOPTAR** (cita_ok {d_ok:+d} p={p:.3f} = sin caida significativa, cita_limpia {d_lim:+d}).")
+    elif _ok_cae_de_verdad and d_lim > 0:
+        lines.append(f"\n**LECTURA AUTOMATICA: TRADE-OFF** (cita_ok {d_ok:+d} p={p:.4f} SIGNIFICATIVO, pero cita_limpia {d_lim:+d}) — decision de producto, NO adoptar solo.")
     else:
         lines.append(f"\n**LECTURA AUTOMATICA: no adoptar** (cita_ok {d_ok:+d}, cita_limpia {d_lim:+d}).")
 

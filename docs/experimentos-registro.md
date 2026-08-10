@@ -51,6 +51,8 @@ holdout 18 · balanced_v2 339.
 | 33 | GEN11 · `answer_doc_limit=3` | idem, más agresivo | cita_ok | 260→261 (gana 3, pierde 2), **p=1.0 FLAT**. precisión 0.58→0.70, **tiempo 20.4→14.4 s (−30%)** | ✗ flat en calidad; ⏳ útil solo como palanca de LATENCIA |
 | 34 | **NO-REGRESIÓN** (dev/coloquial/holdout) | los 6 cambios adoptados solo se habían medido en `balanced_v2` | cita_ok | coloquial **36/39** (hist 37/39) · dev **37/44** (hist 36/44) · holdout **17/18** (hist 17/18) → **±1, SIN REGRESIÓN** | ✅ verificado |
 | 35 | GEN8a-v2 · `think=True` (comparación justa) | rehecho tras el fix de `<think>`: antes el brazo OFF contaba citas del bloque de razonamiento | cita_ok | **260→244 (gana 1, pierde 17), p=0.0001 SIGNIFICATIVO NEGATIVO**. precisión 0.58→0.66 | ✗ **confirmado negativo** (no era artefacto) |
+| 36 | GEN12 · híbrido `think` | intento 0 con `think=True`; si RECHAZA o no deja cita válida → reintento con `think=False` | cita_ok + precisión | **260→250 (gana 1, pierde 11), p=0.0063 NEGATIVO**. `cita_limpia` +15, `cita_perfecta` +38 | ✗ recupera 6 de los 16 golds, no alcanza |
+| 37 | **GEN2 · self-consistency N=3** | 3 generaciones a T=0.7; consenso = citas en ≥2; se elige la respuesta más respaldada | cita_ok + precisión | **cita_ok 260→259 (p=1.0 FLAT)** · **`cita_limpia` +18** · **`cita_perfecta` +29** · precisión 0.59→**0.66** · tiempo 20.8→**61.4 s** | ✅ **WIN de CALIDAD** — el único que sube precisión SIN costar aciertos |
 
 **Diagnóstico auxiliar (no experimento, medición):** `exp_stage_split.py` →
 coloquial gold∈pool@50 = **39/39** (el embedder NUNCA falla el pool); el reranker no lo sube a top5 en 11.
@@ -350,3 +352,32 @@ cita errada. **No se adopta unilateralmente**: depende de si en el uso real es p
 norma o entregarla mezclada con normas que no aplican.
 Camino intermedio no probado: `think=True` + reintento con `think=False` cuando la respuesta no
 cita nada válido (recupera golds sin reintroducir el ruido).
+
+
+---
+
+## 9. GEN12 / GEN2 (2026-08-10) — cómo subir precisión sin perder aciertos
+
+Las tres formas probadas de reducir el rociado de citas, ordenadas por lo que cuestan:
+
+```
+                       cita_ok        cita_limpia  cita_perfecta  precision  seg
+config vigente         260/267            170           85          0.59     20.8
+think=True (#35)       244  (-16, p=1e-4)  185          123          0.66     24.1
+hibrido think (#36)    250  (-10, p=6e-3)  185          123          0.66     ~40
+self-consistency (#37) 259  ( -1, p=1.0)   188          114          0.66     61.4
+```
+
+**GEN12 (híbrido) falló la hipótesis.** Se diseñó para recuperar los 16 golds que pierde
+`think=True` reintentando con el modo actual cuando el 1er intento rechaza. Recuperó **6**; siguen
+faltando 10 y la caída sigue siendo significativa (p=0.0063). Conclusión: los golds no se pierden
+solo por RECHAZAR — también porque `think=True` se compromete con el artículo funcional en vez del
+definitorio (el sesgo de #27), y eso el reintento no lo detecta.
+
+**GEN2 self-consistency es el WIN.** Es el único que sube la precisión (0.59→0.66, +18 `cita_limpia`,
++29 `cita_perfecta`) **sin caída significativa de `cita_ok`** (−1, p=1.0). Coste: **3× el tiempo**
+(20.8 → 61.4 s por respuesta). Es un intercambio de LATENCIA por CALIDAD, no de calidad por calidad.
+
+⚠️ **Bug de la lectura automática, corregido:** `auto_report.py` etiquetaba como TRADE-OFF cualquier
+`d_ok < 0`, sin mirar significancia — y marcó así a GEN2, que en realidad es adoptable. Ahora exige
+`p < 0.05` para llamarlo trade-off. *Un heurístico que ignora la significancia esconde WINs limpios.*
