@@ -87,15 +87,20 @@ async def main():
     if not WRITE:
         print("\n(dry-run; WRITE=1 para persistir)")
         return
+    # OJO: `norma_norma` es una VIEW (con DISTINCT) -> no se puede insertar en ella
+    # ("cannot insert into view"). Las vinculaciones de BCN van a su propia TABLA.
     with with_connection() as conn, conn.cursor() as cur:
+        cur.execute("""CREATE TABLE IF NOT EXISTS norma_vinculacion (
+            origen text, destino text, tipo_relacion text, fuente text DEFAULT 'bcn',
+            PRIMARY KEY (origen, destino, tipo_relacion))""")
         for o, d, t in set(aristas):
-            cur.execute("INSERT INTO norma_norma (origen,destino,tipo_relacion) VALUES (%s,%s,%s) "
+            cur.execute("INSERT INTO norma_vinculacion (origen,destino,tipo_relacion) VALUES (%s,%s,%s) "
                         "ON CONFLICT DO NOTHING", (o, d, t))
         for idn in derog:
             cur.execute("UPDATE normas SET metadata = COALESCE(metadata,'{}'::jsonb) || '{\"estado\":\"DEROGADA\"}'::jsonb "
                         "WHERE id_norma = %s", (idn,))
         conn.commit()
-        cur.execute("SELECT count(*) FROM norma_norma"); print(f"[WRITE] norma_norma: {cur.fetchone()[0]} filas")
+        cur.execute("SELECT count(*) FROM norma_vinculacion"); print(f"[WRITE] norma_vinculacion: {cur.fetchone()[0]} filas")
         cur.execute("SELECT metadata->>'estado', count(*) FROM normas GROUP BY 1"); print("[WRITE] estados:", cur.fetchall())
 
 
