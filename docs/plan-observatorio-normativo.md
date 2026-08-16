@@ -111,3 +111,84 @@ Ya hay `content_hash` y `versiones`. Falta el bucle:
 2. Sobre el grafo poblado: medir el **cierre transitivo** — cuántas normas nuevas aparecen a
    profundidad 1 y 2. Ese número es el insumo para que el usuario defina la frontera (FASE 2).
 3. Con la frontera definida, construir el monitor (FASE 3), que es donde está el valor.
+
+---
+
+# PARTE II — Diferenciación y etapas reales (2026-08-16)
+
+Dos observaciones del usuario que cambian el plan:
+1. **"Ya hay RAGs que ven normativa"** → indexar Ley Chile está commoditizado; hay que especializarse.
+2. **"Hay varias etapas, por ejemplo saber qué scrapear"** → el plan saltaba el DESCUBRIMIENTO.
+
+---
+
+## II.1 Qué es defendible y qué no
+
+| capa | ¿diferencia? | por qué |
+|---|---|---|
+| Buscar normativa y responder citando | ❌ NO | commodity: cualquiera indexa Ley Chile |
+| **Precisión de cita medida** (`cita_limpia` 0.66) | ✅ SÍ | casi nadie mide cuántas de sus citas son CORRECTAS, solo si citó algo |
+| **Monitor de cambios** (qué cambió desde la última vez) | ✅ SÍ | BCN da normas sueltas; nadie avisa "esto que citabas cambió" |
+| **Inyección determinista** (`glossary_inject`, +16) | ✅ SÍ | portable a cualquier corpus con glosarios |
+| **Mapeo norma → obligación → proceso** | ✅✅ **EL FOSO** | nadie fuera del CEN sabe que el art. 3-27 NTCO fija el plazo de TU informe |
+
+**Consecuencia de diseño:** separar desde ya **MOTOR** (retrieval + citas + monitor, portable) de
+**DOMINIO** (corpus + mapeo a procesos, específico). Hoy están mezclados.
+
+La pregunta que responde un RAG genérico: *"¿qué dice la norma X?"*
+La que responde este: **"¿qué se rompe en mi proceso si cambia la norma X?"**
+
+---
+
+## II.2 ETAPA 0 — DESCUBRIMIENTO (la que faltaba)
+
+No se puede scrapear lo que no se sabe que existe. **Cuatro fuentes, cuatro mecanismos distintos**:
+
+| fuente | qué aporta | mecanismo | estado |
+|---|---|---|---|
+| **BCN / LeyChile** | leyes, DFL, decretos supremos | Playwright (`norm_detail_crawler.py`) | ✅ funciona, 95 bajadas |
+| **CNE** | **NTCO**, resoluciones exentas, informes técnicos | ❌ sin crawler | **FALTA — y es lo más operativo** |
+| **SEC** | instructivos, oficios circulares | ❌ sin crawler | falta |
+| **CEN (coordinador.cl)** | procedimientos internos, IVTE, minutas | ❌ sin crawler | falta |
+
+**Tres estrategias de descubrimiento, complementarias:**
+1. **Por índice/materia** — cada sitio tiene listados por materia. Da el universo, con ruido.
+2. **Por vinculación** (ya funciona) — seguir `modifica`/`deroga` desde las semillas. Medido:
+   **125 normas nuevas a profundidad 1**. Preciso, pero solo alcanza lo ya vinculado.
+3. **Por citación en el texto** — las normas citan otras en su cuerpo (`referencias`: 5687 filas,
+   pero hoy `destino_norma_id` = 0 → **hay que resolver esas citas a id_norma**). Es la vía que
+   encuentra la normativa que el grafo BCN no declara.
+
+⚠️ **Ninguna sirve sin regla de corte.** Sin ella, seguir vinculaciones arrastró Código Procesal
+Penal (47 modificaciones) y Ley de Tránsito (48) al corpus actual.
+
+**Regla de corte propuesta:** entra si (a) regula generación/transmisión/distribución/mercado
+eléctrico, **o** (b) modifica/deroga a una que ya está dentro. **No entra por ser citada de paso.**
+
+---
+
+## II.3 Etapas, en orden de dependencia
+
+```
+E0  DESCUBRIR      que existe, por fuente        <- FALTA (CNE/SEC/CEN sin crawler)
+E1  ACOTAR         regla de corte + poda de 14   <- decision + barato
+E2  BAJAR          scrapear lo que paso el corte <- BCN ok, resto por construir
+E3  VINCULAR       grafo norma->norma            <- ✅ HECHO (204 aristas)
+E4  MAPEAR         norma -> obligacion -> proceso <- EL FOSO, no empezado
+E5  MONITOREAR     cron + hash + diff + aviso    <- infra existe, falta cablear
+E6  RESPONDER      RAG sobre todo lo anterior    <- ✅ maduro (98.9% cita_ok)
+```
+
+**Contraintuitivo pero medido:** E6 (el RAG) está listo y es lo commoditizado. Lo que falta es
+E0, E4 y E5 — y **E4 es lo único que nadie más puede copiar**.
+
+---
+
+## II.4 Siguiente paso concreto
+
+1. **Crawler CNE** — sin la NTCO y las resoluciones exentas, el corpus no cubre tu operación diaria.
+2. **Resolver `referencias.destino_norma_id`** (5687 filas sin resolver) → habilita descubrimiento
+   por citación sin depender de BCN.
+3. **Podar las 14 normas ajenas.**
+4. **E4 piloto:** tomar UN proceso tuyo (ej. Informe de Valorización de Transferencias Económicas)
+   y mapear qué normas/artículos lo obligan, con qué plazo. Si eso funciona en uno, escala al resto.
