@@ -174,10 +174,24 @@ def build_answer_prompt(query: str, docs: list[dict],
             char_budget = 0
     if char_budget and char_budget > 0:
         docs = fit_docs_to_budget(docs, char_budget)
-    block = "\n\n".join(
-        f"[Art. {d['articulo_numero']} de {d['id_norma']}]\n{d['articulo_text']}"
-        for d in docs
-    )
+    # GEN13 (flag `answer_roles`): marcar el articulo DEFINITORIO en el prompt.
+    # `glossary_inject` ya SABE cual es (match exacto en fragmentos_definicion) pero esa
+    # informacion se tiraba al pasarlo como un doc mas. No se le pide al modelo que adivine
+    # el rol -- se le DICE, que es el patron que funciono dos veces (determinista > prompt).
+    _roles = False
+    try:
+        from src.core import config as _c2
+        _roles = getattr(_c2.settings, "answer_roles", False)
+    except Exception:
+        pass
+
+    def _hdr(d):
+        h = f"[Art. {d['articulo_numero']} de {d['id_norma']}]"
+        if _roles and d.get("_rol") == "DEFINICION":
+            h += f'   <<< ESTE ARTICULO DEFINE "{d.get("_rol_termino", "")}" >>>'
+        return h
+
+    block = "\n\n".join(f"{_hdr(d)}\n{d['articulo_text']}" for d in docs)
     return ANSWER_USER_TEMPLATE.format(query=query, articulos_block=block)
 
 
@@ -213,6 +227,42 @@ Se citan EXACTAMENTE igual, copiando el encabezado tal cual:
 Copia el identificador TAL CUAL aparece en el encabezado del artículo."""
 
 
+# GEN13 (flag `answer_roles`, default OFF): respuesta MULTI-DOCUMENTO con ROLES.
+# Idea del usuario (2026-08-17): en lo legal, la respuesta completa suele necesitar MAS de un
+# articulo con papeles distintos -- el que DEFINE el termino y el que lo REGULA/SANCIONA.
+# Hoy el sistema elige uno y las 2 fallas restantes son justo eso: en "que es Coordinador" cita
+# 258171/212-1 (funcional) en vez de 250604/13 (define), teniendo el gold en rank 0.
+# Hipotesis: si se le PIDE dar ambos con su rol, incluye el definitorio y deja de fallar.
+# ⚠️ Esto sube n_uniq a proposito -> `cita_limpia` lo penaliza por construccion. La metrica
+# asume "menos citas = mejor" (se diseño contra el rociado de 13 citas) y NO distingue
+# 2 citas DELIBERADAS de 2 al voleo. Leer el resultado con eso en mente.
+ANSWER_ROLES_BLOCK = """
+
+==========================================================
+ARTICULO MARCADO COMO DEFINITORIO
+==========================================================
+Algunos articulos vienen marcados asi en su encabezado:
+
+    [Art. 13 de 250604]   <<< ESTE ARTICULO DEFINE "Coordinador" >>>
+
+Esa marca NO la pusiste tu ni la dedujiste: viene del glosario de la norma,
+verificada por coincidencia exacta del termino. Es un HECHO, no una sugerencia.
+
+Cuando la pregunta sea QUE ES / QUE SIGNIFICA / DEFINICION DE ese termino:
+
+1. La PRIMERA oracion responde con ese articulo marcado y SU cita. Obligatorio.
+2. Si ademas hay articulos que fijan sus funciones, obligaciones o sanciones,
+   agregalos DESPUES, en oraciones aparte, cada uno con su cita.
+
+✅ "El Coordinador es el organismo tecnico y autonomo [Art. 13 de 250604].
+    Sus funciones estan establecidas en [Art. 212-1 de 258171]."
+
+❌ NUNCA respondas la definicion citando un articulo que solo REGULA o SANCIONA
+   el termino cuando hay uno marcado como definitorio.
+
+Si ningun articulo viene marcado, responde normalmente."""
+
+
 PREFER_DEFINITION_BLOCK = """
 
 ==========================================================
@@ -240,4 +290,6 @@ def get_answer_system() -> str:
         out += ORDINAL_WORDS_BLOCK
     if getattr(_cfg.settings, "prompt_prefer_definition", False):
         out += PREFER_DEFINITION_BLOCK
+    if getattr(_cfg.settings, "answer_roles", False):
+        out += ANSWER_ROLES_BLOCK
     return out

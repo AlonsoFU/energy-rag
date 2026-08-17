@@ -175,6 +175,10 @@ class Settings(BaseSettings):
     # que resistio RK1, think=True y dos prompts. La cita al articulo que REGULA no se repite
     # entre pasadas; la del que DEFINE si.
     # ⚠️ COSTO: 3x latencia. Bajar a 0 si la latencia manda.
+    # GEN13 (flag OFF, en prueba): respuesta multi-documento con ROLES
+    # (define / regula / sanciona). Ver ANSWER_ROLES_BLOCK en prompts.py.
+    answer_roles: bool = False
+
     self_consistency_n: int = 3
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands

@@ -590,7 +590,17 @@ class SimpleRetriever:
                     if not present:
                         top_score = fused[0]["score"] if fused else 1.0
                         inj["score"] = float(top_score) + 0.01
+                        inj["_rol"] = "DEFINICION"; inj["_rol_termino"] = _c
                         fused = [inj] + fused
+                    else:
+                        # GEN13: el articulo definitorio YA estaba en el pool. Igual hay que
+                        # MARCARLO: sabemos deterministamente que ese es el que DEFINE, y esa
+                        # informacion se perdia al pasarlo al prompt como un doc mas. Las 2
+                        # fallas restantes son exactamente eso (gold en rank 0, cita el funcional).
+                        for _d in fused[:top_k]:
+                            if (str(_d.get("id_norma")), _normalize_art_g(str(_d.get("articulo_numero")))) == key:
+                                _d["_rol"] = "DEFINICION"; _d["_rol_termino"] = _c
+                                break
         # 7. Hierarchical expand
         expanded = hierarchical_expand(fused)
         out = expanded[:top_k]
