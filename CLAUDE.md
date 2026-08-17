@@ -91,6 +91,17 @@ HF_HOME seteado) + PATH con `/usr/local/bin` (ollama) + `HF_HOME=/home/alonso/da
 viven en `/home/alonso/datos` (Ollama + HF), NO en root. Postgres `energy_rag_pg` (Docker :5434) se
 apaga solo → `docker start energy_rag_pg`.
 
+**REGLA — NADA DE REGEX COMO MECANISMO PRINCIPAL (2026-08-17, decisión del usuario):**
+La detección de intención NO se hace con listas hardcodeadas. Se hace con un clasificador
+(embeddings sobre ejemplos, o modelo liviano); **el regex solo puede ir al final como REGLA de
+override/fallback**. Motivo medido: `_DEF_INTENT` falla 6 de 13 fraseos naturales
+("cómo se define X", "defíneme X", "X definición", "qué entiende la ley por X") y —peor— las
+279 queries del set primario usan LAS MISMAS 3 plantillas del regex, así que **el eval se mide
+contra sí mismo**. El 99.2% es sobre fraseos que el regex cubre por construcción, no sobre
+generalización. Estándar de la industria: regex como primera pasada está bien, quedarse ahí no.
+**Antes de cualquier arreglo: queries de test con fraseos que el regex NO cubra**, o toda mejora
+se verá como nula.
+
 ## Principios de arquitectura (OBLIGATORIOS al diseñar)
 
 1. **Pensar a ESCALA GRANDE, siempre.** El corpus hoy es chico (~78 normas / ~3000 artículos)
