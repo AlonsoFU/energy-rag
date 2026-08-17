@@ -52,6 +52,7 @@ holdout 18 · balanced_v2 339.
 | 34 | **NO-REGRESIÓN** (dev/coloquial/holdout) | los 6 cambios adoptados solo se habían medido en `balanced_v2` | cita_ok | coloquial **36/39** (hist 37/39) · dev **37/44** (hist 36/44) · holdout **17/18** (hist 17/18) → **±1, SIN REGRESIÓN** | ✅ verificado |
 | 35 | GEN8a-v2 · `think=True` (comparación justa) | rehecho tras el fix de `<think>`: antes el brazo OFF contaba citas del bloque de razonamiento | cita_ok | **260→244 (gana 1, pierde 17), p=0.0001 SIGNIFICATIVO NEGATIVO**. precisión 0.58→0.66 | ✗ **confirmado negativo** (no era artefacto) |
 | 36 | GEN12 · híbrido `think` | intento 0 con `think=True`; si RECHAZA o no deja cita válida → reintento con `think=False` | cita_ok + precisión | **260→250 (gana 1, pierde 11), p=0.0063 NEGATIVO**. `cita_limpia` +15, `cita_perfecta` +38 | ✗ recupera 6 de los 16 golds, no alcanza |
+| 39 | GEN2b · self-consistency **N=5** vs N=3 | ¿más muestras = consenso más robusto? | cita_ok + precisión | **262→263 (p=1.0 FLAT)**; precisión **0.63→0.57**, citas únicas 2.65→3.08, tiempo 71→98 s | ✗ **descartado** — ver caveat |
 | 38 | D3 · TRIGGER ampliado del extractor | el trigger exigía "se entenderá por"; perdía artículos que ENUMERAN definiciones ("los recursos que siguen: 1) Reposición: ...") | cita_ok | 260→261 (gana 3, pierde 2), **p=1.0 FLAT**. Tabla 713→**743**. Convirtió `Reposición` (el objetivo) | ⚠️ adoptado por CORRECCIÓN de datos, no por el Δ |
 | 37 | **GEN2 · self-consistency N=3** | 3 generaciones a T=0.7; consenso = citas en ≥2; se elige la respuesta más respaldada | cita_ok + precisión | **cita_ok 260→259 (p=1.0 FLAT)** · **`cita_limpia` +18** · **`cita_perfecta` +29** · precisión 0.59→**0.66** · tiempo 20.8→**61.4 s** | ✅ **WIN de CALIDAD** — el único que sube precisión SIN costar aciertos |
 
@@ -382,3 +383,37 @@ definitorio (el sesgo de #27), y eso el reintento no lo detecta.
 ⚠️ **Bug de la lectura automática, corregido:** `auto_report.py` etiquetaba como TRADE-OFF cualquier
 `d_ok < 0`, sin mirar significancia — y marcó así a GEN2, que en realidad es adoptable. Ahora exige
 `p < 0.05` para llamarlo trade-off. *Un heurístico que ignora la significancia esconde WINs limpios.*
+
+
+---
+
+## 10. GEN2b (N=5) — negativo, pero el resultado es sobre MI DISEÑO, no sobre N
+
+```
+                cita_ok        precision  citas_uniq  seg
+N=3 (adoptado)  262/264          0.63       2.65      71.0
+N=5             263/264 (p=1.0)  0.57       3.08      97.9
+```
+
+**No prueba que N=5 sea peor que N=3.** El umbral de consenso quedó FIJO en "≥2 apariciones"
+en vez de escalar con N:
+```
+N=3 -> 2/3 = 67% de las pasadas   (exigente)
+N=5 -> 2/5 = 40% de las pasadas   (laxo)  <- entra ruido
+```
+Con más muestras, más citas alcanzan un umbral que no se movió, así que **el filtro se afloja**
+y la precisión baja. La comparación justa sería `≥ceil(N/2)` (3 de 5).
+
+**Se descarta igual** porque N=3 ya entrega la ganancia y E6 está agotado: re-correr 3h para
+recuperar 1-2 puntos en la etapa que ya funciona no tiene retorno. Queda anotado por si alguien
+retoma self-consistency: **el umbral debe ser proporcional a N**.
+
+**Con esto E6 (RESPONDER) queda CERRADO.**
+```
+cita_ok       262/264 = 99.2%
+cita_limpia   ~188/264 = 71%
+precision     0.63
+latencia      71 s/respuesta (N=3)
+```
+Residuo: 2 fallas. Frentes agotados: pool · reranker · think · híbrido · 2 prompts · 2 recortes
+de docs · self-consistency N=5.
