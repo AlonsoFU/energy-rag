@@ -102,6 +102,16 @@ generalización. Estándar de la industria: regex como primera pasada está bien
 **Antes de cualquier arreglo: queries de test con fraseos que el regex NO cubra**, o toda mejora
 se verá como nula.
 
+**MEDIDO (2026-08-18, exp #41 — `data/eval/queries_fraseos_v1.jsonl`, 64q pareadas por término):**
+`glossary_inject` dispara **53/64 con el fraseo cubierto y 0/64 con fraseo natural** → cobertura
+CERO fuera de las 3 plantillas. Pero `cita_ok` solo cae **95.3% → 87.5%** (p=0.18): el eval era
+circular en el MECANISMO, no inflado en el RESULTADO. El costo real es **precisión 0.66 → 0.57**
+(el modelo rocía más para pegarle igual) y **rechazos falsos 1/64 → 4/64**.
+→ **NÚMERO HONESTO: cita_ok 87.5%** con fraseos naturales sobre términos fáciles (cota inferior).
+El 98.9% vale solo para las 3 plantillas del set primario.
+→ **NO parchear el regex** (el fix de grupo B es 1 línea y recupera 24/64, pero es más regex).
+`queries_fraseos_v1` es el banco de pruebas de B2: meta `inject` 0/64 → ~64/64 con clasificador.
+
 ## Principios de arquitectura (OBLIGATORIOS al diseñar)
 
 1. **Pensar a ESCALA GRANDE, siempre.** El corpus hoy es chico (~78 normas / ~3000 artículos)

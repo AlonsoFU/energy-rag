@@ -379,3 +379,15 @@ sección "vs frontera". Resumen con números:
 - Cuello de escala real = **RAM host 14GB** (HNSW en RAM) + pgvector sin multi-vector indexado
   (VectorChord), **NO la GPU**. LLM denso 70B+ (>24GB) = upside marginal en cita_ok.
 - `ROADMAP_ESCALABILIDAD.txt` (abr-26) mayormente obsoleto (pgvector ya en prod).
+
+### B1 — medición honesta (2026-08-18)
+
+- [x] **B1.1 set de fraseos variados** — `data/eval/queries_fraseos_v1.jsonl` (64q, 64 términos,
+  2 grupos). Commit `50522db`.
+- [x] **B1.2 medir el sistema con fraseos naturales** — exp #41. `cita_ok` **95.3% → 87.5%**
+  (gana 2, pierde 7, McNemar p=0.1797, no significativo). `glossary_inject` **53/64 → 0/64**.
+  precision 0.66 → 0.57. rechazos 1/64 → 4/64. **El eval era circular en el mecanismo, no
+  inflado en el resultado.**
+- [ ] **B1.3 set operativo (112q) como primario** — pendiente, no bloqueado.
+- [ ] **re-calibrar gate off-topic contra `queries_fraseos_v1`** — abierto por el hallazgo de
+  rechazos falsos inducidos por fraseo (4/64).

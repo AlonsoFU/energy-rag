@@ -99,7 +99,7 @@ def main():
         f, e2 = arm(q["query"], gs)
         q["ctrl"], q["fras"], q["err"] = c, f, e1 or e2
         nq += 1
-        if nq % 5 == 0:
+        if nq % 1 == 0:
             rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
             print(f"  pares nuevos={nq}  [{i+1}/{len(rows)}]", flush=True)
     rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))

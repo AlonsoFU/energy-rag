@@ -453,3 +453,70 @@ criterio arbitrario.
 Patrón: **si el dato subyacente es ambiguo, ninguna presentación lo salva.**
 → El fix real es **G4 (entity resolution)**: desambiguar los 42 términos definidos en >1 norma
 por contexto/jerarquía en vez de por longitud de texto.
+
+---
+
+## #41 — B1.2 FRASEOS VARIADOS: el número honesto (2026-08-18) — **CONFIRMA LA CIRCULARIDAD**
+
+Primer experimento que NO prueba una mejora: mide **cuánto del 98.9% es circularidad**.
+Set: `data/eval/queries_fraseos_v1.jsonl` (64q, generado por `scripts/build_fraseos_set.py`).
+Runner: `scripts/exp_fraseos_paired.py`. Resultados: `data/eval/results/fraseos_v1/`.
+
+**Diseño.** Pareado POR TÉRMINO, ambos brazos en la misma sesión (regla #4):
+control `"qué es <T>"` (fraseo que el regex cubre) vs fraseo natural sobre el MISMO término y
+el MISMO gold. Retrieval completo en los dos brazos — la diferencia **es** el retrieval.
+Solo términos con `ok_off=True` en gen13_roles ⇒ una falla es atribuible al FRASEO, no al
+término ⇒ **el drop medido es COTA INFERIOR**.
+
+Dos grupos, dos fallas distintas del mismo mecanismo:
+- **A (40q)** el gate `_is_definition_query` NO dispara.
+- **B (24q)** el gate SÍ dispara, pero `_definition_concept` devuelve **la query entera** en vez
+  del término, porque `_DEF_PREFIX` solo hace match al INICIO. Hallazgo NUEVO: "dame la
+  definición de X", "cuál es la definición de X", "según la ley, qué es X" pasan el gate y aun
+  así `def_exact` no encuentra nada.
+
+```
+                     control        fraseo
+cita_ok  TOTAL       61/64 (95.3%)  56/64 (87.5%)   gano 2, perdio 7   McNemar p=0.1797
+cita_ok  grupo A     39/40 (97.5%)  37/40 (92.5%)   p=0.6250
+cita_ok  grupo B     22/24 (91.7%)  19/24 (79.2%)   p=0.3750
+inject disparo       53/64          0/64            <- COBERTURA CERO
+precision            0.66           0.57
+citas unicas         2.27           2.53            <- rocia mas
+rechazos             1/64           4/64
+```
+
+**Los tres hallazgos, en orden de importancia:**
+
+1. **`glossary_inject` tiene cobertura 0% fuera de las 3 plantillas.** 53/64 → 0/64. El mecanismo
+   que aportó +16 (el mayor win de retrieval del proyecto) **no existe** para un usuario que
+   escribe normal. Esto era la sospecha; ahora está medido.
+
+2. **Pero el sistema NO se derrumba: −7.8 pts, p=0.18 (no significativo con n=64).** Apagar el
+   mecanismo estrella cuesta 5 queries netas. El resto del retrieval (4B + alias + BGE) rescata
+   casi todo. **Corrección a la narrativa previa:** el 98.9% era circular en el MECANISMO, no
+   inflado en el RESULTADO. Cota inferior — sobre términos difíciles el golpe sería mayor.
+
+3. **El costo real está en la PRECISIÓN, no en el acierto.** 0.66 → 0.57 y 2.27 → 2.53 citas
+   únicas: sin la inyección el modelo **rocía más para pegarle igual**. Consistente con que
+   `cita_ok` premia rociar; la métrica de adopción (`cita_limpia`) casi no se mueve porque el
+   acierto extra viene con basura.
+
+**Modo de falla nuevo: el fraseo induce RECHAZOS.** 4 de las 7 pérdidas son `refuso=True`
+(1/64 → 4/64). El sistema contesta "no sé" a una pregunta que con otro fraseo contesta bien:
+```
+[A] Tasas de falla de instalaciones de transmisión definición   refuso, 0 citas
+[A] qué entiende la ley por Estado Deteriorado                  refuso, 0 citas
+[B] necesito saber qué es TON                                   refuso, 0 citas
+[B] según la ley, qué es Solicitante                            refuso, 10 citas (!)
+```
+Peor que fallar: el usuario recibe un no-hay-datos falso. Habrá que re-calibrar el gate off-topic
+contra este set.
+
+**NO parchear el regex.** El fix de B es una línea (permitir preámbulo antes del prefijo) y
+recupera 24/64 casos, pero sería más regex como mecanismo principal — prohibido (CLAUDE.md
+2026-08-17). **Este set es ahora el banco de pruebas de B2 (clasificador por embeddings):**
+la meta es `inject 0/64 → ~64/64` sin tocar el regex.
+
+**El número honesto del sistema:** `cita_ok` **87.5%** con fraseos naturales sobre términos
+fáciles, no 98.9%. Y el 98.9% sigue siendo válido **solo** para las 3 plantillas del set primario.

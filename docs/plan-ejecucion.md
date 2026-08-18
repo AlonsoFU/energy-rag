@@ -30,12 +30,22 @@ o las mejoras se verán como nulas.
 
 | # | qué | GPU | h | dep |
 |---|---|---|---|---|
-| 1.1 | **Set de fraseos variados** — ~60 queries de definición con fraseos que el regex NO cubre ("cómo se define X", "defíneme X", "X definición", "qué entiende la ley por X") | no | 1 | — |
-| 1.2 | **Medir el sistema actual sobre 1.1** — cuánto cae el 99.2% con fraseos reales | **sí** | 1.5 | 1.1 |
+| 1.1 | [x] **HECHO** (`50522db`) **Set de fraseos variados** — 64q, `queries_fraseos_v1.jsonl`. 2 grupos: A gate no dispara (40q), B gate si pero extraccion rota (24q). — ~60 queries de definición con fraseos que el regex NO cubre ("cómo se define X", "defíneme X", "X definición", "qué entiende la ley por X") | no | 1 | — |
+| 1.2 | [x] **HECHO** — **cita_ok 95.3% → 87.5%** (p=0.18, no significativo). `glossary_inject` **0/64 cobertura**. precision 0.66→0.57. Rechazos 1→4. Exp #41 | **sí** | 1.5 | 1.1 |
 | 1.3 | **Set operativo como primario** — hoy 112 queries operativas (coloquial 38 + dev 28 + holdout 19) están medidas UNA vez. Consolidar y medir los cambios adoptados ahí | **sí** | 2 | — |
 
-**Entregable:** saber cuánto del 99.2% es real y cuánto es circularidad. **Es el número honesto
-del sistema.**
+**RESULTADO (2026-08-18, exp #41):** el eval SÍ era circular **en el mecanismo**, pero el
+resultado NO estaba inflado. `glossary_inject` (el mayor win del proyecto, +16) tiene
+**cobertura 0/64** fuera de las 3 plantillas — y aun así `cita_ok` solo cae **95.3% → 87.5%**
+(p=0.18, n=64). El resto del retrieval rescata casi todo. El costo real es **precisión
+0.66 → 0.57**: sin inyección el modelo **rocía más para pegarle igual**.
+
+**Número honesto:** `cita_ok` **87.5%** con fraseos naturales sobre términos fáciles (cota
+inferior — solo se usaron términos que hoy aciertan). El 98.9% vale **solo** para las 3
+plantillas del set primario.
+
+⚠️ **Modo de falla nuevo:** el fraseo induce RECHAZOS (1/64 → 4/64). El sistema contesta "no sé"
+a preguntas que con otro fraseo contesta bien. Re-calibrar el gate off-topic contra este set.
 
 ---
 
@@ -46,8 +56,8 @@ del sistema.**
 | # | qué | GPU | h | dep |
 |---|---|---|---|---|
 | 2.1 | **Ejemplos por intención** — definición · regulación · plazo · sanción · cálculo · procedimiento (~15 c/u, escritos a mano) | no | 1.5 | — |
-| 2.2 | **Clasificador por embeddings** — embeber ejemplos con el qwen3-4b ya cargado; query nueva → coseno → intención más cercana + umbral. Sin llamada al LLM | **sí** | 2 | 2.1 |
-| 2.3 | **Medir vs regex** sobre 1.1 (pareado) | **sí** | 1.5 | 1.2, 2.2 |
+| 2.2 | **Clasificador por embeddings** — embeber ejemplos con el qwen3-4b ya cargado; query nueva → coseno → intención más cercana + umbral. Sin llamada al LLM. **Meta medible: `inject` 0/64 → ~64/64 en `queries_fraseos_v1`** | **sí** | 2 | 2.1 |
+| 2.3 | **Medir vs regex** sobre 1.1 (pareado). Baseline ya en disco: `data/eval/results/fraseos_v1/` | **sí** | 1.5 | 1.2, 2.2 |
 | 2.4 | **Regex como override** solo donde el clasificador falle | no | 0.5 | 2.3 |
 
 **Entregable:** detección de intención que generaliza, y **5 intenciones nuevas** que hoy no
