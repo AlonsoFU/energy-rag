@@ -580,7 +580,16 @@ class SimpleRetriever:
         # si falta). Alta precisión (exact-match) → no desplaza como def_fragments RRF. Ataca los
         # embedding-miss de términos-glosario (Infracciones, Estado Deteriorado, etc.).
         if getattr(_cfg.settings, "glossary_inject", False):
-            _c = _definition_concept(query)
+            # glossary_lookup (B2, 2026-08-18): extrae el TERMINO buscandolo en el diccionario
+            # del glosario, en vez de recortar un prefijo con regex. Medido sobre 64 fraseos
+            # naturales: el regex de prefijo dispara 0/64, el diccionario 54/64. El regex queda
+            # de FALLBACK, que es el unico rol que le corresponde (CLAUDE.md 2026-08-17).
+            _c = None
+            if getattr(_cfg.settings, "glossary_lookup", False):
+                from src.pipelines.glossary_lookup import find_term as _find_term
+                _c = _find_term(query, self.store)
+            if _c is None:
+                _c = _definition_concept(query)
             if _c:
                 inj = self.store.def_exact(_c)
                 if inj:

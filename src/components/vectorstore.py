@@ -178,6 +178,16 @@ class PostgresStore:
             """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()
 
+    def glossary_terms(self) -> list[str]:
+        """Todos los terminos del glosario. Alimenta `glossary_lookup` (extraccion del termino
+        por diccionario en vez de por regex de prefijo). [] si la tabla no existe."""
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.tables WHERE table_name='fragmentos_definicion'")
+            if not cur.fetchone():
+                return []
+            cur.execute("SELECT DISTINCT termino FROM fragmentos_definicion WHERE termino IS NOT NULL")
+            return [r["termino"] for r in cur.fetchall()]
+
     def def_exact(self, concepto: str) -> dict | None:
         """glossary_inject: match EXACTO concepto→def-fragment (case-insensitive). Devuelve un
         doc del artículo padre (parent-doc) o None. Determinista, alta precisión (no como el RRF

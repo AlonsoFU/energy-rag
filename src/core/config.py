@@ -321,6 +321,10 @@ class Settings(BaseSettings):
     # p=0.0000. Mayor WIN de retrieval de la campaña. Sortea el muro del reranker (prefiere artículo
     # FUNCIONAL sobre DEFINICIÓN) que RK1/Qwen3-Reranker NO pudo romper.
     glossary_inject: bool = True
+    # B2: extraer el termino del glosario por DICCIONARIO (palabras completas, gana el
+    # n-grama mas largo) en vez de recortar un prefijo con regex. El regex queda de
+    # fallback. Medido: regex 0/64 vs diccionario 54/64 en fraseos naturales (exp #42).
+    glossary_lookup: bool = False
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los

@@ -1,0 +1,83 @@
+{"intent": "definicion", "text": "qué es el costo marginal"}
+{"intent": "definicion", "text": "defíneme servicios complementarios"}
+{"intent": "definicion", "text": "cómo se define una empresa coordinada"}
+{"intent": "definicion", "text": "a qué se le llama retiro de energía"}
+{"intent": "definicion", "text": "qué entiende la ley por sistema de transmisión zonal"}
+{"intent": "definicion", "text": "en qué consiste el peaje de distribución"}
+{"intent": "definicion", "text": "qué quiere decir potencia de suficiencia"}
+{"intent": "definicion", "text": "dame la definición de cliente libre"}
+{"intent": "definicion", "text": "significado de barra de referencia"}
+{"intent": "definicion", "text": "según la ley, qué es un pequeño medio de generación distribuida"}
+{"intent": "definicion", "text": "concepto de demanda máxima"}
+{"intent": "definicion", "text": "explícame el término interconexión"}
+{"intent": "definicion", "text": "qué se debe entender por instalación de transmisión dedicada"}
+{"intent": "definicion", "text": "generación bruta definición"}
+{"intent": "definicion", "text": "necesito saber qué es un usuario final"}
+{"intent": "definicion", "text": "a qué se refiere el término energía reactiva"}
+{"intent": "regulacion", "text": "qué artículo regula las transferencias económicas entre empresas generadoras"}
+{"intent": "regulacion", "text": "qué norma rige el acceso abierto a los sistemas de transmisión"}
+{"intent": "regulacion", "text": "cuáles son las obligaciones del Coordinador respecto del balance de inyecciones y retiros"}
+{"intent": "regulacion", "text": "dónde está regulada la valorización de las transferencias de potencia"}
+{"intent": "regulacion", "text": "qué dice la ley sobre la remuneración del sistema de transmisión nacional"}
+{"intent": "regulacion", "text": "qué exige la normativa a los coordinados en materia de información"}
+{"intent": "regulacion", "text": "está permitido que un cliente libre cambie de suministrador"}
+{"intent": "regulacion", "text": "quién es responsable de calcular los peajes de transmisión"}
+{"intent": "regulacion", "text": "bajo qué condiciones procede el pago por capacidad de transmisión"}
+{"intent": "regulacion", "text": "qué requisitos debe cumplir una instalación para ser declarada en servicio"}
+{"intent": "regulacion", "text": "a quién le corresponde la operación del sistema eléctrico nacional"}
+{"intent": "regulacion", "text": "qué establece el reglamento sobre los servicios complementarios"}
+{"intent": "regulacion", "text": "es obligatorio informar al Coordinador de las indisponibilidades"}
+{"intent": "regulacion", "text": "qué normativa aplica a la conexión de un PMGD"}
+{"intent": "regulacion", "text": "cuáles son los derechos de los propietarios de instalaciones de transmisión dedicada"}
+{"intent": "plazo", "text": "cuál es el plazo para presentar el informe de valorización de transferencias económicas"}
+{"intent": "plazo", "text": "cuándo debe el Coordinador publicar el balance definitivo"}
+{"intent": "plazo", "text": "hasta qué fecha se pueden presentar observaciones al informe preliminar"}
+{"intent": "plazo", "text": "en cuántos días hábiles debe responder la Comisión"}
+{"intent": "plazo", "text": "cada cuánto se actualiza el informe de precios de nudo"}
+{"intent": "plazo", "text": "qué plazo tiene la empresa para subsanar las observaciones"}
+{"intent": "plazo", "text": "cuándo entra en vigencia el decreto de peajes"}
+{"intent": "plazo", "text": "con cuánta anticipación hay que notificar una desconexión programada"}
+{"intent": "plazo", "text": "tiempo máximo para emitir la resolución exenta"}
+{"intent": "plazo", "text": "en qué momento del año se realiza el proceso de reliquidación"}
+{"intent": "plazo", "text": "cuál es la periodicidad del balance de transferencias económicas"}
+{"intent": "plazo", "text": "fecha límite para la declaración de costos variables"}
+{"intent": "plazo", "text": "cuánto dura la vigencia del decreto tarifario"}
+{"intent": "plazo", "text": "desde cuándo rige la obligación de informar"}
+{"intent": "sancion", "text": "qué multa se aplica por no informar los costos variables"}
+{"intent": "sancion", "text": "qué pasa si una empresa incumple una instrucción del Coordinador"}
+{"intent": "sancion", "text": "cuáles son las infracciones gravísimas en la ley eléctrica"}
+{"intent": "sancion", "text": "qué sanciones contempla la normativa para el incumplimiento de la norma técnica"}
+{"intent": "sancion", "text": "cuánto puede llegar a costar una infracción grave en UTM"}
+{"intent": "sancion", "text": "consecuencias de no pagar las transferencias económicas en plazo"}
+{"intent": "sancion", "text": "quién fiscaliza y sanciona a las empresas del sector eléctrico"}
+{"intent": "sancion", "text": "procede recurso contra la multa aplicada por la Superintendencia"}
+{"intent": "sancion", "text": "se puede caducar la concesión por incumplimiento"}
+{"intent": "sancion", "text": "qué responsabilidad tiene el propietario ante una falla que causa un apagón"}
+{"intent": "sancion", "text": "clasificación de las infracciones leves"}
+{"intent": "sancion", "text": "hay penalización por indisponibilidad no informada"}
+{"intent": "calculo", "text": "cómo se calcula el pago por potencia de suficiencia"}
+{"intent": "calculo", "text": "cuál es la fórmula del costo marginal en la barra de referencia"}
+{"intent": "calculo", "text": "de qué manera se determina el peaje de transmisión nacional"}
+{"intent": "calculo", "text": "cómo se valorizan las inyecciones y retiros de energía"}
+{"intent": "calculo", "text": "qué metodología se usa para calcular el precio de nudo"}
+{"intent": "calculo", "text": "cómo se obtiene el factor de penalización de pérdidas"}
+{"intent": "calculo", "text": "con qué criterio se prorratea el pago del sistema de transmisión zonal"}
+{"intent": "calculo", "text": "cálculo de la anualidad del valor de inversión"}
+{"intent": "calculo", "text": "cómo se determina la demanda de punta del sistema"}
+{"intent": "calculo", "text": "qué variables entran en la valorización de los servicios complementarios"}
+{"intent": "calculo", "text": "fórmula de indexación del valor anual de transmisión"}
+{"intent": "calculo", "text": "cómo se computan las horas de indisponibilidad para el balance"}
+{"intent": "calculo", "text": "de qué depende el monto a pagar por peaje"}
+{"intent": "procedimiento", "text": "cómo se solicita la conexión de una central al sistema"}
+{"intent": "procedimiento", "text": "qué pasos hay que seguir para reclamar un balance de transferencias"}
+{"intent": "procedimiento", "text": "cómo se tramita una discrepancia ante el Panel de Expertos"}
+{"intent": "procedimiento", "text": "cuál es el procedimiento para declarar una instalación en servicio"}
+{"intent": "procedimiento", "text": "qué documentos hay que presentar para el proceso de valorización"}
+{"intent": "procedimiento", "text": "cómo se hace la reliquidación de las transferencias económicas"}
+{"intent": "procedimiento", "text": "de qué forma se notifica una indisponibilidad al Coordinador"}
+{"intent": "procedimiento", "text": "cómo se realiza la auditoría de los costos declarados"}
+{"intent": "procedimiento", "text": "qué trámite se requiere para obtener una concesión eléctrica"}
+{"intent": "procedimiento", "text": "cómo se incorpora una nueva obra al plan de expansión"}
+{"intent": "procedimiento", "text": "pasos para presentar observaciones al informe técnico preliminar"}
+{"intent": "procedimiento", "text": "cómo se ejecuta el proceso de licitación de suministro"}
+{"intent": "procedimiento", "text": "de qué manera se solicita el cambio de suministrador"}

@@ -520,3 +520,68 @@ la meta es `inject 0/64 → ~64/64` sin tocar el regex.
 
 **El número honesto del sistema:** `cita_ok` **87.5%** con fraseos naturales sobre términos
 fáciles, no 98.9%. Y el 98.9% sigue siendo válido **solo** para las 3 plantillas del set primario.
+
+---
+
+## #42 — B2 PROBE: los embeddings agrupan por TEMA, no por INTENCIÓN (2026-08-18)
+
+Antes de construir el clasificador del BLOQUE 2, medir su premisa. Barato (solo embeddings,
+sin LLM): `scripts/exp_intent_probe.py`, ejemplos en `data/intents/ejemplos_v1.jsonl`
+(83 ejemplos escritos a mano, 6 intenciones, **tópicos variados dentro de cada intención**
+a propósito, para que la señal compartida sea la intención y no el tema).
+
+```
+1. LOO centroide   65/83 = 78.3%
+1. LOO 1-NN        24/83 = 28.9%     <- azar = 16.7%
+2. tema vs intencion: la INTENCION gana 1/6
+     "cómo se calcula el peaje"  ->  tema 0.8299  vs  intencion 0.5892
+     "qué es el costo marginal"  ->  tema 0.9147  vs  intencion 0.4437
+3. queries_fraseos_v1: recall 'definicion' 50/64 = 78.1%, margen 1o-2o = 0.0658
+```
+
+**El coseno del embedder generalista está dominado por el TÓPICO.** "cómo se calcula el peaje"
+se parece más a "qué artículo regula el peaje" (0.83) que a "cómo se determina el precio de
+nudo" (0.59). El 1-NN casi al azar lo confirma: el vecino más cercano de un ejemplo es el que
+habla del mismo tema, sin importar la intención. El centroide sobrevive (78%) porque promedia
+tópicos, pero el margen 1º-2º de 0.066 hace cualquier umbral frágil.
+
+**Conclusión que reordena el BLOQUE 2:** el problema real **no era clasificar la intención**,
+era **extraer el término**. Y el término no hace falta inferirlo — está en la DB.
+
+### #42b — `glossary_lookup`: extracción por DICCIONARIO (el fix real)
+
+En vez de preguntar *"¿cómo está fraseada la query?"* (regex de prefijo), preguntar
+*"¿qué término del glosario aparece en la query?"*. `fragmentos_definicion.termino` tiene 616
+términos; match por **palabras completas** (sin esto "AR" matchea dentro de "solares"), gana el
+**n-grama más largo**. `src/pipelines/glossary_lookup.py`, flag `glossary_lookup` (default OFF).
+
+```
+disparo de inject sobre queries_fraseos_v1 (64 fraseos naturales):
+  regex de prefijo ....  0/64
+  diccionario .......... 54/64      (control con fraseo cubierto: 53/64)
+
+no-regresion sobre el set primario (279 in_domain), comparando el ARTICULO inyectado:
+  mismo articulo ....... 267
+  solo lookup inyecta ..  12        <- GANANCIA GRATIS
+  solo regex inyecta ...   0        <- riesgo de regresion CERO
+  inyectan distinto ....   0
+```
+
+Las 12 que solo el diccionario resuelve son **siglas con puntos** (`C.O.M.A.`, `V.A.T.T.`,
+`A.V.I.`, `P.N.C.P.`): `_DEF_PREFIX` deja el punto final fuera del concepto (`C.O.M.A`) y
+`def_exact` hace match exacto ⇒ no encuentra nada. Bug latente desde siempre, invisible porque
+el eval nunca preguntó de otra forma.
+
+El regex queda como **fallback** cuando el diccionario no encuentra término — el único rol que
+le corresponde (CLAUDE.md 2026-08-17).
+
+⚠️ **Riesgo abierto, aún NO medido:** una query de REGULACIÓN que contenga un término del
+glosario ("qué artículo regula el Sistema de Transmisión Nacional") ahora dispara la inyección
+de la DEFINICIÓN. El diccionario extrae, pero no decide *si corresponde inyectar*. **Ahí sí hace
+falta el clasificador de intención, pero como GATE, no como extractor.** Medir sobre el set
+operativo antes de adoptar.
+
+**ESCALA:** costo por query O(tokens²) lookups en dict — constante respecto al tamaño del
+glosario. Memoria ~5 MB por 100k términos. Lo que empeora al escalar es la **ambigüedad**: más
+términos ⇒ más colisiones ⇒ pesa más el desempate arbitrario de `def_exact`
+(`ORDER BY length(texto) DESC`). Ese es el frente G4.
