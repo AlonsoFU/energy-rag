@@ -52,6 +52,7 @@ holdout 18 · balanced_v2 339.
 | 34 | **NO-REGRESIÓN** (dev/coloquial/holdout) | los 6 cambios adoptados solo se habían medido en `balanced_v2` | cita_ok | coloquial **36/39** (hist 37/39) · dev **37/44** (hist 36/44) · holdout **17/18** (hist 17/18) → **±1, SIN REGRESIÓN** | ✅ verificado |
 | 35 | GEN8a-v2 · `think=True` (comparación justa) | rehecho tras el fix de `<think>`: antes el brazo OFF contaba citas del bloque de razonamiento | cita_ok | **260→244 (gana 1, pierde 17), p=0.0001 SIGNIFICATIVO NEGATIVO**. precisión 0.58→0.66 | ✗ **confirmado negativo** (no era artefacto) |
 | 36 | GEN12 · híbrido `think` | intento 0 con `think=True`; si RECHAZA o no deja cita válida → reintento con `think=False` | cita_ok + precisión | **260→250 (gana 1, pierde 11), p=0.0063 NEGATIVO**. `cita_limpia` +15, `cita_perfecta` +38 | ✗ recupera 6 de los 16 golds, no alcanza |
+| 40 | GEN13 · marcar el artículo DEFINITORIO en el prompt | `glossary_inject` SABE cuál define; se marca `<<< ESTE ARTICULO DEFINE "X" >>>` en vez de pedirle al LLM que adivine el rol | cita_ok | **261→260 (gana 3, pierde 4), p=1.0 FLAT**; precisión 0.66→0.66 | ✗ **flat** — 3er intento fallido por el lado del prompt |
 | 39 | GEN2b · self-consistency **N=5** vs N=3 | ¿más muestras = consenso más robusto? | cita_ok + precisión | **262→263 (p=1.0 FLAT)**; precisión **0.63→0.57**, citas únicas 2.65→3.08, tiempo 71→98 s | ✗ **descartado** — ver caveat |
 | 38 | D3 · TRIGGER ampliado del extractor | el trigger exigía "se entenderá por"; perdía artículos que ENUMERAN definiciones ("los recursos que siguen: 1) Reposición: ...") | cita_ok | 260→261 (gana 3, pierde 2), **p=1.0 FLAT**. Tabla 713→**743**. Convirtió `Reposición` (el objetivo) | ⚠️ adoptado por CORRECCIÓN de datos, no por el Δ |
 | 37 | **GEN2 · self-consistency N=3** | 3 generaciones a T=0.7; consenso = citas en ≥2; se elige la respuesta más respaldada | cita_ok + precisión | **cita_ok 260→259 (p=1.0 FLAT)** · **`cita_limpia` +18** · **`cita_perfecta` +29** · precisión 0.59→**0.66** · tiempo 20.8→**61.4 s** | ✅ **WIN de CALIDAD** — el único que sube precisión SIN costar aciertos |
@@ -417,3 +418,38 @@ latencia      71 s/respuesta (N=3)
 ```
 Residuo: 2 fallas. Frentes agotados: pool · reranker · think · híbrido · 2 prompts · 2 recortes
 de docs · self-consistency N=5.
+
+
+---
+
+## 11. GEN13 (marcar el definitorio) — flat, y por qué importa el cómo falló
+
+```
+cita_ok      261/264 -> 260/264   (gana 3, pierde 4)  p=1.0 FLAT
+precision    0.66 -> 0.66    citas unicas 2.57 -> 2.49
+```
+
+**Diseño (corregido a mitad de camino por el usuario).** El primer intento pedía al LLM que
+clasificara el rol de cada artículo (define / regula / sanciona). El usuario lo cuestionó y tenía
+razón: **ese es justo el juicio que el modelo no sabe hacer** — las 2 fallas restantes existen
+porque confunde "define" con "regula". Se descartó SIN correr; habría repetido GEN8b (flat).
+La versión corrida usa el dato determinista que ya teníamos: `glossary_inject` sabe cuál artículo
+define (match exacto en `fragmentos_definicion`) y esa información se tiraba al pasarlo al prompt
+como un doc más. Ahora se marca en el encabezado.
+
+**Lo revelador son las PÉRDIDAS**, no el total:
+```
+PIERDE  que significa DIA
+PIERDE  definicion de Infracciones gravisimas
+PIERDE  que significa Infracciones graves
+```
+Son términos cuyo gold está en **varias normas**. La marca apuntó a UNA definición y el modelo
+dejó de citar la otra, que también era válida. **La marca es determinista pero elige mal cuando
+hay ambigüedad** — arrastra el `ORDER BY length(texto) DESC LIMIT 1` de `def_exact`, que es un
+criterio arbitrario.
+
+**Conclusión: es el 3er intento fallido de arreglar esto por el lado de la PRESENTACIÓN**
+(GEN8b prompt-prefer-definition · GEN13 roles vía LLM, descartado · GEN13 marca determinista).
+Patrón: **si el dato subyacente es ambiguo, ninguna presentación lo salva.**
+→ El fix real es **G4 (entity resolution)**: desambiguar los 42 términos definidos en >1 norma
+por contexto/jerarquía en vez de por longitud de texto.
