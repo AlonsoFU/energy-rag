@@ -727,3 +727,43 @@ Consecuencias para el método:
 **ADOPTADOS** `glossary_lookup=True` + `intent_gate=True` (default ON en `config.py`).
 Ganancia significativa donde importa (fraseos naturales, p=0.0312, 0 pérdidas), sin regresión en
 lo operativo. El regex queda de fallback cuando el diccionario no encuentra término.
+
+---
+
+## #45 — G4 entity resolution: **NO ES MEDIBLE con el eval actual** (2026-08-19)
+
+Antes de construir G4 (desempate de los términos definidos en >1 norma, señalado 3 veces como
+"el fix real"), medí offline si algún criterio de desempate le gana al actual
+(`ORDER BY length(texto) DESC`). Sobre las 64 queries del eval cuyo término ES ambiguo:
+
+```
+longitud (HOY)     64/64 = 100%
+jerarquia+fecha    64/64 = 100%
+fecha mas nueva    64/64 = 100%
+jerarquia+largo    64/64 = 100%
+```
+
+**Los 4 criterios empatan en 100%** porque `also_gold` marca TODAS las variantes como válidas.
+El eval no puede distinguir entre elegir la definición del DECRETO 10 o la de la RESOLUCIÓN 711:
+acepta ambas.
+
+**Conclusión:** el riesgo legal de G4 es real en concepto (elegir la definición equivocada para
+el contexto), pero **el eval actual es ciego a él**. Construirlo ahora sería trabajar sin
+retroalimentación. Para atacarlo primero hay que decidir qué definición es la correcta para cada
+contexto — y eso es una decisión de dominio (del usuario), no algo que yo pueda inferir del
+corpus. Queda BLOQUEADO por falta de criterio, no por falta de implementación.
+
+Dato útil que salió: de los **42** "términos ambiguos", solo **35 son términos reales**; 7 eran
+fórmulas legislativas mal parseadas.
+
+### Higiene del glosario (medido, NO adoptado)
+`fragmentos_definicion` tiene **743 entradas, de las cuales 284 (38%) no son términos** sino
+fórmulas de modificación ("Agrégase el siguiente inciso final", "Reemplázase el artículo 21…").
+Contaminan `def_exact` y el diccionario de `glossary_lookup`.
+
+PERO: no afectan ninguna query real —
+```
+glossary_lookup devuelve basura en:  fraseos 0/64 · operativas 0/114 · primario 0/279
+```
+Nadie pregunta "qué es Agrégase el siguiente inciso". Es **higiene para escala, no ganancia
+medible hoy**: con más normas crecen las fórmulas y sube la chance de colisión. No se gastó GPU.

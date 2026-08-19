@@ -163,39 +163,45 @@ class NormDetailCrawler:
             return data;
         }''')
 
-    async def _esperar_carga_completa(self, page: Page, timeout: float = 60.0) -> bool:
+    async def _esperar_carga_completa(self, page: Page, timeout: float = 300.0) -> bool:
         """Forzar el render COMPLETO del articulado de BCN antes de leer el texto.
 
         BCN renderiza el articulado de forma PEREZOSA, atada al scroll. El `sleep(3)` fijo que
-        habia aca leia solo lo que cabia en el viewport y guardaba el texto truncado a mitad de
-        un articulo, en silencio. Medido:
+        habia aca leia solo lo renderizado y guardaba el texto truncado a mitad de articulo,
+        EN SILENCIO. Y las normas grandes necesitan MUCHOS scrolls:
 
-            LEY 20365   sin scroll 24.432 chars  ->  con scroll 31.059
-            DFL 1       sin scroll 25.401 chars  ->  guardado    313.969
+            LEY 20365   sin scroll  24.432 chars  ->  con scroll   31.059
+            DFL 1       sin scroll  26.409 chars  ->  25 scrolls  284.636
 
-        Peor aun: el placeholder 'Loading' NO siempre esta presente cuando falta contenido, asi
-        que detectarlo no alcanza — hay que hacer scroll SIEMPRE hasta que el largo se estabilice.
+        Dos cosas que costaron un intento fallido cada una:
+
+        1. El placeholder 'Loading' NO siempre esta cuando falta contenido (LEY 20365 daba
+           Loading=False con 24k de 31k). Detectarlo no alcanza: hay que scrollear SIEMPRE.
+        2. Parar con 2 lecturas iguales es prematuro. Entre lote y lote el lazy-load a veces
+           tarda mas que el intervalo de sondeo, asi que dos lecturas seguidas coinciden y el
+           bucle corta con la norma a medias. Se exigen ESTABLES lecturas consecutivas.
 
         Consecuencia para el monitor (B4): un scrape truncado y una modificacion real se ven
-        identicos (ambos cambian el `content_hash`). Sin esto, el monitor reporta falsos
-        positivos; se detectaron 3 antes de arreglarlo.
+        identicos -- ambos cambian el `content_hash`. Sin esto el monitor da falsos positivos;
+        se detectaron 3 antes de arreglarlo.
 
-        Devuelve False si se agoto el timeout sin estabilizar (el llamador decide).
+        Devuelve False si se agoto el timeout sin estabilizar (el llamador decide si acepta).
         """
+        ESTABLES = 5
         prev, estable = -1, 0
-        pasos = int(timeout / 1.5)
-        for _ in range(pasos):
+        inicio = asyncio.get_event_loop().time()
+        while asyncio.get_event_loop().time() - inicio < timeout:
             await page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
-            await asyncio.sleep(1.5)
+            await asyncio.sleep(1.2)
             estado = await page.evaluate("""() => {
                 const t = document.body.innerText || '';
                 return {n: t.length, loading: /\\bLoading\\b/.test(t)};
             }""")
-            if not estado["loading"] and estado["n"] == prev:
+            if estado["n"] == prev:
                 estable += 1
-                if estable >= 2:      # dos lecturas seguidas iguales y sin placeholders
+                if estable >= ESTABLES:
                     await page.evaluate("() => window.scrollTo(0, 0)")
-                    return True
+                    return not estado["loading"]
             else:
                 estable = 0
             prev = estado["n"]
