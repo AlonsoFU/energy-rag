@@ -325,6 +325,10 @@ class Settings(BaseSettings):
     # n-grama mas largo) en vez de recortar un prefijo con regex. El regex queda de
     # fallback. Medido: regex 0/64 vs diccionario 54/64 en fraseos naturales (exp #42).
     glossary_lookup: bool = False
+    # GATE de intencion (logreg sobre el embedding de la query, coeficientes en
+    # data/intents/gate_definicion_v1.json). Decide SI corresponde inyectar la definicion.
+    # Sin el, glossary_lookup contamina lo operativo: 20/51 en complex_v3, 7/19 en holdout.
+    intent_gate: bool = False
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los

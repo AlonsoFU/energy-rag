@@ -585,3 +585,89 @@ operativo antes de adoptar.
 glosario. Memoria ~5 MB por 100k términos. Lo que empeora al escalar es la **ambigüedad**: más
 términos ⇒ más colisiones ⇒ pesa más el desempate arbitrario de `def_exact`
 (`ORDER BY length(texto) DESC`). Ese es el frente G4.
+
+---
+
+## #43 — `glossary_lookup` e2e + GATE de intención (2026-08-18/19) — **el bloque 2, resuelto**
+
+### #43a — e2e del diccionario, sin gate (`lookup_fraseos`)
+
+Pareado sobre `queries_fraseos_v1`, misma query en ambos brazos, misma sesión.
+OFF = concepto por regex de prefijo · ON = concepto por diccionario del glosario.
+
+```
+cita_ok       OFF 56/64  ->  ON 60/64   [gano 4, perdio 0]  McNemar p=0.1250
+cita_limpia   OFF 45/64  ->  ON 42/64
+inject        OFF  0/64  ->  ON 54/64
+rechazos      OFF  4/64  ->  ON  2/64
+precision     OFF  0.62  ->  ON  0.67
+citas unicas  OFF  2.08  ->  ON  2.20
+```
+
+**Gana 4, pierde 0.** p=0.1250 porque McNemar no puede bajar de ahí con 4-0 (harían falta 5-0),
+pero todo apunta igual: mecanismo recuperado, precisión arriba, rechazos a la mitad, cero
+pérdidas. Cierra casi toda la brecha de fraseo: control 61/64 · sin lookup 56/64 · **con lookup
+60/64**.
+
+⚠️ **`cita_limpia` baja 3** y no es contradictorio con la precisión media: 7 queries GANAN
+limpieza (4 pasan de fallar a acertar con precisión 1.00) y 9 la PIERDEN — siguen acertando pero
+rocían más (`uniq 1→3`, `1→5`). Al inyectar entra un doc extra al pool y el modelo lo cita
+*además* de los otros. Parte puede ser flicker de T=0.7 con `self_consistency_n=3`; no se puede
+separar sin repetir la corrida.
+
+### #43b — el riesgo medido: sin gate, el diccionario contamina lo operativo
+
+```
+inyecciones     fraseos_v1(+)  complex_v3(-)  holdout op.(-)
+diccionario solo    54/64          20/51          7/19
+```
+"Cliente", "Ley", "Comisión", "Coordinador", "Aviso" son términos de glosario que aparecen en
+**cualquier** pregunta. El diccionario extrae bien, pero **no decide si corresponde inyectar**.
+
+Filtro por longitud del término — descartado, trade-off malo:
+```
+min 1 palabra   54/64   20/51      min 2 palabras   38/64   7/51
+```
+
+### #43c — el gate: clasificador, no coseno
+
+`src/pipelines/intent_gate.py` + `scripts/train_intent_gate.py`. Regresión logística binaria
+sobre el embedding de la query (mismo `qwen3-embedding:4b` MRL-1024 del retrieval); los
+coeficientes van a `data/intents/gate_definicion_v1.json` y la inferencia en producción es un
+producto punto — sin sklearn ni pickle en runtime.
+
+```
+gate definicion/no-definicion       recall   precision    F1
+  regex `_is_definition_query`       0.864     0.997     0.925
+  centroide (coseno)                 0.983     0.981     0.982
+  logreg (5-fold CV)                 0.992     0.989     0.990
+```
+El coseno agrupa por tópico (#42) pero **la regresión logística sí separa**: aprende qué
+dimensiones codifican la intención y descarta las del tema. Ese era el matiz que faltaba —
+"los embeddings no sirven para intención" es falso; lo que no sirve es *el coseno crudo*.
+
+**Composición del train, elegida midiendo 3 alternativas** (`fraseos_v1` SIEMPRE fuera):
+```
+A) solo 83 ejemplos a mano            inyecta 47/64   1/51   0/19
+B) ejemplos + primario(279)           inyecta 52/64   0/51   0/19   <- elegida
+C) ejemplos + primario + operativas    inyecta 51/64   0/51   0/19
+```
+⚠️ `queries_fraseos_v1` se excluye **deliberadamente** del entrenamiento: es el set de test.
+Meterlo habría repetido exactamente el error que hizo circular al eval original.
+
+**Resultado de la composición completa (fuera de muestra):**
+```
+inyecciones            fraseos_v1(+)  complex_v3(-)  holdout op.(-)
+hoy (regex)                 0/64           0/51           0/19
+diccionario solo           54/64          20/51           7/19
+gate + diccionario         52/64           0/51           0/19
+```
+Cuesta **2 inyecciones correctas** y elimina **las 27 indebidas**.
+
+Flags `glossary_lookup` + `intent_gate` (ambos default OFF). El regex queda de fallback cuando
+el diccionario no encuentra término. Corriendo el e2e pareado de la composición completa.
+
+**ESCALA:** gate = 1 embedding + producto punto de 1024 dims por query, constante respecto al
+corpus. Hay que **reentrenar al cambiar de embedder** (los coeficientes son del espacio
+vectorial) y al agregar intenciones. El diccionario es O(tokens²) lookups, también constante;
+lo que empeora al escalar es la ambigüedad entre términos ⇒ frente G4.

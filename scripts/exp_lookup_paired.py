@@ -66,7 +66,10 @@ def main():
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
     def arm(qtext, gs, val):
+        # ON = lookup por diccionario + gate de intencion (los dos van juntos: el diccionario
+        # sin gate contamina lo operativo, medido 20/51 en complex_v3).
         cfg.settings.glossary_lookup = val
+        cfg.settings.intent_gate = val
         for _ in (1, 2, 3):
             try:
                 t0 = time.time()
@@ -98,6 +101,7 @@ def main():
             print(f"  pares nuevos={nq}  [{i+1}/{len(rows)}]", flush=True)
     rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
     cfg.settings.glossary_lookup = False
+    cfg.settings.intent_gate = False
 
     valid = [q for q in rows if not q.get("err") and q.get("off")]
     n = len(valid)

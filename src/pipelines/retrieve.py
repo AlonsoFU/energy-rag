@@ -586,8 +586,17 @@ class SimpleRetriever:
             # de FALLBACK, que es el unico rol que le corresponde (CLAUDE.md 2026-08-17).
             _c = None
             if getattr(_cfg.settings, "glossary_lookup", False):
-                from src.pipelines.glossary_lookup import find_term as _find_term
-                _c = _find_term(query, self.store)
+                # intent_gate: el diccionario extrae el termino, pero NO decide si corresponde
+                # inyectar. Sin gate contamina lo operativo (20/51 en complex_v3), porque
+                # "Cliente"/"Ley"/"Comision" son terminos de glosario que salen en cualquier
+                # pregunta. El gate es un clasificador (logreg sobre el embedding), no un regex.
+                _pasa = True
+                if getattr(_cfg.settings, "intent_gate", False):
+                    from src.pipelines.intent_gate import is_definition as _is_def
+                    _pasa = _is_def(query)
+                if _pasa:
+                    from src.pipelines.glossary_lookup import find_term as _find_term
+                    _c = _find_term(query, self.store)
             if _c is None:
                 _c = _definition_concept(query)
             if _c:
