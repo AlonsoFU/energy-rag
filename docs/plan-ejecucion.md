@@ -87,10 +87,10 @@ existen. Habilita inyección determinista para lo operativo, no solo para defini
 
 | # | qué | GPU | h | dep |
 |---|---|---|---|---|
-| 4.1 | **Tabla de eventos** (`norma`, tipo, fecha, diff, detectado_en) | no | 0.5 | — |
-| 4.2 | **Diff incremental** — re-scrape + comparar `content_hash` y vinculaciones vs lo guardado | no | 2 | 4.1 |
-| 4.3 | **Cron** (usar skill `schedule`) | no | 0.5 | 4.2 |
-| 4.4 | **Notificación** — qué cambió y qué respuestas del sistema quedaron obsoletas | no | 1 | 4.2 |
+| 4.1 | [x] **HECHO** — `norma_evento` + `norma_snapshot` (`scripts/monitor_schema.py`). 6 tipos de evento, dedup por índice único, campo `impacto` | no | 0.5 | — |
+| 4.2 | [x] **HECHO** — `scripts/monitor_diff.py` (`--snapshot` / diff). Probado: detecta norma_nueva, texto_modificado, estado_cambiado y cruza el impacto (LGSE → 17 artículos que la citan) | no | 2 | 4.1 |
+| 4.3 | [x] **HECHO** — `scripts/monitor_run.sh` (scrape→diff→informe→snapshot). Falta que el usuario lo instale en crontab (1 línea, está en el header) | no | 0.5 | 4.2 |
+| 4.4 | [x] **HECHO** — `scripts/monitor_report.py` → `docs/monitor-ultimo-informe.md`. Separa los eventos que afectan normas CITADAS por el corpus del resto | no | 1 | 4.2 |
 | 4.5 | **Filtro de vigencia en retrieval** — no citar derogado, o citar con advertencia | **sí** | 2 | 4.1 |
 
 **Entregable:** *"el 04.11.2024 la ley 21711 derogó el art. 23 del decreto X, que tu sistema citaba"*.
