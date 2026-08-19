@@ -84,7 +84,7 @@ class NormDetailCrawler:
         try:
             print(f"  Accediendo a: {url}")
             await page.goto(url, wait_until='networkidle', timeout=60000)
-            await asyncio.sleep(3)
+            await self._esperar_carga_completa(page)
 
             # Extraer metadatos básicos
             metadata = await self._extract_metadata(page)
@@ -163,6 +163,45 @@ class NormDetailCrawler:
             return data;
         }''')
 
+    async def _esperar_carga_completa(self, page: Page, timeout: float = 60.0) -> bool:
+        """Forzar el render COMPLETO del articulado de BCN antes de leer el texto.
+
+        BCN renderiza el articulado de forma PEREZOSA, atada al scroll. El `sleep(3)` fijo que
+        habia aca leia solo lo que cabia en el viewport y guardaba el texto truncado a mitad de
+        un articulo, en silencio. Medido:
+
+            LEY 20365   sin scroll 24.432 chars  ->  con scroll 31.059
+            DFL 1       sin scroll 25.401 chars  ->  guardado    313.969
+
+        Peor aun: el placeholder 'Loading' NO siempre esta presente cuando falta contenido, asi
+        que detectarlo no alcanza — hay que hacer scroll SIEMPRE hasta que el largo se estabilice.
+
+        Consecuencia para el monitor (B4): un scrape truncado y una modificacion real se ven
+        identicos (ambos cambian el `content_hash`). Sin esto, el monitor reporta falsos
+        positivos; se detectaron 3 antes de arreglarlo.
+
+        Devuelve False si se agoto el timeout sin estabilizar (el llamador decide).
+        """
+        prev, estable = -1, 0
+        pasos = int(timeout / 1.5)
+        for _ in range(pasos):
+            await page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+            await asyncio.sleep(1.5)
+            estado = await page.evaluate("""() => {
+                const t = document.body.innerText || '';
+                return {n: t.length, loading: /\\bLoading\\b/.test(t)};
+            }""")
+            if not estado["loading"] and estado["n"] == prev:
+                estable += 1
+                if estable >= 2:      # dos lecturas seguidas iguales y sin placeholders
+                    await page.evaluate("() => window.scrollTo(0, 0)")
+                    return True
+            else:
+                estable = 0
+            prev = estado["n"]
+        await page.evaluate("() => window.scrollTo(0, 0)")
+        return False
+
     async def _extract_texto_completo(self, page: Page) -> str:
         """Extraer texto completo de la norma."""
         texto = await page.evaluate('''() => {
@@ -183,7 +222,13 @@ class NormDetailCrawler:
 
             return document.body.innerText || '';
         }''')
-        return texto.strip()
+        texto = texto.strip()
+        if re.search(r"\bLoading\b", texto):
+            # no devolver basura en silencio: el llamador tiene que poder distinguir
+            # "la norma cambio" de "el scrape salio incompleto".
+            print(f"  AVISO: el texto trae placeholders 'Loading' ({len(texto)} chars) "
+                  f"-- extraccion INCOMPLETA")
+        return texto
 
     async def _extract_vinculaciones(self, page: Page) -> dict:
         """

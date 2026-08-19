@@ -71,7 +71,7 @@ existen. Habilita inyección determinista para lo operativo, no solo para defini
 |---|---|---|---|---|
 | 3.1 | **Podar 14 normas ajenas** (tránsito, transporte público, obras públicas, procesal penal, insolvencia) + re-medir | no | 1 | 0.2 |
 | 3.2 | **Crawler CNE** — NTCO + resoluciones exentas. **Sin la NTCO el corpus no cubre la operación diaria** (fija los plazos del Informe de Valorización, arts. 3-27 y 3-29) | no | 4 | 0.2 |
-| 3.3 | **Re-bajar 25 normas modificadas** — el texto guardado puede ser versión vieja. Riesgo real medido | no | 1 | — |
+| 3.3 | [~] **PARCIAL — destapó un bug del crawler.** `scripts/rescrape_modificadas.py` + guarda anti-falso-positivo. BCN renderiza el articulado por **lazy-load atado al scroll**: sin scroll el texto se guardaba truncado en silencio (LEY 20365: 24.432→31.059 chars con scroll). Arreglado en `norm_detail_crawler._esperar_carga_completa`, pero **aún hay normas que bajan incompletas** (DFL 1: 313.969 guardados vs 25.401 bajados) | no | 1 | — |
 | 3.4 | [x] **HECHO — el item estaba MAL DIAGNOSTICADO.** Las 5687 filas ya apuntan a conceptos/artículos, no son citas norma→norma. Las citas reales estaban en el TEXTO, sin extraer: **3055 detectadas, 797 resueltas** (`referencias.tipo_relacion='remite'`) y **2258 apuntan fuera del corpus (399 normas)** → `docs/frontera-candidatas.md`, insumo de 0.2 | no | 2 | — |
 | 3.5 | **Crawler SEC** (instructivos, oficios circulares) | no | 3 | 0.2 |
 | 3.6 | **Crawler CEN** (procedimientos internos, IVTE) | no | 3 | 0.2 |
