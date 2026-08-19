@@ -62,6 +62,12 @@ def main():
     e = Qwen3Embedder(); r = get_reranker(); store = PostgresStore()
     cfg.settings.embed_4b_dense = True; cfg.settings.embed_4b_dim = 1024
     cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
+    # embed_4b_cpu: el embedder va a CPU para NO pelear VRAM con el LLM.
+    # Medido en gate_fraseos: el 30b-a3b ocupa 20.5 GiB de las 20.8 GiB disponibles, asi que
+    # cada llamada al embedder desalojaba el LLM y habia que recargar 17 GiB. Resultado: 186
+    # recargas de modelo en 3 h y el ritmo cayendo de 150 s/par a 888 s/par (5x mas lento).
+    # El embed en CPU cuesta 0.3 s en caliente y devuelve el MISMO vector.
+    cfg.settings.embed_4b_cpu = True
     retr = SimpleRetriever(store, e, r, top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 

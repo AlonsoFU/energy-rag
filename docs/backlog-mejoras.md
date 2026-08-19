@@ -391,3 +391,22 @@ sección "vs frontera". Resumen con números:
 - [ ] **B1.3 set operativo (112q) como primario** — pendiente, no bloqueado.
 - [ ] **re-calibrar gate off-topic contra `queries_fraseos_v1`** — abierto por el hallazgo de
   rechazos falsos inducidos por fraseo (4/64).
+
+### B2 — clasificador de intención (2026-08-19) — CERRADO
+
+- [x] **B2.1 ejemplos por intención** — `data/intents/ejemplos_v1.jsonl`, 83 a mano, 6 intenciones.
+- [x] **B2.2 clasificador** — probe #42: el COSENO agrupa por tópico (1-NN 28.9%, la intención
+  gana 1/6), pero la **logreg SÍ separa** (F1 0.990 en CV5). `src/pipelines/intent_gate.py`.
+- [x] **B2.2b `glossary_lookup`** — el problema real no era la intención sino **extraer el
+  término**; sale del diccionario de la DB, no de un regex. inject 0/64 → 54/64.
+- [x] **B2.3 medir vs regex** — exp #44. `cita_ok` 56→62 en fraseos (p=0.0312), no-regresión
+  flat en 114 operativas. **ADOPTADO**.
+- [x] **B2.4 regex como override** — queda de fallback cuando el diccionario no encuentra término.
+- [ ] **5 intenciones nuevas SIN USAR** — el gate hoy es binario (definición/no). Los ejemplos de
+  regulación/plazo/sanción/cálculo/procedimiento están escritos pero **no alimentan nada todavía**.
+- [ ] **queries reales del usuario** — los 83 ejemplos y los 64 fraseos los escribí yo; el sesgo
+  queda horneado en los coeficientes. Pedido al usuario, pendiente.
+
+### Piso de ruido del sistema (medido, exp #44)
+Con el sistema IDÉNTICO (retrieval igual, 114 pares): `cita_ok` varía ~6%, `cita_limpia` ~30%.
+**`cita_limpia` no sirve para adoptar sin pareado estricto.** Δ<7 en `cita_ok` sobre 114 = ruido.

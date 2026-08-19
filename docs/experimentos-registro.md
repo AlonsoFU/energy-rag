@@ -671,3 +671,59 @@ el diccionario no encuentra término. Corriendo el e2e pareado de la composició
 corpus. Hay que **reentrenar al cambiar de embedder** (los coeficientes son del espacio
 vectorial) y al agregar intenciones. El diccionario es O(tokens²) lookups, también constante;
 lo que empeora al escalar es la ambigüedad entre términos ⇒ frente G4.
+
+---
+
+## #44 — `glossary_lookup` + `intent_gate` **ADOPTADOS** (2026-08-19)
+
+Cierra el BLOQUE 2. Dos corridas pareadas, ambos brazos en la misma sesión.
+
+### Ganancia — `queries_fraseos_v1` (64 fraseos naturales, `gate_fraseos`)
+```
+cita_ok      OFF 56/64  ->  ON 62/64   [gano 6, perdio 0]  McNemar p=0.0312  SIGNIFICATIVO
+cita_limpia  OFF 36/64  ->  ON 41/64
+inject       OFF  0/64  ->  ON 52/64
+rechazos     OFF  4/64  ->  ON  2/64
+precision    OFF  0.53  ->  ON  0.61
+```
+El gate **mejora sobre el diccionario solo** (#43a): con gate gana 6 en vez de 4, y `cita_limpia`
+SUBE (36→41) en vez de bajar (45→42). Evita inyecciones que ensuciaban la respuesta.
+
+### No-regresión — `queries_operativas_v1` (114 queries, `gate_noregresion`)
+```
+cita_ok      OFF 98/114  ->  ON 99/114  [gano 4, perdio 3]  p=1.0000 FLAT
+inject       OFF  3/114  ->  ON  3/114  <- IDENTICO
+cita_limpia  OFF 68/114  ->  ON 62/114
+precision    OFF  0.55   ->  ON  0.53
+```
+**El riesgo que estaba abierto queda cerrado:** el gate no dispara donde no debe. `inject`
+idéntico en **114/114**, y las 3 que inyectaron son de definición legítima
+(`qué es el sistema de transmisión nacional`, `qué es la comisión`, `qué significa coordinado`).
+La predicción offline (0/51 en complex_v3, 0/19 en holdout) se cumplió.
+
+### ⚠️ Hallazgo lateral, más importante que el experimento: LA VARIANZA DEL SISTEMA
+
+```
+queries donde cambio cita_ok:      7/114  — de esas, con inject IDENTICO: 7
+queries donde cambio cita_limpia: 34/114  — con inject IDENTICO: 34
+```
+El retrieval fue **exactamente igual** en ambos brazos (inject 114/114 idéntico) y aun así
+34 queries cambiaron `cita_limpia` y 7 `cita_ok`. Eso no es el flag: es **flicker de generación**
+(T=0.7 + `self_consistency_n=3`).
+
+**Piso de ruido medido del sistema, con el sistema IDÉNTICO:**
+```
+cita_ok      ~6%   (7/114)
+cita_limpia  ~30%  (34/114)
+```
+Consecuencias para el método:
+1. **`cita_limpia` no sirve como métrica de adopción sin pareado estricto.** Explica por qué
+   saltaba errático entre corridas (en #43a bajaba 45→42, acá 68→62, en gate_fraseos SUBÍA 36→41).
+2. Los baselines OFF de dos corridas del MISMO sistema difieren (`cita_limpia` 45 vs 36 sobre el
+   mismo set) — **comparar contra un baseline en disco es inválido**, confirma la regla #4.
+3. Cualquier Δ menor a ~7 en `cita_ok` sobre 114 queries es indistinguible de ruido.
+
+### Decisión
+**ADOPTADOS** `glossary_lookup=True` + `intent_gate=True` (default ON en `config.py`).
+Ganancia significativa donde importa (fraseos naturales, p=0.0312, 0 pérdidas), sin regresión en
+lo operativo. El regex queda de fallback cuando el diccionario no encuentra término.

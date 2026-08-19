@@ -324,11 +324,11 @@ class Settings(BaseSettings):
     # B2: extraer el termino del glosario por DICCIONARIO (palabras completas, gana el
     # n-grama mas largo) en vez de recortar un prefijo con regex. El regex queda de
     # fallback. Medido: regex 0/64 vs diccionario 54/64 en fraseos naturales (exp #42).
-    glossary_lookup: bool = False
+    glossary_lookup: bool = True   # ADOPTADO 2026-08-19 (exp #43/#44)
     # GATE de intencion (logreg sobre el embedding de la query, coeficientes en
     # data/intents/gate_definicion_v1.json). Decide SI corresponde inyectar la definicion.
     # Sin el, glossary_lookup contamina lo operativo: 20/51 en complex_v3, 7/19 en holdout.
-    intent_gate: bool = False
+    intent_gate: bool = True       # ADOPTADO 2026-08-19 (exp #43/#44)
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
