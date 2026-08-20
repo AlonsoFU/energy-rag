@@ -30,12 +30,13 @@ import sys
 from psycopg.rows import dict_row
 
 from src.components.vectorstore import with_connection
+from src.pipelines.texto_hash import hash_estable
 
 
 def _estado_actual(cur):
     cur.execute("""
         SELECT n.id_norma,
-               n.metadata->>'content_hash'            AS content_hash,
+               n.texto_completo                       AS _texto,
                n.metadata->>'estado'                  AS estado,
                coalesce(jsonb_array_length(
                    CASE WHEN jsonb_typeof(n.metadata->'versiones')='array'
@@ -43,7 +44,14 @@ def _estado_actual(cur):
                (SELECT count(*) FROM articulos a WHERE a.id_norma = n.id_norma) AS n_articulos
         FROM normas n
     """)
-    return {r["id_norma"]: r for r in cur.fetchall()}
+    out = {}
+    for r in cur.fetchall():
+        # hash ESTABLE, no el content_hash crudo: ese cambia con cualquier espacio o pedazo
+        # de interfaz de BCN. Medido: 13 de 25 normas acusaban "texto_modificado" y TODAS
+        # eran cosmeticas (LEY 20365 daba similitud 1.0000).
+        r["content_hash"] = hash_estable(r.pop("_texto") or "")
+        out[r["id_norma"]] = r
+    return out
 
 
 def _vinculaciones(cur):

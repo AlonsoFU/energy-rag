@@ -4,7 +4,10 @@ Riesgo real medido en E3: el grafo dice que 25 normas del corpus fueron modifica
 pero el texto guardado puede ser la version ANTERIOR a esa modificacion. Si es asi, el sistema
 esta citando texto derogado o superado — el peor error posible en un sistema legal.
 
-Este script no reingesta nada por su cuenta. Baja, compara el `content_hash` y **registra el
+Este script no reingesta nada por su cuenta. Baja, compara el **hash ESTABLE** del texto
+(`src/pipelines/texto_hash.py` — normaliza espacio/tildes/chrome de BCN antes de hashear, porque
+el `content_hash` crudo cambia con cualquier espacio: 13 de 25 daban "cambio" y TODAS eran
+cosmeticas) y **registra el
 resultado como eventos** (`norma_evento`), que es el mecanismo del monitor B4. Asi el
 diagnostico queda auditable y la reingesta es una decision explicita despues.
 
@@ -24,6 +27,7 @@ from psycopg.rows import dict_row
 
 from src.components.vectorstore import with_connection
 from src.crawlers.norm_detail_crawler import NormDetailCrawler
+from src.pipelines.texto_hash import hash_estable
 
 ESTADO = Path("data/eval/results/rescrape_modificadas.json")
 
@@ -37,6 +41,11 @@ def _incompleto(texto, largo_guardado, tolerancia=0.9):
     haya bajado bien la pagina es casi siempre un scrape truncado.
     """
     texto = texto or ""
+    if largo_guardado and len(texto) >= largo_guardado:
+        # tan largo o mas que lo guardado => bajo completo. La palabra "Loading" puede
+        # aparecer en el chrome de la pagina (footer/UI) sin que falte articulado: sin este
+        # corte se rechazaban textos INTEGROS (medido: 3 de 25 con el largo exacto igual).
+        return False
     if re.search(r"\bLoading\b", texto):
         return True
     if largo_guardado and len(texto) < largo_guardado * tolerancia:
@@ -50,6 +59,7 @@ def objetivo():
         cur.execute("""
             SELECT DISTINCT v.destino AS id_norma, n.tipo, n.numero, n.titulo,
                    n.metadata->>'content_hash' AS hash_guardado,
+                   n.texto_completo           AS texto_guardado,
                    length(n.texto_completo)   AS largo_guardado
             FROM norma_vinculacion v JOIN normas n ON n.id_norma = v.destino
             WHERE v.tipo_relacion ILIKE '%%modific%%'
@@ -83,12 +93,16 @@ async def main(limit=0, delay=20):
     print(f"normas modificadas a revisar: {len(objs)}  (ya revisadas: {len(hechas)})", flush=True)
 
     cambiadas = iguales = fallo = 0
-    async with NormDetailCrawler() as cr:
-        for i, o in enumerate(objs, 1):
+    # RECICLAR el browser cada REINICIO normas: en la primera corrida completa, normas que
+    # bajaban integras de a una (DFL 1: 329.285 chars) salian truncadas al 8% dentro de una
+    # tanda larga. El contexto de Playwright se degrada / BCN empieza a servir a medias.
+    REINICIO = 5
+    pendientes = [o for o in objs if o["id_norma"] not in hechas]
+    for bloque in range(0, len(pendientes), REINICIO):
+      async with NormDetailCrawler() as cr:
+        for i, o in enumerate(pendientes[bloque:bloque + REINICIO], bloque + 1):
             nid = o["id_norma"]
-            if nid in hechas:
-                continue
-            print(f"[{i}/{len(objs)}] {nid} {o['tipo']} {o['numero']}", flush=True)
+            print(f"[{i}/{len(pendientes)}] {nid} {o['tipo']} {o['numero']}", flush=True)
             try:
                 d = await cr.fetch_norm(nid)
             except Exception as ex:
@@ -107,17 +121,18 @@ async def main(limit=0, delay=20):
                                "largo_bajado": len(d.texto_completo or "")}
                 print(f"   ✗ SCRAPE INCOMPLETO ({o['largo_guardado']} -> "
                       f"{len(d.texto_completo or '')} chars) -- NO se registra evento", flush=True)
-            elif d.content_hash != (o["hash_guardado"] or ""):
+            elif hash_estable(d.texto_completo) != hash_estable(o["texto_guardado"] or ""):
                 cambiadas += 1
-                hechas[nid] = {"estado": "cambio", "antes": o["hash_guardado"],
-                               "despues": d.content_hash}
-                registrar(nid, "texto_modificado", o["hash_guardado"], d.content_hash,
+                he_viejo = hash_estable(o["texto_guardado"] or "")
+                he_nuevo = hash_estable(d.texto_completo)
+                hechas[nid] = {"estado": "cambio", "antes": he_viejo, "despues": he_nuevo}
+                registrar(nid, "texto_modificado", he_viejo, he_nuevo,
                           {"origen": "rescrape_modificadas", "estado_bcn": d.estado,
                            "n_versiones": len(d.versiones or [])})
-                print(f"   ⚠️ CAMBIO  {o['hash_guardado']} -> {d.content_hash}", flush=True)
+                print(f"   ⚠️ CAMBIO REAL  {he_viejo} -> {he_nuevo}", flush=True)
             else:
                 iguales += 1
-                hechas[nid] = {"estado": "igual", "hash": d.content_hash}
+                hechas[nid] = {"estado": "igual", "hash": hash_estable(d.texto_completo)}
                 print("   ok (sin cambios)", flush=True)
             ESTADO.parent.mkdir(parents=True, exist_ok=True)
             ESTADO.write_text(json.dumps(hechas, ensure_ascii=False, indent=1))
