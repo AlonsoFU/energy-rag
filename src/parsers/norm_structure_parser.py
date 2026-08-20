@@ -44,6 +44,9 @@ class Articulo:
     modificaciones: List[Modificacion] = field(default_factory=list)
     referencias: List[Referencia] = field(default_factory=list)
     en_titulo: Optional[str] = None  # Título al que pertenece
+    # True si el articulo es texto que esta norma TRANSCRIBE para insertarlo en otra.
+    # Atribuirselo a la norma modificatoria seria una cita legalmente falsa.
+    es_transcrito: bool = False
 
 
 @dataclass
@@ -304,6 +307,13 @@ class NormStructureParser:
             end = matches[i + 1].start() if i + 1 < len(matches) else len(texto)
 
             texto_articulo = texto[start:end].strip()
+            transcrito = self.es_transcrito(match.group(0), texto_articulo)
+
+            # Un articulo TRANSCRITO no puede pisar a uno PROPIO con el mismo numero: la ley
+            # 20701 tiene su "Articulo unico" propio y transcribe un "Articulo 20" de la LGSE.
+            previo = articulos.get(num_articulo)
+            if previo is not None and transcrito and not previo.es_transcrito:
+                continue
 
             # Extraer modificaciones dentro de este artículo
             modificaciones = self._extract_modificaciones_de_texto(texto_articulo)
@@ -316,7 +326,8 @@ class NormStructureParser:
                 texto=self._limpiar_texto_articulo(texto_articulo),
                 texto_original=texto_articulo,
                 modificaciones=modificaciones,
-                en_titulo=en_titulo
+                en_titulo=en_titulo,
+                es_transcrito=transcrito
             )
 
             # Agregar artículo al título correspondiente
