@@ -106,11 +106,39 @@ class NormStructureParser:
     )
 
     # Patrón para artículos
+    # El encabezado puede venir precedido de COMILLAS: las leyes modificatorias transcriben
+    # el articulado que insertan entre comillas ('"Artículo único.- Introdúcense…'), y `\s*`
+    # no cubre `"`. Medido: LEY 20701 daba 0 artículos con el patrón viejo y 15 con comillas
+    # permitidas; 12 normas del corpus quedaron SIN NINGÚN artículo ingestado por esto.
+    # También se aceptan 'bis/ter/quater', que el patrón viejo cortaba.
     ARTICULO_PATTERN = re.compile(
-        r'(?:^|\n)\s*Art[íi]culo\s+(\d+|primero|segundo|tercero|cuarto|quinto|sexto|'
-        r'séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
+        r'(?:^|\n)[\s"“”\'«»]*Art[íi]culo\s+(\d+[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
+        r'tercero|cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
         re.IGNORECASE | re.MULTILINE
     )
+
+    # Un encabezado precedido de COMILLA suele ser articulado que la ley TRANSCRIBE para
+    # insertarlo en OTRA norma. Atribuirselo a la ley modificatoria seria una cita legalmente
+    # falsa: "[Art. 20 de LEY 20701]" cuando ese articulo pertenece a la LGSE.
+    # Excepcion: si el propio texto del articulo empieza con un verbo modificatorio, ES el
+    # articulado propio de la ley modificatoria (su contenido consiste en modificar).
+    # Medido sobre el corpus: 2342 articulos propios vs 341 transcritos.
+    # la comilla queda DENTRO del match (el patron arranca en el \n previo), asi que se
+    # busca en el encabezado, no en el texto anterior.
+    _COMILLA_PREVIA = re.compile(r'["“”«]')
+    _VERBO_MODIFICATORIO = re.compile(
+        r'^[\s\.\-–—:]*(introd[úu]cense|modif[íi]case|agr[ée]gase|sustit[úu]yese|reempl[áa]zase|'
+        r'der[óo]gase|incorp[óo]rase|el[íi]minase|interc[áa]lase|ref[úu]ndese)', re.IGNORECASE)
+
+    @classmethod
+    def es_transcrito(cls, encabezado: str, cuerpo: str) -> bool:
+        """True si el articulo es texto que la ley transcribe de OTRA norma.
+
+        `encabezado` es el match completo del ARTICULO_PATTERN (incluye la comilla si la hay).
+        """
+        if not cls._COMILLA_PREVIA.search(encabezado or ""):
+            return False
+        return not cls._VERBO_MODIFICATORIO.match(cuerpo or "")
 
     # Patrón para modificaciones inline (formato BCN)
     MODIFICACION_PATTERN = re.compile(
