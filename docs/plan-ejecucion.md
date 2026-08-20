@@ -67,6 +67,12 @@ existen. Habilita inyección determinista para lo operativo, no solo para defini
 
 ## BLOQUE 3 — Corpus (E0-E2): lo que el sistema debería tener y no tiene
 
+🔴 **HALLAZGO 2026-08-19 (exp #46):** **12 normas ELÉCTRICAS tienen 0 artículos ingestados**
+(de 17 con 0 en total, sobre 95). Están en el catálogo pero el retrieval no las alcanza jamás:
+LEY 20701 (concesiones eléctricas), LEY 20726 (modifica la LGSE), DECRETO 1 (precios de nudo),
+DECRETO 4 (peajes de distribución), LEY 20586. **Ningún experimento de retrieval o generación
+podía arreglar esto.** Prioridad sobre el resto del bloque — no depende de la frontera (0.2).
+
 | # | qué | GPU | h | dep |
 |---|---|---|---|---|
 | 3.1 | **Podar 14 normas ajenas** (tránsito, transporte público, obras públicas, procesal penal, insolvencia) + re-medir | no | 1 | 0.2 |

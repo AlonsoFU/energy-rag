@@ -767,3 +767,61 @@ glossary_lookup devuelve basura en:  fraseos 0/64 · operativas 0/114 · primari
 ```
 Nadie pregunta "qué es Agrégase el siguiente inciso". Es **higiene para escala, no ganancia
 medible hoy**: con más normas crecen las fórmulas y sube la chance de colisión. No se gastó GPU.
+
+---
+
+## #46 — El monitor cazó un gap del CORPUS, no un cambio normativo (2026-08-19)
+
+Re-bajar las 25 normas modificadas (B3.3) destapó tres cosas, ninguna era la que se buscaba.
+
+### 1. `content_hash` es inservible como detector de cambios
+13 de 25 acusaron `texto_modificado`. Auditadas contra el contenido real: **todas cosméticas**.
+```
+LEY 20365   28.952 -> 28.952 chars   similitud 1.0000   0 bloques distintos
+LEY 20410   71.100 -> 71.119 chars   similitud 0.9999   unica dif: ' Ley Historia de la'
+```
+`content_hash` es sha256 del texto CRUDO: cambia con cualquier espacio, `\xa0` o pedazo de
+interfaz. → `src/pipelines/texto_hash.py` (normaliza antes de hashear). Falsos positivos
+13 → 8, y de los 8 restantes varios siguen siendo ruido de UI (`jurisprudencia`, `autores`,
+`historia de la ley`, `ley facil chile atiende`).
+
+### 2. `normas.texto_completo` está truncado — pero NO afecta al RAG
+```
+                    texto_completo   suma de articulos
+258171 DFL 4 (LGSE)      10.075          496.409     <- 330 articulos, completos
+1058072 LEY 20720        18.910           18.392
+```
+Alarma inicial mía: "la LGSE tiene el 1.7% del texto". **Falso.** El RAG lee de `articulos`,
+no de `normas.texto_completo`; la LGSE tiene sus 330 artículos íntegros. Solo 1 de 95 normas
+tiene el campo realmente desfasado. Corregido antes de actuar sobre él.
+
+### 3. Lo que SÍ es un gap real: normas sin artículos ingestados
+```
+normas totales             95
+con 0 articulos            17
+   de esas, ELECTRICAS     12   <- el sistema NUNCA puede citarlas
+```
+Entre ellas hay normas del dominio que importan:
+```
+1055073  LEY 20701   PROCEDIMIENTO PARA OTORGAR CONCESIONES ELECTRICAS
+1059332  LEY 20726   MODIFICA LA LEY GENERAL DE SERVICIOS ELECTRICOS
+1048990  DECRETO 1   FIJA PRECIOS DE NUDO PROMEDIO EN EL SIC
+1122953  DECRETO 4   FIJA PEAJES DE DISTRIBUCION
+1040103  LEY 20586   CERTIFICACION DE ARTEFACTOS PARA COMBUSTIBLES
+```
+Están en el catálogo pero sin articulado: el retrieval no las alcanza jamás. **Ningún
+experimento de retrieval o generación podía arreglar esto** — es un agujero de ingesta, y
+explica por qué ciertas consultas no tenían respuesta posible.
+
+Además, 2 normas están MAL ETIQUETADAS (el `titulo` no corresponde al `tipo`/`numero`):
+`237695 LEY 19940` cuyo título es "RESOLUCION 32 EXENTA NOMBRA REPRESENTANTE SUPLENTE" y
+`252841 DECRETO 44` cuyo título es "RESOLUCION 838 OTORGA CONCESION DE ACUICULTURA".
+
+### 4. Bugs propios corregidos en el camino
+- La guarda anti-truncado rechazaba textos ÍNTEGROS que traen "Loading" en el footer
+  (3 de 25 con el largo exacto igual). Ahora si el largo ≥ guardado se acepta.
+- El crawler se degrada en tandas largas: DFL 1 baja 329.285 chars de a una y 25.401 dentro
+  de una tanda. Se recicla el browser cada 5 normas (mitiga, no elimina: siguen 10 incompletas).
+
+**Siguiente:** re-ingestar el articulado de las 12 eléctricas con 0 artículos. Es corpus, no
+modelo — y por el historial del proyecto, eso es lo que convierte.
