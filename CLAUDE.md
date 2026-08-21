@@ -102,6 +102,14 @@ generalización. Estándar de la industria: regex como primera pasada está bien
 **Antes de cualquier arreglo: queries de test con fraseos que el regex NO cubra**, o toda mejora
 se verá como nula.
 
+**MATIZ (2026-08-21, decisión del usuario):** el hardcodeo **no está prohibido, está ORDENADO
+ÚLTIMO**. Es legítimo para atajar casos específicos **cuando la metodología ya no da más**; lo
+prohibido es usarlo como mecanismo principal. Y cuando aparece **no se pierde**: se guarda en
+`docs/reglas-candidatas.md` con su evidencia, **fuera del pipeline**, hasta que se justifique.
+Orden obligatorio: **dato → modelo → estructura → regla**.
+Skill: `.claude/skills/sin-hardcodeo-en-experimentos/SKILL.md` (invocarla ANTES de escribir
+cualquier lista/regex que clasifique, decida o enrute).
+
 **MEDIDO (2026-08-18, exp #41 — `data/eval/queries_fraseos_v1.jsonl`, 64q pareadas por término):**
 `glossary_inject` dispara **53/64 con el fraseo cubierto y 0/64 con fraseo natural** → cobertura
 CERO fuera de las 3 plantillas. Pero `cita_ok` solo cae **95.3% → 87.5%** (p=0.18): el eval era
