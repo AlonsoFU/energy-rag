@@ -878,3 +878,56 @@ documentos), no del gate léxico. Ese es otro experimento.
 
 ⚠️ Dato que queda abierto: **8-10 de cada 114 queries operativas reciben un rechazo** (~8%).
 Es el modo de falla más visible para el usuario y sigue sin atacarse por el lado correcto.
+
+---
+
+## #48 — La regla #2 fallada por TERCERA vez: el scorer contaba el rechazo correcto como fallo
+(2026-08-21)
+
+Iba a gastar 12 h de GPU en el frente de "rechazos falsos" (exp #47 dejó ~8% de las queries
+operativas recibiendo "No encuentro esa información"). Antes de correr nada, audité los 9
+rechazos. **4 de los 9 eran off-topic legítimos:**
+```
+cómo hacer un queque de zanahoria · cuál es la capital de Australia
+quién pintó la Mona Lisa · qué dosis de paracetamol tomar para la fiebre
+```
+Son `hold_offcorpus`, con `gold=None`. `exp_lookup_paired` las puntuaba con `cita_ok`, que
+exige una cita → **rechazar correctamente contaba como fallo**.
+
+Es la **REGLA #2** del proyecto ("todo scorer nuevo declara cómo puntúa el RECHAZO antes de
+correrse"), fallada por tercera vez, ahora en un runner que yo mismo escribí.
+
+**Corregido SIN GPU** — el texto de cada respuesta estaba persistido (regla #5, que existe
+exactamente para esto). `scripts/repuntuar.py` re-puntúa las corridas guardadas:
+
+```
+                       scorer VIEJO            scorer CORRECTO
+gate_noregresion    98/114 ->  99/114      102/114 -> 103/114   [4/3]  p=1.0000
+post_reingesta_op   94/114 ->  94/114       98/114 ->  98/114   [3/3]  p=1.0000
+veto_operativas     96/114 ->  94/114      100/114 ->  98/114   [2/4]  p=0.6875
+off-corpus rechazadas correctamente: 4/4 en los tres, ambos brazos
+```
+
+**Ninguna conclusión cambia** (los tres siguen flat), pero el número operativo del sistema
+estaba **4 puntos subestimado**: es **~86-90%**, no ~82%.
+
+### Segundo error, dentro de la propia corrección
+Mi primer `_es_offcorpus` usaba `gold=None`, y eso mezcla dos casos distintos:
+```
+hold_offcorpus (4)  "capital de Australia"   -> rechazar ES el acierto
+hold_ambiguo   (2)  "qué es la comisión"     -> el termino SI esta en el corpus
+```
+Las 2 ambiguas aparecían como "el sistema responde MAL"… y sus respuestas eran **correctas**
+(Comisión Nacional de Energía, Coordinado). El gold está vacío porque lo esperado es que el
+sistema **PREGUNTE cuál acepción**, no que rechace ni que afirme una. Se separa por CATEGORÍA,
+no por gold vacío.
+
+⚠️ **Queda medido y sin atacar:** en las 2 ambiguas el sistema **afirma una acepción sin avisar
+que hay varias**. Ningún scorer actual lo mide. Es el frente **D4 (UX de ambigüedad)** y, a
+diferencia de G4, aquí sí hay casos concretos donde el comportamiento es verificablemente malo.
+
+**Rechazos realmente problemáticos: 5/114 (4.4%)**, no 8%. Y de esos, la mitad viene del LLM,
+no del gate (exp #47). El frente es más chico de lo que parecía.
+
+**Fix aplicado a los runners** (`exp_lookup_paired`, `exp_veto_offtopic`): `es_offcorpus()` por
+categoría, y si la query es off-corpus `cita_ok = refusó`.

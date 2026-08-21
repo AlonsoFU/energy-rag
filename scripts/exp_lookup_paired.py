@@ -27,6 +27,20 @@ LIMIT = int(os.environ.get("LIMIT", "0"))
 OUTDIR = Path(f"data/eval/results/{NAME}")
 
 
+def es_offcorpus(q):
+    """Fuera del corpus => RECHAZAR es el acierto, no un fallo.
+
+    REGLA #2 del proyecto: todo scorer declara como puntua el RECHAZO antes de correrse.
+    Fallada 3 veces ya. `queries_operativas_v1` trae 4 `hold_offcorpus` ("capital de
+    Australia", "queque de zanahoria"...) que se contaban como fallo aunque el sistema las
+    rechazara CORRECTAMENTE -> el resultado operativo salia 4 puntos bajo.
+
+    Se decide por CATEGORIA y no por `gold=None`: los `hold_ambiguo` tambien vienen sin gold,
+    pero ahi el termino SI esta en el corpus y lo esperado es PREGUNTAR, no rechazar (frente D4).
+    """
+    return str(q.get("category", "")).lower() == "hold_offcorpus"
+
+
 def golds(q):
     out = {(str(q["expected_norma"]), _normalize_art(str(q["expected_articulo"])))}
     for g in q.get("also_gold") or []:
@@ -71,7 +85,7 @@ def main():
     retr = SimpleRetriever(store, e, r, top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
-    def arm(qtext, gs, val):
+    def arm(qtext, gs, val, q_row=None):
         # ON = lookup por diccionario + gate de intencion (los dos van juntos: el diccionario
         # sin gate contamina lo operativo, medido 20/51 en complex_v3).
         cfg.settings.glossary_lookup = val
@@ -83,6 +97,9 @@ def main():
                 inject = any((d or {}).get("_rol") == "DEFINICION" for d in docs)
                 txt = generate_answer(qtext, docs, llm=llm, model=MODEL)["text"]
                 s = score_answer(txt, gs)
+                if es_offcorpus(q_row):
+                    s["cita_ok"] = bool(s.get("refuso"))   # rechazar ES el acierto
+                    s["cita_limpia"] = s["cita_ok"]
                 s.update(inject=inject, secs=round(time.time() - t0, 1), text=txt)
                 return s, False
             except Exception as ex:
@@ -98,8 +115,8 @@ def main():
             q.update({k: prev[q["query"]][k] for k in ("off", "on", "err")})
             continue
         gs = golds(q)
-        o, e1 = arm(q["query"], gs, False)
-        n_, e2 = arm(q["query"], gs, True)
+        o, e1 = arm(q["query"], gs, False, q)
+        n_, e2 = arm(q["query"], gs, True, q)
         q["off"], q["on"], q["err"] = o, n_, e1 or e2
         nq += 1
         rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
