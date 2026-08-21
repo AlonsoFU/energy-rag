@@ -931,3 +931,51 @@ no del gate (exp #47). El frente es más chico de lo que parecía.
 
 **Fix aplicado a los runners** (`exp_lookup_paired`, `exp_veto_offtopic`): `es_offcorpus()` por
 categoría, y si la query es off-corpus `cita_ok = refusó`.
+
+---
+
+## #49 — Clasificador MULTI-CLASE de intención: **NO adoptar** (2026-08-21)
+
+Cierra el pendiente de B2: los 67 ejemplos de regulación · plazo · sanción · cálculo ·
+procedimiento estaban escritos desde B2.1 y no alimentaban nada.
+
+```
+LOO/CV5 multi-clase: 65/83 = 78.3%   (azar = 16.7%)
+
+por clase        recall  precision   n
+  calculo         0.85     0.73     13
+  definicion      0.69     0.92     16   <- el gate BINARIO da recall 0.99
+  plazo           0.86     0.71     14
+  procedimiento   0.77     0.77     13
+  regulacion      0.73     0.69     15
+  sancion         0.83     1.00     12
+```
+
+**Dos razones para no adoptarlo, ambas medidas:**
+
+1. **Es peor que lo que ya hay para lo que ya hace.** `definicion` cae de **recall 0.99**
+   (gate binario, exp #43c) a **0.69**. Usar el multi-clase para decidir la inyección
+   perdería 3 de cada 10 queries de definición. El binario se queda.
+
+2. **La logreg no salva el multi-clase como salvó el binario.** 78.3% es exactamente lo mismo
+   que daba el CENTROIDE en el probe #42 — o sea, acá la regresión logística **no aporta nada**
+   sobre el coseno crudo. En el binario subía de 0.982 a 0.990 porque tenía 295 positivos
+   (incluía el set primario); acá son ~14 ejemplos por clase y no alcanzan para aprender una
+   separación fina entre 6 clases.
+
+Las confusiones son semánticamente coherentes, no ruido: `procedimiento→plazo` (3),
+`definicion→regulacion` (3), `regulacion→procedimiento` (2). "Cuál es el plazo del trámite" y
+"cómo se tramita" **comparten la respuesta**; el límite entre esas intenciones es difuso también
+para una persona.
+
+**Además falta el otro lado:** aunque el clasificador fuera perfecto, no hay estructura de datos
+que explotar para las 5 intenciones nuevas. Para `definicion` existe el glosario
+(`fragmentos_definicion` → artículo padre), que es lo que hace determinista a `glossary_inject`.
+Para `regulacion`/`plazo`/`sancion` **no hay tabla equivalente** — habría que construirla, y eso
+es E4 (norma→obligación→proceso), el foso, no un clasificador.
+
+Se guarda `data/intents/intent_multi_v1.json` con los coeficientes y el caveat, para no repetir
+el trabajo cuando haya más ejemplos.
+
+**Lo que desbloquearía esto:** queries reales del usuario. 14 ejemplos por clase escritos por el
+asistente no bastan, y el sesgo del autor queda horneado en los coeficientes.

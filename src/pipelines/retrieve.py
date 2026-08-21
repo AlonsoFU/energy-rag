@@ -600,7 +600,33 @@ class SimpleRetriever:
             if _c is None:
                 _c = _definition_concept(query)
             if _c:
-                inj = self.store.def_exact(_c)
+                # D4 (ambiguity_disclose): si el termino esta definido en VARIAS normas, se
+                # inyectan TODAS las acepciones en vez de una sola. Hoy `def_exact` desempata
+                # con `ORDER BY length(texto) DESC` -- criterio arbitrario -- y el sistema
+                # AFIRMA una acepcion sin avisar que hay otras. Riesgo legal real: 35 terminos
+                # del glosario estan definidos en mas de una norma.
+                _todas = []
+                if getattr(_cfg.settings, "ambiguity_disclose", False):
+                    _todas = self.store.def_exact_all(_c)
+                    if len(_todas) > 1:
+                        _top = fused[0]["score"] if fused else 1.0
+                        _ya = {(str(d.get("id_norma")), _normalize_art_g(str(d.get("articulo_numero"))))
+                               for d in fused[:top_k]}
+                        _nuevos = []
+                        for _k, _alt in enumerate(_todas):
+                            _key = (str(_alt["id_norma"]), _normalize_art_g(str(_alt["articulo_numero"])))
+                            _alt["_rol"] = "DEFINICION"; _alt["_rol_termino"] = _c
+                            _alt["_ambiguo"] = len(_todas)
+                            if _key not in _ya:
+                                _alt["score"] = float(_top) + 0.01 - 0.001 * _k
+                                _nuevos.append(_alt)
+                            else:
+                                for _d in fused[:top_k]:
+                                    if (str(_d.get("id_norma")), _normalize_art_g(str(_d.get("articulo_numero")))) == _key:
+                                        _d["_rol"] = "DEFINICION"; _d["_rol_termino"] = _c
+                                        _d["_ambiguo"] = len(_todas)
+                        fused = _nuevos + fused
+                inj = None if len(_todas) > 1 else self.store.def_exact(_c)
                 if inj:
                     key = (str(inj["id_norma"]), _normalize_art_g(str(inj["articulo_numero"])))
                     present = any((str(d.get("id_norma")), _normalize_art_g(str(d.get("articulo_numero")))) == key

@@ -188,6 +188,31 @@ class PostgresStore:
             cur.execute("SELECT DISTINCT termino FROM fragmentos_definicion WHERE termino IS NOT NULL")
             return [r["termino"] for r in cur.fetchall()]
 
+    def def_exact_all(self, concepto: str) -> list[dict]:
+        """TODAS las definiciones del termino, una por norma. Base de D4 (ambiguedad).
+
+        `def_exact` devuelve UNA sola y desempata con `ORDER BY length(texto) DESC`, criterio
+        arbitrario. 35 terminos del glosario estan definidos en mas de una norma; cuando el
+        usuario pregunta por uno de ellos, el sistema hoy AFIRMA una acepcion sin avisar que
+        hay otras. Medido en 'que es la comision' y 'que significa coordinado'.
+        """
+        with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("SELECT 1 FROM information_schema.tables WHERE table_name='fragmentos_definicion'")
+            if not cur.fetchone():
+                return []
+            cur.execute("""
+                SELECT DISTINCT ON (a.id_norma)
+                       (900000000 + fd.id) AS id, fd.articulo_id, fd.texto AS text,
+                       fd.texto AS contextual_text, a.id_norma, a.numero AS articulo_numero,
+                       n.tipo, n.numero AS norma_numero
+                FROM fragmentos_definicion fd
+                JOIN articulos a ON a.id = fd.articulo_id
+                JOIN normas n ON n.id_norma = a.id_norma
+                WHERE lower(fd.termino) = lower(%s)
+                ORDER BY a.id_norma, length(fd.texto) DESC
+            """, (concepto,))
+            return cur.fetchall()
+
     def def_exact(self, concepto: str) -> dict | None:
         """glossary_inject: match EXACTO concepto→def-fragment (case-insensitive). Devuelve un
         doc del artículo padre (parent-doc) o None. Determinista, alta precisión (no como el RRF

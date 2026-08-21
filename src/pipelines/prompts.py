@@ -282,6 +282,24 @@ Ejemplo: para "qué es Infracciones gravísimas", cita el artículo que dice
 Si ambos aparecen entre los artículos provistos, el DEFINITORIO va primero."""
 
 
+AMBIGUITY_BLOCK = """
+
+TERMINOS DEFINIDOS EN VARIAS NORMAS (obligatorio):
+Algunos terminos tienen definicion propia en MAS DE UNA norma, y no siempre coinciden.
+Cuando entre los articulos provistos haya DOS O MAS que definan el mismo termino:
+
+1. NO elijas una sola y la presentes como "la" definicion.
+2. Di explicitamente que el termino esta definido en varias normas.
+3. Da cada definicion con SU cita, indicando a que norma corresponde.
+4. Si las definiciones difieren en su alcance, señala en que difieren.
+
+Ejemplo de la forma esperada:
+"Coordinador" tiene definicion en mas de una norma:
+ - Segun [Art. 5 de 1146553], ...
+ - Segun [Art. 2 de 1204012], ...
+Ambas coinciden en X; la segunda ademas precisa Y."""
+
+
 def get_answer_system() -> str:
     """Return the system prompt with citation rules."""
     from src.core import config as _cfg
@@ -292,4 +310,6 @@ def get_answer_system() -> str:
         out += PREFER_DEFINITION_BLOCK
     if getattr(_cfg.settings, "answer_roles", False):
         out += ANSWER_ROLES_BLOCK
+    if getattr(_cfg.settings, "ambiguity_disclose", False):
+        out += AMBIGUITY_BLOCK
     return out

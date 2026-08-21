@@ -335,6 +335,10 @@ class Settings(BaseSettings):
     # conversacional no esta en el vocabulario legal y TON (3 chars) se descarta por el
     # minimo de 4 caracteres del tokenizer.
     offtopic_glossary_veto: bool = False
+    # D4: cuando el termino esta definido en VARIAS normas, inyectar TODAS las acepciones
+    # y pedirle a la respuesta que lo declare, en vez de afirmar una sola (hoy elegida
+    # por `ORDER BY length(texto) DESC`, criterio arbitrario). 35 terminos afectados.
+    ambiguity_disclose: bool = False
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
