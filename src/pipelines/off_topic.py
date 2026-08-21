@@ -63,7 +63,30 @@ def is_off_topic(query: str, min_oov_ratio: float = 0.5) -> bool:
 
     vocab = _corpus_vocab()
     oov = significant - vocab
-    return len(oov) / len(significant) > min_oov_ratio
+    if len(oov) / len(significant) <= min_oov_ratio:
+        return False
+
+    # ULTIMA PALABRA: el DICCIONARIO del glosario. Si la query nombra un termino definido
+    # en el corpus, NO es fuera de dominio, por muchas muletillas que traiga.
+    #
+    # Sin esto se rechazaban queries del dominio por dos fallas que se suman:
+    #   1. el preambulo conversacional ("necesito", "saber", "quisiera") no esta en el
+    #      vocabulario legal y cuenta como OOV;
+    #   2. `_TOKEN_RE` exige >=4 caracteres, asi que las siglas cortas del glosario
+    #      (TON, DIA, IPC, VI) se descartan y no compensan.
+    # Medido: "necesito saber que es TON" daba oov=2/2 -> RECHAZO, juzgando solo las
+    # muletillas, cuando TON esta definido en el glosario.
+    # Es un DATO (la tabla de terminos), no una lista de palabras hardcodeada.
+    from src.core import config as _cfg
+    if getattr(_cfg.settings, "offtopic_glossary_veto", False):
+        try:
+            from src.components.vectorstore import PostgresStore
+            from src.pipelines.glossary_lookup import find_term
+            if find_term(query, PostgresStore()):
+                return False
+        except Exception:
+            pass  # sin DB disponible, se cae al criterio lexico
+    return True
 
 
 REFUSAL_TEXT = "No encuentro esa información en las normas disponibles."

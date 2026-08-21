@@ -18,7 +18,7 @@ LOG=logs/watchdog.log
 [ -f .watchdog_off ] && exit 0
 
 # ya hay un experimento corriendo -> no tocar nada
-if pgrep -f "scripts.exp_lookup_paired" > /dev/null; then exit 0; fi
+if pgrep -f "scripts.exp_lookup_paired|scripts.exp_veto_offtopic" > /dev/null; then exit 0; fi
 
 E="env -i HOME=/home/alonso PATH=/usr/local/bin:/usr/bin:/bin
    HF_HOME=/home/alonso/datos/hf HF_HUB_CACHE=/home/alonso/datos/hf/hub
@@ -46,8 +46,21 @@ lanzar() {  # lanzar <nombre> <set> <log>
   exit 0
 }
 
+lanzar_veto() {  # igual que lanzar() pero con el runner del veto off-topic
+  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
+  docker start energy_rag_pg > /dev/null 2>&1
+  sleep 5
+  setsid $E SET="$2" NAME="$1" \
+    ./venv/bin/python -m scripts.exp_veto_offtopic >> "logs/$3" 2>&1 < /dev/null &
+  exit 0
+}
+
 # ---- la cola, en orden ----
-completo gate_fraseos 64      || lanzar gate_fraseos      data/eval/queries_fraseos_v1.jsonl    gate_fraseos.log
-completo gate_noregresion 114 || lanzar gate_noregresion  data/eval/queries_operativas_v1.jsonl gate_noregresion.log
+completo gate_fraseos 64       || lanzar gate_fraseos       data/eval/queries_fraseos_v1.jsonl    gate_fraseos.log
+completo gate_noregresion 114  || lanzar gate_noregresion   data/eval/queries_operativas_v1.jsonl gate_noregresion.log
+completo post_reingesta 64     || lanzar post_reingesta     data/eval/queries_fraseos_v1.jsonl    post_reingesta.log
+completo post_reingesta_op 114 || lanzar post_reingesta_op  data/eval/queries_operativas_v1.jsonl post_reingesta_op.log
+completo veto_fraseos 64       || lanzar_veto veto_fraseos   data/eval/queries_fraseos_v1.jsonl    veto_fraseos.log
+completo veto_operativas 114   || lanzar_veto veto_operativas data/eval/queries_operativas_v1.jsonl veto_operativas.log
 
 echo "$(date '+%F %T') cola COMPLETA, nada que hacer" >> "$LOG"

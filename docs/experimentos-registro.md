@@ -825,3 +825,56 @@ Además, 2 normas están MAL ETIQUETADAS (el `titulo` no corresponde al `tipo`/`
 
 **Siguiente:** re-ingestar el articulado de las 12 eléctricas con 0 artículos. Es corpus, no
 modelo — y por el historial del proyecto, eso es lo que convierte.
+
+---
+
+## #47 — `offtopic_glossary_veto` **DESCARTADO** (2026-08-20/21)
+
+Origen: exp #44 midió 4 rechazos falsos en `queries_fraseos_v1` — el sistema contesta
+"No encuentro esa información" a preguntas que con otro fraseo responde bien. Peor que fallar.
+
+**Diagnóstico (correcto):** dos fallas que se suman en `is_off_topic`.
+```
+"necesito saber qué es TON"  ->  off_topic=True   oov=2/2   fuera=['necesito','saber']
+```
+1. El preámbulo conversacional (`necesito`, `saber`, `quisiera`) no está en el vocabulario
+   legal del corpus y cuenta como OOV.
+2. `_TOKEN_RE` exige ≥4 caracteres, así que **el término real se descarta**: `TON` (3 chars),
+   igual que `DIA`, `IPC`, `VI`.
+
+Queda juzgando solo las muletillas → rechaza una query cuyo término SÍ está en el glosario.
+
+**Fix probado:** el diccionario del glosario tiene la última palabra — si `find_term` encuentra
+un término definido en el corpus, la query no es off-topic. Es un DATO (la tabla de términos),
+no una lista de palabras hardcodeada. Verificado en aislamiento: 5/6 casos, y el que falla
+(`"quien gano el mundial de futbol de 1998"`, `oov 2/4 = 0.50`) es un falso negativo
+**preexistente**, no introducido por el fix.
+
+**Resultado e2e — pareado, ambos brazos misma sesión:**
+```
+                     fraseos_v1 (64)              operativas_v1 (114)
+cita_ok       62/64 -> 62/64  [1/1]  p=1.0000    96/114 -> 94/114  [2/4]  p=0.6875
+rechazos       2/64 ->  2/64                       8/114 ->   9/114   <- SUBIO
+cita_limpia   47/64 -> 40/64                      62/114 ->  65/114
+precision      0.63 -> 0.58                        0.51 ->  0.54
+```
+Flat en ambos, y **los rechazos no bajan**. En fraseos ganó exactamente el caso diagnosticado
+(`necesito saber qué es TON`) pero perdió otro; neto cero.
+
+**Por qué no sirvió — la causa real de los rechazos:**
+```
+rechazos en el brazo ON: 9/114
+  rechazados por el GATE lexico : 4    <- lo unico que el veto puede tocar
+  rechazados por el LLM         : 5    <- el modelo escribe REFUSAL_TEXT por su cuenta
+```
+**Más de la mitad de los rechazos no vienen del gate**, sino del LLM decidiendo que no puede
+responder con los documentos que recibió. Arreglar el gate no los toca. Y de los 4 del gate,
+solo algunos nombran un término del glosario.
+
+**Conclusión:** el bug del gate es REAL y el fix es CORRECTO, pero ataca menos de la mitad del
+problema y su efecto se pierde en el ruido. `offtopic_glossary_veto` queda **default OFF**.
+El frente de los rechazos falsos es de GENERACIÓN (por qué el modelo se rinde teniendo los
+documentos), no del gate léxico. Ese es otro experimento.
+
+⚠️ Dato que queda abierto: **8-10 de cada 114 queries operativas reciben un rechazo** (~8%).
+Es el modo de falla más visible para el usuario y sigue sin atacarse por el lado correcto.

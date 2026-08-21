@@ -45,7 +45,11 @@ inferior — solo se usaron términos que hoy aciertan). El 98.9% vale **solo** 
 plantillas del set primario.
 
 ⚠️ **Modo de falla nuevo:** el fraseo induce RECHAZOS (1/64 → 4/64). El sistema contesta "no sé"
-a preguntas que con otro fraseo contesta bien. Re-calibrar el gate off-topic contra este set.
+a preguntas que con otro fraseo contesta bien.
+**Atacado en exp #47 y DESCARTADO:** el veto del glosario sobre el gate léxico sale flat en los
+dos sets. Causa medida: de 9 rechazos, solo **4 vienen del gate** y **5 los escribe el LLM** por
+su cuenta. El frente correcto es GENERACIÓN, no el gate. Sigue abierto: ~8% de las queries
+operativas reciben rechazo.
 
 ---
 

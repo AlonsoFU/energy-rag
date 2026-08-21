@@ -329,6 +329,12 @@ class Settings(BaseSettings):
     # data/intents/gate_definicion_v1.json). Decide SI corresponde inyectar la definicion.
     # Sin el, glossary_lookup contamina lo operativo: 20/51 en complex_v3, 7/19 en holdout.
     intent_gate: bool = True       # ADOPTADO 2026-08-19 (exp #43/#44)
+    # El diccionario del glosario tiene la ULTIMA PALABRA sobre el gate off-topic: si la
+    # query nombra un termino definido en el corpus, no es fuera de dominio.
+    # Sin esto, 'necesito saber que es TON' daba oov=2/2 -> RECHAZO, porque el preambulo
+    # conversacional no esta en el vocabulario legal y TON (3 chars) se descarta por el
+    # minimo de 4 caracteres del tokenizer.
+    offtopic_glossary_veto: bool = False
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
