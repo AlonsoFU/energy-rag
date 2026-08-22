@@ -11,6 +11,39 @@ Regla del proyecto (decisión del usuario, 2026-08-17, reafirmada 2026-08-21):
 > ya no da más y hay que atajar casos específicos. Y cuando aparece, **no se pierde**:
 > se guarda documentado, **fuera del pipeline**.
 
+## La razón de fondo: el hardcodeo NO mejora el sistema, mejora el NÚMERO
+
+Esto es lo que hay que entender antes que cualquier procedimiento.
+
+Una regla escrita a mano **no le enseña nada al sistema**. Solo tapa los casos que el autor ya
+vio. El modelo sigue igual de ciego frente al caso 51; lo único que cambió es que el eval —que
+también salió de la cabeza del autor— ahora los cubre.
+
+Por eso un experimento con hardcodeo **sube la métrica sin subir la capacidad**, y eso es peor
+que no mejorar: te hace creer que el frente está cerrado y dejás de trabajarlo.
+
+Los dos números del proyecto que lo prueban:
+
+```
+_DEF_INTENT   99.2% en el set primario   ->   dispara 0/64 con fraseos naturales
+              el mecanismo no existia fuera de las 3 plantillas que el propio eval usaba
+
+R6 filtro por longitud   quitaba 13 falsos positivos y costaba 16 aciertos
+   intent_gate (logreg)  quito los 20 SIN perder ninguno
+```
+
+La regla no era una versión peor del clasificador: era **una cosa distinta que aparentaba
+funcionar**. El clasificador generaliza a fraseos que nunca vio (52/64 con el test excluido del
+train); la lista no generaliza a nada, por construcción.
+
+**Corolario práctico:** si un cambio mejora la métrica y es una lista, la primera hipótesis no
+es "mejoró el sistema" sino **"el eval y la lista comparten origen"**. Hay que probar lo
+contrario antes de adoptarlo.
+
+Por eso el hardcodeo va **al final**: cuando el mecanismo ya generaliza y quedan casos
+residuales que ninguna generalización va a cubrir. Ahí atajarlos a mano es legítimo — es
+cerrar la cola, no fabricar la curva.
+
 ## Por qué existe esta regla (costó un error real)
 
 `_DEF_INTENT` era una lista hardcodeada (`qué es|definición de|qué significa`) que decidía si

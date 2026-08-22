@@ -979,3 +979,49 @@ el trabajo cuando haya más ejemplos.
 
 **Lo que desbloquearía esto:** queries reales del usuario. 14 ejemplos por clase escritos por el
 asistente no bastan, y el sesgo del autor queda horneado en los coeficientes.
+
+---
+
+## #50 — D4 `ambiguity_disclose` **ADOPTADO** (2026-08-21) — el resultado más significativo
+
+```
+DECLARA ambiguedad   OFF 18/35  ->  ON 28/35   [gano 11, perdio 1]  McNemar p=0.0063
+cita_ok (no romper)      31/35  ->     32/35
+cobertura normas          0.65  ->      0.86
+normas citadas            1.69  ->      2.29
+docs inyectados           0.00  ->      2.51
+segundos                 77.71  ->     85.92   (+10%)
+```
+
+**p=0.0063** — más significativo que `glossary_lookup` (0.0312), que era el mejor hasta hoy.
+Y `cita_ok` no se rompe (31→32).
+
+**Qué ataja.** 35 términos del glosario están definidos en MÁS DE UNA norma. `def_exact`
+elegía una con `ORDER BY length(texto) DESC` — criterio arbitrario — y el sistema **afirmaba esa
+acepción sin avisar que había otras**. En materia legal eso puede inducir a error: la respuesta
+era correcta pero incompleta.
+
+**Por qué funcionó donde fallaron 3 intentos previos.** GEN8b, GEN13-vía-LLM y GEN13-marca
+intentaron arreglar el sesgo definición-vs-regulación **pidiéndole al modelo que juzgara**.
+Acá el juicio no se delega: `def_exact_all()` trae **todas** las acepciones (dato de la DB), se
+inyectan todas marcadas con `_ambiguo`, y el prompt solo las comunica. El modelo no decide si
+hay ambigüedad — se la damos resuelta.
+
+Es la misma lección de `glossary_inject`: **ganancias de datos/estructura, no de presentación**.
+
+**Métrica nueva, porque `cita_ok` es ciega a esto.** Con `also_gold` cualquier acepción cuenta
+como acierto — por eso en exp #45 los 4 criterios de desempate empataban 64/64. Se mide:
+```
+declara      la respuesta cita >=2 de las normas que definen el termino
+cobertura    fraccion de normas definitorias citadas
+```
+Set: `data/eval/queries_ambiguos_v1.jsonl` (35 queries; 5 normas: 1 · 4 normas: 5 ·
+3 normas: 7 · 2 normas: 22).
+
+**Costo:** +10% de latencia (77.7 → 85.9 s) por los ~2.5 documentos extra inyectados.
+
+**Relación con G4 (exp #45).** G4 buscaba ELEGIR MEJOR entre acepciones y resultó no medible
+(el eval acepta cualquiera). D4 **cambia la pregunta**: en vez de elegir mejor, **no elegir** y
+declarar las que hay. Resuelve el mismo riesgo legal por el lado que sí se puede medir.
+
+⚠️ Pendiente: 7/35 siguen sin declarar, y 1 se perdió. No se auditó cuáles.

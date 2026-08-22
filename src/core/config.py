@@ -338,7 +338,7 @@ class Settings(BaseSettings):
     # D4: cuando el termino esta definido en VARIAS normas, inyectar TODAS las acepciones
     # y pedirle a la respuesta que lo declare, en vez de afirmar una sola (hoy elegida
     # por `ORDER BY length(texto) DESC`, criterio arbitrario). 35 terminos afectados.
-    ambiguity_disclose: bool = False
+    ambiguity_disclose: bool = True   # ADOPTADO 2026-08-21 (exp #50): +10, p=0.0063
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los
