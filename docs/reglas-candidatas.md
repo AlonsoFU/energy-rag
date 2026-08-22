@@ -73,7 +73,7 @@ DISPOSITIVO = r"\n\s*(DECRETO|RESUELVO|RESUELVE|ORDENO)\s*:?\s*\n"
   canónica, y es **ingesta, no decisión en runtime**.
 - **Qué la reemplazaría:** un parser de decretos que entienda la estructura completa.
 
-## R5 — `_DEF_INTENT` / `_DEF_PREFIX` ⚠️ DEUDA ABIERTA
+## R5 — `_DEF_INTENT` / `_DEF_PREFIX` — **MEDIDA Y SACADA DEL PIPELINE** (exp #51)
 
 ```python
 _DEF_INTENT  = r"qué es|qué son|qué significa|qué se entiende por|definición de|…"
@@ -82,11 +82,19 @@ _DEF_PREFIX  = r"^(qué es|definición de|qué significa|…)\s+"
 - **Qué ataja:** detectar queries de definición y extraer el concepto.
 - **Evidencia en contra:** falla **6 de 13** fraseos naturales; dispara **0/64** en
   `queries_fraseos_v1`; y el set primario usaba **sus mismas 3 plantillas** → eval circular.
-- **Estado actual:** **degradado a FALLBACK**. Corren primero `intent_gate` (logreg) y
-  `glossary_lookup` (diccionario). El regex solo actúa si el diccionario no encontró término.
-- **Por qué sigue vivo:** cubre términos que no están en `fragmentos_definicion`
-  (ej. "Mora" → el diccionario devuelve `None` y el regex sí extrae el concepto).
-- **Deuda:** hay que medir cuánto aporta hoy como fallback. Si es ~0, **se borra**.
+- **Medido (exp #51):** sobre las **46 queries donde el diccionario NO encuentra término**
+  (`queries_sin_diccionario_v1.jsonl`), el fallback inyecta **0/46** — ni una sola vez.
+```
+cita_ok   OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  p=1.0000
+inject    OFF  0/46  ->  ON  0/46
+```
+- **Por qué era inútil, y era predecible:** el regex y el diccionario **consultan la misma
+  tabla** (`fragmentos_definicion.termino`). Si el diccionario no encuentra el término,
+  `def_exact` tampoco va a resolver el concepto que extrae el regex. Redundante por
+  construcción. La hipótesis de que "cubre términos fuera del glosario" (ej. "Mora") era
+  falsa: si no está en el glosario, `def_exact` devuelve `None` por ambos caminos.
+- **Estado:** `regex_fallback = False`. El código sigue en `retrieve.py` pero **no se
+  ejecuta**. Queda acá documentado por si alguna vez el extractor deja de depender de esa tabla.
 
 ## R6 — Filtro de términos genéricos del glosario — **DESCARTADA**
 

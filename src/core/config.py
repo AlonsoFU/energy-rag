@@ -339,6 +339,14 @@ class Settings(BaseSettings):
     # y pedirle a la respuesta que lo declare, en vez de afirmar una sola (hoy elegida
     # por `ORDER BY length(texto) DESC`, criterio arbitrario). 35 terminos afectados.
     ambiguity_disclose: bool = True   # ADOPTADO 2026-08-21 (exp #50): +10, p=0.0063
+    # R5 MEDIDO (exp #51): el regex de prefijo como fallback NO aporta nada.
+    # Sobre las 46 queries donde el diccionario no encuentra termino, el fallback
+    # inyecto 0/46 -- ni una vez. Es redundante por construccion: ambos consultan la
+    # MISMA tabla (fragmentos_definicion.termino), asi que si el diccionario falla,
+    # def_exact tampoco resuelve el concepto que extrae el regex.
+    # Default OFF: el regex queda en el codigo pero FUERA del pipeline (ver
+    # docs/reglas-candidatas.md R5).
+    regex_fallback: bool = False
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los

@@ -1025,3 +1025,39 @@ Set: `data/eval/queries_ambiguos_v1.jsonl` (35 queries; 5 normas: 1 · 4 normas:
 declarar las que hay. Resuelve el mismo riesgo legal por el lado que sí se puede medir.
 
 ⚠️ Pendiente: 7/35 siguen sin declarar, y 1 se perdió. No se auditó cuáles.
+
+---
+
+## #51 — R5: el regex de fallback **no aporta nada** — sacado del pipeline (2026-08-21/22)
+
+Deuda abierta desde la adopción de `glossary_lookup`: el regex de prefijo quedó como fallback
+cuando el diccionario no encuentra término. ¿Aporta algo o es peso muerto?
+
+**Set construido para maximizar la señal:** `queries_sin_diccionario_v1.jsonl` — las **61
+queries in_domain donde `find_term` devuelve `None`**, que son las únicas donde el fallback
+puede actuar. (46 llegaron a par válido.)
+
+```
+cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000
+inject       OFF  0/46  ->  ON  0/46   <- NUNCA disparo
+precision    OFF 0.51   ->  ON 0.56
+```
+
+**Era redundante por construcción, y se podía haber deducido:** el regex y el diccionario
+consultan **la misma tabla** (`fragmentos_definicion.termino`). Si el diccionario no encuentra
+el término, `def_exact` tampoco va a resolver el concepto que extrae el regex — devuelve `None`
+por los dos caminos.
+
+La justificación que yo le había dado ("cubre términos que no están en el glosario, ej. Mora")
+**era falsa**: precisamente porque "Mora" no está en `fragmentos_definicion`, ningún camino la
+resuelve.
+
+**`regex_fallback = False`.** El regex sigue en `retrieve.py` pero no se ejecuta. Documentado
+en `docs/reglas-candidatas.md` R5.
+
+**Con esto, el último hardcodeo de clasificación sale del pipeline.** Lo que decide hoy:
+```
+intent_gate        logreg sobre embeddings   (dato aprendido)
+glossary_lookup    diccionario de la DB      (dato)
+ambiguity_disclose def_exact_all             (dato)
+```

@@ -597,7 +597,7 @@ class SimpleRetriever:
                 if _pasa:
                     from src.pipelines.glossary_lookup import find_term as _find_term
                     _c = _find_term(query, self.store)
-            if _c is None:
+            if _c is None and getattr(_cfg.settings, "regex_fallback", True):
                 _c = _definition_concept(query)
             if _c:
                 # D4 (ambiguity_disclose): si el termino esta definido en VARIAS normas, se
