@@ -84,6 +84,24 @@ class PostgresStore:
             """, (query_embedding, query_embedding, top_k))
             return cur.fetchall()
 
+    @staticmethod
+    def _filtro_dominio() -> str:
+        """Fragmento SQL que excluye las normas marcadas fuera del dominio.
+
+        La frontera (decidida por el usuario 2026-08-22: "todo lo referente a la subgerencia
+        de mercados") marca `normas.metadata.fuera_de_dominio`. **Marcar no basta**: sin este
+        filtro los 1352 fragmentos ajenos siguen entrando al pool y compitiendo. Se aplica en
+        BM25 y en el KNN denso, que son las dos patas del retrieval.
+
+        Flag `filtrar_fuera_dominio` (default OFF hasta medir). Devuelve "" si esta apagado,
+        asi que el SQL queda identico al de antes cuando no se usa.
+        """
+        from src.core import config as _cfg
+        if not getattr(_cfg.settings, "filtrar_fuera_dominio", False):
+            return ""
+        return (" AND NOT coalesce((SELECT (n2.metadata->>'fuera_de_dominio')='true' "
+                "FROM normas n2 WHERE n2.id_norma = a.id_norma), false)")
+
     def search_bm25(self, query: str, top_k: int = 50) -> list[dict]:
         # bm25_doc2query (flag): busca sobre tsv_aug (contextual_text + preguntas
         # doc2query generadas) en vez de tsv. "Despierta" BM25 para fraseo
@@ -98,13 +116,14 @@ class PostgresStore:
                 if _c.fetchone():
                     col = "tsv_aug"
         with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
+            dom = self._filtro_dominio()
             cur.execute(f"""
                 SELECT f.id, f.articulo_id, f.text, f.contextual_text,
                        a.id_norma, a.numero AS articulo_numero,
                        ts_rank_cd(f.{col}, plainto_tsquery('spanish', %s)) AS score
                 FROM fragmentos f
                 JOIN articulos a ON a.id = f.articulo_id
-                WHERE f.{col} @@ plainto_tsquery('spanish', %s)
+                WHERE f.{col} @@ plainto_tsquery('spanish', %s) {dom}
                 ORDER BY score DESC
                 LIMIT %s
             """, (query, query, top_k))
@@ -164,6 +183,7 @@ class PostgresStore:
                         "WHERE table_name='fragmentos' AND column_name='embedding_4b_1024'")
             if not cur.fetchone():
                 return []
+            dom = self._filtro_dominio()
             excl = ""
             if exclude_glossary:
                 excl = "AND f.articulo_id NOT IN (SELECT DISTINCT articulo_id FROM fragmentos_definicion)"
@@ -172,7 +192,7 @@ class PostgresStore:
                        a.id_norma, a.numero AS articulo_numero,
                        1 - (f.embedding_4b_1024 <=> %s::vector) AS score
                 FROM fragmentos f JOIN articulos a ON a.id = f.articulo_id
-                WHERE f.embedding_4b_1024 IS NOT NULL {excl}
+                WHERE f.embedding_4b_1024 IS NOT NULL {excl} {dom}
                 ORDER BY f.embedding_4b_1024 <=> %s::vector
                 LIMIT %s
             """, (query_embedding, query_embedding, top_k))
