@@ -1113,3 +1113,67 @@ Coordinador. Es la base legal de las transferencias de mercado y **el corpus no 
 NO mide cuánto aportó agregar la LEY 20936 — para eso haría falta el mismo set contra el corpus
 viejo, que ya no existe. Los resultados de experimentos anteriores quedaron obsoletos al cambiar
 el pool.
+
+---
+
+## #53 — E4 PILOTO DEL FOSO: mapa de obligaciones (2026-08-23)
+
+Lo único que no se puede construir desde fuera del CEN. Un RAG legal responde *"¿qué dice el
+artículo X?"*; esto responde **"¿qué me obliga a hacer, cuándo, y qué se cae si cambia?"**.
+
+### Cómo funciona
+`obligacion(articulo_id, sujeto, accion, destinatario, plazo, evidencia)`. El LLM local lee cada
+artículo y propone obligaciones; **cada campo se valida contra el texto** antes de guardarse:
+
+```
+sujeto      debe aparecer LITERALMENTE en el articulo
+evidencia   debe ser cita literal continua, >=10 chars
+plazo       si no aparece en el texto, se descarta la fila entera
+```
+Sin esa validación el mapa sería una alucinación estructurada — se vería igual de convincente y
+llevaría a incumplir un plazo real.
+
+### Tres bugs antes de que funcionara
+1. `llm.generate()` devuelve `LLMResponse`, no dict. `str(raw)` daba la repr del objeto.
+2. qwen3 razona **en inglés y sin cerrar el `<think>`**: 7962 caracteres de monólogo y cero
+   JSON, incluso con 3500 tokens de presupuesto.
+3. La directiva `/no_think` **no funcionó** — siguió razonando igual.
+
+**Lo que lo resolvió: decodificación restringida por esquema** (`response_format` → `format` de
+Ollama, ya soportado en `llm.py`). Con el sampler restringido al esquema, el modelo no puede
+divagar. Primera prueba: **8/8 válidas, 0 descartadas**.
+
+### Resultado del piloto (extracción en curso)
+```
+190 obligaciones · 60 con plazo · sobre 429 artículos candidatos del núcleo de mercados
+
+por sujeto (normalizado)     por norma
+   comisión      69            DECRETO 10   190
+   coordinador   29
+   comité        19
+```
+
+**Obligaciones reales del Coordinador, con su plazo, extraídas del articulado:**
+```
+enviar                                    a más tardar el día 25 de cada mes    [D10 art 149]
+calcular Ingresos Tarifarios Reales       mensualmente                          [D10 art 148]
+informar resultados de la revisión        primeros 5 días de marzo              [D10 art 165]
+realizar reliquidaciones entre Empresas   —                                     [D10 art 165]
+remitir                                   27 meses antes del término del periodo[D10 art 13]
+determinar e informar las proporciones    quince días                           [D10 art 110]
+```
+Eso **es** el trabajo de Transferencias de Mercado, y ningún RAG genérico lo tiene.
+
+### Consultas (`scripts/mapa_obligaciones.py`)
+```
+--sujeto coordinador   ¿qué me obliga a hacer y cuándo?
+--plazos               ¿qué vence y en qué fecha?
+--impacto <id_norma>   si esa norma cambia, ¿qué obligaciones dependen de ella?
+```
+El sujeto se normaliza **en la consulta**, no en la tabla: "La Comisión" y "la Comisión" llegan
+como entidades distintas porque el literal es lo que sostiene la validación contra el texto.
+
+⚠️ **Pendiente:** el campo `proceso` está vacío. Agrupar obligaciones en procesos (IVTE,
+reliquidación, peajes) es el paso que conecta con el monitor: *"cambió la norma X → se rompe el
+proceso Y"*. Falta también sujetos basura ("se", "bases técnicas preliminares") que la
+validación acepta porque sí aparecen en el texto.
