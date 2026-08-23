@@ -93,7 +93,6 @@ completo veto_fraseos 64       || lanzar_veto veto_fraseos   data/eval/queries_f
 completo veto_operativas 114   || lanzar_veto veto_operativas data/eval/queries_operativas_v1.jsonl veto_operativas.log
 completo ambiguedad 35         || lanzar_amb  ambiguedad      data/eval/queries_ambiguos_v1.jsonl   ambiguedad.log
 completo r5_fallback 46        || lanzar_r5   r5_fallback     data/eval/queries_sin_diccionario_v1.jsonl r5_fallback.log
-completo filtro_fraseos 64     || lanzar_fd   filtro_fraseos  data/eval/queries_fraseos_v1.jsonl    filtro_fraseos.log
 completo filtro_operativas 114 || lanzar_fd   filtro_operativas data/eval/queries_operativas_v1.jsonl filtro_operativas.log
 
 echo "$(date '+%F %T') cola COMPLETA, nada que hacer" >> "$LOG"

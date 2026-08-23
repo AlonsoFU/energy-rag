@@ -350,7 +350,7 @@ class Settings(BaseSettings):
     # Frontera del corpus: excluir del retrieval las normas marcadas
     # metadata.fuera_de_dominio (33 de 95 al 2026-08-22, 1352 fragmentos).
     # MARCAR no basta -- sin este flag los fragmentos ajenos siguen compitiendo.
-    filtrar_fuera_dominio: bool = False
+    filtrar_fuera_dominio: bool = True   # ADOPTADO 2026-08-23 (exp #52)
 
     # concept_inference (flag OFF): inferencia del CONCEPTO legal implícito (estándar
     # legal IR 2025 — STARD / razonamiento de conceptos implícitos). El LLM devuelve los

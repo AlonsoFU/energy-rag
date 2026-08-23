@@ -1061,3 +1061,55 @@ intent_gate        logreg sobre embeddings   (dato aprendido)
 glossary_lookup    diccionario de la DB      (dato)
 ambiguity_disclose def_exact_all             (dato)
 ```
+
+---
+
+## #52 — `filtrar_fuera_dominio` **ADOPTADO** (2026-08-23)
+
+Cierra E1: la frontera del usuario ("todo lo referente a la subgerencia de mercados") pasa de
+ser una etiqueta a filtrar de verdad.
+
+**Marcar no bastaba.** Las 33 normas marcadas seguían con sus 1352 fragmentos en el pool,
+compitiendo. El filtro se aplica en las DOS patas del retrieval (BM25 y KNN denso 4b_1024).
+
+```
+                     OFF          ON
+cita_ok           95/114      100/114   [gano 6, perdio 1]  McNemar p=0.1250
+cita_limpia       54/114       61/114   (+7)
+precision           0.43         0.48
+citas unicas        2.82         2.74
+inject             3/114        3/114
+```
+
+`p=0.1250` es el **piso** de McNemar con 6-1 (harían falta 7-0 para bajar de 0.05). No alcanza
+el umbral, pero **todas las señales apuntan igual** y `cita_limpia` sube 7 — la métrica que
+venía siendo la más ruidosa de todas (piso de ruido ~30%, exp #44).
+
+**Dónde gana es coherente con el mecanismo** — preguntas coloquiales reales que antes competían
+contra la Ley de Tránsito, alcoholes y procedimiento penal por el mismo espacio en el pool:
+```
+"me cortaron la luz por una deuda que creo mal cobrada"
+"cada cuanto me tienen que mandar la cuenta de la luz"
+"tengo una planta solar y me sobra energia"
+"quien coordina la electricidad"
+"ese grupo que resuelve las peleas entre las empresas y el operador"
+```
+
+**Contraste con el set de definiciones (exp anterior, `filtro_fraseos`):** ahí salió flat
+(58→59, p=1.0). Predicho y explicado: son 64 queries de definición, y las normas ajenas casi
+nunca competían por definiciones del glosario. **El filtro sirve para lo operativo, no para lo
+definicional** — que es donde el usuario realmente trabaja.
+
+### Corpus con el que se midió (cambió respecto de todo lo anterior)
+```
+normas       95 -> 108   (+16 del descubrimiento; 39 marcadas fuera en total)
+articulos  2978 -> 3235
+fragmentos 3907 -> 4288
+```
+Ingresó la **LEY 20936** (63 artículos) — establece el sistema de transmisión actual y crea el
+Coordinador. Es la base legal de las transferencias de mercado y **el corpus no la tenía**.
+
+⚠️ **Caveat de comparación:** este experimento mide OFF/ON del filtro **dentro del corpus nuevo**.
+NO mide cuánto aportó agregar la LEY 20936 — para eso haría falta el mismo set contra el corpus
+viejo, que ya no existe. Los resultados de experimentos anteriores quedaron obsoletos al cambiar
+el pool.
