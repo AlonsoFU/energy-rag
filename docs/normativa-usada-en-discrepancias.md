@@ -6,9 +6,9 @@ aparece en una discrepancia real ante el Panel de Expertos es normativa viva del
 sector. El frente de descubrimiento prospectivo estaba bloqueado porque los sitios
 bloquean el scraping; esta vía no depende de ellos.
 
-- documentos leídos: **3**
-- citas artículo→norma detectadas: **13**
-- resueltas a normas del corpus: **1** (1 con el artículo también presente — sirven de gold para evaluar)
+- documentos leídos: **9**
+- citas artículo→norma detectadas: **21**
+- resueltas a normas del corpus: **9** (8 con el artículo también presente — sirven de gold para evaluar)
 - apuntan a normas que **faltan**: **12**
 
 ## Normas citadas que NO están en el corpus
@@ -19,8 +19,10 @@ resolverlo por truncamiento sesgaría el reporte hacia *"ya lo tenemos"*.
 
 | tipo | número | veces | quizá | ejemplo de la cita |
 |---|---|---|---|---|
-| DECRETO | 44 | 5 | — | artículos 27 y siguientes del Reglamento del Panel de Expertos conteni |
-| DECRETO | 88 | 4 | — | artículo 124 del Reglamento para Medios de Generación de Pequeña Escal |
+| DECRETO | 44 | 4 | — | artículo 27, inciso segundo, del Decreto Supremo N°44 |
+| DECRETO | 88 | 3 | — | artículo 9 del Decreto Supremo Nº88 |
+| LEY | 198801 | 1 | LEY 19880 | artículo 62 de la Ley N°19.8801 |
+| LEY | 19971 | 1 | — | artículo 33, N°1, letra a), de la Ley N°19.971 |
 | DECRETO | 97 | 1 | — | artículo 6 del Decreto Supremo N°97 |
 | DECRETO | 244 | 1 | — | artículo 39 del Decreto Supremo N°244 |
 | DECRETO | 8810 | 1 | — | artículo 9 del Decreto Supremo Nº8810 |
@@ -29,4 +31,10 @@ resolverlo por truncamiento sesgaría el reporte hacia *"ya lo tenemos"*.
 
 | norma | artículo | documento |
 |---|---|---|
+| LEY 20936 (`1092695`) | 95 | disc_66d778f5.pdf |
+| LEY 19880 (`210676`) | 62 | dictamen_19_2025.pdf |
+| DFL 4 (`258171`) | 208 | disc_66d778f5.pdf |
 | DFL 4 (`258171`) | 208 | disc_betel_2024.pdf |
+| DFL 4 (`258171`) | 79 | disc_689a68a2.pdf |
+| LEY 18410 (`29819`) | 16 | dictamen_4_2023_chilquinta.pdf |
+| LEY 18410 (`29819`) | 3 | dictamen_4_2023_chilquinta.pdf |

@@ -30,6 +30,19 @@ from src.components.vectorstore import with_connection
 
 FUENTE = Path("data/discrepancias")
 SALIDA = Path("docs/normativa-usada-en-discrepancias.md")
+QUERIES = Path("data/eval/queries_discrepancias_v1.jsonl")
+
+# La referencia explicita se BORRA de la query. Si la pregunta dice "segun el articulo 124 del
+# DS 88...", el sistema tiene la respuesta regalada y el eval mide cualquier cosa menos
+# retrieval. Se reemplaza por un marcador neutro, como preguntaria alguien que NO sabe donde
+# esta la respuesta -- que es el caso real de uso.
+REF = re.compile(r"(?:de\s+conformidad\s+con\s+|conforme\s+a\s+|seg[uú]n\s+|"
+                 r"lo\s+(?:dispuesto|prescrito|establecido)\s+en\s+)?"
+                 r"(?:el\s+|los\s+)?art[íi]culos?\s+[\d°ºª\-\s]+"
+                 r"(?:\s*(?:bis|ter|quater))?"
+                 r"(?:\s*(?:y\s+siguientes|inciso\s+\w+))?"
+                 r"(?:[^.;]{0,80}?(?:ley|decreto|reglamento|resoluci[oó]n)[^.;]{0,40})?",
+                 re.IGNORECASE)
 
 # "articulo 124 del Decreto Supremo N°88" / "articulo 208 ... Decreto con Fuerza de Ley N°4"
 CITA = re.compile(
@@ -91,15 +104,29 @@ def main():
     for n in normas:
         cat.setdefault((str(n["tipo"]).upper(), _num(n["numero"])), n)
 
+    def query_de(texto, m):
+        """La ORACION que rodea la cita, sin la referencia. Es lenguaje del sector, no una
+        plantilla mia: la escribio el abogado que redacto la discrepancia."""
+        ini = texto.rfind(".", max(0, m.start() - 400), m.start()) + 1
+        fin = texto.find(".", m.end())
+        fin = fin if 0 < fin - ini < 600 else m.end() + 200
+        frase = re.sub(r"\s+", " ", texto[ini:fin]).strip()
+        frase = REF.sub(" ", frase)
+        frase = re.sub(r"\s+", " ", frase).strip(" ,;:-")
+        return frase
+
     en_corpus = collections.Counter()
     faltan = collections.defaultdict(lambda: {"n": 0, "ejemplo": "", "docs": set()})
-    con_art, sin_art, pares = 0, 0, []
+    con_art, sin_art, pares, queries = 0, 0, [], []
     for pdf in pdfs:
         t = texto_de(pdf)
         for m in CITA.finditer(t):
-            # el "medio" no debe cruzar otra mencion de articulo: si lo hace, el par
-            # articulo-norma que se arma es falso.
-            if re.search(r"art[íi]culo", m.group("medio"), re.I):
+            # El "medio" no debe cruzar otra mencion de articulo NI de norma. Sin la segunda
+            # condicion, "Articulo 72-7 de la Ley General de Servicios Electricos" -- que no
+            # trae numero -- seguia buscando y enganchaba un "Decreto 44" posterior, dando el
+            # par falso (DECRETO 44, art 72-7) y contaminando el reporte de faltantes.
+            if re.search(r"art[íi]culo|ley|decreto|reglamento|resoluci[oó]n|anexo|c[oó]digo",
+                         m.group("medio"), re.I):
                 continue
             tp = _tipo(m.group("tipo"))
             if not tp:
@@ -115,6 +142,13 @@ def main():
                     con_art += 1
                     pares.append((cat[k]["id_norma"], cat[k]["tipo"], cat[k]["numero"],
                                   art, pdf.name))
+                    # NO se genera query desde el contexto de la cita. Se probo y NO sirve:
+                    # los escritos legales rodean sus citas de texto PROCESAL, no de
+                    # preguntas. Las 7 queries que salieron eran encabezados de pagina
+                    # ("Dictamen N°19-2025 63 de 71"), domicilios de notificacion y frases
+                    # cortadas a la mitad. Publicar eso como set de evaluacion habria sido
+                    # peor que no tener set: mediria ruido y parecerian datos reales.
+                    # El par norma-articulo SI sirve, y queda en el reporte de abajo.
                 else:
                     sin_art += 1
             else:
@@ -180,6 +214,8 @@ def main():
         L.append(f"| {tp} {nu} (`{nid}`) | {art} | {doc} |")
     SALIDA.write_text("\n".join(L) + "\n")
     print(f"\nescrito {SALIDA}")
+
+
 
 
 if __name__ == "__main__":
