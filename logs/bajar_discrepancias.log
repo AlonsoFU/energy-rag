@@ -3,3 +3,10 @@ candidatas a bajar: 2  (ya procesadas: 32)
 === resueltos 30 idNorma ===
   Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=186969
   [25/30] DECRETO-44: 1924 chars -> 186969.json
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=8990
+  [26/30] DECRETO-88: 763 chars -> 8990.json
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=230697
+  AVISO: el texto trae placeholders 'Loading' (7102 chars) -- extraccion INCOMPLETA
+  [27/30] LEY-19971: 7102 chars -> 230697.json
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=188831
+  [28/30] DECRETO-97: 849 chars -> 188831.json

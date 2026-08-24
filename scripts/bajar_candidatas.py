@@ -54,6 +54,65 @@ def candidatas(limit=0, doc=None):
     return out
 
 
+AVISO_DOMINIO = 0.30      # mismo corte que `marcar_fuera_dominio.CORTE`
+_REF_DOMINIO = None
+
+
+def dominio_sim(texto):
+    """Parecido del ARTICULADO bajado con las funciones de la subgerencia. None si no se puede."""
+    global _REF_DOMINIO
+    try:
+        from scripts.frontera_mercados import DOMINIO
+        from scripts.marcar_fuera_dominio import _v
+        if _REF_DOMINIO is None:
+            _REF_DOMINIO = _v(re.sub(r"\s+", " ", DOMINIO).strip())
+        a = _REF_DOMINIO
+        b = _v(re.sub(r"\s+", " ", (texto or ""))[:4000])
+        if not a or not b:
+            return None
+        return sum(x * y for x, y in zip(a, b))
+    except Exception:
+        return None
+
+
+def _guardar(d, v):
+    out = Path(f"data/normas_completas/nuevas/{v['id_norma']}.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({
+        "id_norma": v["id_norma"], "tipo": d.tipo, "numero": d.numero,
+        "titulo": d.titulo, "fecha_publicacion": d.fecha_publicacion,
+        "organismo": d.organismo, "estado": d.estado, "url": d.url,
+        "texto_completo": d.texto_completo, "content_hash": d.content_hash,
+        "vinculaciones": d.vinculaciones, "versiones": d.versiones,
+    }, ensure_ascii=False))
+    return out
+
+
+def identidad_ok(tipo_pedido, num_pedido, d):
+    """La norma bajada, ¿es la que se pidio?
+
+    El buscador de BCN resuelve por NUMERO y nada mas: `DECRETO 42` devolvio `ACUERDO 42`, y
+    8 de 24 descargas de una tanda anterior eran otra norma. Se compara lo que declara la
+    propia norma bajada contra lo que se pidio.
+
+    Se exige tipo Y numero. El tipo se compara contra el titulo ademas del campo `tipo`
+    porque BCN a veces deja `tipo` vacio y solo lo escribe en el encabezado del titulo.
+    """
+    n_ped = re.sub(r"[^\d]", "", str(num_pedido or "")).lstrip("0")
+    n_bajo = re.sub(r"[^\d]", "", str(getattr(d, "numero", "") or "")).lstrip("0")
+    if n_bajo and n_ped and n_bajo != n_ped:
+        return False
+    t_ped = str(tipo_pedido or "").upper().strip()
+    t_bajo = str(getattr(d, "tipo", "") or "").upper().strip()
+    titulo = str(getattr(d, "titulo", "") or "").upper()
+    if not t_bajo:
+        t_bajo = titulo.split()[0] if titulo.split() else ""
+    if not t_bajo:
+        return True                     # sin dato de tipo no se puede desmentir
+    # DECRETO SUPREMO / DECRETO EXENTO cuentan como DECRETO; ACUERDO no.
+    return t_bajo.startswith(t_ped) or t_ped.startswith(t_bajo)
+
+
 def ya_en_corpus():
     with with_connection() as c, c.cursor(row_factory=dict_row) as cur:
         cur.execute("SELECT id_norma, tipo, numero FROM normas")
@@ -118,6 +177,31 @@ async def main(limit=0, delay=20, dry=False, fuente=None):
             if not d or len(d.texto_completo) < 500:
                 v["descargado"] = False
                 print(f"  [{j}/{len(listos)}] {k}: FALLO o vacio", flush=True)
+            elif (sim := dominio_sim(d.texto_completo)) is not None and sim < AVISO_DOMINIO:
+                # Tipo y numero pueden coincidir y aun asi ser otra norma: el DECRETO 88 que
+                # devolvio BCN era un decreto exento del Ministerio de EDUCACION de 1994, con
+                # numero y tipo correctos. La materia es la unica señal que lo separa. Se
+                # puntua por ARTICULADO contra las funciones de la subgerencia, igual que
+                # `marcar_fuera_dominio` -- por titulo no sirve, la formula burocratica del
+                # encabezado legal chileno es identica entre materias.
+                # Se GUARDA igual pero se avisa: la frontera es una decision aparte, y
+                # descartar en silencio esconderia un acierto legitimo mal puntuado.
+                v["descargado"] = True
+                v["dominio_sim"] = round(sim, 3)
+                out = _guardar(d, v)
+                print(f"  [{j}/{len(listos)}] {k}: GUARDADO pero DUDOSO "
+                      f"(dominio {sim:.3f} < {AVISO_DOMINIO}) -> {out.name}", flush=True)
+                print(f"        titulo: {(d.titulo or '')[:80]}", flush=True)
+            elif not identidad_ok(v["tipo"], v["numero"], d):
+                # El buscador de BCN resuelve SOLO por numero, asi que devuelve cualquier
+                # norma que lleve ese numero. Pedir "DECRETO 44" (Reglamento del Panel de
+                # Expertos) trajo el ACUERDO 44/2001 del Ministerio de Educacion sobre el
+                # Instituto Profesional Zipter, y "DECRETO 88" trajo un decreto exento de
+                # Educacion de 1994. Sin esta guarda se guardaban igual.
+                v["descargado"] = False
+                v["rechazo"] = f"identidad: pedido {v['tipo']} {v['numero']}, vino {d.tipo} {d.numero}"
+                print(f"  [{j}/{len(listos)}] {k}: RECHAZADO -- {v['rechazo']}", flush=True)
+                print(f"        titulo: {(d.titulo or '')[:80]}", flush=True)
             else:
                 out = Path(f"data/normas_completas/nuevas/{v['id_norma']}.json")
                 out.parent.mkdir(parents=True, exist_ok=True)

@@ -70,9 +70,19 @@ PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio      # simula la fr
 PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
 PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar   # procesos
 ```
-⚠️ **El buscador de BCN busca solo por número**: `DECRETO 42` devolvió `ACUERDO 42`. 8 de 24
-descargas eran otra norma. `bajar_candidatas` valida identidad, pero conviene mirar el título
-de lo que bajó antes de ingerir.
+⚠️ **El buscador de BCN busca solo por número.** Pedir `DECRETO 44` (Reglamento del Panel de
+Expertos) devolvió el `ACUERDO 44/2001` del Ministerio de **Educación** sobre el Instituto
+Profesional Zipter; `DECRETO 88` devolvió un decreto exento de Educación de 1994. Antes eran
+8 de 24 descargas erradas.
+
+`bajar_candidatas` ahora tiene dos guardas —**no las tenía**, y por eso esas dos se guardaron:
+```
+identidad_ok()   tipo Y numero deben coincidir  -> ACUERDO 44 se RECHAZA
+dominio_sim()    materia por ARTICULADO         -> Educacion dio 0.217 y 0.230 (corte 0.30)
+```
+La segunda **guarda igual y avisa**, no descarta: la frontera es una decisión aparte y
+descartar en silencio escondería un acierto legítimo mal puntuado. Igual conviene mirar el
+título de lo que bajó antes de ingerir.
 
 ---
 
