@@ -1,0 +1,138 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34771.20it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  95%|█████████▍| 373/393 [00:00<00:00, 3660.88it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3794.27it/s]
+=== FASE A: re-retrieval def_fragments=ON sobre 339q, detecta cambios ===
+  retr 50/339 cambiados=37 (15s)
+  retr 100/339 cambiados=68 (31s)
+  retr 150/339 cambiados=101 (47s)
+  retr 200/339 cambiados=136 (62s)
+  retr 250/339 cambiados=178 (78s)
+  retr 300/339 cambiados=199 (94s)
+  top-10 CAMBIO en 232/339 queries -> solo esos re-generan
+=== FASE B: gen SOLO los 232 cambiados ===
+  gen 20/232 (793s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (1) 'qué significa Tasas de falla d': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (2) 'qué significa Tasas de falla d': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (1) 'qué significa Estado Deteriora': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (2) 'qué significa Estado Deteriora': APIConnectionError
+  gen 40/232 (5106s)
+  gen 60/232 (5628s)
+  gen 80/232 (6234s)
+  gen 100/232 (6620s)
+  gen 120/232 (7206s)
+  gen 140/232 (7653s)
+  gen 160/232 (8289s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 180/232 (9329s)
+  gen 200/232 (9824s)
+  gen 220/232 (9976s)
+
+=== M2 (def_fragments) vs BASELINE ===
+  in_domain          base 173/279 -> M1 163/279  (gano 4, perdio 14)
+  off_corpus         base  30/ 30 -> M1  30/ 30  (gano 0, perdio 0)
+  off_domain_corpus  base  21/ 30 -> M1  22/ 30  (gano 1, perdio 0)
+
+  TOTAL flips: gano 5, perdio 14  -> McNemar p=0.0636  (RUIDO (no adoptar))
+
+=== queries que GANARON (base fail -> M1 ok) ===
+  [in_domain       ] 250604/13      | definición de Empresa distribuidora
+  [in_domain       ] 250604/13      | qué significa Empresa distribuidora
+  [in_domain       ] 1112591/11     | qué significa Costo de Falla de Larga Duraci
+  [in_domain       ] 1112591/11     | qué es Costo de Falla de Corta Duración
+  [off_domain_corpus] 1207690/46     | qué es Veedor

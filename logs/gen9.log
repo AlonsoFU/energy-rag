@@ -1,0 +1,66 @@
+=== FASE A: retrieval 100% cacheado (267 queries) ===
+=== FASE B: gen pareada  OFF(citation_ordinal_words=False) / ON(citation_ordinal_words=True) ===
+  gen nuevas=5  [5/267]
+  gen nuevas=10  [10/267]
+  gen nuevas=15  [15/267]
+  gen nuevas=20  [20/267]
+  gen nuevas=25  [25/267]
+  gen nuevas=30  [30/267]
+  gen nuevas=35  [35/267]
+  gen nuevas=40  [40/267]
+  gen nuevas=45  [45/267]
+  gen nuevas=50  [50/267]
+  gen nuevas=55  [55/267]
+  gen nuevas=60  [60/267]
+  gen nuevas=65  [65/267]
+  gen nuevas=70  [70/267]
+  gen nuevas=75  [75/267]
+  gen nuevas=80  [80/267]
+  gen nuevas=85  [85/267]
+  gen nuevas=90  [90/267]
+  gen nuevas=95  [95/267]
+  gen nuevas=100  [100/267]
+  gen nuevas=105  [105/267]
+  gen nuevas=110  [110/267]
+  gen nuevas=115  [115/267]
+  gen nuevas=120  [120/267]
+  gen nuevas=125  [125/267]
+  gen nuevas=130  [130/267]
+  gen nuevas=135  [135/267]
+  gen nuevas=140  [140/267]
+  gen nuevas=145  [145/267]
+  gen nuevas=150  [150/267]
+  gen nuevas=155  [155/267]
+  gen nuevas=160  [160/267]
+  gen nuevas=165  [165/267]
+  gen nuevas=170  [170/267]
+  gen nuevas=175  [175/267]
+  gen nuevas=180  [180/267]
+  gen nuevas=185  [185/267]
+  gen nuevas=190  [190/267]
+  gen nuevas=195  [195/267]
+  gen nuevas=200  [200/267]
+  gen nuevas=205  [205/267]
+  gen nuevas=210  [210/267]
+  gen nuevas=215  [215/267]
+  gen nuevas=220  [220/267]
+  gen nuevas=225  [225/267]
+  gen nuevas=230  [230/267]
+  gen nuevas=235  [235/267]
+  gen nuevas=240  [240/267]
+  gen nuevas=245  [245/267]
+  gen nuevas=250  [250/267]
+  gen nuevas=255  [255/267]
+  gen nuevas=260  [260/267]
+  gen nuevas=265  [265/267]
+
+=== gen9: citation_ordinal_words False -> True (in_domain contestables) ===
+  cita_ok  OFF 260/267 -> ON 261/267  (gano 2, perdio 1)
+  McNemar p=1.0000  (ruido/flat)
+  citas/resp     OFF  13.83  ->  ON  14.55
+  citas unicas   OFF   4.19  ->  ON   4.26
+  precision      OFF   0.42  ->  ON   0.42
+  segundos       OFF  21.24  ->  ON  21.01
+  GANO: definición de DIA
+  GANO: definición de Ajustes
+  PERDIO: definición de Solicitante

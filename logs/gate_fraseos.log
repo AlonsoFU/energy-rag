@@ -1,0 +1,30 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32155.36it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  88%|████████▊ | 345/393 [00:00<00:00, 3431.64it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3717.97it/s]
+=== gate_fraseos: 64 pares  OFF(regex) / ON(diccionario) ===
+  pares nuevos=5  [5/64]
+  pares nuevos=10  [10/64]
+  pares nuevos=15  [15/64]
+  pares nuevos=20  [20/64]
+  pares nuevos=25  [25/64]
+  pares nuevos=30  [30/64]
+  pares nuevos=35  [35/64]
+  pares nuevos=40  [40/64]
+  pares nuevos=45  [45/64]
+  pares nuevos=50  [50/64]
+  pares nuevos=55  [55/64]
+  pares nuevos=60  [60/64]
+
+=== gate_fraseos — 64 pares validos ===
+  cita_ok      OFF 56/64  ->  ON 62/64   [gano 6, perdio 0]  McNemar p=0.0312  (SIGNIFICATIVO)
+  cita_limpia  OFF 36/64  ->  ON 41/64
+  inject       OFF 0/64  ->  ON 52/64
+  rechazos     OFF 4/64  ->  ON 2/64
+  precision     OFF   0.53  ->  ON   0.61
+  citas unicas  OFF   2.59  ->  ON   2.64
+  segundos      OFF 287.38  ->  ON 285.67
+  GANO:   [A] defíneme Sistema de Transmisión Nacional
+  GANO:   [A] qué entiende la ley por Estado Deteriorado
+  GANO:   [B] dame la definición de DIA
+  GANO:   [B] explícame qué significa Informe Definitivo
+  GANO:   [B] según la ley, qué es Solicitante
+  GANO:   [B] en la normativa, qué se entiende por Infracciones gravísimas

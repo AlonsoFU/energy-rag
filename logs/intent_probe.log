@@ -1,0 +1,49 @@
+=== embebiendo 83 ejemplos (dim 1024) ===
+
+=== 1. LOO CENTROIDE: 65/83 = 78.3% ===
+        calcul  defini   plazo  proced  regula  sancio   <- predicho
+calcul      10       0       1       0       2       0
+defini       2      11       0       0       3       0
+ plazo       1       0      12       1       0       0
+proced       0       0       3      10       0       0
+regula       1       0       1       2      11       0
+sancio       0       0       1       0       0      11
+
+=== 1. LOO 1-NN: 24/83 = 28.9% ===
+        calcul  defini   plazo  proced  regula  sancio   <- predicho
+calcul       2       7       1       0       1       2
+defini       8       3       0       1       3       1
+ plazo       2       0       5       2       2       3
+proced       0       0       4       4       4       1
+regula       3       2       2       3       4       1
+sancio       0       0       3       2       1       6
+
+=== 2. TEMA vs INTENCION (gana el mas cercano al ancla) ===
+  TEMA       tema=0.8299 int=0.5892  | cómo se calcula el peaje de transmisión
+  TEMA       tema=0.8093 int=0.4544  | cuál es el plazo para entregar el balance de
+  INTENCION  tema=0.6218 int=0.6556  | qué multa se aplica por incumplir la norma t
+  TEMA       tema=0.9147 int=0.4437  | qué es el costo marginal
+  TEMA       tema=0.7741 int=0.3630  | cómo se solicita la conexión de una central
+  TEMA       tema=0.7334 int=0.4525  | cuándo vence el plazo para observar el infor
+  -> la INTENCION gana 1/6
+
+=== 3. queries_fraseos_v1 (64q, todas definicion) ===
+  recall definicion: 50/64 = 78.1%
+  predicciones: {'definicion': 50, 'regulacion': 10, 'sancion': 2, 'plazo': 1, 'calculo': 1}
+  margen 1o-2o medio: 0.0658
+    [A] -> regulacion (0.6270, 2o definicion)  cómo se define Plan de obra de generación y transmis
+    [A] -> regulacion (0.6698, 2o definicion)  cómo se define Sistemas de Transmisión Dedicados
+    [A] -> regulacion (0.6393, 2o definicion)  Tasas de falla de instalaciones de transmisión defin
+    [A] -> sancion (0.6456, 2o definicion)  qué entiende la ley por Estado Deteriorado
+    [A] -> regulacion (0.6757, 2o definicion)  en qué consiste Sistemas de Transmisión Zonal
+    [A] -> regulacion (0.6041, 2o definicion)  cómo define la ley Sistemas de Transmisión para Polo
+    [A] -> regulacion (0.5966, 2o definicion)  cómo define la ley Energía de Regulación
+    [A] -> regulacion (0.6221, 2o calculo)  explícame el término Parámetros y variables del Sist
+    [B] -> plazo (0.6740, 2o definicion)  explícame qué significa Informe Definitivo
+    [B] -> regulacion (0.5344, 2o procedimiento)  según la ley, qué es Planificación de la Transmisión
+    [B] -> regulacion (0.5146, 2o definicion)  en la normativa, qué se entiende por Capacidad Insta
+    [B] -> regulacion (0.5861, 2o definicion)  en la normativa, qué se entiende por Barra de Transf
+    [B] -> sancion (0.5198, 2o regulacion)  en la normativa, qué se entiende por Infracciones gr
+    [B] -> calculo (0.6689, 2o definicion)  quisiera el concepto de Año de Cálculo
+
+escrito data/eval/results/intent_probe/probe.json

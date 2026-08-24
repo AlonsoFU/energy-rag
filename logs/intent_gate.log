@@ -1,0 +1,30 @@
+positivos(definicion)=359  negativos(operativa)=137
+embebiendo 496 (cache 0)
+  50/496
+  100/496
+  150/496
+  200/496
+  250/496
+  300/496
+  350/496
+  400/496
+  450/496
+
+-- regex `_is_definition_query` (actual)
+   recall(dispara donde debe)   0.864  (310/359)
+   precision(no contamina)      0.997  (310/311)   FP=1/137
+   F1 0.925
+
+-- centroide (coseno pos vs neg)
+   recall(dispara donde debe)   0.983  (353/359)
+   precision(no contamina)      0.981  (353/360)   FP=7/137
+   F1 0.982
+
+-- logreg (5-fold CV, sin ver su propio ejemplo)
+   recall(dispara donde debe)   0.992  (356/359)
+   precision(no contamina)      0.989  (356/360)   FP=4/137
+   F1 0.990
+
+escrito data/eval/results/intent_gate/gate.json
+
+⚠️ la etiqueta NEGATIVA es aproximada (heredada del set, no revisada 1x1).

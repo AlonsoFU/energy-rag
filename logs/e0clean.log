@@ -1,0 +1,251 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5875.38it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:28, 13.69it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 593.40it/s]
+=== FASE A: retrieval cacheado sobre queries_balanced_v2_clean (339q) ===
+  retrieval 50/339 (16s)
+  retrieval 100/339 (31s)
+  retrieval 150/339 (46s)
+  retrieval 200/339 (60s)
+  retrieval 250/339 (75s)
+  retrieval 300/339 (91s)
+=== GEN run 1/1 con ollama/qwen3:30b-a3b ===
+  gen 25/339 (971s)
+  gen 50/339 (1844s)
+  gen 75/339 (2694s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 100/339 (3641s)
+  gen 125/339 (4378s)
+  gen 150/339 (4926s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 175/339 (5990s)
+  gen 200/339 (6621s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 1) q='qué es Sistema Eléctrico Nacio': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 2) q='qué es Sistema Eléctrico Nacio': APIConnectionError
+  gen 225/339 (9130s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 1) q='qué significa Costo de Falla d': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 2) q='qué significa Costo de Falla d': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 1) q='qué es Costo de Falla de Corta': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+    ! gen fail (intento 2) q='qué es Costo de Falla de Corta': APIConnectionError
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 250/339 (13687s)
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 275/339 (14575s)
+  gen 300/339 (15354s)
+  gen 325/339 (15652s)
+  run 1 en 15756s (errored: 3)
+
+=== BASELINE por categoría ===
+  run1: in_domain 226/279 | off_corpus  30/ 30 | off_domain_corpus  21/ 30 | TOTAL 277/339
+
+=== FALLAS run1 (base para McNemar) ===
+  [in_domain         ] 250604/5       | qué es Mora
+  [in_domain         ] 250604/5       | definición de Mora
+  [in_domain         ] 250604/5       | qué significa Mora
+  [in_domain         ] 250604/13      | qué significa Estado Deteriorado
+  [in_domain         ] 29819/2 D      | qué es Reposición
+  [in_domain         ] 29819/2 D      | definición de Reposición
+  [in_domain         ] 29819/2 D      | qué significa Reposición
+  [in_domain         ] 1030861/2,1112591/21,1216930/5,1216930/7 | qué es Proyecto
+  [in_domain         ] 1216930/5,29819/3 A | qué es Actividad
+  [in_domain         ] 1149788/4,250604/14,258171/225 | qué es Cliente
+  [in_domain         ] 250604/31      | qué es DIA
+  [in_domain         ] 250604/31      | definición de DIA
+  [in_domain         ] 250604/31      | qué significa DIA
+  [in_domain         ] 1112591/11,1149788/4 | qué es Ajustes
+  [in_domain         ] 1160108/102    | qué es Bases de Licitación
+  [in_domain         ] 1160108/102    | definición de Bases de Licitación
+  [in_domain         ] 1160108/102    | qué significa Bases de Licitación
+  [in_domain         ] 250604/53      | definición de TON
+  [in_domain         ] 250604/53      | qué significa TON
+  [in_domain         ] 1160108/95,1216930/5 | qué es Titular
+  [in_domain         ] 1160108/78,1160108/segundo | qué es Informe Definitivo
+  [in_domain         ] 1160108/78,1160108/segundo | definición de Informe Definitivo
+  [in_domain         ] 1160108/78,1160108/segundo | qué significa Informe Definitivo
+  [in_domain         ] 29819/2 D      | qué es Gas licuado
+  [in_domain         ] 29819/2 D      | definición de Gas licuado
+  [in_domain         ] 29819/2 D      | qué significa Gas licuado
+  [in_domain         ] 1160108/41,1216930/5 | qué es Solicitante
+  [in_domain         ] 1160108/16     | qué es Acometida
+  [in_domain         ] 1160108/16     | definición de Acometida
+  [in_domain         ] 1160108/16     | qué significa Acometida
+  [in_domain         ] 1155887/4      | qué significa Infracciones gravísimas
+  [in_domain         ] 1112591/2,1146553/5,1160108/2,250604/13 | qué es Coordinador
+  [in_domain         ] 250604/31      | definición de DIP
+  [in_domain         ] 250604/31      | qué significa DIP
+  [in_domain         ] 1112591/2,1146553/5,1160108/2,250604/13,258171/225 | qué es Sistema Eléctrico Nacional
+  [in_domain         ] 1155887/4      | definición de Infracciones graves
+  [in_domain         ] 1155887/4      | qué significa Infracciones graves
+  [in_domain         ] 250604/13      | qué es Empresa distribuidora
+  [in_domain         ] 250604/13      | definición de Empresa distribuidora
+  [in_domain         ] 250604/13      | qué significa Empresa distribuidora
+  [in_domain         ] 1112591/11     | qué significa Costo de Falla de Larga Duración
+  [in_domain         ] 1112591/11     | qué es Costo de Falla de Corta Duración
+  [in_domain         ] 1155887/4      | qué significa Infracciones menos graves
+  [in_domain         ] 1183783/17     | qué es Tránsito
+  [in_domain         ] 1183783/17     | definición de Tránsito
+  [in_domain         ] 1183783/17     | qué significa Tránsito
+  [in_domain         ] 1058072/2,1146553/5,1149788/4,1160108/2,1183783/2,29819/2 D | qué es Superintendencia
+  [in_domain         ] 1155887/7      | qué es Vehículo
+  [in_domain         ] 1155887/7      | definición de Vehículo
+  [in_domain         ] 1155887/7      | qué significa Vehículo
+  [in_domain         ] 1112591/2,1146553/5,1160108/2,1183783/2,29819/2 D | qué es Ministerio
+  [in_domain         ] 1155887/4      | definición de Infracciones leves
+  [in_domain         ] 1155887/4      | qué significa Infracciones leves
+  [off_domain_corpus ] 1199483/72     | qué es Declaración jurada
+  [off_domain_corpus ] 1207690/46     | qué es Veedor
+  [off_domain_corpus ] 1007469/165 D  | qué es Aviso
+  [off_domain_corpus ] 1199483/72     | qué es Reposición
+  [off_domain_corpus ] 1199483/92     | qué es Adecuaciones
+  [off_domain_corpus ] 1007469/224    | qué es Actividad
+  [off_domain_corpus ] 1007469/198 D  | qué es Conductor
+  [off_domain_corpus ] 1007469/57 D   | qué es Riesgo
+  [off_domain_corpus ] 1207690/3      | qué es Detención

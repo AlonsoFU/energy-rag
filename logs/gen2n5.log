@@ -1,0 +1,23 @@
+[92m09:42:18 - LiteLLM:WARNING[0m: get_model_cost_map.py:271 - LiteLLM: Failed to fetch remote model cost map from https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json: The read operation timed out. Falling back to local backup.
+[FLAG] self_consistency_n: OFF=3  ON=5
+=== FASE A: retrieval 100% cacheado (264 queries) ===
+[RESUME] 225 pares ya generados
+=== FASE B: gen pareada  OFF(self_consistency_n=3) / ON(self_consistency_n=5) ===
+  gen nuevas=5  [230/264]
+  gen nuevas=10  [235/264]
+  gen nuevas=15  [240/264]
+  gen nuevas=20  [245/264]
+  gen nuevas=25  [250/264]
+  gen nuevas=30  [255/264]
+  gen nuevas=35  [260/264]
+
+=== gen2_n5: self_consistency_n 3 -> 5 (in_domain contestables) ===
+  cita_ok  OFF 262/264 -> ON 263/264  (gano 2, perdio 1)
+  McNemar p=1.0000  (ruido/flat)
+  citas/resp     OFF   6.20  ->  ON   7.55
+  citas unicas   OFF   2.65  ->  ON   3.08
+  precision      OFF   0.63  ->  ON   0.57
+  segundos       OFF  70.97  ->  ON  97.93
+  GANO: definición de DIA
+  GANO: qué es Coordinador
+  PERDIO: qué es Infracciones graves

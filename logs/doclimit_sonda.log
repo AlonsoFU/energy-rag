@@ -1,0 +1,44 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5521.35it/s]
+The Transformer `cache_dir` argument is deprecated. Please pass `cache_dir` via `model_kwargs`, `processor_kwargs`, and/or `config_kwargs` instead.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7557.17it/s]
+=== sonda doclimit: 12 queries x [0, 5, 3, 2]  (n=3 vigente) ===
+  [1/12] Una distribuidora suministra electricidad a un cli
+discarding closed connection: <psycopg.Connection [BAD] at 0x78ca11d773b0>
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/scripts/exp_doclimit_sonda.py", line 87, in <module>
+    main()
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/scripts/exp_doclimit_sonda.py", line 59, in main
+    docs = retr.retrieve(qt, top_k=10)    # UNA vez: identico para todos los brazos
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/src/pipelines/retrieve.py", line 518, in retrieve
+    bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/src/components/vectorstore.py", line 120, in search_bm25
+    cur.execute(f"""
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.AdminShutdown: terminating connection due to administrator command
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 6032.53it/s]
+The Transformer `cache_dir` argument is deprecated. Please pass `cache_dir` via `model_kwargs`, `processor_kwargs`, and/or `config_kwargs` instead.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 30534.83it/s]
+=== sonda doclimit: 12 queries x [0, 5, 3, 2]  (n=3 vigente) ===
+  [1/12] Una distribuidora suministra electricidad a un cli
+  [2/12] El dueño de una línea de transmisión dedicada con 
+  [3/12] En el reglamento de generación distribuida para au
+  [4/12] El cajón ese de la pared donde llega el cable y el
+  [5/12] El reglamento de generación distribuida para autoc
+  [6/12] ¿Con cuánta anticipación al fin de la vigencia de 
+  [7/12] ¿Quién decide a qué grupo pertenece cada línea de 
+  [8/12] si me cortan la luz por falta de generación, ¿me d
+  [9/12] para empezar a conectar mis paneles, ¿a quién le t
+  [10/12] Si me sancionan y creo que es injusto, ¿cuánto tie
+  [11/12] qué tasa se usa para calcular la anualidad del val
+  [12/12] quién debe informar a la comisión, con un mes de a
+
+=== mediana de segundos por doc_limit (n=3, 12 queries) ===
+  doc_limit=0   mediana  137.4 s   media  132.8 s   n=10
+  doc_limit=5   mediana  131.0 s   media  119.1 s   n=10
+  doc_limit=3   mediana  128.1 s   media  116.9 s   n=10
+  doc_limit=2   mediana  125.9 s   media  119.3 s   n=10
