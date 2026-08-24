@@ -28,11 +28,23 @@ from psycopg.rows import dict_row
 from src.components.vectorstore import with_connection
 from src.parsers.norm_structure_parser import NormStructureParser
 
-# encabezado = la linea es SOLO la etiqueta y su numeral. El nombre va en la linea siguiente.
-# Se exige linea completa a proposito: "lo dispuesto en el Título II" aparece a mitad de
+# El encabezado arranca la linea. El nombre puede venir en la MISMA linea
+# ("TITULO I DISPOSICIONES GENERALES", "Capitulo I: Generalidades") o en la siguiente
+# ("TITULO I" \n "DISPOSICIONES GENERALES"). Exigir linea-solo-etiqueta perdia 317 de 389
+# obligaciones: DECRETO 62 y LEY 20936 escriben el nombre pegado.
+#
+# Se exige INICIO DE LINEA a proposito: "lo dispuesto en el Titulo II" aparece a mitad de
 # parrafo todo el tiempo y no es un encabezado.
+#
+# La COMILLA inicial se captura, no se ignora: un encabezado entrecomillado es articulado que
+# la norma TRANSCRIBE para insertarlo en OTRA norma (LEY 20936 inserta titulos completos en la
+# LGSE). Atribuir ese proceso a la ley modificatoria seria la misma falsedad que el parser ya
+# evita con `es_transcrito` para los articulos.
 ENCABEZADO = re.compile(
-    r'^[ \t]*(T[ÍI]TULO|CAP[ÍI]TULO|P[ÁA]RRAFO)[ \t]+([IVXLC]+|\d+)[°ºª]?\.?[ \t]*$',
+    r'^[ \t]*(?P<comilla>["“«]?)[ \t]*'
+    r'(?P<nivel>T[ÍI]TULO|CAP[ÍI]TULO|P[ÁA]RRAFO)[ \t]+'
+    r'(?P<num>[IVXLC]+(?:[ \t]+BIS|[ \t]+TER)?|\d+)[°ºª]?'
+    r'[ \t]*[:.\-]?[ \t]*(?P<nombre>[^\n]{0,150})$',
     re.MULTILINE | re.IGNORECASE)
 # un nombre valido no es otro encabezado ni el arranque de un articulo
 NO_ES_NOMBRE = re.compile(r'^[ \t]*(art[íi]culo|t[ÍIíi]tulo|cap[ÍIíi]tulo|p[ÁAáa]rrafo)\b', re.I)
@@ -49,22 +61,56 @@ def limpiar(texto):
     return (texto or "").translate(ESPACIOS_DUROS)
 
 
-def encabezados(texto):
-    """[(pos, etiqueta, numeral, nombre)] en orden de aparición."""
+# El patron del parser esta ANCLADO (`^[\s.\-:]*(introducense|...)`) porque alli se aplica al
+# arranque del cuerpo de un articulo. Aca hay que buscarlo a mitad de un parrafo introductorio,
+# asi que se le quita el ancla y se conserva la MISMA lista de verbos: una sola fuente, para
+# que las dos no se separen con el tiempo. (Con el ancla puesta y `.search()` no matcheaba
+# nada: LEY 20936 dice "4) Reemplazase el Titulo III por el siguiente:" y daba 0 transcritos.)
+_VERBOS = re.compile(
+    NormStructureParser._VERBO_MODIFICATORIO.pattern.replace(r"^[\s\.\-–—:]*", "", 1),
+    re.IGNORECASE)
+
+
+def _introduce_texto_ajeno(previo):
+    """¿La comilla abre articulado de OTRA norma, o el contenido propio de esta?
+
+    Distinción medida en dos casos reales, y la decide el VERBO, no la comilla:
+      DECRETO 10  "Apruébase el siguiente reglamento:"  + comilla -> el reglamento ES suyo
+      LEY 20936   "Introdúcense las siguientes modif."  + comilla -> inserta en la LGSE
+    Se reutiliza `_VERBO_MODIFICATORIO` del parser en vez de escribir otra lista: es el mismo
+    criterio que ya usa `es_transcrito` para los artículos, y tenerlo en un solo lugar evita
+    que las dos versiones se separen.
+    """
+    # solo la ultima linea con contenido: es la que introduce la comilla. Barrer 400 chars
+    # enteros cazaria el verbo de OTRO numeral de la misma lista de modificaciones.
+    lineas = [l for l in (previo or "").splitlines() if l.strip()]
+    return bool(_VERBOS.search(lineas[-1])) if lineas else False
+
+
+def encabezados(texto, incluir_transcritos=False):
+    """[(pos, nivel, numeral, nombre, transcrito)] en orden de aparición."""
     out = []
     texto = limpiar(texto)
     for m in ENCABEZADO.finditer(texto):
-        resto = texto[m.end():].splitlines()
-        nombre = ""
-        for linea in resto[:3]:                 # el nombre puede venir tras una linea vacia
-            s = linea.strip()
-            if not s:
-                continue
-            if NO_ES_NOMBRE.match(s):
-                break                            # titulo sin nombre propio: se deja vacio
-            nombre = s
-            break
-        out.append((m.start(), m.group(1).upper(), m.group(2).upper(), nombre[:180]))
+        # comilla SOLA no basta: hay que mirar qué la introduce.
+        transcrito = bool(m.group("comilla")) and _introduce_texto_ajeno(
+            texto[max(0, m.start() - 400):m.start()])
+        if transcrito and not incluir_transcritos:
+            continue
+        nombre = (m.group("nombre") or "").strip().strip('"“«»').strip()
+        if NO_ES_NOMBRE.match(nombre):
+            nombre = ""                          # "TITULO I" seguido de "Articulo 1" en la misma linea
+        if not nombre:                            # el nombre va en alguna de las lineas siguientes
+            for linea in texto[m.end():].splitlines()[:3]:
+                t = linea.strip().strip('"“«»').strip()
+                if not t:
+                    continue
+                if NO_ES_NOMBRE.match(t):
+                    break                         # titulo sin nombre propio: se deja vacio
+                nombre = t
+                break
+        out.append((m.start(), m.group("nivel").upper(),
+                    re.sub(r"\s+", " ", m.group("num")).upper(), nombre[:180], transcrito))
     return out
 
 
@@ -88,10 +134,24 @@ def main(aplicar=False):
                        FROM articulos a JOIN obligacion o ON o.articulo_id = a.id""")
         filas = cur.fetchall()
 
-    asign, sin_estructura, sin_ubicar = {}, 0, 0
+    asign, sin_estructura, sin_ubicar, transcritas = {}, 0, 0, {}
     nombres = Counter()
     for nid, texto in normas.items():
         encs = encabezados(texto)
+        # Si la norma trae encabezados ENTRECOMILLADOS, esta insertando articulado en OTRA
+        # norma (LEY 20936 inserta titulos completos en la LGSE). El bloque citado se abre una
+        # vez y se cierra mucho despues, asi que los encabezados de adentro NO llevan comilla
+        # propia y no se distinguen de los suyos. Pareando comillas tampoco sale: LEY 20936
+        # tiene 381 comillas RECTAS, numero impar -- no hay apertura/cierre que emparejar.
+        #
+        # No se puede separar => no se asigna proceso a ESA norma. En materia legal atribuir
+        # mal un proceso es peor que dejarlo vacio, y `proceso IS NULL` ya significa
+        # "sin proceso conocido". Queda como frente abierto, no como dato inventado.
+        if len(encabezados(texto, incluir_transcritos=True)) > len(encs):
+            n_obl = sum(1 for x in filas if x["id_norma"] == nid)
+            if n_obl:
+                transcritas[nid] = n_obl
+            continue
         arts = list(NormStructureParser.ARTICULO_PATTERN.finditer(texto))
         # numero del articulo -> posicion de su PRIMERA aparicion en el texto
         pos = {}
@@ -117,6 +177,9 @@ def main(aplicar=False):
     print(f"  con proceso del articulado       : {len(asign)}  ({100 * len(asign) // max(tot, 1)} %)")
     print(f"  en normas SIN estructura         : {sin_estructura}")
     print(f"  articulo no ubicado en el texto  : {sin_ubicar}")
+    if transcritas:
+        print(f"  en normas que TRANSCRIBEN articulado: {sum(transcritas.values())}  "
+              f"({len(transcritas)} normas) -- no se asigna, ver comentario")
     print(f"  procesos distintos               : {len(nombres)}")
     print("\n--- procesos con más obligaciones ---")
     for n, k in nombres.most_common(15):
@@ -124,6 +187,13 @@ def main(aplicar=False):
 
     if aplicar:
         with with_connection() as c, c.cursor() as cur:
+            # limpiar ANTES: si el criterio cambia y una obligacion deja de tener proceso
+            # asignable, sin este NULL se quedaria con el valor de la corrida anterior --
+            # un proceso que el criterio vigente ya no le daria. Paso justo por ahi: la
+            # primera version asignaba 225 obligaciones de DECRETO 10 que una version
+            # intermedia descartaba.
+            cur.execute("UPDATE obligacion SET proceso=NULL WHERE proceso IS NOT NULL")
+            print(f"  limpiadas {cur.rowcount} asignaciones previas")
             cur.executemany("UPDATE obligacion SET proceso=%s WHERE id=%s",
                             [(f"{v['nivel']} {v['numeral']} — {v['nombre']}", k)
                              for k, v in asign.items()])
