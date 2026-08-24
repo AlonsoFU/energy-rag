@@ -1,0 +1,175 @@
+QUERY: qué significa Costo de Falla de Larga Duración
+docs: 10 chars: 16770
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+FALLO en 900.6s: APIConnectionError: litellm.APIConnectionError: OllamaException - litellm.Timeout: Connection timed out after 300.0 seconds.
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 136, in handle_request
+    raise exc
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 126, in read
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/http_handler.py", line 1075, in post
+    response = self.client.send(req, stream=stream)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 240, in _make_common_sync_call
+    response = sync_httpx_client.post(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/http_handler.py", line 1079, in post
+    raise litellm.Timeout(
+litellm.exceptions.Timeout: litellm.Timeout: Connection timed out after 300.0 seconds.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/main.py", line 3988, in completion
+    response = base_llm_http_handler.completion(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 564, in completion
+    response = self._make_common_sync_call(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 267, in _make_common_sync_call
+    raise self._handle_error(e=e, provider_config=provider_config)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/llms/custom_httpx/llm_http_handler.py", line 5091, in _handle_error
+    raise provider_config.get_error_class(
+litellm.llms.ollama.common_utils.OllamaError: litellm.Timeout: Connection timed out after 300.0 seconds.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
+    result = original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
+    raise e
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2425, in exception_type
+    raise APIConnectionError(
+litellm.exceptions.APIConnectionError: litellm.APIConnectionError: OllamaException - litellm.Timeout: Connection timed out after 300.0 seconds.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/claude-1000/-home-alonso-Documentos-Github-energy-rag/8500f7c5-720c-4011-b0f2-7b3a43624dde/scratchpad/test_costofalla.py", line 14, in <module>
+    res = generate_answer(q['query'], docs, llm=llm, model="ollama/qwen3:30b-a3b")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/src/pipelines/generate.py", line 177, in generate_answer
+    resp = llm.generate(
+           ^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/src/components/llm.py", line 114, in generate
+    resp = litellm.completion(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/utils.py", line 1717, in wrapper
+    return litellm.completion_with_retries(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/main.py", line 4458, in completion_with_retries
+    return retryer(original_function, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/tenacity/__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
+    raise e
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
+    result = original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
+    raise exception_type(
+          ^^^^^^^^^^^^^^^
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
+    raise e
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2425, in exception_type
+    raise APIConnectionError(
+litellm.exceptions.APIConnectionError: litellm.APIConnectionError: OllamaException - litellm.Timeout: Connection timed out after 300.0 seconds.

@@ -176,3 +176,33 @@ n=1 acierta más pero **rociando** (3.39 citas vs 2.42). El criterio previo evit
 **La fase 1.1 no cumple su objetivo de ≤45 s.** Queda pendiente buscar velocidad en:
 vLLM/llama.cpp con decodificación restringida, o `answer_doc_limit` (ya medido: calidad flat,
 −30 % de tiempo).
+
+---
+
+## FASE 1.1b — `answer_doc_limit` como palanca de latencia (criterio fijado 2026-08-24, ANTES de correr)
+
+Exp #54 cerró `self_consistency_n` (se queda n=3, 103 s). El objetivo de ≤45 s sigue abierto.
+`answer_doc_limit` recorta cuántos documentos ve el GENERADOR; el retrieval no cambia.
+
+**Se corre en dos tiempos, y el primero puede matar el segundo.**
+
+**Paso 1 — sonda de latencia** (`scripts/exp_doclimit_sonda.py`, 12 queries, ~30 min).
+Solo cronómetro, sin calidad.
+```
+si NINGUN doc_limit deja mediana <= 45 s  ->  answer_doc_limit NO es el camino.
+                                             Se cierra, se documenta y se pasa a 1.3.
+```
+El pareado de calidad sobre las 114 operativas cuesta ~5 h de GPU. Gastarlas para descubrir
+que el mejor valor llega a 70 s es tirar la tarde.
+
+**Paso 2 — pareado de calidad**, solo si el paso 1 encontró un valor K con mediana ≤ 45 s:
+```
+adoptar answer_doc_limit=K si  cita_ok cae <= 3  Y  cita_limpia cae <= 2
+```
+`cita_limpia` va más estricta que en #54 **a propósito**. Ahí la trampa era ganar `cita_ok`
+rociando citas; acá el mecanismo dice lo contrario — con menos documentos el modelo tiene
+menos dónde dispersarse, así que la precisión debería **subir**. Si `cita_limpia` cae, el
+mecanismo no está haciendo lo que dice hacer y el ahorro de tiempo no lo compensa.
+
+⚠️ El riesgo simétrico ya está anotado en `config.py`: las queries cuyo gold cae en rank 5-9
+se pierden por definición. El pareado lo mide directo.

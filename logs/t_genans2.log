@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/logs/t_genans.py", line 6, in <module>
+    d = json.load(open('data/eval/results/gen8_paired/result.json'))['detail']
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/eval/results/gen8_paired/result.json'

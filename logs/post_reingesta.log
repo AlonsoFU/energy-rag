@@ -1,0 +1,28 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34573.34it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 13.80it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 598.48it/s]
+=== post_reingesta: 64 pares  OFF(regex) / ON(diccionario) ===
+  pares nuevos=5  [5/64]
+  pares nuevos=10  [10/64]
+  pares nuevos=15  [15/64]
+  pares nuevos=20  [20/64]
+  pares nuevos=25  [25/64]
+  pares nuevos=30  [30/64]
+  pares nuevos=35  [35/64]
+  pares nuevos=40  [40/64]
+  pares nuevos=45  [45/64]
+  pares nuevos=50  [50/64]
+  pares nuevos=55  [55/64]
+  pares nuevos=60  [60/64]
+
+=== post_reingesta — 64 pares validos ===
+  cita_ok      OFF 56/64  ->  ON 60/64   [gano 4, perdio 0]  McNemar p=0.1250  (ruido/flat)
+  cita_limpia  OFF 40/64  ->  ON 39/64
+  inject       OFF 0/64  ->  ON 52/64
+  rechazos     OFF 3/64  ->  ON 2/64
+  precision     OFF   0.57  ->  ON   0.61
+  citas unicas  OFF   2.45  ->  ON   2.39
+  segundos      OFF 217.03  ->  ON 201.34
+  GANO:   [A] qué entiende la ley por Estado Deteriorado
+  GANO:   [B] explícame qué significa Informe Definitivo
+  GANO:   [B] según la ley, qué es Solicitante
+  GANO:   [B] quisiera el concepto de Coordinador

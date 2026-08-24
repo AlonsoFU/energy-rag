@@ -1,0 +1,59 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34592.66it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:20, 18.74it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 810.38it/s]
+config: glossary_inject=True num_ctx=32768 num_predict=2000
+
+=== coloquial: 39q (historico 37/39 (95%)) [resume 0] ===
+  5/39
+  10/39
+  15/39
+  20/39
+  25/39
+  30/39
+  35/39
+  --> coloquial: 36/39 = 92.3%  (historico 37/39 (95%))  citas_uniq 3.79  precision 0.41
+      FALLA gold=['258171/104'] | ¿Por cuántos años se supone que dura una torre o lín
+      FALLA gold=['250604/2'] | tengo una planta solar y me sobra energía algunos me
+      FALLA gold=['258171/212'] | Ese grupo que resuelve las peleas entre las empresas
+
+=== dev_independent: 49q (historico 36/44 (82%)) [resume 0] ===
+  5/49
+  10/49
+  15/49
+  20/49
+  25/49
+  30/49
+  35/49
+  40/49
+  45/49
+  --> dev_independent: 37/49 = 75.5%  (historico 36/44 (82%))  citas_uniq 3.06  precision 0.35
+      FALLA gold=['258171/76'] | qué son los sistemas de transmisión dedicados
+      FALLA gold=['None/none'] | qué es la comisión
+      FALLA gold=['None/none'] | qué significa coordinado
+      FALLA gold=['None/none'] | cuántos planetas tiene el sistema solar
+      FALLA gold=['None/none'] | receta de pan amasado
+      FALLA gold=['None/none'] | quién ganó el mundial 2022
+      FALLA gold=['29819/2'] | si una distribuidora incumple la normativa, ¿qué org
+      FALLA gold=['258171/212'] | el ente que resuelve discrepancias entre el coordina
+      FALLA gold=['258171/225'] | máxima cantidad de energía que un sistema de almacen
+      FALLA gold=['258171/225'] | qué se necesita para que una central se considere de
+      FALLA gold=['258171/147'] | un cliente que puede negociar libremente su precio d
+      FALLA gold=['258171/225'] | qué es la tasa de actualización según la ley
+
+=== holdout: 24q (historico 17/18 (94%)) [resume 0] ===
+  5/24
+  10/24
+  15/24
+  20/24
+  --> holdout: 17/24 = 70.8%  (historico 17/18 (94%))  citas_uniq 3.12  precision 0.31
+      FALLA gold=['258171/149'] | los suministros no incluidos en el artículo de clien
+      FALLA gold=['None/none'] | cómo hacer un queque de zanahoria
+      FALLA gold=['None/none'] | cuál es la capital de Australia
+      FALLA gold=['None/none'] | quién pintó la Mona Lisa
+      FALLA gold=['None/none'] | qué dosis de paracetamol tomar para la fiebre
+      FALLA gold=['None/none'] | qué es la comisión
+      FALLA gold=['None/none'] | qué significa coordinado
+
+=== RESUMEN NO-REGRESIÓN (config vigente vs histórico pre-campaña) ===
+  coloquial        36/39 =  92.3%   historico 37/39 (95%)     precision 0.41
+  dev_independent  37/49 =  75.5%   historico 36/44 (82%)     precision 0.35
+  holdout          17/24 =  70.8%   historico 17/18 (94%)     precision 0.31

@@ -1,0 +1,4 @@
+ollama_think=False: len=3126  grounded=True
+    'Okay, let\'s tackle this query. The user is asking for the definition of "Mora" based on the provided Chilean electrical regulations.\n\nFirst, I need to check all the articles provided to find where "Mo'
+ollama_think=True: len=792  grounded=True
+    'La Mora se define como el estado en que un Usuario de Sistema Interoperable se encuentra cuando existen deudas impagas en un plazo igual o inferior a 5 años, considerando el período comprendido entre '

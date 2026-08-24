@@ -1,0 +1,19 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33599.52it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:08, 47.85it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 1729.24it/s]
+=== FASE A: retrieval OFF vs ON (44q) ===
+  top-10 cambio en 13/44
+=== FASE B: gen pareada (cambiados) ===
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  gen 5/13
+  gen 10/13
+
+=== DEF_FRAGMENTS en DEV ===
+  OFF 36/44 -> ON 37/44  (gano 1, perdio 0)
+  McNemar p=1.0000  (ruido/flat)
+  GANO: definición de seguridad de servicio

@@ -1,0 +1,13 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5816.02it/s]
+in_domain (clean, also_gold): 279
+=== rerank BGE ===
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.12it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 612.00it/s]
+  BGE gold@10: 237/279  (93s)
+=== rerank Qwen3-Reranker-4B ===
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:   6%|▋         | 25/398 [00:00<00:01, 190.33it/s]Loading weights:  12%|█▏        | 47/398 [00:00<00:01, 190.10it/s]Loading weights:  17%|█▋        | 69/398 [00:00<00:01, 191.67it/s]Loading weights:  23%|██▎       | 91/398 [00:00<00:01, 192.24it/s]Loading weights:  28%|██▊       | 113/398 [00:00<00:01, 195.53it/s]Loading weights:  34%|███▍      | 135/398 [00:00<00:01, 194.59it/s]Loading weights:  39%|███▉      | 157/398 [00:00<00:01, 191.48it/s]Loading weights:  45%|████▍     | 179/398 [00:00<00:01, 194.51it/s]Loading weights:  50%|█████     | 199/398 [00:01<00:01, 176.97it/s]Loading weights:  55%|█████▍    | 217/398 [00:01<00:01, 136.39it/s]Loading weights:  59%|█████▊    | 233/398 [00:01<00:01, 128.44it/s]Loading weights:  62%|██████▏   | 247/398 [00:01<00:01, 95.27it/s] Loading weights:  65%|██████▌   | 259/398 [00:01<00:01, 94.82it/s]Loading weights:  69%|██████▉   | 275/398 [00:01<00:01, 106.48it/s]Loading weights:  73%|███████▎  | 289/398 [00:02<00:01, 98.69it/s] Loading weights:  76%|███████▌  | 302/398 [00:02<00:00, 102.83it/s]Loading weights:  79%|███████▉  | 314/398 [00:02<00:00, 96.86it/s] Loading weights:  84%|████████▎ | 333/398 [00:02<00:00, 113.29it/s]Loading weights:  89%|████████▉ | 355/398 [00:02<00:00, 132.63it/s]Loading weights:  95%|█████████▍| 377/398 [00:02<00:00, 147.52it/s]Loading weights:  99%|█████████▊| 393/398 [00:02<00:00, 145.77it/s]Loading weights: 100%|██████████| 398/398 [00:02<00:00, 140.76it/s]
+  Qwen3 gold@10: 239/279  (1591s)
+
+=== RK1 SCREEN ===
+  BGE   gold@10: 237/279
+  Qwen3 gold@10: 239/279
+  Δ = +2  -> RK1 no rescata recall, NO seguir

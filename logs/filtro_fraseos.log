@@ -1,0 +1,27 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 29884.26it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:06, 62.01it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 2450.14it/s]
+=== filtro_fraseos: 64 pares  OFF(sin filtro) / ON(filtra ajenas) ===
+  pares nuevos=5  [5/64]
+  pares nuevos=10  [10/64]
+  pares nuevos=15  [15/64]
+  pares nuevos=20  [20/64]
+  pares nuevos=25  [25/64]
+  pares nuevos=30  [30/64]
+  pares nuevos=35  [35/64]
+  pares nuevos=40  [40/64]
+  pares nuevos=45  [45/64]
+  pares nuevos=50  [50/64]
+  pares nuevos=55  [55/64]
+  pares nuevos=60  [60/64]
+
+=== filtro_fraseos — 64 pares validos ===
+  cita_ok      OFF 58/64  ->  ON 59/64   [gano 2, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 36/64  ->  ON 34/64
+  inject       OFF 52/64  ->  ON 52/64
+  rechazos     OFF 4/64  ->  ON 4/64
+  precision     OFF   0.50  ->  ON   0.56
+  citas unicas  OFF   3.08  ->  ON   2.91
+  segundos      OFF 107.65  ->  ON  97.72
+  GANO:   [A] cómo se define Mora
+  GANO:   [A] qué quiere decir Plan de Expansión
+  PERDIO: [B] explícame qué significa Sistema de Transmisión
