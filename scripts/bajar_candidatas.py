@@ -32,10 +32,15 @@ BUSCADOR = "https://www.bcn.cl/leychile/consulta/listaresultadosimple?cadena={}"
 FILA = re.compile(r"^\|\s*(LEY|DECRETO|DFL|DL|RESOLUCI[OÓ]N)\s*\|\s*([\d]+)\s*\|\s*(\d+)\s*\|")
 
 
-def candidatas(limit=0):
-    """Lee la tabla de la fuente 1 del reporte de descubrimiento."""
+def candidatas(limit=0, doc=None):
+    """Lee la tabla de candidatas de un reporte de descubrimiento.
+
+    `doc` permite apuntar a otra fuente con la misma forma de tabla — hoy tambien
+    `docs/normativa-usada-en-discrepancias.md`, que es descubrimiento por USO: normas que el
+    sector cita en sus discrepancias ante el Panel y el corpus no tiene.
+    """
     out, visto = [], set()
-    for ln in DOC.read_text().splitlines():
+    for ln in Path(doc or DOC).read_text().splitlines():
         m = FILA.match(ln.strip())
         if not m:
             continue
@@ -66,11 +71,11 @@ async def resolver(pg, numero):
     return ids[0] if ids else None
 
 
-async def main(limit=0, delay=20, dry=False):
+async def main(limit=0, delay=20, dry=False, fuente=None):
     from src.crawlers.norm_detail_crawler import NormDetailCrawler
 
     ids_corpus, pares_corpus = ya_en_corpus()
-    cands = [c for c in candidatas()
+    cands = [c for c in candidatas(doc=fuente)
              if (c["tipo"], c["numero"].lstrip("0")) not in pares_corpus]
     if limit:
         cands = cands[:limit]
@@ -140,5 +145,7 @@ if __name__ == "__main__":
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--delay", type=int, default=20)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--fuente", default=None,
+                    help="reporte de donde leer las candidatas (default: descubrimiento-pendiente)")
     a = ap.parse_args()
-    asyncio.run(main(a.limit, a.delay, a.dry))
+    asyncio.run(main(a.limit, a.delay, a.dry, a.fuente))
