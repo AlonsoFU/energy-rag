@@ -1,11 +1,11 @@
 #!/bin/bash
-# Resucitador -- cron cada 5 horas. Deja el sistema en condiciones de seguir trabajando
+# Resucitador -- cron cada 3 horas. Deja el sistema en condiciones de seguir trabajando
 # pase lo que pase mientras nadie mira: el PC se colgo dos veces, Postgres se apaga solo y
 # el limite de la GPU no sobrevive un reinicio.
 #
 # NO decide nada: solo restablece condiciones y deja que el watchdog (cada 15 min) haga la cola.
 #
-# Instalar:  crontab -l | { cat; echo "0 */5 * * * <ruta>/scripts/retomar.sh"; } | crontab -
+# Instalar:  crontab -l | { cat; echo "0 */3 * * * <ruta>/scripts/retomar.sh"; } | crontab -
 set -u
 cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
 LOG=logs/retomar.log
@@ -45,5 +45,17 @@ with with_connection() as c, c.cursor() as cur:
     cur.execute('SELECT count(*) FROM obligacion'); print('  obligaciones:', cur.fetchone()[0])
 " 2>/dev/null || echo "  (DB no responde)"
 
+  # 6. que fase sigue. Al 2026-08-24 todas estan cerradas menos las que dependen del
+  #    usuario; esto lo dice en cada pasada para no tener que ir a leer el handoff.
+  ./venv/bin/python - <<'FASES' 2>/dev/null
+from pathlib import Path
+f = Path("data/eval/preguntas_reales.jsonl")
+n = sum(1 for l in f.read_text().splitlines() if l.strip()) if f.exists() else 0
+print("  fases pendientes:")
+if n < 20:
+    print(f"    3.1 preguntas reales: {n}/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4")
+else:
+    print(f"    3.1 LISTO ({n} preguntas) -> se puede correr 3.2 (medir contra ellas)")
+FASES
   echo "=== fin $(date '+%F %T') ==="
 } >> "$LOG" 2>&1
