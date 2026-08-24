@@ -73,3 +73,39 @@ sitios de organismo. CNE importa para la NTCO (operación diaria), no para tarif
 3. Probar acceso directo a ese PDF por URL.
 4. Si funciona: parsear la sección NORMAS GENERALES y filtrar por dominio con el clasificador
    que ya existe (`frontera_mercados.DOMINIO`, corte 0.30 por articulado).
+
+---
+
+## 2026-08-24 — vía que SÍ funciona: descubrimiento por USO
+
+Las 10 vías anteriores preguntaban *"¿qué normas existen?"* a buscadores y catálogos, y los
+sitios bloquean. Esta pregunta otra cosa: **¿qué normas cita la gente que está litigando?**
+
+Fuente: discrepancias y dictámenes ante el **Panel de Expertos** (`panelexpertos.cl`,
+`cartas.coordinador.cl`). Son PDF públicos, se bajan con `curl` sin bloqueo y se leen con
+`pdftotext -layout`. Script: `scripts/extraer_de_discrepancias.py`.
+
+Por qué es mejor fuente que un buscador: una norma que aparece en una discrepancia real es
+**normativa viva** — alguien la está usando para litigar hoy. Un resultado de búsqueda sólo
+prueba que la norma existe.
+
+**Primera pasada, 3 documentos (51.408 palabras):**
+```
+DECRETO 44    5 citas   Reglamento del Panel de Expertos
+DECRETO 88    4 citas   Reglamento para Medios de Generación de Pequeña Escala
+DECRETO 97    1 cita
+DECRETO 244   1 cita
+DECRETO 8810  1 cita    (el número viene pegado por el PDF; probablemente DECRETO 88)
+```
+Con **tres** documentos ya aparecen 5 normas que el corpus no tiene. Escala sola: más PDF en
+`data/discrepancias/` y volver a correr.
+
+**Segundo uso, gratis:** el mismo documento trae el planteamiento en lenguaje del sector **y**
+el artículo exacto en que se apoya, citado por el abogado que lo redactó. Eso es un par
+pregunta–gold que **no fabriqué yo**, que es justo lo que le falta a la FASE 3.2.
+
+⚠️ Trampa del formato: `pdftotext -layout` pega numeraciones de línea al número de la norma
+(`Decreto N°44.` + `1` → `DECRETO 441`; `Nº88` + `10` → `DECRETO 8810`). El corte por punto
+sólo se aplica cuando lo que sigue no son 3 dígitos, porque el separador de miles chileno
+agrupa siempre de a 3: `20.936` es 20936, pero `44.1` es 44. Lo que queda dudoso se **señala**
+y no se corrige solo: resolver por truncamiento sesgaría el reporte hacia *"ya lo tenemos"*.
