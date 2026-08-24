@@ -99,8 +99,17 @@ class PostgresStore:
         from src.core import config as _cfg
         if not getattr(_cfg.settings, "filtrar_fuera_dominio", False):
             return ""
-        return (" AND NOT coalesce((SELECT (n2.metadata->>'fuera_de_dominio')='true' "
-                "FROM normas n2 WHERE n2.id_norma = a.id_norma), false)")
+        sql = (" AND NOT coalesce((SELECT (n2.metadata->>'fuera_de_dominio')='true' "
+               "FROM normas n2 WHERE n2.id_norma = a.id_norma), false)")
+        # Articulos DUPLICADOS: una ley modificatoria guardo como suyos los articulos que
+        # inserta en otro cuerpo legal. LEY 20936 tiene 55 articulos (72°-122°, 212°) que
+        # pertenecen al DFL 4 y estan tambien alli, mejor numerados. Sin este filtro el
+        # sistema puede responder "[LEY 20936 art 92°]" cuando la cita correcta es
+        # "[DFL 4 art 92°]" -- una cita FALSA, que es el peor error en un sistema legal.
+        # Se excluye el duplicado, no el original: `duplicado_de` apunta al que se conserva.
+        if getattr(_cfg.settings, "filtrar_duplicados", True):
+            sql += " AND (a.metadata->>'duplicado_de') IS NULL"
+        return sql
 
     def search_bm25(self, query: str, top_k: int = 50) -> list[dict]:
         # bm25_doc2query (flag): busca sobre tsv_aug (contextual_text + preguntas

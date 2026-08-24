@@ -150,6 +150,13 @@ class Settings(BaseSettings):
     # dispersarse y más presión para comprometerse con los primeros.
     # ⚠️ Riesgo simétrico: las queries cuyo gold cae en rank 5-9 se pierden. El experimento
     # pareado lo mide directo (no asumir que gana).
+    # Excluye del retrieval los articulos marcados `metadata.duplicado_de` por
+    # `scripts/detectar_articulos_duplicados.py`: articulos que una ley modificatoria guardo
+    # como suyos pero pertenecen al cuerpo que modifica (50 casos, 39 de LEY 20936 -> DFL 4).
+    # ON por defecto: citar "[LEY 20936 art 92°]" en vez de "[DFL 4 art 92°]" es una cita
+    # legalmente falsa, no una preferencia de ranking.
+    filtrar_duplicados: bool = True
+
     answer_doc_limit: int = 0
 
     # GEN12 (flag OFF, en prueba): HÍBRIDO de razonamiento.
