@@ -1213,3 +1213,50 @@ recortar documentos del prompt (`answer_doc_limit`, ya probado flat en calidad y
 ⚠️ Dato lateral: la latencia bajó de 139 s (medición previa) a 103 s para el mismo n=3. La
 diferencia es la potencia de GPU (180 W ahora vs 180 W antes) y el corpus, que cambió. **Los
 tiempos entre corridas de distinta fecha no son comparables.**
+
+---
+
+## #55 — FASE 1.1b: `answer_doc_limit` **NO es palanca de latencia**. Frente cerrado (2026-08-24)
+
+Objetivo heredado de #54: bajar de ~100 s a **≤45 s**. `answer_doc_limit` recorta cuántos
+documentos ve el generador; el retrieval no cambia. Venía con antecedente favorable: exp #33
+midió **−30 % de tiempo** con calidad flat.
+
+**Criterio fijado y commiteado ANTES de correr** (`e5d20d0`, `docs/plan-operacion.md`):
+```
+Paso 1 (sonda de latencia, 12 queries): si NINGUN doc_limit deja mediana <= 45 s,
+        answer_doc_limit NO es el camino -> se cierra, y NO se gasta el pareado de 5 h.
+Paso 2 (pareado de calidad, 114 queries): solo si el paso 1 encontro un K con <= 45 s.
+```
+
+Sonda: mismo retrieval cacheado por query (la intervención es solo del generador), orden de
+los brazos rotado por query para no cargarle el calentamiento del modelo siempre al mismo.
+
+```
+             mediana    media    n
+doc_limit=0   137.4 s   132.8 s  10     <- sin limite (config vigente)
+doc_limit=5   131.0 s   119.1 s  10
+doc_limit=3   128.1 s   116.9 s  10
+doc_limit=2   125.9 s   119.3 s  10     <- el mejor
+
+pareado 0 vs 2, 10 queries: doc_limit=2 mas rapido en 8
+  ahorro mediano 13.6 s  (10 %)
+  chars de salida: lim0 5311  ->  lim2 5531   (con MENOS docs el modelo escribe MAS)
+```
+
+**Veredicto: el paso 1 mata al paso 2.** El mejor valor deja la mediana en 125.9 s contra un
+objetivo de 45 s. El pareado de calidad no se corre: aunque saliera flat, adoptarlo no
+cumpliría el objetivo. Se ahorran ~5 h de GPU.
+
+**Por qué #33 daba −30 % y acá da −10 %.** #33 se midió sin `self_consistency`. Recortar
+documentos achica el **prompt** (prefill); con `n=3` el tiempo lo domina **decodificar tres
+respuestas**, y eso no baja — de hecho los caracteres de salida SUBEN un 4 % con menos
+documentos, porque el modelo con menos material se explaya más. Llegar a 45 s desde 126 s pide
+−64 %: no sale de recortar el prompt por ningún valor de K.
+
+**La velocidad hay que buscarla en la decodificación**, no en el prompt: vLLM / llama.cpp con
+mejor throughput de tokens. ⚠️ El cuello ahí es la **RAM de 14 GB**, no la VRAM.
+
+⚠️ 8 de 48 mediciones fallaron (2 queries no completaron sus 4 celdas) — quedan 10 queries con
+las 4 celdas completas, y el análisis pareado usa solo esas.
+⚠️ Los tiempos NO son comparables con los 103 s de #54: otras queries, otra sesión.

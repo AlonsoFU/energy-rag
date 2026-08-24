@@ -206,3 +206,16 @@ mecanismo no está haciendo lo que dice hacer y el ahorro de tiempo no lo compen
 
 ⚠️ El riesgo simétrico ya está anotado en `config.py`: las queries cuyo gold cae en rank 5-9
 se pierden por definición. El pareado lo mide directo.
+
+
+### VEREDICTO 1.1b (2026-08-24) — frente CERRADO
+
+El paso 1 mató al paso 2. Mejor valor `doc_limit=2`: mediana **125.9 s** contra objetivo 45 s.
+El pareado de calidad **no se corrió** — aunque saliera flat, adoptarlo no cumpliría el
+objetivo. ~5 h de GPU ahorradas por haber fijado el criterio antes.
+
+El ahorro real es **10 %**, no el 30 % de exp #33: aquel se midió sin `self_consistency`.
+Con `n=3` el tiempo lo domina decodificar 3 respuestas, no el prompt.
+
+**La velocidad queda en vLLM / llama.cpp** (throughput de decodificación). Cuello: RAM 14 GB.
+Ver exp #55.
