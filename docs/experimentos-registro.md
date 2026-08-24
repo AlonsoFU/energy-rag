@@ -1260,3 +1260,57 @@ mejor throughput de tokens. ⚠️ El cuello ahí es la **RAM de 14 GB**, no la 
 ⚠️ 8 de 48 mediciones fallaron (2 queries no completaron sus 4 celdas) — quedan 10 queries con
 las 4 celdas completas, y el análisis pareado usa solo esas.
 ⚠️ Los tiempos NO son comparables con los 103 s de #54: otras queries, otra sesión.
+
+---
+
+## #56 — FASE 1.1c: `self_consistency` en PARALELO. **Sale al revés: es más lento** (2026-08-24)
+
+Exp #55 dejó el diagnóstico: el tiempo lo domina decodificar 3 respuestas, no el prompt. Y esas
+3 salen de un `for i in range(n)` en `_self_consistency` — **una espera a la anterior**.
+
+Hipótesis mecánica (buena, y falsa): decodificar UNA secuencia deja la GPU limitada por ancho de
+banda de memoria — la 3090 nunca pasa de 230 W con este MoE. Un lote de 3 lee los MISMOS pesos
+una vez y los usa para las tres, así que 3 juntas deberían costar bastante menos que 3×.
+
+**Criterio fijado antes** (`62e8c20`): verde si 3 concurrentes tardan **menos de 2×** lo que
+tarda 1.
+
+Sonda A — configuración vigente (`OLLAMA_NUM_PARALLEL` por defecto):
+```
+1 secuencial    4.6 s   400 tok    87.3 tok/s
+3 concurrentes 13.8 s  1200 tok    86.8 tok/s     factor 3.02x   -> ROJO
+  cada una: [4.6, 13.8, 9.2]   <- encoladas: Ollama las serializa, no hay lote
+```
+El throughput idéntico (87 vs 86.8 tok/s) confirma serialización pura. Cerrar ahí habría sido
+injusto: es la config que **no** habilita batching. Se levantó un `ollama serve` propio en
+:11435 con `OLLAMA_NUM_PARALLEL=3` (sin sudo y sin tocar el servicio de systemd).
+
+Sonda B — `OLLAMA_NUM_PARALLEL=3`:
+```
+1 secuencial    9.8 s   400 tok    40.8 tok/s     <- 2x MAS LENTA que con la config normal
+3 concurrentes 25.0 s  1200 tok    48.0 tok/s     factor 2.55x   -> ROJO
+  cada una: [22.5, 25.0, 25.0]  <- ahora SI arrancan juntas
+VRAM 23.967 / 24.576 MiB  <- al borde
+```
+
+**El batching funciona pero el remedio es peor.** Comparado en absoluto contra la config vigente:
+
+```
+config vigente,  3 secuenciales : 3 x 4.6  = 13.8 s
+NUM_PARALLEL=3,  3 concurrentes :            25.0 s     <- casi 2x MAS LENTO
+```
+
+**Por qué.** `OLLAMA_NUM_PARALLEL=3` reserva tres KV caches. El modelo ya ocupa ~20.5 GiB de
+24.5; los tres slots empujan a 23.97 GiB y desalojan parte del modelo, así que **cada** token
+pasa a costar el doble (87 → 41 tok/s). El ahorro del lote no alcanza a pagar esa penalización.
+Es exactamente el riesgo simétrico que el criterio anotaba antes de correr.
+
+**Y acá el cuello es la VRAM, no la RAM.** Es distinto del cuello de vLLM (RAM de 14 GB) que
+venía anotado desde antes: son dos límites diferentes y conviene no confundirlos.
+
+**Veredicto: no se adopta. `self_consistency` se queda secuencial.** El paso 2 (pareado de
+calidad) no se corre: no hay nada que ganar que justifique medir calidad.
+
+⚠️ La sonda usa `num_predict=400`; una respuesta real ronda los 1500 tokens. El factor podría
+moverse algo con secuencias más largas, pero no da vuelta una diferencia de 13.8 s contra 25 s.
+⚠️ Servidor de prueba apagado, servicio original intacto (:11434 responde, VRAM liberada).

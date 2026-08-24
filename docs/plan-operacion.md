@@ -247,3 +247,17 @@ adoptar paralelo si  cita_ok cae <= 2  Y  cita_limpia cae <= 2  Y  mediana <= 45
 La calidad **debería quedar idéntica** — es la misma decodificación con la misma temperatura,
 solo que simultánea. Si `cita_limpia` se mueve fuerte, algo más cambió y hay que entenderlo
 antes de adoptar, no después.
+
+
+### VEREDICTO 1.1c (2026-08-24) — no se adopta
+
+El batching **funciona** pero el remedio es peor: `OLLAMA_NUM_PARALLEL=3` reserva 3 KV caches,
+empuja la VRAM a 23.97/24.58 GiB, desaloja parte del modelo y cada token pasa a costar el doble
+(87 → 41 tok/s).
+
+```
+config vigente,  3 secuenciales : 13.8 s
+NUM_PARALLEL=3,  3 concurrentes : 25.0 s   <- casi 2x mas lento
+```
+
+Acá el cuello es la **VRAM**, distinto del cuello de vLLM (RAM 14 GB). Ver exp #56.
