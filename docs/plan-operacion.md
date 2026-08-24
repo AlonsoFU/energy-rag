@@ -219,3 +219,31 @@ Con `n=3` el tiempo lo domina decodificar 3 respuestas, no el prompt.
 
 **La velocidad queda en vLLM / llama.cpp** (throughput de decodificación). Cuello: RAM 14 GB.
 Ver exp #55.
+
+---
+
+## FASE 1.1c — `self_consistency` en PARALELO (criterio fijado 2026-08-24, ANTES de correr)
+
+Exp #55 cerró `answer_doc_limit`: el tiempo lo domina **decodificar 3 respuestas**, no el prompt.
+Pero esas 3 respuestas hoy salen de un `for i in range(n)` — **una espera a la anterior**.
+
+Hipótesis mecánica: decodificar UNA secuencia deja la GPU limitada por ancho de banda de
+memoria (medido: la 3090 nunca pasa de 230 W con este MoE). Un lote de 3 secuencias lee los
+MISMOS pesos una vez y los usa para las tres, así que debería costar mucho menos que 3×.
+
+⚠️ Riesgo simétrico: `OLLAMA_NUM_PARALLEL` multiplica el KV cache reservado. El modelo ya ocupa
+20.5 GiB de 24; si 3 slots no caben, Ollama descarga capas a CPU y queda **mucho más lento**,
+no más rápido. Por eso se mide antes de tocar la configuración.
+
+**Paso 1 — sonda**: 1 request contra 3 concurrentes, mismo prompt.
+```
+si 3 concurrentes NO tardan menos de 2x lo que tarda 1  ->  no hay batching efectivo:
+                                                            se cierra y queda solo vLLM.
+```
+**Paso 2 — pareado de calidad**, solo si el paso 1 da verde:
+```
+adoptar paralelo si  cita_ok cae <= 2  Y  cita_limpia cae <= 2  Y  mediana <= 45 s
+```
+La calidad **debería quedar idéntica** — es la misma decodificación con la misma temperatura,
+solo que simultánea. Si `cita_limpia` se mueve fuerte, algo más cambió y hay que entenderlo
+antes de adoptar, no después.
