@@ -1177,3 +1177,39 @@ como entidades distintas porque el literal es lo que sostiene la validación con
 reliquidación, peajes) es el paso que conecta con el monitor: *"cambió la norma X → se rompe el
 proceso Y"*. Falta también sujetos basura ("se", "bases técnicas preliminares") que la
 validación acepta porque sí aparecen en el texto.
+
+---
+
+## #54 — FASE 1.1: `self_consistency_n=1` **NO adoptado** — el criterio previo mandó (2026-08-24)
+
+Objetivo: bajar de 139 s a ≤45 s por respuesta. `n=3` triplica la generación.
+
+**Criterio fijado y publicado ANTES de correr** (`docs/plan-operacion.md`, bitácora):
+```
+adoptar n=1 si  cita_ok cae <= 2  Y  cita_limpia cae <= 5
+```
+
+```
+             n=1        n=3
+cita_ok      97/114     95/114     n=1 MEJOR (+2)      p=0.6875
+cita_limpia  49/114     61/114     n=1 CAE 12          <- rompe el criterio
+precision    0.40       0.48
+citas unicas 3.39       2.42
+segundos       33 s      103 s     n=1 3x mas rapido
+```
+
+**Veredicto: se queda n=3.** `cita_limpia` cae 12 y el criterio permitía 5.
+
+**Por qué el criterio previo valió la pena.** Mirando solo el resultado, era trivial justificar
+n=1: *acierta más y va 3× más rápido*. Pero acierta más **rociando** — 3.39 citas por respuesta
+contra 2.42. En materia legal, una respuesta que acierta entre cinco citas de las cuales tres
+están mal es peor que una que cita dos y ambas sirven. `cita_ok` premia rociar; por eso existe
+`cita_limpia`, y por eso el criterio la incluía.
+
+**La fase 1.1 NO cumple su objetivo** (mediana ≤ 45 s): con n=3 son 103 s. La velocidad hay que
+buscarla donde el propio criterio indicaba: vLLM / llama.cpp con decodificación restringida, o
+recortar documentos del prompt (`answer_doc_limit`, ya probado flat en calidad y −30 % en tiempo).
+
+⚠️ Dato lateral: la latencia bajó de 139 s (medición previa) a 103 s para el mismo n=3. La
+diferencia es la potencia de GPU (180 W ahora vs 180 W antes) y el corpus, que cambió. **Los
+tiempos entre corridas de distinta fecha no son comparables.**

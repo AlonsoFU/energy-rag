@@ -164,3 +164,15 @@ adoptar n=1 si   cita_ok cae <= 2   Y   cita_limpia cae <= 5
 si no            quedarse en n=3 y buscar velocidad en otro lado
 ```
 Baseline con n=3 y el corpus actual: `cita_ok` 100/114 · `cita_limpia` 61/114 · mediana 139 s.
+
+### 2026-08-24 — FASE 1.1 RESUELTA: **se queda n=3** (exp #54)
+```
+             n=1        n=3
+cita_ok      97/114     95/114     n=1 mejor (+2)
+cita_limpia  49/114     61/114     n=1 CAE 12   -> rompe el criterio (permitía 5)
+segundos       33 s      103 s
+```
+n=1 acierta más pero **rociando** (3.39 citas vs 2.42). El criterio previo evitó adoptarlo.
+**La fase 1.1 no cumple su objetivo de ≤45 s.** Queda pendiente buscar velocidad en:
+vLLM/llama.cpp con decodificación restringida, o `answer_doc_limit` (ya medido: calidad flat,
+−30 % de tiempo).
