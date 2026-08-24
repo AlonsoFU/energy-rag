@@ -23,6 +23,8 @@ import collections
 import difflib
 import re
 
+from scripts.estructura_articulado import _VERBOS
+
 from psycopg.rows import dict_row
 
 from src.components.vectorstore import with_connection
@@ -42,7 +44,8 @@ def main(aplicar=False):
                               n.tipo, n.numero AS nnum
                        FROM articulos a JOIN normas n ON n.id_norma = a.id_norma
                        WHERE a.texto IS NOT NULL AND length(a.texto) > 80
-                         AND n.metadata->>'fuera_de_dominio' IS DISTINCT FROM 'true'""")
+                         AND n.metadata->>'fuera_de_dominio' IS DISTINCT FROM 'true'
+                       ORDER BY a.id_norma, a.id""")
         arts = cur.fetchall()
 
     por_num = collections.defaultdict(list)
@@ -74,7 +77,39 @@ def main(aplicar=False):
                 queda, sobra = (a, b) if ta > tb else (b, a)
                 dups.append({"sobra": sobra, "queda": queda, "sim": round(sim, 3)})
 
+    # --- 2a pasada: MISMA SERIE, texto distinto ---------------------------------------
+    # Los 16 restantes de LEY 20936 tenian sim entre 0.07 y 0.898, asi que el umbral de texto
+    # no los tomaba. Y son PEORES que los otros: `len_dfl > len_ley` en casi todos, porque el
+    # DFL 4 trae la version VIGENTE y la ley modificatoria conserva la que introdujo en 2016 y
+    # despues fue modificada. Citarla es dar por vigente un texto superado.
+    #
+    # La señal no es el parecido del texto, es estructural, y se pide entera:
+    #   1. el par de normas YA tiene >= 3 duplicados confirmados por texto (es una
+    #      modificatoria de ese cuerpo, no dos normas que coinciden en un numero);
+    #   2. el numero del articulo existe en la norma destino;
+    #   3. el articulo NO arranca con verbo modificatorio -- ese es el corte que salva los
+    #      articulos PROPIOS: el 2° de LEY 20936 dice "Modificase el articulo 15° de la ley
+    #      N°18.410" y existe tambien en DFL 4, pero es suyo. Los transitorios ni siquiera
+    #      existen en el destino.
+    pares = collections.Counter((d["sobra"]["id_norma"], d["queda"]["id_norma"]) for d in dups)
+    nums_por_norma = collections.defaultdict(set)
+    for a in arts:
+        nums_por_norma[a["id_norma"]].add(norm_num(a["numero"]))
+    ya = {d["sobra"]["id"] for d in dups}
+    serie = []
+    for (orig, dest), k in pares.items():
+        if k < 3:
+            continue
+        for a in arts:
+            if a["id_norma"] != orig or a["id"] in ya:
+                continue
+            if norm_num(a["numero"]) not in nums_por_norma[dest]:
+                continue
+            if _VERBOS.search(a["texto"][:120]):
+                continue                       # articulo PROPIO de la modificatoria
+            serie.append({"sobra": a, "queda": {"id_norma": dest}, "sim": None})
     print(f"articulos comparados      : {len(arts)}")
+    print(f"misma serie (texto distinto, señal estructural): {len(serie)}")
     print(f"numeros presentes en >1 norma: {sum(1 for g in por_num.values() if len(g) > 1)}")
     print(f"duplicados (sim >= {UMBRAL}) : {len(dups)}")
     print(f"ambiguos (empate, NO se marcan): {len(ambiguos)}")
@@ -89,13 +124,20 @@ def main(aplicar=False):
 
     if aplicar:
         with with_connection() as c, c.cursor() as cur:
+            # limpiar antes: si el criterio cambia, un articulo que deja de ser duplicado se
+            # quedaria marcado con el veredicto de la corrida anterior.
+            cur.execute("""UPDATE articulos SET metadata = metadata - 'duplicado_de'
+                           - 'duplicado_sim' WHERE metadata->>'duplicado_de' IS NOT NULL""")
+            print(f"  limpiadas {cur.rowcount} marcas previas")
             cur.executemany(
                 """UPDATE articulos SET metadata = coalesce(metadata,'{}'::jsonb)
                    || jsonb_build_object('duplicado_de', %s::text, 'duplicado_sim', %s::text)
                    WHERE id = %s""",
-                [(d["queda"]["id_norma"], str(d["sim"]), d["sobra"]["id"]) for d in dups])
+                [(d["queda"]["id_norma"], str(d["sim"]), d["sobra"]["id"])
+                 for d in dups + serie])
             c.commit()
-        print(f"\nMARCADOS {len(dups)} articulos con metadata.duplicado_de (reversible)")
+        print(f"\nMARCADOS {len(dups) + len(serie)} articulos con metadata.duplicado_de "
+              f"({len(dups)} por texto, {len(serie)} por serie) -- reversible")
     else:
         print("\n(simulacion — usar --aplicar para marcar)")
 
