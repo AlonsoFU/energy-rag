@@ -47,6 +47,30 @@ def hash_estable(texto: str) -> str:
     return hashlib.sha256(normalizar(texto).encode()).hexdigest()[:16]
 
 
-def cambio_real(viejo: str, nuevo: str) -> bool:
-    """True solo si el contenido normativo difiere."""
-    return hash_estable(viejo) != hash_estable(nuevo)
+# Un cambio normativo real agrega, quita o reemplaza articulado: mueve el texto en varios
+# por mil, no en unas pocas palabras. Perseguir cada variante del chrome de BCN con una lista
+# es una carrera perdida -- ya se escapo "historia de la ley" (la lista tenia el mismo texto
+# en otro orden), "jurisprudencia" y "anotese, tomese razon y publiquese".
+UMBRAL_SIMILITUD = 0.995
+# ⚠️ El umbral supone textos LARGOS (normas de miles de caracteres), que es el caso real:
+# ahi el chrome de BCN pesa por mil. En un texto de 80 caracteres, 60 de chrome hunden la
+# similitud a 0.70 y el filtro no aplica. No usar `cambio_real` para fragmentos cortos.
+
+
+def similitud(viejo: str, nuevo: str) -> float:
+    """Cuanto se parecen dos versiones tras normalizar. 1.0 = identicas."""
+    import difflib
+    return difflib.SequenceMatcher(None, normalizar(viejo), normalizar(nuevo)).ratio()
+
+
+def cambio_real(viejo: str, nuevo: str, umbral: float = UMBRAL_SIMILITUD) -> bool:
+    """True solo si el contenido normativo difiere de verdad.
+
+    Dos filtros en cascada: primero el hash normalizado (barato); si difiere, se mide la
+    similitud, porque el hash cambia con una sola palabra. Medido sobre los 13 eventos que
+    el monitor habia registrado: TODOS tenian similitud >= 0.9977 y su unica diferencia era
+    texto de interfaz de BCN.
+    """
+    if hash_estable(viejo) == hash_estable(nuevo):
+        return False
+    return similitud(viejo, nuevo) < umbral

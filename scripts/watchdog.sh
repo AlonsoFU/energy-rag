@@ -18,7 +18,7 @@ LOG=logs/watchdog.log
 [ -f .watchdog_off ] && exit 0
 
 # ya hay un experimento corriendo -> no tocar nada
-if pgrep -f "scripts.exp_(lookup_paired|veto_offtopic|ambiguedad|r5_fallback|filtro_dominio)" > /dev/null; then exit 0; fi
+if pgrep -f "scripts.(exp_|extraer_obligaciones)" > /dev/null; then exit 0; fi
 
 E="env -i HOME=/home/alonso PATH=/usr/local/bin:/usr/bin:/bin
    HF_HOME=/home/alonso/datos/hf HF_HUB_CACHE=/home/alonso/datos/hf/hub
@@ -84,6 +84,15 @@ lanzar_fd() {   # E1: filtro de frontera
 
 # OJO: el N esperado es el de PARES VALIDOS, no el largo del set: el runner descarta
 # las queries marcadas unanswerable. r5_fallback: set de 61 -> 46 pares.
+lanzar_sc() {   # FASE 1.1: n=3 vs n=1 (latencia vs precision)
+  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
+  docker start energy_rag_pg > /dev/null 2>&1
+  sleep 5
+  setsid $E SET="$2" NAME="$1" \
+    ./venv/bin/python -m scripts.exp_selfcons_n1 >> "logs/$3" 2>&1 < /dev/null &
+  exit 0
+}
+
 # ---- la cola, en orden ----
 completo gate_fraseos 64       || lanzar gate_fraseos       data/eval/queries_fraseos_v1.jsonl    gate_fraseos.log
 completo gate_noregresion 114  || lanzar gate_noregresion   data/eval/queries_operativas_v1.jsonl gate_noregresion.log
@@ -94,5 +103,6 @@ completo veto_operativas 114   || lanzar_veto veto_operativas data/eval/queries_
 completo ambiguedad 35         || lanzar_amb  ambiguedad      data/eval/queries_ambiguos_v1.jsonl   ambiguedad.log
 completo r5_fallback 46        || lanzar_r5   r5_fallback     data/eval/queries_sin_diccionario_v1.jsonl r5_fallback.log
 completo filtro_operativas 114 || lanzar_fd   filtro_operativas data/eval/queries_operativas_v1.jsonl filtro_operativas.log
+completo selfcons_n1 114       || lanzar_sc   selfcons_n1     data/eval/queries_operativas_v1.jsonl selfcons_n1.log
 
 echo "$(date '+%F %T') cola COMPLETA, nada que hacer" >> "$LOG"
