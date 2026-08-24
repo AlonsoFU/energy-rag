@@ -1,5 +1,0 @@
-prompt chars: 43482
-num_predict=2000: t=23s eval=1960 done=stop thinking=6678 response=719
-   resp: 'Mora se entiende como la situación en la que un Usuario de Sistema Interoperable tiene deudas impagas en un plazo igual o inferior a 5 años, considerando el período comprendido entre la fecha de venci'
-num_predict=8000: t=15s eval=1655 done=stop thinking=5719 response=581
-   resp: 'Mora se entiende como que un Usuario de Sistema Interoperable está en Mora cuando existen deudas impagas en un plazo igual o inferior a 5 años [Art. 3 de 1207690].  \nEl cómputo de dicho término consid'

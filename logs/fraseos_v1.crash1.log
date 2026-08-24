@@ -1,6 +1,0 @@
-Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5937.33it/s]
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.14it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 612.70it/s]
-=== fraseos_v1: 64 pares (control vs fraseo) ===
-  pares nuevos=5  [5/64]
-  pares nuevos=10  [10/64]
-  pares nuevos=15  [15/64]
