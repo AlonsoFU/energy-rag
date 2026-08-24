@@ -1,40 +1,0 @@
-Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 7806.07it/s]
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.13it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 612.05it/s]
-=== post_reingesta_op: 114 pares  OFF(regex) / ON(diccionario) ===
-  pares nuevos=5  [5/114]
-  pares nuevos=10  [10/114]
-  pares nuevos=15  [15/114]
-  pares nuevos=20  [20/114]
-  pares nuevos=25  [25/114]
-  pares nuevos=30  [30/114]
-  pares nuevos=35  [35/114]
-  pares nuevos=40  [40/114]
-  pares nuevos=45  [45/114]
-  pares nuevos=50  [50/114]
-  pares nuevos=55  [55/114]
-  pares nuevos=60  [60/114]
-  pares nuevos=65  [65/114]
-  pares nuevos=70  [70/114]
-  pares nuevos=75  [75/114]
-  pares nuevos=80  [80/114]
-  pares nuevos=85  [85/114]
-  pares nuevos=90  [90/114]
-  pares nuevos=95  [95/114]
-  pares nuevos=100  [100/114]
-  pares nuevos=105  [105/114]
-  pares nuevos=110  [110/114]
-
-=== post_reingesta_op — 114 pares validos ===
-  cita_ok      OFF 94/114  ->  ON 94/114   [gano 3, perdio 3]  McNemar p=1.0000  (ruido/flat)
-  cita_limpia  OFF 61/114  ->  ON 59/114
-  inject       OFF 3/114  ->  ON 3/114
-  rechazos     OFF 10/114  ->  ON 9/114
-  precision     OFF   0.51  ->  ON   0.49
-  citas unicas  OFF   2.27  ->  ON   2.31
-  segundos      OFF  84.68  ->  ON  80.22
-  GANO:   [?] Me cortaron la luz por una deuda que yo creo que está mal cobr
-  GANO:   [?] soy chico y no le vendo electricidad a empresas ni a casas, ¿m
-  GANO:   [?] dónde se inscriben las personas que quieren participar como in
-  PERDIO: [?] Si yo tengo una planta de luz, ¿me pueden negar enchufarme a l
-  PERDIO: [?] ¿Hay un tope de ganancia que les permiten cobrar a los dueños 
-  PERDIO: [?] Ese grupo que resuelve las peleas entre las empresas y el oper

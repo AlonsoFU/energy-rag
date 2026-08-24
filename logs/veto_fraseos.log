@@ -1,26 +1,0 @@
-Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5746.16it/s]
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.06it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 609.88it/s]
-=== veto_fraseos: 64 pares  OFF(sin veto) / ON(veto del glosario) ===
-  pares nuevos=5  [5/64]
-  pares nuevos=10  [10/64]
-  pares nuevos=15  [15/64]
-  pares nuevos=20  [20/64]
-  pares nuevos=25  [25/64]
-  pares nuevos=30  [30/64]
-  pares nuevos=35  [35/64]
-  pares nuevos=40  [40/64]
-  pares nuevos=45  [45/64]
-  pares nuevos=50  [50/64]
-  pares nuevos=55  [55/64]
-  pares nuevos=60  [60/64]
-
-=== veto_fraseos — 64 pares validos ===
-  cita_ok      OFF 62/64  ->  ON 62/64   [gano 1, perdio 1]  McNemar p=1.0000  (ruido/flat)
-  cita_limpia  OFF 47/64  ->  ON 40/64
-  inject       OFF 52/64  ->  ON 52/64
-  rechazos     OFF 2/64  ->  ON 2/64
-  precision     OFF   0.63  ->  ON   0.58
-  citas unicas  OFF   2.41  ->  ON   2.55
-  segundos      OFF  72.17  ->  ON  67.59
-  GANO:   [B] necesito saber qué es TON
-  PERDIO: [B] dame la definición de DIA
