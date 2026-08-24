@@ -1,7 +1,8 @@
 #!/bin/bash
 # B4.3 -- una pasada completa del monitor normativo. Para cron.
 #
-#   1. re-scrape de BCN (throttled, resumible)   <- unico paso que toca la red
+#   0. repara scrapes rotos (limit 4/pasada)      <- toca la red
+#   1. re-scrape del corpus EN DOMINIO (70)       <- toca la red, ~40 min a 20 s de throttle
 #   2. diff contra el snapshot                    -> escribe norma_evento
 #   3. informe de lo pendiente                    -> docs/monitor-ultimo-informe.md
 #   4. nuevo snapshot                             -> baseline para la proxima pasada
@@ -23,8 +24,18 @@ E="env -i HOME=/home/alonso PATH=/usr/local/bin:/usr/bin:/bin
   docker start energy_rag_pg >/dev/null 2>&1
   sleep 5
 
-  echo "--- 1. re-scrape BCN"
-  timeout 7200 $E venv/bin/python -m scripts.rescrape_partial || echo "   (scrape incompleto, sigo)"
+  echo "--- 0. reparar scrapes rotos (los que quedaron en 'Loading...')"
+  timeout 1200 $E venv/bin/python -m scripts.rescrape_partial --limit 4 \
+    || echo "   (reparacion incompleta, sigo)"
+
+  echo "--- 1. re-scrape del corpus en dominio"
+  # BUG que esto arregla: aca se llamaba a `rescrape_partial`, que NO detecta cambios --
+  # solo re-baja los JSON que quedaron con 'Loading...'. Con 0 parciales pendientes no bajaba
+  # nada y el diff daba 0 cambios PARA SIEMPRE, informando "sin cambios" sin haber mirado.
+  # El detector real es `rescrape_modificadas`, y va con --alcance dominio (70 normas):
+  # con el alcance viejo miraba 16 y las otras 54 podian cambiar sin que nadie se enterara.
+  timeout 7200 $E venv/bin/python -m scripts.rescrape_modificadas --alcance dominio --frescura 6 \
+    || echo "   (scrape incompleto, sigo)"
 
   echo "--- 2. diff"
   $E venv/bin/python -m scripts.monitor_diff

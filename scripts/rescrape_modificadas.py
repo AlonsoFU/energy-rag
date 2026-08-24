@@ -27,7 +27,7 @@ from psycopg.rows import dict_row
 
 from src.components.vectorstore import with_connection
 from src.crawlers.norm_detail_crawler import NormDetailCrawler
-from src.pipelines.texto_hash import hash_estable
+from src.pipelines.texto_hash import cambio_real, hash_estable, similitud
 
 ESTADO = Path("data/eval/results/rescrape_modificadas.json")
 
@@ -53,18 +53,40 @@ def _incompleto(texto, largo_guardado, tolerancia=0.9):
     return False
 
 
-def objetivo():
-    """Normas del corpus que alguna otra norma MODIFICA."""
+COLS = """n.id_norma, n.tipo, n.numero, n.titulo,
+          n.metadata->>'content_hash' AS hash_guardado,
+          n.texto_completo           AS texto_guardado,
+          length(n.texto_completo)   AS largo_guardado"""
+
+
+def objetivo(alcance="dominio"):
+    """Qué normas se re-bajan.
+
+    `modificadas` — las que el grafo de BCN marca como modificadas por otra norma. Era el
+    alcance original y sirve para un diagnóstico puntual, PERO cubre 16 de las 70 normas en
+    dominio (23 %). Como monitor periódico da falsa seguridad: las otras 54 pueden cambiar
+    sin que nadie se entere, porque `norma_vinculacion` viene incompleta desde BCN (204 filas
+    para 111 normas) y NO es un registro confiable de qué se modificó.
+
+    `dominio` (default) — las 70 normas del corpus dentro de la frontera de mercados. Es lo
+    que un monitor tiene que mirar: se re-baja todo y **el texto decide**, no el metadato.
+    A 20 s de throttle son ~40 min por pasada, viable semanalmente.
+    """
     with with_connection() as c, c.cursor(row_factory=dict_row) as cur:
-        cur.execute("""
-            SELECT DISTINCT v.destino AS id_norma, n.tipo, n.numero, n.titulo,
-                   n.metadata->>'content_hash' AS hash_guardado,
-                   n.texto_completo           AS texto_guardado,
-                   length(n.texto_completo)   AS largo_guardado
-            FROM norma_vinculacion v JOIN normas n ON n.id_norma = v.destino
-            WHERE v.tipo_relacion ILIKE '%%modific%%'
-            ORDER BY 1
-        """)
+        if alcance == "modificadas":
+            cur.execute(f"""
+                SELECT DISTINCT {COLS}
+                FROM norma_vinculacion v JOIN normas n ON n.id_norma = v.destino
+                WHERE v.tipo_relacion ILIKE '%%modific%%'
+                ORDER BY 1
+            """)
+        else:
+            cur.execute(f"""
+                SELECT {COLS} FROM normas n
+                WHERE n.metadata->>'fuera_de_dominio' IS DISTINCT FROM 'true'
+                  AND n.texto_completo IS NOT NULL
+                ORDER BY 1
+            """)
         return cur.fetchall()
 
 
@@ -85,19 +107,42 @@ def registrar(id_norma, tipo_evento, antes, despues, detalle, ):
         c.commit()
 
 
-async def main(limit=0, delay=20):
-    objs = objetivo()
+def _vencida(reg, frescura):
+    """True si hay que volver a revisar esta norma.
+
+    BUG que esto arregla: `hechas` no caducaba nunca. La primera pasada dejaba las 25 normas
+    marcadas y **la segunda encontraba 0 pendientes** — un monitor semanal que a partir de la
+    semana 2 no mira nada y sigue informando "sin cambios". El estado servia para RESUMIR una
+    corrida cortada, no para correr periodicamente.
+
+    `frescura=0` fuerza revisar todo (util para una corrida manual completa).
+    """
+    if not isinstance(reg, dict) or frescura <= 0:
+        return True
+    v = reg.get("revisado_en")
+    if not v:
+        return True          # estado del formato viejo: sin fecha, se revisa
+    try:
+        return (date.today() - date.fromisoformat(v)).days >= frescura
+    except ValueError:
+        return True
+
+
+async def main(limit=0, delay=20, alcance="dominio", frescura=6):
+    objs = objetivo(alcance)
     if limit:
         objs = objs[:limit]
     hechas = json.loads(ESTADO.read_text()) if ESTADO.exists() else {}
-    print(f"normas modificadas a revisar: {len(objs)}  (ya revisadas: {len(hechas)})", flush=True)
+    print(f"alcance={alcance}  normas a revisar: {len(objs)}  "
+          f"(con registro previo: {len(hechas)}, frescura {frescura} d)", flush=True)
 
     cambiadas = iguales = fallo = 0
     # RECICLAR el browser cada REINICIO normas: en la primera corrida completa, normas que
     # bajaban integras de a una (DFL 1: 329.285 chars) salian truncadas al 8% dentro de una
     # tanda larga. El contexto de Playwright se degrada / BCN empieza a servir a medias.
     REINICIO = 5
-    pendientes = [o for o in objs if o["id_norma"] not in hechas]
+    pendientes = [o for o in objs if _vencida(hechas.get(o["id_norma"]), frescura)]
+    print(f"pendientes en esta pasada: {len(pendientes)}", flush=True)
     for bloque in range(0, len(pendientes), REINICIO):
       async with NormDetailCrawler() as cr:
         for i, o in enumerate(pendientes[bloque:bloque + REINICIO], bloque + 1):
@@ -121,19 +166,35 @@ async def main(limit=0, delay=20):
                                "largo_bajado": len(d.texto_completo or "")}
                 print(f"   ✗ SCRAPE INCOMPLETO ({o['largo_guardado']} -> "
                       f"{len(d.texto_completo or '')} chars) -- NO se registra evento", flush=True)
-            elif hash_estable(d.texto_completo) != hash_estable(o["texto_guardado"] or ""):
+            elif cambio_real(o["texto_guardado"] or "", d.texto_completo):
+                # `cambio_real` = hash estable distinto Y similitud < 0.995. El hash SOLO no
+                # alcanza: se cazo aca mismo un falso positivo en LEY 20365 -- mismo largo
+                # exacto (30.087 chars) y similitud 0.9997, marcado como "CAMBIO REAL". Es la
+                # misma trampa de los 13 eventos cosmeticos, que se habia arreglado en
+                # `monitor_diff` y NO aca. La similitud queda guardada para poder auditarlo.
                 cambiadas += 1
                 he_viejo = hash_estable(o["texto_guardado"] or "")
                 he_nuevo = hash_estable(d.texto_completo)
-                hechas[nid] = {"estado": "cambio", "antes": he_viejo, "despues": he_nuevo}
+                sim = round(similitud(o["texto_guardado"] or "", d.texto_completo), 4)
+                hechas[nid] = {"estado": "cambio", "antes": he_viejo, "despues": he_nuevo,
+                               "similitud": sim}
                 registrar(nid, "texto_modificado", he_viejo, he_nuevo,
                           {"origen": "rescrape_modificadas", "estado_bcn": d.estado,
-                           "n_versiones": len(d.versiones or [])})
-                print(f"   ⚠️ CAMBIO REAL  {he_viejo} -> {he_nuevo}", flush=True)
+                           "similitud": sim, "n_versiones": len(d.versiones or [])})
+                print(f"   ⚠️ CAMBIO REAL  {he_viejo} -> {he_nuevo}  (sim {sim})", flush=True)
+            elif hash_estable(d.texto_completo) != hash_estable(o["texto_guardado"] or ""):
+                # hash distinto pero similitud alta: cambio COSMETICO de BCN. Se anota para
+                # que la proxima pasada no lo vuelva a mirar, y no se registra evento.
+                iguales += 1
+                hechas[nid] = {"estado": "cosmetico",
+                               "similitud": round(similitud(o["texto_guardado"] or "",
+                                                            d.texto_completo), 4)}
+                print(f"   ~ cosmetico (sim {hechas[nid]['similitud']}) -- sin evento", flush=True)
             else:
                 iguales += 1
                 hechas[nid] = {"estado": "igual", "hash": hash_estable(d.texto_completo)}
                 print("   ok (sin cambios)", flush=True)
+            hechas[nid]["revisado_en"] = date.today().isoformat()
             ESTADO.parent.mkdir(parents=True, exist_ok=True)
             ESTADO.write_text(json.dumps(hechas, ensure_ascii=False, indent=1))
             await asyncio.sleep(delay)
@@ -146,5 +207,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--delay", type=int, default=20)
+    ap.add_argument("--alcance", choices=["dominio", "modificadas"], default="dominio",
+                    help="dominio = las 70 del corpus (monitor); modificadas = las 16 del grafo")
+    ap.add_argument("--frescura", type=int, default=6,
+                    help="dias antes de volver a revisar una norma (0 = revisar todas)")
     a = ap.parse_args()
-    asyncio.run(main(a.limit, a.delay))
+    asyncio.run(main(a.limit, a.delay, a.alcance, a.frescura))
