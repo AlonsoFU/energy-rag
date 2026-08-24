@@ -1,0 +1,3 @@
+QUERY: qué es Superintendencia | prompt chars: 43649
+  num_predict= 2000  t=  28.7s  eval_count=2000  done_reason=length  len=6270
+   resp[:200]: Vamos a analizar la pregunta: "qué es Superintendencia"  Necesito encontrar en los artículos proporcionados una definición de "Superintendencia". Revisaré cada artículo para ver si hay una definición 

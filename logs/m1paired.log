@@ -1,0 +1,15 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34308.78it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  94%|█████████▍| 371/393 [00:00<00:00, 3700.95it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3822.24it/s]
+[RESUME] 250 pares ya generados
+=== FASE A: retrieval pool 50 vs 100 (279q) ===
+  top-10 cambio en 41/279
+=== FASE B: gen pareada ===
+  gen nuevas=5 (chg 1/41)  [255/279]
+  gen nuevas=10 (chg 3/41)  [260/279]
+  gen nuevas=15 (chg 4/41)  [265/279]
+  gen nuevas=20 (chg 6/41)  [270/279]
+  gen nuevas=25 (chg 8/41)  [275/279]
+
+=== M1 PAREADO pool 50 -> 100 (balanced_v2 clean in_domain) ===
+  OFF 252/279 -> ON 252/279  (gano 0, perdio 0)
+  McNemar p=1.0000  (ruido/flat)

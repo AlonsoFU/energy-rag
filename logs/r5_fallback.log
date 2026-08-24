@@ -1,0 +1,641 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5879.32it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.13it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 612.10it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+  pares nuevos=5  [5/46]
+  pares nuevos=10  [10/46]
+  pares nuevos=15  [15/46]
+  pares nuevos=20  [20/46]
+  pares nuevos=25  [25/46]
+  pares nuevos=30  [30/46]
+  pares nuevos=35  [35/46]
+  pares nuevos=40  [40/46]
+  pares nuevos=45  [45/46]
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5878.17it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 13.99it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 606.90it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35265.37it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  91%|█████████ | 357/393 [00:00<00:00, 3569.24it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3752.73it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34408.65it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  91%|█████████ | 357/393 [00:00<00:00, 3483.24it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3726.43it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[92m05:15:19 - LiteLLM:WARNING[0m: get_model_cost_map.py:271 - LiteLLM: Failed to fetch remote model cost map from https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json: [Errno -3] Temporary failure in name resolution. Falling back to local backup.
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 30233.79it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  31%|███       | 122/393 [00:00<00:00, 1219.84it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3504.53it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[92m05:30:24 - LiteLLM:WARNING[0m: get_model_cost_map.py:271 - LiteLLM: Failed to fetch remote model cost map from https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json: [Errno -3] Temporary failure in name resolution. Falling back to local backup.
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34373.18it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 325/393 [00:00<00:00, 3206.67it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3560.19it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32907.33it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  81%|████████  | 319/393 [00:00<00:00, 3165.86it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3571.76it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33090.73it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  91%|█████████ | 357/393 [00:00<00:00, 3497.26it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3719.56it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35708.95it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  89%|████████▉ | 351/393 [00:00<00:00, 3505.14it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3768.46it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35647.27it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 325/393 [00:00<00:00, 3221.28it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3609.33it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33992.16it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  96%|█████████▌| 377/393 [00:00<00:00, 3697.60it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3826.66it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 28915.94it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  93%|█████████▎| 367/393 [00:00<00:00, 3647.96it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3790.21it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34412.30it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  79%|███████▊  | 309/393 [00:00<00:00, 3075.59it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3511.37it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33331.65it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4285.99it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33054.56it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  95%|█████████▍| 373/393 [00:00<00:00, 3683.51it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3856.36it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32046.79it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 85.80it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3569.27it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35488.68it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  91%|█████████ | 357/393 [00:00<00:00, 3524.04it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3724.72it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34836.41it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  87%|████████▋ | 341/393 [00:00<00:00, 3391.95it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3736.43it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 28372.05it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  96%|█████████▌| 377/393 [00:00<00:00, 3744.33it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3851.29it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32820.11it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  95%|█████████▍| 373/393 [00:00<00:00, 3601.45it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3774.53it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35502.25it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  97%|█████████▋| 383/393 [00:00<00:00, 3827.86it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3914.81it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[92m09:30:18 - LiteLLM:WARNING[0m: get_model_cost_map.py:271 - LiteLLM: Failed to fetch remote model cost map from https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json: [Errno -3] Temporary failure in name resolution. Falling back to local backup.
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32292.72it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  94%|█████████▍| 369/393 [00:00<00:00, 3665.19it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3794.47it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35117.74it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 325/393 [00:00<00:00, 3247.93it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3672.26it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34273.51it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  93%|█████████▎| 365/393 [00:00<00:00, 3646.30it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3758.87it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33967.30it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  98%|█████████▊| 385/393 [00:00<00:00, 3777.54it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3846.67it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33217.54it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  92%|█████████▏| 361/393 [00:00<00:00, 3609.14it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3759.94it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32789.49it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4517.71it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 4469.60it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:35, 10.76it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 448.32it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 25059.44it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 78.93it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 2410.65it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 8582.12it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:07, 50.26it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 1767.54it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 16241.76it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:06, 58.80it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 2032.96it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33014.28it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 82.93it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3061.22it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 31941.29it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 88.10it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3083.40it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32053.11it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 89.64it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3066.73it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 31729.28it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  59%|█████▊    | 230/393 [00:00<00:00, 2299.55it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3128.06it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 31930.31it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  75%|███████▍  | 293/393 [00:00<00:00, 2916.13it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3368.39it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32736.65it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 107/393 [00:00<00:00, 1055.01it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3185.96it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32528.63it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  67%|██████▋   | 265/393 [00:00<00:00, 2588.09it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3207.22it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32684.81it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 164/393 [00:00<00:00, 1639.84it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3168.19it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 30321.92it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  67%|██████▋   | 265/393 [00:00<00:00, 2630.52it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3248.52it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 34020.62it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 269/393 [00:00<00:00, 2671.49it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3204.26it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 31906.02it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  70%|██████▉   | 275/393 [00:00<00:00, 2745.37it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3207.63it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 33014.28it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 85.58it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 2657.18it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 28217.50it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:04, 77.87it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3030.00it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda
+[RESUME] 46 pares ya hechos
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 31330.19it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  69%|██████▉   | 271/393 [00:00<00:00, 2672.83it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3236.49it/s]
+=== r5_fallback: 46 pares  OFF(sin fallback) / ON(con fallback regex) ===
+
+=== r5_fallback — 46 pares validos ===
+  cita_ok      OFF 44/46  ->  ON 43/46   [gano 0, perdio 1]  McNemar p=1.0000  (ruido/flat)
+  cita_limpia  OFF 27/46  ->  ON 26/46
+  inject       OFF 0/46  ->  ON 0/46
+  rechazos     OFF 1/46  ->  ON 2/46
+  precision     OFF   0.51  ->  ON   0.56
+  citas unicas  OFF   3.70  ->  ON   3.43
+  segundos      OFF 121.48  ->  ON 115.13
+  PERDIO: [A] en qué consiste Modelamiento de la demanda

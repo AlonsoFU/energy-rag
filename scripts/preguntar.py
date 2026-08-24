@@ -96,6 +96,11 @@ def responder(pregunta):
             vistos.add(k)
             print(f"       [{d.get('id_norma')} art {d.get('articulo_numero')}]")
 
+    # FASE 3.1: las preguntas REALES son el unico insumo que no se fabrica desde adentro.
+    from src.core import bitacora
+    v, nota = bitacora.preguntar_veredicto()
+    bitacora.registrar(pregunta, r["text"], docs, time.time() - t0, v, nota)
+
 
 def obligaciones(sujeto):
     _chequeos()
@@ -138,8 +143,13 @@ if __name__ == "__main__":
                     help="qué obliga la normativa a un sujeto (ej: coordinador)")
     ap.add_argument("--plazos", action="store_true", help="obligaciones con plazo")
     ap.add_argument("--cambios", action="store_true", help="cambios normativos detectados")
+    ap.add_argument("--bitacora", action="store_true",
+                    help="preguntas reales registradas y su veredicto")
     a = ap.parse_args()
-    if a.plazos:
+    if a.bitacora:
+        from src.core.bitacora import resumen
+        resumen()
+    elif a.plazos:
         plazos()
     elif a.cambios:
         cambios()

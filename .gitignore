@@ -10,6 +10,7 @@ data/concept_index/
 data/debug/
 data/temp/
 data/logs/
+logs/          # regla del proyecto: los logs de corrida NO se commitean
 data/monitor/
 data/downloads/
 data/download_progress.json
@@ -37,3 +38,4 @@ venv-gpu/
 
 .scratch/
 *.gguf
+data/eval/preguntas_reales.jsonl

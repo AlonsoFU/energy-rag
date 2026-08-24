@@ -1,0 +1,45 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5620.18it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.03it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 606.95it/s]
+=== FASE A: retrieval 4B-1024+alias, cachea ===
+  [coloquial] 39
+  [dev] 44
+  [holdout] 18
+=== GEN run 1 con ollama/qwen3:30b-a3b ===
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  run 1 en 3560s
+=== GEN run 2 con ollama/qwen3:30b-a3b ===
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+  run 2 en 3790s
+
+=== VARIANZA (2 corridas, mismos docs) ===
+  coloquial  run1=36/39  run2=37/39
+  dev        run1=36/44  run2=36/44
+  holdout    run1=17/18  run2=17/18
+
+=== FALLAS ESTABLES (fallan en AMBAS = reales) ===
+  [coloquial] 258171/104     | ¿Por cuántos años se supone que dura una torre o lín
+  [coloquial] 250604/2       | tengo una planta solar y me sobra energía algunos me
+  [dev      ] 258171/76      | qué son los sistemas de transmisión dedicados
+  [dev      ] 29819/2        | si una distribuidora incumple la normativa, ¿qué org
+  [dev      ] 258171/212     | el ente que resuelve discrepancias entre el coordina
+  [dev      ] 258171/225     | máxima cantidad de energía que un sistema de almacen
+  [dev      ] 258171/225     | qué se necesita para que una central se considere de
+  [dev      ] 258171/147     | un cliente que puede negociar libremente su precio d
+  [dev      ] 258171/225     | definición de seguridad de servicio
+  [dev      ] 258171/225     | qué es la tasa de actualización según la ley
+  [holdout  ] 258171/149     | los suministros no incluidos en el artículo de clien
+
+=== INESTABLES (fallan en solo 1 = ruido) ===
+  [coloquial] ¿Hay un tope de ganancia que les permiten cobrar a l

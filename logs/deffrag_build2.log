@@ -1,0 +1,22 @@
+articulos-glosario detectados: 71
+fragmentos-definicion totales:  640
+[D2] articulos con leyenda de variable: 20  -> fragmentos nuevos: 103
+conceptos que fallan cubiertos por un fragmento: 37/45
+  NO cubiertos: ['acometida', 'bases de licitación', 'costo de falla de corta duración', 'empresa distribuidora', 'gas licuado', 'mora', 'tránsito', 'vehículo']
+
+[WRITE] creando tabla fragmentos_definicion + embeddings ...
+  insertados 50/743
+  insertados 100/743
+  insertados 150/743
+  insertados 200/743
+  insertados 250/743
+  insertados 300/743
+  insertados 350/743
+  insertados 400/743
+  insertados 450/743
+  insertados 500/743
+  insertados 550/743
+  insertados 600/743
+  insertados 650/743
+  insertados 700/743
+[WRITE] listo: 743 fragmentos-definicion + indice HNSW.

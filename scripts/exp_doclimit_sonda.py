@@ -21,6 +21,7 @@ from src.components.llm import get_llm_provider
 from src.components.reranker import get_reranker
 from src.components.vectorstore import PostgresStore
 from src.core import config as cfg
+from src.core import resiliencia
 from src.pipelines.generate import generate_answer
 from src.pipelines.retrieve import SimpleRetriever
 
@@ -56,7 +57,11 @@ def main():
 
     for i, q in enumerate(rows):
         qt = q["query"]
-        docs = retr.retrieve(qt, top_k=10)    # UNA vez: identico para todos los brazos
+        # FASE 1.3: una corrida larga sobrevive a que Postgres se caiga a mitad. Esta sonda
+        # murio con AdminShutdown en su primera corrida (el container se apago durante el
+        # retrieval) y perdio 40 min de GPU aunque el checkpoint por medicion la deje resumir.
+        docs = resiliencia.reintentar(lambda: retr.retrieve(qt, top_k=10), levantar_db=True,
+                                      aviso=lambda m: print(f"     … {m}", flush=True))
         orden = VALORES[i % len(VALORES):] + VALORES[:i % len(VALORES)]   # rota el calentamiento
         for v in orden:
             k = f"{v}|{qt}"
@@ -65,7 +70,9 @@ def main():
             cfg.settings.answer_doc_limit = v
             try:
                 t0 = time.time()
-                txt = generate_answer(qt, docs, llm=llm, model=MODEL)["text"]
+                txt = resiliencia.reintentar(
+                    lambda: generate_answer(qt, docs, llm=llm, model=MODEL)["text"],
+                    levantar_db=True)
                 prev[k] = {"secs": round(time.time() - t0, 1), "chars": len(txt), "v": v}
             except Exception as ex:
                 print(f"  ! {type(ex).__name__} v={v} '{qt[:30]}'", flush=True)

@@ -1,0 +1,39 @@
+=== 19 rechazos + 7 otras fallas ===
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5784.73it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:26, 14.36it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 622.86it/s]
+
+### RECHAZOS
+  FUERA del pool     | definición de Reposición
+  FUERA del pool     | qué es DIA
+  FUERA del pool     | definición de DIA
+  FUERA del pool     | qué significa DIA
+  FUERA del pool     | definición de TON
+  FUERA del pool     | qué significa TON
+  EN pool rank=1     | qué es Gas licuado
+  EN pool rank=0     | qué es Acometida
+  FUERA del pool     | definición de Acometida
+  FUERA del pool     | qué significa Acometida
+  EN pool rank=6     | definición de DIP
+  FUERA del pool     | qué significa DIP
+  FUERA del pool     | qué es Empresa distribuidora
+  EN pool rank=0     | qué es Tránsito
+  FUERA del pool     | definición de Tránsito
+  FUERA del pool     | qué significa Tránsito
+  FUERA del pool     | qué es Vehículo
+  FUERA del pool     | definición de Vehículo
+  FUERA del pool     | qué significa Vehículo
+  --> 4 con gold EN pool (fallo de GEN) | 15 FUERA (fallo de RETRIEVAL)
+
+### OTRAS FALLAS
+  EN pool rank=0     | qué es Informe Definitivo
+  EN pool rank=0     | definición de Informe Definitivo
+  EN pool rank=0     | qué significa Informe Definitivo
+  EN pool rank=8     | definición de Gas licuado
+  FUERA del pool     | qué significa Gas licuado
+  EN pool rank=0     | qué significa Infracciones graves
+  EN pool rank=1     | definición de Empresa distribuidora
+  --> 6 con gold EN pool (fallo de GEN) | 1 FUERA (fallo de RETRIEVAL)
+
+=== RESUMEN 26 fallas ===
+  GEN      (gold estaba en el pool y no lo uso): 10
+  RETRIEVAL(gold nunca llego al pool):           16
