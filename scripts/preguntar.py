@@ -32,8 +32,12 @@ def _chequeos():
         with with_connection() as c, c.cursor() as cur:
             cur.execute("SELECT 1")
     except Exception as e:
-        _fatal("La base de datos no responde.",
-               f"Probá:  docker start energy_rag_pg     ({type(e).__name__})")
+        # el container se apaga solo (CLAUDE.md): intentar levantarlo antes de rendirse.
+        from src.core.resiliencia import levantar_postgres
+        print("  … la base no responde, levantándola…", flush=True)
+        if not levantar_postgres():
+            _fatal("La base de datos no responde y no se pudo levantar.",
+                   f"Probá a mano:  docker start energy_rag_pg     ({type(e).__name__})")
     try:
         urllib.request.urlopen("http://localhost:11434/api/tags", timeout=5)
     except Exception:
@@ -61,11 +65,24 @@ def responder(pregunta):
     retr = SimpleRetriever(store, Qwen3Embedder(), get_reranker(),
                            top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
+    # FASE 1.3: los chequeos de arriba corren ANTES de cargar modelos (~40 s). Si Postgres se
+    # cae DURANTE el retrieval, sin esto la consulta se pierde entera. `reintentar` distingue
+    # caida de servicio (reintenta, y levanta el container) de bug (falla al toque).
+    from src.core import resiliencia
+    aviso = lambda m: print(f"  … {m}", flush=True)
     try:
-        docs = retr.retrieve(pregunta, top_k=10)
-        r = generate_answer(pregunta, docs, llm=llm, model="ollama/qwen3:30b-a3b")
+        docs = resiliencia.reintentar(lambda: retr.retrieve(pregunta, top_k=10),
+                                      levantar_db=True, aviso=aviso)
+        r = resiliencia.reintentar(
+            lambda: generate_answer(pregunta, docs, llm=llm, model="ollama/qwen3:30b-a3b"),
+            levantar_db=True, aviso=aviso)
     except Exception as e:
         _fatal("No se pudo generar la respuesta.", f"{type(e).__name__}: {e}")
+    # Ollama agota sus 3 reintentos internos devolviendo texto VACIO, no excepcion: no cae en
+    # el `except` de arriba y el usuario veria una respuesta en blanco sin explicacion.
+    if resiliencia.respuesta_vacia(r):
+        _fatal("El modelo no devolvió respuesta (se quedó colgado o sin memoria).",
+               "Probá de nuevo. Si se repite:  ollama ps   y revisá que no haya otro modelo cargado.")
 
     print(f"\n{r['text']}\n")
     print(f"  ── {time.time() - t0:.0f} s · {len(docs)} artículos consultados")
