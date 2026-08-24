@@ -79,7 +79,39 @@ def impacto(nid):
     print(f"  normas del corpus que la citan       : {len(cit)}")
     for x in cit[:12]:
         print(f"      {x['tipo']} {x['nnum']}")
+    # FASE 4.2: el proceso viene del encabezado del propio articulado (TÍTULO / CAPÍTULO /
+    # PÁRRAFO), no de una taxonomía inventada. Es lo que convierte "cambió la norma X" en
+    # "se rompe el proceso Y", que es la pregunta que justifica tener el foso.
+    pr = q("""SELECT o.proceso, count(*) n FROM obligacion o
+              JOIN articulos a ON a.id = o.articulo_id
+              WHERE a.id_norma = %s AND o.proceso IS NOT NULL
+              GROUP BY 1 ORDER BY n DESC""", nid)
+    if pr:
+        print(f"\n  procesos que toca ({sum(x['n'] for x in pr)} obligaciones):")
+        for x in pr[:12]:
+            print(f"      {x['n']:>3}  {x['proceso'][:70]}")
+    sin = prop - sum(x["n"] for x in pr)
+    if sin > 0:
+        # sin proceso CONOCIDO no es lo mismo que sin proceso. Dos causas distintas: la
+        # norma no trae estructura de títulos, o el artículo no se pudo ubicar en el texto.
+        # Decir "la norma no trae títulos" seria mentir en el segundo caso.
+        print(f"\n  ({sin} sin proceso conocido — sin títulos en la norma, o artículo no ubicado)")
     print("\n  ⚠️ las obligaciones de esas normas pueden depender de lo que cambie.")
+
+
+def procesos():
+    """Qué procesos existen y en qué normas viven."""
+    r = q("""SELECT o.proceso, count(*) n, count(o.plazo) cp,
+                    count(DISTINCT a.id_norma) normas
+             FROM obligacion o JOIN articulos a ON a.id = o.articulo_id
+             WHERE o.proceso IS NOT NULL GROUP BY 1 ORDER BY n DESC""")
+    tot = q("SELECT count(*) n FROM obligacion")[0]["n"]
+    con = sum(x["n"] for x in r)
+    print(f"\n=== {len(r)} procesos — {con}/{tot} obligaciones ubicadas ===")
+    print("  el nombre lo escribió el legislador en el encabezado del articulado\n")
+    for x in r[:25]:
+        print(f"  {x['n']:>4}  ({x['cp']:>3} con plazo, {x['normas']} norma/s)  {x['proceso'][:64]}")
+    print(f"\n  {tot - con} obligaciones sin proceso conocido (normas sin títulos)")
 
 
 def resumen():
@@ -99,9 +131,11 @@ def resumen():
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--sujeto"); ap.add_argument("--plazos", action="store_true")
+    ap.add_argument("--procesos", action="store_true")
     ap.add_argument("--impacto")
     a = ap.parse_args()
-    if a.sujeto: por_sujeto(a.sujeto)
+    if a.procesos: procesos()
+    elif a.sujeto: por_sujeto(a.sujeto)
     elif a.plazos: plazos()
     elif a.impacto: impacto(a.impacto)
     else: resumen()

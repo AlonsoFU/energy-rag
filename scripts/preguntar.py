@@ -143,10 +143,22 @@ if __name__ == "__main__":
                     help="qué obliga la normativa a un sujeto (ej: coordinador)")
     ap.add_argument("--plazos", action="store_true", help="obligaciones con plazo")
     ap.add_argument("--cambios", action="store_true", help="cambios normativos detectados")
+    ap.add_argument("--procesos", action="store_true",
+                    help="procesos normativos y cuántas obligaciones tiene cada uno")
+    ap.add_argument("--impacto", metavar="ID_NORMA",
+                    help="si cambia esta norma, qué procesos se rompen")
     ap.add_argument("--bitacora", action="store_true",
                     help="preguntas reales registradas y su veredicto")
     a = ap.parse_args()
-    if a.bitacora:
+    if a.procesos:
+        _chequeos()
+        from scripts.mapa_obligaciones import procesos as _pr
+        _pr()
+    elif a.impacto:
+        _chequeos()
+        from scripts.mapa_obligaciones import impacto as _im
+        _im(a.impacto)
+    elif a.bitacora:
         from src.core.bitacora import resumen
         resumen()
     elif a.plazos:
