@@ -1,0 +1,8 @@
+# Cola de trabajo. Una tarea por linea: ETIQUETA|comando
+# El runner toma la PRIMERA no marcada como hecha en logs/cola_hechas.txt.
+# Sin GPU o con GPU, en orden de valor.
+descubrir_mas|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_de_discrepancias
+proceso_faltante|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
+derogaciones|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
+duplicados|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+citas|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir

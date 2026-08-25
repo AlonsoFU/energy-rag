@@ -1,0 +1,13 @@
+[1/2] DECRETO 327 (idNorma 124102)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=124102
+    titulo: DECRETO 327 FIJA REGLAMENTO DE LA LEY GENERAL DE SERVICIOS ELECTRICOS
+    chars : 278526
+    dominio 0.584  ok
+    guardado -> data/normas_completas/nuevas/124102.json  (registrado como DECRETO-327)
+[2/2] DECRETO 125 (idNorma 1140253)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1140253
+  AVISO: el texto trae placeholders 'Loading' (14919 chars) -- extraccion INCOMPLETA
+    titulo: DECRETO 125 APRUEBA REGLAMENTO DE LA COORDINACIÓN Y OPERACIÓN DEL SISTEMA ELÉC
+    chars : 14919
+    dominio 0.622  ok
+    guardado -> data/normas_completas/nuevas/1140253.json  (registrado como DECRETO-125)

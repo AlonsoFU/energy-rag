@@ -1,0 +1,40 @@
+=== cadena2 2026-08-25 08:21:39 ===
+--- 1. ingerir DS 327 + DS 125
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5431.40it/s]
+  LEY-21185      ✗ IDENTIDAD: bajo 'RESOLUCIÓN 21185 EXENTA APRUEBA PROTOCOLO DE'
+  DECRETO-125    sim=0.571 dentro  4 arts  DECRETO 125 APRUEBA REGLAMENTO DE LA C
+  DECRETO-55     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 55 EXTRACTO DE RESOLUCIÓN Nº 55, '
+  DL-2763        ✗ IDENTIDAD: bajo 'ACUERDO 1ACUERDO 2763-01-260115SESIÓN ORDINA'
+  DECRETO-327    sim=0.591 dentro  340 arts  DECRETO 327 FIJA REGLAMENTO DE LA LEY 
+  DECRETO-97     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 97RESOLUCIÓN A-97 EXTRACTO DE RES'
+  DFL-850        ✗ IDENTIDAD: bajo 'DECRETO 850 EXENTO EXTRACTO DE DECRETO Nº 85'
+  DFL-29         ✗ IDENTIDAD: bajo 'DECRETO 29 EXTRACTO DE DECRETO EXENTO N° 29,'
+  DFL-164        ✗ IDENTIDAD: bajo 'DECRETO 164 EXTRACTO DE DECRETO N° 164 EXENT'
+  DL-2224        ✗ IDENTIDAD: bajo 'RESOLUCION 2224 EXENTA'
+  DECRETO-42     ✗ IDENTIDAD: bajo 'ACUERDO 42ACUERDO 42-04 ACUERDOS ADOPTADOS P'
+
+=== validas 2 · rechazadas por identidad 9 · marcadas fuera de dominio 0 · articulos 344 INGESTADOS ===
+--- 2. frontera
+  arrastran 1241 articulos y 1513 fragmentos
+
+MARCADAS 42 normas con metadata.fuera_de_dominio = true (reversible)
+--- 3. duplicados
+     1  LEY 19613 -> LEY 18410
+     1  DECRETO 70 -> DECRETO 62
+  limpiadas 68 marcas previas
+
+MARCADOS 68 articulos con metadata.duplicado_de (50 por texto, 18 por serie) -- reversible
+--- 4. derogaciones
+     1  DECRETO 71
+     1  DECRETO 244
+     1  LEY 21306
+     1  LEY 18287 art 26
+
+MARCADAS 0 normas y 21 articulos como derogados
+--- 5. proceso
+    20  PROCEDIMIENTO DE PLANIFICACIÓN DE LA TRANSMISIÓN
+    19  OBJETIVOS Y CRITERIOS GENERALES DE LA PLANIFICACIÓN DE LA TRANSMISIÓN
+  limpiadas 912 asignaciones previas
+
+ESCRITAS 912 filas de `obligacion.proceso`
+--- 6. obligaciones (LLM, lento)

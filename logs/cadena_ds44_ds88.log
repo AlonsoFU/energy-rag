@@ -19,3 +19,22 @@ MARCADOS 68 articulos con metadata.duplicado_de (50 por texto, 18 por serie) -- 
 
 ESCRITAS 912 filas de `obligacion.proceso`
 --- 4. obligaciones de las normas nuevas (LLM, lo lento)
+        Las expansiones de instalaciones p → no podrán degradar el desempeño de las instalaciones
+        Las expansiones de instalaciones p → deberán considerar los costos asociados y/o los even
+  [428/429] RESOLUCIÓN 711 art 26°: 7/7 válidas
+        La Comisión → considerará en la Planificación de la Transmisión lo
+        La Comisión → incorporar en la planificación de la transmisión, co
+  [429/429] RESOLUCIÓN 711 art tercero: 1/1 válidas
+        La presente resolución → deberá estar disponible · plazo: a más tarde el día hábil s
+
+=== propuestas 1119 · VÁLIDAS 1076 · descartadas 43 GUARDADAS ===
+   descartadas por evidencia no es cita literal: 21
+   descartadas por sujeto no aparece: 14
+   descartadas por plazo inventado: 8
+--- 5. citas norma->norma
+ambiguas (>1 candidata)             : 3
+citadas y NO en el corpus           : 1820  (450 normas distintas)
+   ...de esas, citadas DESDE el dominio electrico: 387 normas
+escritas 1756 filas remite en `referencias`
+escrito docs/frontera-candidatas.md
+=== fin 2026-08-25 01:13:56 ===

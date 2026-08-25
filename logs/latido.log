@@ -1,1 +1,11 @@
 2026-08-25 00:41:30  CORRIENDO  procesos=4  gpu=179.84 W, 96 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 01:00:01  CORRIENDO  procesos=4  gpu=180.18 W, 96 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 02:00:01  CORRIENDO  procesos=2  gpu=19.95 W, 0 %  pg=running  :: 
+2026-08-25 03:00:01  CORRIENDO  procesos=2  gpu=31.08 W, 0 %  pg=running  :: 
+2026-08-25 04:00:01  CORRIENDO  procesos=2  gpu=21.86 W, 0 %  pg=running  :: 
+2026-08-25 05:00:01  CORRIENDO  procesos=3  gpu=19.91 W, 0 %  pg=running  :: 
+2026-08-25 06:00:01  CORRIENDO  procesos=3  gpu=19.45 W, 0 %  pg=running  :: 
+2026-08-25 07:00:01  CORRIENDO  procesos=3  gpu=22.16 W, 0 %  pg=running  :: 
+2026-08-25 08:00:01  CORRIENDO  procesos=3  gpu=30.55 W, 0 %  pg=running  :: 
+2026-08-25 08:21:26  PARADO  <-- nada trabajando     gpu=19.77 W, 0 %  pg=running  cola=47 resultados
+2026-08-25 08:21:44  CORRIENDO  procesos=1  gpu=20.61 W, 0 %  pg=running  :: scripts.detectar_articulos_duplicados scripts.detectar_derogaciones scripts.estructura_articulado scripts.extraer_obligaciones scripts.ingerir_nuevas scripts.marcar_fuera_dominio scripts.resolver_citas_normas 
