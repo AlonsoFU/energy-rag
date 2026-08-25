@@ -1,0 +1,21 @@
+=== cadena 2026-08-25 00:31:12 ===
+--- 1. frontera de dominio sobre las nuevas
+
+  arrastran 1241 articulos y 1513 fragmentos
+
+MARCADAS 42 normas con metadata.fuera_de_dominio = true (reversible)
+--- 2. duplicados (las nuevas pueden duplicar articulado existente)
+     1  LEY 20410 -> DECRETO 900
+     1  LEY 19613 -> LEY 18410
+     1  DECRETO 70 -> DECRETO 62
+  limpiadas 68 marcas previas
+
+MARCADOS 68 articulos con metadata.duplicado_de (50 por texto, 18 por serie) -- reversible
+--- 3. proceso desde el articulado
+    21  POTENCIA MAXIMA Y CONTROL ESTADÍSTICO
+    20  PROCEDIMIENTO DE PLANIFICACIÓN DE LA TRANSMISIÓN
+    19  OBJETIVOS Y CRITERIOS GENERALES DE LA PLANIFICACIÓN DE LA TRANSMISIÓN
+  limpiadas 912 asignaciones previas
+
+ESCRITAS 912 filas de `obligacion.proceso`
+--- 4. obligaciones de las normas nuevas (LLM, lo lento)

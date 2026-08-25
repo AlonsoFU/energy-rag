@@ -109,6 +109,13 @@ class PostgresStore:
         # Se excluye el duplicado, no el original: `duplicado_de` apunta al que se conserva.
         if getattr(_cfg.settings, "filtrar_duplicados", True):
             sql += " AND (a.metadata->>'duplicado_de') IS NULL"
+        # B4.5 VIGENCIA: un articulo DEROGADO no se cita como derecho vigente. Son 17, y no
+        # son inofensivos: seis del DECRETO 88 y el art 23 del DFL 4 -- la LGSE, la norma mas
+        # citada del corpus. Su cuerpo entero es "Derogado.", asi que si entran al pool
+        # ocupan un lugar y no aportan nada; y si el modelo los cita, afirma como vigente
+        # algo que ya no rige, que es el peor error posible en materia legal.
+        if getattr(_cfg.settings, "filtrar_derogados", True):
+            sql += " AND NOT coalesce(a.derogado, false)"
         return sql
 
     def search_bm25(self, query: str, top_k: int = 50) -> list[dict]:

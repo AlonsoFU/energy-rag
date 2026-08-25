@@ -155,6 +155,12 @@ class Settings(BaseSettings):
     # como suyos pero pertenecen al cuerpo que modifica (50 casos, 39 de LEY 20936 -> DFL 4).
     # ON por defecto: citar "[LEY 20936 art 92°]" en vez de "[DFL 4 art 92°]" es una cita
     # legalmente falsa, no una preferencia de ranking.
+    # B4.5: excluye del retrieval los articulos marcados `derogado` por
+    # `scripts/detectar_derogaciones.py`. ON por defecto: citar un articulo derogado como
+    # vigente no es una preferencia de ranking, es una afirmacion falsa sobre el derecho.
+    # Son 17 hoy, incluido el art 23 del DFL 4 (LGSE).
+    filtrar_derogados: bool = True
+
     filtrar_duplicados: bool = True
 
     answer_doc_limit: int = 0
