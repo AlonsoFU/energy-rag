@@ -101,10 +101,16 @@ def objetivo(limit=0):
               AND a.texto ~* '(deber[áa]n?|estar[áa]n? obligad|le corresponder[áa]|
                                tendr[áa]n? que|se obliga|remitir[áa]|informar[áa]|
                                comunicar[áa]|publicar[áa])'
-              AND (n.titulo ILIKE '%transferencia%' OR n.titulo ILIKE '%peaje%'
-                   OR n.titulo ILIKE '%valoriz%' OR n.titulo ILIKE '%tarif%'
-                   OR n.titulo ILIKE '%precio%' OR n.titulo ILIKE '%transmisi%'
-                   OR n.numero IN ('20936','62','10'))
+              -- El filtro de dominio de arriba (`fuera_de_dominio`) YA decide que normas
+              -- entran, y lo hace por ARTICULADO con un clasificador. Aca habia ademas una
+              -- lista de titulos a mano ('%transferencia%', '%peaje%', '%tarif%'...) mas
+              -- `n.numero IN ('20936','62','10')`. Era hardcodeo en el pipeline, redundante
+              -- con el clasificador y ademas DAÑINO: el DS 327 (Reglamento de la LGSE), el
+              -- DS 125, el DS 88 y el DS 44 no matchean ninguno de esos patrones, asi que
+              -- nunca fueron candidatos -- por eso las cuatro normas nuevas quedaron con 0
+              -- obligaciones. Y '20936' es la norma cuyo articulado resulto mal atribuido.
+              AND (a.metadata->>'duplicado_de') IS NULL
+              AND NOT coalesce(a.derogado, false)
             ORDER BY n.tipo, n.numero, a.id
         """)
         r = cur.fetchall()

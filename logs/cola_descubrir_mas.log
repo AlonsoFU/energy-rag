@@ -1,0 +1,14 @@
+documentos leidos            : 9
+citas articulo->norma        : 21
+  a normas DEL corpus        : 17  (8 normas)
+     ...y el ARTICULO existe : 15   <- sirven como gold
+     ...articulo NO esta     : 2
+  a normas que FALTAN        : 4  (4 normas)
+
+--- normas citadas por el sector que NO estan en el corpus ---
+    1  LEY 198801   artículo 62 de la Ley N°19.8801  (¿será LEY 19880? numero pegado por el PDF)
+    1  DECRETO 97       artículo 6 del Decreto Supremo N°97
+    1  DECRETO 244      artículo 39 del Decreto Supremo N°244
+    1  DECRETO 8810     artículo 9 del Decreto Supremo Nº8810  (¿será DECRETO 88? numero pegado por el PDF)
+
+escrito docs/normativa-usada-en-discrepancias.md

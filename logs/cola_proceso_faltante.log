@@ -1,0 +1,26 @@
+obligaciones                       : 1178
+  con proceso del articulado       : 912  (77 %)
+  en normas SIN estructura         : 39
+  articulo no ubicado en el texto  : 9
+  en normas que TRANSCRIBEN articulado: 218  (1 normas) -- no se asigna, ver comentario
+  procesos distintos               : 84
+
+--- procesos con más obligaciones ---
+    53  De la Licitación para la Creación, Implementación, Mantención y Administ
+    47  Del Ambiente Privado
+    42  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    33  Apertura, evaluación y adjudicación de obras
+    31  MECANISMO TRANSITORIO DE PROTECCIÓN AL CLIENTE
+    31  Disposiciones generales
+    28  Del Procedimiento para el uso de la capacidad técnica de transmisión dis
+    26  Del procedimiento de solicitud de autorización de conexión
+    25  Supervisión de la ejecución de los proyectos
+    23  De los requerimientos técnicos operativos mínimos
+    22  DEFINICIÓN DE OBRAS DE EXPANSIÓN DE LOS SISTEMAS DE TRANSMISIÓN
+    22  POTENCIA INICIAL
+    21  POTENCIA MAXIMA Y CONTROL ESTADÍSTICO
+    20  PROCEDIMIENTO DE PLANIFICACIÓN DE LA TRANSMISIÓN
+    19  OBJETIVOS Y CRITERIOS GENERALES DE LA PLANIFICACIÓN DE LA TRANSMISIÓN
+  limpiadas 912 asignaciones previas
+
+ESCRITAS 912 filas de `obligacion.proceso`

@@ -38,3 +38,15 @@ MARCADAS 0 normas y 21 articulos como derogados
 
 ESCRITAS 912 filas de `obligacion.proceso`
 --- 6. obligaciones (LLM, lento)
+        La presente resolución → deberá estar disponible · plazo: a más tarde el día hábil s
+
+=== propuestas 1119 · VÁLIDAS 1076 · descartadas 43 GUARDADAS ===
+   descartadas por evidencia no es cita literal: 21
+   descartadas por sujeto no aparece: 14
+   descartadas por plazo inventado: 8
+--- 7. citas
+citadas y NO en el corpus           : 1856  (452 normas distintas)
+   ...de esas, citadas DESDE el dominio electrico: 389 normas
+escritas 1773 filas remite en `referencias`
+escrito docs/frontera-candidatas.md
+=== fin 2026-08-25 09:04:40 ===

@@ -3,9 +3,9 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **3576**
-- resueltas a normas del corpus: **1756**
-- apuntan fuera del corpus: **1820** (450 normas distintas)
+- citas norma→norma detectadas en el texto: **3629**
+- resueltas a normas del corpus: **1773**
+- apuntan fuera del corpus: **1856** (452 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma
@@ -17,6 +17,7 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | DECRETO | 42 | **77** | 77 | Decreto 42 |
 | LEY | 21150 | **65** | 65 | Ley 21150 |
 | LEY | 20955 | **55** | 55 | Ley 20955 |
+| DECRETO | 30 | **38** | 38 | Decreto 30 |
 | LEY | 21806 | **18** | 20 | Ley 21806 |
 | LEY | 21805 | **18** | 18 | Ley 21805 |
 | DFL | 29 | **15** | 17 | decreto con fuerza de ley N° 29 |
@@ -41,7 +42,6 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | LEY | 20379 | **10** | 10 | ley N° 20.379 |
 | LEY | 19955 | **10** | 10 | LEY 19955 |
 | DL | 3500 | **9** | 10 | decreto ley N° 3.500 |
-| DECRETO | 125 | **9** | 9 | decreto supremo N° 125 |
 | LEY | 19327 | **9** | 9 | ley Nº 19.327 |
 | LEY | 20283 | **8** | 8 | ley N° 20.283 |
 | DL | 2224 | **8** | 8 | decreto ley Nº 2.224 |
@@ -77,6 +77,7 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | LEY | 20948 | **5** | 5 | ley N° 20.948 |
 | LEY | 21455 | **5** | 5 | Ley 21455 |
 | LEY | 18845 | **5** | 5 | ley Nº 18.845 |
+| LEY | 4 | **5** | 5 | ley Nº 4 |
 | LEY | 19718 | **5** | 5 | ley N° 19.718 |
 | LEY | 19653 | **5** | 5 | LEY 19653 |
 | DFL | 850 | **4** | 7 | decreto con fuerza de ley N° 850 |
@@ -86,6 +87,7 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | DL | 3166 | **4** | 4 | decreto ley N° 3.166 |
 | LEY | 19378 | **4** | 4 | ley N° 19.378 |
 | LEY | 21040 | **4** | 4 | ley N° 21.040 |
+| DECRETO | 385 | **4** | 4 | decreto 385 |
 | LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
 | DECRETO | 134 | **4** | 4 | Decreto N° 134 |
 | DECRETO | 106 | **4** | 4 | decreto supremo Nº 106 |
@@ -112,7 +114,6 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | LEY | 19995 | **3** | 3 | ley N° 19.995 |
 | LEY | 20551 | **3** | 3 | ley N° 20.551 |
 | LEY | 20248 | **3** | 3 | ley N° 20.248 |
-| DECRETO | 385 | **3** | 3 | decreto 385 |
 | DECRETO | 181 | **3** | 3 | decreto supremo Nº 181 |
 | LEY | 21600 | **3** | 3 | ley N° 21.600 |
 | LEY | 19646 | **3** | 3 | ley N° 19.646 |
@@ -132,6 +133,5 @@ citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 | DL | 321 | **3** | 3 | decreto ley N°321 |
 | DL | 1056 | **3** | 3 | decreto ley Nº1.056 |
 | LEY | 18196 | **3** | 3 | ley Nº18.196 |
-| LEY | 19970 | **3** | 3 | ley N°19.970 |
 
-_(450 normas distintas en total; se listan las 120 más citadas)_
+_(452 normas distintas en total; se listan las 120 más citadas)_
