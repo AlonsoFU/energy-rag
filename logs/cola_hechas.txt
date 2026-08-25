@@ -1,4 +1,5 @@
-descubrir_mas
-proceso_faltante
-derogaciones
-duplicados
+proceso_v2
+derogaciones_v2
+duplicados_v2
+citas_v2
+descubrir_v2

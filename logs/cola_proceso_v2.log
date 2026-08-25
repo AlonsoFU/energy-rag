@@ -1,0 +1,26 @@
+obligaciones                       : 3695
+  con proceso del articulado       : 2214  (59 %)
+  en normas SIN estructura         : 1092
+  articulo no ubicado en el texto  : 160
+  en normas que TRANSCRIBEN articulado: 229  (2 normas) -- no se asigna, ver comentario
+  procesos distintos               : 197
+
+--- procesos con más obligaciones ---
+   135  MODIFICACIONES A OTROS CUERPOS LEGALES
+    53  De la Licitación para la Creación, Implementación, Mantención y Administ
+    48  Disposiciones generales
+    47  Ventas a Clientes Finales de Potencia
+    47  Del Ambiente Privado
+    42  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    40  CONCESIONES DEFINITIVAS
+    36  Sobre la clasificación de los PMGD como de impacto no significativo y lo
+    35  Apertura, evaluación y adjudicación de obras
+    34  CONSIDERACIONES GENERALES
+    31  MECANISMO TRANSITORIO DE PROTECCIÓN AL CLIENTE
+    30  Del Procedimiento para el uso de la capacidad técnica de transmisión dis
+    28  De la tramitación electrónica de los procedimientos judiciales
+    27  Registros de profesionales y entidades técnicas
+    26  Del procedimiento de solicitud de autorización de conexión
+  limpiadas 912 asignaciones previas
+
+ESCRITAS 2214 filas de `obligacion.proceso`

@@ -13,3 +13,10 @@
 2026-08-25 10:00:01  PARADO  <-- nada trabajando     gpu=19.62 W, 0 %  pg=running  cola=47 resultados
 2026-08-25 11:00:01  PARADO  <-- nada trabajando     gpu=20.04 W, 0 %  pg=running  cola=47 resultados
 2026-08-25 12:00:01  PARADO  <-- nada trabajando     gpu=30.27 W, 0 %  pg=running  cola=47 resultados
+2026-08-25 13:00:01  CORRIENDO  procesos=1  gpu=179.77 W, 97 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 14:00:01  CORRIENDO  procesos=1  gpu=180.05 W, 96 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 15:00:01  PARADO  <-- nada trabajando     gpu=20.18 W, 0 %  pg=running  cola=47 resultados
+2026-08-25 16:00:01  CORRIENDO  procesos=1  gpu=179.01 W, 100 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 17:00:01  CORRIENDO  procesos=1  gpu=178.42 W, 97 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-25 18:00:01  PARADO  <-- nada trabajando     gpu=20.18 W, 0 %  pg=running  cola=47 resultados
+2026-08-25 19:00:01  PARADO  <-- nada trabajando     gpu=19.64 W, 0 %  pg=running  cola=47 resultados
