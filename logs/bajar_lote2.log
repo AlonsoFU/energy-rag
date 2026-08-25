@@ -1,0 +1,13 @@
+[1/2] LEY 21719 (idNorma 1209272)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1209272
+    titulo: LEY 21719  REGULA LA PROTECCIÓN Y EL TRATAMIENTO DE LOS DATOS PERSONALES Y CRE
+    chars : 155978
+    DUDOSO: dominio 0.259 < 0.3 -- se guarda y se avisa
+    guardado -> data/normas_completas/nuevas/1209272.json  (registrado como LEY-21719)
+[2/2] LEY 20955 (idNorma 1095821)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1095821
+  AVISO: el texto trae placeholders 'Loading' (48123 chars) -- extraccion INCOMPLETA
+    titulo: LEY 20955  PERFECCIONA EL SISTEMA DE ALTA DIRECCIÓN PÚBLICA Y FORTALECE LA DIR
+    chars : 48123
+    DUDOSO: dominio 0.295 < 0.3 -- se guarda y se avisa
+    guardado -> data/normas_completas/nuevas/1095821.json  (registrado como LEY-20955)

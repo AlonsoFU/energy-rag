@@ -1,6 +1,9 @@
 # Cola de trabajo. ETIQUETA|comando. Runner toma la primera no hecha.
-proceso_v2|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
-derogaciones_v2|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
-duplicados_v2|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-citas_v2|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir
-descubrir_v2|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_de_discrepancias
+bajar_lote3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1130640:LEY:21150 1131679:DECRETO:30
+ingerir_lote|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.ingerir_nuevas
+frontera_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+duplicados_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+derogaciones_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
+obligaciones_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_obligaciones
+proceso_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
+citas_v3|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir
