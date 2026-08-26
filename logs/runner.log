@@ -101,3 +101,20 @@
 2026-08-26 15:30:01  cola VACIA -- nada pendiente
 2026-08-26 16:30:01  cola VACIA -- nada pendiente
 2026-08-26 17:30:01  cola VACIA -- nada pendiente
+2026-08-26 18:24:30  LANZO rescrape_dfl4
+2026-08-26 18:25:44  OK    rescrape_dfl4
+2026-08-26 18:25:44  LANZO rescrape_d14
+2026-08-26 18:26:14  OK    rescrape_d14
+2026-08-26 18:26:14  LANZO rescrape_20999
+2026-08-26 18:26:44  OK    rescrape_20999
+2026-08-26 18:26:44  LANZO rescrape_21667
+2026-08-26 18:27:12  OK    rescrape_21667
+2026-08-26 18:27:12  LANZO rescrape_20936
+2026-08-26 18:27:43  OK    rescrape_20936
+2026-08-26 18:27:43  drenaje terminado: 5/5
+2026-08-26 18:30:01  cola VACIA -- nada pendiente
+2026-08-26 18:51:07  LANZO rs_20999
+2026-08-26 18:51:37  OK    rs_20999
+2026-08-26 18:51:37  LANZO rs_21667
+2026-08-26 18:52:05  OK    rs_21667
+2026-08-26 18:52:05  LANZO rs_20936

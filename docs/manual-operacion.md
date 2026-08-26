@@ -139,3 +139,34 @@ la precisión de las citas. Bajarlo a 1 va 3× más rápido y hace caer `cita_li
 
 Queda vLLM como única vía abierta. ⚠️ Su cuello es la **RAM de 14 GB** (distinto del cuello de
 VRAM de exp #56).
+
+---
+
+## Diagnosticar una norma "truncada"
+
+`texto_completo` con el placeholder `Loading` **no significa que el corpus esté roto**. El
+retrieval no lee `texto_completo`: lee `fragmentos`, que salen de `articulos`. Lo que hay que
+comparar es cuánto del documento cubre el articulado.
+
+```sql
+SELECT n.tipo, n.numero, length(n.texto_completo) tc,
+       count(a.id) arts, coalesce(sum(length(a.texto)),0) suma
+FROM normas n LEFT JOIN articulos a ON a.id_norma = n.id_norma
+WHERE n.texto_completo ILIKE '%Loading%'
+GROUP BY 1,2,3;
+```
+
+```
+suma / tc  >= 0.9   el articulado cubre el documento -> NO tocar
+suma / tc  <  0.9   articulado incompleto -> re-scrape + scripts.actualizar_norma
+suma >> tc          los articulos vienen de otra pasada y estan completos -> NO tocar
+```
+
+Medido el 26-08 sobre las 8 normas en dominio con `Loading`: **sólo 3** tenían el articulado
+incompleto (LEY 20936 0.63, LEY 20999 0.58, LEY 21667 0.53). El `DFL 4` daba la peor pinta
+—10.075 caracteres de `texto_completo`— y es el que está **mejor**: sus 330 artículos suman
+496.409 caracteres.
+
+⚠️ `scripts/actualizar_norma.py` aborta si el articulado caería bajo el 90 %. Pasó con el
+`DFL 4`: el texto nuevo era 58× más grande y aun así el reemplazo lo habría dejado en 278
+artículos de 330. **El texto puede crecer y el articulado encoger igual.**
