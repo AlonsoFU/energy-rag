@@ -164,3 +164,34 @@ Si una norma nueva modifica una que tenemos, es relevante por definición.
 CNE · SEC · CEN publican resoluciones que BCN no indexa. **Sin esto el corpus no
 cubre la operación diaria de la subgerencia** (la NTCO fija los plazos del Informe
 de Valorización de Transferencias Económicas). No implementado.
+
+---
+
+## 2026-08-25 — el ranking por citas NO distingue materia
+
+Se bajaron las 4 normas ausentes más citadas del reporte. **Ninguna es del dominio eléctrico:**
+
+```
+LEY 21719    85 citas   Protección de Datos Personales        dominio 0.259  DUDOSO
+LEY 21150    65 citas   Ministerio de Desarrollo Social       dominio 0.191  DUDOSO
+LEY 20955    55 citas   Alta Dirección Pública                dominio 0.295  DUDOSO
+DECRETO 30   38 citas   Movilidad local (transporte)          dominio 0.341  pasó
+```
+
+**Por qué falla el ranking.** La columna `desde_elec` cuenta cuántas veces la cita **una norma
+del dominio**. Eso mide quién cita, no *qué se cita*: el articulado eléctrico remite todo el
+tiempo a normas generales —protección de datos, procedimiento administrativo, compras
+públicas— y esas remisiones no las convierten en normativa eléctrica.
+
+Ordenar candidatas por número de citas trae, arriba de todo, exactamente las normas
+transversales que más se citan de paso.
+
+**Lo que sí sirvió:** el descubrimiento por USO (discrepancias ante el Panel) trajo el DS 44 y
+el DS 88, ambos del dominio y con puntaje alto (0.579 y 0.591). La diferencia es que ahí la
+norma aparece **como fundamento de una controversia eléctrica**, no como remisión de paso.
+
+⚠️ `DECRETO 30` pasó el corte con **0.341** siendo un reglamento de transporte: es un falso
+positivo del clasificador, no un acierto. El corte 0.30 no separa bien en esa zona.
+
+**Para la próxima:** ordenar las candidatas por puntaje de dominio **antes** de bajarlas, no
+por veces citada. Bajar por citas gasta descargas en normas que después hay que marcar fuera.

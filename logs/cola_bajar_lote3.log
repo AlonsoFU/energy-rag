@@ -1,0 +1,12 @@
+[1/2] LEY 21150 (idNorma 1130640)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1130640
+    titulo: LEY 21150  MODIFICA LA LEY Nº 20.530 Y CREA EL MINISTERIO DE DESARROLLO SOCIAL
+    chars : 22430
+    DUDOSO: dominio 0.191 < 0.3 -- se guarda y se avisa
+    guardado -> data/normas_completas/nuevas/1130640.json  (registrado como LEY-21150)
+[2/2] DECRETO 30 (idNorma 1131679)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1131679
+    titulo: DECRETO 30 REGLAMENTO SOBRE MITIGACIÓN DE IMPACTOS AL SISTEMA DE MOVILIDAD LOC
+    chars : 263473
+    dominio 0.341  ok
+    guardado -> data/normas_completas/nuevas/1131679.json  (registrado como DECRETO-30)

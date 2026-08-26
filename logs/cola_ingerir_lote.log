@@ -1,0 +1,37 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 8519.25it/s]
+  LEY-20936      ya en el corpus, salteo
+  LEY-20955      sim=0.225 FUERA  8 arts  LEY 20955  PERFECCIONA EL SISTEMA DE A
+  DECRETO-44     ya en el corpus, salteo
+  LEY-21185      ✗ IDENTIDAD: bajo 'RESOLUCIÓN 21185 EXENTA APRUEBA PROTOCOLO DE'
+  LEY-21150      sim=0.134 FUERA  4 arts  LEY 21150  MODIFICA LA LEY Nº 20.530 Y
+  DECRETO-30     sim=0.279 FUERA  4 arts  DECRETO 30 REGLAMENTO SOBRE MITIGACIÓN
+  DECRETO-125    ya en el corpus, salteo
+  DECRETO-55     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 55 EXTRACTO DE RESOLUCIÓN Nº 55, '
+  DECRETO-88     ya en el corpus, salteo
+  LEY-21472      ya en el corpus, salteo
+  LEY-21667      ya en el corpus, salteo
+  LEY-21711      ya en el corpus, salteo
+  LEY-21719      sim=0.260 FUERA  70 arts  LEY 21719  REGULA LA PROTECCIÓN Y EL T
+  DL-2763        ✗ IDENTIDAD: bajo 'ACUERDO 1ACUERDO 2763-01-260115SESIÓN ORDINA'
+  DECRETO-327    ya en el corpus, salteo
+  LEY-19613      ya en el corpus, salteo
+  DECRETO-97     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 97RESOLUCIÓN A-97 EXTRACTO DE RES'
+  DFL-850        ✗ IDENTIDAD: bajo 'DECRETO 850 EXENTO EXTRACTO DE DECRETO Nº 85'
+  DFL-29         ✗ IDENTIDAD: bajo 'DECRETO 29 EXTRACTO DE DECRETO EXENTO N° 29,'
+  DFL-164        ✗ IDENTIDAD: bajo 'DECRETO 164 EXTRACTO DE DECRETO N° 164 EXENT'
+  LEY-19880      ya en el corpus, salteo
+  LEY-19882      ya en el corpus, salteo
+  LEY-19971      ya en el corpus, salteo
+  DL-2224        ✗ IDENTIDAD: bajo 'RESOLUCION 2224 EXENTA'
+  LEY-20285      ya en el corpus, salteo
+  LEY-18045      ya en el corpus, salteo
+  LEY-18287      ya en el corpus, salteo
+  LEY-18290      ya en el corpus, salteo
+  LEY-18575      ya en el corpus, salteo
+  LEY-18834      ya en el corpus, salteo
+  LEY-19300      ya en el corpus, salteo
+  LEY-19496      ya en el corpus, salteo
+  DECRETO-42     ✗ IDENTIDAD: bajo 'ACUERDO 42ACUERDO 42-04 ACUERDOS ADOPTADOS P'
+  LEY-19553      ya en el corpus, salteo
+
+=== validas 4 · rechazadas por identidad 9 · marcadas fuera de dominio 4 · articulos 86 INGESTADOS ===
