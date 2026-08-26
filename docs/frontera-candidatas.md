@@ -3,135 +3,143 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **3629**
-- resueltas a normas del corpus: **1773**
-- apuntan fuera del corpus: **1856** (452 normas distintas)
+- citas norma→norma detectadas en el texto: **3679**
+- resueltas a normas del corpus: **2042**
+- apuntan fuera del corpus: **1637** (452 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma
 citada solo por la Ley de Tránsito no entra al corpus eléctrico.
 
-| tipo | número | desde_elec | total | ejemplo |
-|---|---|---|---|---|
-| LEY | 21719 | **85** | 85 | ley N° 21.719 |
-| DECRETO | 42 | **77** | 77 | Decreto 42 |
-| LEY | 21150 | **65** | 65 | Ley 21150 |
-| LEY | 20955 | **55** | 55 | Ley 20955 |
-| DECRETO | 30 | **38** | 38 | Decreto 30 |
-| LEY | 21806 | **18** | 20 | Ley 21806 |
-| LEY | 21805 | **18** | 18 | Ley 21805 |
-| DFL | 29 | **15** | 17 | decreto con fuerza de ley N° 29 |
-| LEY | 18046 | **15** | 15 | ley N°18.046 |
-| LEY | 19886 | **15** | 15 | ley N° 19.886 |
-| LEY | 21185 | **14** | 24 | Ley N° 21.185 |
-| DL | 249 | **14** | 14 | decreto ley N° 249 |
-| LEY | 21090 | **13** | 13 | Ley 21090 |
-| LEY | 21563 | **13** | 13 | Ley 21563 |
-| DL | 2763 | **13** | 13 | decreto ley N° 2.763 |
-| LEY | 20033 | **12** | 12 | LEY 20033 |
-| LEY | 18695 | **11** | 14 | ley N° 18.695 |
-| LEY | 20000 | **11** | 14 | ley Nº 20.000 |
-| DFL | 2 | **11** | 11 | decreto con fuerza de ley N° 2 |
-| LEY | 19665 | **11** | 11 | ley Nº 19.665 |
-| LEY | 20066 | **11** | 11 | ley N° 20.066 |
-| LEY | 20382 | **11** | 11 | Ley 20382 |
-| DL | 1263 | **10** | 10 | decreto ley N° 1.263 |
-| DL | 3063 | **10** | 10 | decreto ley N° 3.063 |
-| DECRETO | 92 | **10** | 10 | decreto Nº 92 |
-| LEY | 20191 | **10** | 10 | LEY 20191 |
-| LEY | 20379 | **10** | 10 | ley N° 20.379 |
-| LEY | 19955 | **10** | 10 | LEY 19955 |
-| DL | 3500 | **9** | 10 | decreto ley N° 3.500 |
-| LEY | 19327 | **9** | 9 | ley Nº 19.327 |
-| LEY | 20283 | **8** | 8 | ley N° 20.283 |
-| DL | 2224 | **8** | 8 | decreto ley Nº 2.224 |
-| DECRETO | 55 | **8** | 8 | decreto supremo N° 55 |
-| LEY | 17105 | **7** | 7 | ley Nº 17.105 |
-| LEY | 19863 | **7** | 7 | ley N°19.863 |
-| LEY | 21526 | **7** | 7 | ley N° 21.526 |
-| LEY | 21314 | **7** | 7 | Ley 21314 |
-| LEY | 20417 | **7** | 7 | Ley 20417 |
-| DFL | 3 | **6** | 6 | decreto con fuerza de ley N° 3 |
-| LEY | 21194 | **6** | 6 | ley N° 21.194 |
-| DFL | 5 | **6** | 6 | decreto con fuerza de ley N° 5 |
-| LEY | 9618 | **6** | 6 | ley Nº 9.618 |
-| LEY | 20609 | **6** | 6 | ley N° 20.609 |
-| LEY | 19640 | **6** | 6 | ley Nº 19.640 |
-| DL | 2859 | **6** | 6 | decreto ley N° 2.859 |
-| LEY | 19799 | **6** | 6 | ley Nº 19.799 |
-| DFL | 164 | **5** | 15 | decreto con fuerza de ley Nº 164 |
-| LEY | 19968 | **5** | 5 | Ley N° 19.968 |
-| DFL | 382 | **5** | 5 | decreto con fuerza de ley N° 382 |
-| DECRETO | 291 | **5** | 5 | decreto supremo Nº 291 |
-| DECRETO | 121 | **5** | 5 | Decreto N°121 |
-| DECRETO | 244 | **5** | 5 | Decreto N° 244 |
-| DFL | 323 | **5** | 5 | Decreto con fuerza de ley Nº 323 |
-| DFL | 206 | **5** | 5 | decreto con fuerza de ley N° 206 |
-| DL | 824 | **5** | 5 | decreto ley N° 824 |
-| LEY | 19812 | **5** | 5 | LEY 19812 |
-| DFL | 458 | **5** | 5 | decreto con fuerza de ley N°458 |
-| LEY | 19464 | **5** | 5 | ley N° 19.464 |
-| LEY | 21109 | **5** | 5 | ley N° 21.109 |
-| LEY | 17798 | **5** | 5 | ley N° 17.798 |
-| LEY | 16744 | **5** | 5 | ley N° 16.744 |
-| LEY | 20948 | **5** | 5 | ley N° 20.948 |
-| LEY | 21455 | **5** | 5 | Ley 21455 |
-| LEY | 18845 | **5** | 5 | ley Nº 18.845 |
-| LEY | 4 | **5** | 5 | ley Nº 4 |
-| LEY | 19718 | **5** | 5 | ley N° 19.718 |
-| LEY | 19653 | **5** | 5 | LEY 19653 |
-| DFL | 850 | **4** | 7 | decreto con fuerza de ley N° 850 |
-| LEY | 15840 | **4** | 5 | ley N° 15.840 |
-| DL | 211 | **4** | 5 | decreto ley N° 211 |
-| LEY | 18216 | **4** | 5 | ley Nº 18.216 |
-| DL | 3166 | **4** | 4 | decreto ley N° 3.166 |
-| LEY | 19378 | **4** | 4 | ley N° 19.378 |
-| LEY | 21040 | **4** | 4 | ley N° 21.040 |
-| DECRETO | 385 | **4** | 4 | decreto 385 |
-| LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
-| DECRETO | 134 | **4** | 4 | Decreto N° 134 |
-| DECRETO | 106 | **4** | 4 | decreto supremo Nº 106 |
-| LEY | 19253 | **4** | 4 | ley N° 19.253 |
-| DECRETO | 71 | **4** | 4 | decreto supremo Nº 71 |
-| LEY | 15386 | **4** | 4 | ley N° 15.386 |
-| LEY | 21196 | **4** | 4 | ley N° 21.196 |
-| LEY | 19418 | **4** | 4 | ley Nº 19.418 |
-| LEY | 21658 | **4** | 4 | Ley 21658 |
-| LEY | 21325 | **4** | 4 | ley N° 21.325 |
-| LEY | 21302 | **4** | 4 | ley Nº 21.302 |
-| LEY | 19296 | **4** | 4 | ley Nº 19.296 |
-| DL | 1953 | **4** | 4 | decreto ley N° 1.953 |
-| LEY | 19664 | **4** | 4 | ley Nº 19.664 |
-| LEY | 21094 | **4** | 4 | ley N° 21.094 |
-| LEY | 20255 | **4** | 4 | ley N° 20.255 |
-| LEY | 21306 | **4** | 4 | ley N° 21.306 |
-| LEY | 20422 | **4** | 4 | ley N° 20.422 |
-| LEY | 19533 | **4** | 4 | ley Nº 19.533 |
-| LEY | 21833 | **3** | 21 | Ley 21833 |
-| LEY | 15231 | **3** | 6 | ley Nº 15.231 |
-| LEY | 18987 | **3** | 3 | ley N° 18.987 |
-| DECRETO | 38 | **3** | 3 | decreto N° 38 |
-| LEY | 19995 | **3** | 3 | ley N° 19.995 |
-| LEY | 20551 | **3** | 3 | ley N° 20.551 |
-| LEY | 20248 | **3** | 3 | ley N° 20.248 |
-| DECRETO | 181 | **3** | 3 | decreto supremo Nº 181 |
-| LEY | 21600 | **3** | 3 | ley N° 21.600 |
-| LEY | 19646 | **3** | 3 | ley N° 19.646 |
-| LEY | 18883 | **3** | 3 | ley N° 18.883 |
-| DL | 1305 | **3** | 3 | decreto ley N° 1.305 |
-| LEY | 16319 | **3** | 3 | ley N° 16.319 |
-| DECRETO | 98 | **3** | 3 | Decreto 98 |
-| LEY | 20880 | **3** | 3 | ley N° 20.880 |
-| LEY | 16618 | **3** | 3 | ley Nº 16.618 |
-| DECRETO | 2385 | **3** | 3 | decreto supremo Nº 2.385 |
-| DL | 2460 | **3** | 3 | decreto ley N°2.460 |
-| LEY | 19123 | **3** | 3 | ley N° 19.123 |
-| LEY | 19992 | **3** | 3 | ley N° 19.992 |
-| LEY | 20405 | **3** | 3 | ley N° 20.405 |
-| LEY | 19949 | **3** | 3 | ley N° 19.949 |
-| LEY | 18091 | **3** | 3 | ley N° 18.091 |
-| DL | 321 | **3** | 3 | decreto ley N°321 |
-| DL | 1056 | **3** | 3 | decreto ley Nº1.056 |
-| LEY | 18196 | **3** | 3 | ley Nº18.196 |
+**Ordenadas por `dom`**, no por citas. `dom` = parecido del CONTEXTO de la cita con
+las funciones de la subgerencia. Es señal débil —mide cómo habla de la norma quien la
+cita, no la norma misma— pero se obtiene sin descargar nada, y ordenar por citas ponía
+arriba justo las transversales: protección de datos (85 citas, dominio real 0.259),
+desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
+
+| dom | tipo | número | desde_elec | total | ejemplo |
+|---|---|---|---|---|---|
+| 0.572 | LEY | 21833 | **3** | 21 | Ley 21833 |
+| 0.562 | LEY | 21194 | **6** | 6 | ley N° 21.194 |
+| 0.550 | DECRETO | 42 | **77** | 77 | Decreto 42 |
+| 0.546 | RESOLUCION | 334 | **2** | 2 | resolución exenta N° 334 |
+| 0.545 | LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
+| 0.533 | DECRETO | 385 | **4** | 4 | decreto 385 |
+| 0.530 | RESOLUCION | 1312 | **1** | 1 | resolución exenta Nº 1.312 |
+| 0.525 | DECRETO | 71 | **4** | 4 | decreto supremo Nº 71 |
+| 0.524 | DECRETO | 291 | **5** | 5 | decreto supremo Nº 291 |
+| 0.511 | DECRETO | 207 | **1** | 1 | decreto supremo Nº 207 |
+| 0.501 | DECRETO | 106 | **4** | 4 | decreto supremo Nº 106 |
+| 0.497 | DECRETO | 121 | **5** | 5 | Decreto N°121 |
+| 0.493 | RESOLUCION | 706 | **1** | 1 | resolución exenta Nº 706 |
+| 0.492 | RESOLUCION | 659 | **2** | 2 | resolución exenta Nº 659 |
+| 0.488 | DL | 1057 | **1** | 1 | decreto ley 1.057 |
+| 0.476 | DECRETO | 244 | **5** | 5 | Decreto N° 244 |
+| 0.471 | RESOLUCION | 83 | **0** | 1 | Resolución Exenta N° 83 |
+| 0.468 | DECRETO | 49 | **2** | 2 | decreto supremo N° 49 |
+| 0.466 | DECRETO | 181 | **3** | 3 | decreto supremo Nº 181 |
+| 0.461 | DFL | 5 | **6** | 6 | decreto con fuerza de ley N° 5 |
+| 0.455 | DECRETO | 105 | **2** | 2 | Decreto Nº 105 |
+| 0.455 | DECRETO | 46 | **1** | 1 | Decreto Nº 46 |
+| 0.454 | LEY | 18876 | **0** | 1 | ley Nº 18.876 |
+| 0.453 | DECRETO | 85 | **1** | 1 | Decreto Nº 85 |
+| 0.446 | DECRETO | 127 | **2** | 2 | Decreto Nº 127 |
+| 0.446 | DECRETO | 139 | **1** | 1 | Decreto Supremo Nº 139 |
+| 0.445 | DECRETO | 82 | **2** | 2 | Decreto Nº 82 |
+| 0.444 | DECRETO | 162 | **1** | 1 | decreto Nº 162 |
+| 0.443 | RESOLUCION | 675 | **1** | 1 | Resolución 675 |
+| 0.442 | DECRETO | 264 | **1** | 1 | Decreto Nº 264 |
+| 0.439 | LEY | 21185 | **14** | 24 | Ley N° 21.185 |
+| 0.438 | LEY | 18046 | **15** | 15 | ley N°18.046 |
+| 0.432 | DECRETO | 40 | **2** | 2 | Decreto Nº 40 |
+| 0.431 | DECRETO | 84 | **1** | 1 | Decreto Nº 84 |
+| 0.430 | LEY | 16319 | **3** | 3 | ley N° 16.319 |
+| 0.427 | DECRETO | 98 | **3** | 3 | Decreto 98 |
+| 0.425 | RESOLUCION | 52 | **1** | 1 | resolución exenta Nº 52 |
+| 0.420 | DECRETO | 92 | **10** | 10 | decreto Nº 92 |
+| 0.420 | DECRETO | 23 | **1** | 1 | Decreto Nº 23 |
+| 0.418 | DECRETO | 341 | **2** | 2 | decreto supremo Nº 341 |
+| 0.417 | DL | 1939 | **3** | 3 | decreto ley Nº1.939 |
+| 0.415 | DL | 211 | **4** | 5 | decreto ley N° 211 |
+| 0.413 | DL | 824 | **5** | 5 | decreto ley N° 824 |
+| 0.409 | DECRETO | 16 | **1** | 1 | Decreto Nº 16 |
+| 0.402 | RESOLUCION | 338 | **1** | 1 | resolución exenta Nº 338 |
+| 0.398 | LEY | 9618 | **6** | 6 | ley Nº 9.618 |
+| 0.396 | DECRETO | 64 | **1** | 1 | Decreto Nº 64 |
+| 0.388 | LEY | 20575 | **2** | 2 | Ley 20575 |
+| 0.385 | DECRETO | 454 | **1** | 1 | Decreto 454 |
+| 0.381 | LEY | 21213 | **0** | 2 | ley N° 21.213 |
+| 0.376 | DL | 3538 | **2** | 2 | decreto ley N° 3.538 |
+| 0.374 | LEY | 21603 | **1** | 1 | ley N° 21.603 |
+| 0.371 | DECRETO | 134 | **4** | 4 | Decreto N° 134 |
+| 0.370 | LEY | 20658 | **2** | 2 | ley N° 20.658 |
+| 0.370 | DECRETO | 229 | **1** | 1 | decreto supremo Nº 229 |
+| 0.368 | LEY | 18840 | **1** | 3 | ley N° 18.840 |
+| 0.368 | DECRETO | 294 | **0** | 5 | decreto supremo N° 294 |
+| 0.367 | DFL | 338 | **1** | 1 | decreto con fuerza de ley N° 338 |
+| 0.367 | LEY | 21329 | **0** | 1 | Ley 21329 |
+| 0.365 | DL | 3063 | **10** | 10 | decreto ley N° 3.063 |
+| 0.364 | LEY | 18660 | **2** | 2 | LEY 18660 |
+| 0.363 | LEY | 18091 | **3** | 3 | ley N° 18.091 |
+| 0.363 | LEY | 20555 | **1** | 1 | Ley 20555 |
+| 0.362 | DECRETO | 6 | **2** | 2 | decreto supremo Nº 6 |
+| 0.360 | LEY | 21314 | **7** | 7 | Ley 21314 |
+| 0.360 | LEY | 19404 | **1** | 1 | ley N° 19.404 |
+| 0.359 | DL | 2224 | **8** | 8 | decreto ley Nº 2.224 |
+| 0.359 | LEY | 21793 | **0** | 1 | Ley 21793 |
+| 0.358 | DECRETO | 38 | **3** | 3 | decreto N° 38 |
+| 0.358 | DL | 825 | **2** | 2 | decreto ley N° 825 |
+| 0.358 | DFL | 279 | **1** | 1 | decreto con fuerza de ley N° 279 |
+| 0.357 | LEY | 21040 | **4** | 4 | ley N° 21.040 |
+| 0.357 | DL | 1953 | **4** | 4 | decreto ley N° 1.953 |
+| 0.356 | RESOLUCION | 18 | **1** | 1 | resolución exenta Nº 18 |
+| 0.353 | DFL | 2186 | **0** | 1 | decreto con fuerza de ley N° 2.186 |
+| 0.352 | LEY | 20382 | **11** | 11 | Ley 20382 |
+| 0.351 | LEY | 20378 | **1** | 1 | ley N° 20.378 |
+| 0.348 | LEY | 20998 | **1** | 1 | ley
+N° 20.998 |
+| 0.346 | RESOLUCION | 79 | **1** | 1 | resolución Nº 79 |
+| 0.345 | DECRETO | 119 | **2** | 2 | decreto supremo N°
+119 |
+| 0.344 | LEY | 19296 | **4** | 4 | ley Nº 19.296 |
+| 0.343 | LEY | 19863 | **7** | 7 | ley N°19.863 |
+| 0.343 | DECRETO | 128 | **1** | 1 | decreto supremo Nº 128 |
+| 0.343 | LEY | 18059 | **1** | 1 | ley N° 18.059 |
+| 0.340 | DECRETO | 55 | **8** | 8 | decreto supremo N° 55 |
+| 0.337 | LEY | 21563 | **13** | 13 | Ley 21563 |
+| 0.337 | LEY | 18302 | **2** | 2 | ley Nº 18.302 |
+| 0.336 | LEY | 21806 | **27** | 29 | Ley 21806 |
+| 0.336 | LEY | 19955 | **10** | 10 | LEY 19955 |
+| 0.336 | DL | 1056 | **3** | 3 | decreto ley Nº1.056 |
+| 0.334 | DL | 2763 | **13** | 13 | decreto ley N° 2.763 |
+| 0.334 | DFL | 323 | **5** | 5 | Decreto con fuerza de ley Nº 323 |
+| 0.330 | DFL | 850 | **4** | 7 | decreto con fuerza de ley N° 850 |
+| 0.330 | LEY | 21196 | **4** | 4 | ley N° 21.196 |
+| 0.328 | LEY | 20322 | **1** | 1 | ley N° 20.322 |
+| 0.327 | LEY | 21214 | **1** | 1 | Ley 21214 |
+| 0.326 | DECRETO | 118 | **1** | 1 | decreto supremo Nº 118 |
+| 0.325 | LEY | 19886 | **15** | 15 | ley N° 19.886 |
+| 0.325 | DL | 3500 | **9** | 10 | decreto ley N° 3.500 |
+| 0.325 | DFL | 164 | **5** | 15 | decreto con fuerza de ley Nº 164 |
+| 0.325 | LEY | 21722 | **2** | 2 | ley N° 21.722 |
+| 0.325 | LEY | 21659 | **0** | 2 | Ley 21659 |
+| 0.325 | LEY | 20879 | **0** | 3 | Ley 20879 |
+| 0.323 | DL | 249 | **16** | 16 | decreto ley N° 249 |
+| 0.323 | LEY | 20313 | **2** | 2 | LEY 20313 |
+| 0.323 | LEY | 16441 | **1** | 1 | ley Nº 16.441 |
+| 0.322 | DFL | 206 | **5** | 5 | decreto con fuerza de ley N° 206 |
+| 0.322 | LEY | 19831 | **1** | 1 | ley N° 19.831 |
+| 0.321 | LEY | 19429 | **2** | 2 | ley N° 19.429 |
+| 0.320 | DL | 1263 | **11** | 11 | decreto ley N° 1.263 |
+| 0.320 | LEY | 20018 | **2** | 2 | LEY 20018 |
+| 0.319 | LEY | 20068 | **0** | 110 | LEY Nº20.068 |
+| 0.317 | LEY | 20212 | **3** | 3 | LEY 20212 |
+| 0.316 | LEY | 19171 | **0** | 4 | LEY 19171 |
+| 0.315 | DL | 3501 | **3** | 3 | decreto ley N° 3.501 |
+| 0.315 | DECRETO | 152 | **1** | 1 | decreto supremo Nº 152 |
+| 0.314 | LEY | 20883 | **1** | 1 | ley N° 20.883 |
+| 0.314 | LEY | 21161 | **0** | 3 | Ley 21161 |
+| 0.313 | DFL | 29 | **16** | 18 | decreto con fuerza de ley N° 29 |
+| 0.313 | LEY | 19872 | **0** | 3 | LEY Nº19.872 |
 
 _(452 normas distintas en total; se listan las 120 más citadas)_

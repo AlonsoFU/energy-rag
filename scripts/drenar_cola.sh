@@ -4,10 +4,12 @@
 # tarea por hora, demasiado lento cuando hay cola cargada y nadie mirando.
 set -u
 cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
-PEND=$(grep -v '^#' scripts/cola.txt | grep -c .)
-for _ in $(seq 1 "$PEND"); do
-  ./scripts/runner.sh
+# Se recuenta la cola en CADA vuelta: si se agregan tareas mientras drena, el bucle las toma.
+# Antes se fijaba PEND al arrancar y quedaba corto -- paso con 9 tareas fijadas y 10 en cola.
+while :; do
+  PEND=$(grep -v '^#' scripts/cola.txt | grep -c .)
   HECHAS=$(wc -l < logs/cola_hechas.txt 2>/dev/null || echo 0)
   [ "$HECHAS" -ge "$PEND" ] && break
+  ./scripts/runner.sh
 done
 echo "$(date '+%F %T')  drenaje terminado: $(wc -l < logs/cola_hechas.txt)/$PEND" >> logs/runner.log
