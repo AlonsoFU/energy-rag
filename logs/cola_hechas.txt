@@ -6,3 +6,7 @@ act_20999
 act_21667
 act_20936
 act_20720
+dup_f
+der_f
+proc_f
+frontera_f

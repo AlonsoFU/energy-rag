@@ -43,3 +43,4 @@
 2026-08-26 16:00:01  PARADO  <-- nada trabajando     gpu=19.26 W, 0 %  pg=running  cola=47 resultados
 2026-08-26 17:00:01  PARADO  <-- nada trabajando     gpu=20.03 W, 0 %  pg=running  cola=47 resultados
 2026-08-26 18:00:01  PARADO  <-- nada trabajando     gpu=29.20 W, 0 %  pg=running  cola=47 resultados
+2026-08-26 19:00:01  CORRIENDO  procesos=1  gpu=180.04 W, 0 %  pg=running  :: scripts.actualizar_norma scripts.bajar_por_id scripts.detectar_articulos_duplicados scripts.detectar_derogaciones scripts.estructura_articulado scripts.extraer_de_discrepancias scripts.extraer_obligaciones scripts.resolver_citas_normas 

@@ -107,3 +107,34 @@ No se usó lista de palabras clave (sería mi criterio, no el suyo) ni el campo
 | 0.143 | LEY | 20714 | LEY 20714  RESTABLECE EXCEPCIÓN, EN LAS REGIONES DE AYSÉN Y MAGALLANES, ACERCA DE LOS ES |
 | 0.124 | LEY | 21241 | LEY 21241  MODIFICA LA LEY Nº 18.287, QUE ESTABLECE PROCEDIMIENTO ANTE LOS JUZGADOS DE P |
 | 0.106 | LEY | 19814 | LEY 19814 INTRODUCE DIVERSAS MODIFICACIONES A LA LEY DE ALCOHOLES, BEBIDAS ALCOHOLICAS Y |
+
+---
+
+## 2026-08-26 — el corte 0.30 no separa en la zona 0.30–0.42
+
+Medido sobre las normas marcadas **dentro** del dominio con puntaje bajo:
+
+```
+0.315  LEY 19496    protección del consumidor      ajena
+0.332  LEY 20720    insolvencia / concursal        ajena   ← 415 artículos al pool
+0.341  DECRETO 30   movilidad local (transporte)   ajena
+0.355  LEY 18045    mercado de valores             ajena
+0.369  LEY 21711    concesiones geotérmicas        energía, ¿mercados?
+0.394  LEY 21667    estabilización tarifaria       DEL DOMINIO
+0.411  LEY 19882    política de personal           ajena
+```
+
+Cuatro normas claramente ajenas pasan el corte. La peor es la **LEY 20720**: al re-scrapearla
+pasó de 6 a 415 artículos, y con 0.332 entra entera al pool de retrieval.
+
+**Candidato: subir el corte a 0.36.** Sacaría las cuatro ajenas de abajo y dejaría dentro la
+LEY 21667 (0.394), que sí es del dominio. ⚠️ Dejaría fuera la LEY 21711 (0.369, concesiones
+geotérmicas) — que es energía, pero no está claro que sea de la subgerencia de **mercados**.
+
+**NO se aplica sin medir.** Mover el corte cambia qué entra al pool de retrieval, y este
+proyecto ya aprendió que un cambio que "obviamente mejora" puede bajar `cita_limpia`. Hace
+falta el pareado sobre `queries_operativas_v1` con criterio fijado antes.
+
+⚠️ Y hay un caso que ningún corte resuelve: la LEY 19882 puntúa **0.411** —más alto que la
+LEY 21667, que sí es del dominio— y es una ley de política de personal. El puntaje por
+articulado no ordena bien en esta zona; subir el umbral la dejaría dentro igual.
