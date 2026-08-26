@@ -36,3 +36,10 @@
 2026-08-26 09:00:01  PARADO  <-- nada trabajando     gpu=19.69 W, 0 %  pg=running  cola=47 resultados
 2026-08-26 10:00:01  PARADO  <-- nada trabajando     gpu=21.23 W, 0 %  pg=running  cola=47 resultados
 2026-08-26 11:00:01  PARADO  <-- nada trabajando     gpu=20.05 W, 0 %  pg=running  cola=47 resultados
+2026-08-26 12:00:01  CORRIENDO  procesos=1  gpu=179.89 W, 94 %  pg=running  :: scripts.detectar_articulos_duplicados scripts.detectar_derogaciones scripts.estructura_articulado scripts.extraer_obligaciones scripts.resolver_citas_normas 
+2026-08-26 13:00:01  CORRIENDO  procesos=1  gpu=180.32 W, 96 %  pg=running  :: scripts.detectar_articulos_duplicados scripts.detectar_derogaciones scripts.estructura_articulado scripts.extraer_obligaciones scripts.resolver_citas_normas 
+2026-08-26 14:00:01  CORRIENDO  procesos=1  gpu=179.85 W, 97 %  pg=running  :: scripts.detectar_articulos_duplicados scripts.detectar_derogaciones scripts.estructura_articulado scripts.extraer_obligaciones scripts.resolver_citas_normas 
+2026-08-26 15:00:01  PARADO  <-- nada trabajando     gpu=20.80 W, 0 %  pg=running  cola=47 resultados
+2026-08-26 16:00:01  PARADO  <-- nada trabajando     gpu=19.26 W, 0 %  pg=running  cola=47 resultados
+2026-08-26 17:00:01  PARADO  <-- nada trabajando     gpu=20.03 W, 0 %  pg=running  cola=47 resultados
+2026-08-26 18:00:01  PARADO  <-- nada trabajando     gpu=29.20 W, 0 %  pg=running  cola=47 resultados

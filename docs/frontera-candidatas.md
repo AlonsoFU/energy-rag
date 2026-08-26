@@ -3,9 +3,9 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **3701**
-- resueltas a normas del corpus: **2144**
-- apuntan fuera del corpus: **1557** (450 normas distintas)
+- citas norma→norma detectadas en el texto: **3752**
+- resueltas a normas del corpus: **2164**
+- apuntan fuera del corpus: **1588** (451 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma
@@ -19,6 +19,7 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 
 | dom | tipo | número | desde_elec | total | ejemplo |
 |---|---|---|---|---|---|
+| 0.624 | DECRETO | 32 | **26** | 26 | Decreto 32 |
 | 0.572 | LEY | 21833 | **3** | 21 | Ley 21833 |
 | 0.546 | RESOLUCION | 334 | **2** | 2 | resolución exenta N° 334 |
 | 0.545 | LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
@@ -38,6 +39,7 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.471 | RESOLUCION | 83 | **0** | 1 | Resolución Exenta N° 83 |
 | 0.468 | DECRETO | 49 | **2** | 2 | decreto supremo N° 49 |
 | 0.463 | LEY | 21185 | **15** | 25 | Ley N° 21.185 |
+| 0.456 | DECRETO | 23 | **2** | 2 | Decreto Nº 23 |
 | 0.455 | DECRETO | 105 | **2** | 2 | Decreto Nº 105 |
 | 0.455 | DECRETO | 46 | **1** | 1 | Decreto Nº 46 |
 | 0.454 | LEY | 18876 | **0** | 1 | ley Nº 18.876 |
@@ -48,17 +50,16 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.444 | DECRETO | 162 | **1** | 1 | decreto Nº 162 |
 | 0.443 | RESOLUCION | 675 | **1** | 1 | Resolución 675 |
 | 0.442 | DECRETO | 264 | **1** | 1 | Decreto Nº 264 |
-| 0.438 | LEY | 18046 | **15** | 15 | ley N°18.046 |
-| 0.432 | DECRETO | 40 | **2** | 2 | Decreto Nº 40 |
+| 0.439 | DECRETO | 40 | **3** | 3 | Decreto Nº 40 |
+| 0.438 | LEY | 18046 | **16** | 16 | ley N°18.046 |
 | 0.431 | DECRETO | 84 | **1** | 1 | Decreto Nº 84 |
 | 0.430 | LEY | 16319 | **3** | 3 | ley N° 16.319 |
 | 0.427 | DECRETO | 98 | **3** | 3 | Decreto 98 |
 | 0.425 | RESOLUCION | 52 | **1** | 1 | resolución exenta Nº 52 |
+| 0.423 | DL | 211 | **5** | 6 | decreto ley N° 211 |
 | 0.420 | DECRETO | 92 | **10** | 10 | decreto Nº 92 |
-| 0.420 | DECRETO | 23 | **1** | 1 | Decreto Nº 23 |
 | 0.418 | DECRETO | 341 | **2** | 2 | decreto supremo Nº 341 |
 | 0.417 | DL | 1939 | **3** | 3 | decreto ley Nº1.939 |
-| 0.415 | DL | 211 | **4** | 5 | decreto ley N° 211 |
 | 0.413 | DL | 824 | **5** | 5 | decreto ley N° 824 |
 | 0.409 | DECRETO | 16 | **1** | 1 | Decreto Nº 16 |
 | 0.402 | RESOLUCION | 338 | **1** | 1 | resolución exenta Nº 338 |
@@ -140,6 +141,5 @@ N° 20.998 |
 | 0.313 | DFL | 29 | **16** | 18 | decreto con fuerza de ley N° 29 |
 | 0.313 | LEY | 19872 | **0** | 3 | LEY Nº19.872 |
 | 0.312 | DFL | 458 | **5** | 5 | decreto con fuerza de ley N°458 |
-| 0.312 | LEY | 19230 | **1** | 1 | ley N° 19.230 |
 
-_(450 normas distintas en total; se listan las 120 más citadas)_
+_(451 normas distintas en total; se listan las 120 más citadas)_

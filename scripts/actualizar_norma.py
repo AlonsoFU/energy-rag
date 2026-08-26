@@ -87,6 +87,15 @@ def main(nid, aplicar=False, permitir_encoger=False):
     if not arts:
         print("  ABORTA: el parser no encontro articulos en el texto nuevo")
         return
+    # Segunda guarda, y hace falta aparte de la del texto: el DFL 4 (la LGSE) tiene el
+    # texto_completo truncado a 10.075 chars PERO 330 articulos buenos, parseados de otra
+    # pasada. Ahi el texto nuevo crece —pasa la guarda de arriba— y aun asi el reemplazo
+    # destruiria 330 articulos para dejar los pocos que el parser saque. Perder articulos
+    # de la norma mas citada del corpus es el peor resultado posible de una "mejora".
+    if n_viejos and len(arts) < n_viejos * TOLERANCIA and not permitir_encoger:
+        print(f"  ABORTA: pasaria de {n_viejos} a {len(arts)} articulos (<{TOLERANCIA:.0%}).")
+        print("          El texto puede crecer y el ARTICULADO encoger igual. Revisar a mano.")
+        return
 
     if not aplicar:
         print("\n(simulacion — usar --aplicar para reemplazar)")

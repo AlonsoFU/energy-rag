@@ -1,6 +1,6 @@
-# Reproceso tras actualizar DECRETO 125 (4 -> 213 articulos)
-duplicados_u1|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-derogaciones_u1|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proceso_u1|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
-obligaciones_u1|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_obligaciones
-citas_u1|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir
+# Re-scrape de truncadas EN DOMINIO, de a una (BCN da timeout con documentos grandes)
+rescrape_dfl4|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 258171:DFL:4
+rescrape_d14|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1049988:DECRETO:14
+rescrape_20999|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1099982:LEY:20999
+rescrape_21667|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1203005:LEY:21667
+rescrape_20936|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1092695:LEY:20936
