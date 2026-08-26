@@ -75,7 +75,8 @@ def main(escribir=False):
     print(f"catalogo: {len(normas)} normas ({len(ajenas)} ajenas al dominio electrico)")
 
     resueltas, ambiguas = [], 0
-    externas = collections.defaultdict(lambda: {"total": 0, "desde_electrico": 0, "ejemplo": ""})
+    externas = collections.defaultdict(
+        lambda: {"total": 0, "desde_electrico": 0, "ejemplo": "", "ctx": []})
     for a in arts:
         for m in PAT.finditer(a["texto"] or ""):
             t = _tipo(m.group(1))
@@ -95,11 +96,40 @@ def main(escribir=False):
                     e["desde_electrico"] += 1
                 if not e["ejemplo"]:
                     e["ejemplo"] = m.group(0)
+                # CONTEXTO de la cita, no solo la cita. El articulado suele nombrar la materia
+                # ahi mismo: "Ley N° 21.719, que regula la proteccion de datos personales".
+                # Con eso se puede puntuar el dominio SIN bajar la norma -- que es lo que
+                # fallo el 25-08: las 4 candidatas mas citadas resultaron ajenas (proteccion
+                # de datos, desarrollo social, alta direccion publica, transporte) y se
+                # gastaron 4 descargas para descubrirlo.
+                if len(e["ctx"]) < 6:
+                    txt = a["texto"] or ""
+                    e["ctx"].append(re.sub(r"\s+", " ",
+                                           txt[max(0, m.start() - 60):m.end() + 180]).strip())
 
     print(f"citas resueltas a normas del corpus : {len(resueltas)}")
     print(f"ambiguas (>1 candidata)             : {ambiguas}")
     print(f"citadas y NO en el corpus           : {sum(v['total'] for v in externas.values())}"
           f"  ({len(externas)} normas distintas)")
+    # Puntaje de dominio del CONTEXTO. Es una señal debil -- mide como habla de la norma quien
+    # la cita, no la norma misma -- pero se obtiene sin descargar nada y ordena mucho mejor
+    # que el numero de citas, que pone arriba justo las normas transversales.
+    try:
+        from scripts.frontera_mercados import DOMINIO
+        from scripts.marcar_fuera_dominio import _v
+        ref = _v(re.sub(r"\s+", " ", DOMINIO).strip())
+        for k, v in externas.items():
+            if not v["ctx"] or not ref:
+                v["dom"] = None
+                continue
+            b = _v(" ".join(v["ctx"])[:3000])
+            v["dom"] = round(sum(x * y for x, y in zip(ref, b)), 3) if b else None
+        print("puntaje de dominio del contexto: calculado")
+    except Exception as ex:
+        for v in externas.values():
+            v["dom"] = None
+        print(f"puntaje de dominio: no disponible ({type(ex).__name__})")
+
     solo_e = {k: v for k, v in externas.items() if v["desde_electrico"] > 0}
     print(f"   ...de esas, citadas DESDE el dominio electrico: {len(solo_e)} normas")
 
@@ -116,7 +146,10 @@ def main(escribir=False):
         print(f"escritas {len(resueltas)} filas remite en `referencias`")
 
     out = Path("docs/frontera-candidatas.md")
-    orden = sorted(externas.items(), key=lambda kv: (-kv[1]["desde_electrico"], -kv[1]["total"]))
+    # Se ordena por DOMINIO y despues por citas. Al reves (por citas) las cuatro primeras
+    # candidatas eran normas ajenas citadas de paso.
+    orden = sorted(externas.items(),
+                   key=lambda kv: (-(kv[1].get("dom") or 0), -kv[1]["desde_electrico"]))
     L = ["# Candidatas de frontera — normas citadas que NO están en el corpus",
          "",
          "Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**",
@@ -131,10 +164,17 @@ def main(escribir=False):
          "tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma",
          "citada solo por la Ley de Tránsito no entra al corpus eléctrico.",
          "",
-         "| tipo | número | desde_elec | total | ejemplo |",
-         "|---|---|---|---|---|"]
+         "**Ordenadas por `dom`**, no por citas. `dom` = parecido del CONTEXTO de la cita con",
+         "las funciones de la subgerencia. Es señal débil —mide cómo habla de la norma quien la",
+         "cita, no la norma misma— pero se obtiene sin descargar nada, y ordenar por citas ponía",
+         "arriba justo las transversales: protección de datos (85 citas, dominio real 0.259),",
+         "desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).",
+         "",
+         "| dom | tipo | número | desde_elec | total | ejemplo |",
+         "|---|---|---|---|---|---|"]
     for (t, n), v in orden[:120]:
-        L.append(f"| {t} | {n} | **{v['desde_electrico']}** | {v['total']} | {v['ejemplo']} |")
+        d = f"{v['dom']:.3f}" if v.get("dom") is not None else "—"
+        L.append(f"| {d} | {t} | {n} | **{v['desde_electrico']}** | {v['total']} | {v['ejemplo']} |")
     L += ["", f"_({len(orden)} normas distintas en total; se listan las 120 más citadas)_"]
     out.write_text("\n".join(L) + "\n")
     print(f"escrito {out}")

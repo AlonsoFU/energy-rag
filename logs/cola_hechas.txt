@@ -1,2 +1,5 @@
 bajar_lote3
 ingerir_lote
+frontera_v3
+duplicados_v3
+derogaciones_v3
