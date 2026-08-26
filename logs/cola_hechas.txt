@@ -21,3 +21,6 @@ ingerir_v5
 frontera_v5
 duplicados_v5
 derogaciones_v5
+obligaciones_v5
+proceso_v5
+citas_v5

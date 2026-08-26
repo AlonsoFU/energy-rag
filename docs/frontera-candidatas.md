@@ -3,9 +3,9 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **3698**
-- resueltas a normas del corpus: **2065**
-- apuntan fuera del corpus: **1633** (451 normas distintas)
+- citas norma→norma detectadas en el texto: **3701**
+- resueltas a normas del corpus: **2144**
+- apuntan fuera del corpus: **1557** (450 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma
@@ -20,7 +20,6 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | dom | tipo | número | desde_elec | total | ejemplo |
 |---|---|---|---|---|---|
 | 0.572 | LEY | 21833 | **3** | 21 | Ley 21833 |
-| 0.550 | DECRETO | 42 | **77** | 77 | Decreto 42 |
 | 0.546 | RESOLUCION | 334 | **2** | 2 | resolución exenta N° 334 |
 | 0.545 | LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
 | 0.533 | DECRETO | 385 | **4** | 4 | decreto 385 |
@@ -28,6 +27,7 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.525 | DECRETO | 71 | **4** | 4 | decreto supremo Nº 71 |
 | 0.524 | DECRETO | 291 | **5** | 5 | decreto supremo Nº 291 |
 | 0.511 | DECRETO | 207 | **1** | 1 | decreto supremo Nº 207 |
+| 0.502 | DECRETO | 181 | **4** | 4 | decreto supremo Nº 181 |
 | 0.501 | DECRETO | 106 | **4** | 4 | decreto supremo Nº 106 |
 | 0.497 | DECRETO | 121 | **5** | 5 | Decreto N°121 |
 | 0.493 | RESOLUCION | 706 | **1** | 1 | resolución exenta Nº 706 |
@@ -37,7 +37,6 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.476 | DECRETO | 244 | **5** | 5 | Decreto N° 244 |
 | 0.471 | RESOLUCION | 83 | **0** | 1 | Resolución Exenta N° 83 |
 | 0.468 | DECRETO | 49 | **2** | 2 | decreto supremo N° 49 |
-| 0.466 | DECRETO | 181 | **3** | 3 | decreto supremo Nº 181 |
 | 0.463 | LEY | 21185 | **15** | 25 | Ley N° 21.185 |
 | 0.455 | DECRETO | 105 | **2** | 2 | Decreto Nº 105 |
 | 0.455 | DECRETO | 46 | **1** | 1 | Decreto Nº 46 |
@@ -141,5 +140,6 @@ N° 20.998 |
 | 0.313 | DFL | 29 | **16** | 18 | decreto con fuerza de ley N° 29 |
 | 0.313 | LEY | 19872 | **0** | 3 | LEY Nº19.872 |
 | 0.312 | DFL | 458 | **5** | 5 | decreto con fuerza de ley N°458 |
+| 0.312 | LEY | 19230 | **1** | 1 | ley N° 19.230 |
 
-_(451 normas distintas en total; se listan las 120 más citadas)_
+_(450 normas distintas en total; se listan las 120 más citadas)_

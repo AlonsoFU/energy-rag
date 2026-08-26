@@ -222,7 +222,28 @@ class PostgresStore:
             if not cur.fetchone():
                 return []
             cur.execute("SELECT DISTINCT termino FROM fragmentos_definicion WHERE termino IS NOT NULL")
-            return [r["termino"] for r in cur.fetchall()]
+            terminos = [r["termino"] for r in cur.fetchall()]
+        # HIGIENE: 267 de los 615 "terminos" son frases MODIFICATORIAS que el extractor tomo
+        # por termino ("reemplazase el articulo 115 por el siguiente", "agregase el siguiente
+        # inciso segundo"). No son conceptos y no deben estar en el diccionario.
+        #
+        # Se filtran con `_VERBO_MODIFICATORIO` del parser -- la misma lista de verbos que ya
+        # usan `es_transcrito` y `estructura_articulado`, no una lista nueva.
+        #
+        # ⚠️ Medido antes de aplicar: NINGUNO de esos 267 gana un lookup en las 178 queries de
+        # los sets operativo y de fraseos. Esto es higiene, NO una mejora de calidad, y no
+        # deberia mover ninguna metrica. Se aplica porque un diccionario con basura es
+        # superficie de error futura, no porque haga ganar puntos.
+        #
+        # NO se filtra por LARGO: los terminos legales chilenos son largos de verdad
+        # ("Sistema de Distribucion o Red de Distribucion", "Sistemas de Transmision para
+        # Polos de Desarrollo"). Un corte por numero de palabras se lleva puestos terminos
+        # legitimos -- probado con >6 palabras, dio 5 falsos positivos de 5.
+        try:
+            from src.parsers.norm_structure_parser import NormStructureParser as _P
+            return [t for t in terminos if not _P._VERBO_MODIFICATORIO.match(t or "")]
+        except Exception:
+            return terminos
 
     def def_exact_all(self, concepto: str) -> list[dict]:
         """TODAS las definiciones del termino, una por norma. Base de D4 (ambiguedad).
