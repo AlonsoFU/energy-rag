@@ -245,6 +245,11 @@ class PostgresStore:
                 JOIN articulos a ON a.id = fd.articulo_id
                 JOIN normas n ON n.id_norma = a.id_norma
                 WHERE lower(fd.termino) = lower(%s)
+                  -- una definicion que vive en un articulo DEROGADO no es derecho vigente, y
+                  -- una que vive en un articulo DUPLICADO esta atribuida a la norma
+                  -- equivocada. Ninguna de las dos debe ofrecerse como acepcion.
+                  AND NOT coalesce(a.derogado, false)
+                  AND (a.metadata->>'duplicado_de') IS NULL
                 ORDER BY a.id_norma, length(fd.texto) DESC
             """, (concepto,))
             return cur.fetchall()
@@ -262,6 +267,10 @@ class PostgresStore:
                        fd.texto AS contextual_text, a.id_norma, a.numero AS articulo_numero
                 FROM fragmentos_definicion fd JOIN articulos a ON a.id = fd.articulo_id
                 WHERE lower(fd.termino) = lower(%s)
+                  -- misma razon que en `def_exact_all`: no ofrecer como definicion vigente
+                  -- una que vive en un articulo derogado o mal atribuido.
+                  AND NOT coalesce(a.derogado, false)
+                  AND (a.metadata->>'duplicado_de') IS NULL
                 ORDER BY length(fd.texto) DESC LIMIT 1
             """, (concepto,))
             return cur.fetchone()

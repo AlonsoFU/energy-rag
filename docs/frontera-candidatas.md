@@ -3,9 +3,9 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **3679**
-- resueltas a normas del corpus: **2042**
-- apuntan fuera del corpus: **1637** (452 normas distintas)
+- citas norma→norma detectadas en el texto: **3698**
+- resueltas a normas del corpus: **2065**
+- apuntan fuera del corpus: **1633** (451 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma
@@ -20,7 +20,6 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | dom | tipo | número | desde_elec | total | ejemplo |
 |---|---|---|---|---|---|
 | 0.572 | LEY | 21833 | **3** | 21 | Ley 21833 |
-| 0.562 | LEY | 21194 | **6** | 6 | ley N° 21.194 |
 | 0.550 | DECRETO | 42 | **77** | 77 | Decreto 42 |
 | 0.546 | RESOLUCION | 334 | **2** | 2 | resolución exenta N° 334 |
 | 0.545 | LEY | 18010 | **4** | 4 | Ley Nº 18.010 |
@@ -33,12 +32,13 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.497 | DECRETO | 121 | **5** | 5 | Decreto N°121 |
 | 0.493 | RESOLUCION | 706 | **1** | 1 | resolución exenta Nº 706 |
 | 0.492 | RESOLUCION | 659 | **2** | 2 | resolución exenta Nº 659 |
+| 0.488 | DFL | 5 | **7** | 7 | decreto con fuerza de ley N° 5 |
 | 0.488 | DL | 1057 | **1** | 1 | decreto ley 1.057 |
 | 0.476 | DECRETO | 244 | **5** | 5 | Decreto N° 244 |
 | 0.471 | RESOLUCION | 83 | **0** | 1 | Resolución Exenta N° 83 |
 | 0.468 | DECRETO | 49 | **2** | 2 | decreto supremo N° 49 |
 | 0.466 | DECRETO | 181 | **3** | 3 | decreto supremo Nº 181 |
-| 0.461 | DFL | 5 | **6** | 6 | decreto con fuerza de ley N° 5 |
+| 0.463 | LEY | 21185 | **15** | 25 | Ley N° 21.185 |
 | 0.455 | DECRETO | 105 | **2** | 2 | Decreto Nº 105 |
 | 0.455 | DECRETO | 46 | **1** | 1 | Decreto Nº 46 |
 | 0.454 | LEY | 18876 | **0** | 1 | ley Nº 18.876 |
@@ -49,7 +49,6 @@ desarrollo social (65 · 0.191), alta dirección pública (55 · 0.295).
 | 0.444 | DECRETO | 162 | **1** | 1 | decreto Nº 162 |
 | 0.443 | RESOLUCION | 675 | **1** | 1 | Resolución 675 |
 | 0.442 | DECRETO | 264 | **1** | 1 | Decreto Nº 264 |
-| 0.439 | LEY | 21185 | **14** | 24 | Ley N° 21.185 |
 | 0.438 | LEY | 18046 | **15** | 15 | ley N°18.046 |
 | 0.432 | DECRETO | 40 | **2** | 2 | Decreto Nº 40 |
 | 0.431 | DECRETO | 84 | **1** | 1 | Decreto Nº 84 |
@@ -141,5 +140,6 @@ N° 20.998 |
 | 0.314 | LEY | 21161 | **0** | 3 | Ley 21161 |
 | 0.313 | DFL | 29 | **16** | 18 | decreto con fuerza de ley N° 29 |
 | 0.313 | LEY | 19872 | **0** | 3 | LEY Nº19.872 |
+| 0.312 | DFL | 458 | **5** | 5 | decreto con fuerza de ley N°458 |
 
-_(452 normas distintas en total; se listan las 120 más citadas)_
+_(451 normas distintas en total; se listan las 120 más citadas)_
