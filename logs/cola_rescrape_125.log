@@ -1,0 +1,14 @@
+[1/3] DECRETO 125 (idNorma 1140253)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1140253
+    titulo: DECRETO 125 APRUEBA REGLAMENTO DE LA COORDINACIÓN Y OPERACIÓN DEL SISTEMA ELÉC
+    chars : 226949
+    dominio 0.622  ok
+    guardado -> data/normas_completas/nuevas/1140253.json  (registrado como DECRETO-125)
+[2/3] DECRETO 14 (idNorma 1049988)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1049988
+  ERROR: Page.goto: Timeout 60000ms exceeded.
+Call log:
+  - navigating to "https://www.bcn.cl/leychile/navegar?idNorma=1049988", waiting until "networkidle"
+
+    FALLO o texto vacio
+[3/3] LEY 20999 (idNorma 1099982)
