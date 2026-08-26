@@ -144,6 +144,31 @@ def main(nid, aplicar=False, permitir_encoger=False):
                     (aid, ch.chunk_index, ch.text, ctx, emb.embed([ctx])[0],
                      [x / nn for x in s4], ch.token_count))
         c.commit()
+    # Re-evaluar el DOMINIO: una norma puede pasar de 6 a 415 articulos y recien ahi
+    # revelar de que trata. Paso con LEY 20720 ("SUSTITUYE EL REGIMEN CONCURSAL") -- ley de
+    # insolvencia, ajena al dominio electrico, que estaba marcada dentro y sin puntaje. Sin
+    # esto, 415 articulos ajenos entran al pool de retrieval.
+    try:
+        from scripts.frontera_mercados import DOMINIO as _DOM
+        from scripts.marcar_fuera_dominio import CORTE as _CORTE, _v as _vv
+        import re as _re
+        _ref = _vv(_re.sub(r"\s+", " ", _DOM).strip())
+        muestra = " ".join(a.texto for a in list(arts.values())[:3])[:1200]
+        _b = _vv(muestra) if len(muestra) > 200 else None
+        if _ref and _b:
+            _sim = sum(x * y for x, y in zip(_ref, _b))
+            _fuera = _sim < _CORTE
+            with with_connection() as c, c.cursor() as cur:
+                cur.execute("""UPDATE normas SET metadata = coalesce(metadata,'{}'::jsonb)
+                               || jsonb_build_object('similitud_dominio', %s::text)
+                               || CASE WHEN %s THEN jsonb_build_object('fuera_de_dominio', true)
+                                       ELSE '{}'::jsonb END
+                               WHERE id_norma = %s""", (f"{_sim:.3f}", _fuera, nid))
+                c.commit()
+            print(f"  dominio re-evaluado: {_sim:.3f} -> {'FUERA' if _fuera else 'dentro'}")
+    except Exception as ex:
+        print(f"  (no se pudo re-evaluar dominio: {type(ex).__name__})")
+
     print(f"\nACTUALIZADA {ped}: {n_art} articulos ingestados")
     print("  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas")
 

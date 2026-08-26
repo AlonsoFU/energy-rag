@@ -10,6 +10,7 @@ act_20720|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualiza
 dup_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
 der_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
 proc_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
+frontera_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
 obl_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_obligaciones
 citas_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir
 desc_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_de_discrepancias
