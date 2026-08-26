@@ -1,0 +1,6 @@
+LEY-20999 (1099982)
+  texto guardado :   130003
+  texto nuevo    :   133805
+  articulos      : 24 -> 20
+  ABORTA: pasaria de 24 a 20 articulos (<90%).
+          El texto puede crecer y el ARTICULADO encoger igual. Revisar a mano.

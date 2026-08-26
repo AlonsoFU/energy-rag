@@ -5,6 +5,8 @@
 #   1. re-scrape del corpus EN DOMINIO (70)       <- toca la red, ~40 min a 20 s de throttle
 #   2. diff contra el snapshot                    -> escribe norma_evento
 #   3. informe de lo pendiente                    -> docs/monitor-ultimo-informe.md
+#   3b. APLICA los cambios al corpus (con guardas)
+#   3c. reproceso: duplicados, derogaciones, proceso, citas
 #   4. nuevo snapshot                             -> baseline para la proxima pasada
 #
 # El scrape va PRIMERO y con throttle porque BCN devuelve 429 por cuota. Si muere a medias,
@@ -42,6 +44,19 @@ E="env -i HOME=/home/alonso PATH=/usr/local/bin:/usr/bin:/bin
 
   echo "--- 3. informe"
   $E venv/bin/python -m scripts.monitor_report --marcar
+
+  echo "--- 3b. aplicar al corpus los cambios detectados"
+  # Cierra el ciclo: hasta ahora el monitor informaba "la norma X cambio" y el corpus seguia
+  # respondiendo con el texto viejo. Cada norma pasa por las guardas de actualizar_norma
+  # (identidad, el texto no encoge >10%, el articulado tampoco); lo que no pasa queda
+  # pendiente para mirar a mano y NO se marca aplicado.
+  $E venv/bin/python -m scripts.aplicar_cambios --aplicar || echo "   (sin cambios que aplicar)"
+
+  echo "--- 3c. reproceso de lo que cambio"
+  for m in detectar_articulos_duplicados detectar_derogaciones estructura_articulado; do
+    $E venv/bin/python -m scripts.$m --aplicar || echo "   ($m fallo, sigo)"
+  done
+  $E venv/bin/python -m scripts.resolver_citas_normas --escribir || echo "   (citas fallo, sigo)"
 
   echo "--- 4. nuevo snapshot"
   $E venv/bin/python -m scripts.monitor_diff --snapshot
