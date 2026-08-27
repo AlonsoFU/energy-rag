@@ -52,7 +52,7 @@ def main(aplicar=False):
             FROM normas n""")
         normas = cur.fetchall()
 
-    fuera, sin_titulo = [], []
+    fuera, sin_titulo, puntuadas = [], [], []
     for n in normas:
         t = str(n["titulo"] or "").strip()
         if (not t or _TITULO_VACIO.match(t)) and len((n.get("muestra") or "")) < 200:
@@ -62,6 +62,7 @@ def main(aplicar=False):
         base = muestra[:1200] if len(muestra) > 200 else t[:400]   # articulado si lo hay
         v = _v(base)
         sim = sum(x * y for x, y in zip(ref, v)) if v else 0.0
+        puntuadas.append((sim, n))          # se guarda el puntaje de TODAS, no solo las que salen
         if sim < CORTE:
             fuera.append((sim, n))
     fuera.sort()
@@ -89,6 +90,13 @@ def main(aplicar=False):
         return 0
 
     with with_connection() as c, c.cursor() as cur:
+        # El puntaje se guarda para TODAS las clasificadas, no solo para las que quedan fuera.
+        # Sin esto solo 60 de 122 normas tenian `similitud_dominio` y no se podia auditar la
+        # decision, ni probar otro corte sin volver a embeber el corpus entero.
+        for s, n in puntuadas:
+            cur.execute("""UPDATE normas SET metadata = coalesce(metadata,'{}'::jsonb)
+                           || jsonb_build_object('similitud_dominio', %s::text)
+                           WHERE id_norma = %s""", (f"{s:.3f}", n["id_norma"]))
         for s, n in fuera:
             cur.execute("""UPDATE normas SET metadata = coalesce(metadata,'{}'::jsonb)
                              || jsonb_build_object('fuera_de_dominio', true)

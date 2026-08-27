@@ -114,8 +114,14 @@ class NormStructureParser:
     # no cubre `"`. Medido: LEY 20701 daba 0 artículos con el patrón viejo y 15 con comillas
     # permitidas; 12 normas del corpus quedaron SIN NINGÚN artículo ingestado por esto.
     # También se aceptan 'bis/ter/quater', que el patrón viejo cortaba.
+    # El sufijo `-N` es parte del numero, no un guion suelto: la numeracion legal chilena
+    # inserta articulos como `92-1`, `180-3`, `212-14`. Sin capturarlo, los 31 articulos
+    # `92-N` del DECRETO 327 (Reglamento de la LGSE) colapsaban todos al numero `92` y solo
+    # sobrevivia uno: se perdian 40 articulos en el corpus, 29 de ellos en ese reglamento.
+    # El `92` que quedaba era en realidad el `92-3` -- su texto arrancaba en "3.- La Comision
+    # podra...", con el sufijo comido, igual que el `72` de LEY 20936 que era el `72-22`.
     ARTICULO_PATTERN = re.compile(
-        r'(?:^|\n)[\s"“”\'«»]*Art[íi]culo\s+(\d+[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
+        r'(?:^|\n)[\s"“”\'«»]*Art[íi]culo\s+(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
         r'tercero|cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
         re.IGNORECASE | re.MULTILINE
     )
