@@ -195,3 +195,30 @@ positivo del clasificador, no un acierto. El corte 0.30 no separa bien en esa zo
 
 **Para la próxima:** ordenar las candidatas por puntaje de dominio **antes** de bajarlas, no
 por veces citada. Bajar por citas gasta descargas en normas que después hay que marcar fuera.
+
+---
+
+## LEY 20999 — actualización FRENADA a propósito (2026-08-26)
+
+`scripts/actualizar_norma 1099982` aborta: pasaría de 24 a 20 artículos. Investigado antes de
+forzar con `--permitir-encoger`, y **la guarda tiene razón**:
+
+```
+texto nuevo   38 articulos detectados · 18 transcritos · 20 netos
+en la DB      24 articulos
+```
+
+Es una ley **modificatoria**, y ahí el parser no separa bien lo propio de lo insertado:
+
+- En la DB hay 4 artículos que son de OTRA norma (`29 ter`, `29 quinquies`, `33 ter`,
+  `33 quinquies`) y **ninguno está marcado como duplicado** — `detectar_articulos_duplicados`
+  no los caza porque esos numerales no existen con ese formato en la norma destino.
+- Los 20 "netos" del texto nuevo incluyen `23`, `24`, `28`, `30`, `31`, que **no están en la
+  DB** y tienen toda la pinta de ser también insertados en otro cuerpo.
+
+O sea: ni la versión guardada ni la nueva separan bien. Reemplazar una por otra cambia el
+conjunto de artículos mal atribuidos, no lo arregla.
+
+**Queda sin tocar.** Para resolverlo hace falta que el parser sepa, dentro de una ley
+modificatoria, a qué norma va cada bloque insertado — el mismo problema de fondo que dejó
+55 artículos de LEY 20936 atribuidos a la LGSE. Ese es el frente, no el re-scrape.

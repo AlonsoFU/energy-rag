@@ -8,8 +8,8 @@ bloquean el scraping; esta vía no depende de ellos.
 
 - documentos leídos: **17**
 - citas artículo→norma detectadas: **28**
-- resueltas a normas del corpus: **19** (16 con el artículo también presente — sirven de gold para evaluar)
-- apuntan a normas que **faltan**: **9**
+- resueltas a normas del corpus: **20** (16 con el artículo también presente — sirven de gold para evaluar)
+- apuntan a normas que **faltan**: **8**
 
 ## Normas citadas que NO están en el corpus
 
@@ -20,7 +20,6 @@ resolverlo por truncamiento sesgaría el reporte hacia *"ya lo tenemos"*.
 | tipo | número | veces | quizá | ejemplo de la cita |
 |---|---|---|---|---|
 | DECRETO | 6 | 2 | — | artículo 212°-1 de la LGSE. j. Decreto N° 6 |
-| LEY | 21194 | 1 | — | artículo 185° de la LGSE. V. Saldos de estabilización Ley N° 21.194. |
 | LEY | 8 | 1 | — | artículo 191° de la Ley 8. |
 | RESOLUCION | 406 | 1 | — | artículo 14 de la Resolución Exenta N° 406 |
 | LEY | 198801 | 1 | LEY 19880 | artículo 62 de la Ley N°19.8801 |

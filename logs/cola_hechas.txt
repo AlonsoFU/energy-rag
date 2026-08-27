@@ -10,3 +10,6 @@ dup_f
 der_f
 proc_f
 frontera_f
+obl_f
+citas_f
+desc_f
