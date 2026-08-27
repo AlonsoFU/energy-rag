@@ -261,3 +261,31 @@ NUM_PARALLEL=3,  3 concurrentes : 25.0 s   <- casi 2x mas lento
 ```
 
 Acá el cuello es la **VRAM**, distinto del cuello de vLLM (RAM 14 GB). Ver exp #56.
+
+---
+
+## EXP #57 — corte de dominio 0.30 → 0.36 (criterio fijado 2026-08-27, ANTES de correr)
+
+Cuatro normas claramente ajenas pasan el corte actual y entran al pool de retrieval:
+```
+0.315  LEY 19496   protección del consumidor
+0.332  LEY 20720   insolvencia          ← 415 artículos
+0.341  DECRETO 30  transporte
+0.355  LEY 18045   mercado de valores
+```
+Un corte en 0.36 las saca y deja dentro la LEY 21667 (0.394), que sí es del dominio.
+
+⚠️ También dejaría fuera la LEY 21711 (0.369, concesiones geotérmicas) — energía, pero no
+claramente de la subgerencia de mercados.
+
+**Criterio de adopción**, pareado sobre `queries_operativas_v1` (114q):
+```
+adoptar 0.36 si  cita_ok NO cae  Y  cita_limpia NO cae mas de 2
+```
+Se pide que `cita_ok` **no caiga nada**: sacar normas del pool sólo puede ayudar si esas normas
+eran ruido. Si `cita_ok` baja, alguna de las cuatro estaba aportando y el corte se lleva algo
+útil por delante — y entonces el problema no es el umbral sino el clasificador.
+
+⚠️ El caso que ningún corte arregla: la LEY 19882 (política de personal) puntúa **0.411**, más
+que la LEY 21667 que sí es del dominio. El puntaje por articulado no ordena bien en esa zona.
+Este experimento mide si mover el umbral ayuda igual, no si lo resuelve.
