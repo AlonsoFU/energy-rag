@@ -16,6 +16,17 @@ touch "$HECHAS"
 
 [ -f .watchdog_off ] && exit 0
 
+# Los modelos NO viven en ~/.cache: estan en /home/alonso/datos (la raiz se lleno una vez con
+# 253 GB de Ollama y el equipo se cayo). Sin HF_HOME, con HF_HUB_OFFLINE=1 puesto, transformers
+# busca en el cache por defecto, no encuentra nada y tira
+# "couldn't connect to huggingface.co ... couldn't find them in the cached files".
+# Paso con act_327: el script informaba "340 -> 370 articulos" y moria al cargar el embedder,
+# asi que el reemplazo nunca se aplicaba y el runner lo marcaba OK igual.
+export HF_HOME=/home/alonso/datos/hf
+export HF_HUB_CACHE=/home/alonso/datos/hf/hub
+export TRANSFORMERS_CACHE=/home/alonso/datos/hf/hub
+export HF_HUB_OFFLINE=1
+
 # ¿ya hay trabajo REAL corriendo? (solo procesos python, no loops de espera)
 if ps -eo args | grep -E '^[^ ]*python' | grep -qE 'scripts\.|exp_'; then
   exit 0

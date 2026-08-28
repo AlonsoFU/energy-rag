@@ -1314,3 +1314,50 @@ calidad) no se corre: no hay nada que ganar que justifique medir calidad.
 ⚠️ La sonda usa `num_predict=400`; una respuesta real ronda los 1500 tokens. El factor podría
 moverse algo con secuencias más largas, pero no da vuelta una diferencia de 13.8 s contra 25 s.
 ⚠️ Servidor de prueba apagado, servicio original intacto (:11434 responde, VRAM liberada).
+
+---
+
+## #58 — El parser se comía el sufijo `-N` y perdía 40 artículos (2026-08-28)
+
+No es un experimento: es un defecto encontrado y medido. Va acá porque cambia el corpus.
+
+`ARTICULO_PATTERN` capturaba `(\d+[°ºª]?…)` sin el sufijo, así que **`Artículo 92-1` se
+guardaba como `92`**. Todos los `92-N` de una norma colapsaban al mismo número y sobrevivía uno
+solo.
+
+```
+DECRETO 327 (Reglamento LGSE)  31 con sufijo -> colapsan a 2   PERDIDOS 29
+LEY 20500                       9             -> 3             PERDIDOS  6
+LEY 21304                       6             -> 1             PERDIDOS  5
+                                                               total    40
+```
+
+**Cómo se delató.** El único artículo `92` que quedaba en el DECRETO 327 tenía el texto
+arrancando en *"3.- La Comisión podrá…"*: era el `92-3` con el `-3` comido. El mismo síntoma
+que ya había aparecido en LEY 20936, cuyo "artículo 72" era en realidad el `72-22`.
+
+**Por qué nadie lo vio antes**, y esto es lo que importa:
+
+```
+parser      NO capturaba -N   -> perdia 40 articulos
+validador   SI lo manejaba    -> CITATION_PATTERN ya traia (?:\s*-\s*\d+)? y
+                                 _normalize_art normaliza "72 - 1" -> "72-1"
+eval        13 golds con -N   -> TODOS del DFL 4, que se ingirio por otra ruta
+                                 que si captaba el guion. Ninguno afectado.
+```
+
+La pérdida era real y **completamente invisible para las métricas**: nadie preguntaba por esos
+artículos porque los sets de evaluación los escribí yo mirando el corpus, y el corpus ya venía
+sin ellos. Un eval fabricado desde adentro no puede detectar lo que falta adentro.
+
+Verificado que el patrón nuevo no rompe lo viejo: `5` → `5`, `8 bis` → `8 bis`,
+`primero` → `primero`, y ahora `212-14` → `212-14`.
+
+Resultado tras re-ingerir: `DECRETO 327` **340 → 370 artículos** con el mismo texto;
+artículos con sufijo en el corpus **64 → 104**.
+
+⚠️ Bug de infraestructura encontrado en el camino: la cola no exportaba `HF_HOME`. Con
+`HF_HUB_OFFLINE=1` puesto, transformers buscaba en `~/.cache` —los modelos viven en
+`/home/alonso/datos`— y moría con *"couldn't connect to huggingface.co"*. El script informaba
+`340 -> 370` y **el runner lo marcaba OK igual**, con la base sin tocar. Ahora `HF_HOME` se
+exporta en `runner.sh`, así que cubre toda la cola.

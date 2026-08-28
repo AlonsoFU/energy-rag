@@ -1,16 +1,10 @@
-# Todo lo que queda y no depende del usuario.
-rs_20999|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1099982:LEY:20999
-rs_21667|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1203005:LEY:21667
-rs_20936|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1092695:LEY:20936
-rs_20720|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1058072:LEY:20720
-act_20999|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1099982 --aplicar
-act_21667|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1203005 --aplicar
-act_20936|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1092695 --aplicar
-act_20720|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1058072 --aplicar
-dup_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proc_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
-frontera_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
-obl_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_obligaciones
-citas_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir
-desc_f|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_de_discrepancias
+# Recuperar los 40 articulos del sufijo -N. DECRETO 327 es el importante (+30).
+act_327b|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 124102 --aplicar
+baj_20500|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.bajar_por_id 1023143:LEY:20500 1154423:LEY:21304
+act_20500b|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1023143 --aplicar
+act_21304b|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.actualizar_norma 1154423 --aplicar
+dup_y|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_y|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.detectar_derogaciones --aplicar
+proc_y|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_y|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.extraer_obligaciones
+citas_y|env PYTHONPATH=. HF_HUB_OFFLINE=1 venv/bin/python -m scripts.resolver_citas_normas --escribir

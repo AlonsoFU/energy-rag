@@ -183,3 +183,101 @@
   fases pendientes:
     3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
 === fin 2026-08-27 00:00:01 ===
+=== retomar 2026-08-27 03:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 03:00:01 ===
+=== retomar 2026-08-27 06:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 06:00:01 ===
+=== retomar 2026-08-27 09:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 09:00:01 ===
+=== retomar 2026-08-27 12:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 12:00:01 ===
+=== retomar 2026-08-27 15:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 15:00:02 ===
+=== retomar 2026-08-27 18:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 18:00:02 ===
+=== retomar 2026-08-27 21:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-27 21:00:02 ===
+=== retomar 2026-08-28 00:00:01 ===
+  quitada la pausa del watchdog
+  postgres arriba
+  GPU restablecida a 180 W (estaba en 250W)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-28 00:00:02 ===
+=== retomar 2026-08-28 03:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-28 03:00:01 ===
+=== retomar 2026-08-28 06:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-28 06:00:01 ===
+=== retomar 2026-08-28 09:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-28 09:00:01 ===
+=== retomar 2026-08-28 12:00:01 ===
+  postgres arriba
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 5020
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-28 12:00:01 ===

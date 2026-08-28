@@ -146,3 +146,69 @@
 2026-08-26 23:30:06  OK    desc_f
 2026-08-26 23:30:06  drenaje terminado: 15/15
 2026-08-27 00:30:01  cola VACIA -- nada pendiente
+2026-08-27 00:53:01  LANZO act_327
+2026-08-27 00:53:07  FALLO act_327 (ver logs/cola_act_327.log)
+2026-08-27 00:53:07  LANZO act_20500
+2026-08-27 00:53:08  OK    act_20500
+2026-08-27 00:53:08  LANZO act_21304
+2026-08-27 00:53:09  OK    act_21304
+2026-08-27 00:53:09  LANZO act_21472
+2026-08-27 00:53:13  FALLO act_21472 (ver logs/cola_act_21472.log)
+2026-08-27 00:53:13  LANZO dup_x
+2026-08-27 00:53:30  OK    dup_x
+2026-08-27 00:53:30  LANZO der_x
+2026-08-27 00:53:30  OK    der_x
+2026-08-27 00:53:30  LANZO proc_x
+2026-08-27 00:53:31  OK    proc_x
+2026-08-27 00:53:31  LANZO obl_x
+2026-08-27 03:27:44  OK    obl_x
+2026-08-27 03:27:44  LANZO citas_x
+2026-08-27 03:28:42  OK    citas_x
+2026-08-27 03:28:42  drenaje terminado: 9/9
+2026-08-27 03:30:01  cola VACIA -- nada pendiente
+2026-08-27 04:30:01  cola VACIA -- nada pendiente
+2026-08-27 05:30:01  cola VACIA -- nada pendiente
+2026-08-27 06:30:01  cola VACIA -- nada pendiente
+2026-08-27 07:30:01  cola VACIA -- nada pendiente
+2026-08-27 08:30:01  cola VACIA -- nada pendiente
+2026-08-27 09:30:01  cola VACIA -- nada pendiente
+2026-08-27 10:30:01  cola VACIA -- nada pendiente
+2026-08-27 11:30:01  cola VACIA -- nada pendiente
+2026-08-27 12:30:01  cola VACIA -- nada pendiente
+2026-08-27 13:30:01  cola VACIA -- nada pendiente
+2026-08-27 14:30:01  cola VACIA -- nada pendiente
+2026-08-27 15:30:01  cola VACIA -- nada pendiente
+2026-08-27 16:30:01  cola VACIA -- nada pendiente
+2026-08-27 17:30:01  cola VACIA -- nada pendiente
+2026-08-27 18:30:01  cola VACIA -- nada pendiente
+2026-08-27 19:30:01  cola VACIA -- nada pendiente
+2026-08-27 20:30:01  cola VACIA -- nada pendiente
+2026-08-27 21:30:01  cola VACIA -- nada pendiente
+2026-08-27 22:30:01  cola VACIA -- nada pendiente
+2026-08-28 00:30:01  cola VACIA -- nada pendiente
+2026-08-28 01:30:01  cola VACIA -- nada pendiente
+2026-08-28 02:30:02  cola VACIA -- nada pendiente
+2026-08-28 03:30:01  cola VACIA -- nada pendiente
+2026-08-28 04:30:01  cola VACIA -- nada pendiente
+2026-08-28 05:30:01  cola VACIA -- nada pendiente
+2026-08-28 06:30:01  cola VACIA -- nada pendiente
+2026-08-28 07:30:01  cola VACIA -- nada pendiente
+2026-08-28 08:30:01  cola VACIA -- nada pendiente
+2026-08-28 09:30:02  cola VACIA -- nada pendiente
+2026-08-28 10:30:01  cola VACIA -- nada pendiente
+2026-08-28 11:30:01  cola VACIA -- nada pendiente
+2026-08-28 12:30:01  cola VACIA -- nada pendiente
+2026-08-28 13:30:01  cola VACIA -- nada pendiente
+2026-08-28 14:10:22  LANZO act_327b
+2026-08-28 14:10:28  FALLO act_327b (ver logs/cola_act_327b.log)
+2026-08-28 14:10:28  LANZO baj_20500
+2026-08-28 14:11:14  FALLO baj_20500 (ver logs/cola_baj_20500.log)
+2026-08-28 14:11:14  LANZO act_20500b
+2026-08-28 14:12:06  LANZO act_327b
+2026-08-28 14:12:06  OK    act_20500b
+2026-08-28 14:16:52  LANZO act_327b
+2026-08-28 14:16:52  OK    act_327b
+2026-08-28 14:21:51  LANZO baj_20500
+2026-08-28 14:21:52  OK    act_327b
+2026-08-28 14:22:49  LANZO baj_20500
+2026-08-28 14:22:49  OK    baj_20500
