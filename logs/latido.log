@@ -96,3 +96,15 @@
 2026-08-28 23:00:01  PARADO  <-- nada trabajando     gpu=55.86 W, 24 %  pg=running  cola=47 resultados
 2026-08-29 00:00:01  PARADO  <-- nada trabajando     gpu=34.62 W, 0 %  pg=running  cola=47 resultados
 2026-08-29 01:00:01  PARADO  <-- nada trabajando     gpu=38.82 W, 7 %  pg=running  cola=47 resultados
+2026-08-29 02:00:01  PARADO  <-- nada trabajando     gpu=33.60 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 03:00:01  PARADO  <-- nada trabajando     gpu=34.34 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 04:00:01  PARADO  <-- nada trabajando     gpu=35.90 W, 3 %  pg=running  cola=47 resultados
+2026-08-29 05:00:01  PARADO  <-- nada trabajando     gpu=34.79 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 06:00:01  PARADO  <-- nada trabajando     gpu=36.32 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 07:00:01  PARADO  <-- nada trabajando     gpu=34.69 W, 4 %  pg=running  cola=47 resultados
+2026-08-29 08:00:02  PARADO  <-- nada trabajando     gpu=31.54 W, 6 %  pg=running  cola=47 resultados
+2026-08-29 09:00:01  PARADO  <-- nada trabajando     gpu=31.51 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 10:00:01  PARADO  <-- nada trabajando     gpu=34.90 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 11:00:01  PARADO  <-- nada trabajando     gpu=189.77 W, 98 %  pg=running  cola=47 resultados
+2026-08-29 12:00:01  PARADO  <-- nada trabajando     gpu=277.65 W, 97 %  pg=running  cola=47 resultados
+2026-08-29 13:00:01  PARADO  <-- nada trabajando     gpu=52.89 W, 39 %  pg=running  cola=47 resultados

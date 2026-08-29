@@ -1395,3 +1395,44 @@ Ningún corte separa un orden que ya viene mezclado.
 
 Se mantiene el corte en **0.30**. Para arreglarlo de verdad hay que cambiar el clasificador,
 no el umbral.
+
+---
+
+## #59 — clasificador de dominio con LLM: **NO PASA el criterio** (2026-08-29)
+
+Exp #57 dejó el diagnóstico: el embedding no ordena por materia. Se probó que un LLM lea el
+articulado y decida. Criterio fijado antes: **≥ 8 aciertos de 9** casos de control.
+
+```
+LEY 18045  mercado de valores              LLM=fuera  emb=dentro  ok
+LEY 20484  transporte publico              LLM=fuera  emb=dentro  ok
+LEY 20698  generacion renovable ERNC       LLM=dentro emb=dentro  ok
+LEY 20720  insolvencia                     LLM=fuera  emb=dentro  ok
+LEY 20886  procedimiento civil             LLM=fuera  emb=dentro  ok
+LEY 20897  franquicia solar termica        LLM=fuera  emb=dentro  FALLA
+LEY 21499  biocombustibles solidos         LLM=fuera  emb=dentro  FALLA
+LEY 21770  ley marco autorizaciones sect.  LLM=fuera  emb=dentro  FALLA
+RESOLUCION 838  acuicultura                sin articulado, se saltea
+
+5 aciertos · 3 fallas · 1 salteada     ->  NO PASA (pedia >= 8)
+```
+
+**No se adopta.** El embedding sigue.
+
+**Lo que el LLM hace bien**: identifica la materia con precisión — los rótulos que devuelve
+(`mercado de valores`, `insolvencia`, `procedimiento civil`, `transporte`) son correctos, y
+saca las cinco ajenas que el embedding deja pasar. Ahí gana 5-0.
+
+**Dónde falla, y por qué puede tener razón**: las 3 fallas son normas de energía que manda
+fuera — franquicia tributaria solar, biocombustibles sólidos, ley marco de autorizaciones. En
+sentido estricto **no son mercado eléctrico**, y el que puede estar equivocado soy yo al
+ponerlas como "dentro" en los controles. La frontera que definió el usuario es *"todo lo
+referente a la subgerencia de mercados"*, y si biocombustibles sólidos entra o no es una
+decisión suya, no mía.
+
+⚠️ **El experimento midió contra mi propio criterio de frontera, que es justo lo que está en
+duda.** Sin que el usuario confirme si esas 3 entran, no se puede saber si el LLM falló o
+acertó. Anotado como pregunta abierta, no como veredicto sobre el clasificador.
+
+⚠️ `RESOLUCION 838` (acuicultura) no tiene articulado en la DB — el LLM no puede clasificar
+lo que no está. Ese caso lo tiene que resolver la ingesta, no el clasificador.

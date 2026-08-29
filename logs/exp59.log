@@ -1,0 +1,15 @@
+clasificando 9 normas con ollama/qwen3:30b-a3b
+
+  LEY 18045    LLM=fuera   emb=dentro  sim=0.348  [mercado de valores] 11s  ok
+  LEY 20484    LLM=fuera   emb=dentro  sim=0.303  [transporte] 5s  ok
+  LEY 20698    LLM=dentro  emb=dentro  sim=0.301  [generación de energía renovable] 17s  ok
+  LEY 20720    LLM=fuera   emb=dentro  sim=0.332  [insolvencia] 11s  ok
+  LEY 20886    LLM=fuera   emb=dentro  sim=0.347  [procedimiento civil] 4s  ok
+  LEY 20897    LLM=fuera   emb=dentro  sim=0.358  [franquicia tributaria] 6s  FALLA (esperado dentro)
+  LEY 21499    LLM=fuera   emb=dentro  sim=0.300  [biocombustibles sólidos] 10s  FALLA (esperado dentro)
+  LEY 21770    LLM=fuera   emb=dentro  sim=0.331  [procedimientos administrativos] 12s  FALLA (esperado dentro)
+  RESOLUCIÓN 838      sin articulado, se saltea
+
+=== controles: 5 aciertos · 3 fallas · 0 indefinidos de 9 ===
+criterio: adoptar si aciertos >= 8  ->  NO PASA
+(el embedding acierta 0 de 9 con el corte 0.30 vigente)
