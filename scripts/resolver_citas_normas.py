@@ -51,6 +51,34 @@ AJENA = re.compile(r"tr[áa]nsito|transporte\s+p[úu]blico|obras\s+p[úu]blicas|
                    r"insolvencia|reemprendimiento|copropiedad|urbanismo|construcciones", re.I)
 
 
+# El TIPO de relacion lo dice el verbo que introduce la cita, no hay que inferirlo. Las 2204
+# citas norma->norma estaban todas como `remite` generico, que no distingue "esta norma
+# DEROGA a aquella" de "la menciona al pasar" -- y esa diferencia es la que hace util el
+# grafo: pedido del usuario, "mapea bien la norma y sus relaciones".
+#
+# Se mira la ventana ANTES de la cita: ahi va el verbo. El enum de la tabla ya admitia
+# 'modifica', 'deroga' y 'complementa'; estaban sin usar.
+VERBO_TIPO = [
+    (re.compile(r"der[óo]g(?:ase|uese|anse|uense)|queda\s+derogad", re.I), "deroga"),
+    (re.compile(r"modif[íi]case|introd[úu]cense|reempl[áa]zase|sustit[úu]yese|agr[ée]gase|"
+                r"incorp[óo]rase|interc[áa]lase|el[íi]minase|sup[rr][íi]mese", re.I), "modifica"),
+    (re.compile(r"apru[ée]base\s+el\s+(?:siguiente\s+)?reglamento|"
+                r"reglamento\s+de\s+(?:la\s+)?(?:ley|decreto)", re.I), "complementa"),
+    (re.compile(r"de\s+conformidad|conforme\s+a|seg[úu]n\s+lo\s+dispuesto|"
+                r"en\s+virtud\s+de|de\s+acuerdo\s+a", re.I), "aplica"),
+]
+VENTANA = 90        # caracteres antes de la cita donde vive el verbo
+
+
+def _tipo_relacion(texto, ini):
+    """Tipo de la relacion segun el verbo que precede a la cita. Default `remite`."""
+    prev = texto[max(0, ini - VENTANA):ini]
+    for pat, tipo in VERBO_TIPO:
+        if pat.search(prev):
+            return tipo
+    return "remite"
+
+
 def _num(s):
     return (s or "").replace(".", "").replace(" ", "").lstrip("0") or "0"
 
@@ -86,7 +114,8 @@ def main(escribir=False):
             hits = cat.get(k) or []
             if len(hits) == 1:
                 if hits[0] != a["id_norma"]:           # autocitas no aportan al grafo
-                    resueltas.append((a["id"], hits[0], m.group(0)))
+                    resueltas.append((a["id"], hits[0], m.group(0),
+                                      _tipo_relacion(a["texto"] or "", m.start())))
             elif len(hits) > 1:
                 ambiguas += 1
             else:
@@ -108,6 +137,9 @@ def main(escribir=False):
                                            txt[max(0, m.start() - 60):m.end() + 180]).strip())
 
     print(f"citas resueltas a normas del corpus : {len(resueltas)}")
+    _por_tipo = collections.Counter(t for *_x, t in resueltas)
+    for _t, _n in _por_tipo.most_common():
+        print(f"     {_t:14} {_n}")
     print(f"ambiguas (>1 candidata)             : {ambiguas}")
     print(f"citadas y NO en el corpus           : {sum(v['total'] for v in externas.values())}"
           f"  ({len(externas)} normas distintas)")
@@ -135,13 +167,15 @@ def main(escribir=False):
 
     if escribir:
         with with_connection() as c, c.cursor() as cur:
-            cur.execute("DELETE FROM referencias WHERE tipo_relacion='remite'")
+            cur.execute("""DELETE FROM referencias
+                           WHERE tipo_relacion IN ('remite','modifica','deroga','complementa','aplica')
+                             AND destino_norma_id IS NOT NULL""")
             cur.executemany(
                 """INSERT INTO referencias
                    (origen_articulo_id, destino_norma_id, tipo_relacion,
                     confianza, metodo_extraccion, contexto)
-                   VALUES (%s,%s,'remite',0.9,'regex',%s)""",
-                resueltas)
+                   VALUES (%s,%s,%s,0.9,'regex',%s)""",
+                [(a, d, t, ctx) for a, d, ctx, t in resueltas])
             c.commit()
         print(f"escritas {len(resueltas)} filas remite en `referencias`")
 

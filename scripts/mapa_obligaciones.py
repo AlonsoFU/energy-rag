@@ -74,18 +74,32 @@ def impacto(nid):
               JOIN articulos a ON a.id = o.articulo_id
               WHERE a.id_norma = %s{NO_DUP}""", nid)
     prop = r[0]["n"]
-    cit = q("""SELECT DISTINCT a2.id_norma, n2.tipo, n2.numero AS nnum, count(*) OVER () tot
+    # Se piden TODOS los tipos de relacion, no solo `remite`. El tipo lo dice el verbo que
+    # introduce la cita, y la diferencia importa: que otra norma te DEROGUE o te MODIFIQUE no
+    # es lo mismo que te mencione al pasar.
+    cit = q("""SELECT DISTINCT a2.id_norma, n2.tipo, n2.numero AS nnum, r.tipo_relacion,
+                      CASE r.tipo_relacion
+                        WHEN 'deroga' THEN 1 WHEN 'modifica' THEN 2
+                        WHEN 'complementa' THEN 3 WHEN 'aplica' THEN 4 ELSE 5 END AS prio
                FROM referencias r
                JOIN articulos a2 ON a2.id = r.origen_articulo_id
                JOIN normas n2 ON n2.id_norma = a2.id_norma
-               WHERE r.tipo_relacion = 'remite' AND r.destino_norma_id = %s""", nid)
+               WHERE r.destino_norma_id = %s
+                 AND r.tipo_relacion IN ('remite','aplica','modifica','deroga','complementa')
+               ORDER BY prio""", nid)
     n = q("SELECT tipo, numero, titulo FROM normas WHERE id_norma=%s", nid)
     nom = f"{n[0]['tipo']} {n[0]['numero']}" if n else nid
     print(f"\n=== si cambia {nom} ({nid}) ===")
     print(f"  obligaciones que define directamente : {prop}")
     print(f"  normas del corpus que la citan       : {len(cit)}")
+    import collections as _c
+    _por = _c.Counter(x["tipo_relacion"] for x in cit)
+    if _por:
+        print("      " + " · ".join(f"{v} {k}" for k, v in _por.most_common()))
     for x in cit[:12]:
-        print(f"      {x['tipo']} {x['nnum']}")
+        # las que DEROGAN o MODIFICAN van primero: son las que rompen algo
+        marca = "⚠️ " if x["tipo_relacion"] in ("deroga", "modifica") else "   "
+        print(f"      {marca}{x['tipo_relacion']:12} {x['tipo']} {x['nnum']}")
     # FASE 4.2: el proceso viene del encabezado del propio articulado (TÍTULO / CAPÍTULO /
     # PÁRRAFO), no de una taxonomía inventada. Es lo que convierte "cambió la norma X" en
     # "se rompe el proceso Y", que es la pregunta que justifica tener el foso.
