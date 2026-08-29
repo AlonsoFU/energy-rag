@@ -69,6 +69,27 @@ VERBO_TIPO = [
 ]
 VENTANA = 90        # caracteres antes de la cita donde vive el verbo
 
+# "Modificase el articulo 3º de la ley Nº 18.410" -- el articulo va ANTES de la norma, entre
+# el verbo y la cita. Si ese articulo existe en la DB, la relacion apunta a EL y no a la norma
+# entera: saber que LEY 21194 toca el articulo 118 del DFL 4 es mucho mas util que saber que
+# "lo modifica" a secas. El CHECK de la tabla admite un solo destino, asi que el articulo gana
+# cuando se puede resolver.
+ART_TOCADO = re.compile(
+    r"art[íi]culos?\s+(?P<art>\d{1,3}[°ºª]?(?:\s*-\s*\d+)?(?:\s*(?:bis|ter|quater))?)"
+    r"(?P<medio>[^.;]{0,60})$", re.IGNORECASE)
+
+
+def _art_tocado(texto, ini):
+    """Numero de articulo mencionado justo antes de la cita, si lo hay."""
+    prev = texto[max(0, ini - 140):ini]
+    m = ART_TOCADO.search(prev)
+    if not m:
+        return None
+    # el "medio" no debe cruzar otra norma: "articulo 5 de la ley X, y la ley Y" apuntaria mal
+    if re.search(r"\b(ley|decreto|reglamento|resoluci[oó]n)\b", m.group("medio"), re.I):
+        return None
+    return re.sub(r"[°ºª\s]+", "", m.group("art")).lower()
+
 
 def _tipo_relacion(texto, ini):
     """Tipo de la relacion segun el verbo que precede a la cita. Default `remite`."""
@@ -94,6 +115,10 @@ def main(escribir=False):
         normas = cur.fetchall()
         cur.execute("SELECT id, id_norma, texto FROM articulos WHERE texto IS NOT NULL")
         arts = cur.fetchall()
+        cur.execute("""SELECT id, id_norma,
+                              lower(replace(replace(replace(numero,'°',''),'º',''),' ','')) k
+                       FROM articulos""")
+        idx_art = {(r["id_norma"], r["k"]): r["id"] for r in cur.fetchall()}
 
     cat = collections.defaultdict(list)
     for n in normas:
@@ -114,8 +139,13 @@ def main(escribir=False):
             hits = cat.get(k) or []
             if len(hits) == 1:
                 if hits[0] != a["id_norma"]:           # autocitas no aportan al grafo
-                    resueltas.append((a["id"], hits[0], m.group(0),
-                                      _tipo_relacion(a["texto"] or "", m.start())))
+                    tr = _tipo_relacion(a["texto"] or "", m.start())
+                    aid_dest = None
+                    if tr in ("modifica", "deroga"):
+                        k = _art_tocado(a["texto"] or "", m.start())
+                        if k:
+                            aid_dest = idx_art.get((hits[0], k))
+                    resueltas.append((a["id"], hits[0], m.group(0), tr, aid_dest))
             elif len(hits) > 1:
                 ambiguas += 1
             else:
@@ -137,7 +167,9 @@ def main(escribir=False):
                                            txt[max(0, m.start() - 60):m.end() + 180]).strip())
 
     print(f"citas resueltas a normas del corpus : {len(resueltas)}")
-    _por_tipo = collections.Counter(t for *_x, t in resueltas)
+    _con_art = sum(1 for *_x, ad in resueltas if ad is not None)
+    print(f"   ...con el ARTICULO tocado resuelto : {_con_art}")
+    _por_tipo = collections.Counter(r[3] for r in resueltas)
     for _t, _n in _por_tipo.most_common():
         print(f"     {_t:14} {_n}")
     print(f"ambiguas (>1 candidata)             : {ambiguas}")
@@ -170,12 +202,19 @@ def main(escribir=False):
             cur.execute("""DELETE FROM referencias
                            WHERE tipo_relacion IN ('remite','modifica','deroga','complementa','aplica')
                              AND destino_norma_id IS NOT NULL""")
+            # el CHECK admite UN solo destino: si se resolvio el articulo, gana el articulo
             cur.executemany(
                 """INSERT INTO referencias
                    (origen_articulo_id, destino_norma_id, tipo_relacion,
                     confianza, metodo_extraccion, contexto)
                    VALUES (%s,%s,%s,0.9,'regex',%s)""",
-                [(a, d, t, ctx) for a, d, ctx, t in resueltas])
+                [(a, d, t, ctx) for a, d, ctx, t, ad in resueltas if ad is None])
+            cur.executemany(
+                """INSERT INTO referencias
+                   (origen_articulo_id, destino_articulo_id, tipo_relacion,
+                    confianza, metodo_extraccion, contexto)
+                   VALUES (%s,%s,%s,0.95,'regex',%s)""",
+                [(a, ad, t, ctx) for a, d, ctx, t, ad in resueltas if ad is not None])
             c.commit()
         print(f"escritas {len(resueltas)} filas remite en `referencias`")
 

@@ -117,6 +117,21 @@ def impacto(nid):
         # norma no trae estructura de títulos, o el artículo no se pudo ubicar en el texto.
         # Decir "la norma no trae títulos" seria mentir en el segundo caso.
         print(f"\n  ({sin} sin proceso conocido — sin títulos en la norma, o artículo no ubicado)")
+    # Relaciones que apuntan a un ARTICULO concreto de esta norma: son las mas accionables
+    # -- no "algo de esta norma cambia" sino "el articulo 118 lo toca la LEY 21194".
+    art = q("""SELECT n2.tipo, n2.numero AS nnum, a.numero AS art, r.tipo_relacion
+               FROM referencias r
+               JOIN articulos a ON a.id = r.destino_articulo_id
+               JOIN articulos a2 ON a2.id = r.origen_articulo_id
+               JOIN normas n2 ON n2.id_norma = a2.id_norma
+               WHERE a.id_norma = %s
+                 AND r.tipo_relacion IN ('modifica','deroga')
+               ORDER BY r.tipo_relacion, a.numero""", nid)
+    if art:
+        print(f"\n  articulos tocados por otra norma ({len(art)}):")
+        for x in art[:15]:
+            print(f"      art {str(x['art']):<10} {x['tipo_relacion']:9} por {x['tipo']} {x['nnum']}")
+
     print("\n  ⚠️ las obligaciones de esas normas pueden depender de lo que cambie.")
 
 
