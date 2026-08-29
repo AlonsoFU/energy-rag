@@ -1361,3 +1361,37 @@ artículos con sufijo en el corpus **64 → 104**.
 `/home/alonso/datos`— y moría con *"couldn't connect to huggingface.co"*. El script informaba
 `340 -> 370` y **el runner lo marcaba OK igual**, con la base sin tocar. Ahora `HF_HOME` se
 exporta en `runner.sh`, así que cubre toda la cola.
+
+---
+
+## #57 — corte de dominio 0.36: **DESCARTADO por inspección, sin correr** (2026-08-29)
+
+Criterio fijado antes (`docs/plan-operacion.md`): adoptar si `cita_ok` **no cae nada** y
+`cita_limpia` no cae más de 2. Antes de gastar ~5 h de GPU se miró **qué normas saca**, y ahí
+murió: el corte 0.36 deja fuera 19 normas, y entre ellas hay energía legítima.
+
+```
+SACA, y son del dominio:
+  0.300  LEY 21499   BIOCOMBUSTIBLES SOLIDOS
+  0.301  LEY 20698   AMPLIACION DE LA MATRIZ ENERGETICA (ERNC)
+  0.331  LEY 21770   LEY MARCO DE AUTORIZACIONES SECTORIALES
+  0.358  LEY 20897   FRANQUICIA solar termica
+
+SACA, y son ajenas (lo que se buscaba):
+  0.303  LEY 20484   no pago de tarifa en transporte publico
+  0.311  RESOLUCION 838  concesion de ACUICULTURA
+  0.332  LEY 20720   insolvencia
+  0.347  LEY 20886   Codigo de Procedimiento Civil
+  0.348  LEY 18045   mercado de valores
+```
+
+Con la ley de matriz energética fuera del pool, `cita_ok` cae — y el criterio pedía que no
+cayera nada. **No se corre.**
+
+**El diagnóstico que deja:** el problema no es dónde está el umbral, es que el puntaje por
+embedding **no ordena por materia**. La ley de biocombustibles (0.300) y la de matriz
+energética (0.301) puntúan MÁS BAJO que la de acuicultura (0.311) y la de insolvencia (0.332).
+Ningún corte separa un orden que ya viene mezclado.
+
+Se mantiene el corte en **0.30**. Para arreglarlo de verdad hay que cambiar el clasificador,
+no el umbral.

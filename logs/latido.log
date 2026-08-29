@@ -94,3 +94,5 @@
 2026-08-28 21:00:01  PARADO  <-- nada trabajando     gpu=230.65 W, 98 %  pg=running  cola=47 resultados
 2026-08-28 22:00:01  PARADO  <-- nada trabajando     gpu=60.94 W, 42 %  pg=running  cola=47 resultados
 2026-08-28 23:00:01  PARADO  <-- nada trabajando     gpu=55.86 W, 24 %  pg=running  cola=47 resultados
+2026-08-29 00:00:01  PARADO  <-- nada trabajando     gpu=34.62 W, 0 %  pg=running  cola=47 resultados
+2026-08-29 01:00:01  PARADO  <-- nada trabajando     gpu=38.82 W, 7 %  pg=running  cola=47 resultados
