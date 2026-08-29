@@ -35,6 +35,8 @@ fi
 while IFS='|' read -r etiqueta cmd; do
   case "$etiqueta" in ''|\#*) continue ;; esac
   grep -qxF "$etiqueta" "$HECHAS" && continue
+  # candado: evita que dos drenadores tomen la MISMA tarea a la vez
+  exec 9>>logs/.runner.lock; flock -n 9 || exit 0
   echo "$(date '+%F %T')  LANZO $etiqueta" >> "$LOG"
   if eval "$cmd" >> "logs/cola_$etiqueta.log" 2>&1; then
     echo "$etiqueta" >> "$HECHAS"

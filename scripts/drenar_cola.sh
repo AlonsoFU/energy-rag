@@ -8,7 +8,9 @@ cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
 # Antes se fijaba PEND al arrancar y quedaba corto -- paso con 9 tareas fijadas y 10 en cola.
 while :; do
   PEND=$(grep -v '^#' scripts/cola.txt | grep -c .)
-  HECHAS=$(wc -l < logs/cola_hechas.txt 2>/dev/null || echo 0)
+  # unicas: si dos drenadores corren a la vez, la misma etiqueta se anota dos veces
+  # y el contador supera al total, cortando la cola antes de tiempo (visto: "10/9").
+  HECHAS=$(sort -u logs/cola_hechas.txt 2>/dev/null | grep -c . || echo 0)
   [ "$HECHAS" -ge "$PEND" ] && break
   ./scripts/runner.sh
 done

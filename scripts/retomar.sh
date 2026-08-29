@@ -20,11 +20,12 @@ mkdir -p logs
   # 2. Postgres se apaga solo (medido varias veces)
   docker start energy_rag_pg > /dev/null 2>&1 && echo "  postgres arriba"
 
-  # 3. el limite de potencia NO persiste tras reiniciar: vuelve solo a 350 W y suena
-  W=$(nvidia-smi --query-gpu=power.limit --format=csv,noheader,nounits 2>/dev/null | cut -d. -f1)
-  if [ "${W:-0}" != "180" ]; then
-    sudo -n nvidia-smi -pl 180 > /dev/null 2>&1 && echo "  GPU restablecida a 180 W (estaba en ${W}W)"
-  fi
+  # 3. el limite de potencia lo fija SOLO EL USUARIO, a mano.
+  #    Aca habia un bloque que lo forzaba a 180 W en cada pasada (cron 0 */3), asi que a las
+  #    21:00 y cada 3 horas pisaba lo que el usuario hubiera puesto. Se saco a pedido suyo:
+  #    el ajuste es manual con `scripts/gpu_modo.sh` o `sudo nvidia-smi -pl <W>`.
+  #    Solo se INFORMA el valor actual, no se toca.
+  echo "  GPU en $(nvidia-smi --query-gpu=power.limit --format=csv,noheader 2>/dev/null) (no se modifica)"
 
   # 4. Ollama tiene que estar sirviendo
   curl -s --max-time 5 http://localhost:11434/api/tags > /dev/null 2>&1 \

@@ -19,3 +19,14 @@ Terminado
     dominio 0.466  ok
     guardado -> data/normas_completas/nuevas/1154423.json  (registrado como LEY-21304)
 [1/2] LEY 20500 (idNorma 1023143)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1023143
+    titulo: LEY 20500  SOBRE ASOCIACIONES Y PARTICIPACIÓN CIUDADANA EN LA GESTIÓN PÚBLICA
+    chars : 59897
+    DUDOSO: dominio 0.283 < 0.3 -- se guarda y se avisa
+    guardado -> data/normas_completas/nuevas/1023143.json  (registrado como LEY-20500)
+[2/2] LEY 21304 (idNorma 1154423)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1154423
+    titulo: LEY 21304  SOBRE SUMINISTRO DE ELECTRICIDAD PARA PERSONAS ELECTRODEPENDIENTES
+    chars : 5799
+    dominio 0.466  ok
+    guardado -> data/normas_completas/nuevas/1154423.json  (registrado como LEY-21304)

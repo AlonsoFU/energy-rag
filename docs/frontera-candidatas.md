@@ -3,9 +3,9 @@
 Generado por `scripts/resolver_citas_normas.py`. **Insumo de la decisión 0.2**
 (frontera del corpus), que es del usuario, no mía.
 
-- citas norma→norma detectadas en el texto: **4039**
+- citas norma→norma detectadas en el texto: **4037**
 - resueltas a normas del corpus: **2204**
-- apuntan fuera del corpus: **1835** (483 normas distintas)
+- apuntan fuera del corpus: **1833** (483 normas distintas)
 
 `desde_elec` = veces citada desde una norma del dominio eléctrico (excluye las ajenas:
 tránsito, obras públicas, procesal penal…). **Es la columna que importa** — una norma

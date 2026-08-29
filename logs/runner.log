@@ -212,3 +212,29 @@
 2026-08-28 14:21:52  OK    act_327b
 2026-08-28 14:22:49  LANZO baj_20500
 2026-08-28 14:22:49  OK    baj_20500
+2026-08-28 14:23:46  OK    baj_20500
+2026-08-28 14:23:46  LANZO act_21304b
+2026-08-28 14:23:57  LANZO act_21304b
+2026-08-28 14:23:57  OK    act_21304b
+2026-08-28 14:24:06  LANZO dup_y
+2026-08-28 14:24:06  OK    act_21304b
+2026-08-28 14:24:25  OK    dup_y
+2026-08-28 14:24:25  LANZO der_y
+2026-08-28 14:24:25  LANZO der_y
+2026-08-28 14:24:25  OK    der_y
+2026-08-28 14:24:25  drenaje terminado: 9/9
+2026-08-28 14:24:25  OK    der_y
+2026-08-28 14:24:25  drenaje terminado: 10/9
+2026-08-28 14:26:26  LANZO proc_y
+2026-08-28 14:26:27  OK    proc_y
+2026-08-28 14:26:27  LANZO obl_y
+2026-08-28 16:46:34  OK    obl_y
+2026-08-28 16:46:34  LANZO citas_y
+2026-08-28 16:47:31  OK    citas_y
+2026-08-28 16:47:31  drenaje terminado: 9/9
+2026-08-28 17:30:01  cola VACIA -- nada pendiente
+2026-08-28 19:30:01  cola VACIA -- nada pendiente
+2026-08-28 20:30:01  cola VACIA -- nada pendiente
+2026-08-28 21:30:01  cola VACIA -- nada pendiente
+2026-08-28 22:30:01  cola VACIA -- nada pendiente
+2026-08-28 23:30:01  cola VACIA -- nada pendiente
