@@ -289,3 +289,39 @@ eran ruido. Si `cita_ok` baja, alguna de las cuatro estaba aportando y el corte 
 ⚠️ El caso que ningún corte arregla: la LEY 19882 (política de personal) puntúa **0.411**, más
 que la LEY 21667 que sí es del dominio. El puntaje por articulado no ordena bien en esa zona.
 Este experimento mide si mover el umbral ayuda igual, no si lo resuelve.
+
+---
+
+## EXP #59 — clasificar dominio con LLM en vez de embedding (criterio fijado 2026-08-29)
+
+Exp #57 dejó el diagnóstico: el puntaje por embedding **no ordena por materia**. Biocombustibles
+(0.300) y matriz energética (0.301) puntúan más bajo que acuicultura (0.311) e insolvencia
+(0.332). Ningún umbral arregla un orden ya mezclado.
+
+Alternativa: que un LLM lea el articulado y decida si la norma regula el mercado eléctrico.
+
+**Casos de control, fijados ANTES de correr.** Son los 9 donde el embedding ya se sabe que
+falla o acierta por poco; el LLM tiene que resolverlos bien:
+```
+DENTRO   LEY 21499  biocombustibles solidos          (embedding 0.300, casi fuera)
+DENTRO   LEY 20698  matriz energetica ERNC           (embedding 0.301, casi fuera)
+DENTRO   LEY 21770  ley marco autorizaciones sect.   (embedding 0.331)
+DENTRO   LEY 20897  franquicia solar termica         (embedding 0.358)
+FUERA    LEY 20484  no pago tarifa transporte publico(embedding 0.303, DENTRO hoy)
+FUERA    RESOLUCION 838  concesion de ACUICULTURA    (embedding 0.311, DENTRO hoy)
+FUERA    LEY 20720  insolvencia                      (embedding 0.332, DENTRO hoy)
+FUERA    LEY 20886  Codigo de Procedimiento Civil    (embedding 0.347, DENTRO hoy)
+FUERA    LEY 18045  mercado de valores               (embedding 0.348, DENTRO hoy)
+```
+El embedding acierta **0 de 9** con el corte 0.30 vigente (las 4 de arriba entran por poco y
+las 5 de abajo también entran, que es el error).
+
+**Criterio de adopción:**
+```
+adoptar el clasificador LLM si acierta >= 8 de los 9 casos de control
+```
+Con menos de 8 no vale cambiar un mecanismo adoptado por otro que falla parecido.
+
+⚠️ Los 9 casos los elegí yo, y son justo los casos difíciles — no una muestra representativa.
+Esto mide si el LLM resuelve **lo que el embedding no puede**, no la exactitud global. Si pasa,
+falta medir el efecto en retrieval con pareado antes de tocar el pipeline.
