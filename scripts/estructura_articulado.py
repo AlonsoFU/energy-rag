@@ -20,8 +20,10 @@ Las otras 388 quedan con `proceso = NULL` — **sin proceso conocido, que no es 
   PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado [--aplicar]
 """
 import argparse
+import json
 import re
 from collections import Counter
+from pathlib import Path
 
 from psycopg.rows import dict_row
 
@@ -129,7 +131,24 @@ def main(aplicar=False):
         cur.execute("""SELECT n.id_norma, n.texto_completo FROM normas n
                        WHERE n.texto_completo IS NOT NULL
                          AND n.metadata->>'fuera_de_dominio' IS DISTINCT FROM 'true'""")
-        normas = {r["id_norma"]: limpiar(r["texto_completo"]) for r in cur.fetchall()}
+        normas = {}
+        for r in cur.fetchall():
+            t = limpiar(r["texto_completo"])
+            # Si `texto_completo` quedo truncado por el render perezoso de BCN pero el JSON
+            # bajado tiene el documento entero, se usa ese para BUSCAR ENCABEZADOS. Los
+            # articulos ya estan en la DB y no se tocan; lo unico que sale del JSON es donde
+            # empieza cada TITULO/CAPITULO.
+            # Caso que lo motiva: el DFL 4 (la LGSE) tiene 10.075 chars en la DB y 582.770 en
+            # el JSON -> 1 encabezado contra 26, y sus 862 obligaciones quedaban sin proceso.
+            j = Path(f"data/normas_completas/nuevas/{r['id_norma']}.json")
+            if j.exists():
+                try:
+                    tj = limpiar(json.loads(j.read_text()).get("texto_completo") or "")
+                    if len(tj) > len(t) * 1.5:
+                        t = tj
+                except Exception:
+                    pass
+            normas[r["id_norma"]] = t
         cur.execute("""SELECT a.id, a.id_norma, a.numero, o.id AS obl
                        FROM articulos a JOIN obligacion o ON o.articulo_id = a.id""")
         filas = cur.fetchall()
