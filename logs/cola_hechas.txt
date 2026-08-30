@@ -1,9 +1,2 @@
-act_20500b
-act_21304b
-act_327b
-baj_20500
-der_y
-dup_y
-proc_y
-obl_y
-citas_y
+dup_z
+der_z

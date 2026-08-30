@@ -127,3 +127,42 @@ inject    OFF  0/46  ->  ON  0/46
 Si una entrada de este archivo empieza a aparecer en el pipeline **sin flag y sin número**,
 está mal puesta. El orden es siempre: **dato → modelo → estructura → regla**, y la regla
 llega última, medida y documentada.
+
+---
+
+## R8 — Atribuir artículos de una ley modificatoria a su norma destino — **NO APLICADO**
+
+`scripts/atribuir_articulos.py` existe y funciona a medias. **No se enchufa al pipeline** porque
+ninguna de las dos variantes probadas es correcta, y equivocarse acá produce citas falsas.
+
+**El problema.** Una ley modificatoria no tiene artículos propios en los bloques que inserta:
+declara un destino y mete articulado ajeno. El ingestor los guardó como suyos, y de ahí salían
+respuestas del tipo `[LEY 20936 art 92°]` cuando el artículo 92° es del DFL 4.
+
+**Variante 1 — sin cierre de bloque.** Todo artículo posterior a la frase-destino se atribuye
+al destino. Detecta bien los 56 de LEY 20936 → DFL 4, pero **se lleva puestos los propios**:
+LEY 21472 declara en su artículo 1 que modifica el DFL 4, y sus artículos 2-16 —*"Mecanismo
+Transitorio de Protección al Cliente"*, suyos— terminaban atribuidos al DFL 4.
+
+**Variante 2 — cerrando el bloque en `".`** (comilla-punto, que es como cierra el articulado
+insertado en la ley chilena). Arregla LEY 21472, pero **pierde LEY 20936**: esa ley anuncia el
+destino UNA sola vez y después usa numerales que lo heredan —
+
+```
+"Introdúcense en el DFL 4 ... las siguientes modificaciones:"
+    1. Modifícase el artículo 1 ...
+    3) Intercálase, a continuación del artículo 72°, el siguiente Título II BIS   <- sin repetir destino
+```
+
+— así que el cierre corta después del primer numeral. Medido: 2 frases-destino y 84 cierres en
+240.608 caracteres; atribuciones totales 391 → 52, y las 56 de LEY 20936 desaparecen.
+
+**Lo que hace falta** es un modelo de ÁMBITO: una frase-destino abre un alcance que dura hasta
+la siguiente frase-destino o hasta que aparece un artículo de la ley misma fuera de comillas.
+El balance de comillas no sirve para detectarlo — LEY 20936 tiene 381 comillas rectas, número
+impar, así que no hay apertura/cierre que emparejar.
+
+**Mientras tanto**, el caso principal ya está cubierto por otra vía más robusta:
+`detectar_articulos_duplicados` los caza **por contenido** (mismo número + texto similar en la
+norma destino), sin depender de interpretar la sintaxis modificatoria. Cubre 55 de los 56 de
+LEY 20936. Lo que esa vía NO cubre es cuando el destino no está en el corpus.

@@ -1,0 +1,17 @@
+articulos comparados      : 3149
+misma serie (texto distinto, señal estructural): 20
+numeros presentes en >1 norma: 340
+duplicados (sim >= 0.9) : 53
+ambiguos (empate, NO se marcan): 1
+     DECRETO 7 art quinto <-> DECRETO 8 art quinto  sim=0.992
+    39  LEY 20936 -> DFL 4
+     6  DECRETO 52 -> DECRETO 113
+     3  LEY 21304 -> DFL 4
+     1  Ley 20776 -> LEY 20402
+     1  DECRETO 130 -> DECRETO 10
+     1  LEY 20410 -> DECRETO 900
+     1  LEY 19613 -> LEY 18410
+     1  DECRETO 70 -> DECRETO 62
+  limpiadas 73 marcas previas
+
+MARCADOS 73 articulos con metadata.duplicado_de (53 por texto, 20 por serie) -- reversible

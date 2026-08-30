@@ -46,6 +46,15 @@ DESTINO = re.compile(
 TIPO = {"ley": "LEY", "decreto supremo": "DECRETO", "decreto": "DECRETO",
         "decreto con fuerza de ley": "DFL", "decreto ley": "DL", "resolucion": "RESOLUCION"}
 
+# FIN del bloque insertado. Sin esto el atribuidor mandaba a la norma destino TODO lo que
+# viniera despues de la frase que abre el bloque, incluidos los articulos PROPIOS que la ley
+# tiene mas abajo. Caso medido: LEY 21472 art 1 modifica el DFL 4, y sus articulos 2-16 son
+# suyos ("Mecanismo Transitorio de Proteccion al Cliente") -- se los llevaba al DFL 4.
+#
+# El articulado insertado va entrecomillado y cierra con comilla-punto:
+#   "...no podra prorrogarse mas alla de ese periodo.".  TITULO II  MECANISMO TRANSITORIO...
+CIERRE_BLOQUE = re.compile(r'["“”]\s*\.')
+
 
 def _num(s):
     s = (s or "").replace(" ", "")
@@ -74,6 +83,7 @@ def main(aplicar=False):
         por_norma[a["id_norma"]].append(a)
 
     asign, sin_destino, sin_resolver = {}, 0, collections.Counter()
+    fuera_bloque = 0
     for n in normas:
         texto = limpiar(n["texto_completo"] or "")
         if not texto:
@@ -114,12 +124,19 @@ def main(aplicar=False):
             if not previos:
                 sin_destino += 1
                 continue                       # antes del primer bloque => articulo PROPIO
+            # ¿el bloque ya cerro antes de llegar a este articulo? Entonces es PROPIO.
+            ini_bloque = previos[-1][0]
+            cierre = CIERRE_BLOQUE.search(texto, ini_bloque, p)
+            if cierre:
+                fuera_bloque += 1
+                continue
             asign[a["id"]] = {"destino": previos[-1][1], "etiqueta": previos[-1][2],
                               "origen": f"{n['tipo']} {n['numero']}", "art": a["numero"]}
 
     print(f"articulos revisados            : {len(arts)}")
     print(f"atribuidos a OTRA norma        : {len(asign)}")
     print(f"antes del primer bloque (propios): {sin_destino}")
+    print(f"despues del cierre del bloque (propios): {fuera_bloque}")
     print(f"destinos que NO estan en el corpus: {sum(sin_resolver.values())}"
           f"  ({len(sin_resolver)} distintos)")
     for k, v in sin_resolver.most_common(6):
