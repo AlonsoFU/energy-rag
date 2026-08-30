@@ -425,3 +425,12 @@
   fases pendientes:
     3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
 === fin 2026-08-30 09:00:02 ===
+=== retomar 2026-08-30 12:00:01 ===
+  postgres arriba
+  GPU en 250.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4997
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-30 12:00:02 ===

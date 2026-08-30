@@ -12,8 +12,16 @@ cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
 mkdir -p logs
 LOG=logs/trabajar.log
 
-# el plan maestro manda: si la cola quedo corta respecto al plan, se recarga
-cp -n scripts/plan_maestro.txt scripts/cola.txt 2>/dev/null || true
+# CANDADO: el cron lanza esto cada 10 min. Sin flock se acumulaban workers -- medido: 9
+# corriendo a la vez, todos peleando por la misma cola. Si ya hay uno, este sale en silencio.
+exec 8>logs/.trabajar.lock
+flock -n 8 || exit 0
+
+# El plan maestro manda SIEMPRE. Antes esto era `cp -n` (no sobrescribe), asi que agregar
+# tareas al plan NO llegaba a cola.txt: `trabajar.sh` contaba contra el plan y `runner.sh`
+# leia la cola vieja -> el worker se creia incompleto para siempre, o al reves.
+# Ahora se sincroniza en cada vuelta; `cola_hechas.txt` evita repetir lo ya hecho.
+cp -f scripts/plan_maestro.txt scripts/cola.txt
 
 while :; do
   [ -f .watchdog_off ] && { echo "$(date '+%F %T')  PAUSA manual (.watchdog_off)" >> "$LOG"; exit 0; }
