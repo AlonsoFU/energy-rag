@@ -48,6 +48,27 @@ ENCABEZADO = re.compile(
     r'(?P<num>[IVXLC]+(?:[ \t]+BIS|[ \t]+TER)?|\d+)[°ºª]?'
     r'[ \t]*[:.\-]?[ \t]*(?P<nombre>[^\n]{0,150})$',
     re.MULTILINE | re.IGNORECASE)
+# BCN incrusta notas de vigencia EN MEDIO del titulo:
+#   "CAPITULO II De [Ley 21804 Art. unico N° 15 D.O. 13.02.2026] los precios maximos..."
+#   "TITULO IV [Ley N° 19.940 Art. 1º D.O. 13.03.2004] De la Explotacion de los Servicios..."
+# Sin sacarlas, el nombre quedaba cortado en "De" o reemplazado por "Ley Nº 19.940" -- 231
+# obligaciones del DFL 4 con un proceso que no dice nada.
+# El formato de la nota es el de BCN (norma + Art. + D.O. + fecha), no una lista de normas.
+# Se exige el "Art." de la nota: sin eso, el patron se comeria menciones legitimas a una ley
+# dentro de un titulo. La fecha D.O. es OPCIONAL -- hay notas que no la traen
+# ("TITULO I BIS Ley 21804 Art. unico N° 2").
+NOTA_BCN = re.compile(
+    r"\s*\b(?:ley|decreto|dfl|d\.f\.l\.|dl)\s*n?[°º]?\s*[\d.]+\s*,?\s*[A-ZÁÉÍÓÚÑ]*\s*"
+    r"art[íi]?c?u?l?o?\.?\s*(?:[úu]nico|primero|\d+[°ºª]?)?\s*(?:n[°º]\s*\d+)?\s*"
+    r"(?:d\.?\s*o\.?\s*\d{1,2}\.\d{1,2}\.\d{4})?\s*",
+    re.IGNORECASE)
+
+# El nombre TERMINA donde arranca el articulado o el encabezado siguiente. Juntando 3 lineas
+# para saltar las notas de BCN se arrastraba lo que venia despues:
+# "Disposiciones Generales Articulo 2°.- Estan comprendidas en...".
+CORTE_NOMBRE = re.compile(
+    r"\s*(?:art[íi]culo\s|t[ÍIíi]tulo\s|cap[ÍIíi]tulo\s|p[ÁAáa]rrafo\s)", re.IGNORECASE)
+
 # un nombre valido no es otro encabezado ni el arranque de un articulo
 NO_ES_NOMBRE = re.compile(r'^[ \t]*(art[íi]culo|t[ÍIíi]tulo|cap[ÍIíi]tulo|p[ÁAáa]rrafo)\b', re.I)
 
@@ -99,18 +120,30 @@ def encabezados(texto, incluir_transcritos=False):
             texto[max(0, m.start() - 400):m.start()])
         if transcrito and not incluir_transcritos:
             continue
-        nombre = (m.group("nombre") or "").strip().strip('"“«»').strip()
+        nombre = NOTA_BCN.sub(" ", (m.group("nombre") or ""))
+        nombre = CORTE_NOMBRE.split(nombre, 1)[0]
+        nombre = re.sub(r"\s+", " ", nombre).strip().strip('"“«»').strip()
         if NO_ES_NOMBRE.match(nombre):
             nombre = ""                          # "TITULO I" seguido de "Articulo 1" en la misma linea
         if not nombre:                            # el nombre va en alguna de las lineas siguientes
-            for linea in texto[m.end():].splitlines()[:3]:
-                t = linea.strip().strip('"“«»').strip()
+            # 6 primeras lineas NO VACIAS. Tres razones para no achicar la ventana:
+            #   - tras el encabezado suele haber lineas en blanco
+            #   - la nota de BCN puede ocupar TRES lineas enteras por si sola:
+            #       "Ley Nº 19.940" / "Art. 3º" / "D.O. 13.03.2004"
+            #     y con ventana de 3 el nombre real ("Del Panel de Expertos") quedaba afuera
+            #   - CORTE_NOMBRE corta igual en cuanto aparece "Articulo", asi que ampliar la
+            #     ventana no arrastra el articulado
+            no_vacias = [l for l in texto[m.end():m.end() + 700].splitlines() if l.strip()][:6]
+            crudo = " ".join(no_vacias)
+            for linea in [NOTA_BCN.sub(" ", crudo)] + no_vacias:
+                t = re.sub(r"\s+", " ", NOTA_BCN.sub(" ", linea)).strip().strip('"“«»').strip()
                 if not t:
                     continue
                 if NO_ES_NOMBRE.match(t):
                     break                         # titulo sin nombre propio: se deja vacio
-                nombre = t
-                break
+                nombre = CORTE_NOMBRE.split(t, 1)[0].strip()
+                if nombre:
+                    break
         out.append((m.start(), m.group("nivel").upper(),
                     re.sub(r"\s+", " ", m.group("num")).upper(), nombre[:180], transcrito))
     return out
