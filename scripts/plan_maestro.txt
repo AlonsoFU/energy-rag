@@ -1,34 +1,25 @@
-# PLAN MAESTRO — todo el trabajo pendiente, en orden. El runner lo consume solo.
-# Cada linea: ETIQUETA|comando. Lo hecho queda en logs/cola_hechas.txt y no se repite.
+# PLAN MAESTRO v2 — el runner lo consume solo. Lo hecho vive en logs/cola_hechas.txt.
 #
-# TANDA 1 — reproceso con los fixes del parser (sufijo -N, notas BCN)
-dup_z|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_z|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-obl_z|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-proc_z|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-citas_z|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-desc_z|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+# TANDA A — bajar las 6 candidatas de MAYOR puntaje de dominio (ya no por citas).
+#   Las guardas de bajar_candidatas (identidad + dominio) rechazan lo que BCN devuelva mal.
+baja_dom|env PYTHONPATH=. venv/bin/python -m scripts.bajar_candidatas --fuente docs/frontera-candidatas.md --limit 6 --delay 20
+ingerir_a|env PYTHONPATH=. venv/bin/python -m scripts.ingerir_nuevas
+frontera_a|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
 #
-# TANDA 2 — re-scrape de las normas cuyo articulado no cubre el documento
-rs_20999b|env PYTHONPATH=. venv/bin/python -m scripts.bajar_por_id 1099982:LEY:20999
-rs_21304b|env PYTHONPATH=. venv/bin/python -m scripts.bajar_por_id 1154423:LEY:21304
-rs_20500c|env PYTHONPATH=. venv/bin/python -m scripts.bajar_por_id 1023143:LEY:20500
-act_21304c|env PYTHONPATH=. venv/bin/python -m scripts.actualizar_norma 1154423 --aplicar
-act_20500d|env PYTHONPATH=. venv/bin/python -m scripts.actualizar_norma 1023143 --aplicar
+# TANDA B — reproceso completo del corpus
+dup_a|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_a|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
+proc_a|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_a|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_a|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
 #
-# TANDA 3 — reproceso tras la tanda 2
-dup_w|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_w|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proc_w|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_w|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_w|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-#
-# TANDA 4 — informe final del estado
-informe|env PYTHONPATH=. venv/bin/python -m scripts.mapa_obligaciones --procesos
-#
-# TANDA 5 — mas material de descubrimiento por USO (sin GPU, no pelea con nada)
-desc_pdfs|bash -c 'cd data/discrepancias && for u in 68800aa33563570d1b166acd 6932f3da3563575f65a5c270 6812497135635738f19f80db; do f="d_$u.pdf"; [ -f "$f" ] || curl -sSL --max-time 90 -A "Mozilla/5.0" -o "$f" "https://cartas.coordinador.cl/download_anexos/$u/0"; sleep 6; done; ls *.pdf | wc -l'
-desc_final|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
-#
-# TANDA 6 — reaplicar procesos con el fix de nombres cortados por la nota BCN
-proc_final|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+# TANDA C — segunda vuelta de descubrimiento con el corpus ya crecido
+desc_a|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+baja_dom2|env PYTHONPATH=. venv/bin/python -m scripts.bajar_candidatas --fuente docs/frontera-candidatas.md --limit 6 --delay 20
+ingerir_b|env PYTHONPATH=. venv/bin/python -m scripts.ingerir_nuevas
+frontera_b|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+dup_b|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_b|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
+proc_b|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_b|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_b|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir

@@ -29,7 +29,10 @@ from src.components.vectorstore import with_connection
 DOC = Path("docs/descubrimiento-pendiente.md")
 ESTADO = Path("data/eval/results/candidatas_bajadas.json")
 BUSCADOR = "https://www.bcn.cl/leychile/consulta/listaresultadosimple?cadena={}"
-FILA = re.compile(r"^\|\s*(LEY|DECRETO|DFL|DL|RESOLUCI[OÓ]N)\s*\|\s*([\d]+)\s*\|\s*(\d+)\s*\|")
+# Tolera una primera columna numerica opcional: el reporte de frontera ahora abre con `dom`
+# (puntaje de dominio del contexto) y antes empezaba directo por el tipo.
+FILA = re.compile(r"^\|\s*(?:[\d.]+\s*\|\s*)?(LEY|DECRETO|DFL|DL|RESOLUCI[OÓ]N)\s*\|"
+                  r"\s*([\d]+)\s*\|\s*\**(\d+)\**\s*\|")
 
 
 def candidatas(limit=0, doc=None):

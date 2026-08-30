@@ -6,9 +6,9 @@ aparece en una discrepancia real ante el Panel de Expertos es normativa viva del
 sector. El frente de descubrimiento prospectivo estaba bloqueado porque los sitios
 bloquean el scraping; esta vía no depende de ellos.
 
-- documentos leídos: **17**
-- citas artículo→norma detectadas: **28**
-- resueltas a normas del corpus: **20** (16 con el artículo también presente — sirven de gold para evaluar)
+- documentos leídos: **20**
+- citas artículo→norma detectadas: **29**
+- resueltas a normas del corpus: **21** (17 con el artículo también presente — sirven de gold para evaluar)
 - apuntan a normas que **faltan**: **8**
 
 ## Normas citadas que NO están en el corpus
@@ -36,6 +36,7 @@ resolverlo por truncamiento sesgaría el reporte hacia *"ya lo tenemos"*.
 | DECRETO 44 (`1113260`) | 27 | disc_betel_2024.pdf |
 | DECRETO 44 (`1113260`) | 32 | disc_betel_2024.pdf |
 | DECRETO 88 (`1150437`) | 9 | informe_panel_2024.pdf |
+| DECRETO 88 (`1150437`) | 93 | d_6932f3da3563575f65a5c270.pdf |
 | DECRETO 327 (`124102`) | 311 | cne_rect_formulas.pdf |
 | LEY 19880 (`210676`) | 62 | dictamen_19_2025.pdf |
 | DFL 4 (`258171`) | 208 | disc_66d778f5.pdf |
