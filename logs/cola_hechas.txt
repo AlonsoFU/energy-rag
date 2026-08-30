@@ -1,2 +1,8 @@
 dup_z
 der_z
+obl_z
+proc_z
+citas_z
+desc_z
+rs_20999b
+rs_21304b

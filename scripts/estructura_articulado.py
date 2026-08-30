@@ -125,6 +125,18 @@ def encabezados(texto, incluir_transcritos=False):
         nombre = re.sub(r"\s+", " ", nombre).strip().strip('"“«»').strip()
         if NO_ES_NOMBRE.match(nombre):
             nombre = ""                          # "TITULO I" seguido de "Articulo 1" en la misma linea
+        # Un nombre que es solo una preposicion esta CORTADO por la nota de BCN, que arranca
+        # justo despues y puede ocupar 4 lineas:
+        #   "Parrafo 1º De" / "Decreto 1," / "ENERGIA" / "Art. unico N° 13" / "D.O. ..." /
+        #   "los regimenes de precio..."
+        # Sin esto el nombre quedaba en "De" -- no vacio, asi que no se buscaba mas abajo.
+        if re.fullmatch(r"(?:de|del|de\s+la|de\s+los|de\s+las|sobre|para)\s*", nombre, re.I):
+            resto = " ".join(l for l in texto[m.end():m.end() + 700].splitlines() if l.strip())
+            resto = CORTE_NOMBRE.split(NOTA_BCN.sub(" ", resto), 1)[0]
+            resto = re.sub(r"\s+", " ", resto).strip()
+            if resto:
+                nombre = f"{nombre.strip()} {resto}".strip()
+
         if not nombre:                            # el nombre va en alguna de las lineas siguientes
             # 6 primeras lineas NO VACIAS. Tres razones para no achicar la ventana:
             #   - tras el encabezado suele haber lineas en blanco
