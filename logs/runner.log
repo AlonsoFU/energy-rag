@@ -290,3 +290,48 @@
 2026-08-30 13:15:12  LANZO rs_21304b
 2026-08-30 13:15:45  OK    rs_21304b
 2026-08-30 13:15:50  LANZO rs_20500c
+2026-08-30 13:16:23  OK    rs_20500c
+2026-08-30 13:16:28  LANZO act_21304c
+2026-08-30 13:16:38  OK    act_21304c
+2026-08-30 13:16:43  LANZO act_20500d
+2026-08-30 13:17:03  OK    act_20500d
+2026-08-30 13:17:08  LANZO dup_w
+2026-08-30 13:17:27  OK    dup_w
+2026-08-30 13:17:32  LANZO der_w
+2026-08-30 13:17:32  OK    der_w
+2026-08-30 13:17:37  LANZO proc_w
+2026-08-30 13:17:39  OK    proc_w
+2026-08-30 13:17:44  LANZO obl_w
+2026-08-30 14:57:58  OK    obl_w
+2026-08-30 14:58:03  LANZO citas_w
+2026-08-30 14:58:46  OK    citas_w
+2026-08-30 14:58:51  LANZO informe
+2026-08-30 14:58:52  OK    informe
+2026-08-30 14:58:57  cola VACIA -- nada pendiente
+2026-08-30 14:59:02  cola VACIA -- nada pendiente
+2026-08-30 14:59:07  cola VACIA -- nada pendiente
+2026-08-30 14:59:12  cola VACIA -- nada pendiente
+2026-08-30 14:59:17  cola VACIA -- nada pendiente
+2026-08-30 14:59:22  cola VACIA -- nada pendiente
+2026-08-30 14:59:27  cola VACIA -- nada pendiente
+2026-08-30 14:59:32  cola VACIA -- nada pendiente
+2026-08-30 14:59:37  cola VACIA -- nada pendiente
+2026-08-30 14:59:42  cola VACIA -- nada pendiente
+2026-08-30 14:59:47  cola VACIA -- nada pendiente
+2026-08-30 14:59:52  cola VACIA -- nada pendiente
+2026-08-30 14:59:57  cola VACIA -- nada pendiente
+2026-08-30 15:00:02  cola VACIA -- nada pendiente
+2026-08-30 15:00:07  cola VACIA -- nada pendiente
+2026-08-30 15:00:12  cola VACIA -- nada pendiente
+2026-08-30 15:00:17  cola VACIA -- nada pendiente
+2026-08-30 15:00:22  cola VACIA -- nada pendiente
+2026-08-30 15:00:27  cola VACIA -- nada pendiente
+2026-08-30 15:00:32  cola VACIA -- nada pendiente
+2026-08-30 15:00:37  cola VACIA -- nada pendiente
+2026-08-30 15:00:42  cola VACIA -- nada pendiente
+2026-08-30 15:00:47  cola VACIA -- nada pendiente
+2026-08-30 15:00:52  cola VACIA -- nada pendiente
+2026-08-30 15:00:57  cola VACIA -- nada pendiente
+2026-08-30 15:01:00  LANZO desc_pdfs
+2026-08-30 15:01:19  OK    desc_pdfs
+2026-08-30 15:01:24  LANZO desc_final

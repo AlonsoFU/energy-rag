@@ -1,0 +1,10 @@
+LEY-21304 (1154423)
+  texto guardado :     5799
+  texto nuevo    :     5799
+  articulos      : 6 -> 6
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5079.48it/s]
+  borrados: 6 fragmentos · 0 obligaciones · 0 definiciones · 2 referencias
+  dominio re-evaluado: 0.539 -> dentro
+
+ACTUALIZADA LEY-21304: 6 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas

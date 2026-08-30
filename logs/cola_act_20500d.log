@@ -1,0 +1,10 @@
+LEY-20500 (1023143)
+  texto guardado :    59897
+  texto nuevo    :    59897
+  articulos      : 54 -> 54
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 35910.14it/s]
+  borrados: 55 fragmentos · 0 obligaciones · 0 definiciones · 6 referencias
+  dominio re-evaluado: 0.180 -> FUERA
+
+ACTUALIZADA LEY-20500: 54 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas

@@ -21,9 +21,12 @@ flock -n 8 || exit 0
 # tareas al plan NO llegaba a cola.txt: `trabajar.sh` contaba contra el plan y `runner.sh`
 # leia la cola vieja -> el worker se creia incompleto para siempre, o al reves.
 # Ahora se sincroniza en cada vuelta; `cola_hechas.txt` evita repetir lo ya hecho.
-cp -f scripts/plan_maestro.txt scripts/cola.txt
-
 while :; do
+  # Sincronizar EN CADA VUELTA, no una sola vez al arrancar: si el plan crece mientras el
+  # worker corre, las tareas nuevas tienen que entrar. Estaba antes del bucle y las 3 ultimas
+  # (desc_pdfs, desc_final, proc_final) quedaron fuera -- el runner informaba "cola VACIA"
+  # con el plan en 17/20.
+  cp -f scripts/plan_maestro.txt scripts/cola.txt
   [ -f .watchdog_off ] && { echo "$(date '+%F %T')  PAUSA manual (.watchdog_off)" >> "$LOG"; exit 0; }
 
   PEND=$(grep -v '^#' scripts/plan_maestro.txt | grep -c .)

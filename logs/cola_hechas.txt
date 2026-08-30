@@ -6,3 +6,13 @@ citas_z
 desc_z
 rs_20999b
 rs_21304b
+rs_20500c
+act_21304c
+act_20500d
+dup_w
+der_w
+proc_w
+obl_w
+citas_w
+informe
+desc_pdfs
