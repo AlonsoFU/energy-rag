@@ -129,8 +129,14 @@ class NormStructureParser:
     # Ordinales latinos completos. Faltaban `quater` CON TILDE ("135 quater" se escribe
     # "quáter" en el DFL 4) y de `quinquies` en adelante -- 73 articulos del corpus quedaban
     # sin ubicar en el texto, y con ellos sus obligaciones sin proceso.
+    # Dos formatos mas que el patron no veia (115 articulos):
+    #   "Articulo 72°-1.-"  el grado va ANTES del guion, y `[°ºª]?` estaba solo despues,
+    #                       asi que de "72°-1" capturaba "72" -- 164 casos en el DFL 4
+    #   "Articulo 3º A.-"   letra tras el ordinal (LEY 18410, LEY 20720, LEY 20084...)
+    # La letra exige espacio HORIZONTAL y punto o guion detras: con `\s` y lookahead laxo se
+    # colaba el salto de linea y DFL 1 inventaba 227 articulos tipo "1\nd".
     ARTICULO_PATTERN = re.compile(
-        r'(?:^|\n)[\s"“”\'«»]*(?:Art[íi]culo\s+|Art\.\s*(?=\d))(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|qu[áa]ter|quinquies|sexies|septies))?|primero|segundo|'
+        r'(?:^|\n)[\s"“”\'«»]*(?:Art[íi]culo\s+|Art\.\s*(?=\d))(\d+[°ºª]?(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|qu[áa]ter|quinquies|sexies|septies))?(?:[ \t]+[A-Z](?=[.\-]))?|primero|segundo|'
         r'tercero|cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
         re.IGNORECASE | re.MULTILINE
     )
