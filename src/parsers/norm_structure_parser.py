@@ -126,8 +126,11 @@ class NormStructureParser:
     # esa norma.
     # La forma abreviada exige NUMERO (lookahead \d): las notas de BCN traen "Art. unico N° 15"
     # al inicio de linea y crearian un articulo fantasma llamado "unico".
+    # Ordinales latinos completos. Faltaban `quater` CON TILDE ("135 quater" se escribe
+    # "quáter" en el DFL 4) y de `quinquies` en adelante -- 73 articulos del corpus quedaban
+    # sin ubicar en el texto, y con ellos sus obligaciones sin proceso.
     ARTICULO_PATTERN = re.compile(
-        r'(?:^|\n)[\s"“”\'«»]*(?:Art[íi]culo\s+|Art\.\s*(?=\d))(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
+        r'(?:^|\n)[\s"“”\'«»]*(?:Art[íi]culo\s+|Art\.\s*(?=\d))(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|qu[áa]ter|quinquies|sexies|septies))?|primero|segundo|'
         r'tercero|cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
         re.IGNORECASE | re.MULTILINE
     )
