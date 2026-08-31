@@ -1436,3 +1436,51 @@ acertó. Anotado como pregunta abierta, no como veredicto sobre el clasificador.
 
 ⚠️ `RESOLUCION 838` (acuicultura) no tiene articulado en la DB — el LLM no puede clasificar
 lo que no está. Ese caso lo tiene que resolver la ingesta, no el clasificador.
+
+---
+
+## #60 — El monitor corrió COMPLETO y solo, por primera vez en producción (2026-08-31)
+
+No es un experimento: es la verificación de que la FASE 2 funciona fuera del papel. El cron
+lo disparó el lunes 06:00 sin que nadie lo tocara.
+
+```
+06:00  arranca por cron
+  0. reparar scrapes rotos     4/4 reparados · +466.701 chars recuperados
+  1. re-scrape del dominio     77 normas, throttle 20 s
+  2. diff                      11 cambios REALES · 1 cosmético descartado
+  3. informe
+  3b. APLICAR al corpus        4 normas actualizadas
+  3c. reproceso                duplicados · derogaciones · proceso · citas (2259)
+  4. snapshot                  124 normas
+07:58  fin
+```
+
+Casi 2 horas, sin intervención.
+
+**Lo que aplicó:**
+```
+LEY 20586    1 articulo
+LEY 20999   24 articulos    <- el caso que ANTES abortaba
+LEY 21268    1 articulo
+LEY 21343    1 articulo
+```
+
+**Lo que NO tocó, y es lo importante:** el `DFL 4` (la LGSE) quedó en sus **330 artículos**.
+La guarda de articulado hizo exactamente aquello para lo que se escribió: su `texto_completo`
+está truncado a 10.075 caracteres, el re-scrape trae 582.770, y un reemplazo lo habría dejado
+en 278 artículos. **El texto crece y el articulado encoge**, que es la trampa que la guarda
+existe para atrapar.
+
+**Y `LEY 20999` se destrabó sola.** Estaba documentada en `reglas-candidatas.md` como
+"actualización frenada a propósito" porque el reemplazo la dejaba en 20 de 24 artículos. Los
+fixes del parser de esta jornada (forma `Art.`, ordinales latinos, grado antes del guion)
+hicieron que ahora el parser encuentre los 24, así que la guarda ya no tenía nada que frenar y
+la aplicó limpio: **24 → 24**.
+
+Eso valida las dos mitades del diseño: la guarda frenaba por una razón real, y desapareció
+cuando la razón desapareció. Ninguna de las dos cosas se forzó a mano.
+
+⚠️ El descarte del cosmético también funcionó: 1 evento con hash distinto pero similitud
+≥ 0.995 no disparó ningún reproceso. Sin esa guarda habrían sido 12 eventos y un reproceso
+inútil, como los 13 falsos positivos que ya costaron caro antes.

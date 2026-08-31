@@ -1,0 +1,484 @@
+=== monitor 2026-08-31 06:00:01 ===
+--- 0. reparar scrapes rotos (los que quedaron en 'Loading...')
+[rescrape] 4 partial JSONs to process
+  [1/4] OK 1095821 old=  48123  new=  57548  updated=True  loading=False
+  [2/4] OK 30210 old=   9938  new= 138284  updated=True  loading=False
+  [3/4] OK 30667 old=  12013  new= 134157  updated=True  loading=False
+  [4/4] OK 61438 old=  14325  new= 221111  updated=True  loading=False
+
+[rescrape] summary: 4/4 updated, 0 still partial, +466701 chars total
+--- 1. re-scrape del corpus en dominio
+alcance=dominio  normas a revisar: 77  (con registro previo: 2, frescura 6 d)
+pendientes en esta pasada: 77
+[1/77] 1005169 LEY 20365
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1005169
+   ok (sin cambios)
+[2/77] 1008692 LEY 20402
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1008692
+   ok (sin cambios)
+[3/77] 1009792 DFL 12
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1009792
+   ok (sin cambios)
+[4/77] 1010304 LEY 20410
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1010304
+   ok (sin cambios)
+[5/77] 1010668 LEY 20416
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1010668
+   ~ cosmetico (sim 0.9999) -- sin evento
+[6/77] 1021880 LEY 20484
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1021880
+   ok (sin cambios)
+[7/77] 1032851 DECRETO 61
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1032851
+   ok (sin cambios)
+[8/77] 1038211 LEY 20571
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1038211
+   ~ cosmetico (sim 0.9988) -- sin evento
+[9/77] 1040103 LEY 20586
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1040103
+   ⚠️ CAMBIO REAL  c527f0cf1d81e6d2 -> a6ea0aa27b0c2376  (sim 0.9944)
+[10/77] 1047565 DECRETO 130
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1047565
+   ok (sin cambios)
+[11/77] 1048990 DECRETO 1
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1048990
+   ok (sin cambios)
+[12/77] 1049988 DECRETO 14
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1049988
+   ~ cosmetico (sim 0.9977) -- sin evento
+[13/77] 1055073 LEY 20701
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1055073
+   ok (sin cambios)
+[14/77] 1055402 LEY 20698
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1055402
+   ~ cosmetico (sim 0.9984) -- sin evento
+[15/77] 1058072 LEY 20720
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1058072
+  AVISO: el texto trae placeholders 'Loading' (18910 chars) -- extraccion INCOMPLETA
+   ✗ SCRAPE INCOMPLETO (547858 -> 18910 chars) -- NO se registra evento
+[16/77] 1059332 LEY 20726
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1059332
+   ok (sin cambios)
+[17/77] 1066212 DECRETO 52
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1066212
+   ok (sin cambios)
+[18/77] 1066889 LEY 20776
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1066889
+   ok (sin cambios)
+[19/77] 1067875 DECRETO 2
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1067875
+   ok (sin cambios)
+[20/77] 1074277 LEY 20805
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1074277
+   ~ cosmetico (sim 0.9994) -- sin evento
+[21/77] 1076506 DECRETO 7
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1076506
+   ~ cosmetico (sim 0.9992) -- sin evento
+[22/77] 1076507 DECRETO 8
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1076507
+   ok (sin cambios)
+[23/77] 1085545 LEY 20886
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1085545
+  AVISO: el texto trae placeholders 'Loading' (11195 chars) -- extraccion INCOMPLETA
+   ✗ SCRAPE INCOMPLETO (36952 -> 11195 chars) -- NO se registra evento
+[24/77] 1087315 LEY 20897
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1087315
+   ~ cosmetico (sim 0.999) -- sin evento
+[25/77] 1089564 LEY 20908
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1089564
+   ~ cosmetico (sim 0.9957) -- sin evento
+[26/77] 1091871 LEY 20928
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1091871
+   ok (sin cambios)
+[27/77] 1092695 LEY 20936
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1092695
+   ~ cosmetico (sim 1.0) -- sin evento
+[28/77] 1099982 LEY 20999
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1099982
+   ⚠️ CAMBIO REAL  3f32678ddeb53767 -> c8716394264f7162  (sim 0.974)
+[29/77] 1102690 RESOLUCIÓN 237
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1102690
+   ok (sin cambios)
+[30/77] 1109624 RESOLUCIÓN 583
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1109624
+   ok (sin cambios)
+[31/77] 1111297 LEY 21044
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1111297
+   ~ cosmetico (sim 0.9996) -- sin evento
+[32/77] 1112591 RESOLUCIÓN 711
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1112591
+   ok (sin cambios)
+[33/77] 1113260 DECRETO 44
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1113260
+   ok (sin cambios)
+[34/77] 1115627 LEY 21076
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1115627
+   ~ cosmetico (sim 0.9971) -- sin evento
+[35/77] 1116754 LEY 21083
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1116754
+   ~ cosmetico (sim 0.9997) -- sin evento
+[36/77] 1122953 DECRETO 4
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1122953
+   ok (sin cambios)
+[37/77] 1125560 LEY 21118
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1125560
+   ~ cosmetico (sim 0.9988) -- sin evento
+[38/77] 1140253 DECRETO 125
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1140253
+   ok (sin cambios)
+[39/77] 1140301 LEY 21194
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1140301
+   ~ cosmetico (sim 0.9998) -- sin evento
+[40/77] 1146553 DECRETO 10
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1146553
+   ok (sin cambios)
+[41/77] 1149645 LEY 21268
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1149645
+   ⚠️ CAMBIO REAL  a333423c3f0b0fe7 -> 162c760e51650e61  (sim 0.9896)
+[42/77] 1149788 DECRETO 57
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1149788
+   ok (sin cambios)
+[43/77] 1150437 DECRETO 88
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1150437
+   ok (sin cambios)
+[44/77] 1153949 DECRETO 42
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1153949
+   ok (sin cambios)
+[45/77] 1154423 LEY 21304
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1154423
+   ~ cosmetico (sim 0.9983) -- sin evento
+[46/77] 1155887 LEY 21305
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1155887
+   ~ cosmetico (sim 0.9995) -- sin evento
+[47/77] 1160108 DECRETO 37
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1160108
+   ok (sin cambios)
+[48/77] 1160783 LEY 21343
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1160783
+   ⚠️ CAMBIO REAL  9ed9c24c62cf562a -> d6eb25e8bbb4732c  (sim 0.9927)
+[49/77] 1179524 LEY 21472
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1179524
+   ok (sin cambios)
+[50/77] 1183783 LEY 21499
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1183783
+   ~ cosmetico (sim 0.9992) -- sin evento
+[51/77] 1191446 RESOLUCIÓN 149
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1191446
+   ok (sin cambios)
+[52/77] 1203005 LEY 21667
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1203005
+   ~ cosmetico (sim 0.9997) -- sin evento
+[53/77] 1204012 DECRETO 70
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1204012
+   ok (sin cambios)
+[54/77] 1207690 DECRETO 262
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1207690
+   ok (sin cambios)
+[55/77] 1207908 LEY 21711
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1207908
+   ok (sin cambios)
+[56/77] 1212738 DECRETO 3
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1212738
+   ok (sin cambios)
+[57/77] 1214890 LEY 21755
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1214890
+   ✗ SCRAPE INCOMPLETO (35978 -> 322 chars) -- NO se registra evento
+[58/77] 1215040 DECRETO 13
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1215040
+   ok (sin cambios)
+[59/77] 1215190 LEY 21750
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1215190
+   ~ cosmetico (sim 0.9951) -- sin evento
+[60/77] 1216930 LEY 21770
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1216930
+   ok (sin cambios)
+[61/77] 1226550 LEY 21833
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1226550
+   ok (sin cambios)
+[62/77] 124102 DECRETO 327
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=124102
+   ok (sin cambios)
+[63/77] 137421 LEY 19613
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=137421
+   ok (sin cambios)
+[64/77] 150669 LEY 19657
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=150669
+   ok (sin cambios)
+[65/77] 16121 DECRETO 900
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=16121
+   ok (sin cambios)
+[66/77] 202975 DECRETO 3386
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=202975
+   ok (sin cambios)
+[67/77] 211480 LEY 19882
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=211480
+   ok (sin cambios)
+[68/77] 237695 RESOLUCIÓN 32
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=237695
+   ok (sin cambios)
+[69/77] 250604 DECRETO 62
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=250604
+   ok (sin cambios)
+[70/77] 252841 RESOLUCIÓN 838
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=252841
+   ok (sin cambios)
+[71/77] 258171 DFL 4
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=258171
+   ⚠️ CAMBIO REAL  987be1b86c0b699a -> b63c7769fba2bdf5  (sim 0.0337)
+[72/77] 264058 DECRETO 113
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=264058
+   ok (sin cambios)
+[73/77] 270212 LEY 20257
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=270212
+   ✗ SCRAPE INCOMPLETO (13502 -> 383 chars) -- NO se registra evento
+[74/77] 29472 LEY 18045
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=29472
+   ⚠️ CAMBIO REAL  3dbd3f5f5a2df767 -> 274df9bf038a0ea1  (sim 0.0638)
+[75/77] 29819 LEY 18410
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=29819
+   ok (sin cambios)
+[76/77] 61438 LEY 19496
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=61438
+   ⚠️ CAMBIO REAL  e635006206a6bd29 -> a77b9b5241e9db9e  (sim 0.1211)
+[77/77] 6857 Ley 20776
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=6857
+   ok (sin cambios)
+
+=== cambiadas 7 · iguales 66 · fallo 4 ===
+los cambios quedaron en `norma_evento`; ver con scripts.monitor_report
+--- 2. diff
+cambios detectados: 17
+  norma_nueva            1140301  None -> 1140301
+  texto_modificado       1092695  2b909e3b676bde75 -> 5fe2ceef14da7fbf
+  norma_nueva            1226550  None -> 1226550
+  norma_nueva            1113260  None -> 1113260
+  texto_modificado       1203005  5aa0dad6b3df873d -> d0187a4427f8db34
+  norma_nueva            1150437  None -> 1150437
+  norma_nueva             124102  None -> 124102
+  norma_nueva            1153949  None -> 1153949
+  norma_nueva            1140253  None -> 1140253
+  norma_nueva             230697  None -> 230697
+  texto_modificado       1154423  1dd620120e215a61 -> 20c665e2c61d4c3d
+  texto_modificado       1058072  450376e6e4af376e -> 420de437343325df
+  norma_nueva            1095821  None -> 1095821
+  norma_nueva            1209272  None -> 1209272
+  norma_nueva            1131679  None -> 1131679
+  norma_nueva            1130640  None -> 1130640
+  norma_nueva             162557  None -> 162557
+--- 3. informe
+eventos: 24  |  con impacto en el corpus: 8
+  ⚠️ texto_modificado     LEY 20936              afecta a 9 articulos
+  ⚠️ texto_modificado     LEY 21667              afecta a 13 articulos
+  ⚠️ texto_modificado     LEY 20720              afecta a 14 articulos
+  ⚠️ texto_modificado     LEY 19496              afecta a 7 articulos
+  ⚠️ texto_modificado     LEY 18045              afecta a 17 articulos
+  ⚠️ texto_modificado     DFL 4                  afecta a 25 articulos
+  ⚠️ texto_modificado     LEY 20999              afecta a 2 articulos
+  ⚠️ texto_modificado     LEY 20586              afecta a 1 articulos
+escrito docs/monitor-ultimo-informe.md
+marcados 24 eventos como notificados
+--- 3b. aplicar al corpus los cambios detectados
+eventos de cambio SIN aplicar: 11
+  LEY 20586    (1040103)  detectado 2026-08-31
+  LEY 20999    (1099982)  detectado 2026-08-31
+  LEY 21268    (1149645)  detectado 2026-08-31
+  LEY 21343    (1160783)  detectado 2026-08-31
+  DFL 4        (258171)  detectado 2026-08-31
+  LEY 18045    (29472)  detectado 2026-08-31
+  LEY 19496    (61438)  detectado 2026-08-31
+  LEY 20936    (1092695)  detectado 2026-08-31
+  LEY 21667    (1203005)  detectado 2026-08-31
+  LEY 21304    (1154423)  detectado 2026-08-31
+  LEY 20720    (1058072)  detectado 2026-08-31
+
+=== LEY 20586 (1040103) ===
+[1/1] LEY 20586 (idNorma 1040103)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1040103
+    titulo: LEY 20586  REGULA LA CERTIFICACIÓN DE LOS ARTEFACTOS PARA COMBUSTIÓN DE LEÑA Y
+    chars : 3113
+    dominio 0.318  ok
+    guardado -> data/normas_completas/nuevas/1040103.json  (registrado como LEY-20586)
+
+LEY-20586 (1040103)
+  texto guardado :     3079
+  texto nuevo    :     3113
+  articulos      : 1 -> 1
+  borrados: 2 fragmentos · 1 obligaciones · 0 definiciones · 10 referencias
+  dominio re-evaluado: 0.394 -> dentro
+
+ACTUALIZADA LEY-20586: 1 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 20999 (1099982) ===
+[1/1] LEY 20999 (idNorma 1099982)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1099982
+    titulo: LEY 20999  MODIFICA LA LEY DE SERVICIOS DE GAS Y OTRAS DISPOSICIONES QUE INDIC
+    chars : 133805
+    dominio 0.405  ok
+    guardado -> data/normas_completas/nuevas/1099982.json  (registrado como LEY-20999)
+
+LEY-20999 (1099982)
+  texto guardado :   130003
+  texto nuevo    :   133805
+  articulos      : 24 -> 24
+  borrados: 48 fragmentos · 39 obligaciones · 14 definiciones · 86 referencias
+  dominio re-evaluado: 0.427 -> dentro
+
+ACTUALIZADA LEY-20999: 24 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 21268 (1149645) ===
+[1/1] LEY 21268 (idNorma 1149645)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1149645
+    titulo: LEY 21268  MODIFICA LA DISPOSICIÓN TRANSITORIA DE LA LEY Nº 21.213, QUE MODIFI
+    chars : 2171
+    dominio 0.341  ok
+    guardado -> data/normas_completas/nuevas/1149645.json  (registrado como LEY-21268)
+
+LEY-21268 (1149645)
+  texto guardado :     2128
+  texto nuevo    :     2171
+  articulos      : 1 -> 1
+  borrados: 1 fragmentos · 0 obligaciones · 0 definiciones · 0 referencias
+  dominio re-evaluado: 0.354 -> dentro
+
+ACTUALIZADA LEY-21268: 1 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 21343 (1160783) ===
+[1/1] LEY 21343 (idNorma 1160783)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1160783
+    titulo: LEY 21343  MODIFICA LA DISPOSICIÓN TRANSITORIA DE LA LEY Nº 21.213, QUE MODIFI
+    chars : 1372
+    dominio 0.334  ok
+    guardado -> data/normas_completas/nuevas/1160783.json  (registrado como LEY-21343)
+
+LEY-21343 (1160783)
+  texto guardado :     1353
+  texto nuevo    :     1372
+  articulos      : 1 -> 1
+  borrados: 1 fragmentos · 0 obligaciones · 0 definiciones · 0 referencias
+  dominio re-evaluado: 0.365 -> dentro
+
+ACTUALIZADA LEY-21343: 1 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== DFL 4 (258171) ===
+[1/1] DFL 4 (idNorma 258171)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=258171
+    titulo: DFL 4DFL 4/20018 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO 
+    chars : 582770
+    dominio 0.582  ok
+    guardado -> data/normas_completas/nuevas/258171.json  (registrado como DFL-4)
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/scripts/aplicar_cambios.py", line 94, in <module>
+    main(ap.parse_args().aplicar)
+  File "/home/alonso/Documentos/Github/energy-rag-postgres-rag/scripts/aplicar_cambios.py", line 71, in main
+    r = subprocess.run([sys.executable, "-m", "scripts.actualizar_norma", nid, "--aplicar"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/usr/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['/home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python', '-m', 'scripts.actualizar_norma', '258171', '--aplicar']' timed out after 3600 seconds
+   (sin cambios que aplicar)
+--- 3c. reproceso de lo que cambio
+articulos comparados      : 3162
+misma serie (texto distinto, señal estructural): 20
+numeros presentes en >1 norma: 337
+duplicados (sim >= 0.9) : 53
+ambiguos (empate, NO se marcan): 1
+     DECRETO 7 art quinto <-> DECRETO 8 art quinto  sim=0.992
+    39  LEY 20936 -> DFL 4
+     6  DECRETO 52 -> DECRETO 113
+     3  LEY 21304 -> DFL 4
+     1  Ley 20776 -> LEY 20402
+     1  DECRETO 130 -> DECRETO 10
+     1  LEY 20410 -> DECRETO 900
+     1  LEY 19613 -> LEY 18410
+     1  DECRETO 70 -> DECRETO 62
+  limpiadas 73 marcas previas
+
+MARCADOS 73 articulos con metadata.duplicado_de (53 por texto, 20 por serie) -- reversible
+articulos revisados            : 4580
+NORMAS derogadas por completo  : 0
+ARTICULOS derogados (por otra norma) : 1
+ARTICULOS cuyo CUERPO es la marca     : 20
+   DECRETO 88 art 20          '- Derogado'
+   DECRETO 88 art 21          '- Derogado.'
+   DECRETO 88 art 22          '- Derogado'
+   DECRETO 88 art 23          '- Derogado.'
+   DECRETO 88 art 25          '- Derogado.'
+   DECRETO 88 art 26          '- Derogado.'
+   DECRETO 327 art 236        '- DEROGADO.'
+   DECRETO 327 art 237        '- DEROGADO.'
+derogaciones PARCIALES (no se marcan): 0
+objetos que NO estan en el corpus    : 9  (9 distintos)
+     1  LEY 18989
+     1  LEY 18175
+     1  DECRETO 181
+     1  DECRETO 23
+     1  DECRETO 71
+     1  DECRETO 244
+
+MARCADAS 0 normas y 21 articulos como derogados
+obligaciones                       : 4959
+  con proceso del articulado       : 4894  (98 %)
+  en normas SIN estructura         : 0
+  articulo no ubicado en el texto  : 35
+  en normas que TRANSCRIBEN articulado: 29  (2 normas) -- no se asigna, ver comentario
+  procesos distintos               : 330
+
+--- procesos con más obligaciones ---
+   181  De los precios máximos en el sistema eléctrico nacional y en los sistema
+   179  MODIFICACIONES A OTROS CUERPOS LEGALES
+   123  De la Planificación Energética y de la Transmisión
+   103  FIJA NORMAS ESPECIALES PARA LAS EMPRESAS DE MENOR TAMAÑO
+    82  De la Coordinación y operación del Sistema Eléctrico Nacional
+    80  De la Explotación de los Servicios Eléctricos y del Suministro
+    71  Generalidades
+    69  Del Coordinador Independiente del Sistema Eléctrico Nacional
+    65  DE LA OPERACIÓN EN TIEMPO REAL DEL SISTEMA ELÉCTRICO NACIONAL
+    57  De la Licitación para la Creación, Implementación, Mantención y Administ
+    56  DE LA PROGRAMACIÓN DE LA OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL
+    55  De las concesiones de centrales hidráulicas productoras de energía eléct
+    52  Disposiciones generales
+    49  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    49  Relaciones con los consumidores Art. 76. Los concesionarios deberán mant
+  limpiadas 4894 asignaciones previas
+
+ESCRITAS 4894 filas de `obligacion.proceso`
+catalogo: 124 normas (17 ajenas al dominio electrico)
+citas resueltas a normas del corpus : 2259
+   ...con el ARTICULO tocado resuelto : 24
+     remite         2000
+     aplica         164
+     modifica       92
+     deroga         2
+     complementa    1
+ambiguas (>1 candidata)             : 3
+citadas y NO en el corpus           : 1791  (483 normas distintas)
+puntaje de dominio del contexto: calculado
+   ...de esas, citadas DESDE el dominio electrico: 421 normas
+escritas 2259 filas remite en `referencias`
+escrito docs/frontera-candidatas.md
+--- 4. nuevo snapshot
+snapshot tomado: 124 normas
+=== fin 2026-08-31 07:58:38 ===

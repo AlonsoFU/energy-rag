@@ -412,3 +412,30 @@
 2026-08-31 00:10:42  OK    citas_x2
 2026-08-31 00:30:01  cola VACIA -- nada pendiente
 2026-08-31 00:49:53  LANZO obl_v4
+2026-08-31 03:16:15  OK    obl_v4
+2026-08-31 03:16:20  LANZO proc_v4
+2026-08-31 03:16:21  OK    proc_v4
+2026-08-31 03:16:26  LANZO citas_v4
+2026-08-31 03:17:26  OK    citas_v4
+2026-08-31 03:17:31  LANZO dup_v4
+2026-08-31 03:17:51  OK    dup_v4
+2026-08-31 03:17:56  LANZO der_v4
+2026-08-31 03:17:56  OK    der_v4
+2026-08-31 03:18:01  LANZO desc_v4
+2026-08-31 03:18:02  OK    desc_v4
+2026-08-31 03:18:07  LANZO frontera_v4
+2026-08-31 03:18:30  OK    frontera_v4
+2026-08-31 03:18:35  LANZO proc_v5
+2026-08-31 03:18:37  OK    proc_v5
+2026-08-31 03:18:42  LANZO obl_v5
+2026-08-31 06:01:12  OK    obl_v5
+2026-08-31 07:58:43  LANZO citas_v5
+2026-08-31 07:59:39  OK    citas_v5
+2026-08-31 08:30:01  cola VACIA -- nada pendiente
+2026-08-31 09:30:01  cola VACIA -- nada pendiente
+2026-08-31 10:30:01  cola VACIA -- nada pendiente
+2026-08-31 11:30:01  cola VACIA -- nada pendiente
+2026-08-31 12:30:01  cola VACIA -- nada pendiente
+2026-08-31 13:30:01  cola VACIA -- nada pendiente
+2026-08-31 14:30:01  cola VACIA -- nada pendiente
+2026-08-31 14:57:02  LANZO rep_scrapes

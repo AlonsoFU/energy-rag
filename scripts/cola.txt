@@ -1,17 +1,19 @@
-# PLAN MAESTRO v4 — reproceso completo con el proceso a nivel norma, y segunda vuelta.
+# PLAN MAESTRO v5 — el corpus esta en plateau (98.7% con proceso). El margen que queda:
+#   1. mas material de descubrimiento por USO (PDFs de discrepancias) -> normas faltantes
+#   2. reparar los scrapes rotos que quedan (el monitor recupero 466.701 chars con 4)
+#   3. reproceso para consolidar
 #
-# TANDA A — el corpus cambio (4895 obligaciones con proceso): recalcular todo lo derivado
-obl_v4|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-proc_v4|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-citas_v4|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-dup_v4|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_v4|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
+# TANDA A — reparar scrapes rotos (sin GPU, toca red)
+rep_scrapes|env PYTHONPATH=. venv/bin/python -m scripts.rescrape_partial --limit 8 --delay 15
 #
-# TANDA B — descubrimiento y frontera con el corpus ya al dia
-desc_v4|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
-frontera_v4|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+# TANDA B — mas PDFs de discrepancias y dictamenes (sin GPU)
+pdfs_v5|bash -c 'cd data/discrepancias && for u in 689a68a23563572019057901 66d1dea835635764e262d5b7 6932f3da3563575f65a5c270; do f="p_$u.pdf"; [ -f "$f" ] || curl -sSL --max-time 90 -A "Mozilla/5.0" -o "$f" "https://cartas.coordinador.cl/download_anexos/$u/0"; sleep 6; done; ls *.pdf | wc -l'
+desc_v5|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
 #
-# TANDA C — segunda pasada: el reproceso puede destapar articulos nuevos
-proc_v5|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_v5|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_v5|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+# TANDA C — consolidar
+proc_c5|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_c5|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_c5|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+dup_c5|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_c5|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
+frontera_c5|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
