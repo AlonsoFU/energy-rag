@@ -1,18 +1,6 @@
-candidatas a bajar: 6  (ya procesadas: 45)
-[1/6] DECRETO 32 (26 citas) -> idNorma 162557
-[2/6] DECRETO 23 (8 citas) -> idNorma 97915
-[3/6] LEY 21833 (3 citas) -> idNorma 1226550
-[4/6] RESOLUCION 334 (2 citas) -> idNorma 228526
-[5/6] LEY 18010 (4 citas) -> idNorma 29438
-[6/6] DECRETO 385 (4 citas) -> idNorma 1059295
+candidatas a bajar: 6  (ya procesadas: 51)
 
 === resueltos 49 idNorma ===
-  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=152571
-  [29/49] DECRETO-244: GUARDADO pero DUDOSO (dominio 0.237 < 0.3) -> 152571.json
-        titulo: RESOLUCION 244 EXENTA EXTRACTO DE RESOLUCION EXENTA NO. 244, DE 1986
-  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1044934
-  [30/49] DECRETO-8810: GUARDADO pero DUDOSO (dominio 0.281 < 0.3) -> 1044934.json
-        titulo: RESOLUCIÓN 8810 EXENTA EXTRACTO DE RESOLUCIÓN Nº 8.810 EXENTA, DE 2012
 Traceback (most recent call last):
   File "<frozen runpy>", line 198, in _run_module_as_main
   File "<frozen runpy>", line 88, in _run_code

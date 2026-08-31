@@ -1,0 +1,17 @@
+[1/3] DECRETO 32 (idNorma 162557)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=162557
+    titulo: DECRETO 32 EXTRACTO DECRETO NO. 32, DE 1986, QUE APRUEBA MODIFICACION CONVENIO
+    chars : 1110
+    dominio 0.317  ok
+    guardado -> data/normas_completas/nuevas/162557.json  (registrado como DECRETO-32)
+[2/3] DECRETO 23 (idNorma 97915)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=97915
+    titulo: RESOLUCIÓN 23RESOLUCIÓN O-23 EXTRACTO DE RESOLUCION O Nº 23, DE 1998, QUE DECL
+    chars : 2756
+    RECHAZADO -- identidad: vino RESOLUCIÓN 23
+[3/3] LEY 21833 (idNorma 1226550)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1226550
+    titulo: LEY 21833  LEY DE PROTECCIÓN TARIFARIA ELÉCTRICA
+    chars : 38594
+    dominio 0.611  ok
+    guardado -> data/normas_completas/nuevas/1226550.json  (registrado como LEY-21833)

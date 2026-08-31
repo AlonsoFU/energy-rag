@@ -1,0 +1,47 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 32518.05it/s]
+  LEY-20500      ya en el corpus, salteo
+  DECRETO-8810   ✗ IDENTIDAD: bajo 'RESOLUCIÓN 8810 EXENTA EXTRACTO DE RESOLUCIÓ'
+  DECRETO-14     ya en el corpus, salteo
+  LEY-20720      ya en el corpus, salteo
+  LEY-20936      ya en el corpus, salteo
+  LEY-20955      ya en el corpus, salteo
+  LEY-20999      ya en el corpus, salteo
+  DECRETO-44     ya en el corpus, salteo
+  LEY-21185      ✗ IDENTIDAD: bajo 'RESOLUCIÓN 21185 EXENTA APRUEBA PROTOCOLO DE'
+  LEY-21150      ya en el corpus, salteo
+  DECRETO-30     ya en el corpus, salteo
+  DECRETO-125    ya en el corpus, salteo
+  LEY-21194      ya en el corpus, salteo
+  DECRETO-55     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 55 EXTRACTO DE RESOLUCIÓN Nº 55, '
+  DECRETO-88     ya en el corpus, salteo
+  DECRETO-42     ya en el corpus, salteo
+  LEY-21304      ya en el corpus, salteo
+  LEY-21472      ya en el corpus, salteo
+  LEY-21667      ya en el corpus, salteo
+  LEY-21711      ya en el corpus, salteo
+  LEY-21719      ya en el corpus, salteo
+  DL-2763        ✗ IDENTIDAD: bajo 'ACUERDO 1ACUERDO 2763-01-260115SESIÓN ORDINA'
+  DECRETO-327    ya en el corpus, salteo
+  LEY-19613      ya en el corpus, salteo
+  DECRETO-244    ✗ IDENTIDAD: bajo 'RESOLUCION 244 EXENTA EXTRACTO DE RESOLUCION'
+  DECRETO-97     ✗ IDENTIDAD: bajo 'RESOLUCIÓN 97RESOLUCIÓN A-97 EXTRACTO DE RES'
+  DFL-850        ✗ IDENTIDAD: bajo 'DECRETO 850 EXENTO EXTRACTO DE DECRETO Nº 85'
+  DFL-29         ✗ IDENTIDAD: bajo 'DECRETO 29 EXTRACTO DE DECRETO EXENTO N° 29,'
+  DFL-164        ✗ IDENTIDAD: bajo 'DECRETO 164 EXTRACTO DE DECRETO N° 164 EXENT'
+  LEY-19880      ya en el corpus, salteo
+  LEY-19882      ya en el corpus, salteo
+  LEY-19971      ya en el corpus, salteo
+  DFL-4          ya en el corpus, salteo
+  DL-2224        ✗ IDENTIDAD: bajo 'RESOLUCION 2224 EXENTA'
+  LEY-20285      ya en el corpus, salteo
+  LEY-18045      ya en el corpus, salteo
+  LEY-18287      ya en el corpus, salteo
+  LEY-18290      ya en el corpus, salteo
+  LEY-18575      ya en el corpus, salteo
+  LEY-18834      ya en el corpus, salteo
+  LEY-19300      ya en el corpus, salteo
+  LEY-19496      ya en el corpus, salteo
+  ?              ✗ IDENTIDAD: bajo 'ACUERDO 42ACUERDO 42-04 ACUERDOS ADOPTADOS P'
+  LEY-19553      ya en el corpus, salteo
+
+=== validas 0 · rechazadas por identidad 11 · marcadas fuera de dominio 0 · articulos 0 INGESTADOS ===

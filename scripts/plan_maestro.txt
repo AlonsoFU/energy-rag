@@ -1,25 +1,14 @@
-# PLAN MAESTRO v2 — el runner lo consume solo. Lo hecho vive en logs/cola_hechas.txt.
+# PLAN MAESTRO v3 — recuperar los 334 articulos de la forma abreviada "Art. N"
 #
-# TANDA A — bajar las 6 candidatas de MAYOR puntaje de dominio (ya no por citas).
-#   Las guardas de bajar_candidatas (identidad + dominio) rechazan lo que BCN devuelva mal.
-baja_dom|env PYTHONPATH=. venv/bin/python -m scripts.bajar_candidatas --fuente docs/frontera-candidatas.md --limit 6 --delay 20
-ingerir_a|env PYTHONPATH=. venv/bin/python -m scripts.ingerir_nuevas
-frontera_a|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+# TANDA A — re-ingerir las normas mas afectadas (necesitan el JSON bajado)
+baja_3386|env PYTHONPATH=. venv/bin/python -m scripts.bajar_por_id 202975:DECRETO:3386
+act_3386|env PYTHONPATH=. venv/bin/python -m scripts.actualizar_norma 202975 --aplicar
 #
-# TANDA B — reproceso completo del corpus
-dup_a|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_a|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proc_a|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_a|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_a|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-#
-# TANDA C — segunda vuelta de descubrimiento con el corpus ya crecido
-desc_a|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
-baja_dom2|env PYTHONPATH=. venv/bin/python -m scripts.bajar_candidatas --fuente docs/frontera-candidatas.md --limit 6 --delay 20
-ingerir_b|env PYTHONPATH=. venv/bin/python -m scripts.ingerir_nuevas
-frontera_b|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
-dup_b|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_b|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proc_b|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_b|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_b|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+# TANDA B — reproceso completo
+frontera_v|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+dup_v|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_v|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
+proc_v|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_v|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+desc_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias

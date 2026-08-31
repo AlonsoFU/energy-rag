@@ -120,8 +120,14 @@ class NormStructureParser:
     # sobrevivia uno: se perdian 40 articulos en el corpus, 29 de ellos en ese reglamento.
     # El `92` que quedaba era en realidad el `92-3` -- su texto arrancaba en "3.- La Comision
     # podra...", con el sufijo comido, igual que el `72` de LEY 20936 que era el `72-22`.
+    # `Art.` abreviado ademas de `Articulo`: el DECRETO 3386 (Reglamento de Servicio de la
+    # LGSE) escribe "Art. 17", y de sus articulos solo se encontraba UNO en el texto -- por eso
+    # 137 de sus obligaciones quedaban sin proceso. En todo el corpus son 334 articulos, 235 de
+    # esa norma.
+    # La forma abreviada exige NUMERO (lookahead \d): las notas de BCN traen "Art. unico N° 15"
+    # al inicio de linea y crearian un articulo fantasma llamado "unico".
     ARTICULO_PATTERN = re.compile(
-        r'(?:^|\n)[\s"“”\'«»]*Art[íi]culo\s+(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
+        r'(?:^|\n)[\s"“”\'«»]*(?:Art[íi]culo\s+|Art\.\s*(?=\d))(\d+(?:\s*-\s*\d+)?[°ºª]?(?:\s+(?:bis|ter|quater))?|primero|segundo|'
         r'tercero|cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|único)[°ºª]?\s*[:\.\-]?\s*',
         re.IGNORECASE | re.MULTILINE
     )
