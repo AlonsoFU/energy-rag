@@ -439,3 +439,20 @@
 2026-08-31 13:30:01  cola VACIA -- nada pendiente
 2026-08-31 14:30:01  cola VACIA -- nada pendiente
 2026-08-31 14:57:02  LANZO rep_scrapes
+2026-08-31 15:00:59  OK    rep_scrapes
+2026-08-31 15:01:04  LANZO pdfs_v5
+2026-08-31 15:01:23  OK    pdfs_v5
+2026-08-31 15:01:28  LANZO desc_v5
+2026-08-31 15:01:29  OK    desc_v5
+2026-08-31 15:01:34  LANZO proc_c5
+2026-08-31 15:01:35  OK    proc_c5
+2026-08-31 15:01:40  LANZO obl_c5
+2026-08-31 17:40:49  OK    obl_c5
+2026-08-31 17:40:54  LANZO citas_c5
+2026-08-31 17:41:52  OK    citas_c5
+2026-08-31 17:41:57  LANZO dup_c5
+2026-08-31 17:42:17  OK    dup_c5
+2026-08-31 17:42:22  LANZO der_c5
+2026-08-31 17:42:22  OK    der_c5
+2026-08-31 17:42:27  LANZO frontera_c5
+2026-08-31 17:42:49  OK    frontera_c5

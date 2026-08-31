@@ -1484,3 +1484,39 @@ cuando la razón desapareció. Ninguna de las dos cosas se forzó a mano.
 ⚠️ El descarte del cosmético también funcionó: 1 evento con hash distinto pero similitud
 ≥ 0.995 no disparó ningún reproceso. Sin esa guarda habrían sido 12 eventos y un reproceso
 inútil, como los 13 falsos positivos que ya costaron caro antes.
+
+---
+
+## #61 — vLLM: **NO es viable en este equipo**. Frente cerrado por el hardware (2026-08-31)
+
+Era el último camino abierto para la latencia (~100 s por respuesta), después de que exp #55
+cerrara `answer_doc_limit` y exp #56 cerrara el batching. Se midió antes de instalar nada.
+
+```
+RAM total    14 G · libre 7 G
+swap         15 G · YA usa 8 G   <- el sistema esta bajo presion de memoria
+VRAM         24.5 G libre
+modelo       qwen3:30b-a3b, ~20 G
+```
+
+**vLLM carga el modelo a RAM antes de pasarlo a VRAM** — el mismo patrón de HuggingFace que
+este proyecto ya tenía documentado como causa de crashes con modelos de 7B en adelante. El
+modelo pide ~20 GB y hay 7 GB libres, con el swap ya al 53 %.
+
+No es que sea lento o arriesgado: **no entra**. Ollama funciona precisamente porque el formato
+GGUF va directo a VRAM sin pasar por RAM.
+
+**Qué haría falta para reabrirlo**, en orden de costo:
+```
+1. mas RAM             14 G -> 32 G. Es el cuello real, no la VRAM (que sobra: 24.5 G)
+2. modelo mas chico    cabria en vLLM, pero habria que medir cuanto cae cita_limpia
+3. nada mas            no hay configuracion de vLLM que evite la carga por RAM
+```
+
+**Los tres caminos de velocidad quedan cerrados con medición:**
+```
+#55  answer_doc_limit   mejor valor 125.9 s contra objetivo de 45 s
+#56  batching paralelo  13.8 s secuencial vs 25.0 s en paralelo (los KV caches llenan la VRAM)
+#61  vLLM               no entra en 14 G de RAM
+```
+La latencia de ~100 s se queda hasta que cambie el hardware o se acepte otro modelo.

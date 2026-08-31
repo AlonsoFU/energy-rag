@@ -1,0 +1,11 @@
+[rescrape] 8 partial JSONs to process
+  [1/8] OK 29472 old=  10246  new= 308875  updated=True  loading=False
+  [2/8] OK 276363 old=   4931  new=  71744  updated=True  loading=False
+  [3/8] OK 29708 old=  16899  new= 214899  updated=True  loading=False
+  [4/8] OK 29967 old=   4134  new=  57816  updated=True  loading=False
+  [5/8] OK 230697 old=   7102  new=  36239  updated=True  loading=False
+  [6/8] OK 29705 old=  20084  new=  87247  updated=True  loading=False
+  [7/8] -- 1099982 old= 130003  new= 133805  updated=False  loading=False
+  [8/8] -- 1106211 old=  39191  new=  40081  updated=False  loading=False
+
+[rescrape] summary: 6/8 updated, 0 still partial, +713424 chars total
