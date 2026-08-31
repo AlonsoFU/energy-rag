@@ -12,3 +12,8 @@ proc_v|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplic
 obl_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
 citas_v|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
 desc_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+#
+# TANDA C — reproceso con el fix de grado-antes-del-guion y letra tras el ordinal
+proc_x2|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_x2|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_x2|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir

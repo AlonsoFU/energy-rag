@@ -139,3 +139,7 @@
 2026-08-30 18:00:02  CORRIENDO  procesos=1  gpu=244.05 W, 95 %  pg=running  :: scripts.extraer_obligaciones 
 2026-08-30 19:00:01  CORRIENDO  procesos=1  gpu=233.90 W, 95 %  pg=running  :: scripts.extraer_obligaciones 
 2026-08-30 20:00:01  CORRIENDO  procesos=1  gpu=234.06 W, 96 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-30 21:00:01  CORRIENDO  procesos=1  gpu=243.49 W, 94 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-30 22:00:01  CORRIENDO  procesos=1  gpu=234.92 W, 96 %  pg=running  :: scripts.extraer_obligaciones 
+2026-08-30 23:00:01  PARADO  <-- nada trabajando     gpu=225.78 W, 57 %  pg=running  cola=47 resultados
+2026-08-31 00:00:01  PARADO  <-- nada trabajando     gpu=227.67 W, 65 %  pg=running  cola=47 resultados

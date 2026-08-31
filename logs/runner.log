@@ -399,3 +399,14 @@
 2026-08-30 20:28:35  LANZO proc_v
 2026-08-30 20:28:36  OK    proc_v
 2026-08-30 20:28:42  LANZO obl_v
+2026-08-30 22:10:20  OK    obl_v
+2026-08-30 22:10:25  LANZO citas_v
+2026-08-30 22:11:08  OK    citas_v
+2026-08-30 22:11:13  LANZO desc_v
+2026-08-30 22:11:14  OK    desc_v
+2026-08-30 22:11:19  LANZO proc_x2
+2026-08-30 22:11:21  OK    proc_x2
+2026-08-30 22:11:26  LANZO obl_x2
+2026-08-30 22:25:35  FALLO obl_x2 (ver logs/cola_obl_x2.log)
+2026-08-31 00:10:01  LANZO citas_x2
+2026-08-31 00:10:42  OK    citas_x2

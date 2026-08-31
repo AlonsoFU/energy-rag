@@ -1,0 +1,26 @@
+obligaciones                       : 4999
+  con proceso del articulado       : 4399  (87 %)
+  en normas SIN estructura         : 535
+  articulo no ubicado en el texto  : 35
+  en normas que TRANSCRIBEN articulado: 29  (2 normas) -- no se asigna, ver comentario
+  procesos distintos               : 295
+
+--- procesos con más obligaciones ---
+   181  De los precios máximos en el sistema eléctrico nacional y en los sistema
+   179  MODIFICACIONES A OTROS CUERPOS LEGALES
+   123  De la Planificación Energética y de la Transmisión
+    82  De la Coordinación y operación del Sistema Eléctrico Nacional
+    80  De la Explotación de los Servicios Eléctricos y del Suministro
+    71  Generalidades
+    69  Del Coordinador Independiente del Sistema Eléctrico Nacional
+    65  DE LA OPERACIÓN EN TIEMPO REAL DEL SISTEMA ELÉCTRICO NACIONAL
+    57  De la Licitación para la Creación, Implementación, Mantención y Administ
+    56  DE LA PROGRAMACIÓN DE LA OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL
+    55  De las concesiones de centrales hidráulicas productoras de energía eléct
+    52  Disposiciones generales
+    49  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    49  Relaciones con los consumidores Art. 76. Los concesionarios deberán mant
+    48  Normas sobre Racionamiento.
+  limpiadas 4110 asignaciones previas
+
+ESCRITAS 4399 filas de `obligacion.proceso`

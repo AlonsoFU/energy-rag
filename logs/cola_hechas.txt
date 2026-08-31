@@ -4,3 +4,9 @@ frontera_v
 dup_v
 der_v
 proc_v
+obl_v
+citas_v
+desc_v
+proc_x2
+obl_x2
+citas_x2

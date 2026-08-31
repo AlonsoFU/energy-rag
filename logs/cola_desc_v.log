@@ -1,0 +1,17 @@
+documentos leidos            : 20
+citas articulo->norma        : 29
+  a normas DEL corpus        : 21  (10 normas)
+     ...y el ARTICULO existe : 17   <- sirven como gold
+     ...articulo NO esta     : 4
+  a normas que FALTAN        : 8  (7 normas)
+
+--- normas citadas por el sector que NO estan en el corpus ---
+    2  DECRETO 6        artículo 212°-1 de la LGSE. j. Decreto N° 6
+    1  LEY 8        artículo 191° de la Ley 8.
+    1  RESOLUCION 406      artículo 14 de la Resolución Exenta N° 406
+    1  LEY 198801   artículo 62 de la Ley N°19.8801  (¿será LEY 19880? numero pegado por el PDF)
+    1  DECRETO 97       artículo 6 del Decreto Supremo N°97
+    1  DECRETO 244      artículo 39 del Decreto Supremo N°244
+    1  DECRETO 8810     artículo 9 del Decreto Supremo Nº8810  (¿será DECRETO 88? numero pegado por el PDF)
+
+escrito docs/normativa-usada-en-discrepancias.md

@@ -173,9 +173,10 @@ def proceso_de(pos_art, encs):
 
 def main(aplicar=False):
     with with_connection() as c, c.cursor(row_factory=dict_row) as cur:
-        cur.execute("""SELECT n.id_norma, n.texto_completo FROM normas n
+        cur.execute("""SELECT n.id_norma, n.titulo, n.texto_completo FROM normas n
                        WHERE n.texto_completo IS NOT NULL
                          AND n.metadata->>'fuera_de_dominio' IS DISTINCT FROM 'true'""")
+        n_titulo = {}
         normas = {}
         for r in cur.fetchall():
             t = limpiar(r["texto_completo"])
@@ -194,6 +195,7 @@ def main(aplicar=False):
                 except Exception:
                     pass
             normas[r["id_norma"]] = t
+            n_titulo[r["id_norma"]] = r.get("titulo")
         cur.execute("""SELECT a.id, a.id_norma, a.numero, o.id AS obl
                        FROM articulos a JOIN obligacion o ON o.articulo_id = a.id""")
         filas = cur.fetchall()
@@ -222,9 +224,26 @@ def main(aplicar=False):
         for m in arts:
             k = re.sub(r"[°ºª\s]+", "", (m.group(1) or "")).lower()
             pos.setdefault(k, m.start())
+        # Norma SIN subdivisiones: el legislador no dejo TITULO/CAPITULO, asi que no hay
+        # agrupamiento interno que leer. Pero la norma entera SI define una materia, y su
+        # propio titulo la nombra -- tambien escrito por el legislador, no inventado por mi.
+        # Son 535 obligaciones en normas como LEY 20416 (Estatuto PYME) o LEY 19657
+        # (concesiones geotermicas), que quedaban sin ningun proceso.
+        # Se marca con prefijo NORMA para que se distinga a simple vista de un proceso que
+        # SI viene del articulado: no es lo mismo "TITULO IV — De la Explotacion" que
+        # "toda esta norma trata de X".
+        titulo_norma = re.sub(r"\s+", " ", (n_titulo.get(nid) or "")).strip()
+        titulo_norma = re.sub(r"^(LEY|DECRETO|DFL|DL|RESOLUCI[OÓ]N)\s*[\d.]*\s*", "",
+                              titulo_norma, flags=re.I).strip()
+
         for f in [x for x in filas if x["id_norma"] == nid]:
             if len(encs) < 2:
-                sin_estructura += 1
+                if titulo_norma:
+                    asign[f["obl"]] = {"nivel": "NORMA", "numeral": "",
+                                       "nombre": titulo_norma[:180]}
+                    nombres[titulo_norma[:180]] += 1
+                else:
+                    sin_estructura += 1
                 continue
             k = re.sub(r"[°ºª\s]+", "", str(f["numero"] or "")).lower()
             p = pos.get(k)

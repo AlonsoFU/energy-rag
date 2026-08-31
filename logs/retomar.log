@@ -452,3 +452,22 @@
   fases pendientes:
     3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
 === fin 2026-08-30 18:00:02 ===
+=== retomar 2026-08-30 21:00:01 ===
+  postgres arriba
+  GPU en 250.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4883
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-30 21:00:01 ===
+=== retomar 2026-08-31 00:00:01 ===
+  quitada la pausa del watchdog
+  postgres arriba
+  GPU en 250.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4999
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-31 00:00:01 ===
