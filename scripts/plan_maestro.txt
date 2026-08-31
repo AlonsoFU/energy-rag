@@ -1,19 +1,17 @@
-# PLAN MAESTRO v3 — recuperar los 334 articulos de la forma abreviada "Art. N"
+# PLAN MAESTRO v4 — reproceso completo con el proceso a nivel norma, y segunda vuelta.
 #
-# TANDA A — re-ingerir las normas mas afectadas (necesitan el JSON bajado)
-baja_3386|env PYTHONPATH=. venv/bin/python -m scripts.bajar_por_id 202975:DECRETO:3386
-act_3386|env PYTHONPATH=. venv/bin/python -m scripts.actualizar_norma 202975 --aplicar
+# TANDA A — el corpus cambio (4895 obligaciones con proceso): recalcular todo lo derivado
+obl_v4|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+proc_v4|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+citas_v4|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+dup_v4|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+der_v4|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
 #
-# TANDA B — reproceso completo
-frontera_v|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
-dup_v|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
-der_v|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-proc_v|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_v|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-desc_v|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+# TANDA B — descubrimiento y frontera con el corpus ya al dia
+desc_v4|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+frontera_v4|env PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
 #
-# TANDA C — reproceso con el fix de grado-antes-del-guion y letra tras el ordinal
-proc_x2|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-obl_x2|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
-citas_x2|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+# TANDA C — segunda pasada: el reproceso puede destapar articulos nuevos
+proc_v5|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+obl_v5|env PYTHONPATH=. venv/bin/python -m scripts.extraer_obligaciones
+citas_v5|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
