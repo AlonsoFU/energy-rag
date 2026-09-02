@@ -362,3 +362,30 @@ adoptar think=True si  los tipos que NO CIERRAN pasan a >= 4 de 6 usables
 ```
 La segunda condición es la que protege lo que ya funciona: no sirve arreglar la síntesis si se
 rompe la definición, que es el caso de uso más frecuente.
+
+### RESULTADO #63 (2026-09-01) — think=True arregla los 6 tipos que no cerraban
+
+```
+                  think=OFF   think=ON
+rule-application    0/1    ->   1/1
+temporal-plazo      0/1    ->   1/1
+comparison-multi    0/2    ->   2/2
+aggregation         0/1    ->   1/1
+interpretation      0/1    ->   1/1
+                    0/6         6/6      criterio pedia >= 4
+rule-recall         2/2    ->   2/2      intactos
+null-rechazo        2/2    ->   2/2      intactos
+```
+Costo: 150-200 s → 162-377 s en los casos duros.
+
+⚠️ **NO se adopta todavía.** GEN8 midió que `think=True` pierde 16 golds por rechazar en el set
+grande de `rule-recall`; mis 2 preguntas de ese tipo no alcanzan para desmentirlo. Falta el
+pareado sobre `queries_operativas_v1` (114q).
+
+**Criterio para adoptar de verdad:**
+```
+adoptar think=True si  cita_ok cae <= 3  Y  cita_limpia NO cae
+```
+`cita_limpia` no puede caer: think=True existe justamente para que el modelo deje de rociar
+citas mientras delibera, así que si la precisión no sube o se mantiene, no está haciendo lo que
+promete.

@@ -1,0 +1,14 @@
+catalogo: 124 normas (17 ajenas al dominio electrico)
+citas resueltas a normas del corpus : 2476
+   ...con el ARTICULO tocado resuelto : 24
+     remite         2206
+     aplica         175
+     modifica       92
+     deroga         2
+     complementa    1
+ambiguas (>1 candidata)             : 3
+citadas y NO en el corpus           : 2210  (512 normas distintas)
+puntaje de dominio del contexto: calculado
+   ...de esas, citadas DESDE el dominio electrico: 451 normas
+escritas 2476 filas remite en `referencias`
+escrito docs/frontera-candidatas.md

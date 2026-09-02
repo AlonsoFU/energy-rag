@@ -1,10 +1,9 @@
-# PLAN MAESTRO v6 — atacar por TIPO de pregunta (taxonomia CRAG + LegalBench)
+# PLAN MAESTRO v7 — decidir think=True con el pareado grande (exp #63)
 #
-# TANDA A — diagnostico: que tipos cierran y cuales no
-tipos_diag|env PYTHONPATH=. venv/bin/python -m scripts.exp_tipos_pregunta
+# TANDA A — el pareado que decide. ~114q x 2 brazos, es largo.
+think_paired|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl NAME=think_paired venv/bin/python -m scripts.exp_selfcons_n1
 #
-# TANDA B — consolidar el corpus mientras tanto
-proc_v6|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-citas_v6|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-der_v6|env PYTHONPATH=. venv/bin/python -m scripts.detectar_derogaciones --aplicar
-dup_v6|env PYTHONPATH=. venv/bin/python -m scripts.detectar_articulos_duplicados --aplicar
+# TANDA B — consolidar mientras
+citas_v7|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
+proc_v7|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
+desc_v7|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias

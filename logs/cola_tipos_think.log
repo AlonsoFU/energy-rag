@@ -1,0 +1,40 @@
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5663.90it/s]
+The Transformer `cache_dir` argument is deprecated. Please pass `cache_dir` via `model_kwargs`, `processor_kwargs`, and/or `config_kwargs` instead.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 23378.69it/s]
+=== 12 preguntas · 9 tipos · think=ON ===
+
+[1/12] rule-recall        OK           295s  4 citas
+          qué es el Coordinador Independiente del Sistema Eléctrico Nacional
+[2/12] rule-recall        OK           522s  3 citas
+          qué se entiende por sistema de transmisión zonal
+[3/12] rule-application   OK           377s  4 citas
+          qué debe hacer una empresa generadora para conectarse al sistema de transm
+[4/12] temporal-plazo     OK           290s  3 citas
+          en qué plazo debe la Comisión emitir el informe técnico definitivo de valo
+[5/12] comparison-multi   OK           195s  3 citas
+          cada cuánto debe el Coordinador publicar el balance de transferencias econ
+[6/12] comparison-multi   OK           261s  3 citas
+          qué diferencia hay entre el sistema de transmisión nacional y el zonal
+[7/12] aggregation        OK           288s  3 citas
+          qué obligaciones tiene el Coordinador respecto de los servicios complement
+[8/12] bridge-multihop    OK           162s  3 citas
+          quién fiscaliza al organismo que coordina la operación del sistema eléctri
+[9/12] temporal-vigencia  OK           277s  3 citas
+          sigue vigente el decreto supremo 244 sobre medios de generación no convenc
+[10/12] null-rechazo       RECHAZA       73s  dice que no esta en el corpus
+          cuál es la capital de Australia
+[11/12] null-rechazo       RECHAZA       27s  dice que no esta en el corpus
+          qué dice la normativa sobre el cultivo de paltas en Petorca
+[12/12] interpretation     OK           206s  3 citas
+          puede una empresa distribuidora negarse a dar acceso abierto a su red
+
+=== por TIPO ===
+  aggregation          1/1 usable   ['OK']
+  bridge-multihop      1/1 usable   ['OK']
+  comparison-multi     2/2 usable   ['OK', 'OK']
+  interpretation       1/1 usable   ['OK']
+  null-rechazo         2/2 usable   ['RECHAZA', 'RECHAZA']
+  rule-application     1/1 usable   ['OK']
+  rule-recall          2/2 usable   ['OK', 'OK']
+  temporal-plazo       1/1 usable   ['OK']
+  temporal-vigencia    1/1 usable   ['OK']

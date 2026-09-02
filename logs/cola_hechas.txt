@@ -1,2 +1,6 @@
 tipos_diag
 proc_v6
+citas_v6
+der_v6
+dup_v6
+tipos_think

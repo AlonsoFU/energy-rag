@@ -20,6 +20,7 @@ no existe no se puede evaluar.
 """
 import argparse
 import json
+import os
 import re
 import time
 from pathlib import Path
@@ -35,6 +36,7 @@ from src.pipelines.retrieve import SimpleRetriever
 MODEL = "ollama/qwen3:30b-a3b"
 SET = Path("data/eval/queries_tipos_v1.jsonl")
 OUT = Path("data/eval/results/tipos_pregunta.json")
+THINK = os.environ.get("THINK", "") == "1"      # exp #63: razonamiento en canal separado
 
 # Marcadores de que la respuesta NO cerró: quedó el monólogo de deliberación en vez del texto.
 # No es una lista de palabras prohibidas: son las muletillas con que el modelo razona EN INGLES
@@ -66,18 +68,25 @@ def main(limit=0):
     if limit:
         rows = rows[:limit]
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    prev = json.loads(OUT.read_text()) if OUT.exists() else {}
+    out = Path(str(OUT).replace(".json", "_think.json")) if THINK else OUT
+    prev = json.loads(out.read_text()) if out.exists() else {}
 
     llm = get_llm_provider()
     store = PostgresStore()
     cfg.settings.embed_4b_dense = True
     cfg.settings.embed_4b_dim = 1024
     cfg.settings.embed_4b_cpu = True          # que no pelee VRAM con el LLM
+    if THINK:
+        # exp #63: con think=False el modelo razona DENTRO de la respuesta y no cierra.
+        # num_predict_think=6000 ya esta calibrado en config: con 2000 se queda sin tokens
+        # ANTES de responder y devuelve vacio en ~55% de los casos.
+        cfg.settings.ollama_think = True
     retr = SimpleRetriever(store, Qwen3Embedder(), get_reranker(),
                            top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
-    print(f"=== {len(rows)} preguntas, {len(set(r['tipo'] for r in rows))} tipos ===\n", flush=True)
+    print(f"=== {len(rows)} preguntas · {len(set(r['tipo'] for r in rows))} tipos · "
+          f"think={'ON' if THINK else 'OFF'} ===\n", flush=True)
     for i, q in enumerate(rows, 1):
         if q["query"] in prev:
             continue
@@ -92,7 +101,7 @@ def main(limit=0):
         seg = round(time.time() - t0, 1)
         prev[q["query"]] = {"tipo": q["tipo"], "estado": estado, "motivo": motivo,
                             "secs": seg, "docs": len(docs), "text": (txt or "")[:1500]}
-        OUT.write_text(json.dumps(prev, ensure_ascii=False, indent=1))
+        out.write_text(json.dumps(prev, ensure_ascii=False, indent=1))
         print(f"[{i}/{len(rows)}] {q['tipo']:<18} {estado:<10} {seg:>5.0f}s  {motivo}", flush=True)
         print(f"          {q['query'][:74]}", flush=True)
 
