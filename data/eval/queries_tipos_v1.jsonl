@@ -1,0 +1,12 @@
+{"tipo":"rule-recall","query":"qué es el Coordinador Independiente del Sistema Eléctrico Nacional","nota":"una fuente, definicion directa"}
+{"tipo":"rule-recall","query":"qué se entiende por sistema de transmisión zonal","nota":"una fuente, definicion directa"}
+{"tipo":"rule-application","query":"qué debe hacer una empresa generadora para conectarse al sistema de transmisión","nota":"una fuente, procedimiento"}
+{"tipo":"temporal-plazo","query":"en qué plazo debe la Comisión emitir el informe técnico definitivo de valorización","nota":"una fuente, plazo puntual"}
+{"tipo":"comparison-multi","query":"cada cuánto debe el Coordinador publicar el balance de transferencias económicas","nota":"MULTI-FUENTE, plazos que difieren entre articulos - FALLA CONOCIDA"}
+{"tipo":"comparison-multi","query":"qué diferencia hay entre el sistema de transmisión nacional y el zonal","nota":"MULTI-FUENTE, comparar dos definiciones"}
+{"tipo":"aggregation","query":"qué obligaciones tiene el Coordinador respecto de los servicios complementarios","nota":"AGREGACION, varios articulos"}
+{"tipo":"bridge-multihop","query":"quién fiscaliza al organismo que coordina la operación del sistema eléctrico","nota":"BRIDGE: coordinador -> quien lo fiscaliza"}
+{"tipo":"temporal-vigencia","query":"sigue vigente el decreto supremo 244 sobre medios de generación no convencionales","nota":"VIGENCIA: esa norma esta derogada"}
+{"tipo":"null-rechazo","query":"cuál es la capital de Australia","nota":"NULL: debe rechazar"}
+{"tipo":"null-rechazo","query":"qué dice la normativa sobre el cultivo de paltas en Petorca","nota":"NULL: fuera del corpus, debe rechazar"}
+{"tipo":"interpretation","query":"puede una empresa distribuidora negarse a dar acceso abierto a su red","nota":"INTERPRETACION: requiere leer condiciones"}

@@ -1,9 +1,0 @@
-rep_scrapes
-pdfs_v5
-desc_v5
-proc_c5
-obl_c5
-citas_c5
-dup_c5
-der_c5
-frontera_c5
