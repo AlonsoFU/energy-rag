@@ -1520,3 +1520,45 @@ GGUF va directo a VRAM sin pasar por RAM.
 #61  vLLM               no entra en 14 G de RAM
 ```
 La latencia de ~100 s se queda hasta que cambie el hardware o se acepte otro modelo.
+
+---
+
+## #62 — Preguntas reales: el sistema no cierra en preguntas MULTI-FUENTE (2026-09-01)
+
+El usuario pidió que le hiciera preguntas al sistema. La primera ya destapó un modo de falla
+que **ningún set de evaluación detecta**.
+
+```
+pregunta   "¿cada cuánto debe el Coordinador publicar el balance de transferencias económicas?"
+respuesta  el RAZONAMIENTO CRUDO EN INGLÉS, sin respuesta final
+```
+
+**El retrieval funciona.** Trae los artículos correctos y los evalúa bien:
+```
+[Art. 12 de 250604]    "dentro de los primeros cinco dias de abril"  -> anual
+[Art. 4º de 250604]    preliminar 31-dic · final 31-mar
+[Art. 148 de 1146553]  mensual, pero son ingresos tarifarios, no este balance
+[Art. 139 de 1140253]  define las transferencias economicas, sin plazo
+```
+
+**Falla la generación**: la pregunta exige comparar fuentes que dicen cosas distintas (anual en
+abril / mensual / marzo), el modelo delibera y agota el presupuesto sin cerrar.
+
+⚠️ **Verificado que NO es competencia de VRAM.** La primera corrida tenía el monitor en
+paralelo; se repitió con la GPU libre y pasó lo mismo. Es sistemático.
+
+**Por qué los sets no lo veían.** Los escribí yo mirando el corpus, y apuntan a definiciones
+puntuales —*"qué es X"*, *"qué dice el artículo Y"*— que se responden con UNA fuente. Ninguno
+pregunta algo que obligue a reconciliar varios artículos. El sistema mide `cita_ok` 87.5 % y
+aun así no responde esto.
+
+Es el segundo caso del día en que un problema real queda invisible para las métricas: el otro
+fue el parser perdiendo 562 artículos sin que ninguna medición se moviera.
+
+**Candidatos a probar** (ninguno medido todavía):
+```
+1. cerrar el bloque de razonamiento por presupuesto y forzar respuesta con lo que haya
+2. detectar la pregunta multi-fuente y pedir explicitamente "responde en español, cita cada
+   plazo con su articulo" -- ⚠️ prompt enfatico ya fallo antes en este proyecto
+3. subir max_tokens: puede ser que simplemente no le alcance
+```

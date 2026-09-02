@@ -516,3 +516,93 @@
   fases pendientes:
     3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
 === fin 2026-08-31 15:00:01 ===
+=== retomar 2026-08-31 18:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-31 18:00:01 ===
+=== retomar 2026-08-31 21:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-08-31 21:00:01 ===
+=== retomar 2026-09-01 00:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 00:00:01 ===
+=== retomar 2026-09-01 03:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 03:00:02 ===
+=== retomar 2026-09-01 06:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 06:00:01 ===
+=== retomar 2026-09-01 09:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 09:00:01 ===
+=== retomar 2026-09-01 12:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 4992
+  fases pendientes:
+    3.1 preguntas reales: 0/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 12:00:02 ===
+=== retomar 2026-09-01 15:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 3634
+  fases pendientes:
+    3.1 preguntas reales: 1/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 15:00:02 ===
+=== retomar 2026-09-01 18:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 3634
+  fases pendientes:
+    3.1 preguntas reales: 1/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 18:00:01 ===
+=== retomar 2026-09-01 21:00:01 ===
+  postgres arriba
+  GPU en 180.00 W (no se modifica)
+  selfcons_n1: 114 pares
+  filtro_operativas: 114 pares
+  obligaciones: 3634
+  fases pendientes:
+    3.1 preguntas reales: 1/20 minimo -- BLOQUEA 3.2, 3.3 y 3.4
+=== fin 2026-09-01 21:00:01 ===

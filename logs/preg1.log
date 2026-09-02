@@ -1,0 +1,95 @@
+  buscando…
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5568.36it/s]
+The Transformer `cache_dir` argument is deprecated. Please pass `cache_dir` via `model_kwargs`, `processor_kwargs`, and/or `config_kwargs` instead.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 23271.75it/s]
+
+Okay, let's tackle this question. The user is asking how often the Coordinador must publish the balance of economic transfers. I need to check the provided articles to find the specific timeframes mentioned.
+
+First, I'll look through each article to find mentions of "publicar" or "balance" related to economic transfers.
+
+Starting with [Art. 12 de 250604]. The article says that within the first five days of April each year, the Coordinador must make public the calculation bases and background for the Power Sufficiency and the balance of injections and withdrawals. So that's annually, in April.
+
+Next, [Art. 4º de 250604] mentions the Coordinador communicating the preliminary calculation by December 31st each year, and the final calculation by March 31st. The final calculation is communicated after the calculation year ends, so March of the following year.
+
+[Art. 147 de 1140253] talks about the balance of injections and withdrawals, but doesn't specify the publication frequency. It's more about the calculation method.
+
+[Art. 148 de 1146553] states that monthly, the Coordinador calculates the Real Tariff Incomes for each transmission line. But this is about tariffs, not the balance of economic transfers. Wait, the question is about the balance of economic transfers, not tariffs. So maybe this is relevant? Wait, the user is asking about the balance of economic transfers, which might be related to the balance of transfers mentioned in other articles.
+
+[Art. 75 de 250604] says the Coordinador determines the balance of injections and withdrawals, with companies paying in twelve installments. But it doesn't mention publication frequency.
+
+[Art. 139 de 1140253] mentions determining and coordinating economic transfers, but no specific timeframes for publication.
+
+[Art. 140 de 1140253] talks about measures to guarantee payment continuity, but not publication frequency.
+
+[Art. 156 de 1140253] is about guarantees for payment continuity, not publication.
+
+[Art. 28º de 1150437] refers to including MGPE in the balance, but no frequency.
+
+[Art. 183 de 1140253] is about public information systems. It says the Coordinador must implement public information systems with regular updates. Specifically, in point e: "Información sobre transferencias económicas. Información detallada respecto a las transferencias económicas entre los Coordinados, tales como balances de transferencias de energía y potencia..." But it doesn't specify how often the balance is published. However, the article mentions "información permanentemente actualizada" (permanently updated information), which might imply ongoing updates, but the user is asking for a specific timeframe.
+
+Wait, the user's question is about how often the Coordinador must publish the balance. From [Art. 12 de 250604], the first five days of April each year. So annually in April.
+
+[Art. 4º de 250604] mentions the preliminary calculation communicated by December 31st (so for the next year's payments), and the final calculation by March 31st. But the publication of the balance might be part of this. Wait, the user is asking about the balance of economic transfers, which might be the same as the balance of injections and withdrawals. 
+
+Wait, in [Art. 12 de 250604], it says "balance de inyecciones y retiros" and the Coordinador must publish the calculation bases and background for the balance within the first five days of April. So the balance itself is published in April.
+
+In [Art. 4º de 250604], the final calculation is communicated by March 31st. So the balance is published by March 31st (final) and the preliminary by December 31st. But the user is asking about the publication of the balance, so the final balance is published in March.
+
+Wait, let me check again. [Art. 4º de 250604] says: "Una vez transcurrido el Año de Cálculo, el Coordinador deberá comunicar el cálculo definitivo de las transferencias de potencia, a más tardar el último día del mes de marzo." So the final calculation (balance) is communicated by March 31st. Then, the preliminary calculation is communicated by December 31st.
+
+But the user's question is about publishing the balance of economic transfers. The term "balance" here is likely referring to the calculation of transfers, so the final balance is published by March 31st each year.
+
+However, [Art. 12 de 250604] mentions publishing the bases and background for the balance of injections and withdrawals within the first five days of April. Wait, that's a bit confusing. The bases and background for the balance are published in April, but the final calculation is communicated by March. Maybe the April publication is about the methodology, while the March communication is the actual balance.
+
+Wait, the user's question is about "cada cuanto debe el Coordinador publicar el balance de transferencias economicas". So the balance itself, not the bases. So the balance (the final calculation) is communicated by March 31st (Art. 4º), so once a year, by March 31st.
+
+But let's check the exact wording. Art. 4º says the final calculation must be communicated by March 31st. So the balance is published by March 31st each year. So the frequency is annually, by March 31st.
+
+Wait, but the user is asking for "cada cuanto", which is "how often", so the answer would be "anualmente, a más tardar el último día del mes de marzo" (annually, by the last day of March).
+
+Additionally, [Art. 12 de 250604] mentions publishing the bases and background within the first five days of April, which is after the March communication. But that's about the bases, not the balance itself. The balance (the actual calculation) is communicated in March.
+
+So the correct answer should be based on Art. 4º de 250604, stating that the final calculation (balance) must be communicated by March 31st.
+
+Wait, let's check the exact text of Art. 4º:
+
+"Una vez transcurrido el Año de Cálculo, el Coordinador deberá comunicar el cálculo definitivo de las transferencias de potencia, a más tardar el último día del mes de marzo."
+
+So the balance (cálculo definitivo) is communicated by March 31st.
+
+Therefore, the Coordinador must publish the balance (cálculo definitivo) by March 31st each year.
+
+Another point: [Art. 148 de 1146553] says "Mensualmente, con ocasión de los balances de transferencias de energía y potencia", but this is about calculating the real tariff incomes monthly, not publishing the balance. So it's a different thing.
+
+So the key article is Art. 4º de 250604.
+
+Wait, but the user's question is about "balance de transferencias economicas" (economic transfers balance). In Art. 4º, it's about "transferencias de potencia" (power transfers), but the balance mentioned in Art. 12 is "balance de inyecciones y retiros" (balance of injections and withdrawals), which is part of the economic transfers.
+
+Wait, the user's question uses "transferencias economicas", which might be the same as "transferencias de potencia" or related. The term "economic" might refer to the financial aspect, which is covered in Art. 4º and Art. 12.
+
+But according to the articles, the balance of injections and withdrawals (which underlies the economic transfers) is communicated by March 31st (final calculation) and the bases are published in April.
+
+So the answer should be that the Coordinador must publish the balance (final calculation) by March 31st each year, based on Art. 4º de 250604.
+
+Let me check if any other article specifies a different frequency.
+
+Art. 148 mentions monthly for the tariffs, but not for the balance of transfers.
+
+Art. 183 says the information must be "permanentemente actualizada" (permanently updated), but that's about the public information system, not the specific balance publication.
+
+So the specific answer is from Art. 4º de 250604: the final calculation must be communicated by March 31st, so the balance is published by March 31st annually.
+
+Wait, but the user is asking "cada cuanto" (how often), so the answer is "anualmente, a más tardar el último día del mes de marzo".
+
+So the correct citation is [Art. 4º de 250604].
+
+Now, check if there's any other mention. Art.
+
+  ── 160 s · 10 artículos consultados
+  ── fuentes en el pool:
+       [250604 art 12]
+       [250604 art 4º]
+       [1140253 art 147]
+       [1146553 art 148]
+       [250604 art 75]
+       [1140253 art 139]

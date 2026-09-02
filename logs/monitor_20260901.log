@@ -1,0 +1,257 @@
+=== monitor 2026-09-01 12:14:18 ===
+--- 0. reparar scrapes rotos (los que quedaron en 'Loading...')
+[rescrape] 4 partial JSONs to process
+  [1/4] -- 1099982 old= 130003  new= 133805  updated=False  loading=False
+  [2/4] -- 1106211 old=  39191  new=  40081  updated=False  loading=False
+  [3/4] -- 176595 old=   4737  new= 239088  updated=False  loading=True
+  [4/4] -- 1058072 old=  18910  new= 273182  updated=False  loading=True
+
+[rescrape] summary: 0/4 updated, 2 still partial, +0 chars total
+--- 1. re-scrape del corpus en dominio
+alcance=dominio  normas a revisar: 77  (con registro previo: 77, frescura 6 d)
+pendientes en esta pasada: 0
+
+=== cambiadas 0 · iguales 0 · fallo 0 ===
+los cambios quedaron en `norma_evento`; ver con scripts.monitor_report
+--- 2. diff
+cambios detectados: 0
+  (sin cambios respecto al snapshot)
+--- 3. informe
+sin cambios pendientes
+escrito docs/monitor-ultimo-informe.md
+--- 3b. aplicar al corpus los cambios detectados
+eventos de cambio SIN aplicar: 7
+  DFL 4        (258171)  detectado 2026-08-31
+  LEY 18045    (29472)  detectado 2026-08-31
+  LEY 19496    (61438)  detectado 2026-08-31
+  LEY 20936    (1092695)  detectado 2026-08-31
+  LEY 21667    (1203005)  detectado 2026-08-31
+  LEY 21304    (1154423)  detectado 2026-08-31
+  LEY 20720    (1058072)  detectado 2026-08-31
+
+=== DFL 4 (258171) ===
+[1/1] DFL 4 (idNorma 258171)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=258171
+    titulo: DFL 4DFL 4/20018 FIJA TEXTO REFUNDIDO, COORDINADO Y SISTEMATIZADO DEL DECRETO 
+    chars : 582770
+    dominio 0.585  ok
+    guardado -> data/normas_completas/nuevas/258171.json  (registrado como DFL-4)
+
+DFL-4 (258171)
+  texto guardado :    10075
+  texto nuevo    :   582770
+  articulos      : 330 -> 450
+  borrados: 407 fragmentos · 862 obligaciones · 33 definiciones · 1147 referencias
+  dominio re-evaluado: 0.513 -> dentro
+
+ACTUALIZADA DFL-4: 450 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 18045 (29472) ===
+[1/1] LEY 18045 (idNorma 29472)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=29472
+    titulo: LEY 18045 LEY DE MERCADO DE VALORES
+    chars : 308875
+    dominio 0.413  ok
+    guardado -> data/normas_completas/nuevas/29472.json  (registrado como LEY-18045)
+
+LEY-18045 (29472)
+  texto guardado :    10246
+  texto nuevo    :   308875
+  articulos      : 6 -> 243
+  borrados: 8 fragmentos · 3 obligaciones · 0 definiciones · 0 referencias
+  dominio re-evaluado: 0.339 -> dentro
+
+ACTUALIZADA LEY-18045: 243 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 19496 (61438) ===
+[1/1] LEY 19496 (idNorma 61438)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=61438
+  AVISO: el texto trae placeholders 'Loading' (14325 chars) -- extraccion INCOMPLETA
+    titulo: LEY 19496 ESTABLECE NORMAS SOBRE PROTECCION DE LOS DERECHOS DE LOS CONSUMIDORE
+    chars : 14325
+    dominio 0.337  ok
+    guardado -> data/normas_completas/nuevas/61438.json  (registrado como LEY-19496)
+
+LEY-19496 (61438)
+  texto guardado :    14325
+  texto nuevo    :    14325
+  articulos      : 6 -> 8
+  borrados: 8 fragmentos · 1 obligaciones · 0 definiciones · 1 referencias
+  dominio re-evaluado: 0.315 -> dentro
+
+ACTUALIZADA LEY-19496: 8 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 20936 (1092695) ===
+[1/1] LEY 20936 (idNorma 1092695)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1092695
+    titulo: LEY 20936  ESTABLECE UN NUEVO SISTEMA DE TRANSMISIÓN ELÉCTRICA Y CREA UN ORGAN
+    chars : 240608
+    dominio 0.659  ok
+    guardado -> data/normas_completas/nuevas/1092695.json  (registrado como LEY-20936)
+
+LEY-20936 (1092695)
+  texto guardado :   240608
+  texto nuevo    :   240608
+  articulos      : 67 -> 100
+  borrados: 104 fragmentos · 19 obligaciones · 0 definiciones · 39 referencias
+  dominio re-evaluado: 0.590 -> dentro
+
+ACTUALIZADA LEY-20936: 100 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 21667 (1203005) ===
+[1/1] LEY 21667 (idNorma 1203005)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1203005
+    titulo: LEY 21667  MODIFICA DIVERSOS CUERPOS LEGALES, EN MATERIA DE ESTABILIZACIÓN TAR
+    chars : 34413
+    dominio 0.547  ok
+    guardado -> data/normas_completas/nuevas/1203005.json  (registrado como LEY-21667)
+
+LEY-21667 (1203005)
+  texto guardado :    34413
+  texto nuevo    :    34413
+  articulos      : 8 -> 9
+  borrados: 12 fragmentos · 17 obligaciones · 0 definiciones · 14 referencias
+  dominio re-evaluado: 0.394 -> dentro
+
+ACTUALIZADA LEY-21667: 9 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 21304 (1154423) ===
+[1/1] LEY 21304 (idNorma 1154423)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1154423
+    titulo: LEY 21304  SOBRE SUMINISTRO DE ELECTRICIDAD PARA PERSONAS ELECTRODEPENDIENTES
+    chars : 5799
+    dominio 0.469  ok
+    guardado -> data/normas_completas/nuevas/1154423.json  (registrado como LEY-21304)
+
+LEY-21304 (1154423)
+  texto guardado :     5799
+  texto nuevo    :     5799
+  articulos      : 6 -> 6
+  borrados: 6 fragmentos · 0 obligaciones · 0 definiciones · 2 referencias
+  dominio re-evaluado: 0.535 -> dentro
+
+ACTUALIZADA LEY-21304: 6 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+=== LEY 20720 (1058072) ===
+[1/1] LEY 20720 (idNorma 1058072)
+  Accediendo a: https://www.bcn.cl/leychile/navegar?idNorma=1058072
+    titulo: LEY 20720  SUSTITUYE EL RÉGIMEN CONCURSAL VIGENTE POR UNA LEY DE REORGANIZACIÓ
+    chars : 547858
+    dominio 0.343  ok
+    guardado -> data/normas_completas/nuevas/1058072.json  (registrado como LEY-20720)
+
+LEY-20720 (1058072)
+  texto guardado :   547858
+  texto nuevo    :   547858
+  articulos      : 415 -> 441
+  borrados: 477 fragmentos · 456 obligaciones · 0 definiciones · 37 referencias
+  dominio re-evaluado: 0.291 -> FUERA
+
+ACTUALIZADA LEY-20720: 441 articulos ingestados
+  ⚠️ hay que volver a correr: duplicados · derogaciones · proceso · obligaciones · citas
+
+  evento marcado como aplicado
+
+⚠️ despues de esto hay que correr el reproceso:
+   duplicados · derogaciones · proceso · obligaciones · citas
+--- 3c. reproceso de lo que cambio
+articulos comparados      : 2908
+misma serie (texto distinto, señal estructural): 15
+numeros presentes en >1 norma: 320
+duplicados (sim >= 0.9) : 88
+ambiguos (empate, NO se marcan): 1
+     DECRETO 7 art quinto <-> DECRETO 8 art quinto  sim=0.992
+    75  LEY 20936 -> DFL 4
+     6  DECRETO 52 -> DECRETO 113
+     2  LEY 21304 -> DFL 4
+     1  Ley 20776 -> LEY 20402
+     1  DECRETO 130 -> DECRETO 10
+     1  LEY 20410 -> DECRETO 900
+     1  LEY 19613 -> LEY 18410
+     1  DECRETO 70 -> DECRETO 62
+  limpiadas 13 marcas previas
+
+MARCADOS 103 articulos con metadata.duplicado_de (88 por texto, 15 por serie) -- reversible
+articulos revisados            : 4999
+NORMAS derogadas por completo  : 0
+ARTICULOS derogados (por otra norma) : 1
+ARTICULOS cuyo CUERPO es la marca     : 14
+   DECRETO 88 art 20          '- Derogado'
+   DECRETO 88 art 21          '- Derogado.'
+   DECRETO 88 art 22          '- Derogado'
+   DECRETO 88 art 23          '- Derogado.'
+   DECRETO 88 art 25          '- Derogado.'
+   DECRETO 88 art 26          '- Derogado.'
+   DECRETO 327 art 236        '- DEROGADO.'
+   DECRETO 327 art 237        '- DEROGADO.'
+derogaciones PARCIALES (no se marcan): 0
+objetos que NO estan en el corpus    : 9  (9 distintos)
+     1  LEY 18989
+     1  LEY 18175
+     1  DECRETO 181
+     1  DECRETO 23
+     1  DECRETO 71
+     1  DECRETO 244
+
+MARCADAS 0 normas y 15 articulos como derogados
+obligaciones                       : 3634
+  con proceso del articulado       : 3556  (97 %)
+  en normas SIN estructura         : 32
+  articulo no ubicado en el texto  : 35
+  en normas que TRANSCRIBEN articulado: 10  (1 normas) -- no se asigna, ver comentario
+  procesos distintos               : 261
+
+--- procesos con más obligaciones ---
+   179  MODIFICACIONES A OTROS CUERPOS LEGALES
+   103  FIJA NORMAS ESPECIALES PARA LAS EMPRESAS DE MENOR TAMAÑO
+    65  DE LA OPERACIÓN EN TIEMPO REAL DEL SISTEMA ELÉCTRICO NACIONAL
+    57  De la Licitación para la Creación, Implementación, Mantención y Administ
+    56  DE LA PROGRAMACIÓN DE LA OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL
+    52  Disposiciones generales
+    49  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    49  Relaciones con los consumidores Art. 76. Los concesionarios deberán mant
+    48  Normas sobre Racionamiento.
+    48  Del Ambiente Privado
+    47  SOBRE EFICIENCIA ENERGÉTICA
+    46  CONSIDERACIONES GENERALES
+    46  MECANISMO TRANSITORIO DE PROTECCIÓN AL CLIENTE
+    45  Ventas a Clientes Finales de Potencia
+    42  SOBRE CONCESIONES DE ENERGIA GEOTERMICA
+  limpiadas 3555 asignaciones previas
+
+ESCRITAS 3556 filas de `obligacion.proceso`
+catalogo: 124 normas (17 ajenas al dominio electrico)
+citas resueltas a normas del corpus : 2476
+   ...con el ARTICULO tocado resuelto : 24
+     remite         2206
+     aplica         175
+     modifica       92
+     deroga         2
+     complementa    1
+ambiguas (>1 candidata)             : 3
+citadas y NO en el corpus           : 2210  (512 normas distintas)
+puntaje de dominio del contexto: calculado
+   ...de esas, citadas DESDE el dominio electrico: 451 normas
+escritas 2476 filas remite en `referencias`
+escrito docs/frontera-candidatas.md
+--- 4. nuevo snapshot
+snapshot tomado: 124 normas
+=== fin 2026-09-01 14:06:25 ===
