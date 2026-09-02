@@ -325,3 +325,40 @@ Con menos de 8 no vale cambiar un mecanismo adoptado por otro que falla parecido
 ⚠️ Los 9 casos los elegí yo, y son justo los casos difíciles — no una muestra representativa.
 Esto mide si el LLM resuelve **lo que el embedding no puede**, no la exactitud global. Si pasa,
 falta medir el efecto en retrieval con pareado antes de tocar el pipeline.
+
+---
+
+## EXP #63 — `ollama_think=True` contra los tipos que NO CIERRAN (criterio fijado 2026-09-01)
+
+Exp #62 y el diagnóstico por tipos dejaron el cuadro: **6 de 12 preguntas no cierran**, y el
+corte es nítido —cierra lo que sale de UNA fuente, no cierra lo que hay que sintetizar—.
+
+```
+CIERRAN                        NO CIERRAN
+rule-recall       2/2          rule-application   0/1
+null-rechazo      2/2          temporal-plazo     0/1
+bridge-multihop   1/1          comparison-multi   0/2
+temporal-vigencia 1/1          aggregation        0/1
+                               interpretation     0/1
+```
+Los que fallan tardan 150-200 s: consumen el presupuesto entero deliberando.
+
+**El diagnóstico ya estaba escrito en `config.py`**, y el flag existe apagado: con
+`think=False` el modelo razona DENTRO del cuerpo de la respuesta porque no tiene otro lugar
+donde pensar; con `think=True` Ollama devuelve el razonamiento en el campo `thinking` y deja
+`response` limpio. `ollama_num_predict_think=6000` ya está calibrado (con 2000 el modelo se
+queda sin tokens antes de responder).
+
+⚠️ **think=True ya se midió antes (GEN8) y salió mixto**: precisión 0.66 vs 0.58 y +40
+respuestas con todas las citas correctas, pero **perdía 16 golds, casi siempre por rechazar**.
+Esa medición se hizo sobre el set viejo, que es casi todo `rule-recall` — el único tipo que hoy
+funciona bien. La pregunta abierta es si lo que costaba en `rule-recall` lo gana en los tipos
+que directamente no responden.
+
+**Criterio de adopción:**
+```
+adoptar think=True si  los tipos que NO CIERRAN pasan a >= 4 de 6 usables
+                   Y   rule-recall + null-rechazo NO pierden ninguno (siguen 4/4)
+```
+La segunda condición es la que protege lo que ya funciona: no sirve arreglar la síntesis si se
+rompe la definición, que es el caso de uso más frecuente.

@@ -1,0 +1,26 @@
+obligaciones                       : 3634
+  con proceso del articulado       : 3556  (97 %)
+  en normas SIN estructura         : 32
+  articulo no ubicado en el texto  : 35
+  en normas que TRANSCRIBEN articulado: 10  (1 normas) -- no se asigna, ver comentario
+  procesos distintos               : 261
+
+--- procesos con más obligaciones ---
+   179  MODIFICACIONES A OTROS CUERPOS LEGALES
+   103  FIJA NORMAS ESPECIALES PARA LAS EMPRESAS DE MENOR TAMAÑO
+    65  DE LA OPERACIÓN EN TIEMPO REAL DEL SISTEMA ELÉCTRICO NACIONAL
+    57  De la Licitación para la Creación, Implementación, Mantención y Administ
+    56  DE LA PROGRAMACIÓN DE LA OPERACIÓN DEL SISTEMA ELÉCTRICO NACIONAL
+    52  Disposiciones generales
+    49  Designación, constitución, funcionamiento, obligaciones y atribuciones d
+    49  Relaciones con los consumidores Art. 76. Los concesionarios deberán mant
+    48  Normas sobre Racionamiento.
+    48  Del Ambiente Privado
+    47  SOBRE EFICIENCIA ENERGÉTICA
+    46  CONSIDERACIONES GENERALES
+    46  MECANISMO TRANSITORIO DE PROTECCIÓN AL CLIENTE
+    45  Ventas a Clientes Finales de Potencia
+    42  SOBRE CONCESIONES DE ENERGIA GEOTERMICA
+  limpiadas 3556 asignaciones previas
+
+ESCRITAS 3556 filas de `obligacion.proceso`
