@@ -1,9 +1,13 @@
-# PLAN MAESTRO v7 — decidir think=True con el pareado grande (exp #63)
+# PLAN MAESTRO v8 — decidir think=True con el pareado CORRECTO (exp #63)
 #
-# TANDA A — el pareado que decide. ~114q x 2 brazos, es largo.
-think_paired|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl NAME=think_paired venv/bin/python -m scripts.exp_selfcons_n1
+# v7 encoló `exp_selfcons_n1` para esto y ese script togglea `self_consistency_n`, NO
+# `ollama_think`: corrió ~6 h y devolvió una repetición del exp #54. El resultado quedó
+# guardado en data/eval/results/selfcons_n1_repetido_mal_etiquetado (no borrarlo, es evidencia
+# válida de n=1 vs n=3, solo estaba mal rotulado). El script correcto es exp_think_paired.
 #
-# TANDA B — consolidar mientras
-citas_v7|env PYTHONPATH=. venv/bin/python -m scripts.resolver_citas_normas --escribir
-proc_v7|env PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar
-desc_v7|env PYTHONPATH=. venv/bin/python -m scripts.extraer_de_discrepancias
+# TANDA A — el pareado que decide. 114q x 2 brazos x ~250 s/par ≈ 8 h. Resumible.
+think_real|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl NAME=think_real venv/bin/python -m scripts.exp_think_paired
+#
+# TANDA B — held-out del MISMO cambio, para cazar overfit al set operativo.
+# Son fraseos naturales (64q); si think gana en A y pierde en B, no se adopta.
+think_holdout|env PYTHONPATH=. SET=data/eval/queries_fraseos_v1.jsonl NAME=think_holdout venv/bin/python -m scripts.exp_think_paired
