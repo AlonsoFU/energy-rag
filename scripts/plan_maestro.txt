@@ -11,3 +11,8 @@ think_real|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl NAME=think
 # TANDA B — held-out del MISMO cambio, para cazar overfit al set operativo.
 # Son fraseos naturales (64q); si think gana en A y pierde en B, no se adopta.
 think_holdout|env PYTHONPATH=. SET=data/eval/queries_fraseos_v1.jsonl NAME=think_holdout venv/bin/python -m scripts.exp_think_paired
+#
+# TANDA C — grafo. VA DESPUES de los dos pareados a proposito: toca la DB y correrlo
+# en medio de un experimento cambiaria el corpus entre brazos.
+dedup_refs|env PYTHONPATH=. venv/bin/python -m scripts.dedup_referencias --aplicar
+mapa_c|env PYTHONPATH=. venv/bin/python -m scripts.mapa_obligaciones

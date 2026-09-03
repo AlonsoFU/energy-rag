@@ -1,108 +1,49 @@
 #!/bin/bash
-# Watchdog de la cola de experimentos. Para cron cada 15 min.
+# Watchdog. Cron cada 15 min.
 #
-# Motivo: el PC ya se colgo dos veces a mitad de corrida (freeze duro, sin Xid ni OOM en el
-# kernel log). Los runners son resumibles y guardan tras CADA par, asi que relanzar es seguro
-# y barato: retoma donde quedo.
+# QUE HACE AHORA: relanza `trabajar.sh` si hay plan pendiente y NADA corriendo.
 #
-# Recorre la cola en orden. Para cada etapa mira si ya esta completa; si no lo esta y NO hay
-# nada corriendo, la relanza. Una sola etapa a la vez -- nunca dos procesos peleando la GPU.
+# QUE HACIA ANTES, y por que se reescribio: tenia la cola de 10 experimentos ESCRITA A MANO
+# (gate_fraseos, veto_operativas, selfcons_n1...). Todos terminaron hace semanas, asi que
+# desde entonces caia siempre en "cola COMPLETA, nada que hacer" -- 953 veces. No miraba el
+# plan maestro, no sabia que existia `think_real`, y si ese experimento se moria NO lo
+# relanzaba. Era codigo muerto informando verde.
 #
-# Instalar:
-#   crontab -l 2>/dev/null | { cat; echo "*/15 * * * * /home/alonso/Documentos/Github/energy-rag-postgres-rag/scripts/watchdog.sh"; } | crontab -
-# Desinstalar:  crontab -e   y borrar la linea
-# Pausar:       touch /home/alonso/Documentos/Github/energy-rag-postgres-rag/.watchdog_off
+# La leccion: una cola hardcodeada caduca en silencio. Esta version lee el plan, que es el
+# unico registro de que falta.
+#
+# Pausar: touch .watchdog_off
 set -u
 cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
 LOG=logs/watchdog.log
+mkdir -p logs
 [ -f .watchdog_off ] && exit 0
 
-# ya hay un experimento corriendo -> no tocar nada
-if pgrep -f "scripts.(exp_|extraer_obligaciones)" > /dev/null; then exit 0; fi
+# ya hay trabajo REAL corriendo -> no tocar nada. Nunca dos peleando la GPU.
+if ps -eo args | grep -E '^[^ ]*python' | grep -qE 'scripts\.|exp_'; then exit 0; fi
 
-E="env -i HOME=/home/alonso PATH=/usr/local/bin:/usr/bin:/bin
-   HF_HOME=/home/alonso/datos/hf HF_HUB_CACHE=/home/alonso/datos/hf/hub
-   TRANSFORMERS_CACHE=/home/alonso/datos/hf/hub HF_HUB_OFFLINE=1
-   BGE_DEVICE=cuda PYTHONPATH=."
+docker start energy_rag_pg > /dev/null 2>&1
 
-# completo <dir_resultados> <n_esperado> -> 0 si ya termino
-completo() {
-  [ -f "data/eval/results/$1/result.json" ] || return 1
-  n=$(./venv/bin/python -c "
-import json,sys
-try:
-    d=json.load(open('data/eval/results/$1/result.json'))['detail']
-    print(sum(1 for q in d if q.get('on') and q.get('off')))
-except Exception: print(0)" 2>/dev/null)
-  [ "${n:-0}" -ge "$2" ]
-}
+PEND=$(grep -v '^#' scripts/plan_maestro.txt | grep -c .)
+HECHAS=$(sort -u logs/cola_hechas.txt 2>/dev/null | grep -c . || echo 0)
 
-lanzar() {  # lanzar <nombre> <set> <log>
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_lookup_paired >> "logs/$3" 2>&1 < /dev/null &
+if [ "$HECHAS" -ge "$PEND" ]; then
+  # PLAN AGOTADO NO ES EXITO. Es la maquina parada esperando que yo escriba el proximo plan,
+  # y es exactamente como se perdieron 35 h entre el 02-09 07:19 y el 03-09 18:35 con los
+  # tres crons en verde. Se deja una marca con hora para que se pueda MEDIR cuanto lleva
+  # parada, en vez de una linea mas de "nada que hacer".
+  if [ ! -f .plan_agotado ]; then
+    date '+%F %T' > .plan_agotado
+    echo "$(date '+%F %T') PLAN AGOTADO ($HECHAS/$PEND) -- MAQUINA OCIOSA, falta plan nuevo" >> "$LOG"
+  else
+    DESDE=$(cat .plan_agotado)
+    MIN=$(( ( $(date +%s) - $(date -d "$DESDE" +%s) ) / 60 ))
+    echo "$(date '+%F %T') PLAN AGOTADO hace $MIN min (desde $DESDE) -- MAQUINA OCIOSA" >> "$LOG"
+  fi
   exit 0
-}
+fi
 
-lanzar_veto() {  # igual que lanzar() pero con el runner del veto off-topic
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_veto_offtopic >> "logs/$3" 2>&1 < /dev/null &
-  exit 0
-}
-
-lanzar_amb() {  # runner de D4 (ambiguedad)
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_ambiguedad >> "logs/$3" 2>&1 < /dev/null &
-  exit 0
-}
-
-lanzar_r5() {   # R5: aporta algo el regex de fallback?
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_r5_fallback >> "logs/$3" 2>&1 < /dev/null &
-  exit 0
-}
-
-lanzar_fd() {   # E1: filtro de frontera
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_filtro_dominio >> "logs/$3" 2>&1 < /dev/null &
-  exit 0
-}
-
-# OJO: el N esperado es el de PARES VALIDOS, no el largo del set: el runner descarta
-# las queries marcadas unanswerable. r5_fallback: set de 61 -> 46 pares.
-lanzar_sc() {   # FASE 1.1: n=3 vs n=1 (latencia vs precision)
-  echo "$(date '+%F %T') relanzo $1" >> "$LOG"
-  docker start energy_rag_pg > /dev/null 2>&1
-  sleep 5
-  setsid $E SET="$2" NAME="$1" \
-    ./venv/bin/python -m scripts.exp_selfcons_n1 >> "logs/$3" 2>&1 < /dev/null &
-  exit 0
-}
-
-# ---- la cola, en orden ----
-completo gate_fraseos 64       || lanzar gate_fraseos       data/eval/queries_fraseos_v1.jsonl    gate_fraseos.log
-completo gate_noregresion 114  || lanzar gate_noregresion   data/eval/queries_operativas_v1.jsonl gate_noregresion.log
-completo post_reingesta 64     || lanzar post_reingesta     data/eval/queries_fraseos_v1.jsonl    post_reingesta.log
-completo post_reingesta_op 114 || lanzar post_reingesta_op  data/eval/queries_operativas_v1.jsonl post_reingesta_op.log
-completo veto_fraseos 64       || lanzar_veto veto_fraseos   data/eval/queries_fraseos_v1.jsonl    veto_fraseos.log
-completo veto_operativas 114   || lanzar_veto veto_operativas data/eval/queries_operativas_v1.jsonl veto_operativas.log
-completo ambiguedad 35         || lanzar_amb  ambiguedad      data/eval/queries_ambiguos_v1.jsonl   ambiguedad.log
-completo r5_fallback 46        || lanzar_r5   r5_fallback     data/eval/queries_sin_diccionario_v1.jsonl r5_fallback.log
-completo filtro_operativas 114 || lanzar_fd   filtro_operativas data/eval/queries_operativas_v1.jsonl filtro_operativas.log
-completo selfcons_n1 114       || lanzar_sc   selfcons_n1     data/eval/queries_operativas_v1.jsonl selfcons_n1.log
-
-echo "$(date '+%F %T') cola COMPLETA, nada que hacer" >> "$LOG"
+rm -f .plan_agotado
+echo "$(date '+%F %T') nada corriendo con plan $HECHAS/$PEND -> relanzo trabajar.sh" >> "$LOG"
+# trabajar.sh tiene su propio flock: si ya hay uno vivo, este sale solo.
+setsid ./scripts/trabajar.sh >> logs/trabajar.log 2>&1 < /dev/null &

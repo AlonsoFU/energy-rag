@@ -42,8 +42,20 @@ while IFS='|' read -r etiqueta cmd; do
     echo "$etiqueta" >> "$HECHAS"
     echo "$(date '+%F %T')  OK    $etiqueta" >> "$LOG"
   else
-    echo "$etiqueta" >> "$HECHAS"   # no reintentar en loop: queda el log para mirar
-    echo "$(date '+%F %T')  FALLO $etiqueta (ver logs/cola_$etiqueta.log)" >> "$LOG"
+    # ANTES esto marcaba HECHA la tarea fallida ("no reintentar en loop"). Con corridas de
+    # 11 h y runners RESUMIBLES eso es lo peor posible: un cuelgue a la hora 6 se registraba
+    # como terminada, nadie la retomaba, y el experimento moria a medias en verde.
+    # Ahora reintenta hasta MAX_INTENTOS: cada relanzada retoma donde quedo (result.json se
+    # escribe tras CADA par). Recien al 3er fallo se rinde, para no quedar en loop infinito
+    # si lo que falla es el script y no la maquina.
+    N=$(grep -cxF "$etiqueta" logs/cola_intentos.txt 2>/dev/null || echo 0)
+    echo "$etiqueta" >> logs/cola_intentos.txt
+    if [ "$((N+1))" -ge "${MAX_INTENTOS:-3}" ]; then
+      echo "$etiqueta" >> "$HECHAS"
+      echo "$(date '+%F %T')  FALLO DEFINITIVO $etiqueta tras $((N+1)) intentos (ver logs/cola_$etiqueta.log)" >> "$LOG"
+    else
+      echo "$(date '+%F %T')  FALLO $etiqueta intento $((N+1)), se reintenta (ver logs/cola_$etiqueta.log)" >> "$LOG"
+    fi
   fi
   exit 0
 done < scripts/cola.txt
