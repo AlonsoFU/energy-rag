@@ -1562,3 +1562,41 @@ fue el parser perdiendo 562 artículos sin que ninguna medición se moviera.
    plazo con su articulo" -- ⚠️ prompt enfatico ya fallo antes en este proyecto
 3. subir max_tokens: puede ser que simplemente no le alcance
 ```
+
+---
+
+## 14. El pareado de `think` que no midió `think` (2026-09-03)
+
+**Qué pasó.** El plan v7 encoló `scripts/exp_selfcons_n1` para decidir `ollama_think`. Ese
+script togglea `self_consistency_n` (1 vs 3). Corrió ~6 h de GPU y devolvió una repetición del
+exp #54, no una medición de `think`.
+
+```
+lo que devolvio     cita_ok 66 -> 66    cita_limpia 27 -> 35     n=1 vs n=3
+lo que se pedia     think=False vs think=True
+```
+
+**Por qué no se cazó antes.** El nombre de la corrida (`think_paired`) y el nombre del script
+(`exp_selfcons_n1`) no coinciden, y nadie los comparó: el `NAME` lo puse yo en la línea del
+plan. La evidencia quedó guardada como
+`data/eval/results/selfcons_n1_repetido_mal_etiquetado` — es válida, sólo estaba mal rotulada.
+
+**Regla que sale de acá:** el script tiene que *imprimir qué variable togglea* en su primera
+línea de salida. `exp_think_paired` arranca con
+`OFF(think=False, actual) / ON(think=True)` y el resumen repite `OFF=think:False ON=think:True`
+en cada bloque parcial. Si el log no dice qué se está midiendo, el log no sirve de evidencia.
+
+**El pareado correcto** — `scripts/exp_think_paired.py`, plan v8:
+```
+dev       queries_operativas_v1  114q   50 coloquiales, 5 multihop, 5 temporal, 4 offcorpus
+held-out  queries_fraseos_v1      64q   fraseos naturales
+criterio  adoptar si  cita_ok cae <= 3  Y  cita_limpia NO cae     (fijado el 2026-09-01)
+costo     ~250 s/par medido en humo  ->  ~8 h dev + ~4.5 h held-out
+```
+Tres cosas que el script hace distinto y por qué:
+- **retrieval una sola vez por query**, compartido por los dos brazos: la intervención es de
+  generación, así que recuperar dos veces sólo agrega ruido y duplica el costo;
+- **`think_hybrid` apagado explícito**: muta `ollama_think` por intento (GEN12) y pisaría la
+  variable del experimento en el reintento, haciendo converger los dos brazos;
+- **`hold_offcorpus` puntúa el RECHAZO como acierto**: la acusación contra `think=True` (GEN8,
+  −16 golds) es que rechaza de más; contar esos 4 como fallo lo castigaría por acertar.

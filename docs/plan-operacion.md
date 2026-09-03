@@ -389,3 +389,18 @@ adoptar think=True si  cita_ok cae <= 3  Y  cita_limpia NO cae
 `cita_limpia` no puede caer: think=True existe justamente para que el modelo deje de rociar
 citas mientras delibera, así que si la precisión no sube o se mantiene, no está haciendo lo que
 promete.
+
+### ESTADO #63 (2026-09-03) — el pareado se encoló con el script equivocado, se rehizo
+
+`exp_selfcons_n1` togglea `self_consistency_n`, no `ollama_think`. Corrió ~6 h y devolvió una
+repetición del exp #54 (`cita_ok` 66→66, `cita_limpia` 27→35, que es n=1 vs n=3). La evidencia
+quedó guardada como `data/eval/results/selfcons_n1_repetido_mal_etiquetado`.
+
+El pareado real es `scripts/exp_think_paired.py` (plan v8), y va con **held-out** para no
+adoptar sobre un solo set:
+```
+dev       queries_operativas_v1  114q   corriendo desde 2026-09-03 18:35  (~8 h)
+held-out  queries_fraseos_v1      64q   encolado detras                   (~4.5 h)
+```
+El criterio de arriba **no se toca** y el script imprime el veredicto solo.
+Si dev y held-out discrepan, **NO se adopta**: manda el held-out.
