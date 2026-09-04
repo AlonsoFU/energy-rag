@@ -35,8 +35,13 @@ from src.pipelines.retrieve import SimpleRetriever
 
 MODEL = "ollama/qwen3:30b-a3b"
 SET = Path("data/eval/queries_tipos_v1.jsonl")
-OUT = Path("data/eval/results/tipos_pregunta.json")
-THINK = os.environ.get("THINK", "") == "1"      # exp #63: razonamiento en canal separado
+# NAME nombra la corrida. Existe porque el 04-09 se encolo una re-medicion con la config
+# adoptada y el script RESUMIO el archivo del 01-09: 12/12 ya estaban cacheados, termino en
+# 7 segundos, imprimio el resultado viejo y el runner lo marco OK. Un log verde sin haber
+# medido nada. Con NAME cada corrida escribe su propio archivo.
+NAME = os.environ.get("NAME", "tipos_pregunta")
+OUT = Path(f"data/eval/results/{NAME}.json")
+THINK = os.environ.get("THINK", "") == "1"      # exp #63: forzar think a mano (pre-adopcion)
 
 # Marcadores de que la respuesta NO cerró: quedó el monólogo de deliberación en vez del texto.
 # No es una lista de palabras prohibidas: son las muletillas con que el modelo razona EN INGLES
@@ -85,8 +90,15 @@ def main(limit=0):
                            top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
+    # Se imprime la config EFECTIVA, no la variable de entorno. Desde el 04-09 lo que manda
+    # es `answer_think` (adoptado, solo en la ruta de respuesta): el banner viejo decia
+    # "think=OFF" mientras la respuesta SI razonaba en canal separado.
     print(f"=== {len(rows)} preguntas · {len(set(r['tipo'] for r in rows))} tipos · "
-          f"think={'ON' if THINK else 'OFF'} ===\n", flush=True)
+          f"THINK_env={'ON' if THINK else 'OFF'} · "
+          f"answer_think={getattr(cfg.settings, 'answer_think', False)} · "
+          f"ollama_think={cfg.settings.ollama_think} · "
+          f"pendientes={sum(1 for r in rows if r['query'] not in prev)}/{len(rows)} ===\n",
+          flush=True)
     for i, q in enumerate(rows, 1):
         if q["query"] in prev:
             continue

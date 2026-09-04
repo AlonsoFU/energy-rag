@@ -1,8 +1,6 @@
-# PLAN MAESTRO v10 — cerrar el lazo de think y volver al mapa
+# PLAN MAESTRO v11 — re-medir los tipos con la config ADOPTADA (de verdad esta vez)
 #
-# v8 completo: think_real (ADOPTA), think_holdout (ADOPTA), dedup_refs (7100->6074), mapa_c.
-#
-# TANDA A — el diagnostico por tipos se corrio con think forzado a mano (exp #63 chico).
-# Ahora corre con la config ADOPTADA, que es distinta: answer_think solo en la ruta de
-# respuesta. Confirma que los 6 tipos que no cerraban siguen cerrando en produccion.
-tipos_v2|env PYTHONPATH=. venv/bin/python -m scripts.exp_tipos_pregunta
+# v10 fallo en silencio: `tipos_v2` resumio el archivo del 01-09, termino en 7 s, imprimio el
+# resultado viejo (6/12, think=OFF) y el runner lo marco OK. Ahora cada corrida usa su propio
+# NAME y el banner imprime la config EFECTIVA.
+tipos_adoptado|env PYTHONPATH=. NAME=tipos_adoptado venv/bin/python -m scripts.exp_tipos_pregunta

@@ -25,7 +25,11 @@ if ps -eo args | grep -E '^[^ ]*python' | grep -qE 'scripts\.|exp_'; then exit 0
 docker start energy_rag_pg > /dev/null 2>&1
 
 PEND=$(grep -v '^#' scripts/plan_maestro.txt | grep -c .)
-HECHAS=$(sort -u logs/cola_hechas.txt 2>/dev/null | grep -c . || echo 0)
+# `grep -c` con cero coincidencias IMPRIME 0 y ademas SALE 1, asi que el `|| echo 0`
+# agregaba un segundo cero: HECHAS quedaba en "0\n0" y el `-ge` moria con
+# "se esperaba una expresion entera". Con la cola vacia el watchdog no comparaba nada.
+HECHAS=$(sort -u logs/cola_hechas.txt 2>/dev/null | grep -c . || true)
+HECHAS=${HECHAS:-0}
 
 if [ "$HECHAS" -ge "$PEND" ]; then
   # PLAN AGOTADO NO ES EXITO. Es la maquina parada esperando que yo escriba el proximo plan,
