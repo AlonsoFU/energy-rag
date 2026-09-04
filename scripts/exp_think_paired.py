@@ -112,12 +112,24 @@ def resumen(rows, parcial=False):
     if not parcial:
         # VEREDICTO automatico contra el criterio escrito ANTES de correr. Se imprime aca para
         # que no quede a interpretacion mia despues de ver el numero.
+        # El criterio depende de QUE se esta midiendo, y esta fijado en
+        # docs/plan-operacion.md ANTES de correr. Si el veredicto se imprimiera siempre con la
+        # regla del exp #63, una corrida de #64 diria "NO ADOPTAR" por un criterio que no es
+        # el suyo -- y ya perdimos 6 h una vez por leer un log que medía otra cosa.
+        #   #63 answer_think        cita_ok <= 3  Y  cita_limpia NO cae
+        #   #64 self_consistency_n  cita_ok <= 3  Y  cita_limpia cae <= 2  (compra 3x de
+        #       velocidad sobre el bloqueante declarado, no un punto de precision)
+        # OJO: en #64 el brazo OFF es n=1, o sea ADOPTAR = quedarse con el brazo OFF.
+        tope_limpia = 2 if VAR == "self_consistency_n" else 0
         cae_ok = ok_off - ok_on
         cae_limpia = li_off - li_on
-        adoptar = (cae_ok <= 3) and (cae_limpia <= 0)
-        print(f"\n  CRITERIO: cita_ok cae <= 3  Y  cita_limpia NO cae", flush=True)
+        if VAR == "self_consistency_n":
+            cae_ok, cae_limpia = -cae_ok, -cae_limpia   # se evalua la caida DE n=1 (OFF)
+        adoptar = (cae_ok <= 3) and (cae_limpia <= tope_limpia)
+        print(f"\n  CRITERIO ({VAR}): cita_ok cae <= 3  Y  cita_limpia cae <= {tope_limpia}", flush=True)
         print(f"  cita_ok cae {cae_ok}   cita_limpia cae {cae_limpia}", flush=True)
-        print(f"  => {'ADOPTAR think=True' if adoptar else 'NO ADOPTAR'}", flush=True)
+        cual = "n=1 (brazo OFF)" if VAR == "self_consistency_n" else "answer_think=True (brazo ON)"
+        print(f"  => {'ADOPTAR ' + cual if adoptar else 'NO ADOPTAR ' + cual}", flush=True)
         for q in valid:
             if q["off"]["cita_ok"] and not q["on"]["cita_ok"]:
                 print(f"  PERDIO: [{q.get('category','?')}] {q['query'][:62]}", flush=True)
