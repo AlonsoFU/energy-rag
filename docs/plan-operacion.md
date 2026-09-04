@@ -475,3 +475,31 @@ Adoptarlos sería adoptar algo que no se midió.
 
 ⚠️ **Costo: mediana 140.8 s → 208.7 s (+48 %)** en dev, 153.4 → 253.7 en held-out, sobre la
 latencia que ya era el bloqueante (FASE 1.1, objetivo 45 s). Revertir = `answer_think=False`.
+
+## EXP #64 — ¿sigue haciendo falta `self_consistency_n=3` ahora que hay think? (criterio fijado 2026-09-04, ANTES de correr)
+
+`n=3` se adoptó en exp #54 por UN motivo: con `n=1` el modelo **rociaba** y `cita_limpia` caía
+12 (3.39 citas vs 2.42). El acierto subía (97 vs 95) y el tiempo bajaba de 103 s a 33 s, pero
+el criterio de entonces lo bloqueó por la precisión.
+
+**Think ataca el rociado por otra vía**, y más fuerte: `n_cits` 7.28 → 2.67 (exp #63, dev).
+Si el rociado ya está resuelto, `n=3` está pagando 3 generaciones por un problema que otro
+mecanismo arregla. Y la latencia es el bloqueante declarado del proyecto: FASE 1.1 apuntaba a
+45 s y hoy la mediana es 208.7 s, con casos de 494 s en el set de tipos.
+
+⚠️ **Exp #54 se midió con `think=False`**, o sea nadie midió `n=1` con think. No es repetir el
+experimento: es la misma palanca bajo una condición distinta.
+
+```
+OFF = self_consistency_n 1     ON = self_consistency_n 3 (actual)
+los dos brazos con answer_think=True (adoptado)
+dev = queries_operativas_v1 114q · held-out = queries_fraseos_v1 64q
+```
+
+**Criterio de adopción de `n=1`:**
+```
+adoptar n=1 si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
+```
+`cita_limpia` admite una caída de 2 acá (en exp #63 pedía cero) porque lo que se compra es
+**3x de velocidad sobre el bloqueante del proyecto**, no un punto de precisión. Si cae más que
+eso, think no está cubriendo lo que cubría `n=3` y se queda como está.

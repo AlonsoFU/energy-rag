@@ -1,6 +1,13 @@
-# PLAN MAESTRO v11 — re-medir los tipos con la config ADOPTADA (de verdad esta vez)
+# PLAN MAESTRO v12 — exp #64: ¿n=3 sigue haciendo falta con think adoptado?
 #
-# v10 fallo en silencio: `tipos_v2` resumio el archivo del 01-09, termino en 7 s, imprimio el
-# resultado viejo (6/12, think=OFF) y el runner lo marco OK. Ahora cada corrida usa su propio
-# NAME y el banner imprime la config EFECTIVA.
-tipos_adoptado|env PYTHONPATH=. NAME=tipos_adoptado venv/bin/python -m scripts.exp_tipos_pregunta
+# v11 cerro: tipos_adoptado 12/12 usable con la config adoptada (los 6 tipos que no cerraban,
+# cierran). Costo visible: casos de 337-494 s.
+#
+# Criterio FIJADO ANTES de correr en docs/plan-operacion.md (exp #64):
+#   adoptar n=1 si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
+#
+# TANDA A — dev. OFF = n=1 (rapido), ON = n=3 (actual). Los dos con answer_think=True.
+n1_dev|env PYTHONPATH=. VAR=self_consistency_n SET=data/eval/queries_operativas_v1.jsonl NAME=n1_dev venv/bin/python -m scripts.exp_think_paired
+#
+# TANDA B — held-out, mismo cambio, para cazar overfit.
+n1_holdout|env PYTHONPATH=. VAR=self_consistency_n SET=data/eval/queries_fraseos_v1.jsonl NAME=n1_holdout venv/bin/python -m scripts.exp_think_paired

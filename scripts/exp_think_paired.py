@@ -42,6 +42,8 @@ from scripts.eval_metrics import score_answer
 MODEL = "ollama/qwen3:30b-a3b"
 SET = Path(os.environ.get("SET", "data/eval/queries_operativas_v1.jsonl"))
 NAME = os.environ.get("NAME", "think_paired")
+# Que variable se togglea. OFF = valor bajo/apagado, ON = valor alto/prendido.
+VAR = os.environ.get("VAR", "answer_think")
 LIMIT = int(os.environ.get("LIMIT", "0"))
 OUTDIR = Path(f"data/eval/results/{NAME}")
 
@@ -86,7 +88,7 @@ def resumen(rows, parcial=False):
     lost = sum(1 for q in valid if q["off"]["cita_ok"] and not q["on"]["cita_ok"])
     p = _mcnemar_p(lost, won)
     tag = "PARCIAL" if parcial else "FINAL"
-    print(f"\n=== {NAME} [{tag}] — {n} pares validos   OFF=think:False  ON=think:True ===", flush=True)
+    print(f"\n=== {NAME} [{tag}] — {n} pares validos   VAR={VAR}  OFF=bajo / ON=alto ===", flush=True)
     print(f"  cita_ok      OFF {ok_off}/{n}  ->  ON {ok_on}/{n}   [gano {won}, perdio {lost}]  "
           f"McNemar p={p:.4f}  ({'SIGNIFICATIVO' if p < 0.05 else 'ruido/flat'})", flush=True)
     print(f"  cita_limpia  OFF {li_off}/{n}  ->  ON {li_on}/{n}", flush=True)
@@ -149,6 +151,7 @@ def main():
     cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True
     cfg.settings.ambiguity_disclose = True; cfg.settings.filtrar_fuera_dominio = True
     cfg.settings.self_consistency_n = 3
+    cfg.settings.answer_think = True
     # think_hybrid MUTA `ollama_think` por intento (GEN12). Si quedara prendido pisaria la
     # variable del experimento en el reintento y los dos brazos convergerian. Se midio y se
     # descarto (exp #36: 260->250, p=0.0063 NEGATIVO), pero se apaga explicito.
@@ -160,8 +163,14 @@ def main():
     retr = SimpleRetriever(store, e, r, top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
-    def arm(qtext, docs, gs, think, q_row):
-        cfg.settings.ollama_think = think
+    def arm(qtext, docs, gs, val, q_row):
+        # VAR elige QUE se togglea. Existe porque el 03-09 se encolo `exp_selfcons_n1` para
+        # decidir `think` y ese script togglea `self_consistency_n`: 6 h de GPU midiendo otra
+        # cosa. Un solo script, la variable explicita, y el banner la imprime.
+        if VAR == "self_consistency_n":
+            cfg.settings.self_consistency_n = 3 if val else 1
+        else:
+            cfg.settings.answer_think = val
         for _ in (1, 2, 3):
             try:
                 t0 = time.time()
@@ -173,14 +182,14 @@ def main():
                 s.update(secs=round(time.time() - t0, 1), text=txt)
                 return s, False
             except Exception as ex:
-                print(f"    ! fail '{qtext[:30]}' think={think} {type(ex).__name__}: {ex}", flush=True)
+                print(f"    ! fail '{qtext[:30]}' {VAR}={val} {type(ex).__name__}: {ex}", flush=True)
                 time.sleep(3)
         return {"cita_ok": False, "cita_limpia": False, "precision": 0.0, "n_uniq": 0,
                 "n_cits": 0, "refuso": False, "secs": 0.0, "text": ""}, True
 
     pend = [q for q in rows if q["query"] not in prev]
     print(f"=== {NAME}: {len(rows)} queries ({len(pend)} pendientes)  "
-          f"OFF(think=False, actual) / ON(think=True) ===", flush=True)
+          f"togglea VAR={VAR}  OFF=bajo / ON=alto ===", flush=True)
     nq = 0
     for i, q in enumerate(rows):
         if q["query"] in prev:
@@ -197,7 +206,6 @@ def main():
             print(f"  pares nuevos={nq}  [{i+1}/{len(rows)}]", flush=True)
             resumen(rows, parcial=True)
     rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
-    cfg.settings.ollama_think = False
     resumen(rows)
 
 
