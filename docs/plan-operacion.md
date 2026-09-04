@@ -443,3 +443,35 @@ perdidos sólo 1 fue por rechazo — no es el mecanismo de GEN8.
 ⚠️ **NO adoptado todavía.** Falta el held-out (`queries_fraseos_v1`, 64q). Y el costo es real:
 **+48 % sobre una mediana que ya era el bloqueante del proyecto** (FASE 1.1, objetivo 45 s).
 Adoptar es cambiar velocidad por precisión de cita, y esa es decisión del usuario.
+
+### ADOPTADO #63 (2026-09-04) — `answer_think=True`, held-out confirmado
+
+```
+              cita_ok              cita_limpia
+dev      62/114 -> 60/114 (-2)   27/114 -> 46/114 (+19)  McNemar p=0.00002
+held-out  62/64 ->  61/64 (-1)    35/64 ->  47/64 (+12)  McNemar p=0.01690
+```
+Los dos pasan el criterio fijado el 01-09. **El antecedente de GEN8 (−16 golds por rechazar)
+no se reprodujo**: `refuso` 0.08 → 0.11 en dev, 0.02 → 0.02 en held-out.
+
+**Los 5 golds perdidos en `cx_coloquial` eran aciertos de rebote.** Mirando cada uno:
+```
+off: 11 citas prec=0.14 limpia=False  ->  on: 0 citas (rechazo)
+off: 18 citas prec=0.11 limpia=False  ->  on: 3 citas
+off: 10 citas prec=0.14 limpia=False  ->  on: 3 citas
+off: 18 citas prec=0.33 limpia=False  ->  on: 3 citas
+off: 14 citas prec=0.12 limpia=False  ->  on: 3 citas
+```
+Los cinco tenían `cita_limpia=False` en el brazo OFF: el gold estaba **enterrado entre 10 y 18
+citas** con precisión 0.11-0.33. Es un acierto que ningún abogado podría usar, y es exactamente
+lo que `cita_limpia` se inventó para no premiar. En el mismo frente `cita_limpia` sube 7 → 12.
+
+**Se adoptó como `answer_think`, NO como default global de `ollama_think`.** En `llm.py` el flag
+también pisa el `max_tokens` del que llama (`num_predict=6000` cuando think=True), así que un
+default global se llevaría puesto a `contextual.enrich` (150 tokens, 3318 chunks → días),
+`infer_legal_concept` (40), `hyde` (300), `step_back` (100). **Ninguno de esos entró al
+pareado**: el retrieval se ejecutó antes de togglear el flag, con think=False en los dos brazos.
+Adoptarlos sería adoptar algo que no se midió.
+
+⚠️ **Costo: mediana 140.8 s → 208.7 s (+48 %)** en dev, 153.4 → 253.7 en held-out, sobre la
+latencia que ya era el bloqueante (FASE 1.1, objetivo 45 s). Revertir = `answer_think=False`.

@@ -1,18 +1,8 @@
-# PLAN MAESTRO v8 — decidir think=True con el pareado CORRECTO (exp #63)
+# PLAN MAESTRO v10 — cerrar el lazo de think y volver al mapa
 #
-# v7 encoló `exp_selfcons_n1` para esto y ese script togglea `self_consistency_n`, NO
-# `ollama_think`: corrió ~6 h y devolvió una repetición del exp #54. El resultado quedó
-# guardado en data/eval/results/selfcons_n1_repetido_mal_etiquetado (no borrarlo, es evidencia
-# válida de n=1 vs n=3, solo estaba mal rotulado). El script correcto es exp_think_paired.
+# v8 completo: think_real (ADOPTA), think_holdout (ADOPTA), dedup_refs (7100->6074), mapa_c.
 #
-# TANDA A — el pareado que decide. 114q x 2 brazos x ~250 s/par ≈ 8 h. Resumible.
-think_real|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl NAME=think_real venv/bin/python -m scripts.exp_think_paired
-#
-# TANDA B — held-out del MISMO cambio, para cazar overfit al set operativo.
-# Son fraseos naturales (64q); si think gana en A y pierde en B, no se adopta.
-think_holdout|env PYTHONPATH=. SET=data/eval/queries_fraseos_v1.jsonl NAME=think_holdout venv/bin/python -m scripts.exp_think_paired
-#
-# TANDA C — grafo. VA DESPUES de los dos pareados a proposito: toca la DB y correrlo
-# en medio de un experimento cambiaria el corpus entre brazos.
-dedup_refs|env PYTHONPATH=. venv/bin/python -m scripts.dedup_referencias --aplicar
-mapa_c|env PYTHONPATH=. venv/bin/python -m scripts.mapa_obligaciones
+# TANDA A — el diagnostico por tipos se corrio con think forzado a mano (exp #63 chico).
+# Ahora corre con la config ADOPTADA, que es distinta: answer_think solo en la ruta de
+# respuesta. Confirma que los 6 tipos que no cerraban siguen cerrando en produccion.
+tipos_v2|env PYTHONPATH=. venv/bin/python -m scripts.exp_tipos_pregunta

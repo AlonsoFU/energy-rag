@@ -214,113 +214,124 @@ def generate_answer(
     used_model = model
     extra_instruction = ""
 
-    for attempt in range(max_retries + 1):
-        # On retry, widen the doc pool if caller provided a larger one.
-        if attempt == 0 and initial_top is not None and len(docs) > initial_top:
-            active_docs = docs[:initial_top]
-        else:
-            active_docs = docs
+    # try/finally: sin esto, una excepcion a mitad del bucle deja `ollama_think` en True
+    # y la PROXIMA query arranca con think prendido en llamadores de salida corta.
+    try:
+        for attempt in range(max_retries + 1):
+            # On retry, widen the doc pool if caller provided a larger one.
+            if attempt == 0 and initial_top is not None and len(docs) > initial_top:
+                active_docs = docs[:initial_top]
+            else:
+                active_docs = docs
 
-        # Context budget: drop tail docs until the prompt fits the LLM ctx.
-        # MUST be applied BEFORE building the schema — otherwise the JSON
-        # enum would force the model to cite docs the prompt no longer shows
-        # (the constrained sampler would deadlock or hallucinate).
-        budget = getattr(cfg.settings, "prompt_doc_char_budget", 0)
-        if budget and budget > 0:
-            from src.pipelines.prompts import fit_docs_to_budget
-            active_docs = fit_docs_to_budget(active_docs, budget)
+            # Context budget: drop tail docs until the prompt fits the LLM ctx.
+            # MUST be applied BEFORE building the schema — otherwise the JSON
+            # enum would force the model to cite docs the prompt no longer shows
+            # (the constrained sampler would deadlock or hallucinate).
+            budget = getattr(cfg.settings, "prompt_doc_char_budget", 0)
+            if budget and budget > 0:
+                from src.pipelines.prompts import fit_docs_to_budget
+                active_docs = fit_docs_to_budget(active_docs, budget)
 
-        # GEN10: recorta cuantos docs VE EL GENERADOR (el retrieval ya trajo top_k).
-        # Va DESPUES del budget para que el recorte sea el efectivo. Ver config.answer_doc_limit.
-        _dlim = getattr(cfg.settings, "answer_doc_limit", 0)
-        if _dlim and _dlim > 0:
-            active_docs = active_docs[:_dlim]
+            # GEN10: recorta cuantos docs VE EL GENERADOR (el retrieval ya trajo top_k).
+            # Va DESPUES del budget para que el recorte sea el efectivo. Ver config.answer_doc_limit.
+            _dlim = getattr(cfg.settings, "answer_doc_limit", 0)
+            if _dlim and _dlim > 0:
+                active_docs = active_docs[:_dlim]
 
-        # GEN12 HÍBRIDO think (flag `think_hybrid`): 1er intento razonando en canal separado
-        # (respuesta corta y precisa), y si NO deja una cita utilizable se reintenta con el
-        # modo actual (razonamiento en el cuerpo), que es el que rescata los golds.
-        # Evidencia: think=True da precisión 0.66 vs 0.58 y +40 respuestas con TODAS las citas
-        # correctas, pero pierde 16 golds — casi siempre por RECHAZAR o comprometerse mal.
-        # El reintento se dispara exactamente ahí. Ver `_accept_attempt` más abajo.
-        if getattr(cfg.settings, "think_hybrid", False):
-            cfg.settings.ollama_think = (attempt == 0)
+            # GEN12 HÍBRIDO think (flag `think_hybrid`): 1er intento razonando en canal separado
+            # (respuesta corta y precisa), y si NO deja una cita utilizable se reintenta con el
+            # modo actual (razonamiento en el cuerpo), que es el que rescata los golds.
+            # Evidencia: think=True da precisión 0.66 vs 0.58 y +40 respuestas con TODAS las citas
+            # correctas, pero pierde 16 golds — casi siempre por RECHAZAR o comprometerse mal.
+            # El reintento se dispara exactamente ahí. Ver `_accept_attempt` más abajo.
+            if getattr(cfg.settings, "think_hybrid", False):
+                cfg.settings.ollama_think = (attempt == 0)
+            elif getattr(cfg.settings, "answer_think", False):
+                # exp #63 ADOPTADO: el razonamiento va al campo `thinking` y `response` queda
+                # limpio. Se prende ACA y no en el default global porque el flag tambien pisa el
+                # num_predict del llamador (llm.py), y los llamadores de salida corta
+                # (contextual.enrich, hyde, infer_legal_concept) no entraron al pareado.
+                cfg.settings.ollama_think = True
 
-        prompt = build_answer_prompt(query, active_docs) + extra_instruction
-        response_format: dict | None = None
-        # Hybrid pattern (default): skip JSON-schema constrained decoding —
-        # Ollama deadlocks on qwen3.5 (issues #15540, #15260). Generate plain;
-        # `verify_citations` below + the retry-on-fail loop with stricter
-        # `extra_instruction` enforces the legal guarantee (citations must
-        # appear verbatim from the retrieved pool). Industry-recommended
-        # pattern when constrained decoding isn't reliable in the runtime.
-        if cfg.settings.use_constrained_decoding and active_docs:
-            citations = extract_valid_citations(active_docs)
-            if citations:
-                response_format = build_json_schema(citations)
+            prompt = build_answer_prompt(query, active_docs) + extra_instruction
+            response_format: dict | None = None
+            # Hybrid pattern (default): skip JSON-schema constrained decoding —
+            # Ollama deadlocks on qwen3.5 (issues #15540, #15260). Generate plain;
+            # `verify_citations` below + the retry-on-fail loop with stricter
+            # `extra_instruction` enforces the legal guarantee (citations must
+            # appear verbatim from the retrieved pool). Industry-recommended
+            # pattern when constrained decoding isn't reliable in the runtime.
+            if cfg.settings.use_constrained_decoding and active_docs:
+                citations = extract_valid_citations(active_docs)
+                if citations:
+                    response_format = build_json_schema(citations)
 
-        resp = llm.generate(
-            prompt, model=model, system=system,
-            temperature=0.0, max_tokens=2000,
-            response_format=response_format,
-        )
-        raw = _strip_think_block(resp.text)
-        # GEN2 self-consistency: solo en el PRIMER intento (los reintentos ya llevan
-        # `extra_instruction` correctiva y mezclarlos rompería la señal de consenso).
-        _scn = getattr(cfg.settings, "self_consistency_n", 0)
-        if _scn and _scn > 1 and attempt == 0:
-            _alt = _self_consistency(
-                query, active_docs, llm, model,
-                {"prompt": prompt, "model": model, "system": system,
-                 "max_tokens": 2000, "response_format": response_format}, _scn)
-            if _alt:
-                raw = _strip_think_block(_alt)
-        tokens_in += resp.tokens_in
-        tokens_out += resp.tokens_out
-        used_model = resp.model
+            resp = llm.generate(
+                prompt, model=model, system=system,
+                temperature=0.0, max_tokens=2000,
+                response_format=response_format,
+            )
+            raw = _strip_think_block(resp.text)
+            # GEN2 self-consistency: solo en el PRIMER intento (los reintentos ya llevan
+            # `extra_instruction` correctiva y mezclarlos rompería la señal de consenso).
+            _scn = getattr(cfg.settings, "self_consistency_n", 0)
+            if _scn and _scn > 1 and attempt == 0:
+                _alt = _self_consistency(
+                    query, active_docs, llm, model,
+                    {"prompt": prompt, "model": model, "system": system,
+                     "max_tokens": 2000, "response_format": response_format}, _scn)
+                if _alt:
+                    raw = _strip_think_block(_alt)
+            tokens_in += resp.tokens_in
+            tokens_out += resp.tokens_out
+            used_model = resp.model
 
-        if response_format:
-            try:
-                parsed = json.loads(raw)
-                response_text = _format_as_text(parsed)
-            except (json.JSONDecodeError, TypeError):
+            if response_format:
+                try:
+                    parsed = json.loads(raw)
+                    response_text = _format_as_text(parsed)
+                except (json.JSONDecodeError, TypeError):
+                    response_text = raw
+            else:
                 response_text = raw
-        else:
-            response_text = raw
 
-        # A valid refusal (LLM says "No encuentro esa información") is also a
-        # grounded response — it's the correct answer when docs don't contain
-        # the query's topic. Not a hallucination.
-        # HÍBRIDO: en el PRIMER intento (think=True) el rechazo NO se acepta —
-        # es justo el modo de falla que hace perder los 16 golds. Se deja caer al
-        # reintento con el modo actual. En los intentos siguientes vale como siempre.
-        _hib_1er = getattr(cfg.settings, "think_hybrid", False) and attempt == 0
-        if REFUSAL_TEXT.lower() in response_text.lower():
-            if _hib_1er and attempt < max_retries:
-                extra_instruction = ""      # sin reproche: el 2o intento es otro MODO, no un castigo
-                continue
-            grounding_pass = True
-            break
-        if verify_citations(response_text, active_docs):
-            grounding_pass = True
-            break
-        # In-pool verify failed. Try corpus fallback: cite may be a real
-        # article that retrieval just didn't surface in the top-k. Still
-        # strict-exact (no fuzzy) — only legitimizes citations whose
-        # (id_norma, articulo_numero) actually exist in the DB.
-        try:
-            from src.storage.connection import with_connection
-            with with_connection() as _conn:
-                if verify_citations_against_corpus(response_text, _conn):
-                    grounding_pass = True
-                    break
-        except Exception:
-            pass  # DB issues: stay strict, fall through to retry
-        extra_instruction = (
-            "\n\nIMPORTANTE: Tu respuesta anterior contenía citas inválidas. "
-            "Cita SOLO artículos provistos arriba, verbatim."
-        )
+            # A valid refusal (LLM says "No encuentro esa información") is also a
+            # grounded response — it's the correct answer when docs don't contain
+            # the query's topic. Not a hallucination.
+            # HÍBRIDO: en el PRIMER intento (think=True) el rechazo NO se acepta —
+            # es justo el modo de falla que hace perder los 16 golds. Se deja caer al
+            # reintento con el modo actual. En los intentos siguientes vale como siempre.
+            _hib_1er = getattr(cfg.settings, "think_hybrid", False) and attempt == 0
+            if REFUSAL_TEXT.lower() in response_text.lower():
+                if _hib_1er and attempt < max_retries:
+                    extra_instruction = ""      # sin reproche: el 2o intento es otro MODO, no un castigo
+                    continue
+                grounding_pass = True
+                break
+            if verify_citations(response_text, active_docs):
+                grounding_pass = True
+                break
+            # In-pool verify failed. Try corpus fallback: cite may be a real
+            # article that retrieval just didn't surface in the top-k. Still
+            # strict-exact (no fuzzy) — only legitimizes citations whose
+            # (id_norma, articulo_numero) actually exist in the DB.
+            try:
+                from src.storage.connection import with_connection
+                with with_connection() as _conn:
+                    if verify_citations_against_corpus(response_text, _conn):
+                        grounding_pass = True
+                        break
+            except Exception:
+                pass  # DB issues: stay strict, fall through to retry
+            extra_instruction = (
+                "\n\nIMPORTANTE: Tu respuesta anterior contenía citas inválidas. "
+                "Cita SOLO artículos provistos arriba, verbatim."
+            )
 
-    if getattr(cfg.settings, "think_hybrid", False):
+    finally:
+        # Se restaura SIEMPRE, no solo en el hibrido: `answer_think` tambien lo muta, y dejarlo
+        # prendido filtraria think=True a los llamadores de salida corta de la proxima query.
         cfg.settings.ollama_think = _think_orig
 
     # Clean up: drop bracket patterns the strict CITATION_PATTERN can't parse

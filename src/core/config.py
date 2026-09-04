@@ -109,16 +109,44 @@ class Settings(BaseSettings):
     # diagnostico completo (loop de deliberacion con think=False).
     ollama_num_predict: int = 2000
 
-    # GEN8 (flag OFF, en prueba): razonamiento en CANAL SEPARADO.
+    # GEN8 — ADOPTADO 2026-09-04 (exp #63): razonamiento en CANAL SEPARADO.
+    #
+    # Pareado en dev (queries_operativas_v1, 114q) Y held-out (queries_fraseos_v1, 64q), con
+    # el criterio fijado ANTES de correr: adoptar si cita_ok cae <= 3 Y cita_limpia NO cae.
+    #                cita_ok            cita_limpia
+    #   dev      62 -> 60  (-2)     27 -> 46  (+19)  McNemar p=0.00002
+    #   held-out 62 -> 61  (-1)     35 -> 47  (+12)  McNemar p=0.01690
+    # No cambia SI acierta (el retrieval es compartido y es el que decide si el gold esta
+    # disponible); cambia COMO responde: n_cits 7.28 -> 2.67, precision 0.24 -> 0.31 en dev.
+    # ⚠️ COSTO: mediana 140.8 s -> 208.7 s, +48 %, sobre la latencia que ya era el bloqueante
+    # del proyecto (FASE 1.1, objetivo 45 s). Revertir = poner False aca, nada mas.
+    # ⚠️ La perdida esta TODA en cx_coloquial (22/50 -> 18/50): en preguntas vagas antes le
+    # achuntaba de rebote rociando 7.3 citas. Solo 1 de los 4 perdidos fue por rechazar, asi
+    # que NO es el mecanismo que predecia GEN8.
+    #
     # Con think=False el modelo qwen3 razona DENTRO del cuerpo de la respuesta -> loop de
     # deliberacion ("pero necesito verificar si...") que (a) dispara 13.1 citas por respuesta
     # (precision 0.43) y (b) termina en RECHAZO aunque el gold sea el documento #1 (medido:
     # 6 fallas con rank_gold=0). El prompt YA pide respuesta corta y lo ignora, porque no
     # tiene otro lugar donde pensar. Con think=True ollama devuelve el razonamiento en el
     # campo `thinking` y deja `response` limpio.
-    # ⚠️ think=False se puso por VELOCIDAD (enriquecer 3318 chunks tardaria dias). Si esto
-    # se adopta, dejarlo ON solo en la ruta de RESPUESTA, no en la de indexado.
+    # ⚠️ ESTE flag es el GLOBAL y queda en False A PROPOSITO. Lo adoptado es `answer_think`,
+    # que lo prende SOLO dentro de generate_answer. Motivo: mas abajo en llm.py el flag
+    # tambien PISA el `max_tokens` del que llama (num_predict = 6000 cuando think=True), asi
+    # que un default global a True se llevaria puesto a todos los llamadores de salida corta
+    # que no tienen nada que ver con la respuesta:
+    #     contextual.enrich       max_tokens=150   3318 chunks -> dias (el motivo original)
+    #     infer_legal_concept     max_tokens=40
+    #     hyde / multi_query      max_tokens=300 / 200
+    #     step_back / sel_reform  max_tokens=100 / 60
+    # Ninguno de esos entro al pareado del exp #63: el retrieval se ejecuto ANTES de togglear
+    # el flag, o sea con think=False en los dos brazos. Prenderlos aqui seria adoptar algo
+    # que NO se midio.
     ollama_think: bool = False
+
+    # ADOPTADO 2026-09-04 (exp #63). Razonamiento en canal separado SOLO en la ruta de
+    # respuesta -- que es exactamente lo que se midio. Revertir = poner False aca.
+    answer_think: bool = True
 
     # Tope de salida CUANDO think=True. El razonamiento consume del MISMO presupuesto
     # que la respuesta, asi que 2000 no alcanza: medido en "que es Plan de obra de
