@@ -404,3 +404,42 @@ held-out  queries_fraseos_v1      64q   encolado detras                   (~4.5 
 ```
 El criterio de arriba **no se toca** y el script imprime el veredicto solo.
 Si dev y held-out discrepan, **NO se adopta**: manda el held-out.
+
+### RESULTADO #63 DEV (2026-09-04 06:26) — `think_real`, 114 pares: **pasa el criterio**
+
+```
+cita_ok      OFF 62/114 -> ON 60/114   gano 3, perdio 5   McNemar p=0.72656  (plano)
+cita_limpia  OFF 27/114 -> ON 46/114   gano 20, perdio 1  McNemar p=0.00002  SIGNIFICATIVO
+
+criterio: cita_ok cae <= 3 (cae 2)  Y  cita_limpia NO cae (sube 19)  => ADOPTAR
+```
+
+**El antecedente de GEN8 no se reprodujo.** Decía −16 golds por rechazar; acá son −2 netos y
+`refuso` casi no se movió (0.08 → 0.11). GEN8 se midió sobre `queries_balanced_v2_clean`, que
+es casi todo `rule-recall`, y sin la config adoptada desde entonces (glosario, gate, n=3).
+
+Lo que think cambia de verdad no es SI acierta, es CÓMO responde:
+```
+n_cits      7.28 -> 2.67    deja de rociar citas mientras delibera
+precision   0.24 -> 0.31
+secs      140.81 -> 208.72  +48 %
+```
+Durante los primeros 30 pares el patrón de `cita_ok` fue **idéntico query por query** en los
+dos brazos, con los textos distintos en 27 de 30. Tiene sentido: el retrieval es compartido
+entre brazos, y es el retrieval el que decide si el gold está disponible. Think opera después.
+
+**La pérdida está toda en un frente:**
+```
+cx_coloquial   22/50 -> 18/50   -4
+cx_crossnorma   3/5  ->  4/5    +1
+hold_complex    5/9  ->  6/9    +1
+hold_def        7/9  ->  7/9     0   <- el tipo que GEN8 decia que se rompia
+hold_offcorpus  4/4  ->  4/4     0
+resto (7 tipos)                  0
+```
+En coloquiales vagas, con 7.3 citas le achuntaba **de rebote**. Con 2.7 ya no. De los 4
+perdidos sólo 1 fue por rechazo — no es el mecanismo de GEN8.
+
+⚠️ **NO adoptado todavía.** Falta el held-out (`queries_fraseos_v1`, 64q). Y el costo es real:
+**+48 % sobre una mediana que ya era el bloqueante del proyecto** (FASE 1.1, objetivo 45 s).
+Adoptar es cambiar velocidad por precisión de cita, y esa es decisión del usuario.
