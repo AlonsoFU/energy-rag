@@ -1,9 +1,10 @@
-# PLAN MAESTRO v15 — ¿los fallos son de retrieval o de generacion?
+# PLAN MAESTRO v16 — ¿el gold no esta en el pool, o esta y el rerank lo hunde?
 #
-# Con la config adoptada el set operativo queda en 64/114 cita_ok y 45/114 cita_limpia, y el
-# grueso esta en UN frente: cx_coloquial, 50 de las 114 queries, 11/50 usables. Nunca se midio
-# en cual de las dos mitades del sistema esta el problema, y las soluciones no se parecen:
-#   gold NO llega al pool   -> RETRIEVAL. Generar mejor no lo arregla.
-#   gold llega y no se cita -> GENERACION. Mas recall no lo arregla.
-# Solo retrieval, ~2 s por query: cruza el pool con las respuestas YA generadas del pareado.
-donde_falla|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+# donde_falla (v15) dio: de 50 fallos, 84% son de RETRIEVAL -- el gold no llega al top-10.
+# Eso parte en dos, y las soluciones no se parecen:
+#   esta en el pool de 50 y no en el top-10  -> es el RERANK. Barato de arreglar.
+#   no esta ni en los 50                     -> es la GENERACION DE CANDIDATOS (embedding,
+#                                               BM25, aliases). Caro, y es otro frente.
+# Misma corrida, TOPK=50 (la profundidad del pool antes del rerank). La diferencia entre las
+# dos tablas ES la respuesta.
+donde_falla50|env PYTHONPATH=. TOPK=50 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla

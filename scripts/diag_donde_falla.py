@@ -28,7 +28,9 @@ from src.core import config as cfg
 SET = Path(os.environ.get("SET", "data/eval/queries_operativas_v1.jsonl"))
 RES = Path(os.environ.get("RES", "data/eval/results/def_dev/result.json"))
 TOPK = int(os.environ.get("TOPK", "10"))
-OUT = Path("data/eval/results/donde_falla.json")
+# El archivo lleva el TOPK en el nombre: la corrida con TOPK=50 no debe pisar la de 10, la
+# comparacion entre las dos ES el resultado.
+OUT = Path(f"data/eval/results/donde_falla_top{TOPK}.json")
 
 
 def golds(q):

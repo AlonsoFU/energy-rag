@@ -599,3 +599,48 @@ ajustarlo sobre las mismas 114 es exactamente el sesgo que ya costó caro. Queda
 **Las cuatro palancas de software están medidas y cerradas.** La mediana queda en ~208 s con
 `answer_think` adoptado, contra el objetivo de 45 s de FASE 1.1. Lo que queda es hardware
 (RAM 14 GB → 32 GB reabre vLLM) o cambiar de modelo — ninguna de las dos la puedo decidir yo.
+
+## HALLAZGO (2026-09-05) — el 84 % de los fallos es de RETRIEVAL, no de generación
+
+`scripts/diag_donde_falla.py` cruza el pool recuperado con las respuestas ya generadas del
+pareado. Config adoptada, `queries_operativas_v1`, top_k=10:
+
+```
+categoria         ACIERTA  RETRIEVAL  GENERACION
+  cx_coloquial         21         24           5
+  cx_negacion           6          4           0
+  hold_complex          5          3           1
+  cx_adyacente          3          2           2
+  hold_ambiguo          0          2           0
+  cx_multihop           3          2           0
+  hold_def              7          2           0
+  cx_crossnorma         4          1           0
+  cx_cuantitativo       4          1           0
+  cx_temporal           4          1           0
+  cx_distractor         3          0           0
+  hold_offcorpus        4          0           0
+  TOTAL                64         42           8
+
+De los 50 fallos: 84 % retrieval, 16 % generacion
+fallos de GENERACION con el gold en rank 0: 1 de 8   mediana de rank 6
+```
+
+**El gold no llega al pool en 42 de los 50 fallos.** Generar mejor no puede arreglar eso. Y de
+los 8 que sí son de generación, **sólo 1 tenía el gold en rank 0** (mediana de rank 6): buena
+parte de ese 16 % también es un problema de ORDEN, no de que el modelo ignore lo que ve.
+
+⚠️ **Esto reencuadra el trabajo de los últimos meses.** `think` (#63), `self_consistency`
+(#54, #64, #65), prompts, decoding constreñido: todo eso opera sobre el **16 %**. Los
+experimentos siguen siendo válidos —`cita_limpia` subió 19 puntos con think— pero el techo de
+`cita_ok` no está en la generación.
+
+En `cx_coloquial`, que son 50 de las 114 queries, **24 de sus 29 fallos son de retrieval**.
+
+**Lo que sigue (exp #66, corriendo):** partir ese 84 % en dos con la misma corrida a TOPK=50,
+que es la profundidad del pool antes del rerank.
+```
+esta en los 50 y no en el top-10  -> es el RERANK. Barato.
+no esta ni en los 50              -> es la GENERACION DE CANDIDATOS (embedding, BM25,
+                                     aliases). Caro, y es otro frente.
+```
+La diferencia entre las dos tablas es la respuesta.
