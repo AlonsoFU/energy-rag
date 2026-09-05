@@ -1,10 +1,12 @@
-# PLAN MAESTRO v16 — ¿el gold no esta en el pool, o esta y el rerank lo hunde?
+# PLAN MAESTRO v17 — ¿el gold es ALCANZABLE, o no lo es a ninguna profundidad?
 #
-# donde_falla (v15) dio: de 50 fallos, 84% son de RETRIEVAL -- el gold no llega al top-10.
-# Eso parte en dos, y las soluciones no se parecen:
-#   esta en el pool de 50 y no en el top-10  -> es el RERANK. Barato de arreglar.
-#   no esta ni en los 50                     -> es la GENERACION DE CANDIDATOS (embedding,
-#                                               BM25, aliases). Caro, y es otro frente.
-# Misma corrida, TOPK=50 (la profundidad del pool antes del rerank). La diferencia entre las
-# dos tablas ES la respuesta.
-donde_falla50|env PYTHONPATH=. TOPK=50 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+# v16 dio el corte: de 50 fallos, 8 son de RERANK (el gold esta en los 50 y no llega al top-10)
+# y 34 son de CANDIDATOS (el gold no esta ni en los 50). Un reranker perfecto compra 8 queries.
+#
+# Esta corrida sube el POOL de 50 a 300 y devuelve TOPK=300, o sea pregunta lo maximo posible:
+#   el gold aparece a POOL=300   -> es RANKING. Existe, esta mal ordenado, hay margen.
+#   no aparece ni a POOL=300     -> los generadores de candidatos (embedding + BM25 + aliases)
+#                                   NO lo alcanzan. Ahi no sirve rankear mejor: hay que cambiar
+#                                   como se generan candidatos (doc2query, aliases, otro embed).
+# Solo retrieval, no genera nada.
+alcanzable|env PYTHONPATH=. POOL=300 TOPK=300 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla

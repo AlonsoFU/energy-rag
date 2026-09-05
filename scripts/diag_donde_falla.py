@@ -28,9 +28,15 @@ from src.core import config as cfg
 SET = Path(os.environ.get("SET", "data/eval/queries_operativas_v1.jsonl"))
 RES = Path(os.environ.get("RES", "data/eval/results/def_dev/result.json"))
 TOPK = int(os.environ.get("TOPK", "10"))
+# POOL = cuantos candidatos junta BM25/vector ANTES del rerank (config.retrieval_pool_depth).
+# TOPK recorta DESPUES del rerank. Son dos preguntas distintas y hay que poder moverlas por
+# separado: con POOL=50/TOPK=10 vs POOL=50/TOPK=50 se midio cuanto hunde el rerank (8 queries);
+# subir POOL dice si el gold es ALCANZABLE por los generadores de candidatos o directamente no
+# lo es a ninguna profundidad.
+POOL = int(os.environ.get("POOL", "0"))
 # El archivo lleva el TOPK en el nombre: la corrida con TOPK=50 no debe pisar la de 10, la
 # comparacion entre las dos ES el resultado.
-OUT = Path(f"data/eval/results/donde_falla_top{TOPK}.json")
+OUT = Path(f"data/eval/results/donde_falla_top{TOPK}_pool{POOL or 50}.json")
 
 
 def golds(q):
@@ -67,6 +73,8 @@ def main():
                 prev[c["query"]] = c["on"]
 
     llm = get_llm_provider()
+    if POOL:
+        cfg.settings.retrieval_pool_depth = POOL
     cfg.settings.embed_4b_dense = True; cfg.settings.embed_4b_dim = 1024
     cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
     cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True
