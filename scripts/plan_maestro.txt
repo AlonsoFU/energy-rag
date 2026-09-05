@@ -1,12 +1,14 @@
-# PLAN MAESTRO v13 — exp #65: n=3 solo en definiciones
+# PLAN MAESTRO v14 — sin trabajo autonomo pendiente
 #
-# v12 cerro: #64 NO ADOPTA n=1 (cita_limpia cae 6, toleraba 2). Held-out no se corrio: dev ya
-# habia fallado y el criterio pedia los dos. Hallazgo: con think, el aporte de n=3 NO es
-# anti-rociado (n_cits 2.95 vs 2.82) sino consenso de cita, concentrado en definiciones.
+# Cerrado con medicion: #63 (think ADOPTADO), #64 (n=1 NO), #65 (n=3 solo definiciones NO),
+# dedup_refs, tipos_adoptado 12/12, mapa_c.
 #
-# Criterio FIJADO ANTES en docs/plan-operacion.md (exp #65):
-#   adoptar si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
+# Las cuatro palancas de software para la latencia estan medidas y cerradas (#55 #56 #64 #65).
+# Lo que queda necesita al usuario:
+#   - 20-40 preguntas reales con modismos  (todo el eval lo escribi yo: ese sesgo ya escondio
+#     que 6 de 12 tipos no cerraban con cita_ok marcando 87.5 %)
+#   - B5.4: mapear los 270 procesos a los reales de la subgerencia
+#   - RAM 14 GB -> 32 GB, que reabre vLLM
 #
-# OFF = la propuesta (n=3 solo si is_definition)   ON = la config actual (n=3 siempre)
-def_dev|env PYTHONPATH=. VAR=selfcons_solo_definicion SET=data/eval/queries_operativas_v1.jsonl NAME=def_dev venv/bin/python -m scripts.exp_think_paired
-def_holdout|env PYTHONPATH=. VAR=selfcons_solo_definicion SET=data/eval/queries_fraseos_v1.jsonl NAME=def_holdout venv/bin/python -m scripts.exp_think_paired
+# La cola queda VACIA a proposito. El watchdog va a informar PLAN AGOTADO cada 15 min con los
+# minutos ociosos acumulados: eso es correcto, no es una falla.

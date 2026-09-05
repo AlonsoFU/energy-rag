@@ -552,3 +552,50 @@ esta vez **no se paga con las definiciones**, que es donde #64 mostró que está
 ⚠️ Riesgo conocido: `is_definition` tiene recall 0.99 pero su precisión no se midió para ESTE
 uso. Un falso negativo baja esa query a `n=1`. Si el resultado queda al filo, hay que mirar
 cuántos de los perdidos eran definiciones mal clasificadas antes de culpar al mecanismo.
+
+### RESULTADO #65 (2026-09-05) — NO se adopta, y el culpable es el router, no la idea
+
+```
+cita_ok      propuesta 61/114 -> actual 64/114   cae 3  (toleraba 3)   adentro
+cita_limpia  propuesta 42/114 -> actual 45/114   cae 3  (toleraba 2)   FUERA por 1
+=> NO ADOPTAR
+secs         propuesta ~60 -> actual ~200        el 3x seguia en pie
+```
+Held-out no se corrió: dev falló y el criterio pedía los dos.
+
+**El gate ruteó 9 de 114 a `n=3`.** Y mirando QUÉ perdió la propuesta en `cita_limpia`:
+```
+[hold_def] gate_def=False  qué principios rigen la operación coordinada de la...
+[hold_def] gate_def=False  de dónde sale el presupuesto del coordinador y del...
+[hold_def] gate_def=False  cuál es el objeto del reglamento que regula califi...
+[hold_def] gate_def=False  cuál es el objeto del reglamento de acceso abierto...
+```
+**4 de las 7 pérdidas son `hold_def` que el gate clasificó como NO-definición.** El mecanismo
+hacía lo correcto donde acertaba el ruteo; falló donde el router mandó a `n=1` una definición.
+
+**Por qué falla el router, y por qué no es un bug.** `is_definition` tiene recall 0.99 **para su
+tarea**, que es decidir *si conviene inyectar un término del glosario*. Acá se le pidió otra
+cosa: *¿esta query se beneficia del consenso de 3 generaciones?* Son preguntas distintas, y
+"cuál es el objeto del reglamento de acceso abierto" es definicional en sustancia sin ser una
+consulta de glosario. Reusar un clasificador fuera de la tarea para la que se midió es el error,
+no el clasificador.
+
+⚠️ **El arreglo obvio no se puede hacer todavía.** Entrenar un clasificador para el objetivo
+correcto necesita etiquetas, y las hay: qué queries gana `n=3` sobre `n=1` (exp #64, por query).
+Pero son **6 positivos sobre 114**. Con eso no se entrena nada que sobreviva a un held-out, y
+ajustarlo sobre las mismas 114 es exactamente el sesgo que ya costó caro. Queda anotado en
+`docs/reglas-candidatas.md`, sin aplicar.
+
+---
+
+## Latencia: qué queda después de #65
+
+```
+#55  answer_doc_limit         mejor valor 125.9 s          CERRADO
+#56  3 generaciones paralelas 25.0 s vs 13.8 s secuencial  CERRADO
+#64  n=1 con think            cita_limpia cae 6            CERRADO
+#65  n=3 solo en definiciones cita_limpia cae 3            CERRADO
+```
+**Las cuatro palancas de software están medidas y cerradas.** La mediana queda en ~208 s con
+`answer_think` adoptado, contra el objetivo de 45 s de FASE 1.1. Lo que queda es hardware
+(RAM 14 GB → 32 GB reabre vLLM) o cambiar de modelo — ninguna de las dos la puedo decidir yo.
