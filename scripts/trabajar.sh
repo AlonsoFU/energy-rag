@@ -26,6 +26,10 @@ while :; do
   # worker corre, las tareas nuevas tienen que entrar. Estaba antes del bucle y las 3 ultimas
   # (desc_pdfs, desc_final, proc_final) quedaron fuera -- el runner informaba "cola VACIA"
   # con el plan en 17/20.
+  # Sincroniza ANTES de cada vuelta. Ojo con la ventana: el 05-09, entre que se mato una
+  # tarea y que se escribio el plan nuevo, esta linea alcanzo a copiar el plan VIEJO y el
+  # runner relanzo una tarea ya descartada. Al cambiar de plan hay que dejar `.watchdog_off`
+  # puesto mientras se edita, o sincronizar a mano despues.
   cp -f scripts/plan_maestro.txt scripts/cola.txt
   [ -f .watchdog_off ] && { echo "$(date '+%F %T')  PAUSA manual (.watchdog_off)" >> "$LOG"; exit 0; }
 
