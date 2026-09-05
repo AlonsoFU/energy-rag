@@ -148,6 +148,19 @@ class Settings(BaseSettings):
     # respuesta -- que es exactamente lo que se midio. Revertir = poner False aca.
     answer_think: bool = True
 
+    # exp #65 (flag OFF, en prueba): n=3 SOLO cuando la query pide una definicion.
+    # Sale de medir el #64: con think adoptado, n=1 cita 2.95 y n=3 cita 2.82 -- el rociado
+    # que justificaba n=3 en el exp #54 YA lo arregla think. Pero n=3 igual gana 6 de
+    # cita_limpia, y esa ganancia esta CONCENTRADA en definiciones:
+    #     hold_def +4 · cx_negacion +1 · cx_crossnorma +1 · cx_temporal +1 · cx_cuantitativo +1
+    #     cx_coloquial -1 · hold_complex -1
+    # O sea con think el aporte de n=3 ya no es anti-rociado: es elegir BIEN la cita por
+    # consenso, y donde eso pesa es en las definiciones.
+    # El clasificador es el `intent_gate` ya adoptado (logreg sobre el embedding, recall 0.99,
+    # medido fuera de muestra) -- no una lista de palabras.
+    # Si pasa: 3x de velocidad en todo lo que NO es definicion.
+    selfcons_solo_definicion: bool = False
+
     # Tope de salida CUANDO think=True. El razonamiento consume del MISMO presupuesto
     # que la respuesta, asi que 2000 no alcanza: medido en "que es Plan de obra de
     # generacion y transmision" -> thinking 8313 chars, done_reason=length, response=0

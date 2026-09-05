@@ -276,6 +276,14 @@ def generate_answer(
             # GEN2 self-consistency: solo en el PRIMER intento (los reintentos ya llevan
             # `extra_instruction` correctiva y mezclarlos rompería la señal de consenso).
             _scn = getattr(cfg.settings, "self_consistency_n", 0)
+            # exp #65: n=3 solo donde aporta (definiciones). Ver config.selfcons_solo_definicion.
+            if _scn > 1 and getattr(cfg.settings, "selfcons_solo_definicion", False):
+                try:
+                    from src.pipelines.intent_gate import is_definition
+                    if not is_definition(query):
+                        _scn = 1
+                except Exception:
+                    pass   # sin gate disponible se queda con n=3: el fallback es el seguro
             if _scn and _scn > 1 and attempt == 0:
                 _alt = _self_consistency(
                     query, active_docs, llm, model,

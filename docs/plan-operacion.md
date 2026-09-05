@@ -503,3 +503,52 @@ adoptar n=1 si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
 `cita_limpia` admite una caída de 2 acá (en exp #63 pedía cero) porque lo que se compra es
 **3x de velocidad sobre el bloqueante del proyecto**, no un punto de precisión. Si cae más que
 eso, think no está cubriendo lo que cubría `n=3` y se queda como está.
+
+### RESULTADO #64 (2026-09-05) — `n=1` NO se adopta, pero cambia el POR QUÉ de `n=3`
+
+```
+cita_ok      n=1 61/114 -> n=3 64/114   cae 3  (toleraba 3)   adentro
+cita_limpia  n=1 42/114 -> n=3 48/114   cae 6  (toleraba 2)   FUERA
+=> NO ADOPTAR n=1
+secs         n=1  67.42  ->  n=3 202.66     el 3x era real, pero se paga
+```
+**El held-out no se corrió**: el criterio pedía pasar en dev **Y** en held-out, y dev ya falló.
+Correrlo eran ~5 h de GPU para una decisión ya tomada.
+
+**La hipótesis de partida se confirmó, y aun así el cambio se rechaza.** `n=1` con think cita
+**2.95** y `n=3` cita **2.82**: el rociado que justificaba `n=3` en el exp #54 (3.39 vs 2.42)
+efectivamente ya lo arregla think. Pero `n=3` gana igual 6 de `cita_limpia`, o sea **aporta algo
+distinto de lo que decía su justificación original**.
+
+Dónde está esa ganancia, por categoría (flips netos a favor de `n=3`):
+```
+hold_def +4 · cx_negacion +1 · cx_crossnorma +1 · cx_temporal +1 · cx_cuantitativo +1
+cx_coloquial -1 · hold_complex -1
+```
+Con think, el aporte de `n=3` no es anti-rociado: es **elegir bien la cita por consenso**, y
+donde eso pesa es en las **definiciones**.
+
+---
+
+## EXP #65 — `n=3` solo donde aporta (criterio fijado 2026-09-05, ANTES de correr)
+
+Si la ganancia de `n=3` vive en las definiciones, pagar 3 generaciones en TODO el resto es
+gasto puro. El clasificador ya existe y está adoptado: `intent_gate.is_definition` (logreg
+sobre el embedding, recall 0.99, medido fuera de muestra). **No es una lista de palabras.**
+
+```
+OFF = n=3 solo si is_definition(query), n=1 en el resto   (la propuesta)
+ON  = n=3 siempre                                          (la config actual)
+dev = queries_operativas_v1 114q · held-out = queries_fraseos_v1 64q
+```
+
+**Criterio de adopción:**
+```
+adoptar si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
+```
+Mismo tope que #64 porque compra lo mismo: velocidad sobre el bloqueante. La diferencia es que
+esta vez **no se paga con las definiciones**, que es donde #64 mostró que está el aporte.
+
+⚠️ Riesgo conocido: `is_definition` tiene recall 0.99 pero su precisión no se midió para ESTE
+uso. Un falso negativo baja esa query a `n=1`. Si el resultado queda al filo, hay que mirar
+cuántos de los perdidos eran definiciones mal clasificadas antes de culpar al mecanismo.

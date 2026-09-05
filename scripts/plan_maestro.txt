@@ -1,13 +1,12 @@
-# PLAN MAESTRO v12 — exp #64: ¿n=3 sigue haciendo falta con think adoptado?
+# PLAN MAESTRO v13 — exp #65: n=3 solo en definiciones
 #
-# v11 cerro: tipos_adoptado 12/12 usable con la config adoptada (los 6 tipos que no cerraban,
-# cierran). Costo visible: casos de 337-494 s.
+# v12 cerro: #64 NO ADOPTA n=1 (cita_limpia cae 6, toleraba 2). Held-out no se corrio: dev ya
+# habia fallado y el criterio pedia los dos. Hallazgo: con think, el aporte de n=3 NO es
+# anti-rociado (n_cits 2.95 vs 2.82) sino consenso de cita, concentrado en definiciones.
 #
-# Criterio FIJADO ANTES de correr en docs/plan-operacion.md (exp #64):
-#   adoptar n=1 si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
+# Criterio FIJADO ANTES en docs/plan-operacion.md (exp #65):
+#   adoptar si  cita_ok cae <= 3  Y  cita_limpia cae <= 2   en dev Y en held-out
 #
-# TANDA A — dev. OFF = n=1 (rapido), ON = n=3 (actual). Los dos con answer_think=True.
-n1_dev|env PYTHONPATH=. VAR=self_consistency_n SET=data/eval/queries_operativas_v1.jsonl NAME=n1_dev venv/bin/python -m scripts.exp_think_paired
-#
-# TANDA B — held-out, mismo cambio, para cazar overfit.
-n1_holdout|env PYTHONPATH=. VAR=self_consistency_n SET=data/eval/queries_fraseos_v1.jsonl NAME=n1_holdout venv/bin/python -m scripts.exp_think_paired
+# OFF = la propuesta (n=3 solo si is_definition)   ON = la config actual (n=3 siempre)
+def_dev|env PYTHONPATH=. VAR=selfcons_solo_definicion SET=data/eval/queries_operativas_v1.jsonl NAME=def_dev venv/bin/python -m scripts.exp_think_paired
+def_holdout|env PYTHONPATH=. VAR=selfcons_solo_definicion SET=data/eval/queries_fraseos_v1.jsonl NAME=def_holdout venv/bin/python -m scripts.exp_think_paired
