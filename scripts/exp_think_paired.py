@@ -121,14 +121,19 @@ def resumen(rows, parcial=False):
         #       velocidad sobre el bloqueante declarado, no un punto de precision)
         # OJO: en #64 el brazo OFF es n=1, o sea ADOPTAR = quedarse con el brazo OFF.
         tope_limpia = 2 if VAR in ("self_consistency_n", "selfcons_solo_definicion") else 0
+        # #67 exige SUBIR, no solo "no empeorar": el cambio no trae premio de velocidad
+        # (mete mas docs al presupuesto del prompt), asi que si no compra aciertos no se paga.
+        sube_min = 2 if VAR == "top_rerank_override" else 0
         cae_ok = ok_off - ok_on
         cae_limpia = li_off - li_on
-        if VAR in ("self_consistency_n", "selfcons_solo_definicion"):
+        if VAR in ("self_consistency_n", "selfcons_solo_definicion", "top_rerank_override"):
             cae_ok, cae_limpia = -cae_ok, -cae_limpia   # se evalua la caida del brazo OFF
-        adoptar = (cae_ok <= 3) and (cae_limpia <= tope_limpia)
-        print(f"\n  CRITERIO ({VAR}): cita_ok cae <= 3  Y  cita_limpia cae <= {tope_limpia}", flush=True)
+        adoptar = (cae_ok <= -sube_min if sube_min else cae_ok <= 3) and (cae_limpia <= tope_limpia)
+        _c = f"cita_ok SUBE >= {sube_min}" if sube_min else "cita_ok cae <= 3"
+        print(f"\n  CRITERIO ({VAR}): {_c}  Y  cita_limpia cae <= {tope_limpia}", flush=True)
         print(f"  cita_ok cae {cae_ok}   cita_limpia cae {cae_limpia}", flush=True)
-        cual = {"self_consistency_n": "n=1 (brazo OFF)",
+        cual = {"top_rerank_override": "top_rerank=50 (brazo OFF)",
+                "self_consistency_n": "n=1 (brazo OFF)",
                 "selfcons_solo_definicion": "n=3 solo en definiciones (brazo OFF)",
                 }.get(VAR, "answer_think=True (brazo ON)")
         print(f"  => {'ADOPTAR ' + cual if adoptar else 'NO ADOPTAR ' + cual}", flush=True)
@@ -183,6 +188,9 @@ def main():
         # cosa. Un solo script, la variable explicita, y el banner la imprime.
         if VAR == "self_consistency_n":
             cfg.settings.self_consistency_n = 3 if val else 1
+        elif VAR == "top_rerank_override":
+            # ON = config actual (10 sobrevivientes)   OFF = la propuesta (50).
+            cfg.settings.top_rerank_override = 10 if val else 50
         elif VAR == "selfcons_solo_definicion":
             # OJO al signo: aca ON = la config ACTUAL (n=3 siempre) y OFF = la propuesta
             # (n=3 solo en definiciones). Se mantiene "ON = lo que ya esta adoptado" en todos

@@ -1,15 +1,15 @@
-# PLAN MAESTRO v18 — primero el piso de ruido, DESPUES el cuello real
+# PLAN MAESTRO v19 — exp #67: top_rerank_override=50
 #
-# Correccion: v16/v17 movian TOPK, que recorta DESPUES del reranker, y el reranker deja pasar
-# `top_rerank=10` fijo (retrieve.py:457,534). Las tres corridas variaron algo ya estrangulado.
-# Peor: dieron 68 / 76 / 71 golds en el pool, y un pool mayor NO puede tener menos golds. O sea
-# hay ruido entre corridas (el retrieval usa el LLM para expandir) y nunca se midio.
+# v18 cerro: el pipeline es DETERMINISTA (ruido_a repitio 68/114 exacto, tabla identica), asi
+# que la variacion 68/76/71 era efecto de parametros, no ruido -- retiro esa correccion mia.
+# rerank50 mostro que ensanchar los sobrevivientes hace visibles 8 golds mas, pero las tablas
+# NO pueden decir si eso mejora la respuesta: ACIERTA sale de las respuestas ya guardadas.
 #
-# TANDA A — el piso de ruido. MISMA config exacta que la corrida que dio 68. Si repite 68, el
-# diagnostico es solido y la variacion venia de TOPK. Si da otra cosa, ESA es la barra que
-# tiene que superar cualquier diferencia que se lea de estas tablas.
-ruido_a|env PYTHONPATH=. TOPK=10 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+# Criterio FIJADO ANTES en docs/plan-operacion.md (exp #67):
+#   adoptar si  cita_ok SUBE >= 2  Y  cita_limpia NO cae   en dev Y en held-out
+# Prediccion registrada: hay 8 golds nuevos disponibles. Si convirtieran todos, 64 -> 72.
+# Si convierten 0, el problema de cx_coloquial no es falta de articulo sino que no lo reconoce.
 #
-# TANDA B — el cuello DE VERDAD: ensanchar los sobrevivientes del reranker, que es la variable
-# que importaba desde el principio. El flag ya existe (top_rerank_override, retrieve.py:534).
-rerank50|env PYTHONPATH=. TOP_RERANK_OVERRIDE=50 TOPK=50 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+# OFF = top_rerank 50 (propuesta)   ON = top_rerank 10 (actual)
+rr_dev|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_operativas_v1.jsonl NAME=rr_dev venv/bin/python -m scripts.exp_think_paired
+rr_holdout|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_fraseos_v1.jsonl NAME=rr_holdout venv/bin/python -m scripts.exp_think_paired

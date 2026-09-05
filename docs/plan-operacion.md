@@ -665,3 +665,50 @@ no esta ni en los 50              -> es la GENERACION DE CANDIDATOS (embedding, 
                                      aliases). Caro, y es otro frente.
 ```
 La diferencia entre las dos tablas es la respuesta.
+
+### RESULTADO ruido_a / rerank50 (2026-09-05)
+
+**El pipeline es DETERMINISTA.** `ruido_a` repitió la config de la corrida de 68 y dio 68/114
+con la tabla por categoría idéntica (42 retrieval / 8 generación, 1 de 8 en rank 0, mediana 6).
+⚠️ La corrección anterior atribuía la variación 68/76/71 a ruido del LLM: **eso era falso**. La
+variación es efecto real de los parámetros. Lo que sí quedó bien fue el diagnóstico de que
+`TOPK` no era la variable correcta.
+
+```
+                    top_rerank=10   top_rerank=50
+gold en el pool         68/114          76/114
+RETRIEVAL                   42              34
+GENERACION                   8              16
+cx_coloquial ret/gen      24 / 5          18 / 11
+```
+
+**Ensanchar los sobrevivientes del reranker hace visibles 8 golds más, y ninguno se convierte
+en respuesta.** El cuello se mueve de retrieval a generación, no desaparece.
+
+⚠️ **Límite de estas tablas:** `ACIERTA` vale 64 en las tres corridas porque sale de las
+respuestas YA guardadas de `def_dev`, generadas con la config de producción. **Miden
+disponibilidad del gold, no calidad de la respuesta.** Si `top_rerank=50` mejora las respuestas
+sólo se sabe volviendo a generar.
+
+---
+
+## EXP #67 — `top_rerank_override=50` (criterio fijado 2026-09-05, ANTES de correr)
+
+```
+OFF = top_rerank 50 (la propuesta)      ON = top_rerank 10 (la config actual)
+dev = queries_operativas_v1 114q · held-out = queries_fraseos_v1 64q
+```
+
+**Criterio de adopción:**
+```
+adoptar top_rerank=50 si  cita_ok sube >= 2  Y  cita_limpia NO cae   en dev Y en held-out
+```
+Acá se exige **subir**, no "no empeorar" como en #63: el cambio no viene con premio de
+velocidad —al contrario, mete más documentos al presupuesto del prompt—, así que si no compra
+aciertos no hay razón para pagarlo.
+
+⚠️ Predicción registrada antes de correr: el diagnóstico dice que hay **8 golds nuevos
+disponibles**. Si convirtieran todos, `cita_ok` iría 64 → 72. Si el resultado da 0 de 8, el
+problema de `cx_coloquial` no es que al modelo le falte el artículo: es que no lo reconoce
+cuando lo tiene delante — y eso manda el frente de vuelta a generación, con el diagnóstico de
+disponibilidad ya agotado.
