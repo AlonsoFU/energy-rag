@@ -1,14 +1,9 @@
-# PLAN MAESTRO v14 — sin trabajo autonomo pendiente
+# PLAN MAESTRO v15 — ¿los fallos son de retrieval o de generacion?
 #
-# Cerrado con medicion: #63 (think ADOPTADO), #64 (n=1 NO), #65 (n=3 solo definiciones NO),
-# dedup_refs, tipos_adoptado 12/12, mapa_c.
-#
-# Las cuatro palancas de software para la latencia estan medidas y cerradas (#55 #56 #64 #65).
-# Lo que queda necesita al usuario:
-#   - 20-40 preguntas reales con modismos  (todo el eval lo escribi yo: ese sesgo ya escondio
-#     que 6 de 12 tipos no cerraban con cita_ok marcando 87.5 %)
-#   - B5.4: mapear los 270 procesos a los reales de la subgerencia
-#   - RAM 14 GB -> 32 GB, que reabre vLLM
-#
-# La cola queda VACIA a proposito. El watchdog va a informar PLAN AGOTADO cada 15 min con los
-# minutos ociosos acumulados: eso es correcto, no es una falla.
+# Con la config adoptada el set operativo queda en 64/114 cita_ok y 45/114 cita_limpia, y el
+# grueso esta en UN frente: cx_coloquial, 50 de las 114 queries, 11/50 usables. Nunca se midio
+# en cual de las dos mitades del sistema esta el problema, y las soluciones no se parecen:
+#   gold NO llega al pool   -> RETRIEVAL. Generar mejor no lo arregla.
+#   gold llega y no se cita -> GENERACION. Mas recall no lo arregla.
+# Solo retrieval, ~2 s por query: cruza el pool con las respuestas YA generadas del pareado.
+donde_falla|env PYTHONPATH=. SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
