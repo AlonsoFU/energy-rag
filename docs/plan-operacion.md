@@ -636,8 +636,29 @@ experimentos siguen siendo válidos —`cita_limpia` subió 19 puntos con think�
 
 En `cx_coloquial`, que son 50 de las 114 queries, **24 de sus 29 fallos son de retrieval**.
 
-**Lo que sigue (exp #66, corriendo):** partir ese 84 % en dos con la misma corrida a TOPK=50,
-que es la profundidad del pool antes del rerank.
+⚠️ **CORRECCION (2026-09-05, mismo dia).** Intente partir ese 84 % subiendo `TOPK` a 50 y a
+300, y el intento NO sirve: `TOPK` recorta **despues** del reranker, y el reranker deja pasar
+`top_rerank=10` fijo (`retrieve.py:457,534`). Las tres corridas movieron algo que ya venia
+estrangulado antes.
+
+Lo delato el propio numero: los golds en el pool dieron **68 (top10) / 76 (top50) / 71
+(pool300)**, y un pool mayor NO PUEDE tener menos golds. O sea hay **ruido entre corridas** —el
+retrieval usa el LLM para expandir la query— y ese piso nunca se midio. Es la trampa que el
+proyecto ya pago una vez: *"comparar contra baseline en disco: el ruido del LLM inventa flips"*.
+
+**Sigue en pie** (no depende de TOPK, es la config real de produccion):
+```
+84 % de los fallos son de retrieval, 16 % de generacion
+solo 1 de 8 fallos de generacion tenia el gold en rank 0
+```
+**No queda en pie**: el corte "8 de rerank / 34 de candidatos".
+
+**Lo que sigue, en orden:**
+1. `ruido_a` — repetir la corrida de top10 con la MISMA config. Si repite 68, el diagnostico es
+   solido. Si no, esa diferencia es la barra que tiene que superar cualquier lectura de estas
+   tablas.
+2. `rerank50` — ensanchar los sobrevivientes del reranker con `top_rerank_override`, que es la
+   variable que importaba desde el principio y que ya existe como flag.
 ```
 esta en los 50 y no en el top-10  -> es el RERANK. Barato.
 no esta ni en los 50              -> es la GENERACION DE CANDIDATOS (embedding, BM25,

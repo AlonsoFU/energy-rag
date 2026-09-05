@@ -36,7 +36,8 @@ TOPK = int(os.environ.get("TOPK", "10"))
 POOL = int(os.environ.get("POOL", "0"))
 # El archivo lleva el TOPK en el nombre: la corrida con TOPK=50 no debe pisar la de 10, la
 # comparacion entre las dos ES el resultado.
-OUT = Path(f"data/eval/results/donde_falla_top{TOPK}_pool{POOL or 50}.json")
+OUT = Path("data/eval/results/donde_falla_top%s_pool%s_rr%s.json" % (
+    TOPK, POOL or 50, os.environ.get("TOP_RERANK_OVERRIDE", "10")))
 
 
 def golds(q):
@@ -75,6 +76,12 @@ def main():
     llm = get_llm_provider()
     if POOL:
         cfg.settings.retrieval_pool_depth = POOL
+    # EL cuello: el reranker deja pasar `top_rerank=10` fijo (retrieve.py:457) y TOPK recorta
+    # DESPUES. Subir TOPK sin esto no puede traer un solo gold mas -- asi se perdieron las
+    # corridas v16/v17.
+    _tro = int(os.environ.get("TOP_RERANK_OVERRIDE", "0"))
+    if _tro:
+        cfg.settings.top_rerank_override = _tro
     cfg.settings.embed_4b_dense = True; cfg.settings.embed_4b_dim = 1024
     cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
     cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True

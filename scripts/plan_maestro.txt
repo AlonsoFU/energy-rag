@@ -1,12 +1,15 @@
-# PLAN MAESTRO v17 — ¿el gold es ALCANZABLE, o no lo es a ninguna profundidad?
+# PLAN MAESTRO v18 — primero el piso de ruido, DESPUES el cuello real
 #
-# v16 dio el corte: de 50 fallos, 8 son de RERANK (el gold esta en los 50 y no llega al top-10)
-# y 34 son de CANDIDATOS (el gold no esta ni en los 50). Un reranker perfecto compra 8 queries.
+# Correccion: v16/v17 movian TOPK, que recorta DESPUES del reranker, y el reranker deja pasar
+# `top_rerank=10` fijo (retrieve.py:457,534). Las tres corridas variaron algo ya estrangulado.
+# Peor: dieron 68 / 76 / 71 golds en el pool, y un pool mayor NO puede tener menos golds. O sea
+# hay ruido entre corridas (el retrieval usa el LLM para expandir) y nunca se midio.
 #
-# Esta corrida sube el POOL de 50 a 300 y devuelve TOPK=300, o sea pregunta lo maximo posible:
-#   el gold aparece a POOL=300   -> es RANKING. Existe, esta mal ordenado, hay margen.
-#   no aparece ni a POOL=300     -> los generadores de candidatos (embedding + BM25 + aliases)
-#                                   NO lo alcanzan. Ahi no sirve rankear mejor: hay que cambiar
-#                                   como se generan candidatos (doc2query, aliases, otro embed).
-# Solo retrieval, no genera nada.
-alcanzable|env PYTHONPATH=. POOL=300 TOPK=300 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+# TANDA A — el piso de ruido. MISMA config exacta que la corrida que dio 68. Si repite 68, el
+# diagnostico es solido y la variacion venia de TOPK. Si da otra cosa, ESA es la barra que
+# tiene que superar cualquier diferencia que se lea de estas tablas.
+ruido_a|env PYTHONPATH=. TOPK=10 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
+#
+# TANDA B — el cuello DE VERDAD: ensanchar los sobrevivientes del reranker, que es la variable
+# que importaba desde el principio. El flag ya existe (top_rerank_override, retrieve.py:534).
+rerank50|env PYTHONPATH=. TOP_RERANK_OVERRIDE=50 TOPK=50 SET=data/eval/queries_operativas_v1.jsonl RES=data/eval/results/def_dev/result.json venv/bin/python -m scripts.diag_donde_falla
