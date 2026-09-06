@@ -765,3 +765,28 @@ estricto y sin control positivo → un 23 % no se distingue de un juez roto. v1 
 artículo → debe salir SOPORTADA), prompt admite paráfrasis/resumen/omisión y le dice que
 ignore las notas de modificación intercaladas. **Umbrales del criterio NO cambian** (90/80).
 Juez válido si `control_neg ≤ 20 %` Y `control_pos ≥ 80 %`.
+
+### EXP #69a — LIMPIAR NOTAS BCN (criterio fijado ANTES, 2026-09-06 12:30)
+
+**Hallazgo (de #68, spot-check)**: la respuesta *"la SEC se crea por la Ley 20402"* es falsa
+(la crea la 18410). "Ley 20402" es una **nota de modificación de BCN intercalada en el texto**
+del Art. 1 de 29819: `Ministerio de En|Ley 20402 / Art. 10 Nº 1 / D.O. 03.12.2009|ergía`.
+El parser tenía limpiador, pero exigía organismo en mayúsculas (`Decreto 42, ENERGÍA`).
+**881/4984 artículos** con nota en el texto; 211 partidas por la segmentación (cabeza al final
+del artículo anterior, cola al inicio del siguiente); varios "Derogado" escondidos como
+`De|nota|rogado`. Contamina al generador Y al juez de #68. Curación de datos, no LLM.
+
+**Fix**: `NOTA_BCN_PATTERN` / `_COLA_INICIO` / `_CABEZA_FIN` en `norm_structure_parser.py`,
+pegando palabras partidas. Medido sobre la DB: 881 → **43** con nota, 0 cabezas colgando,
+20 artículos pierden > 25 % de chars y son todos notas (verificado con diff).
+`scripts/limpiar_notas_bcn.py` lo aplica en sitio (1528 artículos, 1532 fragmentos, 692
+incisos), con respaldo `*_bak_notas_20260906` y `--revertir`. Sin re-embeber (etapa b).
+
+**Criterio** (brazo ON, `SOLO_ON=1`, comparado con `think_real` / `think_holdout` vía
+`scripts/comparar_corridas.py` — válido porque el pipeline es determinista):
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae         dev Y held-out   -> se queda
+fidelidad: NO_SOPORTADA baja o fiel_estricto +5    secundario      -> gana
+cae -> --revertir
+```
+Encolado detrás de fidelidad_holdout (plan v22). La mutación de la DB es reversible.

@@ -1,4 +1,4 @@
-# PLAN MAESTRO v21 — exp #68 fidelidad (exp #67 CERRADO: rechazo en dev, holdout no corrido)
+# PLAN MAESTRO v22 — exp #68 fidelidad + exp #69a limpiar notas BCN
 #
 # v18 cerro: el pipeline es DETERMINISTA (ruido_a repitio 68/114 exacto, tabla identica), asi
 # que la variacion 68/76/71 era efecto de parametros, no ruido -- retiro esa correccion mia.
@@ -21,3 +21,19 @@
 # Va detras de rr_holdout: es la ultima pregunta abierta antes de la decision de produccion.
 fidelidad_dev|env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev venv/bin/python -m scripts.exp_fidelidad
 fidelidad_holdout|env PYTHONPATH=. RES=data/eval/results/think_holdout/result.json ARM=on NAME=fidelidad_holdout venv/bin/python -m scripts.exp_fidelidad
+
+# exp #69a -- LIMPIAR NOTAS BCN (2026-09-06). Hallazgo de #68: 881/4984 articulos con notas de
+# modificacion intercaladas en el texto ("Ministerio de En|Ley 20402 / Art. 10 Nº 1 /
+# D.O. 03.12.2009|ergia"); el generador respondio que la Ley 20402 crea la SEC. Curacion de
+# datos, no LLM. Parser extendido (NOTA_BCN_*), 881 -> 43 con nota, 0 cabezas colgando.
+# Etapa a: limpiar en sitio articulos.texto + fragmentos.text/contextual_text (tsv se regenera)
+# + fragmentos_inciso, SIN re-embeber (etapa b). Respaldo en *_bak_notas_20260906, --revertir.
+# Criterio FIJADO ANTES (docs/plan-operacion.md exp #69a), brazo ON vs think_real/think_holdout:
+#   cita_ok NO cae > 3  Y  cita_limpia NO cae  (dev Y held-out)  -> se queda
+#   fidelidad: NO_SOPORTADA baja o fiel_estricto sube >= 5 pts     -> gana (secundario)
+#   si cae -> scripts/limpiar_notas_bcn.py --revertir
+limpiar_notas|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --apply
+limpio_dev|env PYTHONPATH=. SOLO_ON=1 VAR=answer_think SET=data/eval/queries_operativas_v1.jsonl NAME=limpio_dev venv/bin/python -m scripts.exp_think_paired
+limpio_holdout|env PYTHONPATH=. SOLO_ON=1 VAR=answer_think SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio_holdout venv/bin/python -m scripts.exp_think_paired
+fidelidad_limpio_dev|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json ARM=on NAME=fidelidad_limpio_dev venv/bin/python -m scripts.exp_fidelidad
+fidelidad_limpio_holdout|env PYTHONPATH=. RES=data/eval/results/limpio_holdout/result.json ARM=on NAME=fidelidad_limpio_holdout venv/bin/python -m scripts.exp_fidelidad

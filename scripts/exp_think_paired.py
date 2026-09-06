@@ -42,6 +42,7 @@ from scripts.eval_metrics import score_answer
 MODEL = "ollama/qwen3:30b-a3b"
 SET = Path(os.environ.get("SET", "data/eval/queries_operativas_v1.jsonl"))
 NAME = os.environ.get("NAME", "think_paired")
+SOLO_ON = os.environ.get("SOLO_ON", "0") == "1"   # exp #69: solo brazo ON (config adoptada)
 # Que variable se togglea. OFF = valor bajo/apagado, ON = valor alto/prendido.
 VAR = os.environ.get("VAR", "answer_think")
 LIMIT = int(os.environ.get("LIMIT", "0"))
@@ -216,7 +217,7 @@ def main():
 
     pend = [q for q in rows if q["query"] not in prev]
     print(f"=== {NAME}: {len(rows)} queries ({len(pend)} pendientes)  "
-          f"togglea VAR={VAR}  OFF=bajo / ON=alto ===", flush=True)
+          f"togglea VAR={VAR}  OFF=bajo / ON=alto  SOLO_ON={SOLO_ON} ===", flush=True)
     nq = 0
     for i, q in enumerate(rows):
         if q["query"] in prev:
@@ -224,8 +225,14 @@ def main():
             continue
         gs = golds(q)
         docs = retr.retrieve(q["query"], top_k=10)   # UNA vez, los dos brazos ven lo mismo
-        o, e1 = arm(q["query"], docs, gs, False, q)
-        n_, e2 = arm(q["query"], docs, gs, True, q)
+        if SOLO_ON:
+            # exp #69: corre SOLO la config adoptada (brazo ON) para comparar contra otra
+            # corrida (think_real) con scripts/comparar_corridas.py. Vale porque el pipeline
+            # es determinista (ruido_a reprodujo 68/114 exacto). OFF = copia de ON.
+            n_, e2 = arm(q["query"], docs, gs, True, q); o, e1 = dict(n_), e2
+        else:
+            o, e1 = arm(q["query"], docs, gs, False, q)
+            n_, e2 = arm(q["query"], docs, gs, True, q)
         q["off"], q["on"], q["err"] = o, n_, e1 or e2
         nq += 1
         rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))

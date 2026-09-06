@@ -173,6 +173,33 @@ class NormStructureParser:
         re.IGNORECASE | re.MULTILINE
     )
 
+    # Nota BCN intercalada, forma general, SOLO para limpiar el texto (la extraccion de
+    # modificaciones sigue usando MODIFICACION_PATTERN). 2026-09-06, exp #68: 881 de 4984
+    # articulos tenian notas dentro del texto, a veces partiendo una palabra
+    # ("Ministerio de En|Ley 20402 / Art. 10 Nº 1 / D.O. 03.12.2009|ergía"). El generador leyo
+    # "Ley 20402" como parte del articulo y contesto que esa ley crea la SEC (es la 18410).
+    # Forma: bloque de lineas cortas que empieza con la norma modificatoria o RECTIFICACION y
+    # termina en una linea `D.O. dd.mm.aaaa`. El ancla es la linea D.O.; sin ella no borra.
+    NOTA_BCN_PATTERN = re.compile(
+        # empieza al inicio de linea o tras un espacio (la nota puede caer a mitad de linea)
+        r'(?:\n| )'
+        r'(?:Decreto|Ley|D\.?F\.?L\.?|DL|DTO|D\.S\.?|Resolución|RECTIFICACI[OÓ]N|RECTIFICADO)'
+        r'[^\n]{0,60}?'
+        # o bien lineas cortas separadas por \n hasta la linea D.O., o bien todo en una linea
+        r'(?:\n(?:[^\n]{1,40}\n){0,5}?| )'
+        r'D\.O\.\s*\d{2}\.\d{2}\.\d{4}[ \t]*(?:\n|\Z)',
+        re.IGNORECASE
+    )
+    NOTA_BCN_COLA_INICIO = re.compile(
+        r'\A(?:(?!Art[ií]culo)[^\n]{1,40}\n){0,6}?D\.O\.\s*\d{2}\.\d{2}\.\d{4}[ \t]*(?:\n|\Z)',
+        re.IGNORECASE
+    )
+    NOTA_BCN_CABEZA_FIN = re.compile(
+        r'\n(?:Decreto|Ley|D\.?F\.?L\.?|DL|DTO|D\.S\.?|Resolución|RECTIFICACI[OÓ]N|RECTIFICADO)'
+        r'[^\n.]{0,60}(?:\n(?:[^\n]{1,40}\n?){0,5})?\s*\Z',
+        re.IGNORECASE
+    )
+
     # Patrón para referencias a otras normas
     REFERENCIA_PATTERN = re.compile(
         r'(?:el|la|del|de\s+la|al|las)?\s*'
@@ -486,8 +513,21 @@ class NormStructureParser:
 
     def _limpiar_texto_articulo(self, texto: str) -> str:
         """Limpiar texto de artículo removiendo anotaciones de modificación."""
-        # Remover anotaciones de modificación para tener texto limpio
-        texto_limpio = self.MODIFICACION_PATTERN.sub('', texto)
+        # Remover anotaciones de modificación para tener texto limpio.
+        # Si la nota cayo en medio de una palabra se pega sin espacio; si cayo entre
+        # palabras, un espacio; si entre parrafos, salto de linea.
+        def _quitar(m):
+            antes = texto[m.start() - 1] if m.start() > 0 else '\n'
+            despues = texto[m.end()] if m.end() < len(texto) else '\n'
+            if antes.isalpha() and despues.isalpha() and despues.islower():
+                return ''
+            if antes in '\n' or despues in '\n':
+                return '\n'
+            return ' '
+        texto_limpio = self.NOTA_BCN_PATTERN.sub(_quitar, texto)
+        texto_limpio = self.NOTA_BCN_COLA_INICIO.sub('', texto_limpio)
+        texto_limpio = self.NOTA_BCN_CABEZA_FIN.sub('\n', texto_limpio)
+        texto_limpio = self.MODIFICACION_PATTERN.sub('', texto_limpio)
         # Limpiar espacios múltiples
         texto_limpio = re.sub(r'\n\s*\n', '\n\n', texto_limpio)
         texto_limpio = re.sub(r' +', ' ', texto_limpio)
