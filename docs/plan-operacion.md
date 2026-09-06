@@ -756,3 +756,12 @@ el modelo no lo reconoce cuando lo tiene delante**. Frente de disponibilidad cer
 `top_rerank_override` NO es equivalente al default aunque valga 10 -- posible bug en esa via
 (retrieve.py). La comparacion 50-vs-10 es justa (misma via en ambos brazos), pero el absoluto
 no. Pendiente: leer la via override antes de reusar el flag.
+
+**#68 v2 del juez (2026-09-06 10:00, ANTES de la corrida que cuenta).** A 30/114 con v1:
+`fiel_estricto` 23 %, control negativo 0 %. Spot-check de 4 veredictos negativos: 1 claramente
+mal (frase casi textual del Art. 8 de 250604 → NO_SOPORTADA), 1 dudoso, 2 bien. Juez demasiado
+estricto y sin control positivo → un 23 % no se distingue de un juez roto. v1 descartada
+(`fidelidad_dev_v1_juez_estricto.json`, no cuenta). v2: control POSITIVO (oración textual del
+artículo → debe salir SOPORTADA), prompt admite paráfrasis/resumen/omisión y le dice que
+ignore las notas de modificación intercaladas. **Umbrales del criterio NO cambian** (90/80).
+Juez válido si `control_neg ≤ 20 %` Y `control_pos ≥ 80 %`.

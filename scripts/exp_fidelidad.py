@@ -8,14 +8,17 @@ no genera nada nuevo, solo juzga.
 Unidad = frase con cita. Para cada frase:
   - se busca en `articulos` el texto de cada [Art. X de Y] citado en ESA frase
   - juez local (mismo qwen3, think=True, temp 0) responde SOPORTADA / PARCIAL / NO_SOPORTADA
-  - CONTROL: la misma frase contra un articulo AL AZAR de la misma norma. Si el juez dice
-    SOPORTADA ahi, es sesgo del juez, no fidelidad. Ese % es el piso de la metrica.
+  - CONTROL NEG: la misma frase contra un articulo AL AZAR de la misma norma. Si el juez dice
+    SOPORTADA ahi, regala. Ese % es el piso de la metrica.
+  - CONTROL POS: una oracion TEXTUAL del articulo citado, juzgada contra ese articulo. Si el
+    juez NO dice SOPORTADA ahi, es demasiado estricto. (Agregado tras spot-check a 30/114 en
+    v1: una frase casi textual del Art. 8 de 250604 salio NO_SOPORTADA. v1 descartada.)
 
 Salida: data/eval/results/{NAME}.json  y resumen por pantalla.
 Criterio FIJADO ANTES (docs/plan-operacion.md exp #68), sobre las respuestas con cita_ok:
   fiel_estricto (todas las frases SOPORTADA) >= 90 %  -> "responder" == "buscar"
   < 80 %                                              -> solo buscador
-  piso de control > 20 %                              -> el juez no sirve, no se concluye nada
+  control_neg > 20 %  o  control_pos < 80 %            -> el juez no sirve, no se concluye nada
 
 Uso:
   env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev \
@@ -39,9 +42,11 @@ random.seed(7)
 
 JUEZ_SYS = (
     "Eres un revisor juridico. Te dan una AFIRMACION y el TEXTO de uno o mas articulos. "
-    "Decide si la afirmacion se sigue del texto. Reglas: SOPORTADA = todo lo que afirma esta "
-    "en el texto (parafrasis vale). PARCIAL = una parte esta y otra no, o cambia un detalle "
-    "(plazo, sujeto, monto, condicion). NO_SOPORTADA = el texto no dice eso o dice lo contrario. "
+    "Decide si la afirmacion se sigue del texto. Reglas: SOPORTADA = lo que afirma esta en el "
+    "texto; vale parafrasear, resumir u omitir detalles mientras no cambie el sentido. "
+    "PARCIAL = cambia un detalle (plazo, sujeto, monto, condicion) o afirma algo que el texto "
+    "no dice ademas de algo que si. NO_SOPORTADA = el texto no dice eso o dice lo contrario. "
+    "El texto puede traer notas de modificacion intercaladas (Decreto N, D.O. fecha): ignoralas. "
     "Responde SOLO una palabra: SOPORTADA, PARCIAL o NO_SOPORTADA."
 )
 
@@ -72,6 +77,15 @@ def articulo_azar(cur, norma, evitar):
         if num not in evitar:
             return num, txt
     return None, None
+
+
+def oracion_textual(texto):
+    """Primera oracion del articulo con >= 80 chars, sin las notas de modificacion."""
+    limpio = " ".join(l for l in texto.split("\n") if len(l.strip()) > 40)
+    for o in re.split(r"(?<=[\.;])\s+", limpio):
+        if len(o) >= 80:
+            return o[:400]
+    return None
 
 
 def juzgar(llm, frase, textos):
@@ -122,6 +136,9 @@ def main():
                         num, txt = articulo_azar(cur, n0, {a for _, a in cits})
                         f["control_art"] = num
                         f["control"] = juzgar(llm, fr, [txt]) if txt else None
+                        pos = oracion_textual(textos[0])
+                        f["control_pos_frase"] = pos
+                        f["control_pos"] = juzgar(llm, pos, [textos[0]]) if pos else None
                 else:
                     f["veredicto"] = "CITA_INEXISTENTE"
                 row["frases"].append(f)
@@ -139,6 +156,7 @@ def resumen(rows, final=False):
         fr = [f for r in sub for f in r["frases"]]
         v = [f["veredicto"] for f in fr]
         c = [f.get("control") for f in fr if f.get("control")]
+        cp = [f.get("control_pos") for f in fr if f.get("control_pos")]
         n = len(v) or 1
         estricto = sum(1 for r in sub
                        if r["frases"] and all(f["veredicto"] == "SOPORTADA" for f in r["frases"]))
@@ -147,7 +165,8 @@ def resumen(rows, final=False):
                     no=round(100*v.count("NO_SOPORTADA")/n),
                     inex=v.count("CITA_INEXISTENTE"),
                     fiel_estricto=round(100*estricto/(len(sub) or 1)),
-                    control_sop=round(100*c.count("SOPORTADA")/(len(c) or 1)))
+                    control_neg=round(100*c.count("SOPORTADA")/(len(c) or 1)),
+                    control_pos=round(100*cp.count("SOPORTADA")/(len(cp) or 1)))
     con = [r for r in rows if r["frases"]]
     ok = [r for r in con if r["cita_ok"]]
     print("  cita_ok  ", agg(ok))
@@ -155,8 +174,9 @@ def resumen(rows, final=False):
     if final:
         a = agg(ok)
         print("\nVEREDICTO (criterio exp #68, sobre cita_ok):")
-        if a["control_sop"] > 20:
-            print(f"  JUEZ NO SIRVE: control_sop={a['control_sop']}% > 20. No se concluye.")
+        if a["control_neg"] > 20 or a["control_pos"] < 80:
+            print(f"  JUEZ NO SIRVE: control_neg={a['control_neg']}% (tope 20) "
+                  f"control_pos={a['control_pos']}% (piso 80). No se concluye.")
         elif a["fiel_estricto"] >= 90:
             print(f"  fiel_estricto={a['fiel_estricto']}% >= 90 -> responder == buscar")
         elif a["fiel_estricto"] < 80:
