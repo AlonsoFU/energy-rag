@@ -1,4 +1,4 @@
-# PLAN MAESTRO v20 — exp #67 rr50 + exp #68 fidelidad
+# PLAN MAESTRO v21 — exp #68 fidelidad (exp #67 CERRADO: rechazo en dev, holdout no corrido)
 #
 # v18 cerro: el pipeline es DETERMINISTA (ruido_a repitio 68/114 exacto, tabla identica), asi
 # que la variacion 68/76/71 era efecto de parametros, no ruido -- retiro esa correccion mia.
@@ -11,8 +11,6 @@
 # Si convierten 0, el problema de cx_coloquial no es falta de articulo sino que no lo reconoce.
 #
 # OFF = top_rerank 50 (propuesta)   ON = top_rerank 10 (actual)
-rr_dev|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_operativas_v1.jsonl NAME=rr_dev venv/bin/python -m scripts.exp_think_paired
-rr_holdout|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_fraseos_v1.jsonl NAME=rr_holdout venv/bin/python -m scripts.exp_think_paired
 
 # exp #68 -- FIDELIDAD (2026-09-06). Mide lo que 67 experimentos nunca midieron: si la prosa
 # dice lo que dice el articulo citado. Sobre respuestas GUARDADAS (think_real = config adoptada

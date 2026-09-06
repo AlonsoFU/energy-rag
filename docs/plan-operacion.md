@@ -738,3 +738,21 @@ fiel_estricto < 80 %     SOLO BUSCADOR: ni los aciertos son aciertos
 ```
 `fiel_estricto` = respuesta con TODAS sus frases SOPORTADA. Se reporta dev y held-out.
 Caveat: juez = mismo modelo que respondió. El control mide ese sesgo, no lo elimina.
+
+### RESULTADO #67 DEV — RECHAZADO (2026-09-06)
+
+```
+cita_ok      rr50 52/114  vs  rr10 51/114   [gano 3, perdio 4]  p=1.0
+cita_limpia  rr50 39/114  vs  rr10 38/114
+precision    0.27 vs 0.25 · citas 2.62 vs 2.66 · segundos 232 vs 218
+criterio: SUBE >= 2 -> subio 1. NO ADOPTAR. rr_holdout no corrido (regla #64/#65).
+```
+Prediccion registrada: 8 golds nuevos disponibles con rr50. Convirtieron ~1. Conclusion que
+quedo escrita antes de correr: **el problema de cx_coloquial no es falta de articulo sino que
+el modelo no lo reconoce cuando lo tiene delante**. Frente de disponibilidad cerrado.
+
+⚠️ Caveat: el brazo ON (`top_rerank_override=10`) dio 51/114 donde la config real sin override
+(`think_real`) dio 60/114 con precision 0.31. Diferencia 9 > piso de ruido (~7). La via
+`top_rerank_override` NO es equivalente al default aunque valga 10 -- posible bug en esa via
+(retrieve.py). La comparacion 50-vs-10 es justa (misma via en ambos brazos), pero el absoluto
+no. Pendiente: leer la via override antes de reusar el flag.
