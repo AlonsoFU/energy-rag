@@ -1,4 +1,4 @@
-# PLAN MAESTRO v19 — exp #67: top_rerank_override=50
+# PLAN MAESTRO v20 — exp #67 rr50 + exp #68 fidelidad
 #
 # v18 cerro: el pipeline es DETERMINISTA (ruido_a repitio 68/114 exacto, tabla identica), asi
 # que la variacion 68/76/71 era efecto de parametros, no ruido -- retiro esa correccion mia.
@@ -13,3 +13,13 @@
 # OFF = top_rerank 50 (propuesta)   ON = top_rerank 10 (actual)
 rr_dev|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_operativas_v1.jsonl NAME=rr_dev venv/bin/python -m scripts.exp_think_paired
 rr_holdout|env PYTHONPATH=. VAR=top_rerank_override SET=data/eval/queries_fraseos_v1.jsonl NAME=rr_holdout venv/bin/python -m scripts.exp_think_paired
+
+# exp #68 -- FIDELIDAD (2026-09-06). Mide lo que 67 experimentos nunca midieron: si la prosa
+# dice lo que dice el articulo citado. Sobre respuestas GUARDADAS (think_real = config adoptada
+# answer_think=True), sin generar. Juez = mismo qwen3 + CONTROL con articulo al azar.
+# Criterio FIJADO ANTES (docs/plan-operacion.md exp #68), sobre respuestas cita_ok:
+#   fiel_estricto >= 90 % -> "responder" == "buscar"   |  < 80 % -> SOLO BUSCADOR
+#   control_sop > 20 %    -> el juez no sirve, no se concluye nada
+# Va detras de rr_holdout: es la ultima pregunta abierta antes de la decision de produccion.
+fidelidad_dev|env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev venv/bin/python -m scripts.exp_fidelidad
+fidelidad_holdout|env PYTHONPATH=. RES=data/eval/results/think_holdout/result.json ARM=on NAME=fidelidad_holdout venv/bin/python -m scripts.exp_fidelidad

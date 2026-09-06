@@ -712,3 +712,29 @@ disponibles**. Si convirtieran todos, `cita_ok` iría 64 → 72. Si el resultado
 problema de `cx_coloquial` no es que al modelo le falte el artículo: es que no lo reconoce
 cuando lo tiene delante — y eso manda el frente de vuelta a generación, con el diagnóstico de
 disponibilidad ya agotado.
+
+### EXP #68 — FIDELIDAD (criterio fijado ANTES, 2026-09-06)
+
+**Agujero**: 67 experimentos midieron *cuál* artículo cita (`cita_ok`, `cita_limpia`). Ninguno
+midió si la prosa **dice lo que dice** ese artículo. Puede citar el correcto y cambiar el plazo,
+el sujeto o una excepción, y cuenta como acierto perfecto. En legal es lo que más importa.
+
+**Qué mide**: sobre las respuestas ya guardadas de la config adoptada (`think_real` dev,
+`think_holdout` held-out, brazo `on` = `answer_think=True`), cada frase con cita se juzga
+contra el texto real del/los artículo/s citados (`articulos.texto`). Juez local = mismo qwen3,
+think=True, temp 0, una palabra: SOPORTADA / PARCIAL / NO_SOPORTADA.
+**Control**: la misma frase contra un artículo AL AZAR de la misma norma. Si el juez dice
+SOPORTADA ahí, es sesgo del juez. Ese % es el piso de la métrica.
+
+Dev: 102/114 respuestas con frases citadas, 291 frases, 5 citas inexistentes en DB.
+Script: `scripts/exp_fidelidad.py`. Salida `data/eval/results/fidelidad_{dev,holdout}.json`.
+
+**Criterio (sobre respuestas con `cita_ok`)**:
+```
+control_sop > 20 %       el juez no sirve -> NO se concluye nada (ni a favor ni en contra)
+fiel_estricto >= 90 %    "responder" == "buscar": la recomendacion de solo-buscador era exagerada
+fiel_estricto < 80 %     SOLO BUSCADOR: ni los aciertos son aciertos
+80-90                    zona gris -> muestra de 20 frases revisadas a mano
+```
+`fiel_estricto` = respuesta con TODAS sus frases SOPORTADA. Se reporta dev y held-out.
+Caveat: juez = mismo modelo que respondió. El control mide ese sesgo, no lo elimina.
