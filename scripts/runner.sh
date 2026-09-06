@@ -48,7 +48,7 @@ while IFS='|' read -r etiqueta cmd; do
     # Ahora reintenta hasta MAX_INTENTOS: cada relanzada retoma donde quedo (result.json se
     # escribe tras CADA par). Recien al 3er fallo se rinde, para no quedar en loop infinito
     # si lo que falla es el script y no la maquina.
-    N=$(grep -cxF "$etiqueta" logs/cola_intentos.txt 2>/dev/null || echo 0)
+    N=$(grep -cxF "$etiqueta" logs/cola_intentos.txt 2>/dev/null || true); N=${N:-0}
     echo "$etiqueta" >> logs/cola_intentos.txt
     if [ "$((N+1))" -ge "${MAX_INTENTOS:-3}" ]; then
       echo "$etiqueta" >> "$HECHAS"
