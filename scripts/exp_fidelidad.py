@@ -83,8 +83,10 @@ def oracion_textual(texto):
     """Primera oracion del articulo con >= 80 chars, sin las notas de modificacion."""
     limpio = " ".join(l for l in texto.split("\n") if len(l.strip()) > 40)
     for o in re.split(r"(?<=[\.;])\s+", limpio):
-        if len(o) >= 80:
-            return o[:400]
+        # v2.1: antes cortaba a 400 chars a mitad de oracion ("...suspension o in") y el juez
+        # decia PARCIAL con razon: 8 de 75 positivos fallaban por eso. Oracion completa.
+        if 80 <= len(o) <= 1500:
+            return o
     return None
 
 
@@ -116,7 +118,16 @@ def main():
         cur = conn.cursor()
         for i, rec in enumerate(detail):
             if rec["query"] in hechas:
-                rows.append(hechas[rec["query"]]); continue
+                h = hechas[rec["query"]]
+                # repara positivos truncados de v2.0 (len == 400 era el corte)
+                for f in h["frases"]:
+                    pf = f.get("control_pos_frase")
+                    if pf and len(pf) == 400:
+                        t = texto_articulo(cur, *f["citas"][0])
+                        pos = oracion_textual(t) if t else None
+                        f["control_pos_frase"] = pos
+                        f["control_pos"] = juzgar(llm, pos, [t]) if pos else None
+                rows.append(h); continue
             arm = rec.get(ARM) or {}
             text = arm.get("text") or ""
             row = {"query": rec["query"], "category": rec["category"],
