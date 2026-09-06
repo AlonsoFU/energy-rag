@@ -140,8 +140,8 @@ def resumen(rows, final=False):
         v = [f["veredicto"] for f in fr]
         c = [f.get("control") for f in fr if f.get("control")]
         n = len(v) or 1
-        estricto = sum(all(f["veredicto"] == "SOPORTADA" for f in r["frases"]) and r["frases"]
-                       for r in sub)
+        estricto = sum(1 for r in sub
+                       if r["frases"] and all(f["veredicto"] == "SOPORTADA" for f in r["frases"]))
         return dict(resp=len(sub), frases=len(v),
                     sop=round(100*v.count("SOPORTADA")/n), par=round(100*v.count("PARCIAL")/n),
                     no=round(100*v.count("NO_SOPORTADA")/n),
