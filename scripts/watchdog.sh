@@ -28,7 +28,10 @@ PEND=$(grep -v '^#' scripts/plan_maestro.txt | grep -c .)
 # `grep -c` con cero coincidencias IMPRIME 0 y ademas SALE 1, asi que el `|| echo 0`
 # agregaba un segundo cero: HECHAS quedaba en "0\n0" y el `-ge` moria con
 # "se esperaba una expresion entera". Con la cola vacia el watchdog no comparaba nada.
-HECHAS=$(sort -u logs/cola_hechas.txt 2>/dev/null | grep -c . || true)
+# Cuenta SOLO las hechas que estan en el plan vigente. Antes contaba TODO cola_hechas.txt
+# (tareas de planes viejos incluidas): con 2 tareas nuevas y 10 viejas hechas daba
+# 10 >= 2 -> 'PLAN COMPLETO' sin haber lanzado nada (06-09, fidelidad_dev nunca arranco).
+HECHAS=$(grep -v '^#' scripts/plan_maestro.txt | cut -d'|' -f1 | grep -cxFf logs/cola_hechas.txt 2>/dev/null || true)
 HECHAS=${HECHAS:-0}
 
 if [ "$HECHAS" -ge "$PEND" ]; then
