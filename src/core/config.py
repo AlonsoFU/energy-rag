@@ -233,6 +233,22 @@ class Settings(BaseSettings):
     # (define / regula / sanciona). Ver ANSWER_ROLES_BLOCK en prompts.py.
     answer_roles: bool = False
 
+    # exp #70 (2026-09-07, flag OFF hasta medir): bloque FIDELIDAD en el system prompt.
+    # Sale del exp #68 (fiel_estricto 29/39 %): cifras y umbrales parafraseados ("mayor a"
+    # por "superior o igual a"), condiciones omitidas, y frases META sobre los articulos
+    # ("la definicion es identica en...", "los articulos 4, 5 y 10 complementan...") que
+    # ningun articulo dice de si mismo. Ademas reemplaza la instruccion de COMPARAR
+    # definiciones del bloque de ambiguedad por "dar cada una con su cita, sin comparar".
+    answer_sin_meta: bool = False
+
+    # exp #71 (2026-09-07, flag OFF hasta medir): QUOTE-FIRST. Antes de redactar, el modelo
+    # extrae citas TEXTUALES de los articulos provistos; cada cita se verifica como substring
+    # (normalizando espacios) del articulo -- las que no estan, se tiran -- y la redaccion
+    # recibe las citas verificadas con la instruccion de afirmar SOLO lo que esta en ellas.
+    # Patron estandar de QA atribuida (Anthropic "quotes-then-answer"). +1 llamada al LLM.
+    answer_quote_first: bool = False
+    answer_quote_max: int = 8
+
     self_consistency_n: int = 3
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands

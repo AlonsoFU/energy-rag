@@ -26,22 +26,23 @@ WRITE = os.environ.get("WRITE") == "1"
 MAX_LEN = 260
 
 
+def es_derogado(t):
+    """El texto del articulo es solo 'Derogado' / '(DEROGADO)' (mas encabezado y notas)."""
+    if not t or len(t) >= MAX_LEN or not re.search(r"(?i)derogad[oa]", t):
+        return False
+    # el cuerpo, sin encabezado ni lineas de enmienda, debe ser ~"Derogado"
+    cuerpo = re.sub(r"(?m)^\s*(?:Ley|Decreto|DFL|Art\.|D\.O\.)\b.*$", "", t)
+    # OJO: el cuantificador PEREZOSO ([^\n]{0,20}?) dejaba el numero sin comer
+    # ("Artículo 23°.- Derogado." -> "23°.- Derogado.") y nada matcheaba. Explicito.
+    cuerpo = re.sub(r"(?i)^\s*art[íi]culo\s*[\w°º]+\s*[.:\-]*\s*", "", cuerpo.strip())
+    return re.fullmatch(r"(?is)\s*[\-\.\s]*\(?\s*derogad[oa]s?\s*\)?\s*\.?\s*", cuerpo) is not None
+
+
 def detectar():
     with with_connection() as conn, conn.cursor() as cur:
         cur.execute("SELECT id, id_norma, numero, texto FROM articulos WHERE texto IS NOT NULL")
         arts = cur.fetchall()
-    out = []
-    for aid, n, a, t in arts:
-        if len(t) >= MAX_LEN or not re.search(r"[Dd]erogad[oa]", t):
-            continue
-        # el cuerpo, sin encabezado ni lineas de enmienda, debe ser ~"Derogado"
-        cuerpo = re.sub(r"(?m)^\s*(?:Ley|Decreto|DFL|Art\.|D\.O\.)\b.*$", "", t)
-        # OJO: el cuantificador PEREZOSO ([^\n]{0,20}?) dejaba el numero sin comer
-        # ("Artículo 23°.- Derogado." -> "23°.- Derogado.") y nada matcheaba. Explicito.
-        cuerpo = re.sub(r"(?i)^\s*art[íi]culo\s*[\w°º]+\s*[.:\-]*\s*", "", cuerpo.strip())
-        if re.fullmatch(r"(?is)\s*derogad[oa]s?\s*\.?\s*", cuerpo):
-            out.append((aid, n, a, t.strip()[:60]))
-    return out
+    return [(aid, n, a, t.strip()[:60]) for aid, n, a, t in arts if es_derogado(t)]
 
 
 def main():

@@ -1,39 +1,42 @@
-# PLAN MAESTRO v22 — exp #68 fidelidad + exp #69a limpiar notas BCN
+# PLAN MAESTRO v24 (2026-09-07) -- #69b DB, #73 juez, #70 prompt, #71 quote-first, #72 filtro, #74 modelo
 #
-# v18 cerro: el pipeline es DETERMINISTA (ruido_a repitio 68/114 exacto, tabla identica), asi
-# que la variacion 68/76/71 era efecto de parametros, no ruido -- retiro esa correccion mia.
-# rerank50 mostro que ensanchar los sobrevivientes hace visibles 8 golds mas, pero las tablas
-# NO pueden decir si eso mejora la respuesta: ACIERTA sale de las respuestas ya guardadas.
+# RESULTADO #68 (juez valido pos 100 / neg 0): fiel_estricto dev 29 % - held-out 39 % -> SOLO
+# BUSCADOR (criterio < 80). Frase-SOPORTADA 60 / 69 %. Causas leidas a mano (30 frases,
+# docs/calibracion-juez-68.md): (1) metrica todo-o-nada (2) notas BCN sucias -> #69b
+# (3) parafrasea cifras/modalidad (4) frases meta (5) juez estricto (~46 % de PARCIAL son SOPORTADA).
+# Criterios de #70-#74 FIJADOS ANTES en docs/plan-operacion.md.
 #
-# Criterio FIJADO ANTES en docs/plan-operacion.md (exp #67):
-#   adoptar si  cita_ok SUBE >= 2  Y  cita_limpia NO cae   en dev Y en held-out
-# Prediccion registrada: hay 8 golds nuevos disponibles. Si convirtieran todos, 64 -> 72.
-# Si convierten 0, el problema de cx_coloquial no es falta de articulo sino que no lo reconoce.
+# Todas las corridas nuevas usan SOLO_ON=1 + FLAGS=... y se comparan con
+# scripts/comparar_corridas.py contra limpio_dev / limpio_holdout (pipeline determinista).
+# Mitad de GPU que el pareado clasico.
 #
-# OFF = top_rerank 50 (propuesta)   ON = top_rerank 10 (actual)
-
-# exp #68 -- FIDELIDAD (2026-09-06). Mide lo que 67 experimentos nunca midieron: si la prosa
-# dice lo que dice el articulo citado. Sobre respuestas GUARDADAS (think_real = config adoptada
-# answer_think=True), sin generar. Juez = mismo qwen3 + CONTROL con articulo al azar.
-# Criterio FIJADO ANTES (docs/plan-operacion.md exp #68), sobre respuestas cita_ok:
-#   fiel_estricto >= 90 % -> "responder" == "buscar"   |  < 80 % -> SOLO BUSCADOR
-#   control_sop > 20 %    -> el juez no sirve, no se concluye nada
-# Va detras de rr_holdout: es la ultima pregunta abierta antes de la decision de produccion.
-fidelidad_dev|env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev venv/bin/python -m scripts.exp_fidelidad
-fidelidad_holdout|env PYTHONPATH=. RES=data/eval/results/think_holdout/result.json ARM=on NAME=fidelidad_holdout venv/bin/python -m scripts.exp_fidelidad
-
-# exp #69a -- LIMPIAR NOTAS BCN (2026-09-06). Hallazgo de #68: 881/4984 articulos con notas de
-# modificacion intercaladas en el texto ("Ministerio de En|Ley 20402 / Art. 10 Nº 1 /
-# D.O. 03.12.2009|ergia"); el generador respondio que la Ley 20402 crea la SEC. Curacion de
-# datos, no LLM. Parser extendido (NOTA_BCN_*), 881 -> 43 con nota, 0 cabezas colgando.
-# Etapa a: limpiar en sitio articulos.texto + fragmentos.text/contextual_text (tsv se regenera)
-# + fragmentos_inciso, SIN re-embeber (etapa b). Respaldo en *_bak_notas_20260906, --revertir.
-# Criterio FIJADO ANTES (docs/plan-operacion.md exp #69a), brazo ON vs think_real/think_holdout:
-#   cita_ok NO cae > 3  Y  cita_limpia NO cae  (dev Y held-out)  -> se queda
-#   fidelidad: NO_SOPORTADA baja o fiel_estricto sube >= 5 pts     -> gana (secundario)
-#   si cae -> scripts/limpiar_notas_bcn.py --revertir
-limpiar_notas|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --apply
-limpio_dev|env PYTHONPATH=. SOLO_ON=1 VAR=answer_think SET=data/eval/queries_operativas_v1.jsonl NAME=limpio_dev venv/bin/python -m scripts.exp_think_paired
-limpio_holdout|env PYTHONPATH=. SOLO_ON=1 VAR=answer_think SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio_holdout venv/bin/python -m scripts.exp_think_paired
+# ---- FASE A: #69b (DB) + #73 (juez) ----
+reparar_69b|env PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --apply
+limpio_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio_dev venv/bin/python -m scripts.exp_think_paired
+limpio_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio_holdout venv/bin/python -m scripts.exp_think_paired
 fidelidad_limpio_dev|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json ARM=on NAME=fidelidad_limpio_dev venv/bin/python -m scripts.exp_fidelidad
 fidelidad_limpio_holdout|env PYTHONPATH=. RES=data/eval/results/limpio_holdout/result.json ARM=on NAME=fidelidad_limpio_holdout venv/bin/python -m scripts.exp_fidelidad
+# #73c: respuestas VIEJAS (think_real) contra la DB reparada -> aisla juez-limpio de generador-limpio
+fidelidad_dev_db69b|env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev_db69b venv/bin/python -m scripts.exp_fidelidad
+# #73b: juez DISTINTO (qwen3.6:27b denso, sin think). Valido solo si sus controles pasan.
+fidelidad_limpio_dev_juez27b|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json ARM=on JUEZ=ollama/qwen3.6:27b THINK=0 NAME=fidelidad_limpio_dev_juez27b venv/bin/python -m scripts.exp_fidelidad
+#
+# ---- FASE B: #70 prompt fidelidad, #71 quote-first, #72 verificar-y-filtrar ----
+smoke_sinmeta|env PYTHONPATH=. LIMIT=3 SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_sinmeta venv/bin/python -m scripts.exp_think_paired
+sinmeta_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_operativas_v1.jsonl NAME=sinmeta_dev venv/bin/python -m scripts.exp_think_paired
+sinmeta_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_fraseos_v1.jsonl NAME=sinmeta_holdout venv/bin/python -m scripts.exp_think_paired
+fidelidad_sinmeta_dev|env PYTHONPATH=. RES=data/eval/results/sinmeta_dev/result.json ARM=on NAME=fidelidad_sinmeta_dev venv/bin/python -m scripts.exp_fidelidad
+fidelidad_sinmeta_holdout|env PYTHONPATH=. RES=data/eval/results/sinmeta_holdout/result.json ARM=on NAME=fidelidad_sinmeta_holdout venv/bin/python -m scripts.exp_fidelidad
+smoke_quote|env PYTHONPATH=. LIMIT=3 SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_quote venv/bin/python -m scripts.exp_think_paired
+quote_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_operativas_v1.jsonl NAME=quote_dev venv/bin/python -m scripts.exp_think_paired
+quote_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_fraseos_v1.jsonl NAME=quote_holdout venv/bin/python -m scripts.exp_think_paired
+fidelidad_quote_dev|env PYTHONPATH=. RES=data/eval/results/quote_dev/result.json ARM=on NAME=fidelidad_quote_dev venv/bin/python -m scripts.exp_fidelidad
+fidelidad_quote_holdout|env PYTHONPATH=. RES=data/eval/results/quote_holdout/result.json ARM=on NAME=fidelidad_quote_holdout venv/bin/python -m scripts.exp_fidelidad
+# #72 post-hoc sobre respuestas guardadas. Criterio NO usa el juez 30b (seria circular).
+verificar_dev|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json SET=data/eval/queries_operativas_v1.jsonl NAME=verificar_dev MODO=estricto venv/bin/python -m scripts.exp_verificar
+verificar_dev_laxo|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json SET=data/eval/queries_operativas_v1.jsonl NAME=verificar_dev_laxo MODO=laxo venv/bin/python -m scripts.exp_verificar
+verificar_holdout|env PYTHONPATH=. RES=data/eval/results/limpio_holdout/result.json SET=data/eval/queries_fraseos_v1.jsonl NAME=verificar_holdout MODO=estricto venv/bin/python -m scripts.exp_verificar
+fidelidad_verificar_dev_27b|env PYTHONPATH=. RES=data/eval/results/verificar_dev/result.json ARM=on JUEZ=ollama/qwen3.6:27b THINK=0 NAME=fidelidad_verificar_dev_27b venv/bin/python -m scripts.exp_fidelidad
+#
+# ---- FASE C: #74 techo de modelo. GATE: 10 queries; si mediana > 600 s NO se corre entero ----
+smoke_27b|env PYTHONPATH=. LIMIT=10 SOLO_ON=1 MODEL=ollama/qwen3.6:27b SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_27b venv/bin/python -m scripts.exp_think_paired

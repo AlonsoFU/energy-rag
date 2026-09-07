@@ -23,7 +23,7 @@ Criterio FIJADO ANTES (docs/plan-operacion.md exp #68), sobre las respuestas con
 Uso:
   env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev \
       venv/bin/python -m scripts.exp_fidelidad
-Env: RES, ARM (on|off), NAME, LIMIT, CONTROL (1|0). Resumible.
+Env: RES, ARM (on|off), NAME, LIMIT, CONTROL (1|0), JUEZ (modelo juez, #73b). Resumible.
 """
 import json, os, random, re, time
 from pathlib import Path
@@ -37,6 +37,12 @@ ARM = os.environ.get("ARM", "on")
 NAME = os.environ.get("NAME", "fidelidad")
 LIMIT = int(os.environ.get("LIMIT", "0") or 0)
 CONTROL = os.environ.get("CONTROL", "1") == "1"
+# #73b: juez DISTINTO del que redacto (rompe la circularidad juez == generador). Ej:
+# JUEZ=ollama/qwen3.6:27b (denso 27B, local). Vacio = cfg.settings.llm_default.
+JUEZ = os.environ.get("JUEZ", "")
+# THINK=0: juez sin razonamiento. Medido 2026-09-07: qwen3.6:27b con think tarda 161 s por
+# veredicto (21 h el set dev); sin think entra en horas. Los controles POS/NEG validan igual.
+THINK = os.environ.get("THINK", "1") == "1"
 OUT = Path(f"data/eval/results/{NAME}.json")
 random.seed(7)
 
@@ -62,11 +68,24 @@ def frases_con_cita(text):
 
 
 def texto_articulo(cur, norma, art):
+    # v2.2: la LGSE (258171) tiene 2 filas por articulo: '118º' (13 chars, basura de una
+    # transcripcion) y '118°' (2211 chars, el real). Con LIMIT 1 el juez leia la basura y
+    # decia NO_SOPORTADA por una respuesta correcta. Se toma la fila mas larga no marcada
+    # duplicado_de. 163 pares (norma, art) duplicados; 34/291 frases de dev afectadas.
     cur.execute(
         "SELECT texto FROM articulos WHERE id_norma=%s "
-        "AND replace(replace(numero,'°',''),'º','')=%s LIMIT 1", (norma, art))
+        "AND replace(replace(numero,'°',''),'º','')=%s "
+        "AND COALESCE(NOT (metadata ? 'duplicado_de'), true) "
+        "AND COALESCE(NOT (metadata ? 'fantasma'), true) "  # #69b
+        "ORDER BY length(texto) DESC LIMIT 1", (norma, art))
     r = cur.fetchone()
     return r[0] if r else None
+
+
+def claves_duplicadas(cur):
+    cur.execute("SELECT id_norma, replace(replace(numero,'°',''),'º','') FROM articulos "
+                "GROUP BY 1,2 HAVING count(*)>1")
+    return set(cur.fetchall())
 
 
 def articulo_azar(cur, norma, evitar):
@@ -103,8 +122,10 @@ def juzgar(llm, frase, textos):
 
 def main():
     print(f"exp_fidelidad  RES={RES} ARM={ARM} NAME={NAME} CONTROL={CONTROL}  "
-          f"juez={cfg.settings.llm_default} think=True", flush=True)
-    cfg.settings.ollama_think = True
+          f"juez={JUEZ or cfg.settings.llm_default} think={THINK}", flush=True)
+    cfg.settings.ollama_think = THINK
+    if JUEZ:
+        cfg.settings.llm_default = JUEZ
     llm = get_llm_provider()
     detail = json.load(open(RES))["detail"]
     if LIMIT:
@@ -116,17 +137,32 @@ def main():
     t0 = time.time()
     with with_connection() as conn:
         cur = conn.cursor()
+        dup = claves_duplicadas(cur)
+        n_rej = [0]
         for i, rec in enumerate(detail):
             if rec["query"] in hechas:
                 h = hechas[rec["query"]]
-                # repara positivos truncados de v2.0 (len == 400 era el corte)
                 for f in h["frases"]:
+                    # repara positivos truncados de v2.0 (len == 400 era el corte)
                     pf = f.get("control_pos_frase")
                     if pf and len(pf) == 400:
                         t = texto_articulo(cur, *f["citas"][0])
                         pos = oracion_textual(t) if t else None
                         f["control_pos_frase"] = pos
                         f["control_pos"] = juzgar(llm, pos, [t]) if pos else None
+                    # v2.2: re-juzga frases cuyo articulo citado tiene fila duplicada
+                    if not f.get("v22") and any(tuple(c) in dup for c in f["citas"]):
+                        textos = [t for t in (texto_articulo(cur, *c) for c in f["citas"]) if t]
+                        f["veredicto_v21"] = f["veredicto"]
+                        f["veredicto"] = juzgar(llm, f["frase"], textos) if textos else "CITA_INEXISTENTE"
+                        if textos and CONTROL:
+                            pos = oracion_textual(textos[0])
+                            f["control_pos_frase"] = pos
+                            f["control_pos"] = juzgar(llm, pos, [textos[0]]) if pos else None
+                        f["v22"] = True
+                        n_rej[0] += 1
+                resto = [hechas[r["query"]] for r in detail[i+1:] if r["query"] in hechas]
+                OUT.write_text(json.dumps({"detail": rows + [h] + resto}, ensure_ascii=False, indent=1))
                 rows.append(h); continue
             arm = rec.get(ARM) or {}
             text = arm.get("text") or ""
@@ -159,6 +195,8 @@ def main():
             if (i + 1) % 10 == 0:
                 print(f"  {i+1}/{len(detail)}  {time.time()-t0:.0f}s", flush=True)
                 resumen(rows)
+    if n_rej[0]:
+        print(f"  v2.2: re-juzgadas {n_rej[0]} frases con articulo duplicado", flush=True)
     resumen(rows, final=True)
 
 

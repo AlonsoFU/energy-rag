@@ -244,6 +244,13 @@ class NormStructureParser:
             organismo=self._extract_organismo(texto)
         )
 
+        # Las notas BCN se quitan ANTES de segmentar. 2026-09-06 (exp #69b): la nota
+        # "Ley 20936 / Art. 1 N° 25 / D.O. 20.07.2016" trae una linea "Art. 1 N° 25" que
+        # ARTICULO_PATTERN tomaba como encabezado: el Art. 165 de la LGSE quedaba en
+        # "- Dentro" (8 chars) y el resto caia en un articulo fantasma "1". Medido en la LGSE:
+        # 450 articulos (167 de menos de 60 chars) -> 278 (22). En DTO 1058072: 49 cortos -> 1.
+        texto = self.quitar_notas_bcn(texto)
+
         # Extraer títulos
         norma.titulos = self._extract_titulos(texto)
 
@@ -346,6 +353,7 @@ class NormStructureParser:
 
         # Encontrar posiciones de todos los artículos
         matches = list(self.ARTICULO_PATTERN.finditer(texto))
+        fuerza = {}
 
         for i, match in enumerate(matches):
             num_articulo = match.group(1).lower()
@@ -362,6 +370,16 @@ class NormStructureParser:
             previo = articulos.get(num_articulo)
             if previo is not None and transcrito and not previo.es_transcrito:
                 continue
+            # Numero REPETIDO (2026-09-06, #69b): el ultimo pisaba al primero. Dos causas:
+            # el "Artículo 1°" transitorio del final pisaba al 1° permanente (250604, 16121,
+            # 1150437), y una referencia a inicio de linea ("artículo 32º\ndel presente
+            # reglamento") pisaba al real. Gana el encabezado FUERTE (termina en .- : o -),
+            # y a igual fuerza el PRIMERO (el permanente va antes que el transitorio).
+            fuerte = re.search(r'[:\.\-]\s*$', match.group(0)) is not None
+            if previo is not None and not (previo.es_transcrito and not transcrito):
+                if not (fuerte and not fuerza.get(num_articulo, False)):
+                    continue
+            fuerza[num_articulo] = fuerte
 
             # Extraer modificaciones dentro de este artículo
             modificaciones = self._extract_modificaciones_de_texto(texto_articulo)
@@ -511,20 +529,45 @@ class NormStructureParser:
 
         return titulo_actual
 
-    def _limpiar_texto_articulo(self, texto: str) -> str:
-        """Limpiar texto de artículo removiendo anotaciones de modificación."""
-        # Remover anotaciones de modificación para tener texto limpio.
-        # Si la nota cayo en medio de una palabra se pega sin espacio; si cayo entre
-        # palabras, un espacio; si entre parrafos, salto de linea.
+    @classmethod
+    def quitar_notas_bcn(cls, texto: str) -> str:
+        """Quita las notas BCN intercaladas (bloque que termina en `D.O. dd.mm.aaaa`).
+
+        Si la nota cayo en medio de una palabra se pega sin espacio; si cayo entre palabras,
+        un espacio; si ocupaba lineas enteras y lo que sigue es parrafo nuevo (sangria BCN
+        o encabezado de articulo), salto de linea -- si se devolviera ' ' ahi, el encabezado
+        "Artículo 118°" dejaria de estar a inicio de linea y se fundiria con el 117.
+        """
+        # Notas APILADAS ("D.F.L. Nº 1 ... D.O. 13.09.1982 / Ley Nº 18.410 ... D.O. 22.05.1985"):
+        # la primera consume el \n que la segunda necesita para matchear, asi que se itera
+        # hasta punto fijo (Art. 26, 47, 124 de la LGSE quedaban en 3 palabras).
+        for _ in range(6):
+            nuevo = cls._quitar_notas_una_pasada(texto)
+            if nuevo == texto:
+                break
+            texto = nuevo
+        return texto
+
+    @classmethod
+    def _quitar_notas_una_pasada(cls, texto: str) -> str:
         def _quitar(m):
             antes = texto[m.start() - 1] if m.start() > 0 else '\n'
             despues = texto[m.end()] if m.end() < len(texto) else '\n'
             if antes.isalpha() and despues.isalpha() and despues.islower():
                 return ''
-            if antes in '\n' or despues in '\n':
+            sigue = texto[m.end():m.end() + 8].lstrip(' \xa0\t')
+            if sigue[:1].islower():          # la oracion continua: "calculará | cada cuatro"
+                return ' '
+            if antes == '\n' or despues in '\n \xa0\t':
+                return '\n'
+            if m.group(0)[0] == '\n' and cls.ARTICULO_PATTERN.match(texto, m.end() - 1):
                 return '\n'
             return ' '
-        texto_limpio = self.NOTA_BCN_PATTERN.sub(_quitar, texto)
+        return cls.NOTA_BCN_PATTERN.sub(_quitar, texto)
+
+    def _limpiar_texto_articulo(self, texto: str) -> str:
+        """Limpiar texto de artículo removiendo anotaciones de modificación."""
+        texto_limpio = self.quitar_notas_bcn(texto)
         texto_limpio = self.NOTA_BCN_COLA_INICIO.sub('', texto_limpio)
         texto_limpio = self.NOTA_BCN_CABEZA_FIN.sub('\n', texto_limpio)
         texto_limpio = self.MODIFICACION_PATTERN.sub('', texto_limpio)

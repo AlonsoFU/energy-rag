@@ -300,10 +300,48 @@ Ejemplo de la forma esperada:
 Ambas coinciden en X; la segunda ademas precisa Y."""
 
 
+FIDELIDAD_BLOCK = """
+
+==========================================================
+FIDELIDAD AL TEXTO (obligatorio)
+==========================================================
+- Cifras, umbrales, plazos y condiciones: cópialos LITERALMENTE del artículo.
+  "superior o igual a 200 MW" NO es "mayor a 200 MW". "podrán" NO es "deberán".
+  Si el artículo pone una condición, excepción o alternativa, inclúyela o no afirmes la regla.
+- Afirma SOLO lo que el artículo DICE. No agregues finalidad ("para garantizar que..."),
+  consecuencias ni interpretación que el texto no diga.
+- NO hagas afirmaciones SOBRE los artículos: no digas que uno "complementa", "repite",
+  "amplía" o "es idéntico" a otro, ni "la definición se repite en...". Solo su contenido.
+- Si el texto del artículo trae líneas de modificación (Ley N, Art. N, D.O. fecha), NO son
+  parte del contenido ni el origen de la regla: ignóralas y no las atribuyas."""
+
+# exp #70: mismo bloque de ambiguedad (ADOPTADO, +10) pero SIN pedir comparar: la regla 4
+# ("señala en que difieren") y el ejemplo "Ambas coinciden en X; la segunda ademas precisa Y"
+# producen justo las frases meta que el juez de #68 no puede sostener.
+AMBIGUITY_BLOCK_SIN_META = """
+
+TERMINOS DEFINIDOS EN VARIAS NORMAS (obligatorio):
+Algunos terminos tienen definicion propia en MAS DE UNA norma, y no siempre coinciden.
+Cuando entre los articulos provistos haya DOS O MAS que definan el mismo termino:
+
+1. NO elijas una sola y la presentes como "la" definicion.
+2. Di explicitamente que el termino esta definido en varias normas.
+3. Da cada definicion con SU cita, indicando a que norma corresponde, copiando el texto.
+4. NO compares las definiciones ni afirmes en que coinciden o difieren.
+
+Ejemplo de la forma esperada:
+"Coordinador" tiene definicion en mas de una norma:
+ - Segun [Art. 5 de 1146553], ...
+ - Segun [Art. 2 de 1204012], ..."""
+
+
 def get_answer_system() -> str:
     """Return the system prompt with citation rules."""
     from src.core import config as _cfg
     out = ANSWER_SYSTEM
+    _sin_meta = getattr(_cfg.settings, "answer_sin_meta", False)
+    if _sin_meta:
+        out += FIDELIDAD_BLOCK
     if getattr(_cfg.settings, "citation_ordinal_words", False):
         out += ORDINAL_WORDS_BLOCK
     if getattr(_cfg.settings, "prompt_prefer_definition", False):
@@ -311,5 +349,5 @@ def get_answer_system() -> str:
     if getattr(_cfg.settings, "answer_roles", False):
         out += ANSWER_ROLES_BLOCK
     if getattr(_cfg.settings, "ambiguity_disclose", False):
-        out += AMBIGUITY_BLOCK
+        out += AMBIGUITY_BLOCK_SIN_META if _sin_meta else AMBIGUITY_BLOCK
     return out

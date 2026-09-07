@@ -140,6 +140,43 @@ def _self_consistency(query, docs, llm, model, kwargs, n):
     return max(cands, key=_score)[0]
 
 
+def _quote_first(query, docs, llm, model, max_q):
+    """exp #71 QUOTE-FIRST (flag `answer_quote_first`): el modelo copia oraciones TEXTUALES de
+    los articulos que responden la pregunta; cada una se verifica como substring del articulo
+    (espacios normalizados, sin mayusculas) y las que no estan se tiran. Devuelve
+    (lista de (art, norma, cita), resp). Lista vacia = la redaccion sigue por la ruta normal.
+    Patron estandar de QA atribuida: primero evidencia literal, despues prosa desde la evidencia.
+    Es un chequeo DETERMINISTA de copia, no un clasificador: no decide nada por reglas."""
+    import re
+    from src.pipelines.grounding import extract_citations as _xc, _normalize_art as _na
+
+    def _norm(t):
+        return re.sub(r"\s+", " ", t or "").strip().lower()
+
+    idx = {(str(d["id_norma"]), _na(str(d["articulo_numero"]))): _norm(d.get("articulo_text"))
+           for d in docs}
+    block = "\n\n".join(f"[Art. {d['articulo_numero']} de {d['id_norma']}]\n{d['articulo_text']}"
+                         for d in docs)
+    p = (f"Pregunta:\n{query}\n\nArtículos:\n{block}\n\n"
+         f"Copia LITERALMENTE, sin cambiar ni una palabra, hasta {max_q} oraciones o incisos de los "
+         "artículos de arriba que respondan a la pregunta. Una por línea, con este formato exacto:\n"
+         "[Art. NUMERO de ID] «texto copiado»\n"
+         "No parafrasees, no resumas, no comentes. Si ningún artículo responde, escribe: NINGUNA.")
+    resp = llm.generate(p, model=model, temperature=0.0, max_tokens=1500,
+                        system="Extraes citas textuales de textos legales. Copias literal. No parafraseas ni comentas.")
+    out = []
+    for line in _strip_think_block(resp.text).splitlines():
+        cits = _xc(line)
+        if len(cits) != 1 or "]" not in line:
+            continue
+        nid, art = cits[0]
+        q = line[line.rfind("]") + 1:].strip().strip('«»"“”\' ').strip()
+        t = idx.get((str(nid), _na(str(art))))
+        if t and len(_norm(q)) >= 30 and _norm(q) in t:
+            out.append((art, nid, q))
+    return out, resp
+
+
 def generate_answer(
     query: str,
     docs: list[dict],
@@ -255,6 +292,23 @@ def generate_answer(
                 cfg.settings.ollama_think = True
 
             prompt = build_answer_prompt(query, active_docs) + extra_instruction
+            # exp #71: citas textuales verificadas ANTES de redactar (solo 1er intento; los
+            # reintentos llevan extra_instruction y ya vieron el bloque).
+            if attempt == 0 and getattr(cfg.settings, "answer_quote_first", False) and active_docs:
+                try:
+                    _qs, _qr = _quote_first(query, active_docs, llm, model,
+                                            getattr(cfg.settings, "answer_quote_max", 8))
+                    tokens_in += _qr.tokens_in; tokens_out += _qr.tokens_out
+                except Exception:
+                    _qs = []
+                if _qs:
+                    _quote_block = (
+                        "\n\nCITAS TEXTUALES VERIFICADAS (copiadas literalmente de los artículos de arriba):\n"
+                        + "\n".join(f"[Art. {a} de {n}] «{q}»" for a, n, q in _qs)
+                        + "\n\nRedacta la respuesta A PARTIR DE ESTAS CITAS: afirma solo lo que está en ellas, "
+                          "copia cifras, plazos y condiciones tal cual, y termina cada oración con la cita "
+                          "[Art. NUMERO de ID] de la que sale. Si las citas no responden la pregunta, dilo.")
+                    prompt = build_answer_prompt(query, active_docs) + _quote_block + extra_instruction
             response_format: dict | None = None
             # Hybrid pattern (default): skip JSON-schema constrained decoding —
             # Ollama deadlocks on qwen3.5 (issues #15540, #15260). Generate plain;

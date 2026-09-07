@@ -109,6 +109,12 @@ class PostgresStore:
         # Se excluye el duplicado, no el original: `duplicado_de` apunta al que se conserva.
         if getattr(_cfg.settings, "filtrar_duplicados", True):
             sql += " AND (a.metadata->>'duplicado_de') IS NULL"
+            # #69b FANTASMAS: filas que el parser viejo creo a partir de la nota de
+            # modificacion ("Art. 1 N° 25 / D.O. 20.07.2016") tomada como encabezado, o
+            # de una referencia a inicio de linea ("artículo 32º\ndel presente..."). Su
+            # texto es un pedazo de otro articulo, con otro numero: cita FALSA si entra.
+            # `scripts/reparar_articulos.py --apply` las marca; el texto queda para auditar.
+            sql += " AND (a.metadata->>'fantasma') IS NULL"
         # B4.5 VIGENCIA: un articulo DEROGADO no se cita como derecho vigente. Son 17, y no
         # son inofensivos: seis del DECRETO 88 y el art 23 del DFL 4 -- la LGSE, la norma mas
         # citada del corpus. Su cuerpo entero es "Derogado.", asi que si entran al pool
@@ -271,6 +277,7 @@ class PostgresStore:
                   -- equivocada. Ninguna de las dos debe ofrecerse como acepcion.
                   AND NOT coalesce(a.derogado, false)
                   AND (a.metadata->>'duplicado_de') IS NULL
+                  AND (a.metadata->>'fantasma') IS NULL
                 ORDER BY a.id_norma, length(fd.texto) DESC
             """, (concepto,))
             return cur.fetchall()
@@ -292,6 +299,7 @@ class PostgresStore:
                   -- una que vive en un articulo derogado o mal atribuido.
                   AND NOT coalesce(a.derogado, false)
                   AND (a.metadata->>'duplicado_de') IS NULL
+                  AND (a.metadata->>'fantasma') IS NULL
                 ORDER BY length(fd.texto) DESC LIMIT 1
             """, (concepto,))
             return cur.fetchone()

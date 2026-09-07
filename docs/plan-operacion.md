@@ -790,3 +790,139 @@ fidelidad: NO_SOPORTADA baja o fiel_estricto +5    secundario      -> gana
 cae -> --revertir
 ```
 Encolado detrás de fidelidad_holdout (plan v22). La mutación de la DB es reversible.
+
+### RESULTADO #68 DEV (2026-09-06, juez v2.2) — **fiel_estricto 29 % → SOLO BUSCADOR**
+
+Juez válido: control_pos **100 %**, control_neg **0 %** (v1 se descartó: positivos casi
+textuales salían NO_SOPORTADA; v2.1 corrigió el corte a 400 chars; v2.2 lee la fila más larga
+no duplicada, ver abajo). Sobre 56 respuestas `cita_ok`, 161 frases:
+
+```
+SOPORTADA 60 %   PARCIAL 34 %   NO_SOPORTADA 4 %   citas inexistentes 4
+fiel_estricto (todas las frases SOPORTADA)   29 %   <- criterio: < 80 -> SOLO BUSCADOR
+por categoria: adyacente 100 · multihop 67 · temporal 50 · distractor 33 · hold_def 29
+               coloquial 28 · crossnorma 25 · cuantitativo 25 · negacion 17 · hold_complex 0
+```
+**Lectura**: el error dominante NO es inventar (4 %) sino **PARCIAL** (34 %): cambia un
+detalle — plazo, sujeto, condición — o agrega algo que el artículo no dice. Citar bien y
+resumir mal. Con 1 de cada 3 frases así, la respuesta no se puede entregar como texto legal.
+
+**Artefacto cazado (y por qué existe #69b)**: 11 de las 16 NO_SOPORTADA de v2.1 eran del
+JUEZ, no del sistema: leía filas basura de `articulos` (LGSE `118º` = 13 chars junto a `118°`
+= 2211 chars). 163 pares (norma, art) duplicados, 34/291 frases de dev afectadas. Corregido
+en el juez (fila más larga, no `duplicado_de`, no `fantasma`); la causa está en el parser.
+Archivos: `data/eval/results/fidelidad_dev.json` (final), `fidelidad_dev_v21_dup.json`,
+`fidelidad_dev_v1_juez_estricto.json`. Held-out en cola (`fidelidad_holdout`).
+
+### EXP #69b — REPARAR ARTÍCULOS cortados por las notas BCN (criterio fijado ANTES, 2026-09-06)
+
+**Sustituye a #69a** (limpiar notas en sitio): la nota no solo ensucia, **corta**. `ARTICULO_PATTERN`
+acepta `Art. N` a inicio de línea y la nota BCN trae justo eso (`Ley 20936 / Art. 1 N° 25 /
+D.O. 20.07.2016`). El Art. 165 de la LGSE quedaba en `- Dentro` (8 chars) y el resto caía en
+un artículo fantasma "1". Otra fuente: referencias a inicio de línea (`artículo 32º\ndel presente
+reglamento`) y transitorios que pisaban al permanente del mismo número (último ganaba).
+Corpus: **338 artículos no derogados < 60 chars**, LGSE 450 filas / 163 basura.
+
+**Fix en el parser** (`src/parsers/norm_structure_parser.py`): `quitar_notas_bcn` ANTES de
+segmentar, iterado a punto fijo (notas apiladas); regla de encabezado fuerte (`.-` / `:`) y
+en empate gana el primero. Medido HEAD → nuevo sobre 124 normas, clave normalizada:
+```
+iguales 3908 · ganan texto 908 · encogen 144 · desaparecen 65 · aparecen 108
+artículos < 60 chars: 486 -> 152  (49 son "(DEROGADO)" legítimos)   LGSE 450/163 -> 341/3
+```
+Huecos conocidos que NO se arreglan acá: transitorios con número repetido ahora se descartan
+(antes pisaban al permanente), ordinales compuestos (`décimo noveno`, `nonies`, `sexies`).
+
+**Llevarlo a la DB sin re-ingestar** (`scripts/reparar_articulos.py`, ids intactos porque
+obligación/referencias/definiciones cuelgan de `articulos.id`). Simulación (`reparar_69b_informe.json`):
+```
+igual 3710 · update 514 (EXTENSION 254, BASURA 203, LIMPIEZA 37, RECORTE 16, CABEZA 4)
+fantasma 299 (metadata.fantasma, retrieval las excluye) · nuevo 218 (49 derogados, sin fragmentos)
+revisar 476 -> NO se tocan (DB y parser no coinciden en qué es el artículo N)
+```
+RECORTE exige que ≥ 90 % de la cola cortada viva en artículos que QUEDAN en la DB (63 → 16:
+los otros vivían en transcripciones que no se insertan; se perdería texto). Los artículos
+tocados se re-fragmentan (mismo `contextual_text`) y re-embeben (4B-1024 + 0.6B). Respaldo
+`articulos_bak_69b` / `fragmentos_bak_69b`, `--revertir` deshace todo. Filtro nuevo en
+`vectorstore.py` (`(a.metadata->>'fantasma') IS NULL`, 3 lugares) y en el juez de #68.
+
+**Criterio** (`SOLO_ON=1` vs `think_real` / `think_holdout`, `scripts/comparar_corridas.py`;
+válido porque el pipeline es determinista):
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae          dev Y held-out  -> se queda
+fidelidad: inexistentes baja Y NO_SOPORTADA no sube  secundario     -> gana
+cae en cualquiera de los dos sets                    -> --revertir
+```
+Predicción registrada: `cita_ok` sube poco o nada (el retrieval ya encontraba el fragmento
+del artículo vecino que tenía el texto); lo que cambia es la **cita** (deja de apuntar a un
+fantasma) y el juez. Ventana de veto: `--apply` se encola detrás de `fidelidad_holdout` y
+solo corre con la GPU libre.
+
+### RESULTADO #68 HELD-OUT (2026-09-06) y lectura conjunta
+
+Held-out (`fidelidad_holdout`, 61 respuestas cita_ok, 153 frases): SOPORTADA 69 %, PARCIAL
+20 %, NO 11 %, **fiel_estricto 39 %** → SOLO BUSCADOR. Coincide con dev (29 %). Juez válido
+(pos 100 / neg 0). Causas vistas frase por frase (30 leídas, `docs/calibracion-juez-68.md`):
+(1) métrica todo-o-nada: 18/40 respuestas fallidas en dev caen por UNA frase; (2) notas BCN
+dentro del texto → #69b; (3) el modelo parafrasea cifras y modalidades ("mayor a" por
+"superior o igual a", "se determina" por "podrán"); (4) frases META sobre los artículos
+("la definición es idéntica en...") que nacen del bloque de ambigüedad; (5) el juez es
+estricto: ~46 % de sus PARCIAL son SOPORTADA leídos a mano.
+
+### ESTÁNDARES QUE FALTABAN → EXP #70-#74 (criterios fijados ANTES, 2026-09-07)
+
+Lo adoptado hasta hoy es estándar en retrieval (híbrido + reranker), en generación
+(self-consistency, think) y en medición (juez tipo RAGAS-faithfulness con controles). Lo que
+NO está es lo estándar para **fidelidad de la prosa**: quote-first / QA atribuida,
+verificación por frase (CoVe) y abstención por falta de soporte. Se agregan como
+experimentos, cada uno aislado contra la config adoptada, pareado, dev + held-out.
+
+**#70 — prompt de fidelidad** (`answer_sin_meta`, `src/pipelines/prompts.py`): bloque
+FIDELIDAD (cifras/plazos/condiciones literales, sin finalidad agregada, sin afirmaciones
+sobre los artículos, ignorar líneas de modificación) + bloque de ambigüedad SIN la
+instrucción de comparar definiciones (el "+10" adoptado en #50 se conserva: sigue
+declarando las varias definiciones). Pareado `VAR=answer_sin_meta` (ON = actual, OFF = propuesta).
+```
+adoptar si   cita_ok NO cae > 3  Y  cita_limpia NO cae     (dev Y held-out)
+        Y    fiel_estricto (juez #68, mismo DB) sube >= 5 pts en los dos sets
+riesgo declarado: el bloque de ambigüedad sin "compara" puede costar cita_ok en hold_def
+```
+
+**#71 — quote-first** (`answer_quote_first`, `src/pipelines/generate.py::_quote_first`):
+antes de redactar, el modelo copia hasta 8 oraciones literales de los artículos; cada una se
+verifica como substring del artículo (espacios normalizados) y las que no están se tiran; la
+redacción recibe las verificadas con la orden de afirmar solo lo que está en ellas. +1
+llamada al LLM (~+20 s). Sin citas verificadas → ruta normal (no fuerza rechazo).
+```
+adoptar si   cita_ok NO cae > 3  Y  cita_limpia NO cae     (dev Y held-out)
+        Y    fiel_estricto sube >= 10 pts en los dos sets  (es el estándar que más mueve)
+        Y    mediana de latencia <= 130 s
+```
+
+**#72 — verificar-y-filtrar** (`scripts/exp_verificar.py`, post-hoc sobre respuestas
+guardadas de `limpio_*`): borra las frases que el juez no sostiene; sin frases → rechazo.
+CIRCULAR con el juez de #68, así que el criterio NO usa ese juez:
+```
+adoptar si   cita_ok NO cae > 3  Y  cita_limpia NO cae  (dev Y held-out)
+        Y    cobertura >= 70 % de las frases con cita
+        Y    fidelidad con el juez DISTINTO (#73b) sube >= 10 pts
+modos: estricto (solo SOPORTADA) y laxo (borra solo NO_SOPORTADA / inexistente)
+```
+
+**#73 — calibrar el juez**: (a) 30 PARCIAL leídos a mano → `docs/calibracion-juez-68.md`
+(hecho: ~46 % eran SOPORTADA); (b) juez distinto `qwen3.6:27b` sin think sobre las mismas
+respuestas (`JUEZ=` en `exp_fidelidad`), válido si sus controles pasan; se reporta acuerdo
+con el juez 30b; (c) `fidelidad_dev_db69b`: respuestas viejas de `think_real` juzgadas con
+la DB reparada → aísla el efecto "juez con DB limpia" del efecto "generador con DB limpia".
+
+**#74 — techo de modelo** (`MODEL=ollama/qwen3.6:27b`, denso, ya en disco, 17 GB): `SOLO_ON`
+contra `limpio_*` vía `comparar_corridas`. Medido 2026-09-07: como juez con think tarda
+161 s por veredicto corto; como redactor con n=3 puede pasar de 10 min/query.
+```
+gate:  smoke LIMIT=10; si mediana > 600 s/query NO se corre entero (se reporta y cierra)
+si corre: se adopta solo si cita_ok NO cae > 3 Y cita_limpia NO cae Y fiel_estricto +15
+          (la latencia lo hace inviable en producción igual: mide el TECHO, no un candidato)
+```
+Orden de cola: FASE A (#69b apply → limpio_* → fidelidad_limpio_* → #73c → #73b) → FASE B
+(#70 → #71 → #72) → FASE C (#74). Apilar ganadores (#70+#71) se mide después, en un pareado
+aparte. Nada se adopta con un solo set.

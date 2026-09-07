@@ -39,13 +39,18 @@ from src.pipelines.grounding import _normalize_art
 from src.core import config as cfg
 from scripts.eval_metrics import score_answer
 
-MODEL = "ollama/qwen3:30b-a3b"
+# exp #74: MODEL=ollama/qwen3.6:27b para medir el techo de modelo (SOLO_ON contra limpio_*)
+MODEL = os.environ.get("MODEL", "ollama/qwen3:30b-a3b")
 SET = Path(os.environ.get("SET", "data/eval/queries_operativas_v1.jsonl"))
 NAME = os.environ.get("NAME", "think_paired")
 SOLO_ON = os.environ.get("SOLO_ON", "0") == "1"   # exp #69: solo brazo ON (config adoptada)
 # Que variable se togglea. OFF = valor bajo/apagado, ON = valor alto/prendido.
 VAR = os.environ.get("VAR", "answer_think")
 LIMIT = int(os.environ.get("LIMIT", "0"))
+# FLAGS=a,b  fuerza esos flags a True en AMBOS brazos. Con SOLO_ON=1 corre UNA corrida con la
+# propuesta prendida, que se compara contra limpio_* con scripts/comparar_corridas.py (vale
+# porque el pipeline es determinista). Mitad de GPU que el pareado clasico. exp #70 / #71.
+FLAGS = [f for f in os.environ.get("FLAGS", "").split(",") if f]
 OUTDIR = Path(f"data/eval/results/{NAME}")
 
 
@@ -184,6 +189,8 @@ def main():
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
     def arm(qtext, docs, gs, val, q_row):
+        for _f in FLAGS:
+            setattr(cfg.settings, _f, True)
         # VAR elige QUE se togglea. Existe porque el 03-09 se encolo `exp_selfcons_n1` para
         # decidir `think` y ese script togglea `self_consistency_n`: 6 h de GPU midiendo otra
         # cosa. Un solo script, la variable explicita, y el banner la imprime.
@@ -197,6 +204,10 @@ def main():
             # (n=3 solo en definiciones). Se mantiene "ON = lo que ya esta adoptado" en todos
             # los VAR para que el veredicto se lea igual en los tres.
             cfg.settings.selfcons_solo_definicion = not val
+        elif VAR in ("answer_sin_meta", "answer_quote_first"):
+            # exp #70 / #71: ON = config ACTUAL (flag apagado), OFF = la propuesta (flag
+            # prendido). Mismo signo que top_rerank_override y selfcons_solo_definicion.
+            setattr(cfg.settings, VAR, not val)
         else:
             cfg.settings.answer_think = val
         for _ in (1, 2, 3):
@@ -217,7 +228,7 @@ def main():
 
     pend = [q for q in rows if q["query"] not in prev]
     print(f"=== {NAME}: {len(rows)} queries ({len(pend)} pendientes)  "
-          f"togglea VAR={VAR}  OFF=bajo / ON=alto  SOLO_ON={SOLO_ON} ===", flush=True)
+          f"togglea VAR={VAR}  OFF=bajo / ON=alto  SOLO_ON={SOLO_ON}  FLAGS={FLAGS} ===", flush=True)
     nq = 0
     for i, q in enumerate(rows):
         if q["query"] in prev:
