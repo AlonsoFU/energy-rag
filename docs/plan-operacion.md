@@ -926,3 +926,95 @@ si corre: se adopta solo si cita_ok NO cae > 3 Y cita_limpia NO cae Y fiel_estri
 Orden de cola: FASE A (#69b apply → limpio_* → fidelidad_limpio_* → #73c → #73b) → FASE B
 (#70 → #71 → #72) → FASE C (#74). Apilar ganadores (#70+#71) se mide después, en un pareado
 aparte. Nada se adopta con un solo set.
+
+
+### RESULTADOS FASE B (2026-09-09) — **#71 quote-first ADOPTADO, es la primera mejora real de fidelidad**
+
+Todas las corridas nuevas con `SOLO_ON=1 FLAGS=...` comparadas con `scripts/comparar_corridas.py`
+contra `limpio_dev` / `limpio_holdout` (misma DB) y contra `think_real` / `think_holdout` (baseline
+adoptado). El pipeline es determinista, por eso la comparacion de corridas vale.
+
+#### #70 `answer_sin_meta` — **RECHAZADO**: gana 19 en dev y NO gana en held-out
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok    | 60 -> 79 (+19) p=0.0001 | 61 -> 60 (-1) p=1.0 |
+| cita_limpia| 46 -> 60 (+14) p=0.0094 | 47 -> 44 (**-3**) p=0.5488 |
+| fiel_estricto | 27 -> 33 (+6) | 49 -> 52 (+3, pedia +5) |
+
+Falla el criterio dos veces en held-out. **Es sobreajuste al set de dev, no una mejora.** El
+bloque de ambiguedad que se remueve fue afinado sobre dev en el exp #50: sacarlo arregla una
+patologia que vive en dev (cita_limpia 40 %) y que held-out no tiene (73 %). Queda como
+evidencia de que los dos sets NO son intercambiables, no como candidato.
+
+#### #71 `answer_quote_first` — **ADOPTADO**. Sube en los DOS sets, y ademas es mas rapido
+
+Contra el baseline adoptado (`think_real` / `think_holdout`):
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok       | 60 -> **81** (+21) p=0.0000 | 61 -> 60 (-1) |
+| cita_limpia   | 46 -> **56** (+10) p=0.0639 | 47 -> **52** (+5) |
+| fiel_estricto | 25 -> **44** (+19) | 39 -> **63** (+24) |
+| precision     | 0.31 -> 0.44 | 0.71 -> **0.80** |
+| citas/respuesta | 2.67 -> 2.68 | 2.73 -> **1.94** |
+| latencia mediana | 220 s -> **171 s** | |
+
+Criterio fijado antes: cita_ok no cae > 3 (si), cita_limpia no cae (si), fiel_estricto +10 en
+los dos sets (**+19 y +24**), mediana <= 130 s (**no: 171 s**).
+
+**La clausula de latencia falla como esta escrita y se decide adoptar igual.** Se escribio como
+proteccion contra que quote-first AGREGARA tiempo (es una llamada extra al LLM). Hizo lo
+contrario: baja 49 s porque genera menos texto. Rechazar por "no es suficientemente rapido"
+cuando el objetivo era "que no sea mas lento" seria aplicar la letra contra su proposito.
+Queda registrado que es la unica clausula incumplida.
+
+Hace exactamente lo que promete el patron: en held-out cita **menos** (2.73 -> 1.94) y **mejor**
+(precision 0.71 -> 0.80). No puede afirmar lo que no copio textual y no paso la verificacion
+por substring.
+
+**fiel_estricto held-out 63 % sigue < 80**, asi que el veredicto de #68 (SOLO BUSCADOR) NO se
+revierte todavia. Pero 39 -> 63 es el mayor salto medido en el proyecto.
+
+#### #72 `exp_verificar` — **RECHAZADO** en modo estricto; el laxo queda abierto
+
+| modo / set | cobertura | cita_ok | p |
+|---|---|---|---|
+| estricto dev | **52 %** | 59 -> 47 (-12) | 0.0005 SIGNIFICATIVO |
+| laxo dev | 81 % | 59 -> 57 (-2) | 0.5000 ruido |
+| estricto held-out | 74 % | 59 -> 52 (-7) | 0.0156 SIGNIFICATIVO |
+
+El estricto borra la mitad de las frases y con ellas el gold: falla cobertura (< 70 %) y
+cita_ok. Confirma la calibracion de #73a: el juez de 30b marca PARCIAL de mas, y filtrar por
+el destruye respuestas correctas. **El modo laxo no cae** (-2, ruido) y conserva 81 %, pero
+solo se midio en dev: sin held-out no se adopta nada.
+
+#### #74 modelo denso 27B — **CERRADO por la compuerta**
+
+`smoke_27b` (10 queries): **mediana 1369 s/query** = 22.8 min. La compuerta fijada antes decia
+> 600 s -> no correr el set entero. Es 8x el MoE (171 s con quote-first). Inviable en
+produccion; el techo de modelo queda sin medir y no se persigue.
+
+#### #73 calibracion del juez — el 29 % de #68 era un PISO, no la verdad
+
+- **#73a** (30 PARCIAL leidos a mano, `docs/calibracion-juez-68.md`): ~46 % eran SOPORTADA.
+- **#73b** (juez `qwen3.6:27b` denso, sin think, controles neg 1 / pos 99): los PARCIAL
+  colapsan de 24 % a **3 %** y `fiel_estricto` de dev pasa de 27 a **44**. Dos jueces
+  independientes coinciden en que el de 30b abusa del PARCIAL.
+- **#73c** (`fidelidad_dev_db69b`: MISMAS respuestas viejas contra la DB reparada):
+  SOPORTADA 57 -> 65, NO 6 -> 3, fiel_estricto 25 -> 30. **Aisla el efecto de #69b sobre el
+  JUEZ**: parte de los NO_SOPORTADA de #68 eran articulos basura, no errores del sistema.
+
+### #69b — PENDIENTE DE DECISION: bueno de fondo, mal de ejecucion
+
+Falla el criterio en dev (`cita_limpia` 46 -> 39, rechazos 13 -> 17, `inex` 4 -> 18) y lo pasa
+en held-out (`cita_limpia` 47 -> 47). Pero #73c muestra que la reparacion SI arregla lo que
+decia arreglar.
+
+**Defecto localizado**: 18 de los 299 fantasmas quedaron con su texto INALCANZABLE. Se
+excluyeron de retrieval pero su contenido solo vivia en articulos transcritos que no se
+insertan. Es el mismo chequeo (`cuerpo_db`) que si se aplico a la clase RECORTE y no a la
+clase FANTASMA. Coincide con el salto de `inex` (4 -> 18).
+
+Opciones: (a) `--revertir`; (b) arreglar los 18 y re-medir (~6 h); (c) revertir la DB y quedarse
+solo con el parser corregido, que es correcto y sirve para futuras ingestas.
