@@ -1018,3 +1018,95 @@ clase FANTASMA. Coincide con el salto de `inex` (4 -> 18).
 
 Opciones: (a) `--revertir`; (b) arreglar los 18 y re-medir (~6 h); (c) revertir la DB y quedarse
 solo con el parser corregido, que es correcto y sirve para futuras ingestas.
+
+
+### EXP #75 — QUOTE-ONLY y #69b-v2 (criterios fijados ANTES, 2026-09-10)
+
+**De donde sale**: #71 mostro que el sistema **encuentra bien y traduce mal**. Los 55 fallos de
+213 frases en la config adoptada son de precision al parafrasear: cambia el sujeto
+("residenciales" por "usuarios sujetos a fijacion de precios"), recorta una lista
+("normativa tecnica, sus estandares y los requerimientos" -> solo lo ultimo), o mueve la
+atribucion (le adjudica la regla a la ley de la nota de modificacion). Un modelo mas grande
+baja la TASA de ese error; copiar textual lo hace IMPOSIBLE. No se arregla con un adivinador
+mejor lo que se puede eliminar por construccion.
+
+#### #69b-v2 — el fix de los 18 inalcanzables
+
+`es_fantasma` exigia que el texto viviera en `cuerpo` (todo lo parseado). Si vivia SOLO en un
+transcrito que no se inserta, marcarlo fantasma lo sacaba de retrieval y el texto quedaba
+inalcanzable. Ahora usa `cuerpo_db` (lo que QUEDA visible), el mismo chequeo que ya tenia
+RECORTE. Medido: fantasmas **299 -> 281**, exactamente los 18 detectados.
+
+Bug adicional cazado al probar la reversibilidad por primera vez: `--revertir` hacia
+`INSERT INTO fragmentos SELECT *`, y `tsv`/`tsv_aug` son GENERATED ALWAYS -> Postgres lo
+rechaza. La transaccion entera hizo rollback, la DB quedo intacta. Ahora lista las columnas
+no generadas. **La reversibilidad estaba escrita pero nunca ejecutada.**
+
+#### #75 — QUOTE-ONLY (`answer_quote_only`, requiere `answer_quote_first`)
+
+No redacta: entrega las citas textuales ya verificadas como subcadena del articulo, cada una
+con su `[Art. N de ID]`. Sin llamada de generacion.
+
+**La fidelidad no se mide: es 100 % por construccion.** Lo que hay que medir es si las citas
+RESPONDEN, y cuanto se pierde al no tener el hilo en prosa.
+
+```
+adoptar si   cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out
+             (contra la config adoptada = quote_first, misma DB)
+             Y  respuestas vacias <= 10 %  (si no extrae citas no responde nada)
+se reporta   latencia (deberia BAJAR: no hay generacion) y chars por respuesta
+```
+Riesgo declarado: `cita_ok` mide si la cita pega con el gold, no si un humano entiende la
+respuesta. Un quote-only puede puntuar igual y ser peor de leer. Eso NO lo captura el eval y
+queda como pregunta abierta para las preguntas reales del usuario.
+
+Orden: aplicar #69b-v2, luego baseline `qf_*` (config adoptada, DB reparada) y `qonly_*`
+sobre la MISMA DB, mas fidelidad de los cuatro.
+
+
+### RESULTADO #75 QUOTE-ONLY — **RECHAZADO** por rociado, pero 3.5x mas rapido
+
+Contra la config adoptada (quote_first), misma DB reparada:
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok | 78 -> **83** (+5) p=0.2266 | 61 -> **62** (+1) |
+| cita_limpia | 61 -> **51** (-10) **p=0.0309** | 52 -> **50** (-2) |
+| citas/respuesta | 2.72 -> **3.45** | 2.12 -> **2.47** |
+| precision | 0.43 -> 0.41 | 0.78 -> 0.79 |
+| latencia media | 286 s -> **90 s** | 321 s -> **86 s** |
+| respuestas vacias | 0 % | 0 % |
+
+**Falla `cita_limpia` en los dos sets**, en dev con significancia. La causa esta a la vista en
+la misma tabla: **entrega MAS citas** (2.72 -> 3.45). `cita_limpia` exige que TODAS sean
+correctas, asi que cada cita extra es otra oportunidad de ensuciar la respuesta. Es el mismo
+rociado que ya hizo rechazar `n=1` en el exp #54: acierta mas *tirando mas*.
+
+Lo que SI confirma: encuentra mas (`cita_ok` sube en los dos sets), no deja respuestas vacias
+(0 %), y es **3.2x - 3.8x mas rapido** porque no hay llamada de generacion. La fidelidad no se
+midio porque es 100 % por construccion: el texto es copia verificada como subcadena.
+
+**Candidato derivado (criterio a fijar ANTES de correr)**: `answer_quote_max` esta en 8. Bajarlo
+a 3 deberia recuperar `cita_limpia` conservando velocidad y fidelidad estructural. ⚠️ Tunear un
+parametro DESPUES de ver el resultado es como se sobreajusta: el valor se elige en dev y la
+decision se toma en held-out, o no se toma.
+
+### #69b-v2 aplicado — el fix de los 18 funciono
+
+`inex` (citas que no resuelven en la DB), en dev: **18** con la reparacion v1 sin quote-first,
+**6** con v1 + quote-first, **5** con v2. El baseline original era 4. El daño se cerro.
+
+### ESTADO DE LA CONFIG ADOPTADA (quote_first + DB reparada v2)
+
+| | dev | held-out |
+|---|---|---|
+| SOPORTADA | 68 % | **79 %** |
+| PARCIAL | 25 % | 14 % |
+| NO_SOPORTADA | 4 % | 7 % |
+| **fiel_estricto** | **43 %** | **67 %** |
+
+Contra el punto de partida de #68 (25 % dev / 39 % held-out): **+18 y +28 puntos**. Es el mayor
+movimiento medido en el proyecto.
+
+**Pero 67 % sigue < 80 %, asi que el veredicto SOLO BUSCADOR de #68 NO se revierte.** Dicho en
+claro: 1 de cada 3 respuestas del held-out todavia tiene alguna frase que no se sostiene.

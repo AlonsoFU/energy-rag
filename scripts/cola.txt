@@ -1,42 +1,16 @@
-# PLAN MAESTRO v24 (2026-09-07) -- #69b DB, #73 juez, #70 prompt, #71 quote-first, #72 filtro, #74 modelo
+# PLAN MAESTRO v25 (2026-09-10) -- #69b-v2 + #75 quote-only
 #
-# RESULTADO #68 (juez valido pos 100 / neg 0): fiel_estricto dev 29 % - held-out 39 % -> SOLO
-# BUSCADOR (criterio < 80). Frase-SOPORTADA 60 / 69 %. Causas leidas a mano (30 frases,
-# docs/calibracion-juez-68.md): (1) metrica todo-o-nada (2) notas BCN sucias -> #69b
-# (3) parafrasea cifras/modalidad (4) frases meta (5) juez estricto (~46 % de PARCIAL son SOPORTADA).
-# Criterios de #70-#74 FIJADOS ANTES en docs/plan-operacion.md.
+# ADOPTADO #71 quote-first (config.answer_quote_first=True): fiel_estricto dev 25->44,
+# held-out 39->63, cita_ok dev 60->81, latencia 220->171 s. Sube en los dos sets.
+# RECHAZADOS: #70 sinmeta (sobreajuste a dev), #72 estricto (borra el gold), #74 27B (1369 s/q).
 #
-# Todas las corridas nuevas usan SOLO_ON=1 + FLAGS=... y se comparan con
-# scripts/comparar_corridas.py contra limpio_dev / limpio_holdout (pipeline determinista).
-# Mitad de GPU que el pareado clasico.
-#
-# ---- FASE A: #69b (DB) + #73 (juez) ----
-reparar_69b|env PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --apply
-limpio_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio_dev venv/bin/python -m scripts.exp_think_paired
-limpio_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio_holdout venv/bin/python -m scripts.exp_think_paired
-fidelidad_limpio_dev|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json ARM=on NAME=fidelidad_limpio_dev venv/bin/python -m scripts.exp_fidelidad
-fidelidad_limpio_holdout|env PYTHONPATH=. RES=data/eval/results/limpio_holdout/result.json ARM=on NAME=fidelidad_limpio_holdout venv/bin/python -m scripts.exp_fidelidad
-# #73c: respuestas VIEJAS (think_real) contra la DB reparada -> aisla juez-limpio de generador-limpio
-fidelidad_dev_db69b|env PYTHONPATH=. RES=data/eval/results/think_real/result.json ARM=on NAME=fidelidad_dev_db69b venv/bin/python -m scripts.exp_fidelidad
-# #73b: juez DISTINTO (qwen3.6:27b denso, sin think). Valido solo si sus controles pasan.
-fidelidad_limpio_dev_juez27b|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json ARM=on JUEZ=ollama/qwen3.6:27b THINK=0 NAME=fidelidad_limpio_dev_juez27b venv/bin/python -m scripts.exp_fidelidad
-#
-# ---- FASE B: #70 prompt fidelidad, #71 quote-first, #72 verificar-y-filtrar ----
-smoke_sinmeta|env PYTHONPATH=. LIMIT=3 SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_sinmeta venv/bin/python -m scripts.exp_think_paired
-sinmeta_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_operativas_v1.jsonl NAME=sinmeta_dev venv/bin/python -m scripts.exp_think_paired
-sinmeta_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_sin_meta SET=data/eval/queries_fraseos_v1.jsonl NAME=sinmeta_holdout venv/bin/python -m scripts.exp_think_paired
-fidelidad_sinmeta_dev|env PYTHONPATH=. RES=data/eval/results/sinmeta_dev/result.json ARM=on NAME=fidelidad_sinmeta_dev venv/bin/python -m scripts.exp_fidelidad
-fidelidad_sinmeta_holdout|env PYTHONPATH=. RES=data/eval/results/sinmeta_holdout/result.json ARM=on NAME=fidelidad_sinmeta_holdout venv/bin/python -m scripts.exp_fidelidad
-smoke_quote|env PYTHONPATH=. LIMIT=3 SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_quote venv/bin/python -m scripts.exp_think_paired
-quote_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_operativas_v1.jsonl NAME=quote_dev venv/bin/python -m scripts.exp_think_paired
-quote_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_first SET=data/eval/queries_fraseos_v1.jsonl NAME=quote_holdout venv/bin/python -m scripts.exp_think_paired
-fidelidad_quote_dev|env PYTHONPATH=. RES=data/eval/results/quote_dev/result.json ARM=on NAME=fidelidad_quote_dev venv/bin/python -m scripts.exp_fidelidad
-fidelidad_quote_holdout|env PYTHONPATH=. RES=data/eval/results/quote_holdout/result.json ARM=on NAME=fidelidad_quote_holdout venv/bin/python -m scripts.exp_fidelidad
-# #72 post-hoc sobre respuestas guardadas. Criterio NO usa el juez 30b (seria circular).
-verificar_dev|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json SET=data/eval/queries_operativas_v1.jsonl NAME=verificar_dev MODO=estricto venv/bin/python -m scripts.exp_verificar
-verificar_dev_laxo|env PYTHONPATH=. RES=data/eval/results/limpio_dev/result.json SET=data/eval/queries_operativas_v1.jsonl NAME=verificar_dev_laxo MODO=laxo venv/bin/python -m scripts.exp_verificar
-verificar_holdout|env PYTHONPATH=. RES=data/eval/results/limpio_holdout/result.json SET=data/eval/queries_fraseos_v1.jsonl NAME=verificar_holdout MODO=estricto venv/bin/python -m scripts.exp_verificar
-fidelidad_verificar_dev_27b|env PYTHONPATH=. RES=data/eval/results/verificar_dev/result.json ARM=on JUEZ=ollama/qwen3.6:27b THINK=0 NAME=fidelidad_verificar_dev_27b venv/bin/python -m scripts.exp_fidelidad
-#
-# ---- FASE C: #74 techo de modelo. GATE: 10 queries; si mediana > 600 s NO se corre entero ----
-smoke_27b|env PYTHONPATH=. LIMIT=10 SOLO_ON=1 MODEL=ollama/qwen3.6:27b SET=data/eval/queries_operativas_v1.jsonl NAME=smoke_27b venv/bin/python -m scripts.exp_think_paired
+# Criterios de #75 y #69b-v2 FIJADOS ANTES en docs/plan-operacion.md.
+# qf_* es la config ADOPTADA sobre la DB reparada = nuevo baseline de produccion.
+# qonly_* es la propuesta. Se comparan entre si con scripts/comparar_corridas.py.
+reparar_69b_v2|env PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --apply
+qf_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=qf_dev venv/bin/python -m scripts.exp_think_paired
+qf_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=qf_holdout venv/bin/python -m scripts.exp_think_paired
+qonly_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SET=data/eval/queries_operativas_v1.jsonl NAME=qonly_dev venv/bin/python -m scripts.exp_think_paired
+qonly_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SET=data/eval/queries_fraseos_v1.jsonl NAME=qonly_holdout venv/bin/python -m scripts.exp_think_paired
+fidelidad_qf_dev|env PYTHONPATH=. RES=data/eval/results/qf_dev/result.json ARM=on NAME=fidelidad_qf_dev venv/bin/python -m scripts.exp_fidelidad
+fidelidad_qf_holdout|env PYTHONPATH=. RES=data/eval/results/qf_holdout/result.json ARM=on NAME=fidelidad_qf_holdout venv/bin/python -m scripts.exp_fidelidad

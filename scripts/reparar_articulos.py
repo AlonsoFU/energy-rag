@@ -94,6 +94,12 @@ def clasificar(cur):
             tx = nz(r["texto"])
             if len(r["texto"] or "") < JUNK:
                 return True
+            # FIX 2026-09-10: no basta con que el texto viva en `cuerpo` (todo lo parseado).
+            # Si solo vive en un TRANSCRITO que no se inserta, marcarlo fantasma lo saca de
+            # retrieval y el texto queda INALCANZABLE. Medido: 18 de 299 quedaron asi, y las
+            # citas inexistentes de dev saltaron de 4 a 18. Mismo chequeo que ya tenia RECORTE.
+            if not contenido(tx, cuerpo_db):
+                return False
             # fila de mas de una clave que SI existe en el parser: basta que su texto viva
             # dentro de un articulo nuevo. Fila de clave que el parser no ve ("undécimo",
             # "1º transitorio"): ademas tiene que verse rota, si no se deja quieta.
@@ -102,9 +108,9 @@ def clasificar(cur):
         g = {}
         for i, n, tx, d, md in cur.fetchall():
             g.setdefault(key(n), []).append(dict(id=i, numero=n, texto=tx, derogado=d, meta=md or {}))
-        # cuerpo que QUEDA en la DB tras aplicar: todo lo no transcrito (igual/update/nuevo) mas
-        # los transcritos que ya estaban. Un RECORTE solo vale si la cola cortada vive ahi;
-        # si vive en un transcrito que no se inserta, el texto se perderia.
+        # cuerpo que QUEDA VISIBLE tras aplicar: todo lo no transcrito (igual/update/nuevo) mas
+        # los transcritos que YA estaban en la DB. Si un texto solo vive fuera de aqui, sacarlo
+        # de retrieval lo pierde. Lo usan RECORTE y FANTASMA.
         cuerpo_db = " ".join(nz(a.texto) for kk, a in arts.items()
                              if not a.es_transcrito or kk in g)
         for k, filas in g.items():
@@ -247,7 +253,14 @@ def revertir():
             cur.execute("DELETE FROM obligacion WHERE articulo_id = ANY(%s)", (a["nuevos"],))
             cur.execute("DELETE FROM articulos WHERE id = ANY(%s)", (a["nuevos"],))
         cur.execute("DELETE FROM fragmentos WHERE articulo_id = ANY(%s)", (a["update"],))
-        cur.execute(f"INSERT INTO fragmentos SELECT * FROM fragmentos_bak_{BAK}")
+        # `tsv` y `tsv_aug` son GENERATED ALWAYS: un `SELECT *` las incluye y Postgres rechaza
+        # el INSERT ("cannot insert a non-DEFAULT value into column tsv"). Se listan las
+        # columnas reales para que la restauracion no dependa del orden ni de las generadas.
+        cur.execute("""SELECT column_name FROM information_schema.columns
+                       WHERE table_name='fragmentos' AND is_generated <> 'ALWAYS'
+                       ORDER BY ordinal_position""")
+        cols = ", ".join(f'"{c[0]}"' for c in cur.fetchall())
+        cur.execute(f"INSERT INTO fragmentos ({cols}) SELECT {cols} FROM fragmentos_bak_{BAK}")
         n_fr = cur.rowcount
         cur.execute(f"UPDATE articulos a SET texto=b.texto, metadata=b.metadata, updated_at=now() "
                     f"FROM articulos_bak_{BAK} b WHERE b.id=a.id AND a.id = ANY(%s)",

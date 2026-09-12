@@ -301,6 +301,12 @@ def generate_answer(
                     tokens_in += _qr.tokens_in; tokens_out += _qr.tokens_out
                 except Exception:
                     _qs = []
+                if _qs and getattr(cfg.settings, "answer_quote_only", False):
+                    # exp #75: se entrega la evidencia verificada y NO se redacta. Sin llamada
+                    # de generacion: mas rapido y sin margen para parafrasear mal.
+                    response_text = "\n".join(f"[Art. {a} de {n}] «{q}»" for a, n, q in _qs)
+                    grounding_pass = True
+                    break
                 if _qs:
                     _quote_block = (
                         "\n\nCITAS TEXTUALES VERIFICADAS (copiadas literalmente de los artículos de arriba):\n"

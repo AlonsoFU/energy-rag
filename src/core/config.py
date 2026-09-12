@@ -246,8 +246,21 @@ class Settings(BaseSettings):
     # (normalizando espacios) del articulo -- las que no estan, se tiran -- y la redaccion
     # recibe las citas verificadas con la instruccion de afirmar SOLO lo que esta en ellas.
     # Patron estandar de QA atribuida (Anthropic "quotes-then-answer"). +1 llamada al LLM.
-    answer_quote_first: bool = False
+    # ADOPTADO 2026-09-09 (exp #71). Primera mejora real de fidelidad del proyecto:
+    # fiel_estricto dev 25->44, held-out 39->63; cita_ok dev 60->81; precision held-out
+    # 0.71->0.80; citas/respuesta 2.73->1.94; latencia mediana 220s->171s. Sube en los DOS
+    # sets y no cae ninguna metrica. Unica clausula del criterio incumplida: mediana <= 130 s
+    # (dio 171 s) -- se escribio para evitar que AGREGARA tiempo y lo redujo. Revertir = False.
+    answer_quote_first: bool = True
     answer_quote_max: int = 8
+
+    # exp #75 (2026-09-10, flag OFF hasta medir): QUOTE-ONLY. Requiere answer_quote_first.
+    # No redacta: entrega las citas TEXTUALES ya verificadas como subcadena del articulo,
+    # cada una con su [Art. N de ID]. La fidelidad es 100 % POR CONSTRUCCION -- no es que el
+    # modelo se equivoque menos, es que la clase de error (parafrasear mal) deja de existir.
+    # Sale de #68/#71: el sistema encuentra bien y traduce mal. Lo que hay que medir no es si
+    # miente, es si las citas RESPONDEN (cita_ok / cita_limpia sobre el texto entregado).
+    answer_quote_only: bool = False
 
     self_consistency_n: int = 3
 
