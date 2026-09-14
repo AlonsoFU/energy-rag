@@ -1232,3 +1232,49 @@ Guarda de la metrica pasada (con tope 1 caen cita_ok y cita_limpia, ver arriba).
 **Cambio de producto:** el sistema deja de redactar respuestas en la gran mayoria de los casos y
 entrega las frases textuales de la ley con su cita. Es mas cerca de "buscador con evidencia" que
 de "asistente que responde", y es consistente con el veredicto SOLO BUSCADOR de #68.
+
+### DIAGNOSTICO del 17 % y EXP #77 — reatribuir la cita por procedencia (criterio fijado ANTES, 2026-09-14)
+
+**Hipotesis descartadas, con datos:**
+- *Notas BCN rompen la coincidencia de texto*: solo 1 de 9 definiciones fallidas del glosario
+  Art. 13 de 250604 tiene una nota adentro, y 4 definiciones del MISMO glosario verifican.
+- *Recorte del prompt*: presupuesto 45000 chars, el glosario mide 9889.
+- *Choque de claves en el verificador*: tras la expansion llega un doc por articulo.
+
+**Causa encontrada (`scripts/exp_diag_glosario.py`, `scripts/exp_diag_quote_first.py`):** el modelo
+copia bien la frase pero la **etiqueta mal**. Toma la referencia de una nota BCN metida en el
+articulo o inventa el numero:
+
+| pregunta | etiqueta del modelo | articulo real |
+|---|---|---|
+| Suficiencia de Potencia | `[Art. primero N° 8, x) de 70]` | 13 de 250604 |
+| Potencia Maxima | `[Art. primero N° 8, s)]` | 13 de 250604 |
+| Central Renovable con Capacidad de Regulacion | `[Art. primero N° 8, d)]` | 13 de 250604 |
+| Mora | `[Art. 17 de 1207690]` (no estaba en los docs) | 3 de 1207690 |
+
+"Art. primero N° 8" es la nota `Decreto 70, ENERGIA / Art. primero N° 8, i) / D.O. 05.06.2024`
+pegada dentro del glosario. El verificador exigia que la etiqueta coincidiera y rechazaba todo.
+
+Replay sin GPU sobre lo capturado: **7/7 frases aparecen en un solo doc, y es el correcto**
+(Mora con la frase completa; glosario con el inicio de 69-85 chars, porque el log corta la linea).
+
+Alcance fuera del glosario: 598 de 3127 articulos visibles del dominio (19 %) tienen notas BCN,
+408 con referencias "Art. X N°" que pueden confundir la etiqueta, en 19 normas.
+
+**Cambio (#77, `answer_quote_reatribuir`, OFF):** si la etiqueta no sirve, la procedencia la
+decide el texto: la frase normalizada tiene que aparecer en EXACTAMENTE UN doc. En dos o mas se
+rechaza. Con el flag apagado el comportamiento es identico (test).
+
+**Criterio** (`SOLO_ON=1 FLAGS=answer_quote_reatribuir`, contra `qonly2_dev` / `qonly2_holdout` con
+`scripts/comparar_corridas.py`):
+```
+adoptar si   cita_ok NO cae > 3   Y   cita_limpia NO cae        dev Y held-out
+             Y  respuestas en prosa del held-out BAJAN (hoy 11/64)
+se reporta   latencia, citas/respuesta, y cuantas citas se reatribuyeron
+```
+Riesgo declarado: un texto transcrito en dos normas podria atribuirse a la equivocada. La regla
+"un solo doc" lo acota, y `cita_limpia` lo detecta si pasa.
+
+Alternativa mas amplia, NO elegida primero: limpiar las notas BCN de los 598 articulos (datos).
+Arregla tambien la prosa y al juez, pero exige refragmentar y re-embeber con GPU y RAM que hoy
+estan en riesgo. Queda como siguiente paso si #77 no alcanza.

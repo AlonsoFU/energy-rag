@@ -164,16 +164,34 @@ def _quote_first(query, docs, llm, model, max_q):
          "No parafrasees, no resumas, no comentes. Si ningún artículo responde, escribe: NINGUNA.")
     resp = llm.generate(p, model=model, temperature=0.0, max_tokens=1500,
                         system="Extraes citas textuales de textos legales. Copias literal. No parafraseas ni comentas.")
+    from src.core import config as _cfg
+    reatribuir = getattr(_cfg.settings, "answer_quote_reatribuir", False)
+    # encabezado ORIGINAL de cada doc, para emitir la cita con el numero tal como esta en la DB
+    cab = {(str(d["id_norma"]), _na(str(d["articulo_numero"]))): (str(d["articulo_numero"]), str(d["id_norma"]))
+           for d in docs}
     out = []
     for line in _strip_think_block(resp.text).splitlines():
-        cits = _xc(line)
-        if len(cits) != 1 or "]" not in line:
+        if "]" not in line:
             continue
-        nid, art = cits[0]
+        cits = _xc(line)
         q = line[line.rfind("]") + 1:].strip().strip('«»"“”\' ').strip()
-        t = idx.get((str(nid), _na(str(art))))
-        if t and len(_norm(q)) >= 30 and _norm(q) in t:
-            out.append((art, nid, q))
+        nq = _norm(q)
+        if len(nq) < 30:
+            continue
+        if len(cits) == 1:
+            nid, art = cits[0]
+            t = idx.get((str(nid), _na(str(art))))
+            if t and nq in t:
+                out.append((art, nid, q))
+                continue
+        if not reatribuir:
+            continue
+        # exp #77: la etiqueta no sirve (formato invalido, articulo que no se le dio, o la frase no
+        # esta en el doc etiquetado). La procedencia la decide el texto: un solo doc la contiene.
+        donde = [k for k, t in idx.items() if nq in t]
+        if len(donde) == 1:
+            art_orig, nid_orig = cab[donde[0]]
+            out.append((art_orig, nid_orig, q))
     return out, resp
 
 

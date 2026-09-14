@@ -271,6 +271,16 @@ class Settings(BaseSettings):
     # Esas respuestas conservan el riesgo de parafrasear mal. Revertir = False.
     answer_quote_only: bool = True
 
+    # exp #77 (2026-09-14, flag OFF hasta medir): REATRIBUIR la cita por procedencia.
+    # Diagnostico del 17 % de held-out que caia a prosa: el modelo copia bien la frase pero la
+    # ETIQUETA mal. Toma la referencia de una nota BCN metida en el articulo
+    # ("[Art. primero N° 8, d)]", "[Art. primero N° 8, x) de 70]") o inventa el numero
+    # ("[Art. 17 de 1207690]" cuando el doc era el Art. 3). El verificador exigia que la
+    # etiqueta coincidiera y rechazaba todo. Con esto, si la frase aparece letra por letra en
+    # EXACTAMENTE UN doc, ese doc es su fuente, diga lo que diga la etiqueta. Si aparece en dos
+    # o mas, se rechaza. Replay sin GPU sobre lo capturado: 7/7 frases en un solo doc correcto.
+    answer_quote_reatribuir: bool = False
+
     self_consistency_n: int = 3
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
