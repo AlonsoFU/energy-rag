@@ -386,6 +386,9 @@ class Settings(BaseSettings):
     # cita_ok + no-regresión holdout. Default OFF.
     embed_4b_dense: bool = True   # ADOPTADO 2026-07-06: Qwen3-Embedding-4B campeón (vs 0.6B, +top5/dev; empata al 8B pero más barato/indexable)
     embed_4b_dim: int = 1024      # MRL prefix 1024 (HNSW indexable, escala) — validado igual/mejor que 2560
+    # ADOPTADO 2026-09-14: contexto del embedder 4B. Default de Ollama = 32768 (9.8 GB RAM en CPU).
+    # 4096 da vectores identicos (40/40 coseno 1.000000) y 3.71 GB. Lo mas largo embebido: 2913 tokens.
+    embed_4b_num_ctx: int = 4096
     embed_4b_cpu: bool = False  # fuerza el embed 4B en CPU (Ollama num_gpu=0) para coexistir con el 9B sin swap
 
     # alias_union (flag OFF): vocabulario controlado coloquial→legal (query-side, sin DB,

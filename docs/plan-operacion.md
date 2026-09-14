@@ -1278,3 +1278,58 @@ Riesgo declarado: un texto transcrito en dos normas podria atribuirse a la equiv
 Alternativa mas amplia, NO elegida primero: limpiar las notas BCN de los 598 articulos (datos).
 Arregla tambien la prosa y al juez, pero exige refragmentar y re-embeber con GPU y RAM que hoy
 estan en riesgo. Queda como siguiente paso si #77 no alcanza.
+
+**Diagnostico completo (9/9 casos del glosario, `scripts/exp_diag_glosario.py`):**
+
+| tipo de fallo | casos |
+|---|---|
+| etiqueta tomada de la nota BCN, formato invalido (`[Art. primero N° 8, j)]`, `[... m) D.O. 05.06.2024]`) | 7 |
+| etiqueta de la nota con formato valido pero norma que no es un doc (`[Art. 8 de 70]`) | 1 |
+| el extractor no devolvio nada: "Energia de Regulacion", la unica definicion con una nota BCN adentro | 1 |
+
+Los 9 los explican las notas BCN: 8 por contaminar la ETIQUETA y 1 por partir la definicion.
+**#77 apunta a los 8.** El caso vacio no lo arregla; ese solo lo resuelve limpiar la nota del texto.
+
+### EXP embedder num_ctx — resultados y criterio corregido (2026-09-14)
+
+**Hallazgo:** `qwen3-embedding:4b` carga con ctx 32768 porque `_embed_4b_query` no manda `num_ctx`.
+En CPU ocupa 9.8 GB de RAM y es lo que mata las corridas. Con 4096 ocupa 3.71 GB.
+
+**Test 1 (criterio original: coseno >= 0.9999 contra lo guardado, CPU):** NO PASA, minimo 0.997033.
+**Test 2 (control GPU contra lo guardado):** NO PASA, minimo 0.998165.
+Ambos se registran como fallidos tal como estaban escritos.
+
+**Por que no concluyen sobre el contexto:**
+- CPU 4096 contra CPU 2048: **1.000000** en los 7 textos que caben en ambos. El contexto no cambia vectores.
+- GPU 4096 contra vectores embebidos en SEPTIEMBRE con la misma funcion (#69b-v2, definiciones): **1.000000** en 3 de 3.
+- Contra vectores de JUNIO (carga masiva): 0.998-0.9994. La referencia estaba mezclada.
+- CPU contra GPU: corrimiento parejo ~0.9975. **Ya existe en produccion**: `preguntar.py` embebe
+  consultas en CPU y el corpus se embebio en GPU. Las evaluaciones hacen lo mismo.
+
+**Test 3 — criterio FIJADO ANTES de correr:** GPU con num_ctx=4096 contra 40 fragmentos creados el
+2026-09-10 (misma funcion `_embed_4b_query`, mismo Ollama 0.22.1), mas el texto mas largo del corpus
+y el de definiciones solo para verificar que caben.
+```
+adoptar num_ctx=4096 en _embed_4b_query si   coseno minimo >= 0.9999 en los 40
+                                         Y   ningun error de "no cabe" en los dos mas largos
+CPU con 4096 contra lo mismo: se reporta, no decide (corrimiento de dispositivo conocido)
+```
+
+**Resultado test 3 — PASA, se adopta `embed_4b_num_ctx=4096`:**
+
+| dispositivo | coseno minimo | >= 0.9999 | textos mas largos (tokens) | errores |
+|---|---|---|---|---|
+| GPU 4096 | **1.000000** | **40/40** | 2390 y 2913, caben | 0 |
+| CPU 4096 | 0.995071 | 0/40 | caben | 0 |
+
+RAM del embedder en CPU: **9.8 GB -> 3.71 GB**. La fila de CPU no decide: es el corrimiento de
+dispositivo ya conocido, y es el mismo que hoy tiene `preguntar.py` al embeber consultas en CPU
+contra un corpus embebido en GPU.
+
+Caveats:
+- Ollama trunca en silencio lo que pase de 4096 tokens. Hoy lo mas largo mide 2913. Si se
+  embeben textos mas largos, subir `embed_4b_num_ctx` o chunkear antes.
+- `build_def_fragments.py` y `embed_4b.py` hacen su propia llamada a `/api/embed` y NO heredan el
+  cambio. No corren en produccion; si se vuelven a usar, llevar el mismo `num_ctx`.
+- Los vectores de junio difieren 0.998-0.9994 de los que produce hoy la misma funcion. No es por
+  el contexto; queda como deuda (re-embeber el corpus con una sola corrida homogenea).

@@ -87,8 +87,12 @@ def _embed_4b_query(text: str, model: str = "qwen3-embedding:4b"):
         payload = {"model": model, "input": [text]}
         # embed_4b_cpu: fuerza el embed en CPU (num_gpu=0) para coexistir con el 9B en
         # GPU sin swap (necesario en la ruta complejo, que usa el 9B para expansiones).
+        # num_ctx (2026-09-14): sin esto Ollama carga el embedder con ctx 32768 -> 9.8 GB de RAM en CPU,
+        # lo que mataba las corridas. Con 4096: 3.71 GB y vectores IDENTICOS en el mismo dispositivo
+        # (coseno 1.000000 en 40/40; lo mas largo que se embebe mide 2913 tokens).
+        payload["options"] = {"num_ctx": int(getattr(_c.settings, "embed_4b_num_ctx", 4096))}
         if getattr(_c.settings, "embed_4b_cpu", False):
-            payload["options"] = {"num_gpu": 0}
+            payload["options"]["num_gpu"] = 0
         data = _json.dumps(payload).encode()
         req = _u.Request("http://localhost:11434/api/embed", data=data,
                          headers={"Content-Type": "application/json"})
