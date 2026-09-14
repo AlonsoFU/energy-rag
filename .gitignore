@@ -45,3 +45,4 @@ data/eval/ft_pairs.jsonl
 data/eval/queries_diverse.jsonl
 .gpu_bloqueo
 .gpu_limite
+.plan_agotado
