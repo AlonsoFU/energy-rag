@@ -18,6 +18,7 @@ cd /home/alonso/Documentos/Github/energy-rag-postgres-rag || exit 1
 LOG=logs/watchdog.log
 mkdir -p logs
 [ -f .watchdog_off ] && exit 0
+[ -f .gpu_bloqueo ] && exit 0   # hardware: ver scripts/gpu_guard.sh
 
 # ya hay trabajo REAL corriendo -> no tocar nada. Nunca dos peleando la GPU.
 if ps -eo args | grep -E '^[^ ]*python' | grep -qE 'scripts\.|exp_'; then exit 0; fi

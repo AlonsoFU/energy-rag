@@ -15,7 +15,13 @@ mkdir -p logs
   echo "=== retomar $(date '+%F %T') ==="
 
   # 1. la pausa manual no debe sobrevivir para siempre; si el usuario paro, ya paso el rato
-  [ -f .watchdog_off ] && rm -f .watchdog_off && echo "  quitada la pausa del watchdog"
+  #    ...EXCEPTO con bloqueo de GPU: el 13-09 esta linea habria borrado la pausa puesta tras un
+  #    Xid 79 y la cola se relanzaba sola a 350 W. El bloqueo lo levanta solo una persona.
+  if [ -f .gpu_bloqueo ]; then
+    echo "  GPU BLOQUEADA ($(tail -1 .gpu_bloqueo)) -- la pausa se mantiene"
+  else
+    [ -f .watchdog_off ] && rm -f .watchdog_off && echo "  quitada la pausa del watchdog"
+  fi
 
   # 2. Postgres se apaga solo (medido varias veces)
   docker start energy_rag_pg > /dev/null 2>&1 && echo "  postgres arriba"

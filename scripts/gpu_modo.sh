@@ -17,10 +17,14 @@
 # muestras; bajo carga sostenida 120 W hunde los clocks a 210 MHz de 2100 -> ~5x.
 #
 # El limite NO persiste tras reiniciar: al bootear vuelve solo a 350 W.
+# El tope elegido se guarda en .gpu_limite: gpu_guard.sh lo reaplica antes de lanzar,
+# porque el driver lo pierde en cada reinicio y vuelve solo a 350 W.
+ELEGIDO=/home/alonso/Documentos/Github/energy-rag-postgres-rag/.gpu_limite
+fijar(){ sudo nvidia-smi -pl "$1" > /dev/null && echo "$1" > "$ELEGIDO"; }
 case "${1:-}" in
-  juego|game|350)     sudo nvidia-smi -pl 350 > /dev/null && echo "GPU -> 350 W (juego)";;
-  noche|160)          sudo nvidia-smi -pl 160 > /dev/null && echo "GPU -> 160 W (noche)";;
-  silencio|quiet|120) sudo nvidia-smi -pl 120 > /dev/null && echo "GPU -> 120 W (silencio)";;
+  juego|game|350)     fijar 350 && echo "GPU -> 350 W (juego)";;
+  noche|160)          fijar 160 && echo "GPU -> 160 W (noche)";;
+  silencio|quiet|120) fijar 120 && echo "GPU -> 120 W (silencio)";;
   "") : ;;
   # cualquier numero: el limite lo elige el usuario, no una lista de modos. El rango lo
   # marca la propia tarjeta (nvidia-smi -q -d POWER); fuera de el, el driver rechaza.
@@ -28,7 +32,7 @@ case "${1:-}" in
      if ! [ "$1" -ge 100 ] 2>/dev/null || ! [ "$1" -le 350 ] 2>/dev/null; then
        echo "fuera de rango: $1 W (la 3090 acepta 100-350)"; exit 1
      fi
-     sudo nvidia-smi -pl "$1" > /dev/null && echo "GPU -> $1 W";;
+     fijar "$1" && echo "GPU -> $1 W";;
   *) echo "uso: $0 [<watts>|juego|noche|silencio]"; exit 1;;
 esac
 nvidia-smi --query-gpu=power.limit,power.draw,temperature.gpu,fan.speed,memory.used,memory.total \

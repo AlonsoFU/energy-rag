@@ -170,3 +170,59 @@ incompleto (LEY 20936 0.63, LEY 20999 0.58, LEY 21667 0.53). El `DFL 4` daba la 
 ⚠️ `scripts/actualizar_norma.py` aborta si el articulado caería bajo el 90 %. Pasó con el
 `DFL 4`: el texto nuevo era 58× más grande y aun así el reemplazo lo habría dejado en 278
 artículos de 330. **El texto puede crecer y el articulado encoger igual.**
+
+---
+
+## GPU: falla de hardware recurrente y guardrails (2026-09-13)
+
+**La RTX 3090 se cayó del bus PCIe (Xid 79) seis veces:** 05-08, 07-08, 11-08, 14-08,
+08-09 y 13-09. Dos fueron **sin carga** y una **a 180 W**, con cero errores PCIe/AER en los
+30 minutos previos a cada una. **No es potencia ni calor**: bajar el tope no la evita. Es
+hardware en la alimentación o el enlace de la placa.
+
+Antes de esto no había ninguna guarda: tras cada reinicio la GPU volvía a 350 W, la cola se
+relanzaba sola, y el 08-09 corrió horas con el modelo en CPU (VRAM 0 GB, CPU a 95 °C).
+
+### Qué protege ahora
+
+| pieza | cuándo | qué hace |
+|---|---|---|
+| `scripts/gpu_guard.sh` | antes de lanzar cada tarea (`runner.sh`) | bloquea si el arranque anterior terminó con Xid 79, si hay Xid en el actual, si `nvidia-smi` no responde, o si la GPU ya está ≥ 80 °C; reaplica el tope elegido |
+| `scripts/gpu_vigia.sh` | cron cada minuto | corta la carga si aparece Xid 79, si `nvidia-smi` muere, si el modelo generador cae a CPU, o si la GPU pasa 88 °C tres minutos seguidos |
+| `.gpu_bloqueo` | lo crean guarda o vigía | ningún script arranca trabajo con él; **ningún script lo borra**, `retomar.sh` tampoco |
+| `.gpu_limite` | lo escribe `gpu_modo.sh` | el tope elegido; el driver lo pierde en cada reinicio y la guarda lo reaplica |
+
+Logs: `logs/gpu_guard.log`, `logs/gpu_vigia.log`.
+
+**Límite honesto:** nada de esto previene un Xid 79. Evita lo que venía después:
+relanzar sobre una GPU muerta, correr horas en CPU, y enterarse recién cuando alguien mira.
+
+### Para volver a trabajar, después de revisar el hardware
+
+Revisar en este orden: cada conector PCIe de la placa con **su propio cable** desde la
+fuente (no un cable con dos colas), asiento de la placa, fuente, BIOS (Gigabyte X870 en F8
+del 2025-07-16; probar actualizar y forzar la ranura a PCIe Gen3).
+
+```bash
+cd /home/alonso/Documentos/Github/energy-rag-postgres-rag
+cat .gpu_bloqueo                      # leer el motivo
+rm .gpu_bloqueo .watchdog_off         # levantar bloqueo y pausa
+crontab -l | sed 's/^# PAUSA-XID79 //' | crontab -   # reactivar la cola, conserva el vigía
+./scripts/gpu_modo.sh 230             # tope: misma velocidad que 350 W
+```
+
+No restaurar `logs/crontab_backup_20260913.txt` entero: es anterior al vigía y lo borraría.
+
+### Cómo diagnosticar una caída
+
+Los errores viven en el arranque que se cayó, no en el actual:
+
+```bash
+journalctl -k -b -1 | grep -E "Xid|fallen off the bus"          # el arranque anterior
+for b in $(journalctl --list-boots -q | awk '{print $1}'); do   # todos, para ver recurrencia
+  journalctl -k -b "$b" -o short-iso | grep -E "Xid|fallen off the bus"; done
+```
+
+`dmesg` y `journalctl -k` sin `-b` solo muestran el arranque actual. Por mirar ahí se
+diagnosticó mal dos veces. El protocolo completo está en la skill
+`.claude/skills/gpu-seguridad/SKILL.md`.

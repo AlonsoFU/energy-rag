@@ -1,16 +1,9 @@
-# PLAN MAESTRO v25 (2026-09-10) -- #69b-v2 + #75 quote-only
+# PLAN MAESTRO v27 (2026-09-13) -- exp #76 paso 1 (guarda) + paso 2 (decision)
 #
-# ADOPTADO #71 quote-first (config.answer_quote_first=True): fiel_estricto dev 25->44,
-# held-out 39->63, cita_ok dev 60->81, latencia 220->171 s. Sube en los dos sets.
-# RECHAZADOS: #70 sinmeta (sobreajuste a dev), #72 estricto (borra el gold), #74 27B (1369 s/q).
-#
-# Criterios de #75 y #69b-v2 FIJADOS ANTES en docs/plan-operacion.md.
-# qf_* es la config ADOPTADA sobre la DB reparada = nuevo baseline de produccion.
-# qonly_* es la propuesta. Se comparan entre si con scripts/comparar_corridas.py.
-reparar_69b_v2|env PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --apply
-qf_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=qf_dev venv/bin/python -m scripts.exp_think_paired
-qf_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=qf_holdout venv/bin/python -m scripts.exp_think_paired
-qonly_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SET=data/eval/queries_operativas_v1.jsonl NAME=qonly_dev venv/bin/python -m scripts.exp_think_paired
-qonly_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SET=data/eval/queries_fraseos_v1.jsonl NAME=qonly_holdout venv/bin/python -m scripts.exp_think_paired
-fidelidad_qf_dev|env PYTHONPATH=. RES=data/eval/results/qf_dev/result.json ARM=on NAME=fidelidad_qf_dev venv/bin/python -m scripts.exp_fidelidad
-fidelidad_qf_holdout|env PYTHONPATH=. RES=data/eval/results/qf_holdout/result.json ARM=on NAME=fidelidad_qf_holdout venv/bin/python -m scripts.exp_fidelidad
+# PASO 1 dio ganador max=2 (cita_limpia 61 -> 80, p=0.0003). Criterio en docs/plan-operacion.md.
+# GUARDA: cita_limpia premia decir MENOS. Si max=1 puntua aun mejor sin perder cita_ok,
+#         la metrica esta rota y el resultado no vale. Es dev, no toca held-out.
+qonly1_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=1 SET=data/eval/queries_operativas_v1.jsonl NAME=qonly1_dev venv/bin/python -m scripts.exp_think_paired
+# PASO 2: el ganador del barrido en HELD-OUT, UNA vez. Adopta si cita_ok no cae > 3 Y
+#         cita_limpia no cae, contra qf_holdout, con la guarda de arriba pasada.
+qonly2_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=qonly2_holdout venv/bin/python -m scripts.exp_think_paired

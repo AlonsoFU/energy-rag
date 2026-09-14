@@ -32,6 +32,7 @@ while :; do
   # puesto mientras se edita, o sincronizar a mano despues.
   cp -f scripts/plan_maestro.txt scripts/cola.txt
   [ -f .watchdog_off ] && { echo "$(date '+%F %T')  PAUSA manual (.watchdog_off)" >> "$LOG"; exit 0; }
+  [ -f .gpu_bloqueo ] && { echo "$(date '+%F %T')  GPU BLOQUEADA: $(tail -1 .gpu_bloqueo)" >> "$LOG"; exit 0; }
 
   PEND=$(grep -v '^#' scripts/plan_maestro.txt | grep -c .)
   # `grep -c` con cero coincidencias IMPRIME 0 y ademas SALE 1, asi que el `|| echo 0`

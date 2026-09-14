@@ -51,6 +51,9 @@ LIMIT = int(os.environ.get("LIMIT", "0"))
 # propuesta prendida, que se compara contra limpio_* con scripts/comparar_corridas.py (vale
 # porque el pipeline es determinista). Mitad de GPU que el pareado clasico. exp #70 / #71.
 FLAGS = [f for f in os.environ.get("FLAGS", "").split(",") if f]
+# SETCFG=clave=valor,clave=valor -- para parametros que NO son booleanos (exp #76
+# answer_quote_max). Se castea al tipo del default para no meter strings en settings.
+SETCFG = [kv.split("=", 1) for kv in os.environ.get("SETCFG", "").split(",") if "=" in kv]
 OUTDIR = Path(f"data/eval/results/{NAME}")
 
 
@@ -191,6 +194,9 @@ def main():
     def arm(qtext, docs, gs, val, q_row):
         for _f in FLAGS:
             setattr(cfg.settings, _f, True)
+        for _k, _v in SETCFG:
+            _cur = getattr(cfg.settings, _k)
+            setattr(cfg.settings, _k, type(_cur)(_v))
         # VAR elige QUE se togglea. Existe porque el 03-09 se encolo `exp_selfcons_n1` para
         # decidir `think` y ese script togglea `self_consistency_n`: 6 h de GPU midiendo otra
         # cosa. Un solo script, la variable explicita, y el banner la imprime.
@@ -228,7 +234,7 @@ def main():
 
     pend = [q for q in rows if q["query"] not in prev]
     print(f"=== {NAME}: {len(rows)} queries ({len(pend)} pendientes)  "
-          f"togglea VAR={VAR}  OFF=bajo / ON=alto  SOLO_ON={SOLO_ON}  FLAGS={FLAGS} ===", flush=True)
+          f"togglea VAR={VAR}  OFF=bajo / ON=alto  SOLO_ON={SOLO_ON}  FLAGS={FLAGS}  SETCFG={SETCFG} ===", flush=True)
     nq = 0
     for i, q in enumerate(rows):
         if q["query"] in prev:

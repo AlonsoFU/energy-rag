@@ -43,3 +43,5 @@ data/eval/preguntas_reales.jsonl
 data/eval/_rem.jsonl
 data/eval/ft_pairs.jsonl
 data/eval/queries_diverse.jsonl
+.gpu_bloqueo
+.gpu_limite

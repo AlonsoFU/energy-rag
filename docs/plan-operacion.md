@@ -1110,3 +1110,73 @@ movimiento medido en el proyecto.
 
 **Pero 67 % sigue < 80 %, asi que el veredicto SOLO BUSCADOR de #68 NO se revierte.** Dicho en
 claro: 1 de cada 3 respuestas del held-out todavia tiene alguna frase que no se sostiene.
+
+
+### EXP #76 — cuantas citas entrega quote-only (criterio fijado ANTES, 2026-09-12)
+
+**De donde sale**: #75 falla `cita_limpia` SOLO porque entrega mas citas (2.72 -> 3.45 en dev).
+No es un defecto del enfoque, es el tope `answer_quote_max=8` heredado sin medir.
+
+**Protocolo contra el autoengaño**: el valor se BARRE en dev y la decision se toma en held-out,
+UNA sola vez. Tunear y despues validar en el mismo set es exactamente como se sobreajusta, y
+este proyecto ya pago ese precio (el eval se media contra su propio regex).
+
+```
+PASO 1 (dev): answer_quote_max in {2, 3, 5}. Gana el que maximice cita_limpia; desempate por
+              cita_ok. NO se mira held-out en este paso.
+PASO 2 (held-out): se corre SOLO el ganador. Criterio de adopcion, contra quote_first (qf_*):
+              cita_ok NO cae > 3   Y   cita_limpia NO cae      EN AMBOS SETS
+              Y  respuestas vacias <= 10 %
+              Si falla -> quote-only queda cerrado, no se prueba un cuarto valor.
+```
+Se reporta latencia y citas/respuesta. La fidelidad no se mide: es 100 % por construccion.
+
+**Prediccion registrada**: con max=3 las citas/respuesta caen cerca de 2.1-2.5 y `cita_limpia`
+vuelve al nivel de quote_first o lo pasa. Si `cita_limpia` NO se recupera al bajar el tope,
+entonces el problema no era el rociado y la hipotesis de #75 estaba mal.
+
+
+### RESULTADO #76 PASO 1 (dev) — gana `answer_quote_max=2`, pero con una sospecha
+
+Base = `qf_dev` (quote_first adoptado). Todas quote-only, misma DB:
+
+| tope | cita_ok | cita_limpia | p | citas/resp | seg |
+|---|---|---|---|---|---|
+| 8 | 83 | 51 | 0.0309 | 3.45 | 90 |
+| 5 | 82 | 53 | 0.0768 | 2.63 | 41 |
+| 3 | 80 | 55 | 0.2379 | 2.20 | 28 |
+| **2** | 80 | **80** | **0.0003** | **1.55** | **26** |
+| (base qf) | 78 | 61 | — | 2.72 | 286 |
+
+**La prediccion registrada FALLO en parte**: dije que con max=3 `cita_limpia` volveria al nivel
+de quote_first. Dio 55 contra 61, no se recupero. Con max=2 lo paso por mucho (80). El efecto
+no era gradual: entre 2 y 3 hay 25 puntos.
+
+**Sospecha que hay que descartar antes de adoptar**: `cita_limpia` exige que TODAS las citas
+sean correctas, asi que **premia estructuralmente decir menos**. Con max=2 las citas unicas
+bajan a 1.39 y las respuestas con UNA sola cita suben a 54/114 (eran 38 en la base). Si la
+metrica solo esta recompensando terquedad, `max=1` deberia puntuar AUN mejor, y entonces el
+numero no significa calidad.
+
+**Guarda anadida (sigue siendo PASO 1, dev, no toca held-out)**: correr `max=1`.
+```
+si cita_limpia SIGUE subiendo y cita_ok NO cae  -> la metrica esta rota, no se adopta por ella
+si cita_ok CAE en max=1                         -> max=2 es un optimo real, no un artefacto
+```
+A favor de que sea real: con max=2 `cita_ok` NO cae (78 -> 80). Si solo estuviera diciendo
+menos, deberia perder golds y no los pierde.
+
+**Hallazgo de implementacion**: `qonly*` NO es quote-only puro. Cuando `_quote_first` no
+verifica ninguna cita, cae a la ruta normal y redacta en prosa (asi se escribio). Medido en la
+muestra: la respuesta 1 de `qonly2_dev` es prosa y la 2 son citas. **Lo medido es un hibrido**,
+y el reporte tiene que decirlo asi.
+
+### INCIDENTE 2026-09-13 22:02 — Xid 79, #76 interrumpido
+
+La GPU se cayó del bus PCIe durante `qonly1_dev` (la guarda de la métrica de #76), a 230 W,
+una hora después de arrancar. Es la **sexta** caída desde el 05-08; dos fueron sin carga y
+una a 180 W, así que no es potencia. Detalle y guardrails en `docs/manual-operacion.md`.
+
+**Estado de #76**: paso 1 hecho (ganó `max=2`); la guarda `qonly1_dev` quedó parcial y
+`qonly2_holdout` sin correr. **No se adopta nada de #76** hasta completar ambos. La cola está
+bloqueada (`.gpu_bloqueo`) y no se retoma hasta revisar el hardware.

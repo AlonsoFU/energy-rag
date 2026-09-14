@@ -15,6 +15,8 @@ HECHAS=logs/cola_hechas.txt
 touch "$HECHAS"
 
 [ -f .watchdog_off ] && exit 0
+# GPU bloqueada por hardware (Xid 79, ver scripts/gpu_guard.sh): solo una persona lo levanta
+[ -f .gpu_bloqueo ] && exit 0
 
 # Los modelos NO viven en ~/.cache: estan en /home/alonso/datos (la raiz se lleno una vez con
 # 253 GB de Ollama y el equipo se cayo). Sin HF_HOME, con HF_HUB_OFFLINE=1 puesto, transformers
@@ -29,6 +31,13 @@ export HF_HUB_OFFLINE=1
 
 # ¿ya hay trabajo REAL corriendo? (solo procesos python, no loops de espera)
 if ps -eo args | grep -E '^[^ ]*python' | grep -qE 'scripts\.|exp_'; then
+  exit 0
+fi
+
+# GUARDA DE GPU (2026-09-13): nada se lanza sin verificar que la GPU existe, que el arranque
+# anterior no termino con Xid 79, y que el tope elegido esta aplicado. Ver gpu_guard.sh.
+if ! ./scripts/gpu_guard.sh; then
+  echo "$(date '+%F %T')  NO LANZO: gpu_guard -- $(tail -1 logs/gpu_guard.log)" >> "$LOG"
   exit 0
 fi
 
