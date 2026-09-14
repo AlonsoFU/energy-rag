@@ -1180,3 +1180,22 @@ una a 180 W, así que no es potencia. Detalle y guardrails en `docs/manual-opera
 **Estado de #76**: paso 1 hecho (ganó `max=2`); la guarda `qonly1_dev` quedó parcial y
 `qonly2_holdout` sin correr. **No se adopta nada de #76** hasta completar ambos. La cola está
 bloqueada (`.gpu_bloqueo`) y no se retoma hasta revisar el hardware.
+
+### RESULTADO #76 GUARDA (2026-09-14) — `max=2` es un óptimo real, no un artefacto de la métrica
+
+La sospecha era que `cita_limpia` premia decir menos y que el ganador `max=2` fuera eso. La
+guarda fijada antes decía: si con `max=1` la métrica sigue subiendo sin perder golds, está rota;
+si `max=1` pierde golds, `max=2` es un óptimo real.
+
+| tope | cita_ok | cita_limpia | citas/resp |
+|---|---|---|---|
+| 2 | **80** | **80** | 1.55 |
+| 1 | 70 | 68 | 1.15 |
+| 2 vs 1 | **p=0.0213** (perdió 13, ganó 3) | **p=0.0042** (perdió 14, ganó 2) | |
+
+Con tope 1 **caen las dos métricas**, con significancia. Si la métrica solo recompensara decir
+menos, `cita_limpia` tendría que haber subido con tope 1, y bajó de 80 a 68. **La guarda pasa:**
+el efecto de `max=2` es real.
+
+Queda el PASO 2 (`qonly2_holdout`) para decidir adopción. Corrió tras el incidente Xid 79 del
+13-09 con los guardrails activos, a 180 W por decisión del usuario.
