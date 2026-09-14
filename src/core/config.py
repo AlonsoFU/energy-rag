@@ -252,7 +252,11 @@ class Settings(BaseSettings):
     # sets y no cae ninguna metrica. Unica clausula del criterio incumplida: mediana <= 130 s
     # (dio 171 s) -- se escribio para evitar que AGREGARA tiempo y lo redujo. Revertir = False.
     answer_quote_first: bool = True
-    answer_quote_max: int = 8
+    # ADOPTADO 2026-09-14 (exp #76): 8 -> 2. Barrido en dev {1,2,3,5,8}, decision en held-out.
+    # Con 8 quote-only rociaba (3.45 citas/resp) y caia cita_limpia; con 1 perdia golds
+    # (cita_ok 80->70, p=0.0213). OJO: tambien limita las citas que ve quote_first si
+    # answer_quote_only se apaga, y ese caso (quote_first con 2) NO se midio.
+    answer_quote_max: int = 2
 
     # exp #75 (2026-09-10, flag OFF hasta medir): QUOTE-ONLY. Requiere answer_quote_first.
     # No redacta: entrega las citas TEXTUALES ya verificadas como subcadena del articulo,
@@ -260,7 +264,12 @@ class Settings(BaseSettings):
     # modelo se equivoque menos, es que la clase de error (parafrasear mal) deja de existir.
     # Sale de #68/#71: el sistema encuentra bien y traduce mal. Lo que hay que medir no es si
     # miente, es si las citas RESPONDEN (cita_ok / cita_limpia sobre el texto entregado).
-    answer_quote_only: bool = False
+    # ADOPTADO 2026-09-14 (exp #76, con answer_quote_max=2). Contra quote_first:
+    #   cita_limpia dev 61->80 (p=0.0003), held-out 52->58; cita_ok 78->80 / 61->62;
+    #   precision held-out 0.78->0.89; latencia mediana 294s->19s dev, 285s->35s held-out.
+    # Es HIBRIDO: si ninguna cita verifica, redacta en prosa (11/114 dev, 11/64 held-out).
+    # Esas respuestas conservan el riesgo de parafrasear mal. Revertir = False.
+    answer_quote_only: bool = True
 
     self_consistency_n: int = 3
 

@@ -1199,3 +1199,36 @@ el efecto de `max=2` es real.
 
 Queda el PASO 2 (`qonly2_holdout`) para decidir adopción. Corrió tras el incidente Xid 79 del
 13-09 con los guardrails activos, a 180 W por decisión del usuario.
+
+### RESULTADO #76 PASO 2 (2026-09-14) — **ADOPTADO: quote-only con tope de 2 citas**
+
+Contra la config adoptada (`quote_first`), misma DB reparada. Criterio fijado antes, cumplido
+en los dos sets:
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok (no cae > 3) | 78 -> 80 | 61 -> 62 |
+| cita_limpia (no cae) | 61 -> **80** (p=0.0003) | 52 -> **58** (p=0.1460) |
+| vacias (<= 10 %) | 0 % | 0 % |
+| precision | 0.43 -> 0.51 | 0.78 -> **0.89** |
+| citas/respuesta | 2.72 -> 1.55 | 2.12 -> 1.58 |
+| latencia mediana | 294 s -> **19 s** | 285 s -> **35 s** |
+
+Guarda de la metrica pasada (con tope 1 caen cita_ok y cita_limpia, ver arriba).
+
+**Caveats que viajan con la adopcion:**
+1. **Es hibrido.** Si ninguna cita verifica como subcadena, cae a redactar en prosa: 11/114 en
+   dev y **11/64 (17 %) en held-out**. La fidelidad "100 % por construccion" vale solo para las
+   respuestas en formato de cita (103/114 y 53/64). La fraccion en prosa conserva el riesgo de
+   parafrasear mal medido en #68-#71.
+2. **La legibilidad no se midio.** `cita_ok` dice si la cita pega con el gold, no si una persona
+   entiende una respuesta hecha solo de citas textuales. Eso lo deciden las preguntas reales del
+   usuario, que siguen pendientes.
+3. En held-out la ganancia de `cita_limpia` no es significativa sola (p=0.146); el criterio pedia
+   "no cae", y no cae.
+4. `answer_quote_max=2` tambien limitaria a `quote_first` si se apaga quote-only; esa
+   combinacion no se midio.
+
+**Cambio de producto:** el sistema deja de redactar respuestas en la gran mayoria de los casos y
+entrega las frases textuales de la ley con su cita. Es mas cerca de "buscador con evidencia" que
+de "asistente que responde", y es consistente con el veredicto SOLO BUSCADOR de #68.
