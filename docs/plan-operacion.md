@@ -1333,3 +1333,23 @@ Caveats:
   cambio. No corren en produccion; si se vuelven a usar, llevar el mismo `num_ctx`.
 - Los vectores de junio difieren 0.998-0.9994 de los que produce hoy la misma funcion. No es por
   el contexto; queda como deuda (re-embeber el corpus con una sola corrida homogenea).
+
+### RESULTADO #77 DEV (2026-09-14) — no mejora; por la letra del criterio ya falla
+
+Contra `qonly2_dev` (config adoptada), misma DB, `embed_4b_num_ctx=4096`:
+
+| | qonly2_dev | reatr_dev |
+|---|---|---|
+| cita_ok | 80/114 | 80/114 (gano 1, perdio 1, p=1.0) |
+| cita_limpia | 80/114 | **79/114** (gano 1, perdio 2, p=1.0) |
+| respuestas en prosa | 11/114 | **11/114** |
+| precision | 0.51 | 0.52 |
+| latencia mediana | 19 s | 36 s |
+
+- **Criterio "cita_limpia NO cae": falla por 1 en dev.** Es ruido (p=1.0), pero el criterio no dice
+  "significativo". #77 NO se adopta.
+- La prosa de dev no baja porque sus 11 casos no son etiquetas mal puestas: 8 son rechazos, 4 de ellos
+  preguntas fuera del corpus. Los casos del glosario estan en held-out.
+- La latencia no es comparable: `qonly2_dev` corrio a 230 W y `reatr_dev` a 180 W.
+- `reatr_holdout` sigue corriendo; informa si el mecanismo rescata los casos del glosario (11/64 en prosa),
+  pero no revierte el veredicto.
