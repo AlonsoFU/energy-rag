@@ -260,6 +260,217 @@ usar el set de 339.
   4 papers evitan la remocion, no nombrado literalmente en ninguno.
 - Papers con ID arXiv 26xx: leidos en HTML, son recientes y de menor recorrido que el resto.
 
+---
+
+# SEGUNDA RONDA (8 agentes) — el plan de la seccion 9 queda SUPERADO
+
+## 11. El plan estaba mal priorizado (agente adversario, evidencia primaria)
+
+**11.1 Limpiar datos rinde mas que agregar maquinaria.** OHR-Bench (2412.02592) mide exactamente
+nuestra falla: contaminacion de parseo propagandose por el pipeline. Con el MEJOR extractor
+(Qwen2.5-VL-72B) la caida end-to-end sigue siendo **14% relativo (5 puntos F1)**; con ruido
+SEMANTICO severo (tokens equivocados, no formato) la caida llega a **~50%**; un parser medio
+(MinerU 30.0 F1) pierde ~17% relativo contra texto limpio (36.1 F1).
+Nuestros **598 articulos con notas BCN incrustadas son el mismo defecto**: metadato del editor
+contaminando la unidad de cita.
+Complemento (2603.24580): subir metricas de retrieval **no garantiza** mejores respuestas cuando
+el retrieval ya es decente.
+
+**11.2 Nuestros evals sinteticos inflan los resultados. Medido.**
+- Consultas generadas por LLM **sobreestiman Recall@10 entre 9% y 20.7%** frente a consultas
+  reales de produccion (Chroma, Generative Benchmarking).
+- **11.91% de las consultas generadas son casi-duplicados** (coseno >=0.9) del documento fuente
+  -> filtracion que hace parecer facil la busqueda.
+- Rahmani et al. (2506.10301) confirma por separado: las colecciones sinteticas son
+  "consistently easier" y sobreestiman en todos los tipos de sistema.
+- **Consecuencia directa:** las fases 0b/0c/1 que yo propuse construyen MAS negativos sinteticos
+  y ajustan un umbral sobre ellos. Es invertir justo donde el sesgo medido es mayor, con CERO
+  consultas reales para corregirlo.
+
+**11.3 La abstencion cuesta caro.** Kamath et al. (2006.09462): el metodo selectivo CALIBRADO
+responde solo el **56%** de las preguntas para sostener 80% de exactitud; el umbral ingenuo
+(MaxProb, el analogo de "senales gratis") solo **48%**. O sea: una version bien hecha de lo que
+propuse **rechaza >40%** de las consultas. Es decision de producto, no mejora gratis. Ademas los
+modelos son sobreconfiados FUERA de dominio -> un umbral ajustado en sintetico nace descalibrado.
+
+**11.4 Lo mas efectivo ya esta construido.** Dahl et al. (2401.01301): GPT-4 sin restriccion
+alucina citas legales **58%** de las veces; la solucion en la que converge el area es forzar
+verificacion contra la fuente = nuestro modo quote-only.
+
+## 12. Nuestro eval es MAS ESTRICTO que la literatura de atribucion
+
+- **ALCE (2305.14627)** define citation recall/precision **por implicacion (NLI)**, nunca contra
+  el ID del documento gold. Si citamos el articulo B y B contiene texto parecido, ALCE lo puntua
+  **correcto**. AIS (2112.12870) y AutoAIS (2212.08037) comparten el mismo punto ciego.
+- **Por eso #77 dio cero:** cuando dos normas tienen redaccion paralela, ni el mecanismo ni las
+  metricas del area distinguen "texto duplicado, cualquiera sirve" de "documento equivocado".
+- **Ninguna taxonomia tiene la categoria** (ALCE, RAGTruth 4 clases, taxonomia de 16 tipos). La
+  unica etiqueta parecida es "misgrounded" de Stanford/JELS, y es **anotacion manual**.
+- AutoAIS correlaciona r=0.96 con humanos **a nivel de sistema**; el propio paper advierte que a
+  nivel de instancia es "much lower and more variable".
+- Dato lateral (2412.18004): hasta **57% de las citas que SI implican la afirmacion** no fueron
+  causalmente usadas para generarla (racionalizacion posterior).
+- **Veredicto: no existe metodo medido y reproducible para nuestro bug exacto.**
+
+## 13. Recuperacion a nivel de articulo
+
+- Nuestro bug tiene nombre: **Document-Level Retrieval Mismatch (DRM)** — el retriever trae el
+  tipo de texto correcto desde el documento equivocado (2510.06999). Arreglo propuesto:
+  **Summary-Augmented Chunking** (anteponer a cada chunk un resumen del documento).
+  **Numeros NO verificados** (el PDF no parseo; solo el abstract).
+- **Lo mejor documentado es afinar el retriever denso.** CLERC (2406.17186): ft-LegalBERT-DPR
+  nDCG@10 **14.67** vs BM25 zero-shot **5.40**; recall@1K 68.5% vs 48.3%. El dominio pesa mas que
+  la arquitectura.
+- Chunking que respeta limites estructurales (LegalBench-RAG, 2408.10343): **P@1 6.4% vs 2.4%**
+  (~2.7x) pero **R@64 62.2% vs 76.4%** (peor recall). Es sobre contratos, no leyes.
+- Lo que gana benchmarks de statutes (COLIEE Task 3) es BM25 + reranker neuronal en dos etapas =
+  lo que ya corremos (CAPTAIN F2~0.764, JNLP~0.753).
+- **Huecos reales:** nadie aislo "chunking estructural" como variable controlada sobre texto de
+  ley; y **las notas de enmienda incrustadas no tienen respuesta en la literatura**. Los 598
+  articulos los resolvemos solos y lo medimos contra nuestro propio eval.
+
+## 14. Senales: el score del reranker NO alcanza solo
+
+- **No existe paper primario** que mida calibracion (ECE/Brier) ni AUROC de scores de
+  cross-encoder (BGE/monoT5/MiniLM/ColBERT) para abstencion. Buscado a proposito en cs.IR,
+  SIGIR, ECIR, TOIS. Solo blogs. **Hueco confirmado.**
+- Lo mas cercano medido (2606.29959): margen top1-top2 **en logits del LLM**, AUROC **0.719**
+  (TriviaQA) / 0.657 (NQ) / 0.583 (MS MARCO) — por DEBAJO de entropia (0.694-0.810).
+- **Calibrar bajo el ECE de 0.185 a 0.039 pero NO cambio el AUROC.** Calibrar reordena
+  probabilidades, no mejora la separacion. Calibrar no salva una senal debil.
+- **Ningun sistema del SOTA usa umbral crudo sobre score del buscador**: CRAG entrena T5-large
+  (84.3%), Self-RAG entrena token ISREL, FLARE usa prob de generacion, Adaptive Retrieval usa
+  popularidad de entidad.
+- QPP (el campo clasico de IR para "saldra bien esta query"): Kendall tau **0.05-0.35**, debil,
+  y nadie la uso para abstencion en RAG.
+
+## 15. Entropia semantica: numeros primarios (Nature SI, CC-BY)
+
+- Modelo de clustering: **DeBERTa-large NLI**. GPT-3.5 como alternativa barata; GPT-4 solo para
+  calificar exactitud.
+- **M=10 en los resultados principales**; texto explicito: "after roughly M=5 there are
+  diminishing returns, although going up to M=10 can still help". **No hay minimo duro.**
+  Nuestro n=3 sigue por debajo de lo probado.
+- AUROC promedio sobre 60 combinaciones modelo x dataset (respuesta corta): **SE 0.792**,
+  SE discreta 0.790, entropia naive 0.760, **p(True) 0.683**, regresion sobre embeddings 0.708.
+- Ablacion del modelo de implicacion (LLaMA-2-70B, 8 generaciones): DeBERTa prom **0.78**
+  (TriviaQA 0.83), GPT-3.5 0.83, GPT-4 0.80, LLaMA-2-70B como juez 0.71.
+- Acuerdo humano: implicacion Humano-Humano 87%, Humano-GPT-4 87%.
+
+## 16. Jueces chicos y abiertos (dato que faltaba para decidir la fase 2)
+
+LLM-AggreFact (balanced accuracy): **Bespoke-MiniCheck-7B 77.4** > Claude-3.5-Sonnet 77.2 >
+gpt-4o 75.9 > Qwen2.5-72B 75.6 > **MiniCheck-FT5 (0.8B) 75.0** > Llama-3.3-70B 74.5.
+- **Un verificador AFINADO de 0.8B empata con GPT-4o.** Pero ningun modelo chat generico de
+  7B-32B aparece en estos leaderboards como juez: los unicos chicos que llegan son fine-tunes
+  especializados. **Un Qwen local sin afinar no tiene numero publicado.**
+- **FaithBench (NAACL 2025), casos adversariales:** TODO se cae a cerca del azar. Mejor sistema
+  62.31% BA; GPT-4o 56.18%; MiniCheck-DeBERTa 55.21%; **HHEM-2.1-Open 51.98%**.
+- Sesgos de juez (secundario, no verificado a fondo): auto-preferencia ~10-25 pts, verbosidad
+  ~15-30 pts, posicion ~10-15 pts.
+
+## 17. Español es MAS DIFICIL. Evidencia directa
+
+**Mu-SHROOM (SemEval-2025 Task 3)**, deteccion de spans alucinados en 14 idiomas:
+**español quedo ULTIMO, 14/14, IoU medio 0.31** (italiano 1ro con 0.51). Mejor sistema en español
+IoU 0.53. El acuerdo entre anotadores en español tambien fue de los mas bajos (0.45 val /
+0.51 test).
+-> Cualquier numero de deteccion de alucinaciones sacado de papers en ingles **no se transfiere**.
+- **HHEM-2.1-Open es solo ingles** (el español esta solo en la version comercial 2.3).
+- **Azure groundedness: solo ingles, sin ninguna cifra publicada.**
+- NeMo self-check-facts: **80%** (2310.10501, autoria del propio proveedor) — unico numero que
+  existe.
+- **Sin evidencia** sobre si la abstencion transfiere entre idiomas. Hueco abierto.
+
+## 18. NLI en español, offline
+
+| modelo | params | XNLI es | licencia | verificado |
+|---|---|---|---|---|
+| **mDeBERTa-v3-base-xnli-multilingual-nli-2mil7** | 279M | **83.2%** | MIT | model card del autor |
+| XLM-RoBERTa-large-XNLI | 560M | arquitectura base 85.1% es | MIT | inferido, la card no da tabla |
+| Recognai/bert-base-spanish-wwm-cased-xnli (BETO) | 110M | 79.9% | MIT | model card |
+| PlanTL-GOB-ES | — | **no existe checkpoint NLI** | — | buscado en su org HF |
+
+- **No existe dataset ni modelo NLI legal en español.** Usar mDeBERTa sobre normativa chilena es
+  transferencia de dominio **no probada**; hay que etiquetar 30-50 pares a mano antes de confiar.
+- Costo estimado (no medido): n=5 -> 20 pases por query -> ~2280 pases para dev = 1-4 min.
+
+## 19. Deteccion del lado de la consulta + evidencia con usuarios
+
+- **Mahalanobis** sobre embeddings gana en falsos aceptados: **FPR95 6.8 vs 11.6** (CLINC150),
+  y 0.5 vs 2.2 en ROSTD (4x). Tenemos 2960 articulos para ajustar centroides/covarianza.
+- **No hay ganador universal** (2109.06827): en desplazamiento SEMANTICO (nuestro caso: mismo
+  dominio, norma equivocada) ganan los metodos tipo calibracion; en desplazamiento de fondo gana
+  densidad/perplejidad.
+- **Hueco real:** nadie aplico deteccion OOD a consultas contra un corpus fijo de recuperacion.
+- **Baño de humildad (SQuAD 2.0):** mejor modelo 66.3 F1, humano 89.5, y **abstenerse SIEMPRE da
+  48.9 F1**. Los clasificadores de "no tiene respuesta" son debiles incluso con el contexto.
+- **Contrapeso (Adaptive-RAG 2403.14403):** su clasificador acierta solo **54.52%** y aun asi el
+  sistema mejora y baja ~55% la latencia. Una compuerta mediocre puede rendir.
+- **HCI, n=184 (2402.07632):** confianza **bien calibrada +20%** de exactitud (IC95 0.18-0.23);
+  **mal calibrada +2%** (IC95 -0.00-0.04) **y AUMENTA el sesgo de automatizacion**.
+  -> Mostrar un nivel de confianza sin calibrar **es daniño**, no neutro. No mostrar nada hasta
+  tener la curva riesgo-cobertura medida.
+
+## 20. Obligaciones legales: NINGUNA vinculante aplica
+
+- **AI Act (UE 2024/1689)**: Anexo III(8)(a) cubre sistemas usados **por o para autoridades
+  judiciales**, no herramientas de investigacion legal. Art. 6(3) exime ademas tareas
+  procedimentales estrechas (recuperacion/clasificacion de documentos es el ejemplo de los
+  considerandos). Art. 50 (transparencia) aplicaria solo si fuera producto publico. Aplicacion
+  general 2 ago 2026. Y es jurisdiccion UE: proyecto chileno queda fuera igual.
+- **Chile**: no hay ley vigente. Proyecto (boletines 15.869-19 + 16.821-19 refundidos) aprobado
+  en primer tramite en la Camara el 13 oct 2025, ahora en el Senado. **Circular N°711 (2024)**
+  del Ministerio de Ciencia rige solo para organismos del Estado.
+- **ABA Formal Opinion 512 (29 jul 2024)**: obliga al **humano** a verificar. No puede imponerle
+  nada al sistema.
+- **NIST AI 600-1 (jul 2024)**: voluntario y de PROCESO. Define "confabulation" incluyendo
+  "confabulated logic or citations". Acciones concretas: **MS-2.5-003** (verificar fuentes y
+  citas antes de desplegar y en monitoreo continuo), MG-4.1-002 (monitoreo post-despliegue),
+  MG-4.1-004, MG-4.3-002 (registrar errores y cuasi-fallas), MG-3.2-009.
+- **Dato empirico que si justifica todo esto:** el registro publico de casos judiciales con
+  alucinaciones va en **2.041 casos** (datos al 14 sep 2026), **1.690 de ellos citas
+  fabricadas**; EEUU 1.395, Canada 217, Australia 111. Crece ~1 caso por dia.
+- **Veredicto:** quote-only, tope 2 y rechazo cuando no encuentra es **criterio de ingenieria
+  informado**, respaldado por evidencia empirica, no exigido por ninguna norma.
+
+---
+
+# PLAN FINAL (reemplaza la seccion 9)
+
+Orden por rendimiento medido esperado, no por elegancia:
+
+**A. Limpiar los 598 articulos con notas BCN.** Es la palanca con mayor respaldo (OHR-Bench:
+10-50%). Ataca a la vez el 17% en prosa (causa raiz ya diagnosticada) y probablemente parte de
+las 29/103. Criterio fijado antes: cita_ok y cita_limpia en dev y held-out, mas recuento de
+articulos con etiqueta contaminada. Sin regex como mecanismo principal (regla del proyecto).
+
+**B. Conseguir 50-100 consultas reales ANTES de ajustar cualquier umbral.** Todo lo aguas abajo
+es invalido sin esto: sobreestimacion medida de 9-20.7%, 11.91% de casi-duplicados, y
+sobreconfianza fuera de dominio.
+
+**C. Diagnosticar la raiz de las 29/103** (misgrounded). Hipotesis a separar: contaminacion de
+etiqueta (A lo arregla), redaccion paralela entre normas (entonces el gold es discutible y el
+eval esta mal), o mezcla de rankings. **Ninguna herramienta del area detecta esto**; es
+diagnostico propio.
+
+**D. Instrumentar senales** (`_bge_max`, margen, acuerdo entre muestras, n citas verificadas).
+Barato, no cambia respuestas. Pero **no confiar en umbral crudo**: sin evidencia primaria, y el
+analogo medido da AUROC 0.58-0.72.
+
+**E. Abstencion**, recien despues de A-D, sabiendo el precio: **>40% de rechazo** para sostener
+80% de exactitud. Es decision de producto y hay que preguntarla, no asumirla.
+
+**F. Mostrar confianza al usuario: NO, hasta tener la curva medida.** Mal calibrada da +2% y
+aumenta el sesgo de automatizacion.
+
+**G. Conformal: aplazado.** Sin consultas reales no hay distribucion de calibracion valida.
+
+**Descartado por evidencia:** juez de suficiencia como primer paso (ningun modelo chat generico
+chico tiene numero publicado como juez; en casos adversariales todos caen cerca del azar);
+negativos sinteticos como base de calibracion (sesgo medido); metricas de atribucion estandar
+(ALCE/AIS/AutoAIS son ciegas al ID del documento, mas laxas que nuestro eval actual).
+
 ## Fuentes primarias leidas
 
 Stanford/JELS: https://dho.stanford.edu/wp-content/uploads/Legal_RAG_Hallucinations.pdf ·
@@ -280,3 +491,55 @@ Selective QA: https://ar5iv.labs.arxiv.org/html/2006.09462 ·
 LegalBench-RAG: https://arxiv.org/abs/2408.10343 ·
 CLERC: https://arxiv.org/abs/2406.17186 ·
 HHEM: https://huggingface.co/vectara/hallucination_evaluation_model
+
+## Fuentes primarias leidas — SEGUNDA RONDA
+
+Nature semantic entropy (SI, CC-BY):
+https://ora.ox.ac.uk/objects/uuid:0653d09e-9368-4eb1-98bb-50d9dda7d3e5/files/r0g354g31t ·
+Mu-SHROOM SemEval-2025 (español ultimo de 14): https://aclanthology.org/2025.semeval-1.322.pdf ·
+FaithBench NAACL 2025: https://aclanthology.org/2025.naacl-short.38.pdf ·
+LLM-AggreFact leaderboard: https://llm-aggrefact.github.io/ ·
+MiniCheck: https://arxiv.org/html/2404.10774v2 ·
+ALCE: https://arxiv.org/html/2305.14627 · AIS: https://arxiv.org/abs/2112.12870 ·
+AutoAIS / Attributed QA: https://ar5iv.labs.arxiv.org/html/2212.08037 ·
+RARR: https://ar5iv.labs.arxiv.org/html/2210.08726 ·
+Attribute-First-Then-Generate: https://ar5iv.labs.arxiv.org/html/2403.17104 ·
+Correctness is not Faithfulness: https://arxiv.org/abs/2412.18004 ·
+RAGTruth: https://ar5iv.labs.arxiv.org/html/2401.00396 ·
+OHR-Bench (calidad de parseo): https://arxiv.org/html/2412.02592v4 ·
+Synthetic vs real queries: https://www.trychroma.com/research/generative-benchmarking ·
+Rahmani et al. (colecciones sinteticas): https://arxiv.org/pdf/2506.10301 ·
+Retrieval gains != answer gains: https://arxiv.org/pdf/2603.24580 ·
+Seven Failure Points: https://arxiv.org/abs/2401.05856 ·
+Kamath selective QA: https://arxiv.org/abs/2006.09462 ·
+Dahl et al. alucinacion legal: https://arxiv.org/abs/2401.01301 ·
+DRM / Summary-Augmented Chunking: https://arxiv.org/abs/2510.06999 ·
+LeSICiN: https://ar5iv.labs.arxiv.org/html/2112.14731 ·
+COLIEE 2023 overview: https://pmc.ncbi.nlm.nih.gov/articles/PMC11026282/ ·
+Margen de logits / Know Before You Fetch: https://arxiv.org/html/2606.29959 ·
+TARG: https://arxiv.org/abs/2511.09803 ·
+Shallow Cross-Encoders: https://arxiv.org/abs/2403.20222 ·
+Mahalanobis OOD: https://arxiv.org/pdf/2101.03778 ·
+Tipos de OOD: https://arxiv.org/html/2109.06827 ·
+CLINC150: https://arxiv.org/pdf/1909.02027 ·
+When Not to Trust LMs: https://arxiv.org/html/2212.10511 ·
+FLARE: https://arxiv.org/html/2305.06983 ·
+Adaptive-RAG: https://arxiv.org/html/2403.14403 ·
+HCI confianza calibrada (n=184): https://arxiv.org/abs/2402.07632 ·
+mDeBERTa-xnli: https://huggingface.co/MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 ·
+XNLI: https://arxiv.org/abs/1809.05053 · XLM-R: https://ar5iv.labs.arxiv.org/html/1911.02116 ·
+NIST AI 600-1: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf ·
+AI Act Anexo III: https://artificialintelligenceact.eu/annex/3/ ·
+AI Act art. 50: https://artificialintelligenceact.eu/article/50/ ·
+Registro de casos con alucinaciones: https://www.damiencharlotin.com/hallucinations/ ·
+NeMo Guardrails: https://arxiv.org/abs/2310.10501
+
+## Advertencias sobre la segunda ronda
+
+- Varios PDF no parsearon (Stanford por un agente, DRM 2510.06999, QPP de Ferro). Lo marcado
+  como no verificado esta indicado en cada seccion.
+- Los numeros de sesgo de juez (auto-preferencia, verbosidad, posicion) vienen de resumenes de
+  busqueda, no de tabla leida.
+- Papers con ID arXiv 25xx/26xx: recientes, menos recorrido que el resto.
+- HHEM: las cifras altas son del propio proveedor; en FaithBench (academico, adversarial) cae a
+  51.98%.
