@@ -1353,3 +1353,42 @@ Contra `qonly2_dev` (config adoptada), misma DB, `embed_4b_num_ctx=4096`:
 - La latencia no es comparable: `qonly2_dev` corrio a 230 W y `reatr_dev` a 180 W.
 - `reatr_holdout` sigue corriendo; informa si el mecanismo rescata los casos del glosario (11/64 en prosa),
   pero no revierte el veredicto.
+
+### RESULTADO #77 HELD-OUT (2026-09-14) — confirma: cero efecto
+
+`scripts.comparar_corridas data/eval/results/qonly2_holdout data/eval/results/reatr_holdout`:
+
+| | qonly2_holdout | reatr_holdout |
+|---|---|---|
+| pares comparados | 21 | 21 (A=64 B=64) |
+| cita_ok | 21/21 | 21/21 (gano 0, perdio 0, p=1.0) |
+| cita_limpia | 21/21 | 21/21 (gano 0, perdio 0, p=1.0) |
+| precision | 0.95 | 0.93 |
+| citas/respuesta | 1.71 | 1.67 |
+
+- **VEREDICTO FINAL #77: NO SE ADOPTA.** `answer_quote_reatribuir` queda en `False`. Falla el criterio en
+  dev (cita_limpia 80->79) y en held-out no mueve nada: 0 ganadas, 0 perdidas.
+- No rescata los casos del glosario. La hipotesis era que la procedencia por substring corrigiera las
+  etiquetas contaminadas por notas BCN; el mecanismo exige `len(donde)==1` y en esos casos no se cumple.
+- El 17% en prosa sigue abierto. Su causa medida es contaminacion de etiqueta (notas BCN dentro del texto
+  del articulo), no desajuste de substring -> la palanca es limpiar las notas de los 598 articulos, no
+  reatribuir.
+
+### DIAGNOSTICO (2026-09-16) — que senal existe hoy para abstenerse
+
+Sobre los `result.json` ya guardados, cruzando cada senal contra `cita_ok`:
+
+| senal | dev (114) | held-out (64) | sirve en produccion? |
+|---|---|---|---|
+| `n_cits` | 0: 4F/4T, 1: 7F/31T, 2: 22F/43T | 0: 1F, 1: 37T, 2: 1F/17T | **NO**, casi no separa |
+| `n_uniq` | 1: 15F/39T, 2: 15F/37T | 1: 1F/42T, 2: 16T | **NO** |
+| `precision` | 0.0: 34F/4T, >0: 76T/0F | 0.0: 2F, >0: 62T/0F | **NO, usa el gold** |
+
+- `precision` separa casi perfecto (dev: 34 de 38 con precision 0 son fallas), pero se calcula CONTRA el
+  gold -> es metrica de eval, no senal disponible al responder. No se puede usar como umbral.
+- Las senales que si estarian disponibles en produccion (max BGE del pool, acuerdo entre las 3 muestras de
+  autoconsistencia) **NO se persisten** en `result.json`. Sin instrumentarlas no se puede calibrar ningun
+  umbral de abstencion.
+- **Consecuencia para el plan de abstencion:** la fase 0 no es solo construir negativos duros; hay que
+  guardar por query `_bge_max`, acuerdo de autoconsistencia y n de citas verificadas. Sin eso, la fase 1
+  (abstencion con senales gratis) no es medible.
