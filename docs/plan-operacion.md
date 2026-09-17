@@ -1600,6 +1600,40 @@ Orden de reversion (las dos etapas, en este orden): `reembeber_limpiados.py --re
 (vectores viejos, respaldo `fragmentos_bak_emb_20260917`) y despues
 `limpiar_notas_bcn.py --revertir` (texto, respaldo `*_bak_notas_20260906`).
 
+**REVERTIDO (2026-09-17), decision del usuario: "revertir, es tu regla".**
+
+```
+1) reembeber_limpiados.py --revertir  -> 1120 fragmentos vuelven a sus vectores previos
+2) limpiar_notas_bcn.py  --revertir  -> 1122 articulos, 1120 fragmentos, 692 incisos
+```
+
+Verificacion post-revert:
+
+| control | resultado |
+|---|---|
+| articulos con fecha `D.O.` | 1003 (identico al estado previo) |
+| articulos con `Art. X N°` | 737 (identico al estado previo) |
+| vectores identicos al respaldo | **1120/1120** |
+| textos identicos al respaldo | **1122/1122** |
+
+La DB quedo exactamente como antes del experimento. El orden importa y se respeto: revertir el
+texto primero habria dejado el desajuste al reves (texto viejo con vectores del texto limpio).
+
+**QUE QUEDA VIVO DE ESTE HILO (no se pierde el conocimiento aunque se revirtiera el cambio):**
+
+1. La contaminacion por notas BCN es REAL y esta cuantificada: 598 articulos con fecha D.O.
+   sobre 3252 visibles del dominio. El caso testigo es verificable: la respuesta "la SEC se
+   crea por la Ley 20402" es falsa (la crea la 18410) y ese numero sale de la nota.
+2. Limpiarla **no mueve la metrica adoptada**: dev 80->79, held-out 58->62, y re-embeber no
+   cambio nada. Medido dos veces, ~7 h de GPU en total.
+3. **El cuello NO es este.** Diagnostico del mismo dia: 18 de 28 fallas de dev son porque el
+   gold NI LLEGA al pool, 20 de 28 son `cx_coloquial`. Held-out trae el gold 64/64.
+4. Si se reabre, la metrica que corresponde NO es `cita_limpia` sino el juez de fidelidad
+   (#68), que es el que mide el dano real de citar la fuente equivocada. Criterio nuevo, fijado
+   ANTES, y volver a medir.
+5. Los scripts quedan listos y probados en ambos sentidos: `limpiar_notas_bcn.py`,
+   `reembeber_limpiados.py`, cada uno con respaldo y `--revertir` verificados en vivo.
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
