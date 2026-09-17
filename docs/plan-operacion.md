@@ -1490,7 +1490,12 @@ no. La ganancia que mida el eval es un PISO, no el techo.
 - De las 10 de GENERACION, **solo 1 tenia el gold en rank 0; mediana de rank 5**. O sea ni
   esas son "el modelo ignoro lo que tenia delante": el gold llegaba hondo.
 - **cx_coloquial concentra 20 de 28 fallas.** Es el muro de vocabulario coloquial, ya
-  identificado en exp #74 (`concept_inference`, hoy OFF).
+  identificado hace tiempo. **CORRECCION:** primero escribi "exp #74 (`concept_inference`)" y es
+  falso en las dos mitades. #74 es el **modelo denso 27B**, cerrado por la compuerta.
+  `concept_inference` es el **experimento 16** (`docs/experimentos-registro.md`), medido el
+  2026-06-13: **retrieval +3 / generacion -1 -> RECHAZADO por trade-off**. No es un candidato
+  listo: si se reabre, hay que explicar que cambio desde entonces (hoy corre quote-only, que no
+  existia en junio) y fijar criterio nuevo antes.
 
 **Consecuencia para el plan:** la palanca A (limpiar notas) ataca la contaminacion del TEXTO,
 pero el cuello medido esta ANTES, en traer el articulo. Lo que mas respalda la evidencia
