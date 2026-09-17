@@ -1424,6 +1424,51 @@ Cruce de las 30 respuestas con `cita_ok=False` de `qonly2_dev` contra `articulos
   normalizacion: `unicodedata.NFKD` convierte `º` en `o`, asi que "149" nunca calzaba con
   "149º". Corregido quitando el ordinal ANTES de NFKD -> ausentes reales = 0.
 
+### #69a APLICADO (2026-09-17) — la limpieza corrio; veredicto PENDIENTE del eval
+
+`scripts/limpiar_notas_bcn.py --apply`, autorizado explicitamente por el usuario tras
+explicarle el riesgo. Aplicado: **1122 articulos, 1120 fragmentos, 692 incisos**. Respaldo en
+`articulos_bak_notas_20260906`, `fragmentos_bak_notas_20260906`,
+`fragmentos_inciso_bak_notas_20260906` (3 tablas, verificadas). Reversible con `--revertir`.
+
+**Efecto sobre la contaminacion (toda la tabla `articulos`, 5354 filas):**
+
+| patron | antes | despues |
+|---|---|---|
+| fecha `D.O. dd.mm.aaaa` | 1003 | **21** |
+| referencia `Art. X N°` | 737 | **30** |
+
+**Verificacion de que no se comio texto real.** 200 de las 1122 filas encogen > 25 % (la
+medicion de 2026-09-06 predecia 20, es 10x mas, por eso se leyo una muestra de 8 al azar):
+
+- `- Los nuevos empalmes y |Decreto 1, ENERGÍA Art. único N° 90 i y ii D.O. 13.06.2026| equipos
+  de medida...` -> texto reunido correctamente. Es el arreglo que se buscaba.
+- `- DEROGADO |DTO 291, ECONOMIA Art. Segundo Nº 1 D.O. 04.08.2008|` -> `- DEROGADO`. Correcto.
+- `Artículo 16: Deroga|nota|do.` -> `Artículo 16: Derogado.` La nota PARTIA la palabra.
+- `- Los precios |D.F.L. Nº 1, de 1982, Minería|` (43 chars) -> `- Los precios` (13 chars).
+  **Ya era basura antes** de limpiar: la segmentacion vieja habia cortado el cuerpo. No es
+  dano nuevo, pero explica el salto de filas cortas.
+
+**Residuo a vigilar (NO resuelto):**
+
+| | valor |
+|---|---|
+| filas que quedaron vacias | 8 (5 marcadas `fantasma`, **3 visibles**) |
+| articulos < 60 chars, total | 341 (127 fantasma, 66 derogados, **148 visibles**) |
+| de esos visibles, con fragmentos indexados | 149 |
+
+O sea quedan ~148 articulos casi vacios que el buscador PUEDE devolver. La regla `fantasma` de
+#69b no los cubre. Candidato a una pasada de marcado, medida aparte.
+
+**Veredicto pendiente.** El criterio (fijado 2026-09-06) se decide con `limpio2_dev` /
+`limpio2_holdout` contra `qonly2_dev` / `qonly2_holdout`:
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae   dev Y held-out  -> se queda
+cae en cualquiera de los dos                                -> --revertir
+```
+**CAVEAT:** limpia el TEXTO pero NO re-embebe. BM25 si cambia (tsv recalculado), los vectores
+no. La ganancia que mida el eval es un PISO, no el techo.
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,

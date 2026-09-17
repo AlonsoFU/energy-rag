@@ -1,4 +1,17 @@
-# PLAN MAESTRO v28 (2026-09-14) -- exp #77: reatribuir la cita por procedencia
+# PLAN MAESTRO v29 (2026-09-17) -- #69a aplicado: medir la limpieza de notas BCN
+#
+# `scripts/limpiar_notas_bcn.py --apply` corrio el 2026-09-17: 1122 articulos, 1120 fragmentos,
+# 692 incisos. Respaldo en *_bak_notas_20260906, reversible con --revertir.
+# CRITERIO (fijado el 2026-09-06, NO se reescribe):
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out   -> se queda
+#     cae en cualquiera de los dos                                   -> --revertir
+# Base de comparacion: qonly2_dev / qonly2_holdout (misma config, DB sucia).
+# CAVEAT: limpia el TEXTO pero NO re-embebe (etapa b pendiente); los vectores siguen calculados
+# sobre el texto viejo. BM25 si cambia (tsv se recalcula). La ganancia medida es un PISO.
+limpio2_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio2_dev venv/bin/python -m scripts.exp_think_paired
+limpio2_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio2_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v28 (2026-09-14, ya ejecutado) -- exp #77: reatribuir la cita por procedencia
 #
 # Diagnostico 9/9 del 17 % de held-out en prosa: el modelo copia bien y ETIQUETA mal (toma la
 # referencia de notas BCN, "[Art. primero N° 8, d)]", o inventa el numero). Criterio fijado antes
