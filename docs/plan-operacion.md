@@ -1374,6 +1374,91 @@ Contra `qonly2_dev` (config adoptada), misma DB, `embed_4b_num_ctx=4096`:
   del articulo), no desajuste de substring -> la palanca es limpiar las notas de los 598 articulos, no
   reatribuir.
 
+### EXP #78 (2026-09-17) — aviso deterministico en la prosa (`answer_prosa_marcar`, OFF)
+
+**Medicion previa** sobre `qonly2_dev` + `qonly2_holdout`: 13 respuestas caen a prosa y
+**0 de 13 usan lenguaje de duda**, pese a que el prompt de quote-first pide "si las citas no
+responden la pregunta, dilo". Coincide con arXiv 2608.22228: la abstencion por prompt falla
+cuando el contexto es plausible pero equivocado.
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| se nego | 8 (7 %) | 1 (1.6 %) |
+| negativas correctas | 4 | 0 |
+| **negativas indebidas** | **4** | **1** |
+| respondio en prosa | 3 | 10 |
+| prosa con lenguaje de duda | **0/3** | **0/10** |
+
+**Cambio:** si quote-only no verifico NINGUNA cita como substring, se antepone un aviso.
+- **NO es un porcentaje de confianza.** Es el hecho binario "hubo o no hubo calce literal".
+  Confianza MAL calibrada da +2 % y AUMENTA el sesgo de automatizacion (n=184, arXiv
+  2402.07632); bien calibrada da +20 %. Un hecho binario no requiere calibracion.
+- **NO se rechaza.** De las 13 en prosa, **12 tenian la cita correcta** (held-out 10/10,
+  dev 2/3). Negarse botaria 12 buenas para evitar 1 mala.
+
+**Invariante:** el aviso no lleva corchetes ni `REFUSAL_TEXT` -> `extract_citations` y `refuso`
+no cambian -> `cita_ok` / `cita_limpia` / `precision` deben quedar IGUALES. Protegido por
+`tests/pipelines/test_prosa_marcar.py` (5 tests). Las 3 fallas de `test_generate.py` son
+PREVIAS, verificadas identicas por nombre con los cambios stasheados.
+
+Se agrega `cita_verificada` al retorno de `generate_answer` (instrumentacion, fase D).
+
+### DIAGNOSTICO (2026-09-17) — las 30 fallas de dev contra la base
+
+Cruce de las 30 respuestas con `cita_ok=False` de `qonly2_dev` contra `articulos`:
+
+| | casos |
+|---|---|
+| el articulo gold EXISTE en la DB | **28 de 30** |
+| gold derogado | 0 |
+| sin gold definido (ambiguas) | 2 |
+| **cito otra norma completa** | **19** |
+| cito la norma correcta, otro articulo | 9 |
+| la cita emitida TAMBIEN esta literal en el gold | 2 |
+
+- **La respuesta existe y el sistema cito otra cosa.** No falta el articulo: se trae el
+  documento equivocado. Es el "Document-Level Retrieval Mismatch" de arXiv 2510.06999.
+- Los **2 de texto paralelo** son casos donde el gold es discutible (la frase esta en ambos).
+  Explican solo el 7 %: la hipotesis "el gold esta mal" NO salva al resto.
+- **CAVEAT DE METODO:** la primera pasada reporto "11 golds ausentes". Era un bug MIO de
+  normalizacion: `unicodedata.NFKD` convierte `º` en `o`, asi que "149" nunca calzaba con
+  "149º". Corregido quitando el ordinal ANTES de NFKD -> ausentes reales = 0.
+
+### ESTADO REAL DE #69a (verificado 2026-09-17) — NUNCA SE APLICO
+
+`scripts/limpiar_notas_bcn.py` existe desde `df97291` con criterio fijado, pero
+**las tablas de respaldo `*_bak_notas_20260906` NO existen en la DB** (solo estan
+`articulos_bak_69b`, `fragmentos_bak_69b`, `fragmentos_definicion_bak*`). O sea la limpieza
+quedo encolada y nunca corrio.
+
+Estado de la DB hoy (`articulos` visibles del dominio = 3252, excluye fuera_de_dominio,
+fantasma y derogado):
+
+| patron en `articulos.texto` | articulos |
+|---|---|
+| fecha `D.O. dd.mm.aaaa` | **598** |
+| referencia `Art. X N°` | 413 |
+
+Ensayo en seco de hoy: **1122 articulos, 1120 fragmentos, 692 incisos** cambiarian.
+
+**CAVEAT:** las notas BCN **no llevan corchetes** en el texto; el formato real es
+`Decreto 70, ENERGIA / Art. primero N° 8, i) / D.O. 05.06.2024`. Los corchetes que se ven en
+las citas (`[Art. primero N° 8, d)]`) los agrega el MODELO al citar. Buscar corchetes en la
+DB da 0 y lleva a concluir, falsamente, que no hay contaminacion.
+
+**Criterio (ya fijado el 2026-09-06, no se reescribe):**
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae        dev Y held-out   -> se queda
+fidelidad: NO_SOPORTADA baja o fiel_estricto +5   secundario      -> gana
+cae -> --revertir
+```
+**Riesgo declarado:** la etapa a limpia el TEXTO pero no re-embebe; los vectores quedan
+calculados sobre el texto viejo hasta la etapa b. Comparacion valida igual porque el pipeline
+es determinista, pero la ganancia medida es un PISO, no el techo.
+
+Sets: dev = `data/eval/queries_operativas_v1.jsonl` (114);
+held-out = `data/eval/queries_fraseos_v1.jsonl` (64).
+
 ### DIAGNOSTICO (2026-09-16) — que senal existe hoy para abstenerse
 
 Sobre los `result.json` ya guardados, cruzando cada senal contra `cita_ok`:
