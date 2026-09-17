@@ -1469,6 +1469,42 @@ cae en cualquiera de los dos                                -> --revertir
 **CAVEAT:** limpia el TEXTO pero NO re-embebe. BM25 si cambia (tsv recalculado), los vectores
 no. La ganancia que mida el eval es un PISO, no el techo.
 
+### RESULTADO #69a (2026-09-17) — los dos sets se CONTRADICEN; decision del usuario
+
+`limpio2_dev` (2 h 25) y `limpio2_holdout` (1 h 05) contra `qonly2_*`, misma config, DB limpia.
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok | 80 -> 80 (gano 6, perdio 6) p=1.0 | 62 -> 62 (gano 0, perdio 0) |
+| cita_limpia | 80 -> **79** (gano 5, perdio 6) p=1.0 | 58 -> **62** (gano 4, **perdio 0**) p=0.125 |
+| precision | 0.51 -> 0.50 | 0.89 -> **0.94** |
+| citas/respuesta | 1.55 -> 1.54 | 1.58 -> 1.34 |
+
+**Por la letra del criterio FALLA**: `cita_limpia` cae 1 en dev. Mismo caso que #77.
+
+**Pero el mecanismo esta CONFIRMADO caso por caso**, que es lo que #77 no tenia:
+
+- Held-out, las 4 ganadas son EXACTAMENTE las del glosario que la nota BCN mal-etiquetaba:
+  antes `[Art. primero N° 8, d)]` (rechazada por el verificador), ahora `[Art. 13 de 250604]`.
+  Es la prediccion registrada el 2026-09-06, cumplida. **0 perdidas.**
+- Dev gana el caso que ORIGINO todo el hilo: `[Art. 1 de 29819] «Créase la Superintendencia de
+  Electricidad y Combustibles...»`. Antes la respuesta afirmaba que la SEC la crea la Ley 20402,
+  que es el numero que venia en la nota.
+- **Las 6 perdidas de dev NO son de etiqueta, son de retrieval**: trae otro articulo
+  (`Art. 48 de 1160108` -> `Art. 77 de 124102`; `Art. 163 de 258171` -> `Art. 291-26 de 124102`).
+  5 de 6 son `cx_coloquial`, el frente que el diagnostico de hoy ya senalo como cuello.
+
+**Causa del revoloteo:** la limpieza cambia el texto y el `tsv` (BM25), pero **NO re-embebe**.
+El denso sigue apuntando al texto viejo -> los dos generadores de candidatos quedan
+desincronizados y el orden del pool baila. La etapa b (re-embeber las 1120 filas tocadas)
+existe justamente para esto y NO se corrio.
+
+**Lectura honesta:** 6 ganadas y 6 perdidas en dev es ruido, no dano (p=1.0); held-out gana 4
+sin perder ninguna y sube precision. La medicion es un PISO: falta la etapa b.
+
+**NO se decide solo.** El criterio dice revertir; la evidencia de mecanismo dice completar la
+etapa b y volver a medir. Queda para el usuario, y ademas muta la DB (requiere su permiso).
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
