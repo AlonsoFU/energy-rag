@@ -1424,12 +1424,20 @@ Cruce de las 30 respuestas con `cita_ok=False` de `qonly2_dev` contra `articulos
   normalizacion: `unicodedata.NFKD` convierte `º` en `o`, asi que "149" nunca calzaba con
   "149º". Corregido quitando el ordinal ANTES de NFKD -> ausentes reales = 0.
 
-### ESTADO REAL DE #69a (verificado 2026-09-17) — NUNCA SE APLICO
+### ESTADO REAL DE #69a (verificado 2026-09-17) — SUSTITUIDO por #69b, con RESIDUO medible
 
-`scripts/limpiar_notas_bcn.py` existe desde `df97291` con criterio fijado, pero
-**las tablas de respaldo `*_bak_notas_20260906` NO existen en la DB** (solo estan
-`articulos_bak_69b`, `fragmentos_bak_69b`, `fragmentos_definicion_bak*`). O sea la limpieza
-quedo encolada y nunca corrio.
+**CORRECCION de una afirmacion previa mia en este mismo doc.** Primero escribi que #69a
+"nunca se aplico", dando a entender olvido. Es enganoso: #69a fue **deliberadamente
+sustituido por #69b** (ver seccion #69b, linea "Sustituye a #69a"), porque la nota BCN no
+solo ensucia el texto, ademas CORTA el articulo al segmentar, y eso el limpiador en sitio no
+lo arregla. #69b **si se aplico**: existen `articulos_bak_69b` y `fragmentos_bak_69b`, y
+`limpio_dev` / `limpio_holdout` son sus corridas de medicion.
+
+Lo literalmente cierto: `scripts/limpiar_notas_bcn.py` (#69a) nunca corrio con `--apply`
+(no existen las tablas `*_bak_notas_20260906`).
+
+**El residuo SI existe y es medible.** #69b arreglo los CORTES via parser + reparacion de
+filas, pero NO limpio el texto de todas las filas ya indexadas:
 
 Estado de la DB hoy (`articulos` visibles del dominio = 3252, excluye fuera_de_dominio,
 fantasma y derogado):
