@@ -1505,6 +1505,40 @@ sin perder ninguna y sube precision. La medicion es un PISO: falta la etapa b.
 **NO se decide solo.** El criterio dice revertir; la evidencia de mecanismo dice completar la
 etapa b y volver a medir. Queda para el usuario, y ademas muta la DB (requiere su permiso).
 
+### ETAPA B de #69a (2026-09-17) — criterio fijado ANTES de correr
+
+Decision tomada con el usuario tras ver que los dos sets se contradicen: **no se revierte
+todavia**; primero se completa la etapa b, porque juzgar el experimento con los vectores
+desincronizados es medirlo en su peor version.
+
+`scripts/reembeber_limpiados.py` recalcula, SOLO en las 1120 filas que la etapa A toco:
+- `embedding_4b_1024` <- 4B sobre el `contextual_text` limpio, prefijo MRL 1024, normalizado L2.
+  **Es la columna que usa produccion** (poblada 6583/6583; `embedding_4b` de 2560 solo tiene
+  2974/6583 y no es la que consulta `vectorstore.py`).
+- `embedding` <- Qwen3-Embedding-0.6B sobre el mismo texto.
+
+Misma receta que `reparar_articulos.py::refragmentar` (lineas 186-191). NO re-fragmenta (los
+chunks no cambiaron, solo se les quito la nota) y NO toca `fragmentos_inciso`.
+Respaldo de los vectores viejos en `fragmentos_bak_emb_20260917`, con `--revertir`.
+
+**Estado verificado antes de correr:** las 1120 filas tocadas tienen vector VIEJO en
+`embedding_4b_1024` (1120/1120) y en `embedding` (1120/1120).
+
+```
+CRITERIO (el mismo de #69a, no se reescribe):
+  cita_ok NO cae > 3  Y  cita_limpia NO cae    dev Y held-out, contra qonly2_*
+  cae -> revertir la ETAPA A completa (limpiar_notas_bcn.py --revertir)
+
+PREDICCION REGISTRADA (para que no se pueda mover el poste despues):
+  si el desajuste era la causa -> dev deja de perder las 6 de retrieval y cita_limpia
+  vuelve a >= 80, held-out conserva sus 4 ganadas.
+  si dev sigue en 79 -> la hipotesis era falsa y la limpieza NO se adopta.
+```
+
+**Riesgo honesto declarado:** esto arregla ETIQUETAS, no recuperacion. El diagnostico del
+mismo dia dice que 18 de 28 fallas de dev son porque el gold NI LLEGA al pool. La ganancia
+esperada es chica y puede ser cero.
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
