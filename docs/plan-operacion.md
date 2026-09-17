@@ -1559,6 +1559,47 @@ CAVEATS de esta verificacion, para no sobre-leerla:
 
 Encolado como `limpio3_dev` / `limpio3_holdout` (plan v30).
 
+### RESULTADO ETAPA B (2026-09-17) — PREDICCION FALSADA; el criterio manda REVERTIR
+
+`limpio3_dev` (2 h 22) y `limpio3_holdout` (1 h 07) contra `qonly2_*`, con los 1120 vectores
+ya re-embebidos.
+
+| | qonly2 | limpio2 (sin re-embeber) | **limpio3 (re-embebido)** |
+|---|---|---|---|
+| dev cita_ok | 80/114 | 80 | 80 (gano 6, perdio 6) |
+| dev cita_limpia | 80/114 | 79 | **79** (gano 5, perdio 6) |
+| dev precision | 0.51 | 0.50 | 0.49 |
+| held-out cita_ok | 62/64 | 62 | 62 (gano 0, perdio 0) |
+| held-out cita_limpia | 58/64 | 62 | **62** (gano 4, perdio 0) |
+| held-out precision | 0.89 | 0.94 | **0.95** |
+
+**La prediccion registrada era:** "si el desajuste era la causa, dev vuelve a cita_limpia >= 80;
+si sigue en 79, la hipotesis era falsa y NO se adopta". **Dev quedo en 79. Hipotesis FALSADA.**
+
+- Re-embeber **no aporto nada medible**: held-out da identico con y sin vectores nuevos
+  (58->62 en ambos); dev quedo clavado en 79 con el mismo patron de revoloteo.
+- Dentro de dev hubo movimiento interno (coloquial 27->28, `hold_complex` 7->6), lo que
+  confirma revoloteo, no senal.
+- Costo: ~4 h de GPU para descartar una hipotesis. Sirvio para eso, no para mejorar.
+
+**Veredicto por la letra del criterio: REVERTIR la etapa A.** Es el mismo trato que recibio
+#77. No se mueve el poste despues de ver los numeros.
+
+**Lo que se pierde al revertir (declarado para que la decision sea informada):** vuelve la
+respuesta falsa "la SEC se crea por la Ley 20402" (el numero salia de la nota BCN) y vuelven
+las 4 citas del glosario mal etiquetadas como `[Art. primero N° 8, d)]` en vez de
+`[Art. 13 de 250604]`. El eval de held-out SI las capta (+4, 0 perdidas, precision 0.89->0.95);
+el de dev las diluye.
+
+**Tension honesta, sin resolverla por mi cuenta:** el criterio protege de auto-enganarse (fue
+escrito antes) pero castiga por 1 caso de ruido (p=1.0) un cambio cuyo mecanismo esta
+verificado caso por caso. Rehacer el criterio AHORA seria justamente lo que el criterio existe
+para impedir. Si se quiere reabrir, se fija un criterio nuevo ANTES y se vuelve a medir.
+
+Orden de reversion (las dos etapas, en este orden): `reembeber_limpiados.py --revertir`
+(vectores viejos, respaldo `fragmentos_bak_emb_20260917`) y despues
+`limpiar_notas_bcn.py --revertir` (texto, respaldo `*_bak_notas_20260906`).
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
