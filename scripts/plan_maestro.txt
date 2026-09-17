@@ -1,4 +1,21 @@
-# PLAN MAESTRO v29 (2026-09-17) -- #69a aplicado: medir la limpieza de notas BCN
+# PLAN MAESTRO v30 (2026-09-17) -- #69a ETAPA B: re-embebido, volver a medir
+#
+# limpio2_* midio la etapa A con los vectores VIEJOS (BM25 limpio, denso sucio): dev
+# cita_limpia 80->79 con 5 ganadas / 6 perdidas, y las 6 perdidas eran de RETRIEVAL, no de
+# etiqueta; held-out 58->62, gano 4 y perdio 0.
+# `scripts/reembeber_limpiados.py --apply` corrio: 1120/1120 re-embebidas, 0 fallos.
+# Verificado: 0 vectores identicos en embedding_4b_1024 (la columna viva), 0 nulos,
+# respaldo en fragmentos_bak_emb_20260917.
+#
+# CRITERIO (el mismo de #69a, NO se reescribe) contra qonly2_dev / qonly2_holdout:
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out
+#     cae -> revertir la ETAPA A completa (limpiar_notas_bcn.py --revertir)
+# PREDICCION REGISTRADA ANTES: si el desajuste era la causa, dev vuelve a cita_limpia >= 80
+# y held-out conserva sus 4 ganadas. Si dev sigue en 79, la hipotesis era falsa y NO se adopta.
+limpio3_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio3_dev venv/bin/python -m scripts.exp_think_paired
+limpio3_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio3_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v29 (2026-09-17, ya ejecutado) -- #69a aplicado: medir la limpieza de notas BCN
 #
 # `scripts/limpiar_notas_bcn.py --apply` corrio el 2026-09-17: 1122 articulos, 1120 fragmentos,
 # 692 incisos. Respaldo en *_bak_notas_20260906, reversible con --revertir.

@@ -1539,6 +1539,26 @@ PREDICCION REGISTRADA (para que no se pueda mover el poste despues):
 mismo dia dice que 18 de 28 fallas de dev son porque el gold NI LLEGA al pool. La ganancia
 esperada es chica y puede ser cero.
 
+**APLICADA (2026-09-17):** 1120/1120 re-embebidas, 0 sin vector 4B. Verificacion:
+
+| control | resultado |
+|---|---|
+| filas en el respaldo `fragmentos_bak_emb_20260917` | 1120 |
+| vectores IDENTICOS al viejo en `embedding_4b_1024` | **0** |
+| vectores identicos al viejo en `embedding` (0.6B) | 76 |
+| nulos en la columna viva | 0 de 6583 |
+| mayores distancias coseno en `embedding_4b_1024` | 0.8962, 0.5245, 0.5211, 0.4596, 0.4579 |
+
+CAVEATS de esta verificacion, para no sobre-leerla:
+- Las **76 identicas en 0.6B** se explican porque en esas filas cambio `text` pero NO
+  `contextual_text`, que es lo que se embebe. No es un fallo del script.
+- "0 identicos en 4B" NO prueba por si solo que haya senal nueva: el 4B via Ollama tiene algo
+  de no-determinismo numerico. Lo que sostiene el cambio son las distancias grandes (hasta
+  0.896), no el conteo de identicos.
+- Solo se midio que los vectores cambiaron, NO que sean mejores. Eso lo dice el eval.
+
+Encolado como `limpio3_dev` / `limpio3_holdout` (plan v30).
+
 ### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
 
 `scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
