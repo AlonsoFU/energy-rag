@@ -1424,6 +1424,43 @@ Cruce de las 30 respuestas con `cita_ok=False` de `qonly2_dev` contra `articulos
   normalizacion: `unicodedata.NFKD` convierte `º` en `o`, asi que "149" nunca calzaba con
   "149º". Corregido quitando el ordinal ANTES de NFKD -> ausentes reales = 0.
 
+### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
+
+`scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
+2 no tienen). TOPK=10, POOL=50, `top_rerank_override`=10. Foto guardada en
+`data/eval/results/donde_falla_fallas28_dev.json`.
+
+| categoria | RETRIEVAL | GENERACION |
+|---|---|---|
+| cx_coloquial | 12 | 8 |
+| cx_temporal | 1 | 1 |
+| hold_def | 2 | 0 |
+| cx_adyacente / cx_negacion / hold_complex | 1 c/u | 0 |
+| cx_multihop | 0 | 1 |
+| **TOTAL** | **18 (64 %)** | **10 (35 %)** |
+
+- **El gold NI SIQUIERA LLEGA al pool en 18 de 28.** Generar mejor no las puede arreglar.
+- Guardia del script: el gold aparecio en 10/28, asi que la comparacion de claves funciona
+  (el script aborta si da 0, justamente para no medir otra cosa en silencio).
+- De las 10 de GENERACION, **solo 1 tenia el gold en rank 0; mediana de rank 5**. O sea ni
+  esas son "el modelo ignoro lo que tenia delante": el gold llegaba hondo.
+- **cx_coloquial concentra 20 de 28 fallas.** Es el muro de vocabulario coloquial, ya
+  identificado en exp #74 (`concept_inference`, hoy OFF).
+
+**Consecuencia para el plan:** la palanca A (limpiar notas) ataca la contaminacion del TEXTO,
+pero el cuello medido esta ANTES, en traer el articulo. Lo que mas respalda la evidencia
+externa para esto es afinar el retriever denso (CLERC: nDCG@10 5.40 -> 14.67 con fine-tune
+in-domain), no mas maquinaria de generacion ni de abstencion.
+
+**CAVEAT de costo:** el encabezado del script dice "~2 s por query"; hoy NO es cierto. El
+retrieve llama al LLM (expansion, glosario, intent gate), asi que 114 queries no terminaron
+en 570 s. Por eso se corrio el subconjunto de 28. El `timeout` que corta devuelve 124 y el
+shell imprime "Terminado": no es un corte del vigia ni un OOM (verificado: sin `.gpu_bloqueo`,
+sin CORTE en `logs/gpu_vigia.log`, sin OOM en journalctl).
+
+**El vigia NO esta muerto** (se sospecho por su log detenido el 2026-09-14): solo escribe
+linea cuando `TRABAJO > 0`. Corrido a mano da exit 0 y actualiza `logs/.gpu_vigia_racha`.
+
 ### ESTADO REAL DE #69a (verificado 2026-09-17) — SUSTITUIDO por #69b, con RESIDUO medible
 
 **CORRECCION de una afirmacion previa mia en este mismo doc.** Primero escribi que #69a
