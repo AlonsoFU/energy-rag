@@ -265,6 +265,9 @@ def generate_answer(
 
     response_text = ""
     grounding_pass = False
+    # exp #78: True SOLO si quote-only llego a emitir citas verificadas como substring.
+    # Si queda en False la respuesta es prosa => candidata al aviso (answer_prosa_marcar).
+    cita_verificada = False
     tokens_in = tokens_out = 0
     used_model = model
     extra_instruction = ""
@@ -324,6 +327,7 @@ def generate_answer(
                     # de generacion: mas rapido y sin margen para parafrasear mal.
                     response_text = "\n".join(f"[Art. {a} de {n}] «{q}»" for a, n, q in _qs)
                     grounding_pass = True
+                    cita_verificada = True   # exp #78
                     break
                 if _qs:
                     _quote_block = (
@@ -448,6 +452,19 @@ def generate_answer(
         )
         response_text = repair_info["text"]
 
+    # exp #78 (flag OFF por defecto): si NINGUNA cita se verifico como substring, la
+    # respuesta es prosa y hoy afirma sin titubear (medido: 13 de 13 sin lenguaje de duda).
+    # Se antepone un aviso DETERMINISTICO -- no es un porcentaje de confianza, es el hecho
+    # binario "hubo o no hubo calce literal". No lleva corchetes ni REFUSAL_TEXT, asi que
+    # extract_citations y `refuso` no cambian => cita_ok/cita_limpia/precision intactas.
+    if (getattr(cfg.settings, "answer_prosa_marcar", False)
+            and not cita_verificada
+            and response_text.strip()
+            and REFUSAL_TEXT.lower() not in response_text.lower()):
+        _aviso = getattr(cfg.settings, "answer_prosa_aviso", "").strip()
+        if _aviso:
+            response_text = f"{_aviso}\n\n{response_text}"
+
     return {
         "text": response_text,
         "grounding_pass": grounding_pass,
@@ -455,4 +472,5 @@ def generate_answer(
         "tokens_in": tokens_in,
         "tokens_out": tokens_out,
         "repair": repair_info,  # None si el flag está off; {added, top_score, changed} si on
+        "cita_verificada": cita_verificada,  # exp #78: instrumentacion, fase D del plan
     }

@@ -478,6 +478,25 @@ class Settings(BaseSettings):
     citation_repair_min_score: float = 0.0   # umbral cross-encoder para añadir
     citation_repair_max_add: int = 1         # tope de citas añadidas por respuesta
 
+    # answer_prosa_marcar (flag OFF, exp #78): cuando NINGUNA cita textual se verifica,
+    # la respuesta cae a prosa y hoy AFIRMA sin titubear. Medido 2026-09-16 sobre
+    # qonly2_dev + qonly2_holdout: 13 respuestas en prosa, 0 con lenguaje de duda, pese a
+    # que el prompt pide "si las citas no responden la pregunta, dilo". Coincide con
+    # 2608.22228: pedir la abstencion por prompt falla cuando el contexto es plausible.
+    # Este flag antepone un aviso deterministico. NO es un porcentaje de confianza: es el
+    # hecho binario "hubo o no hubo calce literal contra el articulo" (ver
+    # docs/investigacion-abstencion-2026-09-16.md seccion 19: confianza MAL calibrada da
+    # +2% y AUMENTA el sesgo de automatizacion; un hecho binario no requiere calibracion).
+    # NO se rechaza: de las 13 en prosa, 12 tenian la cita correcta -> negarse botaria 12
+    # respuestas buenas para evitar 1 mala.
+    # El aviso no lleva corchetes y no contiene REFUSAL_TEXT, asi que no toca
+    # extract_citations ni `refuso` -> cita_ok/cita_limpia/precision deben quedar IGUALES.
+    answer_prosa_marcar: bool = False
+    answer_prosa_aviso: str = (
+        "SIN CITA VERIFICADA -- no se encontro texto literal que responda; "
+        "lo siguiente se redacto a partir de los articulos recuperados y hay que verificarlo."
+    )
+
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise
     # via env (RETRIEVAL_POOL_DEPTH) to test whether grounding is recall-limited
