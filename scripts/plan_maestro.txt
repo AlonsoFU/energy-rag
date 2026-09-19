@@ -21,6 +21,18 @@ aviso_smoke|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marc
 aviso_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso_dev venv/bin/python -m scripts.exp_think_paired
 aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso_holdout venv/bin/python -m scripts.exp_think_paired
 
+# REPETIBILIDAD (2026-09-19) -- mide el RUIDO del pipeline, sin cambiar NADA.
+# Motivo: en aviso_smoke, 2 de 13 queries que antes caian a prosa produjeron cita verificada y
+# 4 cambiaron cita_ok/cita_limpia SIN tocar el buscador. Todos los criterios de estos dias
+# asumen "el pipeline es determinista" (docs/plan-operacion.md lo dice explicitamente). Si no
+# lo es, las diferencias de 1 caso que decidieron #77 y #69a pueden ser ruido.
+# ESTA CORRIDA ES IDENTICA a qonly2_dev: misma config, misma DB, mismos flags. Cualquier
+# diferencia contra qonly2_dev es RUIDO puro, no efecto de ningun cambio.
+# Lectura: si el ruido en cita_limpia es >= 1, el criterio "cita_limpia NO cae" es mas
+# estricto que la precision del instrumento y hay que reescribirlo con banda de ruido
+# ANTES del proximo experimento.
+repet_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=repet_dev venv/bin/python -m scripts.exp_think_paired
+
 # --- PLAN v30 (2026-09-17, ya ejecutado) -- #69a ETAPA B: re-embebido, volver a medir
 #
 # limpio2_* midio la etapa A con los vectores VIEJOS (BM25 limpio, denso sucio): dev
