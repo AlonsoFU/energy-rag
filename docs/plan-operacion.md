@@ -783,7 +783,7 @@ pegando palabras partidas. Medido sobre la DB: 881 → **43** con nota, 0 cabeza
 incisos), con respaldo `*_bak_notas_20260906` y `--revertir`. Sin re-embeber (etapa b).
 
 **Criterio** (brazo ON, `SOLO_ON=1`, comparado con `think_real` / `think_holdout` vía
-`scripts/comparar_corridas.py` — válido porque el pipeline es determinista):
+`scripts/comparar_corridas.py` — [AFIRMACION FALSA, corregida 2026-09-19: el pipeline NO es determinista; ruido medido ±1 en cita_limpia, ver HALLAZGO y repet_dev]):
 ```
 cita_ok NO cae > 3  Y  cita_limpia NO cae         dev Y held-out   -> se queda
 fidelidad: NO_SOPORTADA baja o fiel_estricto +5    secundario      -> gana
@@ -847,7 +847,7 @@ tocados se re-fragmentan (mismo `contextual_text`) y re-embeben (4B-1024 + 0.6B)
 `vectorstore.py` (`(a.metadata->>'fantasma') IS NULL`, 3 lugares) y en el juez de #68.
 
 **Criterio** (`SOLO_ON=1` vs `think_real` / `think_holdout`, `scripts/comparar_corridas.py`;
-válido porque el pipeline es determinista):
+[AFIRMACION FALSA, corregida 2026-09-19: el pipeline NO es determinista; ruido medido ±1 en cita_limpia, ver HALLAZGO y repet_dev]):
 ```
 cita_ok NO cae > 3  Y  cita_limpia NO cae          dev Y held-out  -> se queda
 fidelidad: inexistentes baja Y NO_SOPORTADA no sube  secundario     -> gana
@@ -1411,6 +1411,51 @@ con banda de ruido antes del proximo experimento.
 
 **Pendiente tras `repet_dev`:** corregir las 4 afirmaciones de determinismo de este doc y
 decidir si #77 y #69a merecen re-evaluacion con un criterio que respete el ruido medido.
+
+### RESULTADO `repet_dev` (2026-09-19) — el RUIDO del instrumento es exactamente ±1
+
+`repet_dev` es **identica** a `qonly2_dev`: misma DB, misma config, mismos flags, **cero
+cambios**. Toda diferencia es ruido puro.
+
+| | qonly2_dev | repet_dev |
+|---|---|---|
+| cita_ok | 80/114 | 80/114 (gano 1, perdio 1) |
+| cita_limpia | 80/114 | **79/114** (gano 1, perdio 2) |
+| precision | 0.51 | 0.52 |
+| **respuestas con texto distinto** | — | **13 de 114 (11 %)** |
+| queries que cambian cita_ok o cita_limpia | — | 3 |
+
+**Correr dos veces lo mismo baja `cita_limpia` de 80 a 79.** Es exactamente la diferencia por
+la que se rechazo #77 y se revirtio #69a.
+
+**Consecuencia, sin adornos:**
+
+| decision | evidencia invocada | veredicto a la luz del ruido |
+|---|---|---|
+| #77 rechazado | dev `cita_limpia` 80->79 | **indistinguible de ruido** |
+| #69a revertido | dev `cita_limpia` 80->79 (y held-out +4) | **indistinguible de ruido en dev** |
+| #78 aviso, dev | `cita_limpia` 80->79 | **indistinguible de ruido** (ademas es un prefijo de texto que no puede tocar citas) |
+
+El criterio "`cita_limpia` NO cae" **no tiene resolucion**: falla contra un cambio nulo.
+No significa que #77 o #69a fueran buenos. Significa que el instrumento no podia decidirlo y
+que la confianza con que se escribieron esos veredictos no estaba justificada.
+
+**Criterio nuevo, a fijar ANTES del proximo experimento** (propuesta, no adoptado aun):
+1. Todo experimento lleva **brazo de repetibilidad** (misma config, sin cambios) en la misma
+   tanda, para medir el ruido del dia.
+2. El umbral de adopcion se expresa **contra el ruido medido**, no contra 0: p. ej. exigir
+   `|delta| >= 3x` el ruido del brazo de repetibilidad, o McNemar p < 0.05 sobre los flips.
+3. Metricas de conteo binario sobre n=114 con 11 % de respuestas inestables **no sirven para
+   deltas de 1-2 casos**. Para eso hace falta promediar k corridas o usar un set mayor.
+
+**CAVEAT de esta misma medicion:** es UNA repeticion, o sea un punto, no una distribucion.
+Da una cota inferior del ruido (>= 1 en `cita_limpia`, 3 queries inestables, 11 % de textos
+distintos), no su desviacion. Para acotarlo de verdad hacen falta >= 3 repeticiones.
+
+**Causa raiz y candidato de arreglo:** `_self_consistency` muestrea con `temperature: 0.7`
+(`generate.py:122`) en las 114 queries (`self_consistency_n=3`, `selfcons_solo_definicion=False`).
+Bajarla a 0 o fijar semilla haria el pipeline reproducible — pero **eso cambia la config
+adoptada** y hay que medirlo como experimento, no asumirlo.
 
 ### EXP #78 (2026-09-17) — aviso deterministico en la prosa (`answer_prosa_marcar`, OFF)
 
