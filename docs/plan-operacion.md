@@ -1374,6 +1374,44 @@ Contra `qonly2_dev` (config adoptada), misma DB, `embed_4b_num_ctx=4096`:
   del articulo), no desajuste de substring -> la palanca es limpiar las notas de los 598 articulos, no
   reatribuir.
 
+### ⚠ HALLAZGO (2026-09-19) — EL PIPELINE NO ES DETERMINISTA. Afecta a TODO lo medido
+
+**Este doc afirma 4 veces (lineas 786, 850, 935, 1717) "valido porque el pipeline es
+determinista" para justificar las comparaciones pareadas. Es FALSO.**
+
+Causa, en el codigo: `_self_consistency` (`src/pipelines/generate.py:122`) genera sus N
+muestras con **`"temperature": 0.7` explicito**, aunque el default del LLM es 0.0
+(`src/components/llm.py`). Y esta activo en TODAS las queries:
+
+| flag | valor | efecto |
+|---|---|---|
+| `self_consistency_n` | 3 | 3 muestras por respuesta |
+| `selfcons_solo_definicion` | False | no se limita a definiciones: **dispara siempre** |
+
+**Evidencia directa, no teorica.** `aviso_smoke` re-corrio 13 queries cuyo unico cambio era un
+PREFIJO DE TEXTO (el aviso), que no puede alterar citas:
+- 2 de 13 que antes caian a prosa produjeron **cita verificada** esta vez.
+- 4 cambiaron `cita_ok`/`cita_limpia` contra `qonly2_*`: 3 ganaron, 1 perdio.
+
+**Consecuencia sobre decisiones ya tomadas:**
+- **#77** se rechazo por `cita_limpia` 80 -> 79 en dev (1 caso, p=1.0).
+- **#69a** se revirtio por `cita_limpia` 80 -> 79 en dev (1 caso, p=1.0), pese a que held-out
+  ganaba 4 y no perdia ninguna.
+- Si el ruido del instrumento es >= 1 caso, **ninguna de esas dos decisiones se sostiene sobre
+  la evidencia que se invoco**. No significa que los cambios fueran buenos: significa que la
+  medicion no tenia resolucion para decidirlo.
+- El patron "gano 6, perdio 6" que se leyo como revoloteo de la limpieza en `limpio2`/`limpio3`
+  probablemente es, en parte, este mismo ruido.
+
+**Lo que NO se sabe todavia:** la magnitud. `repet_dev` (encolado) corre una config IDENTICA a
+`qonly2_dev` — misma DB, mismos flags, sin ningun cambio — y **toda** diferencia que aparezca
+es ruido puro. Lectura fijada ANTES: si el ruido en `cita_limpia` es >= 1, el criterio
+"`cita_limpia` NO cae" es mas estricto que la precision del instrumento y hay que reescribirlo
+con banda de ruido antes del proximo experimento.
+
+**Pendiente tras `repet_dev`:** corregir las 4 afirmaciones de determinismo de este doc y
+decidir si #77 y #69a merecen re-evaluacion con un criterio que respete el ruido medido.
+
 ### EXP #78 (2026-09-17) — aviso deterministico en la prosa (`answer_prosa_marcar`, OFF)
 
 **Medicion previa** sobre `qonly2_dev` + `qonly2_holdout`: 13 respuestas caen a prosa y
