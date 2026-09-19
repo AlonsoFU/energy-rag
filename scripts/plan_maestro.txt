@@ -1,4 +1,29 @@
-# PLAN MAESTRO v31 (2026-09-18) -- #78: probar el aviso "SIN CITA VERIFICADA"
+# PLAN MAESTRO v32 (2026-09-19) -- exp #79: hacer REPRODUCIBLE el pipeline
+#
+# POR QUE ES LO PRIMERO: `repet_dev` probo que correr dos veces la MISMA config baja
+# cita_limpia de 80 a 79 y cambia el texto de 13 de 114 respuestas (11 %). Ese ruido es del
+# mismo tamano que las diferencias con que se rechazo #77 y se revirtio #69a. Sin
+# reproducibilidad, NINGUNA medicion futura vale, asi que esto va antes que cualquier mejora.
+#
+# Causa: _self_consistency muestreaba con temperature 0.7 HARDCODEADA (generate.py:122).
+# Ahora sale de `config.selfcons_temperature`, default 0.7 = comportamiento ADOPTADO (no se
+# cambia nada sin medirlo). Estas corridas prueban 0.0.
+#
+# CRITERIO, FIJADO ANTES DE CORRER:
+#   1) REPRODUCIBILIDAD (repet0_a vs repet0_b, ambas a temperature 0.0, sin ningun otro cambio)
+#      exigido: 0 queries con texto distinto Y 0 flips de cita_ok/cita_limpia.
+#      Si NO da 0, la temperatura no era la unica fuente de no-determinismo y hay que buscar
+#      la otra ANTES de seguir midiendo nada.
+#   2) CALIDAD (repet0_a vs qonly2_dev): cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+#      El umbral 3 = 3x el ruido medido (>=1), no un numero inventado. Antes se exigia "no
+#      cae", que es mas estricto que la precision del instrumento.
+# RIESGO DECLARADO: a temperature 0 las 3 muestras de autoconsistencia son identicas, o sea el
+# consenso deja de aportar. Si la calidad cae, la leccion es que la autoconsistencia SIRVE y el
+# precio es el ruido; ahi habria que promediar k corridas en vez de bajar la temperatura.
+repet0_a|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_a venv/bin/python -m scripts.exp_think_paired
+repet0_b|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_b venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v31 (2026-09-18, ya ejecutado) -- #78: probar el aviso "SIN CITA VERIFICADA"
 #
 # POR QUE VA POR LA COLA y no a mano: dos intentos lanzados desde la sesion murieron con
 # "system running low on memory". NO fue OOM del kernel (journalctl -k no registra nada): los

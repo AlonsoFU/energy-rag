@@ -478,6 +478,19 @@ class Settings(BaseSettings):
     citation_repair_min_score: float = 0.0   # umbral cross-encoder para añadir
     citation_repair_max_add: int = 1         # tope de citas añadidas por respuesta
 
+    # selfcons_temperature (exp #79): temperatura de las N muestras de _self_consistency.
+    # HALLAZGO 2026-09-19: estaba HARDCODEADA en 0.7 (generate.py:122) pese a que el default
+    # del LLM es 0.0, y dispara en TODAS las queries (self_consistency_n=3,
+    # selfcons_solo_definicion=False). Consecuencia medida con `repet_dev` (config IDENTICA a
+    # qonly2_dev, cero cambios): cita_limpia 80 -> 79 y 13 de 114 respuestas (11 %) con texto
+    # distinto. O sea el instrumento tiene ruido >= 1, que es el mismo tamano de las
+    # diferencias con que se rechazo #77 y se revirtio #69a.
+    # El default se deja en 0.7 = comportamiento ADOPTADO, para no cambiar nada sin medirlo.
+    # Bajarlo a 0.0 deberia hacer el pipeline reproducible; hay que MEDIRLO, no asumirlo: la
+    # autoconsistencia existe justamente para promediar variacion, y a temperatura 0 las N
+    # muestras son identicas -> el consenso deja de aportar y puede caer la calidad.
+    selfcons_temperature: float = 0.7
+
     # answer_prosa_marcar (flag OFF, exp #78): cuando NINGUNA cita textual se verifica,
     # la respuesta cae a prosa y hoy AFIRMA sin titubear. Medido 2026-09-16 sobre
     # qonly2_dev + qonly2_holdout: 13 respuestas en prosa, 0 con lenguaje de duda, pese a
