@@ -1,4 +1,20 @@
-# PLAN MAESTRO v30 (2026-09-17) -- #69a ETAPA B: re-embebido, volver a medir
+# PLAN MAESTRO v31 (2026-09-18) -- #78: probar el aviso "SIN CITA VERIFICADA"
+#
+# POR QUE VA POR LA COLA y no a mano: dos intentos lanzados desde la sesion murieron con
+# "system running low on memory". NO fue OOM del kernel (journalctl -k no registra nada): los
+# mata el harness por presion de RAM. Las corridas del cron (limpio3_dev, 2 h 22) sobrevivieron
+# el mismo dia con la misma maquina, porque no son hijas del harness.
+# Contexto de RAM: 14 GB totales; `qwen3-embedding:4b` se carga en CPU (vram=0.0G) y ocupa
+# 3.7 GB; `ollama stop qwen3-embedding:4b` los libera pero el modelo se recarga solo al usarse.
+#
+# CRITERIO, FIJADO ANTES (sobre las 13 queries que hoy caen a prosa):
+#     el aviso aparece en 13/13 de prosa  Y  en 0 de las que tienen cita verificada
+#     Y  cita_ok / cita_limpia NO se mueven contra qonly2_*
+# Si pasa -> se encola dev + held-out completos con el mismo FLAGS (otra medicion, ~3.5 h).
+# El flag queda OFF por defecto: se prende SOLO en la corrida via FLAGS=.
+aviso_smoke|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_prosa13_v1.jsonl NAME=aviso_smoke venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v30 (2026-09-17, ya ejecutado) -- #69a ETAPA B: re-embebido, volver a medir
 #
 # limpio2_* midio la etapa A con los vectores VIEJOS (BM25 limpio, denso sucio): dev
 # cita_limpia 80->79 con 5 ganadas / 6 perdidas, y las 6 perdidas eran de RETRIEVAL, no de
