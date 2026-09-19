@@ -13,6 +13,13 @@
 # Si pasa -> se encola dev + held-out completos con el mismo FLAGS (otra medicion, ~3.5 h).
 # El flag queda OFF por defecto: se prende SOLO en la corrida via FLAGS=.
 aviso_smoke|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_prosa13_v1.jsonl NAME=aviso_smoke venv/bin/python -m scripts.exp_think_paired
+# Medicion completa, encolada detras de la prueba. Si la prueba FALLA su criterio, estas dos
+# se sacan del plan antes de que arranquen (la prueba dura minutos, hay margen).
+# CRITERIO de estas dos: cita_ok NO cae > 3 Y cita_limpia NO cae, dev Y held-out, contra
+# qonly2_*. Es un cambio de PRESENTACION: si alguna se mueve, el aviso esta ensuciando el
+# parseo de citas y NO se adopta.
+aviso_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso_dev venv/bin/python -m scripts.exp_think_paired
+aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso_holdout venv/bin/python -m scripts.exp_think_paired
 
 # --- PLAN v30 (2026-09-17, ya ejecutado) -- #69a ETAPA B: re-embebido, volver a medir
 #
