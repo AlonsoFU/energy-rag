@@ -1987,3 +1987,16 @@ OJO: la metadata BCN dice que el D.S. 327 esta "DEROGADA" y la SEC lo cita como 
 No cae > 3 en dev ni held-out; si cae se revierten #84 y #85 y se miden por separado.
 Prediccion: dev cita_ok sube >= 3; pub_gold2 >= 11/16.
 Suspendido: #83 (#77+#78 juntos a t=0.0); se reencola sobre el corpus reparado.
+
+### RESULTADO #84 + #85 (2026-09-20 09:10) — criterio PASA, se quedan; predicciones FALSAS
+| | base | reparado | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 79 (`repet0_a`) | 80 / 78 | gano 7, perdio 7 |
+| held-out cita_ok / limpia | 62 / 60 (`repet0_holdout`) | 62 / 59 | gano 0, perdio 0 / 1 |
+| reales, gold de terceros | 8/16 (`pub_gold`) | 9/16 (`pub_gold2`) | gano 2, perdio 1 |
+| respuestas que citan el D.S. 3.386 derogado | dev 9, reales 4 | **0 y 0** | |
+Criterio (no cae > 3, dev y held-out): pasa. Prediccion "dev sube >= 3" y "reales >= 11/16": **falsas**.
+Las 7 ganadas de dev son exactamente los articulos fantasma. De las 7 perdidas, 2 tienen el gold en
+el decreto derogado (4 gold de dev apuntan ahi: error de MI eval) y 5 son desplazamiento real de
+retrieval por los 135 articulos que ahora compiten con su texto verdadero.
+Bases vigentes: `fix84_dev`, `fix84_holdout`, `pub_gold2`. Handoff: `docs/handoff-2026-09-20.md`.
