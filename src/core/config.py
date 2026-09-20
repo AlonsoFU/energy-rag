@@ -489,7 +489,11 @@ class Settings(BaseSettings):
     # Bajarlo a 0.0 deberia hacer el pipeline reproducible; hay que MEDIRLO, no asumirlo: la
     # autoconsistencia existe justamente para promediar variacion, y a temperatura 0 las N
     # muestras son identicas -> el consenso deja de aportar y puede caer la calidad.
-    selfcons_temperature: float = 0.7
+    # ADOPTADO 2026-09-20 (exp #79): 0.0. repet0_a vs repet0_b = 0 textos distintos y 0 flips en
+    # 114 queries. Calidad: dev cita_ok 80->80, cita_limpia 80->79; held-out 62->62, 58->60.
+    # El riesgo de arriba no se observo. OJO: a 0.0 las N muestras son identicas, o sea
+    # self_consistency_n=3 gasta 3 llamadas para 1 respuesta; bajar n a 1 es otra medicion.
+    selfcons_temperature: float = 0.0
 
     # answer_prosa_marcar (flag OFF, exp #78): cuando NINGUNA cita textual se verifica,
     # la respuesta cae a prosa y hoy AFIRMA sin titubear. Medido 2026-09-16 sobre
