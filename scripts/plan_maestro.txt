@@ -1,4 +1,21 @@
-# PLAN MAESTRO v33 (2026-09-19 noche) -- exp #80: de donde sale el corrimiento de las 13 queries
+# PLAN MAESTRO v34 (2026-09-20) -- exp #81: biseccion del corrimiento de las 13 queries
+#
+# RESULTADOS v33: numctx_q coseno 1.000000 en 114/114 (brazo viejo cargo KvSize:32768, verificado)
+#   -> num_ctx NO es. qonly2_holdout (09-14 03:02) ya corrio a 180 W y muestra el mismo patron
+#   (14 textos, los mismos en aviso_holdout y repet0_holdout) -> el tope de W TAMPOCO es.
+#   repet0_holdout: cita_ok 62->62, cita_limpia 58->60 -> #79 pasa dev Y held-out.
+# SOSPECHOSO QUE QUEDA: 1517efe (#77, 09-14 10:42) reescribio el verificador de citas en
+#   generate.py con "flag OFF". Una de las 13 cambia [Art. 8 ...] -> [Art. 8º ...].
+# DISENO: mismas 13 queries en dos worktrees, codigo de ANTES (ea86b7e) y DESPUES (1517efe).
+#   Misma DB, mismo Ollama, mismo tope de W. Lo unico distinto es ese commit.
+# CRITERIO, FIJADO ANTES: bis_antes coincide con qonly2_dev en >= 10 de 13 textos
+#   Y bis_despues coincide con repet_dev en >= 10 de 13 -> 1517efe ES la fuente.
+#   (10 y no 13: ambos commits traen la temperatura 0.7 fija; ruido medido 3-6 de 114 textos.)
+#   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
+bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+
+# --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #
 # RESULTADO #79 (dev): repet0_a vs repet0_b = 0 textos distintos, 0 flips -> REPRODUCIBLE a t=0.0.
 # repet0_a vs qonly2_dev: cita_ok 80->80, cita_limpia 80->79 -> pasa (no cae > 3).
