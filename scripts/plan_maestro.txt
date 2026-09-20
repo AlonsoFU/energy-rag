@@ -34,6 +34,28 @@ juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.j
 # Menos de 11 -> dev SUBESTIMA el problema real. CAVEAT: n=16, IC ~ +-22 puntos; la fuente puede
 # citar un articulo y existir otro tambien valido (cita_ok es piso). Config adoptada (t=0.0).
 pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold venv/bin/python -m scripts.exp_think_paired
+# ===== exp #84 (2026-09-20 03:30) -- REPARAR ARTICULOS FALSOS NACIDOS DE NOTAS MARGINALES =====
+# HALLAZGO (revisando a mano las 28 "citas al articulo equivocado" de dev): en la LGSE la nota
+# marginal "D.F.L. 1, de 1982 / Art. 147º / D.O. 13.09.1982" (numeracion de la ley VIEJA) partia
+# el Art. 222° real y su cuerpo quedaba guardado como fila "147º". 65 filas asi en la LGSE, 10 en
+# otras normas. El Art. 147 REAL (clientes regulados) no existia como fila; el 84° real estaba
+# oculto como fantasma y el falso visible. El sistema cito [Art. 84 de 258171] con el texto del
+# 141: formato perfecto, numero de una ley derogada. Al menos 10 de los 28 gold de dev fallidos
+# apuntan a numeros cuya fila tiene el texto de OTRO articulo -> eran inalcanzables.
+# FIX: clase NOTA_NUMERO en scripts/reparar_articulos.py (confia en el parser corregido solo si la
+# fila arranca en residuo de nota, el parser no, y el cuerpo falso sigue vivo en otro articulo
+# visible). Verificado a mano: 147, 149, 146, 125, 69, 56, 54, 127, 84 quedan con su texto real.
+# Aplica ademas 60 updates de la norma 61438 que el monitor del 09-14 re-rompio (clases ya
+# validadas en #69b). Respaldo propio: BAK=84. Revertir: BAK=84 ... --revertir
+# CRITERIO, FIJADO ANTES (contra repet0_a / repet0_holdout, misma config, t=0.0 determinista):
+#   cita_ok NO cae > 3  Y  cita_limpia NO cae > 3, en dev Y held-out. Cae -> --revertir.
+# PREDICCION REGISTRADA: dev cita_ok SUBE >= 3 (hay >= 10 gold que pasan a ser alcanzables).
+#   Si no sube, los fantasmas no eran la causa de esas fallas y se dice asi.
+# pub_gold corre ANTES (corpus roto) y pub_gold2 DESPUES: antes/despues con gold de terceros.
+fix84_apply|env PYTHONPATH=. BAK=84 HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reparar_articulos --apply
+fix84_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=fix84_dev venv/bin/python -m scripts.exp_think_paired
+pub_gold2|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold2 venv/bin/python -m scripts.exp_think_paired
+fix84_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=fix84_holdout venv/bin/python -m scripts.exp_think_paired
 # exp #83 (reemplaza a #78-bis; aviso0_* nunca corrio): #77 + #78 juntos a t=0.0.
 # POR QUE JUNTOS: re-juzgados contra la base del MISMO corpus (repet_dev / repet0_holdout), con el
 # criterio ORIGINAL sin tocar, ambos pasan: #77 dev 80/79->80/79 con 0 flips, held-out 60->62
@@ -45,8 +67,8 @@ pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_
 #   (b) el aviso aparece en 0 respuestas que traen cita verificada
 #   -> pasan ambos: se adoptan answer_quote_reatribuir=True y answer_prosa_marcar=True.
 #   Si (a) falla no se sabe cual flag fue: NO se adopta ninguno y se miden por separado despues.
-combo0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=combo0_dev venv/bin/python -m scripts.exp_think_paired
-combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=combo0_holdout venv/bin/python -m scripts.exp_think_paired
+# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=combo0_dev venv/bin/python -m scripts.exp_think_paired
+# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=combo0_holdout venv/bin/python -m scripts.exp_think_paired
 
 # --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #

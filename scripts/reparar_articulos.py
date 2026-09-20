@@ -39,14 +39,16 @@ Uso:
   PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --apply
   PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --revertir
 """
-import argparse, json, math, re, sys, time
+import argparse, json, math, os, re, sys, time
 from pathlib import Path
 from src.parsers.norm_structure_parser import NormStructureParser as P
 from src.storage.connection import with_connection
 from scripts.mark_derogados import es_derogado
 
-BAK = "69b"
-APLICADO = Path("data/eval/results/reparar_69b_aplicado.json")
+# BAK por entorno (2026-09-20): cada aplicacion guarda SU respaldo y se revierte sola.
+# `BAK=84 ... --apply` convive con el respaldo de #69b; `BAK=84 ... --revertir` deshace solo esa.
+BAK = os.environ.get("BAK", "69b")
+APLICADO = Path(f"data/eval/results/reparar_{BAK}_aplicado.json")
 INFORME = Path("data/eval/results/reparar_69b_informe.json")
 JUNK = 60
 
@@ -147,6 +149,15 @@ def clasificar(cur):
                 # la fila de la DB se habia tragado los articulos siguientes (16 bis, ter...),
                 # que ahora existen aparte: se RECORTA
                 out["update"].append(dict(base, clase="RECORTE", texto=a_.texto))
+            elif (re.search(r"\d{2}\.\d{2}\.\d{4}", a[:40]) and not re.search(r"\d{2}\.\d{2}\.\d{4}", b[:40])
+                  and contenido(a[40:], cuerpo_db, minimo=0.8)):
+                # NOTA_NUMERO (2026-09-20): la fila es un articulo FALSO nacido de una nota marginal.
+                # En la LGSE la nota "D.F.L. 1, de 1982 / Art. 147º / D.O. 13.09.1982" (numeracion de
+                # la ley VIEJA) partia el Art. 222° real y su cuerpo quedaba guardado como "147º".
+                # El sistema llego a citar [Art. 84 de 258171] con el texto del 141: cita con formato
+                # perfecto y numero de una ley derogada. Se confia en el parser solo si el cuerpo
+                # de la fila falsa sigue vivo en otro articulo visible (no se pierde texto).
+                out["update"].append(dict(base, clase="NOTA_NUMERO", texto=a_.texto))
             else:
                 out["revisar"].append(dict(base, db=a[:80], nuevo=b[:80]))
         for k, a_ in arts.items():
@@ -204,14 +215,14 @@ def aplicar(c):
         cur = conn.cursor()
         cur.execute(f"SELECT 1 FROM information_schema.tables WHERE table_name='articulos_bak_{BAK}'")
         if cur.fetchone():
-            print("ya hay respaldo articulos_bak_69b: revertir antes de volver a aplicar"); return
+            print(f"ya hay respaldo articulos_bak_{BAK}: revertir antes de volver a aplicar, o usar otro BAK="); return
         ids_upd = [u["id"] for u in c["update"]]
         ids_fan = [f["id"] for f in c["fantasma"]]
         cur.execute(f"CREATE TABLE articulos_bak_{BAK} AS SELECT id, numero, texto, metadata FROM articulos")
         cur.execute(f"CREATE TABLE fragmentos_bak_{BAK} AS SELECT * FROM fragmentos WHERE articulo_id = ANY(%s)", (ids_upd,))
         print(f"respaldo: articulos todas, fragmentos {cur.rowcount} filas", flush=True)
         for f in c["fantasma"]:
-            md = {"fantasma": "69b"}
+            md = {"fantasma": BAK}
             if f["duplicado_de"]:
                 md["duplicado_de"] = f["duplicado_de"]
             cur.execute("UPDATE articulos SET metadata = coalesce(metadata,'{}'::jsonb) || %s::jsonb, "
@@ -240,7 +251,7 @@ def aplicar(c):
                 nfr += refragmentar(cur, aid, n["norma"], n["numero_original"], n["texto"], emb06, chunker, _embed_4b_query)
         conn.commit()
         APLICADO.write_text(json.dumps(dict(update=ids_upd, fantasma=ids_fan, nuevos=nuevos,
-                                            fecha="2026-09-06"), indent=1))
+                                            fecha=time.strftime("%Y-%m-%d")), indent=1))
         print(f"APLICADO: {len(ids_upd)} updates, {len(nuevos)} nuevos, {nfr} fragmentos, {time.time()-t0:.0f}s")
 
 
