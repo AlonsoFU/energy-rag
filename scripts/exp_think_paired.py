@@ -256,7 +256,16 @@ def main():
         if nq % 10 == 0:
             print(f"  pares nuevos={nq}  [{i+1}/{len(rows)}]", flush=True)
             resumen(rows, parcial=True)
-    rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
+    # huella del corpus (2026-09-20): el monitor semanal del 09-14 cambio 333 articulos y todas las
+    # comparaciones contra qonly2_* heredaron un "-1" que se leyo como ruido y luego como bug.
+    # Dos corridas solo son comparables si esta huella coincide.
+    from src.storage.connection import with_connection
+    with with_connection() as _c:
+        _cur = _c.cursor()
+        _cur.execute("SELECT (SELECT count(*) FROM articulos), (SELECT max(updated_at) FROM articulos), "
+                     "(SELECT count(*) FROM fragmentos), (SELECT max(created_at) FROM fragmentos)")
+        huella = [str(x) for x in _cur.fetchone()]
+    rp.write_text(json.dumps({"detail": rows, "db_huella": huella}, ensure_ascii=False, default=str))
     resumen(rows)
 
 
