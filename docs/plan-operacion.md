@@ -2000,3 +2000,17 @@ Las 7 ganadas de dev son exactamente los articulos fantasma. De las 7 perdidas, 
 el decreto derogado (4 gold de dev apuntan ahi: error de MI eval) y 5 son desplazamiento real de
 retrieval por los 135 articulos que ahora compiten con su texto verdadero.
 Bases vigentes: `fix84_dev`, `fix84_holdout`, `pub_gold2`. Handoff: `docs/handoff-2026-09-20.md`.
+
+### RESULTADO #83 (2026-09-20 12:27) — #77 reatribuir + #78 aviso, juntos a t=0.0: PASA, **ADOPTADOS**
+Base = `fix84_dev` / `fix84_holdout` (corpus reparado, misma huella). Criterio fijado antes (plan v36).
+| | base | combo0 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | 80 / 78 | gano 0, **perdio 0** |
+| held-out cita_ok / limpia | 62 / 59 | 62 / **61** | gano 2, **perdio 0**; precision 0.88 -> 0.93 |
+| avisos "SIN CITA VERIFICADA" | — | dev 4, held-out 2 | sobre cita verificada: **0 y 0** |
+(a) ninguna query pierde: cumple. (b) aviso nunca sobre cita verificada: cumple (chequeado con patron
+"cita seguida de comillas", no con el campo interno `cita_verificada`, que result.json no guarda).
+Adoptado por instruccion del usuario ("Termina", 2026-09-20): `answer_quote_reatribuir=True`,
+`answer_prosa_marcar=True`. Tests: las mismas 6 fallas preexistentes; 1 test actualizado al
+comportamiento nuevo (`test_generate_handles_plain_text_when_no_format`).
+Caveat de atribucion: medidos juntos; la ganancia de held-out es de #77 (el aviso solo antepone texto).

@@ -279,7 +279,7 @@ class Settings(BaseSettings):
     # etiqueta coincidiera y rechazaba todo. Con esto, si la frase aparece letra por letra en
     # EXACTAMENTE UN doc, ese doc es su fuente, diga lo que diga la etiqueta. Si aparece en dos
     # o mas, se rechaza. Replay sin GPU sobre lo capturado: 7/7 frases en un solo doc correcto.
-    answer_quote_reatribuir: bool = False
+    answer_quote_reatribuir: bool = True  # ADOPTADO 2026-09-20 (exp #83, combo0_* contra fix84_*, t=0.0): dev 0 perdidas; held-out cita_limpia 59->61, 0 perdidas; aviso en 0 citas verificadas
 
     self_consistency_n: int = 3
 
@@ -508,7 +508,7 @@ class Settings(BaseSettings):
     # respuestas buenas para evitar 1 mala.
     # El aviso no lleva corchetes y no contiene REFUSAL_TEXT, asi que no toca
     # extract_citations ni `refuso` -> cita_ok/cita_limpia/precision deben quedar IGUALES.
-    answer_prosa_marcar: bool = False
+    answer_prosa_marcar: bool = True  # ADOPTADO 2026-09-20 (exp #83, combo0_* contra fix84_*, t=0.0): dev 0 perdidas; held-out cita_limpia 59->61, 0 perdidas; aviso en 0 citas verificadas
     answer_prosa_aviso: str = (
         "SIN CITA VERIFICADA -- no se encontro texto literal que responda; "
         "lo siguiente se redacto a partir de los articulos recuperados y hay que verificarlo."
