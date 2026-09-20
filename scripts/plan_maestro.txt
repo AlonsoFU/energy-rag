@@ -53,6 +53,17 @@ pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_
 #   Si no sube, los fantasmas no eran la causa de esas fallas y se dice asi.
 # pub_gold corre ANTES (corpus roto) y pub_gold2 DESPUES: antes/despues con gold de terceros.
 fix84_apply|env PYTHONPATH=. BAK=84 HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reparar_articulos --apply
+# exp #85, MEDIDO JUNTO con #84 (la ventana no da para 9 h): norma DEROGADA servida como vigente.
+# pub_gold (16 preguntas reales, gold de terceros) dio cita_ok 8/16 = 50 %: MI PREDICCION (11-15)
+# ERA FALSA, dev subestimaba el problema real. En 5 de las 8 fallas el sistema cito el D.S. 3.386
+# de 1935 (id 202975), DEROGADO por el art. 329 b) del D.S. 327. BCN lo trae "DESCONOCIDO".
+# Se marcan sus 236 articulos derogado=true con la evidencia; el retrieval ya los excluye.
+# Reversible: scripts.marcar_norma_derogada 202975 124102/329 --revertir
+# CRITERIO: el mismo de #84 (no cae > 3 en dev ni held-out). CAVEAT DE ATRIBUCION: #84 y #85 van
+# juntos; si el conjunto cae se revierten LOS DOS y se miden por separado. Ambos son correcciones
+# con evidencia propia (texto de la ley), la medicion es guarda de regresion, no seleccion.
+# PREDICCION: pub_gold2 >= 11/16.
+fix85_derog|env PYTHONPATH=. venv/bin/python -m scripts.marcar_norma_derogada 202975 124102/329 --apply
 fix84_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=fix84_dev venv/bin/python -m scripts.exp_think_paired
 pub_gold2|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold2 venv/bin/python -m scripts.exp_think_paired
 fix84_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=fix84_holdout venv/bin/python -m scripts.exp_think_paired
