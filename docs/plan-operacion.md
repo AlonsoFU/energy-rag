@@ -1820,3 +1820,66 @@ Sobre los `result.json` ya guardados, cruzando cada senal contra `cita_ok`:
 - **Consecuencia para el plan de abstencion:** la fase 0 no es solo construir negativos duros; hay que
   guardar por query `_bge_max`, acuerdo de autoconsistencia y n de citas verificadas. Sin eso, la fase 1
   (abstencion con senales gratis) no es medible.
+
+---
+
+## 2026-09-19/20 — #79 pasa, y el "ruido ±1" resulta ser un corrimiento fijo (CORRIGE la seccion anterior)
+
+### #79 `selfcons_temperature=0.0` — pasa dev Y held-out (NO adoptado aun: espera OK del usuario)
+
+| criterio (fijado antes, plan v32) | resultado |
+|---|---|
+| reproducibilidad `repet0_a` vs `repet0_b` | **0 textos distintos, 0 flips** |
+| calidad dev vs `qonly2_dev` | cita_ok 80->80, cita_limpia 80->79 (limite: no cae > 3) |
+| calidad held-out vs `qonly2_holdout` | cita_ok 62->62, cita_limpia 58->**60** (gano 4, perdio 2, p=0.69) |
+
+El riesgo declarado (a t=0 la autoconsistencia deja de aportar) no se observo.
+
+### CORRECCION: el -1 de cita_limpia NO era ruido de muestreo
+
+La seccion de `repet_dev` concluyo "ruido ±1". **Es falso.** Las 6 corridas posteriores al
+2026-09-14 difieren de `qonly2_dev` en las MISMAS 13 queries, y todas dan cita_limpia 79:
+
+| corrida | textos != qonly2_dev | de los 13 | cita_limpia |
+|---|---|---|---|
+| reatr_dev (#77) | 16 | 13 | 79 |
+| limpio2_dev / limpio3_dev (#69a, DB distinta) | 60 / 59 | 11 / 11 | 79 / 79 |
+| aviso_dev (#78) | 13 | 13 | 79 |
+| repet_dev (t=0.7) | 13 | 13 | 79 |
+| repet0_a (t=0.0) | 13 | 13 | 79 |
+
+Entre corridas post-14 con la misma DB: 3-6 textos distintos y **0 de diferencia en cita_limpia**.
+Held-out repite el patron: 14 textos, los mismos 14 en `aviso_holdout` y `repet0_holdout`.
+8 de las 13 cambian de ARTICULO citado, no solo de redaccion.
+
+**Consecuencia:** #77, #69a y #78 se juzgaron contra una base (`qonly2_*`) que ya no representa
+el sistema. El -1 no era de ellos. Base vigente para comparar: `repet0_a` / `repet0_holdout`.
+Hay que re-juzgarlos contra esa base con criterio nuevo; NO se readopta nada por inercia.
+
+### Busqueda de la causa (cada descarte con su evidencia)
+
+| candidato | veredicto | evidencia |
+|---|---|---|
+| DB | descartado | 0 vectores (4B y 0.6B) y 0 textos distintos contra `fragmentos_bak_emb_20260917` / `_bak_notas_20260906` |
+| Ollama / modelos | descartado | binario del 04-29 (0.22.1), blobs de junio |
+| dispositivo del embedder | descartado | CPU ambos dias (`exp_think_paired.py:190`; journal: `offloaded 0/37`) |
+| `embed_4b_num_ctx` 32768->4096 (`0a0d74e`) | **descartado, exp #80** | `scripts/exp_numctx_queries.py`: coseno 1.000000 en 114/114 (prefijo 1024), control 1.000000; journal confirma `KvSize:32768` en el brazo viejo. Mi hipotesis era falsa |
+| tope GPU 230->180 W | descartado | `qonly2_holdout` (09-14 03:02) ya corrio a 180 W y muestra el mismo patron |
+| **`1517efe` (#77, 09-14 10:42)** | **en prueba, exp #81** | reescribio el verificador de citas de `generate.py` "con flag OFF"; una de las 13 cambia `[Art. 8 de 250604]` -> `[Art. 8º de 250604]` |
+
+### exp #81 — biseccion (plan v34, criterio fijado antes)
+
+13 queries (`data/eval/queries_corrimiento13_v1.jsonl`) en dos worktrees: `erag-bis-antes`
+(`ea86b7e`) y `erag-bis-despues` (`1517efe`). Misma DB, Ollama y tope de W.
+`bis_antes` coincide con `qonly2_dev` en >= 10/13 Y `bis_despues` con `repet_dev` en >= 10/13
+-> `1517efe` es la fuente. Si `bis_antes` ya sale como `repet_dev` -> no es el codigo.
+
+### Evals: el usuario NO va a aportar preguntas reales (2026-09-20)
+
+Queda como caveat permanente: todo el eval es escrito por el asistente. Plan B propuesto (sin OK
+aun): preguntas publicas escritas por terceros (FAQ/reclamos SEC, Coordinador, CNE, Ley Facil BCN,
+Transparencia) + registrar las consultas reales cuando el sistema se use.
+
+### GPU durante todo esto
+0 Xid NVRM en el arranque vigente (desde 09-13 21:02). Max 73 C a 180 W. Caveat: `gpu_vigia.sh`
+solo registra con trabajo corriendo; en reposo la unica evidencia es el journal.
