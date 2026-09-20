@@ -26,6 +26,14 @@ bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=.
 bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
 juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
 juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+# MEDICION (no experimento): 16 preguntas REALES de terceros (SEC, CGE, Coordinador) cuyo gold es
+# el articulo que cita LA PROPIA FUENTE, verificado en la DB. Primer eval no escrito por el asistente.
+# De 80 recolectadas (data/eval/preguntas_publicas_v1.jsonl): 18 traian articulo, 2 excluidas
+# porque la SEC cita numeracion que no calza con el DFL 4 vigente (arts. 217 y 127).
+# PREDICCION REGISTRADA ANTES: cita_ok entre 70 % (dev) y 97 % (held-out), o sea 11 a 15 de 16.
+# Menos de 11 -> dev SUBESTIMA el problema real. CAVEAT: n=16, IC ~ +-22 puntos; la fuente puede
+# citar un articulo y existir otro tambien valido (cita_ok es piso). Config adoptada (t=0.0).
+pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold venv/bin/python -m scripts.exp_think_paired
 # exp #78-bis: re-juzgar el aviso "SIN CITA VERIFICADA" ahora que el pipeline es reproducible.
 # Antes se rechazo por "-1" contra qonly2_* (corrimiento de entorno, no del aviso).
 # CRITERIO, FIJADO ANTES (mas duro que el original, posible solo a t=0.0): contra repet0_a /
