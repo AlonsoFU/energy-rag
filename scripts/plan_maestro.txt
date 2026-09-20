@@ -26,6 +26,14 @@ bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=.
 bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
 juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
 juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+# exp #78-bis: re-juzgar el aviso "SIN CITA VERIFICADA" ahora que el pipeline es reproducible.
+# Antes se rechazo por "-1" contra qonly2_* (corrimiento de entorno, no del aviso).
+# CRITERIO, FIJADO ANTES (mas duro que el original, posible solo a t=0.0): contra repet0_a /
+#   repet0_holdout el texto debe ser IDENTICO en el 100 % de las queries salvo el prefijo del
+#   aviso, cita_ok y cita_limpia IDENTICAS query a query, y 0 avisos en respuestas con cita
+#   verificada. Pasa -> se adopta answer_prosa_marcar=True. Cualquier diferencia -> no.
+aviso0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso0_dev venv/bin/python -m scripts.exp_think_paired
+aviso0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso0_holdout venv/bin/python -m scripts.exp_think_paired
 
 # --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #

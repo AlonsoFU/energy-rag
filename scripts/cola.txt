@@ -1,4 +1,115 @@
-# PLAN MAESTRO v28 (2026-09-14) -- exp #77: reatribuir la cita por procedencia
+# PLAN MAESTRO v33 (2026-09-19 noche) -- exp #80: de donde sale el corrimiento de las 13 queries
+#
+# RESULTADO #79 (dev): repet0_a vs repet0_b = 0 textos distintos, 0 flips -> REPRODUCIBLE a t=0.0.
+# repet0_a vs qonly2_dev: cita_ok 80->80, cita_limpia 80->79 -> pasa (no cae > 3).
+#
+# HALLAZGO: las 6 corridas posteriores al 2026-09-14 (reatr, limpio2/3, aviso, repet, repet0_a)
+# difieren de qonly2_dev en las MISMAS 13 queries y TODAS dan cita_limpia 79. Entre ellas, con la
+# misma DB, difieren 3-6 textos y 0 en cita_limpia. El "-1" que rechazo #77/#69a/#78 es un
+# corrimiento FIJO de entorno, no muestreo. Descartado: DB (0 vectores/textos distintos al
+# respaldo), Ollama (binario de abril), dispositivo del embedder (CPU ambos dias).
+# Sospechosos: embed_4b_num_ctx 32768->4096 (0a0d74e, 09-14) y tope GPU 230->180 W (09-13).
+#
+# CRITERIO numctx_q, FIJADO ANTES: coseno minimo (prefijo 1024) < 0.9999 -> num_ctx es fuente.
+#   1.000000 en 114/114 -> NO es num_ctx, queda el tope de W.
+# OJO RAM: el brazo viejo carga 9.8 GB de 14. Por eso va SOLO y por la cola, no desde la sesion.
+numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.exp_numctx_queries
+# #79 held-out (la regla es dev Y held-out antes de adoptar selfcons_temperature=0.0).
+# CRITERIO: contra qonly2_holdout, cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+# CAVEAT: qonly2_holdout es del 09-14; si es previo a num_ctx=4096 carga el mismo corrimiento.
+repet0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=repet0_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v32 (2026-09-19, ya ejecutado) -- exp #79: hacer REPRODUCIBLE el pipeline
+#
+# POR QUE ES LO PRIMERO: `repet_dev` probo que correr dos veces la MISMA config baja
+# cita_limpia de 80 a 79 y cambia el texto de 13 de 114 respuestas (11 %). Ese ruido es del
+# mismo tamano que las diferencias con que se rechazo #77 y se revirtio #69a. Sin
+# reproducibilidad, NINGUNA medicion futura vale, asi que esto va antes que cualquier mejora.
+#
+# Causa: _self_consistency muestreaba con temperature 0.7 HARDCODEADA (generate.py:122).
+# Ahora sale de `config.selfcons_temperature`, default 0.7 = comportamiento ADOPTADO (no se
+# cambia nada sin medirlo). Estas corridas prueban 0.0.
+#
+# CRITERIO, FIJADO ANTES DE CORRER:
+#   1) REPRODUCIBILIDAD (repet0_a vs repet0_b, ambas a temperature 0.0, sin ningun otro cambio)
+#      exigido: 0 queries con texto distinto Y 0 flips de cita_ok/cita_limpia.
+#      Si NO da 0, la temperatura no era la unica fuente de no-determinismo y hay que buscar
+#      la otra ANTES de seguir midiendo nada.
+#   2) CALIDAD (repet0_a vs qonly2_dev): cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+#      El umbral 3 = 3x el ruido medido (>=1), no un numero inventado. Antes se exigia "no
+#      cae", que es mas estricto que la precision del instrumento.
+# RIESGO DECLARADO: a temperature 0 las 3 muestras de autoconsistencia son identicas, o sea el
+# consenso deja de aportar. Si la calidad cae, la leccion es que la autoconsistencia SIRVE y el
+# precio es el ruido; ahi habria que promediar k corridas en vez de bajar la temperatura.
+repet0_a|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_a venv/bin/python -m scripts.exp_think_paired
+repet0_b|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_b venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v31 (2026-09-18, ya ejecutado) -- #78: probar el aviso "SIN CITA VERIFICADA"
+#
+# POR QUE VA POR LA COLA y no a mano: dos intentos lanzados desde la sesion murieron con
+# "system running low on memory". NO fue OOM del kernel (journalctl -k no registra nada): los
+# mata el harness por presion de RAM. Las corridas del cron (limpio3_dev, 2 h 22) sobrevivieron
+# el mismo dia con la misma maquina, porque no son hijas del harness.
+# Contexto de RAM: 14 GB totales; `qwen3-embedding:4b` se carga en CPU (vram=0.0G) y ocupa
+# 3.7 GB; `ollama stop qwen3-embedding:4b` los libera pero el modelo se recarga solo al usarse.
+#
+# CRITERIO, FIJADO ANTES (sobre las 13 queries que hoy caen a prosa):
+#     el aviso aparece en 13/13 de prosa  Y  en 0 de las que tienen cita verificada
+#     Y  cita_ok / cita_limpia NO se mueven contra qonly2_*
+# Si pasa -> se encola dev + held-out completos con el mismo FLAGS (otra medicion, ~3.5 h).
+# El flag queda OFF por defecto: se prende SOLO en la corrida via FLAGS=.
+aviso_smoke|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_prosa13_v1.jsonl NAME=aviso_smoke venv/bin/python -m scripts.exp_think_paired
+# Medicion completa, encolada detras de la prueba. Si la prueba FALLA su criterio, estas dos
+# se sacan del plan antes de que arranquen (la prueba dura minutos, hay margen).
+# CRITERIO de estas dos: cita_ok NO cae > 3 Y cita_limpia NO cae, dev Y held-out, contra
+# qonly2_*. Es un cambio de PRESENTACION: si alguna se mueve, el aviso esta ensuciando el
+# parseo de citas y NO se adopta.
+aviso_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso_dev venv/bin/python -m scripts.exp_think_paired
+aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso_holdout venv/bin/python -m scripts.exp_think_paired
+
+# REPETIBILIDAD (2026-09-19) -- mide el RUIDO del pipeline, sin cambiar NADA.
+# Motivo: en aviso_smoke, 2 de 13 queries que antes caian a prosa produjeron cita verificada y
+# 4 cambiaron cita_ok/cita_limpia SIN tocar el buscador. Todos los criterios de estos dias
+# asumen "el pipeline es determinista" (docs/plan-operacion.md lo dice explicitamente). Si no
+# lo es, las diferencias de 1 caso que decidieron #77 y #69a pueden ser ruido.
+# ESTA CORRIDA ES IDENTICA a qonly2_dev: misma config, misma DB, mismos flags. Cualquier
+# diferencia contra qonly2_dev es RUIDO puro, no efecto de ningun cambio.
+# Lectura: si el ruido en cita_limpia es >= 1, el criterio "cita_limpia NO cae" es mas
+# estricto que la precision del instrumento y hay que reescribirlo con banda de ruido
+# ANTES del proximo experimento.
+repet_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=repet_dev venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v30 (2026-09-17, ya ejecutado) -- #69a ETAPA B: re-embebido, volver a medir
+#
+# limpio2_* midio la etapa A con los vectores VIEJOS (BM25 limpio, denso sucio): dev
+# cita_limpia 80->79 con 5 ganadas / 6 perdidas, y las 6 perdidas eran de RETRIEVAL, no de
+# etiqueta; held-out 58->62, gano 4 y perdio 0.
+# `scripts/reembeber_limpiados.py --apply` corrio: 1120/1120 re-embebidas, 0 fallos.
+# Verificado: 0 vectores identicos en embedding_4b_1024 (la columna viva), 0 nulos,
+# respaldo en fragmentos_bak_emb_20260917.
+#
+# CRITERIO (el mismo de #69a, NO se reescribe) contra qonly2_dev / qonly2_holdout:
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out
+#     cae -> revertir la ETAPA A completa (limpiar_notas_bcn.py --revertir)
+# PREDICCION REGISTRADA ANTES: si el desajuste era la causa, dev vuelve a cita_limpia >= 80
+# y held-out conserva sus 4 ganadas. Si dev sigue en 79, la hipotesis era falsa y NO se adopta.
+limpio3_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio3_dev venv/bin/python -m scripts.exp_think_paired
+limpio3_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio3_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v29 (2026-09-17, ya ejecutado) -- #69a aplicado: medir la limpieza de notas BCN
+#
+# `scripts/limpiar_notas_bcn.py --apply` corrio el 2026-09-17: 1122 articulos, 1120 fragmentos,
+# 692 incisos. Respaldo en *_bak_notas_20260906, reversible con --revertir.
+# CRITERIO (fijado el 2026-09-06, NO se reescribe):
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out   -> se queda
+#     cae en cualquiera de los dos                                   -> --revertir
+# Base de comparacion: qonly2_dev / qonly2_holdout (misma config, DB sucia).
+# CAVEAT: limpia el TEXTO pero NO re-embebe (etapa b pendiente); los vectores siguen calculados
+# sobre el texto viejo. BM25 si cambia (tsv se recalcula). La ganancia medida es un PISO.
+limpio2_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio2_dev venv/bin/python -m scripts.exp_think_paired
+limpio2_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio2_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v28 (2026-09-14, ya ejecutado) -- exp #77: reatribuir la cita por procedencia
 #
 # Diagnostico 9/9 del 17 % de held-out en prosa: el modelo copia bien y ETIQUETA mal (toma la
 # referencia de notas BCN, "[Art. primero N° 8, d)]", o inventa el numero). Criterio fijado antes

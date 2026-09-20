@@ -537,3 +537,360 @@
 2026-09-03 15:30:01  cola VACIA -- nada pendiente
 2026-09-03 16:30:01  cola VACIA -- nada pendiente
 2026-09-03 17:30:01  cola VACIA -- nada pendiente
+2026-09-03 18:35:35  LANZO think_real
+2026-09-04 06:26:20  OK    think_real
+2026-09-04 06:26:25  LANZO think_holdout
+2026-09-04 14:07:03  OK    think_holdout
+2026-09-04 14:07:08  LANZO dedup_refs
+2026-09-04 14:07:08  OK    dedup_refs
+2026-09-04 14:07:13  LANZO mapa_c
+2026-09-04 14:07:14  OK    mapa_c
+2026-09-04 14:20:01  LANZO tipos_v2
+2026-09-04 14:20:08  OK    tipos_v2
+2026-09-04 14:30:02  cola VACIA -- nada pendiente
+2026-09-04 14:30:41  LANZO tipos_adoptado
+2026-09-04 15:22:08  OK    tipos_adoptado
+2026-09-04 15:30:01  cola VACIA -- nada pendiente
+2026-09-04 15:31:02  LANZO n1_dev
+2026-09-04 15:32:40  FALLO n1_dev intento 1, se reintenta (ver logs/cola_n1_dev.log)
+2026-09-04 15:32:45  LANZO n1_dev
+2026-09-05 00:54:47  OK    n1_dev
+2026-09-05 00:54:52  LANZO n1_holdout
+2026-09-05 00:55:11  cola VACIA -- nada pendiente
+2026-09-05 00:55:16  LANZO n1_holdout
+2026-09-05 00:56:56  FALLO n1_holdout intento 2, se reintenta (ver logs/cola_n1_holdout.log)
+2026-09-05 00:57:01  LANZO def_dev
+2026-09-05 10:30:25  OK    def_dev
+2026-09-05 10:30:30  LANZO def_holdout
+2026-09-05 10:30:34  cola VACIA -- nada pendiente
+2026-09-05 10:46:29  LANZO donde_falla
+2026-09-05 11:26:42  OK    donde_falla
+2026-09-05 11:27:10  LANZO donde_falla50
+2026-09-05 12:08:02  OK    donde_falla50
+2026-09-05 12:15:45  LANZO alcanzable
+2026-09-05 15:21:26  OK    alcanzable
+2026-09-05 15:30:01  cola VACIA -- nada pendiente
+2026-09-05 15:30:59  LANZO ruido_a
+2026-09-05 16:12:03  OK    ruido_a
+2026-09-05 16:12:08  LANZO rerank50
+2026-09-05 16:53:31  OK    rerank50
+2026-09-05 17:01:24  LANZO rr_dev
+2026-09-06 08:58:53  OK    rr_dev
+2026-09-06 08:58:58  LANZO rr_holdout
+2026-09-06 08:59:02  cola VACIA -- nada pendiente
+2026-09-06 08:59:07  LANZO rr_holdout
+2026-09-06 09:01:18  FALLO rr_holdout intento 2, se reintenta (ver logs/cola_rr_holdout.log)
+2026-09-06 09:03:07  LANZO fidelidad_dev
+2026-09-06 09:13:53  FALLO fidelidad_dev intento 1, se reintenta (ver logs/cola_fidelidad_dev.log)
+2026-09-06 09:13:58  LANZO fidelidad_dev
+2026-09-06 09:30:40  FALLO fidelidad_dev intento 2, se reintenta (ver logs/cola_fidelidad_dev.log)
+2026-09-06 09:30:45  LANZO fidelidad_dev
+2026-09-06 09:56:59  FALLO fidelidad_dev intento 1, se reintenta (ver logs/cola_fidelidad_dev.log)
+2026-09-06 09:57:57  LANZO fidelidad_dev
+2026-09-06 10:52:56  FALLO fidelidad_dev intento 1, se reintenta (ver logs/cola_fidelidad_dev.log)
+2026-09-06 10:53:01  LANZO fidelidad_dev
+2026-09-06 13:30:44  OK    fidelidad_dev
+2026-09-06 13:30:49  LANZO fidelidad_holdout
+2026-09-06 13:31:47  FALLO fidelidad_holdout intento 1, se reintenta (ver logs/cola_fidelidad_holdout.log)
+2026-09-06 13:56:20  LANZO fidelidad_holdout
+2026-09-06 14:15:01  LANZO fidelidad_holdout
+2026-09-06 15:49:59  OK    fidelidad_holdout
+2026-09-06 16:30:01  cola VACIA -- nada pendiente
+2026-09-06 17:30:01  cola VACIA -- nada pendiente
+2026-09-06 18:30:01  cola VACIA -- nada pendiente
+2026-09-06 19:30:01  cola VACIA -- nada pendiente
+2026-09-06 20:30:01  cola VACIA -- nada pendiente
+2026-09-06 21:30:01  cola VACIA -- nada pendiente
+2026-09-06 22:30:01  cola VACIA -- nada pendiente
+2026-09-06 23:30:01  cola VACIA -- nada pendiente
+2026-09-07 00:30:01  cola VACIA -- nada pendiente
+2026-09-07 01:02:36  LANZO reparar_69b
+2026-09-07 01:11:17  OK    reparar_69b
+2026-09-07 01:11:22  LANZO limpio_dev
+2026-09-07 09:09:29  OK    limpio_dev
+2026-09-07 09:09:34  LANZO limpio_holdout
+2026-09-07 13:32:12  OK    limpio_holdout
+2026-09-07 13:32:18  LANZO fidelidad_limpio_dev
+2026-09-07 15:05:12  OK    fidelidad_limpio_dev
+2026-09-07 15:05:17  LANZO fidelidad_limpio_holdout
+2026-09-07 15:55:45  OK    fidelidad_limpio_holdout
+2026-09-07 15:55:50  LANZO fidelidad_dev_db69b
+2026-09-07 17:40:01  LANZO fidelidad_dev_db69b
+2026-09-07 17:59:01  OK    fidelidad_dev_db69b
+2026-09-07 17:59:06  LANZO fidelidad_limpio_dev_juez27b
+2026-09-07 18:22:04  OK    fidelidad_limpio_dev_juez27b
+2026-09-07 18:22:09  LANZO smoke_sinmeta
+2026-09-07 18:28:40  OK    smoke_sinmeta
+2026-09-07 18:28:45  LANZO sinmeta_dev
+2026-09-07 22:26:28  OK    sinmeta_dev
+2026-09-07 22:26:33  LANZO sinmeta_holdout
+2026-09-08 01:50:53  OK    sinmeta_holdout
+2026-09-08 01:50:58  LANZO fidelidad_sinmeta_dev
+2026-09-08 05:20:29  OK    fidelidad_sinmeta_dev
+2026-09-08 05:20:34  LANZO fidelidad_sinmeta_holdout
+2026-09-08 07:00:21  OK    fidelidad_sinmeta_holdout
+2026-09-08 07:00:26  LANZO smoke_quote
+2026-09-08 07:13:53  OK    smoke_quote
+2026-09-08 07:13:58  LANZO quote_dev
+2026-09-08 09:53:14  FALLO quote_dev intento 1, se reintenta (ver logs/cola_quote_dev.log)
+2026-09-08 12:50:01  LANZO quote_dev
+2026-09-08 12:59:24  FALLO quote_dev intento 2, se reintenta (ver logs/cola_quote_dev.log)
+2026-09-08 15:10:01  LANZO quote_dev
+2026-09-08 18:51:27  OK    quote_dev
+2026-09-08 18:51:32  LANZO quote_holdout
+2026-09-08 21:56:38  OK    quote_holdout
+2026-09-08 21:56:43  LANZO fidelidad_quote_dev
+2026-09-08 23:40:27  OK    fidelidad_quote_dev
+2026-09-08 23:40:32  LANZO fidelidad_quote_holdout
+2026-09-09 00:46:55  OK    fidelidad_quote_holdout
+2026-09-09 00:47:00  LANZO verificar_dev
+2026-09-09 02:13:24  OK    verificar_dev
+2026-09-09 02:13:29  LANZO verificar_dev_laxo
+2026-09-09 03:40:06  OK    verificar_dev_laxo
+2026-09-09 03:40:11  LANZO verificar_holdout
+2026-09-09 04:20:22  OK    verificar_holdout
+2026-09-09 04:20:27  LANZO fidelidad_verificar_dev_27b
+2026-09-09 04:43:48  OK    fidelidad_verificar_dev_27b
+2026-09-09 04:43:53  LANZO smoke_27b
+2026-09-09 09:19:47  OK    smoke_27b
+2026-09-09 09:30:01  cola VACIA -- nada pendiente
+2026-09-09 10:30:01  cola VACIA -- nada pendiente
+2026-09-09 11:30:01  cola VACIA -- nada pendiente
+2026-09-09 12:30:01  cola VACIA -- nada pendiente
+2026-09-09 13:30:01  cola VACIA -- nada pendiente
+2026-09-09 14:30:01  cola VACIA -- nada pendiente
+2026-09-09 15:30:01  cola VACIA -- nada pendiente
+2026-09-09 16:30:01  cola VACIA -- nada pendiente
+2026-09-09 17:30:01  cola VACIA -- nada pendiente
+2026-09-09 18:30:01  cola VACIA -- nada pendiente
+2026-09-09 19:30:01  cola VACIA -- nada pendiente
+2026-09-09 20:30:01  cola VACIA -- nada pendiente
+2026-09-09 21:30:01  cola VACIA -- nada pendiente
+2026-09-09 22:30:01  cola VACIA -- nada pendiente
+2026-09-09 23:30:01  cola VACIA -- nada pendiente
+2026-09-10 00:30:01  cola VACIA -- nada pendiente
+2026-09-10 01:30:01  cola VACIA -- nada pendiente
+2026-09-10 02:30:01  cola VACIA -- nada pendiente
+2026-09-10 03:30:01  cola VACIA -- nada pendiente
+2026-09-10 04:30:01  cola VACIA -- nada pendiente
+2026-09-10 05:30:01  cola VACIA -- nada pendiente
+2026-09-10 06:30:01  cola VACIA -- nada pendiente
+2026-09-10 07:30:01  cola VACIA -- nada pendiente
+2026-09-10 08:30:01  cola VACIA -- nada pendiente
+2026-09-10 09:30:01  cola VACIA -- nada pendiente
+2026-09-10 10:30:01  cola VACIA -- nada pendiente
+2026-09-10 11:30:01  cola VACIA -- nada pendiente
+2026-09-10 12:30:01  cola VACIA -- nada pendiente
+2026-09-10 13:30:01  cola VACIA -- nada pendiente
+2026-09-10 14:30:02  cola VACIA -- nada pendiente
+2026-09-10 15:30:01  cola VACIA -- nada pendiente
+2026-09-10 15:49:37  LANZO reparar_69b_v2
+2026-09-10 15:55:28  OK    reparar_69b_v2
+2026-09-10 15:55:33  LANZO qf_dev
+2026-09-11 01:38:15  OK    qf_dev
+2026-09-11 01:38:20  LANZO qf_holdout
+2026-09-11 07:42:03  OK    qf_holdout
+2026-09-11 07:42:08  LANZO qonly_dev
+2026-09-11 11:12:49  OK    qonly_dev
+2026-09-11 11:12:54  LANZO qonly_holdout
+2026-09-11 13:04:33  OK    qonly_holdout
+2026-09-11 13:04:38  LANZO fidelidad_qf_dev
+2026-09-11 15:23:10  OK    fidelidad_qf_dev
+2026-09-11 15:23:15  LANZO fidelidad_qf_holdout
+2026-09-11 16:07:57  OK    fidelidad_qf_holdout
+2026-09-11 16:30:01  cola VACIA -- nada pendiente
+2026-09-11 17:30:01  cola VACIA -- nada pendiente
+2026-09-11 18:30:01  cola VACIA -- nada pendiente
+2026-09-11 19:30:01  cola VACIA -- nada pendiente
+2026-09-11 20:30:01  cola VACIA -- nada pendiente
+2026-09-11 21:30:01  cola VACIA -- nada pendiente
+2026-09-11 22:30:01  cola VACIA -- nada pendiente
+2026-09-11 23:30:01  cola VACIA -- nada pendiente
+2026-09-12 00:30:01  cola VACIA -- nada pendiente
+2026-09-12 01:30:01  cola VACIA -- nada pendiente
+2026-09-12 02:30:01  cola VACIA -- nada pendiente
+2026-09-12 03:30:01  cola VACIA -- nada pendiente
+2026-09-12 04:30:01  cola VACIA -- nada pendiente
+2026-09-12 05:30:01  cola VACIA -- nada pendiente
+2026-09-12 06:30:01  cola VACIA -- nada pendiente
+2026-09-12 07:30:01  cola VACIA -- nada pendiente
+2026-09-12 08:30:01  cola VACIA -- nada pendiente
+2026-09-12 12:50:02  LANZO qonly2_dev
+2026-09-12 14:26:49  OK    qonly2_dev
+2026-09-12 14:26:54  LANZO qonly3_dev
+2026-09-12 16:07:12  OK    qonly3_dev
+2026-09-12 16:07:17  LANZO qonly5_dev
+2026-09-12 18:11:13  OK    qonly5_dev
+2026-09-12 18:30:01  cola VACIA -- nada pendiente
+2026-09-12 19:30:01  cola VACIA -- nada pendiente
+2026-09-12 20:30:01  cola VACIA -- nada pendiente
+2026-09-12 21:30:01  cola VACIA -- nada pendiente
+2026-09-12 22:30:01  cola VACIA -- nada pendiente
+2026-09-12 23:30:01  cola VACIA -- nada pendiente
+2026-09-13 00:30:01  cola VACIA -- nada pendiente
+2026-09-13 01:30:01  cola VACIA -- nada pendiente
+2026-09-13 02:30:01  cola VACIA -- nada pendiente
+2026-09-13 03:30:01  cola VACIA -- nada pendiente
+2026-09-13 04:30:01  cola VACIA -- nada pendiente
+2026-09-13 05:30:01  cola VACIA -- nada pendiente
+2026-09-13 06:30:01  cola VACIA -- nada pendiente
+2026-09-13 07:30:01  cola VACIA -- nada pendiente
+2026-09-13 08:30:01  cola VACIA -- nada pendiente
+2026-09-13 09:30:01  cola VACIA -- nada pendiente
+2026-09-13 10:30:01  cola VACIA -- nada pendiente
+2026-09-13 11:30:01  cola VACIA -- nada pendiente
+2026-09-13 12:30:01  cola VACIA -- nada pendiente
+2026-09-13 13:30:01  cola VACIA -- nada pendiente
+2026-09-13 14:30:01  cola VACIA -- nada pendiente
+2026-09-13 15:30:01  cola VACIA -- nada pendiente
+2026-09-13 16:30:01  cola VACIA -- nada pendiente
+2026-09-13 17:30:01  cola VACIA -- nada pendiente
+2026-09-13 18:30:01  cola VACIA -- nada pendiente
+2026-09-13 19:30:01  cola VACIA -- nada pendiente
+2026-09-13 20:30:02  cola VACIA -- nada pendiente
+2026-09-13 21:00:28  LANZO qonly1_dev
+2026-09-13 23:54:15  LANZO qonly1_dev
+2026-09-14 01:01:38  OK    qonly1_dev
+2026-09-14 01:01:43  LANZO qonly2_holdout
+2026-09-14 03:02:37  OK    qonly2_holdout
+2026-09-14 03:30:01  cola VACIA -- nada pendiente
+2026-09-14 04:30:01  cola VACIA -- nada pendiente
+2026-09-14 05:30:01  cola VACIA -- nada pendiente
+2026-09-14 07:30:01  cola VACIA -- nada pendiente
+2026-09-14 08:30:01  cola VACIA -- nada pendiente
+2026-09-14 09:30:01  cola VACIA -- nada pendiente
+2026-09-14 11:01:38  LANZO reatr_dev
+2026-09-14 13:05:57  OK    reatr_dev
+2026-09-14 13:06:02  LANZO reatr_holdout
+2026-09-14 14:26:08  OK    reatr_holdout
+2026-09-14 14:30:01  cola VACIA -- nada pendiente
+2026-09-14 15:30:01  cola VACIA -- nada pendiente
+2026-09-14 16:30:01  cola VACIA -- nada pendiente
+2026-09-14 17:30:01  cola VACIA -- nada pendiente
+2026-09-14 18:30:01  cola VACIA -- nada pendiente
+2026-09-14 19:30:01  cola VACIA -- nada pendiente
+2026-09-14 20:30:01  cola VACIA -- nada pendiente
+2026-09-14 21:30:01  cola VACIA -- nada pendiente
+2026-09-14 22:30:01  cola VACIA -- nada pendiente
+2026-09-14 23:30:01  cola VACIA -- nada pendiente
+2026-09-15 00:30:01  cola VACIA -- nada pendiente
+2026-09-15 01:30:02  cola VACIA -- nada pendiente
+2026-09-15 02:30:01  cola VACIA -- nada pendiente
+2026-09-15 03:30:02  cola VACIA -- nada pendiente
+2026-09-15 04:30:01  cola VACIA -- nada pendiente
+2026-09-15 05:30:01  cola VACIA -- nada pendiente
+2026-09-15 06:30:01  cola VACIA -- nada pendiente
+2026-09-15 07:30:01  cola VACIA -- nada pendiente
+2026-09-15 08:30:01  cola VACIA -- nada pendiente
+2026-09-15 09:30:02  cola VACIA -- nada pendiente
+2026-09-15 10:30:01  cola VACIA -- nada pendiente
+2026-09-15 11:30:01  cola VACIA -- nada pendiente
+2026-09-15 12:30:01  cola VACIA -- nada pendiente
+2026-09-15 13:30:01  cola VACIA -- nada pendiente
+2026-09-15 14:30:01  cola VACIA -- nada pendiente
+2026-09-15 15:30:01  cola VACIA -- nada pendiente
+2026-09-15 16:30:02  cola VACIA -- nada pendiente
+2026-09-15 17:30:01  cola VACIA -- nada pendiente
+2026-09-15 18:30:01  cola VACIA -- nada pendiente
+2026-09-15 19:30:01  cola VACIA -- nada pendiente
+2026-09-15 20:30:01  cola VACIA -- nada pendiente
+2026-09-15 21:30:01  cola VACIA -- nada pendiente
+2026-09-15 22:30:01  cola VACIA -- nada pendiente
+2026-09-15 23:30:02  cola VACIA -- nada pendiente
+2026-09-16 00:30:01  cola VACIA -- nada pendiente
+2026-09-16 01:30:01  cola VACIA -- nada pendiente
+2026-09-16 02:30:02  cola VACIA -- nada pendiente
+2026-09-16 03:30:01  cola VACIA -- nada pendiente
+2026-09-16 04:30:02  cola VACIA -- nada pendiente
+2026-09-16 05:30:01  cola VACIA -- nada pendiente
+2026-09-16 06:30:01  cola VACIA -- nada pendiente
+2026-09-16 07:30:01  cola VACIA -- nada pendiente
+2026-09-16 08:30:01  cola VACIA -- nada pendiente
+2026-09-16 09:30:02  cola VACIA -- nada pendiente
+2026-09-16 10:30:01  cola VACIA -- nada pendiente
+2026-09-16 11:30:01  cola VACIA -- nada pendiente
+2026-09-16 12:30:01  cola VACIA -- nada pendiente
+2026-09-16 13:30:02  cola VACIA -- nada pendiente
+2026-09-16 14:30:01  cola VACIA -- nada pendiente
+2026-09-16 15:30:01  cola VACIA -- nada pendiente
+2026-09-16 16:30:02  cola VACIA -- nada pendiente
+2026-09-16 17:30:01  cola VACIA -- nada pendiente
+2026-09-16 18:30:02  cola VACIA -- nada pendiente
+2026-09-16 19:30:01  cola VACIA -- nada pendiente
+2026-09-16 20:30:02  cola VACIA -- nada pendiente
+2026-09-16 21:30:01  cola VACIA -- nada pendiente
+2026-09-16 22:30:02  cola VACIA -- nada pendiente
+2026-09-16 23:30:01  cola VACIA -- nada pendiente
+2026-09-17 00:30:01  cola VACIA -- nada pendiente
+2026-09-17 01:30:01  cola VACIA -- nada pendiente
+2026-09-17 02:30:01  cola VACIA -- nada pendiente
+2026-09-17 03:30:01  cola VACIA -- nada pendiente
+2026-09-17 04:30:02  cola VACIA -- nada pendiente
+2026-09-17 05:30:01  cola VACIA -- nada pendiente
+2026-09-17 06:30:01  cola VACIA -- nada pendiente
+2026-09-17 07:30:02  cola VACIA -- nada pendiente
+2026-09-17 08:30:01  cola VACIA -- nada pendiente
+2026-09-17 09:30:02  cola VACIA -- nada pendiente
+2026-09-17 11:30:01  cola VACIA -- nada pendiente
+2026-09-17 12:30:01  cola VACIA -- nada pendiente
+2026-09-17 13:00:01  LANZO limpio2_dev
+2026-09-17 15:24:58  OK    limpio2_dev
+2026-09-17 15:25:03  LANZO limpio2_holdout
+2026-09-17 16:30:24  OK    limpio2_holdout
+2026-09-17 17:10:01  LANZO limpio3_dev
+2026-09-17 19:32:23  OK    limpio3_dev
+2026-09-17 19:32:28  LANZO limpio3_holdout
+2026-09-17 20:39:34  OK    limpio3_holdout
+2026-09-17 21:30:02  cola VACIA -- nada pendiente
+2026-09-17 22:30:01  cola VACIA -- nada pendiente
+2026-09-17 23:30:01  cola VACIA -- nada pendiente
+2026-09-18 00:30:02  cola VACIA -- nada pendiente
+2026-09-18 01:30:01  cola VACIA -- nada pendiente
+2026-09-18 02:30:01  cola VACIA -- nada pendiente
+2026-09-18 03:30:01  cola VACIA -- nada pendiente
+2026-09-18 04:30:01  cola VACIA -- nada pendiente
+2026-09-18 05:30:02  cola VACIA -- nada pendiente
+2026-09-18 06:30:01  cola VACIA -- nada pendiente
+2026-09-18 07:30:01  cola VACIA -- nada pendiente
+2026-09-18 08:30:02  cola VACIA -- nada pendiente
+2026-09-18 09:30:01  cola VACIA -- nada pendiente
+2026-09-18 10:30:01  cola VACIA -- nada pendiente
+2026-09-18 11:30:02  cola VACIA -- nada pendiente
+2026-09-18 12:30:01  cola VACIA -- nada pendiente
+2026-09-18 13:30:01  cola VACIA -- nada pendiente
+2026-09-18 14:30:01  cola VACIA -- nada pendiente
+2026-09-18 15:30:01  cola VACIA -- nada pendiente
+2026-09-18 16:30:02  cola VACIA -- nada pendiente
+2026-09-18 17:30:01  cola VACIA -- nada pendiente
+2026-09-18 18:30:01  cola VACIA -- nada pendiente
+2026-09-18 19:30:01  cola VACIA -- nada pendiente
+2026-09-18 20:30:02  cola VACIA -- nada pendiente
+2026-09-18 21:30:01  cola VACIA -- nada pendiente
+2026-09-18 22:30:02  cola VACIA -- nada pendiente
+2026-09-18 23:30:01  LANZO aviso_smoke
+2026-09-19 00:40:41  OK    aviso_smoke
+2026-09-19 00:40:44  LANZO aviso_dev
+2026-09-19 03:10:43  OK    aviso_dev
+2026-09-19 03:10:48  LANZO aviso_holdout
+2026-09-19 05:08:45  OK    aviso_holdout
+2026-09-19 05:08:50  LANZO repet_dev
+2026-09-19 07:35:30  OK    repet_dev
+2026-09-19 08:30:02  cola VACIA -- nada pendiente
+2026-09-19 09:30:02  cola VACIA -- nada pendiente
+2026-09-19 10:30:02  cola VACIA -- nada pendiente
+2026-09-19 11:30:02  cola VACIA -- nada pendiente
+2026-09-19 12:30:01  cola VACIA -- nada pendiente
+2026-09-19 13:30:01  cola VACIA -- nada pendiente
+2026-09-19 13:40:01  LANZO repet0_a
+2026-09-19 16:05:40  OK    repet0_a
+2026-09-19 16:05:45  LANZO repet0_b
+2026-09-19 18:42:19  OK    repet0_b
+2026-09-19 19:30:02  cola VACIA -- nada pendiente
+2026-09-19 20:30:01  cola VACIA -- nada pendiente
+2026-09-19 21:30:02  cola VACIA -- nada pendiente
+2026-09-19 22:30:02  cola VACIA -- nada pendiente
+2026-09-19 22:40:02  LANZO numctx_q
+2026-09-19 22:42:34  OK    numctx_q
+2026-09-19 22:42:39  LANZO repet0_holdout
+2026-09-20 00:45:13  OK    repet0_holdout
+2026-09-20 01:30:01  cola VACIA -- nada pendiente
