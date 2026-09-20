@@ -1,3 +1,28 @@
+# PLAN MAESTRO v37 (2026-09-20 17:35) -- CIERRE: correr todo lo pendiente que se puede correr.
+# Config ADOPTADA ya vive en config.py (quote-only max 2, t=0.0, reatribuir, aviso): sin FLAGS.
+# RESULTADO #83: combo0_* contra fix84_*: dev 0 perdidas, held-out limpia 59->61, 0 perdidas. ADOPTADO.
+#
+# (1) pub_base: las 16 preguntas reales con la config adoptada = base para lo que sigue.
+# (2) exp #86 self_consistency_n 3 -> 1. A t=0.0 las 3 muestras son identicas: n=1 deberia dar el
+#     MISMO texto con 1/3 de llamadas en esa etapa. CRITERIO, FIJADO ANTES: contra combo0_dev /
+#     combo0_holdout, NINGUNA query pierde cita_ok ni cita_limpia. Pasa -> se adopta n=1.
+# (3) exp #69a-bis: limpiar notas BCN (etapa A) + re-embeber (etapa B) sobre el corpus reparado.
+#     Simulacion 17:30: 1047 articulos, 1050 fragmentos, 692 incisos. Re-juzgado contra la base
+#     correcta pasaba su criterio (held-out precision 0.87 -> 0.95) pero revolvia 5-6 queries de dev.
+#     CRITERIO = EL ORIGINAL, sin tocar: cita_ok NO cae > 3 Y cita_limpia NO cae, dev Y held-out,
+#     contra combo0_*. `gate_69a` lo aplica y REVIERTE SOLO si falla (no depende de que haya alguien).
+#     Va AL FINAL porque muta la DB: nada corre despues que dependa del veredicto.
+# (4) pub_final: las 16 reales sobre el estado final (haya quedado #69a o no).
+pub_base|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_base venv/bin/python -m scripts.exp_think_paired
+n1_dev|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_operativas_v1.jsonl NAME=n1_dev venv/bin/python -m scripts.exp_think_paired
+n1_holdout|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=n1_holdout venv/bin/python -m scripts.exp_think_paired
+l69_apply_a|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --apply
+l69_apply_b|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reembeber_limpiados --apply
+l69_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=l69_dev venv/bin/python -m scripts.exp_think_paired
+l69_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=l69_holdout venv/bin/python -m scripts.exp_think_paired
+gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.gate_69a
+pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_final venv/bin/python -m scripts.exp_think_paired
+
 # PLAN MAESTRO v35 (2026-09-20) -- exp #82 detras de la biseccion: juez "la cita responde la pregunta"
 # Ataca el modo de falla peligroso: cita REAL del articulo EQUIVOCADO (dev 28 juzgables).
 # Juzga respuestas YA guardadas (repet0_*), no toca el pipeline. Control = etiquetas del eval.
