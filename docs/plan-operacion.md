@@ -1883,3 +1883,55 @@ Transparencia) + registrar las consultas reales cuando el sistema se use.
 ### GPU durante todo esto
 0 Xid NVRM en el arranque vigente (desde 09-13 21:02). Max 73 C a 180 W. Caveat: `gpu_vigia.sh`
 solo registra con trabajo corriendo; en reposo la unica evidencia es el journal.
+
+---
+
+## 2026-09-20 madrugada — exp #81: la causa del corrimiento era EL CORPUS (cierra la busqueda)
+
+**Resultado de la biseccion:** el codigo de ANTES de `1517efe` (`ea86b7e`, con embedder a ctx 32768
+y todo lo viejo), corrido hoy sobre las 13 queries: **0/13 textos iguales a `qonly2_dev`, 10/13
+iguales a `repet_dev`** (los 3 restantes = muestreo a t=0.7). Por el criterio fijado: NO es el
+codigo. `1517efe` queda exonerado (su diff con flag OFF es logicamente equivalente, leido).
+
+**Causa real:** el monitor semanal corrio el **2026-09-14 06:00 (09:00 UTC)** y actualizo
+**333 articulos** (61438 Ley 19.496: 145; 1092695: 87; 124102 DS 327: 21; 258171 LGSE: 21;
+137421: 16; 1150437 DS 88: 11; otros 32) y creo **151 fragmentos**. `qonly2_dev` (09-12) y
+`qonly2_holdout` (09-14 03:02) se midieron sobre el corpus ANTERIOR; todo lo demas, sobre el nuevo.
+Calza con todo: mismas 13/14 queries en todas las corridas posteriores, 8 de 13 cambian de articulo.
+
+**Tres diagnosticos mios equivocados en fila, para que no se repitan:**
+1. "el pipeline tiene ruido ±1" (09-19 manana) — el ruido de muestreo existe (3-6 textos) pero el -1 no lo era.
+2. "es `embed_4b_num_ctx`" — falsado por #80 (coseno 1.000000 en 114/114).
+3. "es `1517efe`" — falsado por #81.
+La revision de la DB que hice compara contra respaldos del 09-06/09-17 que solo cubren las 1120
+filas de #69a: no podia ver un cambio del 09-14. Lo correcto era mirar `updated_at`/`created_at`.
+
+**Arreglo (commit `b5d0acb`):** `exp_think_paired` guarda `db_huella` (n articulos, max updated_at,
+n fragmentos, max created_at) en cada `result.json`; `comparar_corridas` avisa si difiere o falta.
+Regla nueva: **despues de cada corrida del monitor semanal la base de comparacion caduca.**
+
+### Re-juicio contra la base del MISMO corpus (criterio ORIGINAL, sin tocarlo)
+
+Base: `repet_dev` (t=0.7) en dev; `repet0_holdout` (t=0.0) en held-out — caveat: en held-out la base
+es a otra temperatura que los brazos; `aviso_holdout` (t=0.7, cita_limpia 59) sirve de referencia.
+
+| experimento | dev cita_ok / limpia | held-out cita_ok / limpia | criterio original | veredicto de entonces |
+|---|---|---|---|---|
+| #77 reatribuir | 80/79 -> 80/79, **0 flips** | 62/60 -> 62/**62** (gano 2, perdio 0) | **PASA** | rechazado por "-1" |
+| #78 aviso | 80/79 -> 80/79, 0 flips | 62/60 -> 62/59 (gano 1, perdio 2) | dev pasa; held-out -1 contra base a otra t | flag OFF por "-1" |
+| #69a limpieza BCN (limpio3) | 80/79 -> 80/79 (gano 5-6, perdio 5-6) | 62/60 -> 62/**62**; precision 0.87 -> 0.95 | **PASA** | revertido por "-1" |
+
+- #77 y #78: se re-miden JUNTOS a t=0.0 (exp #83, plan v35), criterio: ninguna query pierde.
+- **#69a queda para reabrir**: contra la base correcta pasa su propio criterio y sube la precision en
+  held-out, pero en dev revuelve 5-6 queries en cada sentido (efecto de retrieval, no neutro).
+  Re-aplicar es mutar la DB + 4.5 h de GPU; no entra en esta ventana. NO se re-aplica por inercia.
+
+### #79 adoptado
+`selfcons_temperature=0.0` (commit `0c951ca`). Pendiente barato: a t=0.0 las 3 muestras son
+identicas -> `self_consistency_n=1` deberia dar lo mismo con 1/3 de las llamadas. Es otra medicion.
+
+### Primer eval con gold de terceros
+80 preguntas reales publicas (`data/eval/preguntas_publicas_v1.jsonl`); 16 con articulo citado por
+la propia fuente y verificado en la DB (`queries_publicas_gold_v1.jsonl`). Prediccion registrada
+antes de correr: 11-15 de 16. Hallazgo lateral: LGSE arts. 54 y 127 en la DB empiezan a mitad de
+frase (367 y 402 chars) — texto truncado al inicio, sin cuantificar aun.
