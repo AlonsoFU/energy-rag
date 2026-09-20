@@ -1,4 +1,25 @@
-# PLAN MAESTRO v32 (2026-09-19) -- exp #79: hacer REPRODUCIBLE el pipeline
+# PLAN MAESTRO v33 (2026-09-19 noche) -- exp #80: de donde sale el corrimiento de las 13 queries
+#
+# RESULTADO #79 (dev): repet0_a vs repet0_b = 0 textos distintos, 0 flips -> REPRODUCIBLE a t=0.0.
+# repet0_a vs qonly2_dev: cita_ok 80->80, cita_limpia 80->79 -> pasa (no cae > 3).
+#
+# HALLAZGO: las 6 corridas posteriores al 2026-09-14 (reatr, limpio2/3, aviso, repet, repet0_a)
+# difieren de qonly2_dev en las MISMAS 13 queries y TODAS dan cita_limpia 79. Entre ellas, con la
+# misma DB, difieren 3-6 textos y 0 en cita_limpia. El "-1" que rechazo #77/#69a/#78 es un
+# corrimiento FIJO de entorno, no muestreo. Descartado: DB (0 vectores/textos distintos al
+# respaldo), Ollama (binario de abril), dispositivo del embedder (CPU ambos dias).
+# Sospechosos: embed_4b_num_ctx 32768->4096 (0a0d74e, 09-14) y tope GPU 230->180 W (09-13).
+#
+# CRITERIO numctx_q, FIJADO ANTES: coseno minimo (prefijo 1024) < 0.9999 -> num_ctx es fuente.
+#   1.000000 en 114/114 -> NO es num_ctx, queda el tope de W.
+# OJO RAM: el brazo viejo carga 9.8 GB de 14. Por eso va SOLO y por la cola, no desde la sesion.
+numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.exp_numctx_queries
+# #79 held-out (la regla es dev Y held-out antes de adoptar selfcons_temperature=0.0).
+# CRITERIO: contra qonly2_holdout, cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+# CAVEAT: qonly2_holdout es del 09-14; si es previo a num_ctx=4096 carga el mismo corrimiento.
+repet0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=repet0_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v32 (2026-09-19, ya ejecutado) -- exp #79: hacer REPRODUCIBLE el pipeline
 #
 # POR QUE ES LO PRIMERO: `repet_dev` probo que correr dos veces la MISMA config baja
 # cita_limpia de 80 a 79 y cambia el texto de 13 de 114 respuestas (11 %). Ese ruido es del
