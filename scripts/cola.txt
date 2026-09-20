@@ -1,4 +1,49 @@
-# PLAN MAESTRO v33 (2026-09-19 noche) -- exp #80: de donde sale el corrimiento de las 13 queries
+# PLAN MAESTRO v35 (2026-09-20) -- exp #82 detras de la biseccion: juez "la cita responde la pregunta"
+# Ataca el modo de falla peligroso: cita REAL del articulo EQUIVOCADO (dev 28 juzgables).
+# Juzga respuestas YA guardadas (repet0_*), no toca el pipeline. Control = etiquetas del eval.
+# CRITERIO, FIJADO ANTES: detecta >= 50 % de las equivocadas en dev
+#   Y falsa alarma <= 10 % de las correctas en dev Y en held-out
+#   -> se lleva al pipeline como AVISO (no rechazo) y se mide completo. Si no -> descartado.
+# CAVEATS: juez == generador (circular); gold del asistente; un cita_ok=False puede responder
+#   de verdad (articulo alternativo) -> la deteccion medida es un piso ruidoso.
+# (las dos lineas van al final de este bloque para que corran DESPUES de bis_*)
+#
+# PLAN v34 -- exp #81: biseccion del corrimiento de las 13 queries
+#
+# RESULTADOS v33: numctx_q coseno 1.000000 en 114/114 (brazo viejo cargo KvSize:32768, verificado)
+#   -> num_ctx NO es. qonly2_holdout (09-14 03:02) ya corrio a 180 W y muestra el mismo patron
+#   (14 textos, los mismos en aviso_holdout y repet0_holdout) -> el tope de W TAMPOCO es.
+#   repet0_holdout: cita_ok 62->62, cita_limpia 58->60 -> #79 pasa dev Y held-out.
+# SOSPECHOSO QUE QUEDA: 1517efe (#77, 09-14 10:42) reescribio el verificador de citas en
+#   generate.py con "flag OFF". Una de las 13 cambia [Art. 8 ...] -> [Art. 8º ...].
+# DISENO: mismas 13 queries en dos worktrees, codigo de ANTES (ea86b7e) y DESPUES (1517efe).
+#   Misma DB, mismo Ollama, mismo tope de W. Lo unico distinto es ese commit.
+# CRITERIO, FIJADO ANTES: bis_antes coincide con qonly2_dev en >= 10 de 13 textos
+#   Y bis_despues coincide con repet_dev en >= 10 de 13 -> 1517efe ES la fuente.
+#   (10 y no 13: ambos commits traen la temperatura 0.7 fija; ruido medido 3-6 de 114 textos.)
+#   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
+bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
+juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+# MEDICION (no experimento): 16 preguntas REALES de terceros (SEC, CGE, Coordinador) cuyo gold es
+# el articulo que cita LA PROPIA FUENTE, verificado en la DB. Primer eval no escrito por el asistente.
+# De 80 recolectadas (data/eval/preguntas_publicas_v1.jsonl): 18 traian articulo, 2 excluidas
+# porque la SEC cita numeracion que no calza con el DFL 4 vigente (arts. 217 y 127).
+# PREDICCION REGISTRADA ANTES: cita_ok entre 70 % (dev) y 97 % (held-out), o sea 11 a 15 de 16.
+# Menos de 11 -> dev SUBESTIMA el problema real. CAVEAT: n=16, IC ~ +-22 puntos; la fuente puede
+# citar un articulo y existir otro tambien valido (cita_ok es piso). Config adoptada (t=0.0).
+pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold venv/bin/python -m scripts.exp_think_paired
+# exp #78-bis: re-juzgar el aviso "SIN CITA VERIFICADA" ahora que el pipeline es reproducible.
+# Antes se rechazo por "-1" contra qonly2_* (corrimiento de entorno, no del aviso).
+# CRITERIO, FIJADO ANTES (mas duro que el original, posible solo a t=0.0): contra repet0_a /
+#   repet0_holdout el texto debe ser IDENTICO en el 100 % de las queries salvo el prefijo del
+#   aviso, cita_ok y cita_limpia IDENTICAS query a query, y 0 avisos en respuestas con cita
+#   verificada. Pasa -> se adopta answer_prosa_marcar=True. Cualquier diferencia -> no.
+aviso0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso0_dev venv/bin/python -m scripts.exp_think_paired
+aviso0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso0_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #
 # RESULTADO #79 (dev): repet0_a vs repet0_b = 0 textos distintos, 0 flips -> REPRODUCIBLE a t=0.0.
 # repet0_a vs qonly2_dev: cita_ok 80->80, cita_limpia 80->79 -> pasa (no cae > 3).
