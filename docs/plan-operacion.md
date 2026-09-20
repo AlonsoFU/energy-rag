@@ -1935,3 +1935,55 @@ identicas -> `self_consistency_n=1` deberia dar lo mismo con 1/3 de las llamadas
 la propia fuente y verificado en la DB (`queries_publicas_gold_v1.jsonl`). Prediccion registrada
 antes de correr: 11-15 de 16. Hallazgo lateral: LGSE arts. 54 y 127 en la DB empiezan a mitad de
 frase (367 y 402 chars) — texto truncado al inicio, sin cuantificar aun.
+
+---
+
+## 2026-09-20 03:00-04:20 — la causa del "articulo equivocado con formato perfecto" era de DATOS
+
+### exp #82 juez "la cita responde la pregunta" — DESCARTADO (criterio fijado antes: detectar >= 50 %)
+Sobre respuestas guardadas de `repet0_a` / `repet0_holdout`, juez = qwen3 local con think:
+dev detecta **3/28** equivocadas, falsa alarma 5/75; held-out 0/1 y 6/62 (9.7 %). No pasa.
+Pero revisar a mano esas 28 destapo lo que sigue.
+
+### exp #84 — articulos FALSOS nacidos de notas marginales BCN (aplicado 03:59, BAK=84)
+En la LGSE la nota al margen `D.F.L. Nº 1, de 1982, Minería / Art. 147º / D.O. 13.09.1982`
+(numeracion de la ley VIEJA) partia el `Artículo 222°` real; su cuerpo quedaba guardado como fila
+**"147º"**. El Art. 147 real (clientes regulados) NO EXISTIA como fila. #69b habia dejado estos casos
+en REVISAR y, peor, marco fantasma al `84°` real y dejo visible al falso por ser mas largo.
+- **65 filas falsas en la LGSE** (+8 en 29472, +1 en 1058072, +1 en 210676).
+- El sistema cito `[Art. 84 de 258171]` con el texto del 141: formato perfecto, numero de una ley derogada.
+- >= 10 de los 28 gold fallidos de dev (149 x3, 147, 146, 125, 69, 56, 7, 200) apuntaban a filas con
+  el texto de OTRO articulo: inalcanzables.
+- Fix: clase `NOTA_NUMERO` en `scripts/reparar_articulos.py` (la fila arranca en residuo de nota, el
+  parser corregido no, y el cuerpo falso sigue vivo en otro articulo visible). Verificados a mano
+  147, 149, 146, 125, 69, 56, 54, 127, 84. Aplicado: **135 updates** (75 NOTA_NUMERO + 60 de la norma
+  61438 re-rotos por el monitor), 168 fragmentos re-embebidos, 0 sin vector. LGSE visibles que
+  arrancan en nota: 62 -> 8 (esas 8 siguen en REVISAR; no se fuerzan).
+- Revertir: `BAK=84 PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --revertir`
+
+### Bug raiz en el monitor semanal (commit `42f1388`)
+`actualizar_norma.py:81`, `ingerir_nuevas.py:83` y `reingest_faltantes.py:85` llaman a
+`_extract_articulos` con texto CRUDO y se saltan el `quitar_notas_bcn` de `parse()`. **Cada lunes
+06:00 el monitor volvia a crear articulos falsos** (el 09-14 re-rompio 60). Arreglado dentro del
+metodo compartido (idempotente). Test `tests/parsers/test_nota_no_crea_articulo.py`: falla sin el
+fix, pasa con el. OJO: proxima corrida del monitor = lunes 2026-09-21 06:00 -> la base caduca otra vez.
+
+### Primer eval con gold de TERCEROS: `pub_gold` = 8/16 (50 %) — prediccion mia FALSADA
+16 preguntas reales (SEC, CGE, Coordinador) con el articulo que cita la propia fuente. Prediccion
+registrada antes: 11-15. Salio 8. **dev (70 %) SUBESTIMABA el problema real.** 0 rechazos: las 8
+fallas son respuestas seguras con articulo equivocado. Caveat: n=16, IC ~ +-22 puntos.
+
+### exp #85 — norma DEROGADA servida como vigente (aplicado 03:59)
+En 5 de esas 8 fallas el sistema cito el **D.S. 3.386 de 1935** (id 202975, 236 articulos).
+Esta derogado desde 1998: D.S. 327 art. 329 letra b), textual, en el mismo corpus. BCN lo trae
+"DESCONOCIDO"; tambien aparece en >= 8 de las 28 fallas de dev. `scripts/marcar_norma_derogada.py`
+marca `derogado=true` + `metadata.derogado_por="124102/329"`; el retrieval ya excluye derogados.
+Revertir: `... -m scripts.marcar_norma_derogada 202975 124102/329 --revertir`
+OJO: la metadata BCN dice que el D.S. 327 esta "DEROGADA" y la SEC lo cita como vigente: el campo
+`estado` de BCN NO es confiable en ninguna direccion. La derogacion hay que leerla del texto.
+
+### Medicion en curso (criterio y prediccion en plan v36, fijados antes de aplicar)
+`fix84_dev` -> `pub_gold2` -> `fix84_holdout`, contra `repet0_a` / `repet0_holdout` / `pub_gold`.
+No cae > 3 en dev ni held-out; si cae se revierten #84 y #85 y se miden por separado.
+Prediccion: dev cita_ok sube >= 3; pub_gold2 >= 11/16.
+Suspendido: #83 (#77+#78 juntos a t=0.0); se reencola sobre el corpus reparado.
