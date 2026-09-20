@@ -67,6 +67,13 @@ fix85_derog|env PYTHONPATH=. venv/bin/python -m scripts.marcar_norma_derogada 20
 fix84_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=fix84_dev venv/bin/python -m scripts.exp_think_paired
 pub_gold2|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold2 venv/bin/python -m scripts.exp_think_paired
 fix84_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=fix84_holdout venv/bin/python -m scripts.exp_think_paired
+combo0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=combo0_dev venv/bin/python -m scripts.exp_think_paired
+combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=combo0_holdout venv/bin/python -m scripts.exp_think_paired
+# REENCOLADO 2026-09-20 08:25 sobre el corpus reparado. BASE = fix84_dev / fix84_holdout (misma
+# config, mismo corpus, t=0.0), NO repet0_*. Criterio igual: ninguna query pierde cita_ok ni
+# cita_limpia contra esa base; aviso en 0 respuestas con cita verificada. Termina ~14:45, fuera de la
+# ventana de autonomia: la ADOPCION la decide el usuario, aca solo se mide.
+# OJO: el monitor semanal corre lunes 06:00 y cambia el corpus; comparar ANTES de eso.
 # exp #83 (reemplaza a #78-bis; aviso0_* nunca corrio): #77 + #78 juntos a t=0.0.
 # POR QUE JUNTOS: re-juzgados contra la base del MISMO corpus (repet_dev / repet0_holdout), con el
 # criterio ORIGINAL sin tocar, ambos pasan: #77 dev 80/79->80/79 con 0 flips, held-out 60->62
@@ -78,8 +85,6 @@ fix84_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_q
 #   (b) el aviso aparece en 0 respuestas que traen cita verificada
 #   -> pasan ambos: se adoptan answer_quote_reatribuir=True y answer_prosa_marcar=True.
 #   Si (a) falla no se sabe cual flag fue: NO se adopta ninguno y se miden por separado despues.
-# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=combo0_dev venv/bin/python -m scripts.exp_think_paired
-# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=combo0_holdout venv/bin/python -m scripts.exp_think_paired
 
 # --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #
