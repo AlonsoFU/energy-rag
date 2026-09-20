@@ -162,6 +162,11 @@ def main():
 
     prev = {}
     rp = OUTDIR / "result.json"
+    # 2026-09-20: `n1_dev` existia desde el 09-04; la corrida nueva lo "reanudo", termino en 7 s y
+    # le estampo la huella de HOY a filas de otro corpus y otra config. Un result.json de mas de
+    # 48 h no es una corrida interrumpida: es otro experimento con el mismo NAME. No se pisa.
+    if rp.exists() and time.time() - rp.stat().st_mtime > 48 * 3600:
+        raise SystemExit(f"NAME={OUTDIR.name} ya existe y tiene mas de 48 h: usar otro NAME o borrar {rp}")
     if rp.exists():
         try:
             for c in json.load(open(rp))["detail"]:

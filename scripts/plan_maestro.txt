@@ -16,6 +16,9 @@
 pub_base|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_base venv/bin/python -m scripts.exp_think_paired
 n1_dev|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_operativas_v1.jsonl NAME=n1_dev venv/bin/python -m scripts.exp_think_paired
 n1_holdout|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=n1_holdout venv/bin/python -m scripts.exp_think_paired
+# n1_dev quedo INVALIDO: el NAME existia desde el 09-04 y el script lo reanudo en 7 s (arreglado:
+# exp_think_paired ahora rechaza un result.json de mas de 48 h). Se repite con NAME nuevo.
+sc1_dev|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_operativas_v1.jsonl NAME=sc1_dev venv/bin/python -m scripts.exp_think_paired
 l69_apply_a|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --apply
 l69_apply_b|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reembeber_limpiados --apply
 l69_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=l69_dev venv/bin/python -m scripts.exp_think_paired
