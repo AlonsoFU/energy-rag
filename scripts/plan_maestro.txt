@@ -1,4 +1,14 @@
-# PLAN MAESTRO v34 (2026-09-20) -- exp #81: biseccion del corrimiento de las 13 queries
+# PLAN MAESTRO v35 (2026-09-20) -- exp #82 detras de la biseccion: juez "la cita responde la pregunta"
+# Ataca el modo de falla peligroso: cita REAL del articulo EQUIVOCADO (dev 28 juzgables).
+# Juzga respuestas YA guardadas (repet0_*), no toca el pipeline. Control = etiquetas del eval.
+# CRITERIO, FIJADO ANTES: detecta >= 50 % de las equivocadas en dev
+#   Y falsa alarma <= 10 % de las correctas en dev Y en held-out
+#   -> se lleva al pipeline como AVISO (no rechazo) y se mide completo. Si no -> descartado.
+# CAVEATS: juez == generador (circular); gold del asistente; un cita_ok=False puede responder
+#   de verdad (articulo alternativo) -> la deteccion medida es un piso ruidoso.
+# (las dos lineas van al final de este bloque para que corran DESPUES de bis_*)
+#
+# PLAN v34 -- exp #81: biseccion del corrimiento de las 13 queries
 #
 # RESULTADOS v33: numctx_q coseno 1.000000 en 114/114 (brazo viejo cargo KvSize:32768, verificado)
 #   -> num_ctx NO es. qonly2_holdout (09-14 03:02) ya corrio a 180 W y muestra el mismo patron
@@ -14,6 +24,8 @@
 #   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
 bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
 bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
+juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
 
 # --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
 #
