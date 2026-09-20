@@ -349,6 +349,12 @@ class NormStructureParser:
 
     def _extract_articulos(self, texto: str, titulos: List[Titulo]) -> Dict[str, Articulo]:
         """Extraer artículos con sus modificaciones."""
+        # 2026-09-20: las notas BCN se quitan ACA, no solo en parse(). actualizar_norma (monitor
+        # semanal), ingerir_nuevas y reingest_faltantes llaman a este metodo directo con texto
+        # crudo; la nota "D.F.L. 1 / Art. 147º / D.O. 13.09.1982" partia el Art. 222 y nacia un
+        # "147º" falso. El monitor del 09-14 re-rompio asi 60 articulos. Idempotente: parse() ya
+        # paso el texto limpio y una segunda pasada no lo cambia (no mueve posiciones de titulos).
+        texto = self.quitar_notas_bcn(texto)
         articulos = {}
 
         # Encontrar posiciones de todos los artículos
