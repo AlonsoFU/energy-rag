@@ -2091,3 +2091,28 @@ que el top-10 sea igual en dev + held-out, y adoptar. Esperable: busqueda de ~22
 `exp_think_paired.py` fijaba `self_consistency_n = 3` a mano; ahora usa config.py (n=1). Las bases
 <= 2026-09-20 (`combo0_*`, `l69_*`, `fix84_*`) son a n=3: para comparar contra ellas,
 `SETCFG=self_consistency_n=3`. Tests: 5 fallas preexistentes, las mismas antes y despues.
+
+### RESULTADO #88 (2026-09-21 18:25) — reranker BGE en GPU: orden IDENTICO, pero desplaza al LLM
+`scripts/exp_reranker_gpu.py`, una pasada por query que puntua los MISMOS pares en CPU y en GPU-fp32
+(dev + held-out + 16 reales = 194 llamadas a rerank):
+| | resultado | criterio |
+|---|---|---|
+| (a) orden top-k CPU vs GPU | **194/194 identicos**, dif max de puntaje 9.4e-6 | PASA |
+| tiempo de rerank | CPU 21.49 s -> GPU **2.90 s** (7.4x) | — |
+| (b) LLM `qwen3:30b-a3b` con el BGE en GPU | **43/49 capas en GPU** (13 % CPU), VRAM 23.4/24.5 GB | **FALLA** |
+Control de (b): en las 9 cargas del LLM entre 09-19 y 09-21 sin BGE en GPU fue **49/49** siempre.
+Por el criterio: **NO es el default.** Queda en CPU para el modo con respuesta.
+
+**Aplicado solo donde (b) no aplica:** `preguntar.py --buscar` no carga el LLM de respuestas, asi que
+usa BGE en GPU fp32 si hay >= 4 GB de VRAM libre (si no, CPU: mas lento, mismo resultado).
+Medido de punta a punta con una pregunta real: **--buscar 13 s** (7 s de busqueda con carga de
+modelos); modo con respuesta **79 s**.
+
+**Hallazgo de presentacion:** para "mes y medio sin pagar, ¿me pueden cortar?" los articulos
+correctos (141 LGSE, 147 DS 327) quedan **8° y 9°**; el LLM los encuentra igual porque lee los 10.
+En dev el gold llega al top-10 en 92/114 y en 18 de esas queda entre 6° y 10°. El buscador muestra 10.
+
+**Para llevar el BGE a GPU tambien en el modo con respuesta** (exp futuro, criterio a fijar): BGE fp16
+(la mitad de VRAM; puede mover el orden -> comparar contra GPU-fp32, que ya se probo identico a CPU,
+en ~15 min), o `torch.cuda.empty_cache()` tras cada rerank, o bajar `num_ctx` del LLM de 32768. La
+condicion es la misma: LLM 49/49 en GPU.

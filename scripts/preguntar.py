@@ -55,6 +55,8 @@ def responder(pregunta, solo_buscar=False):
     from src.pipelines.generate import generate_answer
     from src.core import config as cfg
 
+    if solo_buscar:
+        _reranker_en_gpu_si_cabe()
     print("  buscando…", flush=True)
     t0 = time.time()
     llm = get_llm_provider()
@@ -102,8 +104,27 @@ def responder(pregunta, solo_buscar=False):
     bitacora.registrar(pregunta, r["text"], docs, time.time() - t0, v, nota)
 
 
-def _mostrar_articulos(docs, n=5, largo=350):
-    """Los articulos encontrados, con su texto, antes que cualquier respuesta redactada."""
+def _reranker_en_gpu_si_cabe(minimo_gb=4.0):
+    """exp #88 (2026-09-21): BGE en GPU fp32 da el MISMO orden que en CPU (194/194, dif max 9e-6)
+    y rerankea en 2.9 s en vez de 21.5 s. NO es el default porque desplaza al LLM de respuestas
+    (49/49 -> 43/49 capas en GPU). En --buscar no hay LLM que redactar, asi que se usa la GPU si
+    hay VRAM libre; si otro proceso la ocupa, se queda en CPU (mas lento, mismo resultado)."""
+    import os
+    try:
+        import torch
+        libre = torch.cuda.mem_get_info()[0] / 1e9 if torch.cuda.is_available() else 0.0
+    except Exception:
+        libre = 0.0
+    if libre >= minimo_gb:
+        os.environ.setdefault("BGE_DEVICE", "cuda")
+        os.environ.setdefault("BGE_FP16", "0")   # fp32: mismos puntajes que CPU
+
+
+def _mostrar_articulos(docs, n=10, largo=260):
+    """Los articulos encontrados, con su texto, antes que cualquier respuesta redactada.
+
+    n=10 y no 5: en dev el articulo correcto llega al top-10 en 92/114 preguntas y en 18 de esas
+    queda entre el 6 y el 10 (ej. "mes y medio sin pagar": 141 LGSE en 8, 147 DS 327 en 9)."""
     import re
     print("\n  ── ARTÍCULOS ENCONTRADOS (lea la fuente):\n")
     vistos = set()
