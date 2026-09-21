@@ -25,6 +25,20 @@ l69_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAM
 l69_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=l69_holdout venv/bin/python -m scripts.exp_think_paired
 gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.gate_69a
 pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_final venv/bin/python -m scripts.exp_think_paired
+# ===== exp #87 (encolado 2026-09-21 00:30, usuario: "termina todo el plan sin que me preguntes") =====
+# PREGUNTA: ¿un modelo mejor arreglaria las fallas? Solo puede en las de GENERACION (gold en el
+# pool, el modelo cita otro); en las de RETRIEVAL nunca ve el articulo. Se mide AHI y en nada mas.
+# Ambos brazos mismo estado, mismas queries, n=1 (adoptado). 27B = qwen3.6:27b denso (#74 lo
+# corto por lento: 22.8 min/query a n=3). timeout 5 h para que no se coma la semana.
+# CRITERIO, FIJADO ANTES, sobre el set de generacion:
+#   27B acierta >= 40 % Y supera al 30b en >= 3 queries  -> modelo mejor SI es palanca; perseguir.
+#   27B supera al 30b en <= 1                           -> modelo NO es la palanca; es retrieval.
+#   entre medio                                         -> no concluyente, se reporta tal cual.
+# CAVEAT: el monitor semanal corre lunes 06:00 y puede cambiar el corpus a mitad del 27B; la
+#   huella de cada result.json lo dira. Si difiere, el resultado se marca como contaminado.
+diag_final|bash scripts/diag_final.sh
+techo_30b|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_30b venv/bin/python -m scripts.exp_think_paired
+techo_27b|timeout 18000 env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 MODEL=ollama/qwen3.6:27b SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_27b venv/bin/python -m scripts.exp_think_paired
 
 # PLAN MAESTRO v35 (2026-09-20) -- exp #82 detras de la biseccion: juez "la cita responde la pregunta"
 # Ataca el modo de falla peligroso: cita REAL del articulo EQUIVOCADO (dev 28 juzgables).
