@@ -2116,3 +2116,17 @@ En dev el gold llega al top-10 en 92/114 y en 18 de esas queda entre 6° y 10°.
 (la mitad de VRAM; puede mover el orden -> comparar contra GPU-fp32, que ya se probo identico a CPU,
 en ~15 min), o `torch.cuda.empty_cache()` tras cada rerank, o bajar `num_ctx` del LLM de 32768. La
 condicion es la misma: LLM 49/49 en GPU.
+
+### RESULTADO #88b (2026-09-21 19:05) — BGE fp16 en GPU + empty_cache: FALLAN (a) y (b). No se adopta
+| | resultado | criterio |
+|---|---|---|
+| (a) orden fp16 vs fp32 (fp32 = identico a CPU) | **73/194 distintos** (empates casi exactos que se invierten; la mayoria mas alla del 10°, algunos dentro) | FALLA |
+| tiempo de rerank | fp32 3.24 s -> fp16 0.77 s | — |
+| (b) LLM recien cargado con el BGE fp16 en GPU | **43/49 capas**, VRAM 23.5/24.5 GB | FALLA |
+Lectura de (b): achicar el BGE a la mitad NO devolvio las 6 capas. El LLM a `num_ctx` 32768 ocupa
+22 GB de 24.5; cualquier proceso torch que tome la GPU antes (contexto CUDA + modelo) lo empuja a CPU.
+El problema es el orden de carga y el tamano del contexto del LLM, no el tamano del reranker.
+**Decision:** el modo con respuesta sigue con el BGE en CPU; `--buscar` sigue con BGE GPU fp32 (orden
+identico a CPU). El `empty_cache` tras rerank en cuda se deja (inocuo; tests iguales).
+Palanca que queda, NO medida: bajar `num_ctx` del LLM (32768 -> 16384) para liberar VRAM. Toca la
+generacion (prompts largos de glosario) -> exige medicion completa dev + held-out, horas de GPU.
