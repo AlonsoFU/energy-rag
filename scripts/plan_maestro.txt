@@ -1,3 +1,11 @@
+# PLAN MAESTRO v38 (2026-09-21) -- exp #88: reranker BGE a GPU. Aprobado por el usuario ("1 ok").
+# La busqueda tarda 21.69 s y 21.51 s son el rerank en CPU (reranker.py:59, default de la GTX 1080).
+# CRITERIO, FIJADO ANTES: (a) orden top-k IDENTICO CPU vs GPU-fp32 en el 100 % de las llamadas a
+#   rerank sobre dev + held-out + 16 reales (mismos pares, una sola pasada); (b) con el BGE en GPU,
+#   qwen3:30b-a3b queda 100 % GPU en `ollama ps`. Pasan -> BGE en cuda por defecto. Falla (a) ->
+#   no se adopta sin medir generacion. Falla (b) -> no se adopta. ~75 min (el brazo CPU manda).
+rerank_gpu|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_gpu
+
 # PLAN MAESTRO v37 (2026-09-20 17:35) -- CIERRE: correr todo lo pendiente que se puede correr.
 # Config ADOPTADA ya vive en config.py (quote-only max 2, t=0.0, reatribuir, aviso): sin FLAGS.
 # RESULTADO #83: combo0_* contra fix84_*: dev 0 perdidas, held-out limpia 59->61, 0 perdidas. ADOPTADO.
