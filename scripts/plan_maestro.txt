@@ -1,3 +1,10 @@
+# PLAN MAESTRO v39 (2026-09-21 19:00) -- exp #88b: BGE en GPU fp16 + empty_cache. Usuario: "sigue".
+# #88: GPU-fp32 = orden identico a CPU (194/194) pero el LLM queda 43/49 capas en GPU.
+# CRITERIO, FIJADO ANTES: (a) orden fp16 IDENTICO a fp32 en 194/194; (b) LLM recien cargado 49/49
+#   con el BGE fp16 en GPU. Pasan -> BGE fp16 en GPU por defecto. Falla (a) -> listar diferencias,
+#   no adoptar sin medir generacion. Falla (b) -> no se adopta. ~15 min.
+rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_fp16
+
 # PLAN MAESTRO v38 (2026-09-21) -- exp #88: reranker BGE a GPU. Aprobado por el usuario ("1 ok").
 # La busqueda tarda 21.69 s y 21.51 s son el rerank en CPU (reranker.py:59, default de la GTX 1080).
 # CRITERIO, FIJADO ANTES: (a) orden top-k IDENTICO CPU vs GPU-fp32 en el 100 % de las llamadas a
