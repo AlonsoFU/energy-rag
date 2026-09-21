@@ -45,7 +45,7 @@ def _chequeos():
                "Probá:  ollama serve      (o revisá que Ollama esté instalado)")
 
 
-def responder(pregunta):
+def responder(pregunta, solo_buscar=False):
     _chequeos()
     from src.components.embedder import Qwen3Embedder
     from src.components.reranker import get_reranker
@@ -73,6 +73,10 @@ def responder(pregunta):
     try:
         docs = resiliencia.reintentar(lambda: retr.retrieve(pregunta, top_k=10),
                                       levantar_db=True, aviso=aviso)
+        if solo_buscar:
+            _mostrar_articulos(docs)
+            print(f"  ── {time.time() - t0:.0f} s · modo buscador (sin respuesta redactada)")
+            return
         r = resiliencia.reintentar(
             lambda: generate_answer(pregunta, docs, llm=llm, model="ollama/qwen3:30b-a3b"),
             levantar_db=True, aviso=aviso)
@@ -84,22 +88,37 @@ def responder(pregunta):
         _fatal("El modelo no devolvió respuesta (se quedó colgado o sin memoria).",
                "Probá de nuevo. Si se repite:  ollama ps   y revisá que no haya otro modelo cargado.")
 
-    print(f"\n{r['text']}\n")
+    # BUSCADOR PRIMERO (2026-09-21): el error tipico del sistema es una cita TEXTUAL de un articulo
+    # que no es el que responde, y en ese caso no avisa. Por eso la fuente va arriba y la respuesta
+    # redactada abajo, como resumen a verificar.
+    _mostrar_articulos(docs)
+    print("  ── RESUMEN (redactado por el modelo; verifíquelo en los artículos de arriba):\n")
+    print(f"{r['text']}\n")
     print(f"  ── {time.time() - t0:.0f} s · {len(docs)} artículos consultados")
-    if docs:
-        print("  ── fuentes en el pool:")
-        vistos = set()
-        for d in docs[:6]:
-            k = f"{d.get('id_norma')}/{d.get('articulo_numero')}"
-            if k in vistos:
-                continue
-            vistos.add(k)
-            print(f"       [{d.get('id_norma')} art {d.get('articulo_numero')}]")
 
     # FASE 3.1: las preguntas REALES son el unico insumo que no se fabrica desde adentro.
     from src.core import bitacora
     v, nota = bitacora.preguntar_veredicto()
     bitacora.registrar(pregunta, r["text"], docs, time.time() - t0, v, nota)
+
+
+def _mostrar_articulos(docs, n=5, largo=350):
+    """Los articulos encontrados, con su texto, antes que cualquier respuesta redactada."""
+    import re
+    print("\n  ── ARTÍCULOS ENCONTRADOS (lea la fuente):\n")
+    vistos = set()
+    for d in docs:
+        k = (d.get("id_norma"), d.get("articulo_numero"))
+        if k in vistos:
+            continue
+        vistos.add(k)
+        norma = (d.get("norma_titulo") or d.get("id_norma") or "").strip()
+        norma = re.sub(r"^(\w+ \d+)\1", r"\1", norma)   # "DFL 4DFL 4/20018 ..." viene asi de la base
+        txt = re.sub(r"\s+", " ", d.get("articulo_text") or "").strip()
+        print(f"  {len(vistos)}. Art. {d.get('articulo_numero')} — {norma[:90]}  [{d.get('id_norma')}]")
+        print(f"     «{txt[:largo]}{'…' if len(txt) > largo else ''}»\n")
+        if len(vistos) >= n:
+            break
 
 
 def obligaciones(sujeto):
@@ -139,6 +158,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(
         description="Consultas sobre normativa eléctrica de la Subgerencia de Mercados.")
     ap.add_argument("pregunta", nargs="?", help="pregunta en lenguaje natural")
+    ap.add_argument("--buscar", action="store_true",
+                    help="solo mostrar los artículos, sin redactar respuesta (mucho más rápido)")
     ap.add_argument("--obligaciones", nargs="?", const="", metavar="SUJETO",
                     help="qué obliga la normativa a un sujeto (ej: coordinador)")
     ap.add_argument("--plazos", action="store_true", help="obligaciones con plazo")
@@ -168,6 +189,6 @@ if __name__ == "__main__":
     elif a.obligaciones is not None:
         obligaciones(a.obligaciones)
     elif a.pregunta:
-        responder(a.pregunta)
+        responder(a.pregunta, solo_buscar=a.buscar)
     else:
         ap.print_help()
