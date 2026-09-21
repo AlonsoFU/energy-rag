@@ -2037,3 +2037,57 @@ de 48 h (commit `bad8a82`). `n1_holdout` se verifico valido: banner de anoche co
 afirma `call_count == 2` (1 intento + 1 reintento) y fallaba desde que se adopto n=3, porque la
 autoconsistencia gastaba llamadas extra (medido: n=3 -> 5 llamadas, n=1 -> 2). Con n=1 vuelve a
 pasar. Fallas preexistentes: 6 -> 5.
+
+---
+
+## CIERRE 2026-09-21 — plan v37 completo
+
+### #69a-bis limpieza de notas BCN + re-embebido, sobre el corpus reparado: PASA, **SE QUEDA**
+Aplicado 2026-09-20 21:15 (1047 articulos, 1050 fragmentos, 692 incisos; 1050 re-embebidos, 0 sin
+vector). `gate_69a` aplico el criterio ORIGINAL (cita_ok no cae > 3 Y cita_limpia no cae, dev Y
+held-out, contra `combo0_*`) y decidio solo:
+| | combo0 | l69 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | **83 / 82** | gano 7, perdio 4 (ok); gano 7, perdio 3 (limpia) |
+| held-out cita_ok / limpia | 62 / 61 | 62 / **62** | 0 perdidas |
+Revisado 3 veces y revertido 2 (09-17) por un "-1" que era el corpus cambiado, no la limpieza.
+Contra la base correcta sube +3 / +4. Leccion: el instrumento ensucio 10 dias de decisiones.
+Revertir: `reembeber_limpiados --revertir` y luego `limpiar_notas_bcn --revertir`.
+
+### Preguntas reales con gold de terceros (16), evolucion completa
+`pub_gold` 8 -> `pub_gold2` (#84 #85) 9 -> `pub_base` (config adoptada) 9 -> **`pub_final` 10/16**.
+En `pub_final`, de las 6 equivocadas: 0 con aviso, 1 rechazo, **5 sin ninguna advertencia**.
+
+### #87 techo de modelo sobre fallas de GENERACION: NO CONCLUYENTE (y el 27B no es viable aca)
+`diag_final` (estado final): 31 fallas de dev = **18 RETRIEVAL + 13 GENERACION** (0 de las 13 con
+el gold en rank 0; mediana rank 5). Brazos sobre esas 13, n=1:
+- `techo_30b`: 1/13.
+- `techo_27b` (qwen3.6:27b denso): ocupa 25 GB, **se desborda 12 % a CPU**, 274-1497 s por
+  pregunta, 2 de 4 por timeout (300 s x 3). Se corto por el tope de 5 h escrito en el plan (el
+  runner lo reintentaba hasta 15 h: se marco hecho a mano y se mato el proceso). 4 filas, 2 completas,
+  **0 aciertos, 0 victorias sobre el 30b**.
+Por la letra del criterio ("supera en <= 1 -> no es la palanca") dice NO, pero con 2 completas no
+concluye nada: se reporta NO CONCLUYENTE. Lo solido: **un modelo local mas grande no es usable en
+este hardware** (una respuesta tarda 5-25 min). Huella del 27B ausente (se mato antes de escribirla);
+el monitor del lunes detecto 0 cambios, asi que no hay contaminacion.
+
+### Tiempo de busqueda por etapa (medido 2026-09-21 09:00, GPU libre, 20 queries de dev)
+`scripts/medir_tiempos_busqueda.py`, cronometrando las funciones reales:
+| etapa | media |
+|---|---|
+| embed de la query (Ollama 4B) | 0.13 s |
+| BM25 | 0.00 s |
+| vector (pgvector) | 0.03 s |
+| **rerank BGE** | **21.51 s** |
+| resto (filtros, glosario, fusion) | 0.01 s |
+| **TOTAL retrieve** | **21.69 s** (mediana 21.61, max 23.48) |
+**El 99 % de la busqueda es el reranker, y corre en CPU a proposito**: `src/components/reranker.py:59`
+`dev = device or os.environ.get("BGE_DEVICE", "cpu")`, con el comentario "GTX 1080 (Pascal sm_61)
+lacks GPU kernels". La maquina ahora tiene una RTX 3090. NO se cambio: puede mover el orden (fp16) y
+necesita su medicion. Receta: `BGE_DEVICE=cuda BGE_FP16=0` (fp32 en GPU -> scores ~identicos), medir
+que el top-10 sea igual en dev + held-out, y adoptar. Esperable: busqueda de ~22 s a < 1 s.
+
+### Harness alineado con la config adoptada
+`exp_think_paired.py` fijaba `self_consistency_n = 3` a mano; ahora usa config.py (n=1). Las bases
+<= 2026-09-20 (`combo0_*`, `l69_*`, `fix84_*`) son a n=3: para comparar contra ellas,
+`SETCFG=self_consistency_n=3`. Tests: 5 fallas preexistentes, las mismas antes y despues.

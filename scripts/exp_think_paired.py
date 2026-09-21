@@ -183,7 +183,9 @@ def main():
     cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
     cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True
     cfg.settings.ambiguity_disclose = True; cfg.settings.filtrar_fuera_dominio = True
-    cfg.settings.self_consistency_n = 3
+    # 2026-09-21: antes fijaba self_consistency_n = 3 a mano, y el harness dejo de reflejar la
+    # config adoptada (#86: n=1). Ahora usa config.py. Las corridas <= 2026-09-20 (combo0_*,
+    # l69_*, fix84_*) se midieron a n=3; para comparar contra ellas, SETCFG=self_consistency_n=3.
     cfg.settings.answer_think = True
     # think_hybrid MUTA `ollama_think` por intento (GEN12). Si quedara prendido pisaria la
     # variable del experimento en el reintento y los dos brazos convergerian. Se midio y se
