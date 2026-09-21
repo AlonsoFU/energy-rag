@@ -281,7 +281,12 @@ class Settings(BaseSettings):
     # o mas, se rechaza. Replay sin GPU sobre lo capturado: 7/7 frases en un solo doc correcto.
     answer_quote_reatribuir: bool = True  # ADOPTADO 2026-09-20 (exp #83, combo0_* contra fix84_*, t=0.0): dev 0 perdidas; held-out cita_limpia 59->61, 0 perdidas; aviso en 0 citas verificadas
 
-    self_consistency_n: int = 3
+    # ADOPTADO 2026-09-20 (exp #86): 1. A selfcons_temperature=0.0 las N muestras son IDENTICAS,
+    # asi que el consenso no aportaba nada y se pagaban 3 llamadas por respuesta. Medido contra
+    # combo0_*: dev cita_ok 80->80 / limpia 78->79, held-out 62->62 / 61->62, 0 perdidas en ambos;
+    # 2 de 64 textos cambian en held-out. Latencia media 49.6->43.1 s (dev), 53.0->47.6 s (held-out).
+    # OJO: si algun dia se vuelve a subir selfcons_temperature, hay que volver a medir n.
+    self_consistency_n: int = 1
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
