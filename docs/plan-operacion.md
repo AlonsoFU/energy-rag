@@ -2014,3 +2014,26 @@ Adoptado por instruccion del usuario ("Termina", 2026-09-20): `answer_quote_reat
 `answer_prosa_marcar=True`. Tests: las mismas 6 fallas preexistentes; 1 test actualizado al
 comportamiento nuevo (`test_generate_handles_plain_text_when_no_format`).
 Caveat de atribucion: medidos juntos; la ganancia de held-out es de #77 (el aviso solo antepone texto).
+
+### RESULTADO #86 (2026-09-20 21:14) — `self_consistency_n` 3 -> 1: PASA, **ADOPTADO**
+A `selfcons_temperature=0.0` las N muestras de autoconsistencia son IDENTICAS: el consenso no
+aportaba nada y se pagaban 3 llamadas al LLM por respuesta. Contra `combo0_*` (config adoptada,
+mismo corpus, misma huella):
+| | base n=3 | n=1 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | 80 / **79** | gano 1, **perdio 0** |
+| held-out cita_ok / limpia | 62 / 61 | 62 / **62** | gano 1, **perdio 0** |
+| latencia media por query | 49.6 s dev, 53.0 s held-out | 43.1 s, 47.6 s | -13 % / -10 % |
+Criterio (ninguna query pierde, dev Y held-out): cumple. Textos distintos: 2 de 64 en held-out.
+CAVEAT: si algun dia se vuelve a subir `selfcons_temperature`, hay que volver a medir `n`.
+
+**Trampa evitada:** `n1_dev` "corrio" en 7 s porque ese NAME existia desde el 2026-09-04 y el
+script lo REANUDO, estampando la huella de hoy sobre filas de otro corpus y otra config. Se
+descarto y se repitio como `sc1_dev`. `exp_think_paired` ahora **rechaza** un `result.json` de mas
+de 48 h (commit `bad8a82`). `n1_holdout` se verifico valido: banner de anoche con
+`VAR=answer_think SETCFG=[['self_consistency_n','1']]` y **64/64 pendientes** (no reanudo nada).
+
+**Efecto lateral en tests (explicado, no es regresion):** `test_generate_answer_retries_on_grounding_fail`
+afirma `call_count == 2` (1 intento + 1 reintento) y fallaba desde que se adopto n=3, porque la
+autoconsistencia gastaba llamadas extra (medido: n=3 -> 5 llamadas, n=1 -> 2). Con n=1 vuelve a
+pasar. Fallas preexistentes: 6 -> 5.
