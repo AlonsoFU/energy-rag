@@ -12,6 +12,9 @@ from src.storage.connection import with_connection
 from src.components.llm import LLMProvider, get_llm_provider
 from src.pipelines.expansion import hyde, multi_query, step_back
 from src.pipelines.normalize import normalize_for_match, find_term_in_query
+# config a nivel de MODULO a proposito: importada dentro de cada funcion, un NameError
+# queda tapado por el `except Exception` de turno y la rama se apaga en silencio (bug #79).
+from src.core import config as cfg
 
 _NORMA_RANKS: dict | None = None
 
@@ -82,7 +85,6 @@ def rrf_fusion(rankings: list[list[dict]], k: int = 60,
 def _embed_4b_query(text: str, model: str = "qwen3-embedding:4b"):
     """Embebe la query con un embedder Qwen3 vía Ollama (GGUF). [] si falla."""
     import json as _json, urllib.request as _u
-    from src.core import config as _c
     try:
         payload = {"model": model, "input": [text]}
         # embed_4b_cpu: fuerza el embed en CPU (num_gpu=0) para coexistir con el 9B en
@@ -90,8 +92,8 @@ def _embed_4b_query(text: str, model: str = "qwen3-embedding:4b"):
         # num_ctx (2026-09-14): sin esto Ollama carga el embedder con ctx 32768 -> 9.8 GB de RAM en CPU,
         # lo que mataba las corridas. Con 4096: 3.71 GB y vectores IDENTICOS en el mismo dispositivo
         # (coseno 1.000000 en 40/40; lo mas largo que se embebe mide 2913 tokens).
-        payload["options"] = {"num_ctx": int(getattr(_c.settings, "embed_4b_num_ctx", 4096))}
-        if getattr(_c.settings, "embed_4b_cpu", False):
+        payload["options"] = {"num_ctx": int(getattr(cfg.settings, "embed_4b_num_ctx", 4096))}
+        if getattr(cfg.settings, "embed_4b_cpu", False):
             payload["options"]["num_gpu"] = 0
         data = _json.dumps(payload).encode()
         req = _u.Request("http://localhost:11434/api/embed", data=data,
@@ -138,27 +140,15 @@ def _normalize_art_g(a):
 
 def _vector_4b_search(text, store, top_k):
     """Embebe `text` con 4B (Ollama) y busca; MRL-1024 (HNSW) o 2560 (seq-scan). [] si falla."""
-    from src.core import config as _c
     emb = _embed_4b_query(text)
     if not emb:
         return []
-    if getattr(_c.settings, "embed_4b_dim", 2560) == 1024:
+    if getattr(cfg.settings, "embed_4b_dim", 2560) == 1024:
         import math as _m
         s = emb[:1024]
         nrm = _m.sqrt(sum(x*x for x in s)) or 1.0
         qv = [x/nrm for x in s]
-        # M2 rechunk: en queries de DEFINICIÓN, reemplaza los glosarios gigantes por los
-        # def-fragments (1 def = 1 fragmento, mapea al artículo padre). GATE por intención:
-        # sin gate contamina las queries no-definición (medido: net -10). glossary_exclude saca
-        # el gigante (0.00, diluido) para que el def-fragment no compita, solo lo reemplace.
-        is_def = getattr(_c.settings, "def_fragments", False) and _is_definition_query(text)
-        excl = is_def and getattr(_c.settings, "glossary_exclude", False)
-        base = store.search_vector_4b_1024(qv, top_k=top_k, exclude_glossary=excl)
-        if is_def:
-            defr = store.search_vector_def_4b_1024(qv, top_k=top_k)
-            if defr:
-                return rrf_fusion([base, defr], k=60)[:top_k]
-        return base
+        return store.search_vector_4b_1024(qv, top_k=top_k)
     return store.search_vector_4b(emb, top_k=top_k)
 
 
@@ -169,18 +159,9 @@ def _vector_leg(text, embedder, store, top_k, raw_query=None):
     TAMBIÉN la query reemplazada por el término legal y UNE (RRF) con la original. Protege
     casos buenos (original) y rescata muros de vocabulario (alias). `raw_query` = query del
     usuario sin augmentar (para el match del alias); si None, usa `text`."""
-    from src.core import config as _c
-    # embed_8b_dense (flag, 3090): pata densa 8B fp16/GGUF (embedding_8b, 4096-dim, seq-scan).
-    # Antes imposible en GTX 1080. Excluyente con 4B. Sin alias_union (experimento aislado del embedder).
-    if getattr(_c.settings, "embed_8b_dense", False):
-        emb = _embed_4b_query(text, model="qwen3-embedding:8b")
-        if emb:
-            res = store.search_vector_8b(emb, top_k=top_k)
-            if res:
-                return res
-    if getattr(_c.settings, "embed_4b_dense", False):
+    if getattr(cfg.settings, "embed_4b_dense", False):
         base = _vector_4b_search(text, store, top_k)
-        if base and getattr(_c.settings, "alias_union", False):
+        if base and getattr(cfg.settings, "alias_union", False):
             from src.pipelines.alias_map import apply_alias
             q = raw_query if raw_query is not None else text
             aug = apply_alias(q)
@@ -206,8 +187,7 @@ def _bgem3_leg(query: str, store, top_k: int) -> list[dict]:
             from sentence_transformers import SentenceTransformer
             import torch
             dev = "cuda" if torch.cuda.is_available() else "cpu"
-            from src.core.config import settings as _s
-            dev = (_s.embedder_device if (_s.embedder_device or "auto") != "auto" else dev)
+            dev = (cfg.settings.embedder_device if (cfg.settings.embedder_device or "auto") != "auto" else dev)
             _BGEM3 = SentenceTransformer("BAAI/bge-m3", device=dev)
             _BGEM3.max_seq_length = 512
         qv = _BGEM3.encode([query], normalize_embeddings=True)[0].tolist()
@@ -468,47 +448,6 @@ class SimpleRetriever:
         self.top_rerank = top_rerank
         self.llm = llm  # only needed when hyde_in_simple is on
 
-    def _search_text(self, query: str) -> str:
-        """Query text used for BM25+vector. Two optional, additive augmentations
-        (both flag-gated, both vector-only — the ORIGINAL query stays in BM25 via
-        retrieve(); rerank/concepts always use the original):
-
-        - ``selective_reform``: if the query is colloquial, append its legal-register
-          restatement so the everyday phrasing lands near the formal article text.
-          A query already in legal register is left untouched ("IGUAL").
-        - ``hyde_in_simple``: append a hypothetical legal paragraph.
-
-        Legal-safe: changes only WHAT is retrieved, never the citation."""
-        from src.core import config as _cfg
-        text = query
-        self._last_concept_terms = ""
-        if getattr(_cfg.settings, "concept_inference", False):
-            try:
-                from src.pipelines.expansion import infer_legal_concept as _ilc
-                terms = _ilc(query, llm=self.llm)
-                if terms:
-                    self._last_concept_terms = terms
-                    text = f"{text} {terms}"
-            except Exception:
-                pass  # LLM hiccup: degrade to plain query, never break retrieval
-        if getattr(_cfg.settings, "selective_reform", False):
-            try:
-                from src.pipelines.expansion import selective_reform as _sr
-                rw = _sr(query, llm=self.llm)
-                if rw:  # "" cuando la query ya es legal (IGUAL) → no se toca
-                    text = f"{query} {rw}"
-            except Exception:
-                pass  # LLM hiccup: degrade to plain query, never break retrieval
-        if getattr(_cfg.settings, "hyde_in_simple", False):
-            try:
-                from src.pipelines.expansion import hyde as _hyde
-                h = _hyde(query, llm=self.llm)
-                if h:
-                    text = f"{text}\n{h}"
-            except Exception:
-                pass
-        return text
-
     def retrieve(self, query: str, top_k: int = 5,
                  query_concepts: list[str] | None = None) -> list[dict]:
         # HyDE is VECTOR-ONLY: the hypothetical legal paragraph augments the
@@ -517,30 +456,20 @@ class SimpleRetriever:
         # real query terms). Fusion weights use the embedded text's length so a
         # HyDE-augmented (long) vector side gets its due weight instead of being
         # down-weighted as if the query were a short keyword lookup.
-        vec_text = self._search_text(query)
         # 1. BM25 — original query terms only
         bm25 = self.store.search_bm25(query, top_k=self.top_bm25)
         # 2. Vector — HyDE-augmented when the flag is on. Pata densa 0.6B o 4B (flag).
-        vec = _vector_leg(vec_text, self.embedder, self.store, self.top_vector, raw_query=query)
-        # 3. RRF (length-weighted: short→BM25, long→vectors). ensemble_bgem3:
-        # agrega una 3ra pata densa (bge-m3) complementaria al Qwen.
-        from src.core import config as _cfg0
-        legs, weights = [bm25, vec], _length_weights(vec_text)
-        if getattr(_cfg0.settings, "ensemble_bgem3", False):
-            bg = _bgem3_leg(query, self.store, self.top_vector)
-            if bg:
-                legs.append(bg)
-                weights = weights + [1.0]
-        fused = rrf_fusion(legs, k=60, weights=weights)[: self.top_bm25]
+        vec = _vector_leg(query, self.embedder, self.store, self.top_vector, raw_query=query)
+        # 3. RRF (length-weighted: short→BM25, long→vectors)
+        fused = rrf_fusion([bm25, vec], k=60, weights=_length_weights(query))[: self.top_bm25]
         # 4. Rerank. top_rerank_override (EXP) widens the survivors so graph_boost
         # can promote a deeper gold instead of it being truncated here.
-        from src.core import config as _cfg
-        _tr = getattr(_cfg.settings, "top_rerank_override", 0) or self.top_rerank
+        _tr = getattr(cfg.settings, "top_rerank_override", 0) or self.top_rerank
         # alias_union: el alias rescata el gold al pool vectorial, pero el reranker lo
         # bota si puntúa solo contra la query coloquial (el gold matchea el TÉRMINO legal,
         # no la frase coloquial). Rerankeamos contra query+término (append) cuando dispara.
         rerank_q = query
-        if getattr(_cfg.settings, "alias_union", False) and getattr(_cfg.settings, "embed_4b_dense", False):
+        if getattr(cfg.settings, "alias_union", False) and getattr(cfg.settings, "embed_4b_dense", False):
             from src.pipelines.alias_map import apply_alias as _aa
             _alias = _aa(query)
             if _alias != query:
@@ -570,38 +499,35 @@ class SimpleRetriever:
             query_concepts = extract_query_concepts(query, all_concepts)
         # 6. Graph boost
         if query_concepts:
-            fused = graph_boost(
-                fused, query_concepts=query_concepts,
-                boost_all=getattr(_cfg.settings, "graph_boost_all", False),
-            )
+            fused = graph_boost(fused, query_concepts=query_concepts)
         # 6b. Authority/jerarquía boost (flag OFF por defecto). Reordena por rango
         # normativo tras el reranker+grafo, antes de truncar a top_k.
-        _beta = getattr(_cfg.settings, "authority_rank_boost", 0.0)
+        _beta = getattr(cfg.settings, "authority_rank_boost", 0.0)
         if _beta:
             fused = authority_boost(fused, _beta)
         # 6c. glossary_inject (determinista): en query de DEFINICIÓN, si el concepto matchea
         # EXACTO un término de glosario, garantiza el artículo padre en el pool (inyecta al tope
         # si falta). Alta precisión (exact-match) → no desplaza como def_fragments RRF. Ataca los
         # embedding-miss de términos-glosario (Infracciones, Estado Deteriorado, etc.).
-        if getattr(_cfg.settings, "glossary_inject", False):
+        if getattr(cfg.settings, "glossary_inject", False):
             # glossary_lookup (B2, 2026-08-18): extrae el TERMINO buscandolo en el diccionario
             # del glosario, en vez de recortar un prefijo con regex. Medido sobre 64 fraseos
             # naturales: el regex de prefijo dispara 0/64, el diccionario 54/64. El regex queda
             # de FALLBACK, que es el unico rol que le corresponde (CLAUDE.md 2026-08-17).
             _c = None
-            if getattr(_cfg.settings, "glossary_lookup", False):
+            if getattr(cfg.settings, "glossary_lookup", False):
                 # intent_gate: el diccionario extrae el termino, pero NO decide si corresponde
                 # inyectar. Sin gate contamina lo operativo (20/51 en complex_v3), porque
                 # "Cliente"/"Ley"/"Comision" son terminos de glosario que salen en cualquier
                 # pregunta. El gate es un clasificador (logreg sobre el embedding), no un regex.
                 _pasa = True
-                if getattr(_cfg.settings, "intent_gate", False):
+                if getattr(cfg.settings, "intent_gate", False):
                     from src.pipelines.intent_gate import is_definition as _is_def
                     _pasa = _is_def(query)
                 if _pasa:
                     from src.pipelines.glossary_lookup import find_term as _find_term
                     _c = _find_term(query, self.store)
-            if _c is None and getattr(_cfg.settings, "regex_fallback", True):
+            if _c is None and getattr(cfg.settings, "regex_fallback", True):
                 _c = _definition_concept(query)
             if _c:
                 # D4 (ambiguity_disclose): si el termino esta definido en VARIAS normas, se
@@ -610,7 +536,7 @@ class SimpleRetriever:
                 # AFIRMA una acepcion sin avisar que hay otras. Riesgo legal real: 35 terminos
                 # del glosario estan definidos en mas de una norma.
                 _todas = []
-                if getattr(_cfg.settings, "ambiguity_disclose", False):
+                if getattr(cfg.settings, "ambiguity_disclose", False):
                     _todas = self.store.def_exact_all(_c)
                     if len(_todas) > 1:
                         _top = fused[0]["score"] if fused else 1.0
@@ -685,9 +611,8 @@ class ComplexRetriever(SimpleRetriever):
         # applied ADITIVELY and VECTOR-ONLY to the original query (q index 0). BM25
         # keeps the user's real terms; the reform only bridges the everyday↔legal
         # register gap on the embedding side. "" when the query is already legal.
-        from src.core import config as _cfg
         reform = ""
-        if getattr(_cfg.settings, "selective_reform", False):
+        if getattr(cfg.settings, "selective_reform", False):
             try:
                 from src.pipelines.expansion import selective_reform as _sr
                 reform = _sr(query, llm=self.llm)
@@ -698,7 +623,7 @@ class ComplexRetriever(SimpleRetriever):
         # implícito, añadidos ADITIVO vector-only a la query original (q índice 0).
         # Mismo cableado que reform; ataca el muro de vocabulario coloquial.
         concept_terms = ""
-        if getattr(_cfg.settings, "concept_inference", False):
+        if getattr(cfg.settings, "concept_inference", False):
             try:
                 from src.pipelines.expansion import infer_legal_concept as _ilc
                 concept_terms = _ilc(query, llm=self.llm)
@@ -707,8 +632,7 @@ class ComplexRetriever(SimpleRetriever):
         _aug0 = " ".join(t for t in (reform, concept_terms) if t)
 
         # 2. Run BM25+vector+RRF for each, then merge across queries via RRF
-        from src.core import config as _cfg0
-        _ens = getattr(_cfg0.settings, "ensemble_bgem3", False)
+        _ens = getattr(cfg.settings, "ensemble_bgem3", False)
         rankings = []
         for i, q in enumerate(all_queries):
             bm25 = self.store.search_bm25(q, top_k=self.top_bm25)
@@ -772,16 +696,15 @@ class AdaptiveRetriever:
         self.router = router
 
     def retrieve(self, query: str, top_k: int = 10):
-        from src.core import config as _cfg
         # CRAG-style routing (flag): hace retrieval BARATO primero (rama simple,
         # SIN las 3 expansiones LLM); si el mejor score BGE es ALTO, responde con
         # eso (se ahorra step-back+HyDE+multi-query); si es bajo, ESCALA a la rama
         # compleja. Estándar adaptado (CRAG evaluate-then-branch + Adaptive-RAG
         # escalate-to-multistep), reusando el score que el reranker ya computa.
-        if getattr(_cfg.settings, "crag_routing", False):
+        if getattr(cfg.settings, "crag_routing", False):
             cheap = self.simple.retrieve(query, top_k=top_k)
             bge = max((d.get("_bge_max", 0.0) for d in cheap), default=0.0)
-            if bge >= getattr(_cfg.settings, "crag_answer_threshold", 0.5):
+            if bge >= getattr(cfg.settings, "crag_answer_threshold", 0.5):
                 branch, docs = "simple", cheap          # barato basta → no expandir
             else:
                 branch, docs = "complejo", self.complejo.retrieve(query, top_k=top_k)
@@ -794,8 +717,7 @@ class AdaptiveRetriever:
         # Curated concept-definition injection (legal-safe, exact-normalized).
         # When query is "qué es X" and X matches a curated concept exactly,
         # prepend the defining article to docs even if retrieval missed it.
-        from src.core import config as _cfg
-        if getattr(_cfg.settings, "inject_curated_definitions", False):
+        if getattr(cfg.settings, "inject_curated_definitions", False):
             from src.pipelines.concept_injection import inject_definition
             docs = inject_definition(query, docs)[:top_k]
         return branch, docs

@@ -1,3 +1,13 @@
+# PLAN MAESTRO v41 (2026-09-28) -- sesion 4: limpiar el camino caliente contra la red golden.
+# Cambio: se borran las ramas muertas de SimpleRetriever/_vector_leg/_vector_4b_search/search_bm25
+#   (def_fragments, glossary_exclude, embed_8b_dense, concept_inference, selective_reform,
+#   hyde_in_simple, ensemble_bgem3, graph_boost_all, bm25_doc2query -- las 9 en False en config)
+#   y se sube `from src.core import config` a nivel de modulo en retrieve.py y vectorstore.py.
+# CRITERIO, FIJADO ANTES: la red de busqueda tiene que dar el orden IDENTICO en 194/194 y la misma
+#   db_huella. Un solo puesto distinto = el refactor cambio el comportamiento y se revierte.
+# Prediccion registrada: 194/194 identico (el pipeline es determinista y las 9 ramas estan OFF).
+red_tras_limpieza|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/tras_limpieza.json
+
 # PLAN MAESTRO v40 (2026-09-28) -- sesion 3 del plan de limpieza. Usuario: "hazlo todo, 180 W".
 # Objetivo: la RED GOLDEN de busqueda, la linea base contra la que se prueba cada refactor de
 # retrieve.py. No es un experimento: no hay hipotesis, se graba el comportamiento de HOY.
