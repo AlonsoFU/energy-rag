@@ -215,8 +215,6 @@ src/search/
 config/
 └── alias_normas.json        # Alias informales + conceptos base manuales
 
-scripts/
-└── DOWNLOAD_ALL_NORMS.py    # Descarga masiva desde BCN
 ```
 
 ## Uso
@@ -252,10 +250,6 @@ search = GraphEnhancedSearch()
 search.search('COMA')
 "
 ```
-
-### Descarga masiva de normas
-
-Ver [GUIA_DESCARGA_MASIVA.md](GUIA_DESCARGA_MASIVA.md) para descargar las 2,031 normas desde BCN.
 
 ## Roadmap
 
