@@ -279,9 +279,14 @@ class Settings(BaseSettings):
     # etiqueta coincidiera y rechazaba todo. Con esto, si la frase aparece letra por letra en
     # EXACTAMENTE UN doc, ese doc es su fuente, diga lo que diga la etiqueta. Si aparece en dos
     # o mas, se rechaza. Replay sin GPU sobre lo capturado: 7/7 frases en un solo doc correcto.
-    answer_quote_reatribuir: bool = False
+    answer_quote_reatribuir: bool = True  # ADOPTADO 2026-09-20 (exp #83, combo0_* contra fix84_*, t=0.0): dev 0 perdidas; held-out cita_limpia 59->61, 0 perdidas; aviso en 0 citas verificadas
 
-    self_consistency_n: int = 3
+    # ADOPTADO 2026-09-20 (exp #86): 1. A selfcons_temperature=0.0 las N muestras son IDENTICAS,
+    # asi que el consenso no aportaba nada y se pagaban 3 llamadas por respuesta. Medido contra
+    # combo0_*: dev cita_ok 80->80 / limpia 78->79, held-out 62->62 / 61->62, 0 perdidas en ambos;
+    # 2 de 64 textos cambian en held-out. Latencia media 49.6->43.1 s (dev), 53.0->47.6 s (held-out).
+    # OJO: si algun dia se vuelve a subir selfcons_temperature, hay que volver a medir n.
+    self_consistency_n: int = 1
 
     # HyDE expansion in the SIMPLE branch. The COMPLEJO branch already expands
     # (hyde+step_back+multi_query); but the router sends many SITUATIONAL/
@@ -477,6 +482,42 @@ class Settings(BaseSettings):
     citation_repair: bool = False
     citation_repair_min_score: float = 0.0   # umbral cross-encoder para añadir
     citation_repair_max_add: int = 1         # tope de citas añadidas por respuesta
+
+    # selfcons_temperature (exp #79): temperatura de las N muestras de _self_consistency.
+    # HALLAZGO 2026-09-19: estaba HARDCODEADA en 0.7 (generate.py:122) pese a que el default
+    # del LLM es 0.0, y dispara en TODAS las queries (self_consistency_n=3,
+    # selfcons_solo_definicion=False). Consecuencia medida con `repet_dev` (config IDENTICA a
+    # qonly2_dev, cero cambios): cita_limpia 80 -> 79 y 13 de 114 respuestas (11 %) con texto
+    # distinto. O sea el instrumento tiene ruido >= 1, que es el mismo tamano de las
+    # diferencias con que se rechazo #77 y se revirtio #69a.
+    # El default se deja en 0.7 = comportamiento ADOPTADO, para no cambiar nada sin medirlo.
+    # Bajarlo a 0.0 deberia hacer el pipeline reproducible; hay que MEDIRLO, no asumirlo: la
+    # autoconsistencia existe justamente para promediar variacion, y a temperatura 0 las N
+    # muestras son identicas -> el consenso deja de aportar y puede caer la calidad.
+    # ADOPTADO 2026-09-20 (exp #79): 0.0. repet0_a vs repet0_b = 0 textos distintos y 0 flips en
+    # 114 queries. Calidad: dev cita_ok 80->80, cita_limpia 80->79; held-out 62->62, 58->60.
+    # El riesgo de arriba no se observo. OJO: a 0.0 las N muestras son identicas, o sea
+    # self_consistency_n=3 gasta 3 llamadas para 1 respuesta; bajar n a 1 es otra medicion.
+    selfcons_temperature: float = 0.0
+
+    # answer_prosa_marcar (flag OFF, exp #78): cuando NINGUNA cita textual se verifica,
+    # la respuesta cae a prosa y hoy AFIRMA sin titubear. Medido 2026-09-16 sobre
+    # qonly2_dev + qonly2_holdout: 13 respuestas en prosa, 0 con lenguaje de duda, pese a
+    # que el prompt pide "si las citas no responden la pregunta, dilo". Coincide con
+    # 2608.22228: pedir la abstencion por prompt falla cuando el contexto es plausible.
+    # Este flag antepone un aviso deterministico. NO es un porcentaje de confianza: es el
+    # hecho binario "hubo o no hubo calce literal contra el articulo" (ver
+    # docs/investigacion-abstencion-2026-09-16.md seccion 19: confianza MAL calibrada da
+    # +2% y AUMENTA el sesgo de automatizacion; un hecho binario no requiere calibracion).
+    # NO se rechaza: de las 13 en prosa, 12 tenian la cita correcta -> negarse botaria 12
+    # respuestas buenas para evitar 1 mala.
+    # El aviso no lleva corchetes y no contiene REFUSAL_TEXT, asi que no toca
+    # extract_citations ni `refuso` -> cita_ok/cita_limpia/precision deben quedar IGUALES.
+    answer_prosa_marcar: bool = True  # ADOPTADO 2026-09-20 (exp #83, combo0_* contra fix84_*, t=0.0): dev 0 perdidas; held-out cita_limpia 59->61, 0 perdidas; aviso en 0 citas verificadas
+    answer_prosa_aviso: str = (
+        "SIN CITA VERIFICADA -- no se encontro texto literal que responda; "
+        "lo siguiente se redacto a partir de los articulos recuperados y hay que verificarlo."
+    )
 
     # Candidate-pool depth fed into RRF fusion (BM25 + vector each retrieve
     # this many before fusion/rerank). Default 50 = unchanged behavior. Raise

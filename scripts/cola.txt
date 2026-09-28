@@ -1,4 +1,198 @@
-# PLAN MAESTRO v28 (2026-09-14) -- exp #77: reatribuir la cita por procedencia
+# PLAN MAESTRO v35 (2026-09-20) -- exp #82 detras de la biseccion: juez "la cita responde la pregunta"
+# Ataca el modo de falla peligroso: cita REAL del articulo EQUIVOCADO (dev 28 juzgables).
+# Juzga respuestas YA guardadas (repet0_*), no toca el pipeline. Control = etiquetas del eval.
+# CRITERIO, FIJADO ANTES: detecta >= 50 % de las equivocadas en dev
+#   Y falsa alarma <= 10 % de las correctas en dev Y en held-out
+#   -> se lleva al pipeline como AVISO (no rechazo) y se mide completo. Si no -> descartado.
+# CAVEATS: juez == generador (circular); gold del asistente; un cita_ok=False puede responder
+#   de verdad (articulo alternativo) -> la deteccion medida es un piso ruidoso.
+# (las dos lineas van al final de este bloque para que corran DESPUES de bis_*)
+#
+# PLAN v34 -- exp #81: biseccion del corrimiento de las 13 queries
+#
+# RESULTADOS v33: numctx_q coseno 1.000000 en 114/114 (brazo viejo cargo KvSize:32768, verificado)
+#   -> num_ctx NO es. qonly2_holdout (09-14 03:02) ya corrio a 180 W y muestra el mismo patron
+#   (14 textos, los mismos en aviso_holdout y repet0_holdout) -> el tope de W TAMPOCO es.
+#   repet0_holdout: cita_ok 62->62, cita_limpia 58->60 -> #79 pasa dev Y held-out.
+# SOSPECHOSO QUE QUEDA: 1517efe (#77, 09-14 10:42) reescribio el verificador de citas en
+#   generate.py con "flag OFF". Una de las 13 cambia [Art. 8 ...] -> [Art. 8º ...].
+# DISENO: mismas 13 queries en dos worktrees, codigo de ANTES (ea86b7e) y DESPUES (1517efe).
+#   Misma DB, mismo Ollama, mismo tope de W. Lo unico distinto es ese commit.
+# CRITERIO, FIJADO ANTES: bis_antes coincide con qonly2_dev en >= 10 de 13 textos
+#   Y bis_despues coincide con repet_dev en >= 10 de 13 -> 1517efe ES la fuente.
+#   (10 y no 13: ambos commits traen la temperatura 0.7 fija; ruido medido 3-6 de 114 textos.)
+#   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
+bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
+juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+# MEDICION (no experimento): 16 preguntas REALES de terceros (SEC, CGE, Coordinador) cuyo gold es
+# el articulo que cita LA PROPIA FUENTE, verificado en la DB. Primer eval no escrito por el asistente.
+# De 80 recolectadas (data/eval/preguntas_publicas_v1.jsonl): 18 traian articulo, 2 excluidas
+# porque la SEC cita numeracion que no calza con el DFL 4 vigente (arts. 217 y 127).
+# PREDICCION REGISTRADA ANTES: cita_ok entre 70 % (dev) y 97 % (held-out), o sea 11 a 15 de 16.
+# Menos de 11 -> dev SUBESTIMA el problema real. CAVEAT: n=16, IC ~ +-22 puntos; la fuente puede
+# citar un articulo y existir otro tambien valido (cita_ok es piso). Config adoptada (t=0.0).
+pub_gold|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold venv/bin/python -m scripts.exp_think_paired
+# ===== exp #84 (2026-09-20 03:30) -- REPARAR ARTICULOS FALSOS NACIDOS DE NOTAS MARGINALES =====
+# HALLAZGO (revisando a mano las 28 "citas al articulo equivocado" de dev): en la LGSE la nota
+# marginal "D.F.L. 1, de 1982 / Art. 147º / D.O. 13.09.1982" (numeracion de la ley VIEJA) partia
+# el Art. 222° real y su cuerpo quedaba guardado como fila "147º". 65 filas asi en la LGSE, 10 en
+# otras normas. El Art. 147 REAL (clientes regulados) no existia como fila; el 84° real estaba
+# oculto como fantasma y el falso visible. El sistema cito [Art. 84 de 258171] con el texto del
+# 141: formato perfecto, numero de una ley derogada. Al menos 10 de los 28 gold de dev fallidos
+# apuntan a numeros cuya fila tiene el texto de OTRO articulo -> eran inalcanzables.
+# FIX: clase NOTA_NUMERO en scripts/reparar_articulos.py (confia en el parser corregido solo si la
+# fila arranca en residuo de nota, el parser no, y el cuerpo falso sigue vivo en otro articulo
+# visible). Verificado a mano: 147, 149, 146, 125, 69, 56, 54, 127, 84 quedan con su texto real.
+# Aplica ademas 60 updates de la norma 61438 que el monitor del 09-14 re-rompio (clases ya
+# validadas en #69b). Respaldo propio: BAK=84. Revertir: BAK=84 ... --revertir
+# CRITERIO, FIJADO ANTES (contra repet0_a / repet0_holdout, misma config, t=0.0 determinista):
+#   cita_ok NO cae > 3  Y  cita_limpia NO cae > 3, en dev Y held-out. Cae -> --revertir.
+# PREDICCION REGISTRADA: dev cita_ok SUBE >= 3 (hay >= 10 gold que pasan a ser alcanzables).
+#   Si no sube, los fantasmas no eran la causa de esas fallas y se dice asi.
+# pub_gold corre ANTES (corpus roto) y pub_gold2 DESPUES: antes/despues con gold de terceros.
+fix84_apply|env PYTHONPATH=. BAK=84 HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reparar_articulos --apply
+# exp #85, MEDIDO JUNTO con #84 (la ventana no da para 9 h): norma DEROGADA servida como vigente.
+# pub_gold (16 preguntas reales, gold de terceros) dio cita_ok 8/16 = 50 %: MI PREDICCION (11-15)
+# ERA FALSA, dev subestimaba el problema real. En 5 de las 8 fallas el sistema cito el D.S. 3.386
+# de 1935 (id 202975), DEROGADO por el art. 329 b) del D.S. 327. BCN lo trae "DESCONOCIDO".
+# Se marcan sus 236 articulos derogado=true con la evidencia; el retrieval ya los excluye.
+# Reversible: scripts.marcar_norma_derogada 202975 124102/329 --revertir
+# CRITERIO: el mismo de #84 (no cae > 3 en dev ni held-out). CAVEAT DE ATRIBUCION: #84 y #85 van
+# juntos; si el conjunto cae se revierten LOS DOS y se miden por separado. Ambos son correcciones
+# con evidencia propia (texto de la ley), la medicion es guarda de regresion, no seleccion.
+# PREDICCION: pub_gold2 >= 11/16.
+fix85_derog|env PYTHONPATH=. venv/bin/python -m scripts.marcar_norma_derogada 202975 124102/329 --apply
+fix84_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=fix84_dev venv/bin/python -m scripts.exp_think_paired
+pub_gold2|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_gold2 venv/bin/python -m scripts.exp_think_paired
+fix84_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=fix84_holdout venv/bin/python -m scripts.exp_think_paired
+# exp #83 (reemplaza a #78-bis; aviso0_* nunca corrio): #77 + #78 juntos a t=0.0.
+# POR QUE JUNTOS: re-juzgados contra la base del MISMO corpus (repet_dev / repet0_holdout), con el
+# criterio ORIGINAL sin tocar, ambos pasan: #77 dev 80/79->80/79 con 0 flips, held-out 60->62
+# (gano 2, perdio 0); #78 dev 0 flips, held-out 60->59 (brazo a t=0.7 contra base a t=0.0).
+# Medirlos por separado a t=0.0 son 9 h y la ventana de GPU no da. A t=0.0 el pipeline es
+# determinista, asi que cualquier diferencia contra repet0_* ES efecto de los flags.
+# CRITERIO, FIJADO ANTES:
+#   (a) NINGUNA query pierde cita_ok ni cita_limpia contra repet0_a / repet0_holdout
+#   (b) el aviso aparece en 0 respuestas que traen cita verificada
+#   -> pasan ambos: se adoptan answer_quote_reatribuir=True y answer_prosa_marcar=True.
+#   Si (a) falla no se sabe cual flag fue: NO se adopta ninguno y se miden por separado despues.
+# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=combo0_dev venv/bin/python -m scripts.exp_think_paired
+# SUSPENDIDO 2026-09-20 03:45 (LGSE mal parseada, ver plan-operacion): combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar,answer_quote_reatribuir SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=combo0_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v33 (2026-09-19 noche, ya ejecutado) -- exp #80: de donde sale el corrimiento
+#
+# RESULTADO #79 (dev): repet0_a vs repet0_b = 0 textos distintos, 0 flips -> REPRODUCIBLE a t=0.0.
+# repet0_a vs qonly2_dev: cita_ok 80->80, cita_limpia 80->79 -> pasa (no cae > 3).
+#
+# HALLAZGO: las 6 corridas posteriores al 2026-09-14 (reatr, limpio2/3, aviso, repet, repet0_a)
+# difieren de qonly2_dev en las MISMAS 13 queries y TODAS dan cita_limpia 79. Entre ellas, con la
+# misma DB, difieren 3-6 textos y 0 en cita_limpia. El "-1" que rechazo #77/#69a/#78 es un
+# corrimiento FIJO de entorno, no muestreo. Descartado: DB (0 vectores/textos distintos al
+# respaldo), Ollama (binario de abril), dispositivo del embedder (CPU ambos dias).
+# Sospechosos: embed_4b_num_ctx 32768->4096 (0a0d74e, 09-14) y tope GPU 230->180 W (09-13).
+#
+# CRITERIO numctx_q, FIJADO ANTES: coseno minimo (prefijo 1024) < 0.9999 -> num_ctx es fuente.
+#   1.000000 en 114/114 -> NO es num_ctx, queda el tope de W.
+# OJO RAM: el brazo viejo carga 9.8 GB de 14. Por eso va SOLO y por la cola, no desde la sesion.
+numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.exp_numctx_queries
+# #79 held-out (la regla es dev Y held-out antes de adoptar selfcons_temperature=0.0).
+# CRITERIO: contra qonly2_holdout, cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+# CAVEAT: qonly2_holdout es del 09-14; si es previo a num_ctx=4096 carga el mismo corrimiento.
+repet0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_fraseos_v1.jsonl NAME=repet0_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v32 (2026-09-19, ya ejecutado) -- exp #79: hacer REPRODUCIBLE el pipeline
+#
+# POR QUE ES LO PRIMERO: `repet_dev` probo que correr dos veces la MISMA config baja
+# cita_limpia de 80 a 79 y cambia el texto de 13 de 114 respuestas (11 %). Ese ruido es del
+# mismo tamano que las diferencias con que se rechazo #77 y se revirtio #69a. Sin
+# reproducibilidad, NINGUNA medicion futura vale, asi que esto va antes que cualquier mejora.
+#
+# Causa: _self_consistency muestreaba con temperature 0.7 HARDCODEADA (generate.py:122).
+# Ahora sale de `config.selfcons_temperature`, default 0.7 = comportamiento ADOPTADO (no se
+# cambia nada sin medirlo). Estas corridas prueban 0.0.
+#
+# CRITERIO, FIJADO ANTES DE CORRER:
+#   1) REPRODUCIBILIDAD (repet0_a vs repet0_b, ambas a temperature 0.0, sin ningun otro cambio)
+#      exigido: 0 queries con texto distinto Y 0 flips de cita_ok/cita_limpia.
+#      Si NO da 0, la temperatura no era la unica fuente de no-determinismo y hay que buscar
+#      la otra ANTES de seguir midiendo nada.
+#   2) CALIDAD (repet0_a vs qonly2_dev): cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
+#      El umbral 3 = 3x el ruido medido (>=1), no un numero inventado. Antes se exigia "no
+#      cae", que es mas estricto que la precision del instrumento.
+# RIESGO DECLARADO: a temperature 0 las 3 muestras de autoconsistencia son identicas, o sea el
+# consenso deja de aportar. Si la calidad cae, la leccion es que la autoconsistencia SIRVE y el
+# precio es el ruido; ahi habria que promediar k corridas en vez de bajar la temperatura.
+repet0_a|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_a venv/bin/python -m scripts.exp_think_paired
+repet0_b|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2,selfcons_temperature=0.0 SET=data/eval/queries_operativas_v1.jsonl NAME=repet0_b venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v31 (2026-09-18, ya ejecutado) -- #78: probar el aviso "SIN CITA VERIFICADA"
+#
+# POR QUE VA POR LA COLA y no a mano: dos intentos lanzados desde la sesion murieron con
+# "system running low on memory". NO fue OOM del kernel (journalctl -k no registra nada): los
+# mata el harness por presion de RAM. Las corridas del cron (limpio3_dev, 2 h 22) sobrevivieron
+# el mismo dia con la misma maquina, porque no son hijas del harness.
+# Contexto de RAM: 14 GB totales; `qwen3-embedding:4b` se carga en CPU (vram=0.0G) y ocupa
+# 3.7 GB; `ollama stop qwen3-embedding:4b` los libera pero el modelo se recarga solo al usarse.
+#
+# CRITERIO, FIJADO ANTES (sobre las 13 queries que hoy caen a prosa):
+#     el aviso aparece en 13/13 de prosa  Y  en 0 de las que tienen cita verificada
+#     Y  cita_ok / cita_limpia NO se mueven contra qonly2_*
+# Si pasa -> se encola dev + held-out completos con el mismo FLAGS (otra medicion, ~3.5 h).
+# El flag queda OFF por defecto: se prende SOLO en la corrida via FLAGS=.
+aviso_smoke|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_prosa13_v1.jsonl NAME=aviso_smoke venv/bin/python -m scripts.exp_think_paired
+# Medicion completa, encolada detras de la prueba. Si la prueba FALLA su criterio, estas dos
+# se sacan del plan antes de que arranquen (la prueba dura minutos, hay margen).
+# CRITERIO de estas dos: cita_ok NO cae > 3 Y cita_limpia NO cae, dev Y held-out, contra
+# qonly2_*. Es un cambio de PRESENTACION: si alguna se mueve, el aviso esta ensuciando el
+# parseo de citas y NO se adopta.
+aviso_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=aviso_dev venv/bin/python -m scripts.exp_think_paired
+aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_marcar SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=aviso_holdout venv/bin/python -m scripts.exp_think_paired
+
+# REPETIBILIDAD (2026-09-19) -- mide el RUIDO del pipeline, sin cambiar NADA.
+# Motivo: en aviso_smoke, 2 de 13 queries que antes caian a prosa produjeron cita verificada y
+# 4 cambiaron cita_ok/cita_limpia SIN tocar el buscador. Todos los criterios de estos dias
+# asumen "el pipeline es determinista" (docs/plan-operacion.md lo dice explicitamente). Si no
+# lo es, las diferencias de 1 caso que decidieron #77 y #69a pueden ser ruido.
+# ESTA CORRIDA ES IDENTICA a qonly2_dev: misma config, misma DB, mismos flags. Cualquier
+# diferencia contra qonly2_dev es RUIDO puro, no efecto de ningun cambio.
+# Lectura: si el ruido en cita_limpia es >= 1, el criterio "cita_limpia NO cae" es mas
+# estricto que la precision del instrumento y hay que reescribirlo con banda de ruido
+# ANTES del proximo experimento.
+repet_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=repet_dev venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v30 (2026-09-17, ya ejecutado) -- #69a ETAPA B: re-embebido, volver a medir
+#
+# limpio2_* midio la etapa A con los vectores VIEJOS (BM25 limpio, denso sucio): dev
+# cita_limpia 80->79 con 5 ganadas / 6 perdidas, y las 6 perdidas eran de RETRIEVAL, no de
+# etiqueta; held-out 58->62, gano 4 y perdio 0.
+# `scripts/reembeber_limpiados.py --apply` corrio: 1120/1120 re-embebidas, 0 fallos.
+# Verificado: 0 vectores identicos en embedding_4b_1024 (la columna viva), 0 nulos,
+# respaldo en fragmentos_bak_emb_20260917.
+#
+# CRITERIO (el mismo de #69a, NO se reescribe) contra qonly2_dev / qonly2_holdout:
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out
+#     cae -> revertir la ETAPA A completa (limpiar_notas_bcn.py --revertir)
+# PREDICCION REGISTRADA ANTES: si el desajuste era la causa, dev vuelve a cita_limpia >= 80
+# y held-out conserva sus 4 ganadas. Si dev sigue en 79, la hipotesis era falsa y NO se adopta.
+limpio3_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio3_dev venv/bin/python -m scripts.exp_think_paired
+limpio3_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio3_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v29 (2026-09-17, ya ejecutado) -- #69a aplicado: medir la limpieza de notas BCN
+#
+# `scripts/limpiar_notas_bcn.py --apply` corrio el 2026-09-17: 1122 articulos, 1120 fragmentos,
+# 692 incisos. Respaldo en *_bak_notas_20260906, reversible con --revertir.
+# CRITERIO (fijado el 2026-09-06, NO se reescribe):
+#     cita_ok NO cae > 3  Y  cita_limpia NO cae     dev Y held-out   -> se queda
+#     cae en cualquiera de los dos                                   -> --revertir
+# Base de comparacion: qonly2_dev / qonly2_holdout (misma config, DB sucia).
+# CAVEAT: limpia el TEXTO pero NO re-embebe (etapa b pendiente); los vectores siguen calculados
+# sobre el texto viejo. BM25 si cambia (tsv se recalcula). La ganancia medida es un PISO.
+limpio2_dev|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_operativas_v1.jsonl NAME=limpio2_dev venv/bin/python -m scripts.exp_think_paired
+limpio2_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=data/eval/queries_fraseos_v1.jsonl NAME=limpio2_holdout venv/bin/python -m scripts.exp_think_paired
+
+# --- PLAN v28 (2026-09-14, ya ejecutado) -- exp #77: reatribuir la cita por procedencia
 #
 # Diagnostico 9/9 del 17 % de held-out en prosa: el modelo copia bien y ETIQUETA mal (toma la
 # referencia de notas BCN, "[Art. primero N° 8, d)]", o inventa el numero). Criterio fijado antes

@@ -783,7 +783,7 @@ pegando palabras partidas. Medido sobre la DB: 881 → **43** con nota, 0 cabeza
 incisos), con respaldo `*_bak_notas_20260906` y `--revertir`. Sin re-embeber (etapa b).
 
 **Criterio** (brazo ON, `SOLO_ON=1`, comparado con `think_real` / `think_holdout` vía
-`scripts/comparar_corridas.py` — válido porque el pipeline es determinista):
+`scripts/comparar_corridas.py` — [AFIRMACION FALSA, corregida 2026-09-19: el pipeline NO es determinista; ruido medido ±1 en cita_limpia, ver HALLAZGO y repet_dev]):
 ```
 cita_ok NO cae > 3  Y  cita_limpia NO cae         dev Y held-out   -> se queda
 fidelidad: NO_SOPORTADA baja o fiel_estricto +5    secundario      -> gana
@@ -847,7 +847,7 @@ tocados se re-fragmentan (mismo `contextual_text`) y re-embeben (4B-1024 + 0.6B)
 `vectorstore.py` (`(a.metadata->>'fantasma') IS NULL`, 3 lugares) y en el juez de #68.
 
 **Criterio** (`SOLO_ON=1` vs `think_real` / `think_holdout`, `scripts/comparar_corridas.py`;
-válido porque el pipeline es determinista):
+[AFIRMACION FALSA, corregida 2026-09-19: el pipeline NO es determinista; ruido medido ±1 en cita_limpia, ver HALLAZGO y repet_dev]):
 ```
 cita_ok NO cae > 3  Y  cita_limpia NO cae          dev Y held-out  -> se queda
 fidelidad: inexistentes baja Y NO_SOPORTADA no sube  secundario     -> gana
@@ -1353,3 +1353,780 @@ Contra `qonly2_dev` (config adoptada), misma DB, `embed_4b_num_ctx=4096`:
 - La latencia no es comparable: `qonly2_dev` corrio a 230 W y `reatr_dev` a 180 W.
 - `reatr_holdout` sigue corriendo; informa si el mecanismo rescata los casos del glosario (11/64 en prosa),
   pero no revierte el veredicto.
+
+### RESULTADO #77 HELD-OUT (2026-09-14) — confirma: cero efecto
+
+`scripts.comparar_corridas data/eval/results/qonly2_holdout data/eval/results/reatr_holdout`:
+
+| | qonly2_holdout | reatr_holdout |
+|---|---|---|
+| pares comparados | 21 | 21 (A=64 B=64) |
+| cita_ok | 21/21 | 21/21 (gano 0, perdio 0, p=1.0) |
+| cita_limpia | 21/21 | 21/21 (gano 0, perdio 0, p=1.0) |
+| precision | 0.95 | 0.93 |
+| citas/respuesta | 1.71 | 1.67 |
+
+- **VEREDICTO FINAL #77: NO SE ADOPTA.** `answer_quote_reatribuir` queda en `False`. Falla el criterio en
+  dev (cita_limpia 80->79) y en held-out no mueve nada: 0 ganadas, 0 perdidas.
+- No rescata los casos del glosario. La hipotesis era que la procedencia por substring corrigiera las
+  etiquetas contaminadas por notas BCN; el mecanismo exige `len(donde)==1` y en esos casos no se cumple.
+- El 17% en prosa sigue abierto. Su causa medida es contaminacion de etiqueta (notas BCN dentro del texto
+  del articulo), no desajuste de substring -> la palanca es limpiar las notas de los 598 articulos, no
+  reatribuir.
+
+### ⚠ HALLAZGO (2026-09-19) — EL PIPELINE NO ES DETERMINISTA. Afecta a TODO lo medido
+
+**Este doc afirma 4 veces (lineas 786, 850, 935, 1717) "valido porque el pipeline es
+determinista" para justificar las comparaciones pareadas. Es FALSO.**
+
+Causa, en el codigo: `_self_consistency` (`src/pipelines/generate.py:122`) genera sus N
+muestras con **`"temperature": 0.7` explicito**, aunque el default del LLM es 0.0
+(`src/components/llm.py`). Y esta activo en TODAS las queries:
+
+| flag | valor | efecto |
+|---|---|---|
+| `self_consistency_n` | 3 | 3 muestras por respuesta |
+| `selfcons_solo_definicion` | False | no se limita a definiciones: **dispara siempre** |
+
+**Evidencia directa, no teorica.** `aviso_smoke` re-corrio 13 queries cuyo unico cambio era un
+PREFIJO DE TEXTO (el aviso), que no puede alterar citas:
+- 2 de 13 que antes caian a prosa produjeron **cita verificada** esta vez.
+- 4 cambiaron `cita_ok`/`cita_limpia` contra `qonly2_*`: 3 ganaron, 1 perdio.
+
+**Consecuencia sobre decisiones ya tomadas:**
+- **#77** se rechazo por `cita_limpia` 80 -> 79 en dev (1 caso, p=1.0).
+- **#69a** se revirtio por `cita_limpia` 80 -> 79 en dev (1 caso, p=1.0), pese a que held-out
+  ganaba 4 y no perdia ninguna.
+- Si el ruido del instrumento es >= 1 caso, **ninguna de esas dos decisiones se sostiene sobre
+  la evidencia que se invoco**. No significa que los cambios fueran buenos: significa que la
+  medicion no tenia resolucion para decidirlo.
+- El patron "gano 6, perdio 6" que se leyo como revoloteo de la limpieza en `limpio2`/`limpio3`
+  probablemente es, en parte, este mismo ruido.
+
+**Lo que NO se sabe todavia:** la magnitud. `repet_dev` (encolado) corre una config IDENTICA a
+`qonly2_dev` — misma DB, mismos flags, sin ningun cambio — y **toda** diferencia que aparezca
+es ruido puro. Lectura fijada ANTES: si el ruido en `cita_limpia` es >= 1, el criterio
+"`cita_limpia` NO cae" es mas estricto que la precision del instrumento y hay que reescribirlo
+con banda de ruido antes del proximo experimento.
+
+**Pendiente tras `repet_dev`:** corregir las 4 afirmaciones de determinismo de este doc y
+decidir si #77 y #69a merecen re-evaluacion con un criterio que respete el ruido medido.
+
+### RESULTADO `repet_dev` (2026-09-19) — el RUIDO del instrumento es exactamente ±1
+
+`repet_dev` es **identica** a `qonly2_dev`: misma DB, misma config, mismos flags, **cero
+cambios**. Toda diferencia es ruido puro.
+
+| | qonly2_dev | repet_dev |
+|---|---|---|
+| cita_ok | 80/114 | 80/114 (gano 1, perdio 1) |
+| cita_limpia | 80/114 | **79/114** (gano 1, perdio 2) |
+| precision | 0.51 | 0.52 |
+| **respuestas con texto distinto** | — | **13 de 114 (11 %)** |
+| queries que cambian cita_ok o cita_limpia | — | 3 |
+
+**Correr dos veces lo mismo baja `cita_limpia` de 80 a 79.** Es exactamente la diferencia por
+la que se rechazo #77 y se revirtio #69a.
+
+**Consecuencia, sin adornos:**
+
+| decision | evidencia invocada | veredicto a la luz del ruido |
+|---|---|---|
+| #77 rechazado | dev `cita_limpia` 80->79 | **indistinguible de ruido** |
+| #69a revertido | dev `cita_limpia` 80->79 (y held-out +4) | **indistinguible de ruido en dev** |
+| #78 aviso, dev | `cita_limpia` 80->79 | **indistinguible de ruido** (ademas es un prefijo de texto que no puede tocar citas) |
+
+El criterio "`cita_limpia` NO cae" **no tiene resolucion**: falla contra un cambio nulo.
+No significa que #77 o #69a fueran buenos. Significa que el instrumento no podia decidirlo y
+que la confianza con que se escribieron esos veredictos no estaba justificada.
+
+**Criterio nuevo, a fijar ANTES del proximo experimento** (propuesta, no adoptado aun):
+1. Todo experimento lleva **brazo de repetibilidad** (misma config, sin cambios) en la misma
+   tanda, para medir el ruido del dia.
+2. El umbral de adopcion se expresa **contra el ruido medido**, no contra 0: p. ej. exigir
+   `|delta| >= 3x` el ruido del brazo de repetibilidad, o McNemar p < 0.05 sobre los flips.
+3. Metricas de conteo binario sobre n=114 con 11 % de respuestas inestables **no sirven para
+   deltas de 1-2 casos**. Para eso hace falta promediar k corridas o usar un set mayor.
+
+**CAVEAT de esta misma medicion:** es UNA repeticion, o sea un punto, no una distribucion.
+Da una cota inferior del ruido (>= 1 en `cita_limpia`, 3 queries inestables, 11 % de textos
+distintos), no su desviacion. Para acotarlo de verdad hacen falta >= 3 repeticiones.
+
+**Causa raiz y candidato de arreglo:** `_self_consistency` muestrea con `temperature: 0.7`
+(`generate.py:122`) en las 114 queries (`self_consistency_n=3`, `selfcons_solo_definicion=False`).
+Bajarla a 0 o fijar semilla haria el pipeline reproducible — pero **eso cambia la config
+adoptada** y hay que medirlo como experimento, no asumirlo.
+
+### EXP #78 (2026-09-17) — aviso deterministico en la prosa (`answer_prosa_marcar`, OFF)
+
+**Medicion previa** sobre `qonly2_dev` + `qonly2_holdout`: 13 respuestas caen a prosa y
+**0 de 13 usan lenguaje de duda**, pese a que el prompt de quote-first pide "si las citas no
+responden la pregunta, dilo". Coincide con arXiv 2608.22228: la abstencion por prompt falla
+cuando el contexto es plausible pero equivocado.
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| se nego | 8 (7 %) | 1 (1.6 %) |
+| negativas correctas | 4 | 0 |
+| **negativas indebidas** | **4** | **1** |
+| respondio en prosa | 3 | 10 |
+| prosa con lenguaje de duda | **0/3** | **0/10** |
+
+**Cambio:** si quote-only no verifico NINGUNA cita como substring, se antepone un aviso.
+- **NO es un porcentaje de confianza.** Es el hecho binario "hubo o no hubo calce literal".
+  Confianza MAL calibrada da +2 % y AUMENTA el sesgo de automatizacion (n=184, arXiv
+  2402.07632); bien calibrada da +20 %. Un hecho binario no requiere calibracion.
+- **NO se rechaza.** De las 13 en prosa, **12 tenian la cita correcta** (held-out 10/10,
+  dev 2/3). Negarse botaria 12 buenas para evitar 1 mala.
+
+**Invariante:** el aviso no lleva corchetes ni `REFUSAL_TEXT` -> `extract_citations` y `refuso`
+no cambian -> `cita_ok` / `cita_limpia` / `precision` deben quedar IGUALES. Protegido por
+`tests/pipelines/test_prosa_marcar.py` (5 tests). Las 3 fallas de `test_generate.py` son
+PREVIAS, verificadas identicas por nombre con los cambios stasheados.
+
+Se agrega `cita_verificada` al retorno de `generate_answer` (instrumentacion, fase D).
+
+### DIAGNOSTICO (2026-09-17) — las 30 fallas de dev contra la base
+
+Cruce de las 30 respuestas con `cita_ok=False` de `qonly2_dev` contra `articulos`:
+
+| | casos |
+|---|---|
+| el articulo gold EXISTE en la DB | **28 de 30** |
+| gold derogado | 0 |
+| sin gold definido (ambiguas) | 2 |
+| **cito otra norma completa** | **19** |
+| cito la norma correcta, otro articulo | 9 |
+| la cita emitida TAMBIEN esta literal en el gold | 2 |
+
+- **La respuesta existe y el sistema cito otra cosa.** No falta el articulo: se trae el
+  documento equivocado. Es el "Document-Level Retrieval Mismatch" de arXiv 2510.06999.
+- Los **2 de texto paralelo** son casos donde el gold es discutible (la frase esta en ambos).
+  Explican solo el 7 %: la hipotesis "el gold esta mal" NO salva al resto.
+- **CAVEAT DE METODO:** la primera pasada reporto "11 golds ausentes". Era un bug MIO de
+  normalizacion: `unicodedata.NFKD` convierte `º` en `o`, asi que "149" nunca calzaba con
+  "149º". Corregido quitando el ordinal ANTES de NFKD -> ausentes reales = 0.
+
+### #69a APLICADO (2026-09-17) — la limpieza corrio; veredicto PENDIENTE del eval
+
+`scripts/limpiar_notas_bcn.py --apply`, autorizado explicitamente por el usuario tras
+explicarle el riesgo. Aplicado: **1122 articulos, 1120 fragmentos, 692 incisos**. Respaldo en
+`articulos_bak_notas_20260906`, `fragmentos_bak_notas_20260906`,
+`fragmentos_inciso_bak_notas_20260906` (3 tablas, verificadas). Reversible con `--revertir`.
+
+**Efecto sobre la contaminacion (toda la tabla `articulos`, 5354 filas):**
+
+| patron | antes | despues |
+|---|---|---|
+| fecha `D.O. dd.mm.aaaa` | 1003 | **21** |
+| referencia `Art. X N°` | 737 | **30** |
+
+**Verificacion de que no se comio texto real.** 200 de las 1122 filas encogen > 25 % (la
+medicion de 2026-09-06 predecia 20, es 10x mas, por eso se leyo una muestra de 8 al azar):
+
+- `- Los nuevos empalmes y |Decreto 1, ENERGÍA Art. único N° 90 i y ii D.O. 13.06.2026| equipos
+  de medida...` -> texto reunido correctamente. Es el arreglo que se buscaba.
+- `- DEROGADO |DTO 291, ECONOMIA Art. Segundo Nº 1 D.O. 04.08.2008|` -> `- DEROGADO`. Correcto.
+- `Artículo 16: Deroga|nota|do.` -> `Artículo 16: Derogado.` La nota PARTIA la palabra.
+- `- Los precios |D.F.L. Nº 1, de 1982, Minería|` (43 chars) -> `- Los precios` (13 chars).
+  **Ya era basura antes** de limpiar: la segmentacion vieja habia cortado el cuerpo. No es
+  dano nuevo, pero explica el salto de filas cortas.
+
+**Residuo a vigilar (NO resuelto):**
+
+| | valor |
+|---|---|
+| filas que quedaron vacias | 8 (5 marcadas `fantasma`, **3 visibles**) |
+| articulos < 60 chars, total | 341 (127 fantasma, 66 derogados, **148 visibles**) |
+| de esos visibles, con fragmentos indexados | 149 |
+
+O sea quedan ~148 articulos casi vacios que el buscador PUEDE devolver. La regla `fantasma` de
+#69b no los cubre. Candidato a una pasada de marcado, medida aparte.
+
+**Veredicto pendiente.** El criterio (fijado 2026-09-06) se decide con `limpio2_dev` /
+`limpio2_holdout` contra `qonly2_dev` / `qonly2_holdout`:
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae   dev Y held-out  -> se queda
+cae en cualquiera de los dos                                -> --revertir
+```
+**CAVEAT:** limpia el TEXTO pero NO re-embebe. BM25 si cambia (tsv recalculado), los vectores
+no. La ganancia que mida el eval es un PISO, no el techo.
+
+### RESULTADO #69a (2026-09-17) — los dos sets se CONTRADICEN; decision del usuario
+
+`limpio2_dev` (2 h 25) y `limpio2_holdout` (1 h 05) contra `qonly2_*`, misma config, DB limpia.
+
+| | dev (114) | held-out (64) |
+|---|---|---|
+| cita_ok | 80 -> 80 (gano 6, perdio 6) p=1.0 | 62 -> 62 (gano 0, perdio 0) |
+| cita_limpia | 80 -> **79** (gano 5, perdio 6) p=1.0 | 58 -> **62** (gano 4, **perdio 0**) p=0.125 |
+| precision | 0.51 -> 0.50 | 0.89 -> **0.94** |
+| citas/respuesta | 1.55 -> 1.54 | 1.58 -> 1.34 |
+
+**Por la letra del criterio FALLA**: `cita_limpia` cae 1 en dev. Mismo caso que #77.
+
+**Pero el mecanismo esta CONFIRMADO caso por caso**, que es lo que #77 no tenia:
+
+- Held-out, las 4 ganadas son EXACTAMENTE las del glosario que la nota BCN mal-etiquetaba:
+  antes `[Art. primero N° 8, d)]` (rechazada por el verificador), ahora `[Art. 13 de 250604]`.
+  Es la prediccion registrada el 2026-09-06, cumplida. **0 perdidas.**
+- Dev gana el caso que ORIGINO todo el hilo: `[Art. 1 de 29819] «Créase la Superintendencia de
+  Electricidad y Combustibles...»`. Antes la respuesta afirmaba que la SEC la crea la Ley 20402,
+  que es el numero que venia en la nota.
+- **Las 6 perdidas de dev NO son de etiqueta, son de retrieval**: trae otro articulo
+  (`Art. 48 de 1160108` -> `Art. 77 de 124102`; `Art. 163 de 258171` -> `Art. 291-26 de 124102`).
+  5 de 6 son `cx_coloquial`, el frente que el diagnostico de hoy ya senalo como cuello.
+
+**Causa del revoloteo:** la limpieza cambia el texto y el `tsv` (BM25), pero **NO re-embebe**.
+El denso sigue apuntando al texto viejo -> los dos generadores de candidatos quedan
+desincronizados y el orden del pool baila. La etapa b (re-embeber las 1120 filas tocadas)
+existe justamente para esto y NO se corrio.
+
+**Lectura honesta:** 6 ganadas y 6 perdidas en dev es ruido, no dano (p=1.0); held-out gana 4
+sin perder ninguna y sube precision. La medicion es un PISO: falta la etapa b.
+
+**NO se decide solo.** El criterio dice revertir; la evidencia de mecanismo dice completar la
+etapa b y volver a medir. Queda para el usuario, y ademas muta la DB (requiere su permiso).
+
+### ETAPA B de #69a (2026-09-17) — criterio fijado ANTES de correr
+
+Decision tomada con el usuario tras ver que los dos sets se contradicen: **no se revierte
+todavia**; primero se completa la etapa b, porque juzgar el experimento con los vectores
+desincronizados es medirlo en su peor version.
+
+`scripts/reembeber_limpiados.py` recalcula, SOLO en las 1120 filas que la etapa A toco:
+- `embedding_4b_1024` <- 4B sobre el `contextual_text` limpio, prefijo MRL 1024, normalizado L2.
+  **Es la columna que usa produccion** (poblada 6583/6583; `embedding_4b` de 2560 solo tiene
+  2974/6583 y no es la que consulta `vectorstore.py`).
+- `embedding` <- Qwen3-Embedding-0.6B sobre el mismo texto.
+
+Misma receta que `reparar_articulos.py::refragmentar` (lineas 186-191). NO re-fragmenta (los
+chunks no cambiaron, solo se les quito la nota) y NO toca `fragmentos_inciso`.
+Respaldo de los vectores viejos en `fragmentos_bak_emb_20260917`, con `--revertir`.
+
+**Estado verificado antes de correr:** las 1120 filas tocadas tienen vector VIEJO en
+`embedding_4b_1024` (1120/1120) y en `embedding` (1120/1120).
+
+```
+CRITERIO (el mismo de #69a, no se reescribe):
+  cita_ok NO cae > 3  Y  cita_limpia NO cae    dev Y held-out, contra qonly2_*
+  cae -> revertir la ETAPA A completa (limpiar_notas_bcn.py --revertir)
+
+PREDICCION REGISTRADA (para que no se pueda mover el poste despues):
+  si el desajuste era la causa -> dev deja de perder las 6 de retrieval y cita_limpia
+  vuelve a >= 80, held-out conserva sus 4 ganadas.
+  si dev sigue en 79 -> la hipotesis era falsa y la limpieza NO se adopta.
+```
+
+**Riesgo honesto declarado:** esto arregla ETIQUETAS, no recuperacion. El diagnostico del
+mismo dia dice que 18 de 28 fallas de dev son porque el gold NI LLEGA al pool. La ganancia
+esperada es chica y puede ser cero.
+
+**APLICADA (2026-09-17):** 1120/1120 re-embebidas, 0 sin vector 4B. Verificacion:
+
+| control | resultado |
+|---|---|
+| filas en el respaldo `fragmentos_bak_emb_20260917` | 1120 |
+| vectores IDENTICOS al viejo en `embedding_4b_1024` | **0** |
+| vectores identicos al viejo en `embedding` (0.6B) | 76 |
+| nulos en la columna viva | 0 de 6583 |
+| mayores distancias coseno en `embedding_4b_1024` | 0.8962, 0.5245, 0.5211, 0.4596, 0.4579 |
+
+CAVEATS de esta verificacion, para no sobre-leerla:
+- Las **76 identicas en 0.6B** se explican porque en esas filas cambio `text` pero NO
+  `contextual_text`, que es lo que se embebe. No es un fallo del script.
+- "0 identicos en 4B" NO prueba por si solo que haya senal nueva: el 4B via Ollama tiene algo
+  de no-determinismo numerico. Lo que sostiene el cambio son las distancias grandes (hasta
+  0.896), no el conteo de identicos.
+- Solo se midio que los vectores cambiaron, NO que sean mejores. Eso lo dice el eval.
+
+Encolado como `limpio3_dev` / `limpio3_holdout` (plan v30).
+
+### RESULTADO ETAPA B (2026-09-17) — PREDICCION FALSADA; el criterio manda REVERTIR
+
+`limpio3_dev` (2 h 22) y `limpio3_holdout` (1 h 07) contra `qonly2_*`, con los 1120 vectores
+ya re-embebidos.
+
+| | qonly2 | limpio2 (sin re-embeber) | **limpio3 (re-embebido)** |
+|---|---|---|---|
+| dev cita_ok | 80/114 | 80 | 80 (gano 6, perdio 6) |
+| dev cita_limpia | 80/114 | 79 | **79** (gano 5, perdio 6) |
+| dev precision | 0.51 | 0.50 | 0.49 |
+| held-out cita_ok | 62/64 | 62 | 62 (gano 0, perdio 0) |
+| held-out cita_limpia | 58/64 | 62 | **62** (gano 4, perdio 0) |
+| held-out precision | 0.89 | 0.94 | **0.95** |
+
+**La prediccion registrada era:** "si el desajuste era la causa, dev vuelve a cita_limpia >= 80;
+si sigue en 79, la hipotesis era falsa y NO se adopta". **Dev quedo en 79. Hipotesis FALSADA.**
+
+- Re-embeber **no aporto nada medible**: held-out da identico con y sin vectores nuevos
+  (58->62 en ambos); dev quedo clavado en 79 con el mismo patron de revoloteo.
+- Dentro de dev hubo movimiento interno (coloquial 27->28, `hold_complex` 7->6), lo que
+  confirma revoloteo, no senal.
+- Costo: ~4 h de GPU para descartar una hipotesis. Sirvio para eso, no para mejorar.
+
+**Veredicto por la letra del criterio: REVERTIR la etapa A.** Es el mismo trato que recibio
+#77. No se mueve el poste despues de ver los numeros.
+
+**Lo que se pierde al revertir (declarado para que la decision sea informada):** vuelve la
+respuesta falsa "la SEC se crea por la Ley 20402" (el numero salia de la nota BCN) y vuelven
+las 4 citas del glosario mal etiquetadas como `[Art. primero N° 8, d)]` en vez de
+`[Art. 13 de 250604]`. El eval de held-out SI las capta (+4, 0 perdidas, precision 0.89->0.95);
+el de dev las diluye.
+
+**Tension honesta, sin resolverla por mi cuenta:** el criterio protege de auto-enganarse (fue
+escrito antes) pero castiga por 1 caso de ruido (p=1.0) un cambio cuyo mecanismo esta
+verificado caso por caso. Rehacer el criterio AHORA seria justamente lo que el criterio existe
+para impedir. Si se quiere reabrir, se fija un criterio nuevo ANTES y se vuelve a medir.
+
+Orden de reversion (las dos etapas, en este orden): `reembeber_limpiados.py --revertir`
+(vectores viejos, respaldo `fragmentos_bak_emb_20260917`) y despues
+`limpiar_notas_bcn.py --revertir` (texto, respaldo `*_bak_notas_20260906`).
+
+**REVERTIDO (2026-09-17), decision del usuario: "revertir, es tu regla".**
+
+```
+1) reembeber_limpiados.py --revertir  -> 1120 fragmentos vuelven a sus vectores previos
+2) limpiar_notas_bcn.py  --revertir  -> 1122 articulos, 1120 fragmentos, 692 incisos
+```
+
+Verificacion post-revert:
+
+| control | resultado |
+|---|---|
+| articulos con fecha `D.O.` | 1003 (identico al estado previo) |
+| articulos con `Art. X N°` | 737 (identico al estado previo) |
+| vectores identicos al respaldo | **1120/1120** |
+| textos identicos al respaldo | **1122/1122** |
+
+La DB quedo exactamente como antes del experimento. El orden importa y se respeto: revertir el
+texto primero habria dejado el desajuste al reves (texto viejo con vectores del texto limpio).
+
+**QUE QUEDA VIVO DE ESTE HILO (no se pierde el conocimiento aunque se revirtiera el cambio):**
+
+1. La contaminacion por notas BCN es REAL y esta cuantificada: 598 articulos con fecha D.O.
+   sobre 3252 visibles del dominio. El caso testigo es verificable: la respuesta "la SEC se
+   crea por la Ley 20402" es falsa (la crea la 18410) y ese numero sale de la nota.
+2. Limpiarla **no mueve la metrica adoptada**: dev 80->79, held-out 58->62, y re-embeber no
+   cambio nada. Medido dos veces, ~7 h de GPU en total.
+3. **El cuello NO es este.** Diagnostico del mismo dia: 18 de 28 fallas de dev son porque el
+   gold NI LLEGA al pool, 20 de 28 son `cx_coloquial`. Held-out trae el gold 64/64.
+4. Si se reabre, la metrica que corresponde NO es `cita_limpia` sino el juez de fidelidad
+   (#68), que es el que mide el dano real de citar la fuente equivocada. Criterio nuevo, fijado
+   ANTES, y volver a medir.
+5. Los scripts quedan listos y probados en ambos sentidos: `limpiar_notas_bcn.py`,
+   `reembeber_limpiados.py`, cada uno con respaldo y `--revertir` verificados en vivo.
+
+### DIAGNOSTICO RETRIEVAL vs GENERACION (2026-09-17) — es RETRIEVAL, 64 %
+
+`scripts.diag_donde_falla` sobre las 28 fallas de `qonly2_dev` que tienen gold (de las 30,
+2 no tienen). TOPK=10, POOL=50, `top_rerank_override`=10. Foto guardada en
+`data/eval/results/donde_falla_fallas28_dev.json`.
+
+| categoria | RETRIEVAL | GENERACION |
+|---|---|---|
+| cx_coloquial | 12 | 8 |
+| cx_temporal | 1 | 1 |
+| hold_def | 2 | 0 |
+| cx_adyacente / cx_negacion / hold_complex | 1 c/u | 0 |
+| cx_multihop | 0 | 1 |
+| **TOTAL** | **18 (64 %)** | **10 (35 %)** |
+
+- **El gold NI SIQUIERA LLEGA al pool en 18 de 28.** Generar mejor no las puede arreglar.
+- Guardia del script: el gold aparecio en 10/28, asi que la comparacion de claves funciona
+  (el script aborta si da 0, justamente para no medir otra cosa en silencio).
+- De las 10 de GENERACION, **solo 1 tenia el gold en rank 0; mediana de rank 5**. O sea ni
+  esas son "el modelo ignoro lo que tenia delante": el gold llegaba hondo.
+- **cx_coloquial concentra 20 de 28 fallas.** Es el muro de vocabulario coloquial, ya
+  identificado hace tiempo. **CORRECCION:** primero escribi "exp #74 (`concept_inference`)" y es
+  falso en las dos mitades. #74 es el **modelo denso 27B**, cerrado por la compuerta.
+  `concept_inference` es el **experimento 16** (`docs/experimentos-registro.md`), medido el
+  2026-06-13: **retrieval +3 / generacion -1 -> RECHAZADO por trade-off**. No es un candidato
+  listo: si se reabre, hay que explicar que cambio desde entonces (hoy corre quote-only, que no
+  existia en junio) y fijar criterio nuevo antes.
+
+**Consecuencia para el plan:** la palanca A (limpiar notas) ataca la contaminacion del TEXTO,
+pero el cuello medido esta ANTES, en traer el articulo. Lo que mas respalda la evidencia
+externa para esto es afinar el retriever denso (CLERC: nDCG@10 5.40 -> 14.67 con fine-tune
+in-domain), no mas maquinaria de generacion ni de abstencion.
+
+**CAVEAT de costo:** el encabezado del script dice "~2 s por query"; hoy NO es cierto. El
+retrieve llama al LLM (expansion, glosario, intent gate), asi que 114 queries no terminaron
+en 570 s. Por eso se corrio el subconjunto de 28. El `timeout` que corta devuelve 124 y el
+shell imprime "Terminado": no es un corte del vigia ni un OOM (verificado: sin `.gpu_bloqueo`,
+sin CORTE en `logs/gpu_vigia.log`, sin OOM en journalctl).
+
+**El vigia NO esta muerto** (se sospecho por su log detenido el 2026-09-14): solo escribe
+linea cuando `TRABAJO > 0`. Corrido a mano da exit 0 y actualiza `logs/.gpu_vigia_racha`.
+
+### ESTADO REAL DE #69a (verificado 2026-09-17) — SUSTITUIDO por #69b, con RESIDUO medible
+
+**CORRECCION de una afirmacion previa mia en este mismo doc.** Primero escribi que #69a
+"nunca se aplico", dando a entender olvido. Es enganoso: #69a fue **deliberadamente
+sustituido por #69b** (ver seccion #69b, linea "Sustituye a #69a"), porque la nota BCN no
+solo ensucia el texto, ademas CORTA el articulo al segmentar, y eso el limpiador en sitio no
+lo arregla. #69b **si se aplico**: existen `articulos_bak_69b` y `fragmentos_bak_69b`, y
+`limpio_dev` / `limpio_holdout` son sus corridas de medicion.
+
+Lo literalmente cierto: `scripts/limpiar_notas_bcn.py` (#69a) nunca corrio con `--apply`
+(no existen las tablas `*_bak_notas_20260906`).
+
+**El residuo SI existe y es medible.** #69b arreglo los CORTES via parser + reparacion de
+filas, pero NO limpio el texto de todas las filas ya indexadas:
+
+Estado de la DB hoy (`articulos` visibles del dominio = 3252, excluye fuera_de_dominio,
+fantasma y derogado):
+
+| patron en `articulos.texto` | articulos |
+|---|---|
+| fecha `D.O. dd.mm.aaaa` | **598** |
+| referencia `Art. X N°` | 413 |
+
+Ensayo en seco de hoy: **1122 articulos, 1120 fragmentos, 692 incisos** cambiarian.
+
+**CAVEAT:** las notas BCN **no llevan corchetes** en el texto; el formato real es
+`Decreto 70, ENERGIA / Art. primero N° 8, i) / D.O. 05.06.2024`. Los corchetes que se ven en
+las citas (`[Art. primero N° 8, d)]`) los agrega el MODELO al citar. Buscar corchetes en la
+DB da 0 y lleva a concluir, falsamente, que no hay contaminacion.
+
+**Criterio (ya fijado el 2026-09-06, no se reescribe):**
+```
+cita_ok NO cae > 3  Y  cita_limpia NO cae        dev Y held-out   -> se queda
+fidelidad: NO_SOPORTADA baja o fiel_estricto +5   secundario      -> gana
+cae -> --revertir
+```
+**Riesgo declarado:** la etapa a limpia el TEXTO pero no re-embebe; los vectores quedan
+calculados sobre el texto viejo hasta la etapa b. Comparacion valida igual porque el pipeline
+es determinista, pero la ganancia medida es un PISO, no el techo.
+
+Sets: dev = `data/eval/queries_operativas_v1.jsonl` (114);
+held-out = `data/eval/queries_fraseos_v1.jsonl` (64).
+
+### DIAGNOSTICO (2026-09-16) — que senal existe hoy para abstenerse
+
+Sobre los `result.json` ya guardados, cruzando cada senal contra `cita_ok`:
+
+| senal | dev (114) | held-out (64) | sirve en produccion? |
+|---|---|---|---|
+| `n_cits` | 0: 4F/4T, 1: 7F/31T, 2: 22F/43T | 0: 1F, 1: 37T, 2: 1F/17T | **NO**, casi no separa |
+| `n_uniq` | 1: 15F/39T, 2: 15F/37T | 1: 1F/42T, 2: 16T | **NO** |
+| `precision` | 0.0: 34F/4T, >0: 76T/0F | 0.0: 2F, >0: 62T/0F | **NO, usa el gold** |
+
+- `precision` separa casi perfecto (dev: 34 de 38 con precision 0 son fallas), pero se calcula CONTRA el
+  gold -> es metrica de eval, no senal disponible al responder. No se puede usar como umbral.
+- Las senales que si estarian disponibles en produccion (max BGE del pool, acuerdo entre las 3 muestras de
+  autoconsistencia) **NO se persisten** en `result.json`. Sin instrumentarlas no se puede calibrar ningun
+  umbral de abstencion.
+- **Consecuencia para el plan de abstencion:** la fase 0 no es solo construir negativos duros; hay que
+  guardar por query `_bge_max`, acuerdo de autoconsistencia y n de citas verificadas. Sin eso, la fase 1
+  (abstencion con senales gratis) no es medible.
+
+---
+
+## 2026-09-19/20 — #79 pasa, y el "ruido ±1" resulta ser un corrimiento fijo (CORRIGE la seccion anterior)
+
+### #79 `selfcons_temperature=0.0` — pasa dev Y held-out (NO adoptado aun: espera OK del usuario)
+
+| criterio (fijado antes, plan v32) | resultado |
+|---|---|
+| reproducibilidad `repet0_a` vs `repet0_b` | **0 textos distintos, 0 flips** |
+| calidad dev vs `qonly2_dev` | cita_ok 80->80, cita_limpia 80->79 (limite: no cae > 3) |
+| calidad held-out vs `qonly2_holdout` | cita_ok 62->62, cita_limpia 58->**60** (gano 4, perdio 2, p=0.69) |
+
+El riesgo declarado (a t=0 la autoconsistencia deja de aportar) no se observo.
+
+### CORRECCION: el -1 de cita_limpia NO era ruido de muestreo
+
+La seccion de `repet_dev` concluyo "ruido ±1". **Es falso.** Las 6 corridas posteriores al
+2026-09-14 difieren de `qonly2_dev` en las MISMAS 13 queries, y todas dan cita_limpia 79:
+
+| corrida | textos != qonly2_dev | de los 13 | cita_limpia |
+|---|---|---|---|
+| reatr_dev (#77) | 16 | 13 | 79 |
+| limpio2_dev / limpio3_dev (#69a, DB distinta) | 60 / 59 | 11 / 11 | 79 / 79 |
+| aviso_dev (#78) | 13 | 13 | 79 |
+| repet_dev (t=0.7) | 13 | 13 | 79 |
+| repet0_a (t=0.0) | 13 | 13 | 79 |
+
+Entre corridas post-14 con la misma DB: 3-6 textos distintos y **0 de diferencia en cita_limpia**.
+Held-out repite el patron: 14 textos, los mismos 14 en `aviso_holdout` y `repet0_holdout`.
+8 de las 13 cambian de ARTICULO citado, no solo de redaccion.
+
+**Consecuencia:** #77, #69a y #78 se juzgaron contra una base (`qonly2_*`) que ya no representa
+el sistema. El -1 no era de ellos. Base vigente para comparar: `repet0_a` / `repet0_holdout`.
+Hay que re-juzgarlos contra esa base con criterio nuevo; NO se readopta nada por inercia.
+
+### Busqueda de la causa (cada descarte con su evidencia)
+
+| candidato | veredicto | evidencia |
+|---|---|---|
+| DB | descartado | 0 vectores (4B y 0.6B) y 0 textos distintos contra `fragmentos_bak_emb_20260917` / `_bak_notas_20260906` |
+| Ollama / modelos | descartado | binario del 04-29 (0.22.1), blobs de junio |
+| dispositivo del embedder | descartado | CPU ambos dias (`exp_think_paired.py:190`; journal: `offloaded 0/37`) |
+| `embed_4b_num_ctx` 32768->4096 (`0a0d74e`) | **descartado, exp #80** | `scripts/exp_numctx_queries.py`: coseno 1.000000 en 114/114 (prefijo 1024), control 1.000000; journal confirma `KvSize:32768` en el brazo viejo. Mi hipotesis era falsa |
+| tope GPU 230->180 W | descartado | `qonly2_holdout` (09-14 03:02) ya corrio a 180 W y muestra el mismo patron |
+| **`1517efe` (#77, 09-14 10:42)** | **en prueba, exp #81** | reescribio el verificador de citas de `generate.py` "con flag OFF"; una de las 13 cambia `[Art. 8 de 250604]` -> `[Art. 8º de 250604]` |
+
+### exp #81 — biseccion (plan v34, criterio fijado antes)
+
+13 queries (`data/eval/queries_corrimiento13_v1.jsonl`) en dos worktrees: `erag-bis-antes`
+(`ea86b7e`) y `erag-bis-despues` (`1517efe`). Misma DB, Ollama y tope de W.
+`bis_antes` coincide con `qonly2_dev` en >= 10/13 Y `bis_despues` con `repet_dev` en >= 10/13
+-> `1517efe` es la fuente. Si `bis_antes` ya sale como `repet_dev` -> no es el codigo.
+
+### Evals: el usuario NO va a aportar preguntas reales (2026-09-20)
+
+Queda como caveat permanente: todo el eval es escrito por el asistente. Plan B propuesto (sin OK
+aun): preguntas publicas escritas por terceros (FAQ/reclamos SEC, Coordinador, CNE, Ley Facil BCN,
+Transparencia) + registrar las consultas reales cuando el sistema se use.
+
+### GPU durante todo esto
+0 Xid NVRM en el arranque vigente (desde 09-13 21:02). Max 73 C a 180 W. Caveat: `gpu_vigia.sh`
+solo registra con trabajo corriendo; en reposo la unica evidencia es el journal.
+
+---
+
+## 2026-09-20 madrugada — exp #81: la causa del corrimiento era EL CORPUS (cierra la busqueda)
+
+**Resultado de la biseccion:** el codigo de ANTES de `1517efe` (`ea86b7e`, con embedder a ctx 32768
+y todo lo viejo), corrido hoy sobre las 13 queries: **0/13 textos iguales a `qonly2_dev`, 10/13
+iguales a `repet_dev`** (los 3 restantes = muestreo a t=0.7). Por el criterio fijado: NO es el
+codigo. `1517efe` queda exonerado (su diff con flag OFF es logicamente equivalente, leido).
+
+**Causa real:** el monitor semanal corrio el **2026-09-14 06:00 (09:00 UTC)** y actualizo
+**333 articulos** (61438 Ley 19.496: 145; 1092695: 87; 124102 DS 327: 21; 258171 LGSE: 21;
+137421: 16; 1150437 DS 88: 11; otros 32) y creo **151 fragmentos**. `qonly2_dev` (09-12) y
+`qonly2_holdout` (09-14 03:02) se midieron sobre el corpus ANTERIOR; todo lo demas, sobre el nuevo.
+Calza con todo: mismas 13/14 queries en todas las corridas posteriores, 8 de 13 cambian de articulo.
+
+**Tres diagnosticos mios equivocados en fila, para que no se repitan:**
+1. "el pipeline tiene ruido ±1" (09-19 manana) — el ruido de muestreo existe (3-6 textos) pero el -1 no lo era.
+2. "es `embed_4b_num_ctx`" — falsado por #80 (coseno 1.000000 en 114/114).
+3. "es `1517efe`" — falsado por #81.
+La revision de la DB que hice compara contra respaldos del 09-06/09-17 que solo cubren las 1120
+filas de #69a: no podia ver un cambio del 09-14. Lo correcto era mirar `updated_at`/`created_at`.
+
+**Arreglo (commit `b5d0acb`):** `exp_think_paired` guarda `db_huella` (n articulos, max updated_at,
+n fragmentos, max created_at) en cada `result.json`; `comparar_corridas` avisa si difiere o falta.
+Regla nueva: **despues de cada corrida del monitor semanal la base de comparacion caduca.**
+
+### Re-juicio contra la base del MISMO corpus (criterio ORIGINAL, sin tocarlo)
+
+Base: `repet_dev` (t=0.7) en dev; `repet0_holdout` (t=0.0) en held-out — caveat: en held-out la base
+es a otra temperatura que los brazos; `aviso_holdout` (t=0.7, cita_limpia 59) sirve de referencia.
+
+| experimento | dev cita_ok / limpia | held-out cita_ok / limpia | criterio original | veredicto de entonces |
+|---|---|---|---|---|
+| #77 reatribuir | 80/79 -> 80/79, **0 flips** | 62/60 -> 62/**62** (gano 2, perdio 0) | **PASA** | rechazado por "-1" |
+| #78 aviso | 80/79 -> 80/79, 0 flips | 62/60 -> 62/59 (gano 1, perdio 2) | dev pasa; held-out -1 contra base a otra t | flag OFF por "-1" |
+| #69a limpieza BCN (limpio3) | 80/79 -> 80/79 (gano 5-6, perdio 5-6) | 62/60 -> 62/**62**; precision 0.87 -> 0.95 | **PASA** | revertido por "-1" |
+
+- #77 y #78: se re-miden JUNTOS a t=0.0 (exp #83, plan v35), criterio: ninguna query pierde.
+- **#69a queda para reabrir**: contra la base correcta pasa su propio criterio y sube la precision en
+  held-out, pero en dev revuelve 5-6 queries en cada sentido (efecto de retrieval, no neutro).
+  Re-aplicar es mutar la DB + 4.5 h de GPU; no entra en esta ventana. NO se re-aplica por inercia.
+
+### #79 adoptado
+`selfcons_temperature=0.0` (commit `0c951ca`). Pendiente barato: a t=0.0 las 3 muestras son
+identicas -> `self_consistency_n=1` deberia dar lo mismo con 1/3 de las llamadas. Es otra medicion.
+
+### Primer eval con gold de terceros
+80 preguntas reales publicas (`data/eval/preguntas_publicas_v1.jsonl`); 16 con articulo citado por
+la propia fuente y verificado en la DB (`queries_publicas_gold_v1.jsonl`). Prediccion registrada
+antes de correr: 11-15 de 16. Hallazgo lateral: LGSE arts. 54 y 127 en la DB empiezan a mitad de
+frase (367 y 402 chars) — texto truncado al inicio, sin cuantificar aun.
+
+---
+
+## 2026-09-20 03:00-04:20 — la causa del "articulo equivocado con formato perfecto" era de DATOS
+
+### exp #82 juez "la cita responde la pregunta" — DESCARTADO (criterio fijado antes: detectar >= 50 %)
+Sobre respuestas guardadas de `repet0_a` / `repet0_holdout`, juez = qwen3 local con think:
+dev detecta **3/28** equivocadas, falsa alarma 5/75; held-out 0/1 y 6/62 (9.7 %). No pasa.
+Pero revisar a mano esas 28 destapo lo que sigue.
+
+### exp #84 — articulos FALSOS nacidos de notas marginales BCN (aplicado 03:59, BAK=84)
+En la LGSE la nota al margen `D.F.L. Nº 1, de 1982, Minería / Art. 147º / D.O. 13.09.1982`
+(numeracion de la ley VIEJA) partia el `Artículo 222°` real; su cuerpo quedaba guardado como fila
+**"147º"**. El Art. 147 real (clientes regulados) NO EXISTIA como fila. #69b habia dejado estos casos
+en REVISAR y, peor, marco fantasma al `84°` real y dejo visible al falso por ser mas largo.
+- **65 filas falsas en la LGSE** (+8 en 29472, +1 en 1058072, +1 en 210676).
+- El sistema cito `[Art. 84 de 258171]` con el texto del 141: formato perfecto, numero de una ley derogada.
+- >= 10 de los 28 gold fallidos de dev (149 x3, 147, 146, 125, 69, 56, 7, 200) apuntaban a filas con
+  el texto de OTRO articulo: inalcanzables.
+- Fix: clase `NOTA_NUMERO` en `scripts/reparar_articulos.py` (la fila arranca en residuo de nota, el
+  parser corregido no, y el cuerpo falso sigue vivo en otro articulo visible). Verificados a mano
+  147, 149, 146, 125, 69, 56, 54, 127, 84. Aplicado: **135 updates** (75 NOTA_NUMERO + 60 de la norma
+  61438 re-rotos por el monitor), 168 fragmentos re-embebidos, 0 sin vector. LGSE visibles que
+  arrancan en nota: 62 -> 8 (esas 8 siguen en REVISAR; no se fuerzan).
+- Revertir: `BAK=84 PYTHONPATH=. venv/bin/python -m scripts.reparar_articulos --revertir`
+
+### Bug raiz en el monitor semanal (commit `42f1388`)
+`actualizar_norma.py:81`, `ingerir_nuevas.py:83` y `reingest_faltantes.py:85` llaman a
+`_extract_articulos` con texto CRUDO y se saltan el `quitar_notas_bcn` de `parse()`. **Cada lunes
+06:00 el monitor volvia a crear articulos falsos** (el 09-14 re-rompio 60). Arreglado dentro del
+metodo compartido (idempotente). Test `tests/parsers/test_nota_no_crea_articulo.py`: falla sin el
+fix, pasa con el. OJO: proxima corrida del monitor = lunes 2026-09-21 06:00 -> la base caduca otra vez.
+
+### Primer eval con gold de TERCEROS: `pub_gold` = 8/16 (50 %) — prediccion mia FALSADA
+16 preguntas reales (SEC, CGE, Coordinador) con el articulo que cita la propia fuente. Prediccion
+registrada antes: 11-15. Salio 8. **dev (70 %) SUBESTIMABA el problema real.** 0 rechazos: las 8
+fallas son respuestas seguras con articulo equivocado. Caveat: n=16, IC ~ +-22 puntos.
+
+### exp #85 — norma DEROGADA servida como vigente (aplicado 03:59)
+En 5 de esas 8 fallas el sistema cito el **D.S. 3.386 de 1935** (id 202975, 236 articulos).
+Esta derogado desde 1998: D.S. 327 art. 329 letra b), textual, en el mismo corpus. BCN lo trae
+"DESCONOCIDO"; tambien aparece en >= 8 de las 28 fallas de dev. `scripts/marcar_norma_derogada.py`
+marca `derogado=true` + `metadata.derogado_por="124102/329"`; el retrieval ya excluye derogados.
+Revertir: `... -m scripts.marcar_norma_derogada 202975 124102/329 --revertir`
+OJO: la metadata BCN dice que el D.S. 327 esta "DEROGADA" y la SEC lo cita como vigente: el campo
+`estado` de BCN NO es confiable en ninguna direccion. La derogacion hay que leerla del texto.
+
+### Medicion en curso (criterio y prediccion en plan v36, fijados antes de aplicar)
+`fix84_dev` -> `pub_gold2` -> `fix84_holdout`, contra `repet0_a` / `repet0_holdout` / `pub_gold`.
+No cae > 3 en dev ni held-out; si cae se revierten #84 y #85 y se miden por separado.
+Prediccion: dev cita_ok sube >= 3; pub_gold2 >= 11/16.
+Suspendido: #83 (#77+#78 juntos a t=0.0); se reencola sobre el corpus reparado.
+
+### RESULTADO #84 + #85 (2026-09-20 09:10) — criterio PASA, se quedan; predicciones FALSAS
+| | base | reparado | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 79 (`repet0_a`) | 80 / 78 | gano 7, perdio 7 |
+| held-out cita_ok / limpia | 62 / 60 (`repet0_holdout`) | 62 / 59 | gano 0, perdio 0 / 1 |
+| reales, gold de terceros | 8/16 (`pub_gold`) | 9/16 (`pub_gold2`) | gano 2, perdio 1 |
+| respuestas que citan el D.S. 3.386 derogado | dev 9, reales 4 | **0 y 0** | |
+Criterio (no cae > 3, dev y held-out): pasa. Prediccion "dev sube >= 3" y "reales >= 11/16": **falsas**.
+Las 7 ganadas de dev son exactamente los articulos fantasma. De las 7 perdidas, 2 tienen el gold en
+el decreto derogado (4 gold de dev apuntan ahi: error de MI eval) y 5 son desplazamiento real de
+retrieval por los 135 articulos que ahora compiten con su texto verdadero.
+Bases vigentes: `fix84_dev`, `fix84_holdout`, `pub_gold2`. Handoff: `docs/handoff-2026-09-20.md`.
+
+### RESULTADO #83 (2026-09-20 12:27) — #77 reatribuir + #78 aviso, juntos a t=0.0: PASA, **ADOPTADOS**
+Base = `fix84_dev` / `fix84_holdout` (corpus reparado, misma huella). Criterio fijado antes (plan v36).
+| | base | combo0 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | 80 / 78 | gano 0, **perdio 0** |
+| held-out cita_ok / limpia | 62 / 59 | 62 / **61** | gano 2, **perdio 0**; precision 0.88 -> 0.93 |
+| avisos "SIN CITA VERIFICADA" | — | dev 4, held-out 2 | sobre cita verificada: **0 y 0** |
+(a) ninguna query pierde: cumple. (b) aviso nunca sobre cita verificada: cumple (chequeado con patron
+"cita seguida de comillas", no con el campo interno `cita_verificada`, que result.json no guarda).
+Adoptado por instruccion del usuario ("Termina", 2026-09-20): `answer_quote_reatribuir=True`,
+`answer_prosa_marcar=True`. Tests: las mismas 6 fallas preexistentes; 1 test actualizado al
+comportamiento nuevo (`test_generate_handles_plain_text_when_no_format`).
+Caveat de atribucion: medidos juntos; la ganancia de held-out es de #77 (el aviso solo antepone texto).
+
+### RESULTADO #86 (2026-09-20 21:14) — `self_consistency_n` 3 -> 1: PASA, **ADOPTADO**
+A `selfcons_temperature=0.0` las N muestras de autoconsistencia son IDENTICAS: el consenso no
+aportaba nada y se pagaban 3 llamadas al LLM por respuesta. Contra `combo0_*` (config adoptada,
+mismo corpus, misma huella):
+| | base n=3 | n=1 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | 80 / **79** | gano 1, **perdio 0** |
+| held-out cita_ok / limpia | 62 / 61 | 62 / **62** | gano 1, **perdio 0** |
+| latencia media por query | 49.6 s dev, 53.0 s held-out | 43.1 s, 47.6 s | -13 % / -10 % |
+Criterio (ninguna query pierde, dev Y held-out): cumple. Textos distintos: 2 de 64 en held-out.
+CAVEAT: si algun dia se vuelve a subir `selfcons_temperature`, hay que volver a medir `n`.
+
+**Trampa evitada:** `n1_dev` "corrio" en 7 s porque ese NAME existia desde el 2026-09-04 y el
+script lo REANUDO, estampando la huella de hoy sobre filas de otro corpus y otra config. Se
+descarto y se repitio como `sc1_dev`. `exp_think_paired` ahora **rechaza** un `result.json` de mas
+de 48 h (commit `bad8a82`). `n1_holdout` se verifico valido: banner de anoche con
+`VAR=answer_think SETCFG=[['self_consistency_n','1']]` y **64/64 pendientes** (no reanudo nada).
+
+**Efecto lateral en tests (explicado, no es regresion):** `test_generate_answer_retries_on_grounding_fail`
+afirma `call_count == 2` (1 intento + 1 reintento) y fallaba desde que se adopto n=3, porque la
+autoconsistencia gastaba llamadas extra (medido: n=3 -> 5 llamadas, n=1 -> 2). Con n=1 vuelve a
+pasar. Fallas preexistentes: 6 -> 5.
+
+---
+
+## CIERRE 2026-09-21 — plan v37 completo
+
+### #69a-bis limpieza de notas BCN + re-embebido, sobre el corpus reparado: PASA, **SE QUEDA**
+Aplicado 2026-09-20 21:15 (1047 articulos, 1050 fragmentos, 692 incisos; 1050 re-embebidos, 0 sin
+vector). `gate_69a` aplico el criterio ORIGINAL (cita_ok no cae > 3 Y cita_limpia no cae, dev Y
+held-out, contra `combo0_*`) y decidio solo:
+| | combo0 | l69 | |
+|---|---|---|---|
+| dev cita_ok / limpia | 80 / 78 | **83 / 82** | gano 7, perdio 4 (ok); gano 7, perdio 3 (limpia) |
+| held-out cita_ok / limpia | 62 / 61 | 62 / **62** | 0 perdidas |
+Revisado 3 veces y revertido 2 (09-17) por un "-1" que era el corpus cambiado, no la limpieza.
+Contra la base correcta sube +3 / +4. Leccion: el instrumento ensucio 10 dias de decisiones.
+Revertir: `reembeber_limpiados --revertir` y luego `limpiar_notas_bcn --revertir`.
+
+### Preguntas reales con gold de terceros (16), evolucion completa
+`pub_gold` 8 -> `pub_gold2` (#84 #85) 9 -> `pub_base` (config adoptada) 9 -> **`pub_final` 10/16**.
+En `pub_final`, de las 6 equivocadas: 0 con aviso, 1 rechazo, **5 sin ninguna advertencia**.
+
+### #87 techo de modelo sobre fallas de GENERACION: NO CONCLUYENTE (y el 27B no es viable aca)
+`diag_final` (estado final): 31 fallas de dev = **18 RETRIEVAL + 13 GENERACION** (0 de las 13 con
+el gold en rank 0; mediana rank 5). Brazos sobre esas 13, n=1:
+- `techo_30b`: 1/13.
+- `techo_27b` (qwen3.6:27b denso): ocupa 25 GB, **se desborda 12 % a CPU**, 274-1497 s por
+  pregunta, 2 de 4 por timeout (300 s x 3). Se corto por el tope de 5 h escrito en el plan (el
+  runner lo reintentaba hasta 15 h: se marco hecho a mano y se mato el proceso). 4 filas, 2 completas,
+  **0 aciertos, 0 victorias sobre el 30b**.
+Por la letra del criterio ("supera en <= 1 -> no es la palanca") dice NO, pero con 2 completas no
+concluye nada: se reporta NO CONCLUYENTE. Lo solido: **un modelo local mas grande no es usable en
+este hardware** (una respuesta tarda 5-25 min). Huella del 27B ausente (se mato antes de escribirla);
+el monitor del lunes detecto 0 cambios, asi que no hay contaminacion.
+
+### Tiempo de busqueda por etapa (medido 2026-09-21 09:00, GPU libre, 20 queries de dev)
+`scripts/medir_tiempos_busqueda.py`, cronometrando las funciones reales:
+| etapa | media |
+|---|---|
+| embed de la query (Ollama 4B) | 0.13 s |
+| BM25 | 0.00 s |
+| vector (pgvector) | 0.03 s |
+| **rerank BGE** | **21.51 s** |
+| resto (filtros, glosario, fusion) | 0.01 s |
+| **TOTAL retrieve** | **21.69 s** (mediana 21.61, max 23.48) |
+**El 99 % de la busqueda es el reranker, y corre en CPU a proposito**: `src/components/reranker.py:59`
+`dev = device or os.environ.get("BGE_DEVICE", "cpu")`, con el comentario "GTX 1080 (Pascal sm_61)
+lacks GPU kernels". La maquina ahora tiene una RTX 3090. NO se cambio: puede mover el orden (fp16) y
+necesita su medicion. Receta: `BGE_DEVICE=cuda BGE_FP16=0` (fp32 en GPU -> scores ~identicos), medir
+que el top-10 sea igual en dev + held-out, y adoptar. Esperable: busqueda de ~22 s a < 1 s.
+
+### Harness alineado con la config adoptada
+`exp_think_paired.py` fijaba `self_consistency_n = 3` a mano; ahora usa config.py (n=1). Las bases
+<= 2026-09-20 (`combo0_*`, `l69_*`, `fix84_*`) son a n=3: para comparar contra ellas,
+`SETCFG=self_consistency_n=3`. Tests: 5 fallas preexistentes, las mismas antes y despues.
+
+### RESULTADO #88 (2026-09-21 18:25) — reranker BGE en GPU: orden IDENTICO, pero desplaza al LLM
+`scripts/exp_reranker_gpu.py`, una pasada por query que puntua los MISMOS pares en CPU y en GPU-fp32
+(dev + held-out + 16 reales = 194 llamadas a rerank):
+| | resultado | criterio |
+|---|---|---|
+| (a) orden top-k CPU vs GPU | **194/194 identicos**, dif max de puntaje 9.4e-6 | PASA |
+| tiempo de rerank | CPU 21.49 s -> GPU **2.90 s** (7.4x) | — |
+| (b) LLM `qwen3:30b-a3b` con el BGE en GPU | **43/49 capas en GPU** (13 % CPU), VRAM 23.4/24.5 GB | **FALLA** |
+Control de (b): en las 9 cargas del LLM entre 09-19 y 09-21 sin BGE en GPU fue **49/49** siempre.
+Por el criterio: **NO es el default.** Queda en CPU para el modo con respuesta.
+
+**Aplicado solo donde (b) no aplica:** `preguntar.py --buscar` no carga el LLM de respuestas, asi que
+usa BGE en GPU fp32 si hay >= 4 GB de VRAM libre (si no, CPU: mas lento, mismo resultado).
+Medido de punta a punta con una pregunta real: **--buscar 13 s** (7 s de busqueda con carga de
+modelos); modo con respuesta **79 s**.
+
+**Hallazgo de presentacion:** para "mes y medio sin pagar, ¿me pueden cortar?" los articulos
+correctos (141 LGSE, 147 DS 327) quedan **8° y 9°**; el LLM los encuentra igual porque lee los 10.
+En dev el gold llega al top-10 en 92/114 y en 18 de esas queda entre 6° y 10°. El buscador muestra 10.
+
+**Para llevar el BGE a GPU tambien en el modo con respuesta** (exp futuro, criterio a fijar): BGE fp16
+(la mitad de VRAM; puede mover el orden -> comparar contra GPU-fp32, que ya se probo identico a CPU,
+en ~15 min), o `torch.cuda.empty_cache()` tras cada rerank, o bajar `num_ctx` del LLM de 32768. La
+condicion es la misma: LLM 49/49 en GPU.
+
+### RESULTADO #88b (2026-09-21 19:05) — BGE fp16 en GPU + empty_cache: FALLAN (a) y (b). No se adopta
+| | resultado | criterio |
+|---|---|---|
+| (a) orden fp16 vs fp32 (fp32 = identico a CPU) | **73/194 distintos** (empates casi exactos que se invierten; la mayoria mas alla del 10°, algunos dentro) | FALLA |
+| tiempo de rerank | fp32 3.24 s -> fp16 0.77 s | — |
+| (b) LLM recien cargado con el BGE fp16 en GPU | **43/49 capas**, VRAM 23.5/24.5 GB | FALLA |
+Lectura de (b): achicar el BGE a la mitad NO devolvio las 6 capas. El LLM a `num_ctx` 32768 ocupa
+22 GB de 24.5; cualquier proceso torch que tome la GPU antes (contexto CUDA + modelo) lo empuja a CPU.
+El problema es el orden de carga y el tamano del contexto del LLM, no el tamano del reranker.
+**Decision:** el modo con respuesta sigue con el BGE en CPU; `--buscar` sigue con BGE GPU fp32 (orden
+identico a CPU). El `empty_cache` tras rerank en cuda se deja (inocuo; tests iguales).
+Palanca que queda, NO medida: bajar `num_ctx` del LLM (32768 -> 16384) para liberar VRAM. Toca la
+generacion (prompts largos de glosario) -> exige medicion completa dev + held-out, horas de GPU.

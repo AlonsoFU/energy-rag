@@ -10,7 +10,12 @@ import json, sys
 from collections import Counter
 from scripts.exp_think_paired import _mcnemar_p
 
-A, B = (json.load(open(f"{d}/result.json"))["detail"] for d in sys.argv[1:3])
+_ra, _rb = (json.load(open(f"{d}/result.json")) for d in sys.argv[1:3])
+A, B = _ra["detail"], _rb["detail"]
+# corridas viejas no traen huella: se avisa igual, porque asi se colo el "-1" del 09-14
+if _ra.get("db_huella") != _rb.get("db_huella") or not _ra.get("db_huella"):
+    print(f"OJO: huella de corpus distinta o ausente -> la diferencia puede ser del CORPUS, no del cambio\n"
+          f"     A={_ra.get('db_huella')}\n     B={_rb.get('db_huella')}")
 b = {r["query"]: r for r in B}
 pares = [(a, b[a["query"]]) for a in A if a["query"] in b and a.get("on") and b[a["query"]].get("on")]
 print(f"pares: {len(pares)}  (A={len(A)} B={len(B)})")

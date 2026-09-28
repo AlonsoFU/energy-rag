@@ -91,7 +91,10 @@ def test_generate_handles_plain_text_when_no_format():
         text="No info.", tokens_in=10, tokens_out=5, model="ollama/qwen2.5:7b",
     )
     result = generate_answer("?", [], llm=fake_llm, model="ollama/qwen2.5:7b")
-    assert result["text"] == "No info."
+    # 2026-09-20: answer_prosa_marcar adoptado -> texto sin cita verificada sale con el aviso delante
+    assert result["text"].endswith("No info.")
+    assert result["cita_verificada"] is False
+    assert result["text"].startswith("SIN CITA VERIFICADA")
 
 
 def test_generate_falls_back_when_json_parse_fails():

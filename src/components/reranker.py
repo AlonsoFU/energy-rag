@@ -72,6 +72,11 @@ class BGEReranker:
         if not docs:
             return []
         scores = self.m.predict([(query, d) for d in docs])
+        # exp #88b: en GPU, devolver la memoria de activaciones apenas termina. Sin esto el BGE
+        # retiene VRAM reservada y el LLM de respuestas carga con capas en CPU (49 -> 43 medido).
+        if str(self.m.device).startswith("cuda"):
+            import torch
+            torch.cuda.empty_cache()
         order = sorted(range(len(docs)), key=lambda i: float(scores[i]), reverse=True)
         return [(i, float(scores[i])) for i in order[:top_k]]
 

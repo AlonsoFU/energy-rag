@@ -162,6 +162,11 @@ def main():
 
     prev = {}
     rp = OUTDIR / "result.json"
+    # 2026-09-20: `n1_dev` existia desde el 09-04; la corrida nueva lo "reanudo", termino en 7 s y
+    # le estampo la huella de HOY a filas de otro corpus y otra config. Un result.json de mas de
+    # 48 h no es una corrida interrumpida: es otro experimento con el mismo NAME. No se pisa.
+    if rp.exists() and time.time() - rp.stat().st_mtime > 48 * 3600:
+        raise SystemExit(f"NAME={OUTDIR.name} ya existe y tiene mas de 48 h: usar otro NAME o borrar {rp}")
     if rp.exists():
         try:
             for c in json.load(open(rp))["detail"]:
@@ -178,7 +183,9 @@ def main():
     cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
     cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True
     cfg.settings.ambiguity_disclose = True; cfg.settings.filtrar_fuera_dominio = True
-    cfg.settings.self_consistency_n = 3
+    # 2026-09-21: antes fijaba self_consistency_n = 3 a mano, y el harness dejo de reflejar la
+    # config adoptada (#86: n=1). Ahora usa config.py. Las corridas <= 2026-09-20 (combo0_*,
+    # l69_*, fix84_*) se midieron a n=3; para comparar contra ellas, SETCFG=self_consistency_n=3.
     cfg.settings.answer_think = True
     # think_hybrid MUTA `ollama_think` por intento (GEN12). Si quedara prendido pisaria la
     # variable del experimento en el reintento y los dos brazos convergerian. Se midio y se
@@ -256,7 +263,16 @@ def main():
         if nq % 10 == 0:
             print(f"  pares nuevos={nq}  [{i+1}/{len(rows)}]", flush=True)
             resumen(rows, parcial=True)
-    rp.write_text(json.dumps({"detail": rows}, ensure_ascii=False, default=str))
+    # huella del corpus (2026-09-20): el monitor semanal del 09-14 cambio 333 articulos y todas las
+    # comparaciones contra qonly2_* heredaron un "-1" que se leyo como ruido y luego como bug.
+    # Dos corridas solo son comparables si esta huella coincide.
+    from src.storage.connection import with_connection
+    with with_connection() as _c:
+        _cur = _c.cursor()
+        _cur.execute("SELECT (SELECT count(*) FROM articulos), (SELECT max(updated_at) FROM articulos), "
+                     "(SELECT count(*) FROM fragmentos), (SELECT max(created_at) FROM fragmentos)")
+        huella = [str(x) for x in _cur.fetchone()]
+    rp.write_text(json.dumps({"detail": rows, "db_huella": huella}, ensure_ascii=False, default=str))
     resumen(rows)
 
 
