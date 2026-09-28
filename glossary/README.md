@@ -29,14 +29,14 @@ Open `concepts.yaml`, find the concept by name, edit:
 ### 2. Render human-readable view
 
 ```bash
-python scripts/render_glossary.py
+python scripts/archivo/render_glossary.py
 # → updates docs/glossary.md (auto-generated, do NOT edit by hand)
 ```
 
 ### 3. Load aliases to Postgres
 
 ```bash
-python scripts/load_glossary_to_db.py [--dry-run]
+python scripts/archivo/load_glossary_to_db.py [--dry-run]
 # → updates conceptos.aliases for entries with status=ok
 # Only loads aliases marked validated: true
 ```
@@ -46,7 +46,7 @@ python scripts/load_glossary_to_db.py [--dry-run]
 When ingesting a new BCN norm:
 
 ```bash
-python scripts/extract_glossary_template.py NORMA_ID
+python scripts/archivo/extract_glossary_template.py NORMA_ID
 # → creates glossary/incoming/NORMA_ID.yaml with concepts auto-detected
 ```
 

@@ -1,4 +1,4 @@
-"""Unit tests for scripts.build_eval_set.
+"""Unit tests for scripts.archivo.build_eval_set.
 
 These are pure-data tests — they patch out DB calls so they run without any
 infrastructure. They confirm the JSONL structure is valid for run_deepeval.
@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from unittest.mock import patch
 
-from scripts.build_eval_set import (
+from scripts.archivo.build_eval_set import (
     HAND_CURATED,
     build,
     fetch_auto_queries,
@@ -56,7 +56,7 @@ def test_fetch_auto_queries_shape():
                 def __exit__(s, *_): return False
             return _C()
 
-    with patch("scripts.build_eval_set.with_connection", lambda: _ConnCM()):
+    with patch("scripts.archivo.build_eval_set.with_connection", lambda: _ConnCM()):
         rows = fetch_auto_queries(limit=10)
 
     assert len(rows) == 2
@@ -97,7 +97,7 @@ def test_build_emits_valid_jsonl_for_run_deepeval(tmp_path):
             return _C()
 
     out = tmp_path / "queries.jsonl"
-    with patch("scripts.build_eval_set.with_connection", lambda: _ConnCM()):
+    with patch("scripts.archivo.build_eval_set.with_connection", lambda: _ConnCM()):
         n = build(limit=20, output=out)
 
     assert n > 0

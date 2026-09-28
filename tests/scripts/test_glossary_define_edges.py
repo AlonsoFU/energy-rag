@@ -10,7 +10,7 @@ hardcoded per-concept text:
      law's own marker. The source XML wraps lines mid-title, so the term must
      survive whitespace normalization.
 """
-from scripts.glossary_define_edges import extract_defined_terms
+from scripts.archivo.glossary_define_edges import extract_defined_terms
 
 
 def test_glossary_list_yields_entries():
