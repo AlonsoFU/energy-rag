@@ -15,6 +15,22 @@ PYTHONPATH=. venv/bin/python scripts/preguntar.py --plazos | --cambios | --proce
 Requisitos: contenedor `energy_rag_pg` arriba (se levanta solo), `ollama serve`,
 `HF_HUB_OFFLINE=1`, `HF_HOME=/home/alonso/datos/hf`. Todo modelo vive en `/home/alonso/datos`.
 
+Los números del sistema, generados (no escritos a mano):
+```bash
+PYTHONPATH=. venv/bin/python -m scripts.estado             # corpus, config adoptada, recall@10, cita_ok
+PYTHONPATH=. venv/bin/python -m scripts.estado --markdown  # las mismas tablas para pegar en estos docs
+```
+
+## Dónde está cada script (limpieza 2026-09-28)
+| carpeta | qué hay | cuántos |
+|---|---|---|
+| `scripts/` | lo que usa algo vivo: cadena del monitor, ingesta, embeddings, `preguntar.py`, `exp_think_paired.py`, `red_golden.py`, `estado.py` | 40 |
+| `scripts/experimentos/` | experimentos ya decididos; `docs/` los cita como evidencia | 87 |
+| `scripts/archivo/` | herramientas de un solo uso ya cumplidas (descargas puntuales, curación de glosario, migraciones). Nada de acá lo llama producción ni el cron | 134 |
+
+Criterio mecánico de «vivo»: aparece en `scripts/*.sh`, `scripts/plan_maestro.txt`,
+`docs/sistema/`, `src/` o `preguntar.py`. Si hace falta una de archivo: `git mv` de vuelta.
+
 ## Correr experimentos largos: la cola
 **Nunca desde la sesión de Claude**: el harness mata procesos hijos por presión de RAM (pasó 2
 veces). Todo experimento largo va por la cola del sistema:
