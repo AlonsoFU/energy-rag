@@ -1,3 +1,40 @@
+# PLAN MAESTRO v44 (2026-09-28 08:10) -- rehacer la base del holdout: el MONITOR SEMANAL corrio
+# hoy 06:00-07:01 y toco 217 articulos. gen_despues_holdout arranco 07:01:54, 3 s despues, asi que
+# comparo contra una base de OTRO corpus (db_huella distinta, avisada por comparar_corridas).
+# La unica respuesta que difiere (1207690/3, "como se define Mora") es un articulo RE-PARSEADO:
+# antes eran 2 incisos, ahora uno. Es del corpus, pero "explicado" no es "probado".
+# Base nueva con el codigo VIEJO sobre el corpus de HOY, desde el worktree erag-antes2 (= 7a4e5d1).
+# CRITERIO, FIJADO ANTES: 64/64 textos identicos contra gen_despues_holdout y la MISMA db_huella.
+#   Si difiere algo, se revierte la limpieza de generate.py.
+# Prediccion registrada: 64/64 identicas (dev ya dio 114/114 con la misma huella).
+gen_antes2_holdout|( cd /home/alonso/Documentos/Github/erag-antes2 && env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_antes2_holdout /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+
+# PLAN MAESTRO v43 (2026-09-28) -- sesion 4c/5: verificar la limpieza de generate.py, reranker.py
+# y config.py contra las dos redes.
+# Cambios a verificar: generate.py 484 -> 398 lineas (fuera _anchor_authoritative_citation,
+#   think_hybrid, selfcons_solo_definicion, semantic_offtopic_gate, citation_repair; config a
+#   nivel de modulo); reranker.py sin el alias sombreado Qwen3Reranker ni la rama RERANKER_KIND;
+#   config.py llm_default local y embed_4b_cpu=True por default; preguntar.py, red_golden.py y
+#   exp_think_paired.py sin los 11 ajustes que repetian el default.
+# CRITERIO, FIJADO ANTES: (a) red de busqueda identica en 194/194 contra busqueda_base.json;
+#   (b) las 178 respuestas IDENTICAS byte a byte contra gen_antes_dev/gen_antes_holdout, misma
+#   db_huella. Cualquier diferencia = se revierte.
+# Prediccion registrada: 194/194 y 178/178 identicas (todo lo borrado estaba en False y los 11
+#   ajustes se verificaron iguales al default antes de sacarlos).
+red_tras_gen|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/tras_gen.json
+gen_despues_dev|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=gen_despues_dev venv/bin/python -m scripts.exp_think_paired
+gen_despues_holdout|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_despues_holdout venv/bin/python -m scripts.exp_think_paired
+
+# PLAN MAESTRO v42 (2026-09-28) -- sesion 4b: la RED COMPLETA, base ANTES de limpiar generate.py.
+# La red de busqueda no cubre generate.py: hay que grabar las 178 respuestas (dev 114 + holdout 64)
+# con el codigo de HOY, limpiar, y volver a grabarlas. ~4 h cada pasada.
+# CRITERIO, FIJADO ANTES: tras limpiar generate.py, el TEXTO de las 178 respuestas tiene que ser
+#   identico byte a byte (el pipeline es determinista: temperatura 0.0, n=1). Una sola distinta =
+#   el refactor cambio el comportamiento y se revierte. Misma db_huella en las dos pasadas.
+# Prediccion registrada: 178/178 identicas (todas las ramas a borrar estan en False en config).
+gen_antes_dev|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=gen_antes_dev venv/bin/python -m scripts.exp_think_paired
+gen_antes_holdout|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_antes_holdout venv/bin/python -m scripts.exp_think_paired
+
 # PLAN MAESTRO v41 (2026-09-28) -- sesion 4: limpiar el camino caliente contra la red golden.
 # Cambio: se borran las ramas muertas de SimpleRetriever/_vector_leg/_vector_4b_search/search_bm25
 #   (def_fragments, glossary_exclude, embed_8b_dense, concept_inference, selective_reform,

@@ -33,3 +33,12 @@ for a, y in pares:
     ca[a["category"]] += bool(a["on"]["cita_ok"]); cb[a["category"]] += bool(y["on"]["cita_ok"])
 for c in sorted(set(ca) | set(cb)):
     print(f"    {c:16} {ca[c]:3} -> {cb[c]:3}")
+# Prueba de REFACTOR: el pipeline es determinista (temperatura 0.0, n=1), asi que dos corridas
+# con la misma config y el mismo corpus tienen que dar el MISMO texto. Si un refactor que
+# deberia ser invisible cambia un solo texto, cambio el comportamiento.
+distintos = [a["query"] for a, y in pares if a["on"].get("text") != y["on"].get("text")]
+print(f"  texto identico: {len(pares)-len(distintos)}/{len(pares)}")
+for q in distintos[:5]:
+    print(f"    DISTINTO: {q[:100]}")
+if len(distintos) > 5:
+    print(f"    … y {len(distintos)-5} mas")

@@ -1,21 +1,19 @@
-"""Identity reranker — preserves RRF order.
+"""Rerankers. EN PRODUCCION: BGEReranker (BAAI/bge-reranker-v2-m3), `use_bge_reranker=True`.
 
-Tried two real rerankers and neither improved this pipeline:
-
-  1. Qwen3-Reranker-0.6B: classifier head missing from checkpoint → scores
-     are random noise. Eval 2026-05-06 confirmed -31pp recall when enabled.
-
-  2. BAAI/bge-reranker-v2-m3: working cross-encoder, but eval 2026-05-12 on
-     15 alias queries showed grounding_pass DROPPING from 100% to 42.9% (of 7
-     generations) while recall stayed at 46.7%. Diagnosis: BGE reorders docs
-     2-10 by general semantic relevance, but the LLM benefits more from RRF
-     order in legal-QA-with-verbatim-citations — the "most relevant" doc by
-     BGE isn't always the most definitional one. The JSON schema enum built
-     from BGE order steers the LLM toward less canonical citations.
-
-Identity rerank keeps the RRF order, which empirically beats both alternatives
-for this corpus + task. Keep the door open for future experiments (e.g. BGE
-as a filter for top-50 → top-20 instead of as a reorderer for top-10).
+Historia, porque el default fue el contrario durante un mes:
+  - 2026-05-06  Qwen3-Reranker-0.6B: le faltaba la cabeza clasificadora en el checkpoint,
+                los puntajes eran ruido (-31 pp de recall). Por eso Identity fue el default.
+  - 2026-05-12  bge-reranker-v2-m3 medido sobre 15 queries de alias: grounding_pass 100 % ->
+                42.9 %. Muestra chica; la conclusion no aguanto.
+  - 2026-06-01  campana con sets mas grandes: BGE sube gold-en-pool@5 en dev (25 -> 33) Y en
+                held-out (15 -> 17), y resuelve la clase parafrasis/situacional que RRF,
+                graph-boost y HyDE no movian. ADOPTADO.
+  - 2026-09-21  exp #88: en GPU fp32 da el MISMO orden que en CPU (194/194, dif max 9e-6) y
+                tarda 2.9 s en vez de 21.5 s, pero desplaza al LLM (49 -> 43 capas en GPU).
+                Por eso el default sigue siendo CPU y la GPU se usa solo en `--buscar`,
+                donde no hay respuesta que redactar (ver scripts/preguntar.py).
+  - Qwen3-Reranker-4B (RK1, 2026-08): quedo plano. La clase se conserva porque la instancia
+    scripts/experimentos/exp_rk1_screen.py, pero NO es un producto de la fabrica.
 """
 from src.core.config import settings
 
@@ -37,21 +35,15 @@ class IdentityReranker:
         return [(i, 1.0 / (i + 1)) for i in range(n)]
 
 
-# Backwards-compatible alias: existing code imports Qwen3Reranker.
-Qwen3Reranker = IdentityReranker
-
-
 class BGEReranker:
     """BAAI/bge-reranker-v2-m3 cross-encoder. Reorders the pool by semantic
     (query, doc) relevance — the lever that, in the 2026-06-01 campaign, lifted
     gold∈pool@5 on BOTH dev (25→33) and a held-out set (15→17) and cracked the
     situational/paraphrase class, where RRF/graph-boost/HyDE could not (HyDE
-    even overfit). Gated by `use_bge_reranker` (default OFF) until the
-    generation eval confirms the recall gain survives as cita_ok (BGE historically
-    hurt the LLM's citation discipline — that's what the eval checks).
+    even overfit). ADOPTADO: `use_bge_reranker=True`.
 
-    CPU only: GTX 1080 (Pascal sm_61) lacks GPU kernels for this cross-encoder
-    ('no kernel image'). Lazy model load so importing this module stays cheap."""
+    Device por `BGE_DEVICE` (default `cpu`). En GPU anda (3090) y da el mismo orden,
+    pero le saca VRAM al LLM: solo `--buscar` lo prende. Carga perezosa del modelo."""
 
     def __init__(self, device: str | None = None):
         import os
@@ -121,12 +113,8 @@ class Qwen3Reranker:
 
 
 def get_reranker():
-    """Production reranker factory. Qwen3-Reranker (RK1) si RERANKER_KIND=qwen3; BGE si
-    `use_bge_reranker`; si no, Identity no-op (preserva orden RRF)."""
-    import os
+    """El de produccion: BGE si `use_bge_reranker` (hoy True); si no, Identity no-op."""
     from src.core.config import settings
-    if os.environ.get("RERANKER_KIND") == "qwen3":
-        return Qwen3Reranker()
     if getattr(settings, "use_bge_reranker", False):
         return BGEReranker()
     return IdentityReranker()

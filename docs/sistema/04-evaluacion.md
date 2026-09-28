@@ -61,7 +61,14 @@ PYTHONPATH=. venv/bin/python -m scripts.red_golden --comparar data/eval/redes/bu
 1. **Criterio escrito ANTES de correr**, en `scripts/plan_maestro.txt`, con predicción registrada.
 2. **dev Y held-out**; si discrepan, no se adopta. Si se puede, también las 16 reales.
 3. **Misma huella de corpus** en base y brazo. Si el monitor aplicó cambios entre medio, la base caducó.
-4. **Pipeline determinista**: `selfcons_temperature=0.0`. Con 0.7 cambiaba el 11 % de los textos entre corridas idénticas.
+4. **Determinismo: la BÚSQUEDA sí, la REDACCIÓN no del todo.** `selfcons_temperature=0.0` (con 0.7
+   cambiaba el 11 % de los textos). La búsqueda es bit-exacta: `red_golden` dio 194/194 el mismo
+   orden en dos corridas. La redacción NO: medido el 2026-09-28 con el MISMO código, mismo corpus
+   y misma query («cómo se define Mora»), tres corridas dieron 751, 419 y 419 caracteres.
+   `qwen3:30b-a3b` es MoE y Ollama a temperatura 0 no es bit-exacto. **Por eso un refactor de
+   `generate.py` no se prueba por byte-identidad**: se prueba con el pareado (ganó 0 / perdió 0,
+   p=1.0) y la identidad de textos como señal, no como condición. Un texto distinto hay que
+   reproducirlo SIN cambiar código antes de culpar al refactor.
 5. **Leer a mano las fallas** antes de otro experimento: el defecto de notas marginales (#84) salió de leer 28 fallas, no de un experimento.
 6. Un `result.json` de más de 48 h con el mismo `NAME` ya no se reanuda (el harness aborta): una vez «corrió» en 7 s sobre datos de otro corpus.
 7. Las bases hasta 2026-09-20 (`combo0_*`, `l69_*`, `fix84_*`) se midieron con `self_consistency_n=3`; el harness ahora usa la config (n=1). Para comparar contra ellas: `SETCFG=self_consistency_n=3`.

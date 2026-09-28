@@ -13,11 +13,9 @@ class Settings(BaseSettings):
     anthropic_api_key: str
 
     qwen_embedding_model: str = "Qwen/Qwen3-Embedding-0.6B"
-    qwen_reranker_model: str = "Qwen/Qwen3-Reranker-0.6B"
     embedder_device: str = "auto"  # "auto" | "cuda" | "cpu" — set "cpu" when LLM occupies GPU
-    reranker_device: str = "auto"  # same semantics as embedder_device
 
-    llm_default: str = "claude-sonnet-4-6"
+    llm_default: str = "ollama/qwen3:30b-a3b"   # local. Antes apuntaba a la API pagada y solo .env lo tapaba
     llm_haiku: str = "claude-haiku-4-5-20251001"
     llm_opus: str = "claude-opus-4-7"
 
@@ -394,7 +392,7 @@ class Settings(BaseSettings):
     # ADOPTADO 2026-09-14: contexto del embedder 4B. Default de Ollama = 32768 (9.8 GB RAM en CPU).
     # 4096 da vectores identicos (40/40 coseno 1.000000) y 3.71 GB. Lo mas largo embebido: 2913 tokens.
     embed_4b_num_ctx: int = 4096
-    embed_4b_cpu: bool = False  # fuerza el embed 4B en CPU (Ollama num_gpu=0) para coexistir con el 9B sin swap
+    embed_4b_cpu: bool = True   # 2026-09-28: era el unico ajuste que preguntar.py y el harness forzaban a mano
 
     # alias_union (flag OFF): vocabulario controlado coloquial→legal (query-side, sin DB,
     # determinista). Si la query dispara un alias curado (src/pipelines/alias_map.py), se

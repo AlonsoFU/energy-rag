@@ -1,16 +1,21 @@
 """Red golden de BUSQUEDA: los 10 articulos que devuelve retrieve.py para las 194 queries.
 
-El pipeline es determinista (selfcons_temperature=0.0, self_consistency_n=1), asi que un
-refactor de `retrieve.py` se PRUEBA: si un solo puesto del orden cambia, el refactor cambio
-el comportamiento y se revierte. Tarda ~7 min, contra las ~4 h de volver a redactar las 178
-respuestas (para eso esta `scripts.exp_think_paired`, que es la red completa).
+La BUSQUEDA si es bit-exacta (dos corridas dieron 194/194 el mismo orden), asi que un refactor
+de `retrieve.py`/`vectorstore.py` se PRUEBA aca: si un solo puesto cambia, el refactor cambio el
+comportamiento y se revierte. Tarda ~15 min contra las ~3 h de volver a redactar las 178
+respuestas.
+
+OJO, no vale lo mismo para `generate.py`: la REDACCION no es bit-exacta aunque la temperatura sea
+0.0. Medido el 2026-09-28, mismo codigo y mismo corpus, la query "como se define Mora" dio 751,
+419 y 419 caracteres en tres corridas (`qwen3:30b-a3b` es MoE). Para generate.py se usa
+`scripts.exp_think_paired` + `scripts.comparar_corridas` y se mira el pareado, no la igualdad.
 
     PYTHONPATH=. venv/bin/python -m scripts.red_golden                          # graba la base
     PYTHONPATH=. venv/bin/python -m scripts.red_golden --salida /tmp/nueva.json
     PYTHONPATH=. venv/bin/python -m scripts.red_golden --comparar A.json B.json  # exit 1 si difiere
     PYTHONPATH=. venv/bin/python -m scripts.red_golden --autoprueba              # chequeo del comparador
 
-La config es la de PRODUCCION (`scripts/preguntar.py`): defaults de config.py + embed_4b_cpu.
+La config es la de PRODUCCION: los defaults de `config.py`, sin ajustes a mano.
 Reranker en GPU si hay VRAM libre; en fp32 da el mismo orden que en CPU (exp #88, 194/194).
 Imprime recall@10 por set (el articulo gold entre los 10) — la metrica del buscador.
 """
@@ -50,10 +55,6 @@ def grabar(salida):
     from src.core import config as cfg
     from src.pipelines.retrieve import SimpleRetriever
 
-    # mismas 3 lineas que preguntar.py: embed_4b_cpu no es default en config.py todavia
-    cfg.settings.embed_4b_dense = True
-    cfg.settings.embed_4b_dim = 1024
-    cfg.settings.embed_4b_cpu = True
     retr = SimpleRetriever(PostgresStore(), Qwen3Embedder(), get_reranker(),
                            top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=get_llm_provider())

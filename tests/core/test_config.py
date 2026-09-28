@@ -25,5 +25,4 @@ def test_settings_has_model_defaults(monkeypatch, tmp_path):
         monkeypatch.delenv(var, raising=False)
     s = Settings(_env_file=str(tmp_path / "nonexistent.env"))
     assert s.qwen_embedding_model == "Qwen/Qwen3-Embedding-0.6B"
-    assert s.qwen_reranker_model == "Qwen/Qwen3-Reranker-0.6B"
-    assert s.llm_default == "claude-sonnet-4-6"
+    assert s.llm_default == "ollama/qwen3:30b-a3b"   # 2026-09-28: el default en codigo es local
