@@ -1,3 +1,12 @@
+# PLAN MAESTRO v45 (2026-09-28 09:20) -- re-grabar la base de la red de busqueda.
+# La base `busqueda_base.json` se grabo con el corpus del 21-09. El monitor de hoy no aplico
+# cambios de BCN pero el reproceso toco 217 articulos, asi que la db_huella ya no coincide y
+# `--comparar` avisaria "CORPUS DISTINTO" en el proximo refactor.
+# CRITERIO, FIJADO ANTES: grabar las 194 con la huella de HOY. Como control, el recall@10 no
+#   deberia moverse (el reproceso no cambio textos de BCN, solo marco duplicados).
+# Prediccion registrada: dev 92/114, holdout 64/64, reales 13/16 -- iguales.
+red_base_28|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/busqueda_base.json
+
 # PLAN MAESTRO v44 (2026-09-28 08:10) -- rehacer la base del holdout: el MONITOR SEMANAL corrio
 # hoy 06:00-07:01 y toco 217 articulos. gen_despues_holdout arranco 07:01:54, 3 s despues, asi que
 # comparo contra una base de OTRO corpus (db_huella distinta, avisada por comparar_corridas).
