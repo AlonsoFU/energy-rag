@@ -11,7 +11,7 @@ from playwright_stealth import Stealth
 async def main():
     # Buscar Decreto 62 en normas
     import json
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -42,7 +42,7 @@ async def main():
         html = await page.content()
 
         # Guardar HTML para inspección
-        with open('data/busquedas/decreto62_html.html', 'w', encoding='utf-8') as f:
+        with open('data/archivo/busquedas/decreto62_html.html', 'w', encoding='utf-8') as f:
             f.write(html)
 
         # Buscar secciones que mencionen "modific"
@@ -65,7 +65,7 @@ async def main():
 
         await browser.close()
 
-        print(f"\n✅ HTML guardado en: data/busquedas/decreto62_html.html")
+        print(f"\n✅ HTML guardado en: data/archivo/busquedas/decreto62_html.html")
 
 
 if __name__ == "__main__":

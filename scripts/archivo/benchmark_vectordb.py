@@ -196,7 +196,7 @@ resultados = {
     'conclusion': 'Numpy suficiente para 2K vectores'
 }
 
-with open('data/busquedas/benchmark_vectordb.json', 'w') as f:
+with open('data/archivo/busquedas/benchmark_vectordb.json', 'w') as f:
     json.dump(resultados, f, indent=2)
 
-print(f"Resultados guardados en: data/busquedas/benchmark_vectordb.json")
+print(f"Resultados guardados en: data/archivo/busquedas/benchmark_vectordb.json")

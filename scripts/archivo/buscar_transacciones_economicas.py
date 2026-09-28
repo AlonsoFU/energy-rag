@@ -136,7 +136,7 @@ async def main():
         'normas': list(todas_normas.values())
     }
 
-    output_path = Path("data/busquedas/transacciones_economicas.json")
+    output_path = Path("data/archivo/busquedas/transacciones_economicas.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, 'w', encoding='utf-8') as f:

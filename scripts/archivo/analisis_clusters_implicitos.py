@@ -12,7 +12,7 @@ from collections import defaultdict, Counter
 
 def main():
     # Cargar normas
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -201,11 +201,11 @@ def main():
         ]
     }
 
-    with open('data/busquedas/analisis_clusters_implicitos.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/analisis_clusters_implicitos.json', 'w', encoding='utf-8') as f:
         json.dump(analisis, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*80}")
-    print(f"✅ Análisis guardado en: data/busquedas/analisis_clusters_implicitos.json")
+    print(f"✅ Análisis guardado en: data/archivo/busquedas/analisis_clusters_implicitos.json")
     print(f"{'='*80}\n")
 
 

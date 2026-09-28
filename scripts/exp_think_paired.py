@@ -5,7 +5,7 @@ Por que existe este archivo y no se reusa `exp_selfcons_n1`: encolé ese script 
 fue una repeticion del exp #54 (n=1 vs n=3), que no decide nada de esto. Este script cambia
 UNA variable: `cfg.settings.ollama_think`.
 
-Criterio FIJADO ANTES de correr (docs/plan-operacion.md, exp #63):
+Criterio FIJADO ANTES de correr (docs/bitacora/plan-operacion.md, exp #63):
 
     adoptar think=True si   cita_ok cae <= 3   Y   cita_limpia NO cae
 
@@ -122,7 +122,7 @@ def resumen(rows, parcial=False):
         # VEREDICTO automatico contra el criterio escrito ANTES de correr. Se imprime aca para
         # que no quede a interpretacion mia despues de ver el numero.
         # El criterio depende de QUE se esta midiendo, y esta fijado en
-        # docs/plan-operacion.md ANTES de correr. Si el veredicto se imprimiera siempre con la
+        # docs/bitacora/plan-operacion.md ANTES de correr. Si el veredicto se imprimiera siempre con la
         # regla del exp #63, una corrida de #64 diria "NO ADOPTAR" por un criterio que no es
         # el suyo -- y ya perdimos 6 h una vez por leer un log que medía otra cosa.
         #   #63 answer_think        cita_ok <= 3  Y  cita_limpia NO cae

@@ -15,7 +15,7 @@ Unidad = frase con cita. Para cada frase:
     v1: una frase casi textual del Art. 8 de 250604 salio NO_SOPORTADA. v1 descartada.)
 
 Salida: data/eval/results/{NAME}.json  y resumen por pantalla.
-Criterio FIJADO ANTES (docs/plan-operacion.md exp #68), sobre las respuestas con cita_ok:
+Criterio FIJADO ANTES (docs/bitacora/plan-operacion.md exp #68), sobre las respuestas con cita_ok:
   fiel_estricto (todas las frases SOPORTADA) >= 90 %  -> "responder" == "buscar"
   < 80 %                                              -> solo buscador
   control_neg > 20 %  o  control_pos < 80 %            -> el juez no sirve, no se concluye nada

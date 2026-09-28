@@ -75,11 +75,11 @@ async def obtener_info_norma(id_norma: str, page, reintentos=3) -> dict:
 
 async def main():
     # Cargar datos actuales
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     # Cargar problemas conocidos
-    with open("data/busquedas/log_problemas.json") as f:
+    with open("data/archivo/busquedas/log_problemas.json") as f:
         problemas = json.load(f)
 
     problematicas = set(problemas['derogadas'] + problemas['no_existen'] + problemas['errores'])
@@ -146,7 +146,7 @@ async def main():
         'total': len(normas),
         'normas': list(normas.values())
     }
-    with open("data/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
+    with open("data/archivo/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     # Actualizar log_problemas.json
@@ -154,13 +154,13 @@ async def main():
     problemas['no_existen'].extend(nuevas_no_existen)
     problemas['errores'].extend(nuevas_errores)
 
-    with open("data/busquedas/log_problemas.json", 'w') as f:
+    with open("data/archivo/busquedas/log_problemas.json", 'w') as f:
         json.dump(problemas, f, indent=2)
 
     print(f"\nTotal normas ahora: {len(normas)}")
     print(f"Archivos actualizados:")
-    print(f"  - data/busquedas/normas_completas.json")
-    print(f"  - data/busquedas/log_problemas.json")
+    print(f"  - data/archivo/busquedas/normas_completas.json")
+    print(f"  - data/archivo/busquedas/log_problemas.json")
 
 
 if __name__ == "__main__":

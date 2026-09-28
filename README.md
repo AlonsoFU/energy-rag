@@ -82,7 +82,7 @@ scrapes a medias. Ver [`docs/sistema/03-actualizacion-bcn.md`](docs/sistema/03-a
 | [05 · Operación](docs/sistema/05-operacion.md) | ¿cómo se usa, cómo se corren experimentos, cómo se cuida la GPU? |
 | [06 · Resultados y límites](docs/sistema/06-resultados-y-limites.md) | ¿qué tan bien funciona y qué falta? |
 
-`docs/handoff-*.md` y `docs/plan-operacion.md` son la bitácora histórica: qué se probó, cuándo y
+`docs/bitacora/` es la historia (handoffs, campañas y `plan-operacion.md`): qué se probó, cuándo y
 con qué resultado. No hace falta leerlos para entender el sistema.
 
 ## Estructura del repo
@@ -101,12 +101,15 @@ scripts/
 ├── red_golden.py           red de prueba: prueba un refactor sin re-medir
 ├── estado.py               los números del sistema, generados
 ├── exp_think_paired.py     harness del eval (pareado + McNemar)
-├── monitor_*.sh|py         monitor semanal de BCN y la cola de trabajos
+├── *.sh                    10: los 7 del crontab + tope de GPU + drenar la cola
+├── INDICE.md               qué hace cada uno de los 34 .py y 10 .sh vivos
 ├── experimentos/           87 experimentos ya decididos (los docs los citan como evidencia)
-└── archivo/                134 herramientas de un solo uso ya cumplidas
+└── archivo/                155 herramientas de un solo uso y drivers de campañas cerradas
 
-data/eval/    sets de preguntas, resultados y la red golden
+data/         eval/ (sets + red golden) · intents/ · normas_completas/ · salida del crawler
+data/archivo/ datos de la v1 que ningún código vivo lee (con README)
 docs/sistema/ documentación vigente por tema
+docs/bitacora/ historia: handoffs, campañas, plan-operacion.md
 tests/        pytest (7 fallas preexistentes conocidas: ver docs/sistema/05)
 ```
 
@@ -135,7 +138,7 @@ corrida del monitor que cambia el corpus invalida toda comparación anterior.
 - Un modelo denso de 27B **no cabe** (25 GB, se desborda a CPU, 5-25 min por respuesta).
 - Escala: BM25 y el vector no crecen con el corpus (el reranker siempre ve 30 documentos), pero la
   descarga desde BCN tiene un throttle obligatorio de 20 s por norma y el embedding está en CPU.
-  Análisis con números medidos en [`docs/handoff-2026-09-27.md`](docs/handoff-2026-09-27.md).
+  Análisis con números medidos en [`docs/bitacora/handoff-2026-09-27.md`](docs/bitacora/handoff-2026-09-27.md).
 
 ## Licencia y datos
 

@@ -90,7 +90,7 @@ async def main():
     print("=" * 70)
 
     # Cargar normas ya descargadas
-    input_path = Path("data/busquedas/normas_ids_conocidos.json")
+    input_path = Path("data/archivo/busquedas/normas_ids_conocidos.json")
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -145,7 +145,7 @@ async def main():
         'normas': list(todas_normas.values())
     }
 
-    output_path = Path("data/busquedas/normas_completas.json")
+    output_path = Path("data/archivo/busquedas/normas_completas.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 

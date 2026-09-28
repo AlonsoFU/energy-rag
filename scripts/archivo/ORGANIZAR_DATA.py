@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Organizar carpeta data/busquedas/ que está desordenada.
+Organizar carpeta data/archivo/busquedas/ que está desordenada.
 
 Crea estructura:
 data/
@@ -20,7 +20,7 @@ from pathlib import Path
 import json
 
 def organizar_data():
-    """Reorganizar carpeta data/busquedas/."""
+    """Reorganizar carpeta data/archivo/busquedas/."""
 
     base = Path("data")
     busquedas = base / "busquedas"
@@ -40,7 +40,7 @@ def organizar_data():
         folder.mkdir(parents=True, exist_ok=True)
 
     print("=" * 70)
-    print("🗂️  ORGANIZANDO data/busquedas/")
+    print("🗂️  ORGANIZANDO data/archivo/busquedas/")
     print("=" * 70)
 
     # Mapeo de archivos a destinos

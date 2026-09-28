@@ -16,7 +16,7 @@ from plotly.subplots import make_subplots
 from src.database.models import Norm, NormType, get_engine, get_session
 
 
-def generate_dashboard(db_path: str = "db/bcn_norms.db", output_path: str = "docs/dashboard.html"):
+def generate_dashboard(db_path: str = "db/bcn_norms.db", output_path: str = "docs/bitacora/dashboard.html"):
     """Generar dashboard de organización de normas."""
 
     print("=" * 60)

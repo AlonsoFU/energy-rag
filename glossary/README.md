@@ -30,7 +30,7 @@ Open `concepts.yaml`, find the concept by name, edit:
 
 ```bash
 python scripts/archivo/render_glossary.py
-# → updates docs/glossary.md (auto-generated, do NOT edit by hand)
+# → updates docs/bitacora/glossary.md (auto-generated, do NOT edit by hand)
 ```
 
 ### 3. Load aliases to Postgres

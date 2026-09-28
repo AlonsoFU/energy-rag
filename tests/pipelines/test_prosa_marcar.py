@@ -3,7 +3,7 @@
 Medido 2026-09-16 sobre qonly2_dev + qonly2_holdout: 13 respuestas cayeron a prosa y
 NINGUNA uso lenguaje de duda, pese a que el prompt pide "si las citas no responden la
 pregunta, dilo". El aviso no es un porcentaje de confianza (mal calibrado = +2% y mas
-sesgo de automatizacion, ver docs/investigacion-abstencion-2026-09-16.md seccion 19):
+sesgo de automatizacion, ver docs/bitacora/investigacion-abstencion-2026-09-16.md seccion 19):
 es el hecho binario "hubo o no hubo calce literal contra el articulo".
 
 INVARIANTE QUE PROTEGEN ESTOS TESTS: el aviso no debe alterar el scoring del eval.

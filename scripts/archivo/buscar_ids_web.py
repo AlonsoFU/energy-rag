@@ -154,7 +154,7 @@ async def main():
         'normas': list(normas.values())
     }
 
-    output_path = Path("data/busquedas/normas_temas_electricos.json")
+    output_path = Path("data/archivo/busquedas/normas_temas_electricos.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 

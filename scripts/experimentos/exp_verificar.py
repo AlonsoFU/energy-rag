@@ -12,7 +12,7 @@ el criterio de #72 NO usa fidelidad del mismo juez, sino:
     cita_ok cae: senal independiente)
   - cobertura = frases conservadas / frases con cita (si borra la mitad, no sirve)
   - fidelidad con el juez DISTINTO (#73b, qwen3.6:27b) sobre lo que queda
-Calibracion #73 (docs/calibracion-juez-68.md): el juez 30b marca PARCIAL ~la mitad de las
+Calibracion #73 (docs/bitacora/calibracion-juez-68.md): el juez 30b marca PARCIAL ~la mitad de las
 veces en frases que si estan soportadas -> este filtro puede borrar de mas. MODO=laxo conserva
 tambien PARCIAL (borra solo NO_SOPORTADA y CITA_INEXISTENTE).
 

@@ -80,7 +80,7 @@ async def main():
     print("=" * 60)
 
     # Cargar normas existentes
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
     ids_existentes = set(normas.keys())
 
@@ -128,7 +128,7 @@ async def main():
         'normas': list(normas.values())
     }
 
-    with open("data/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
+    with open("data/archivo/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'=' * 60}")

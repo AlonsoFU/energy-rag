@@ -65,7 +65,7 @@ async def verificar_norma(id_norma: str, page) -> dict:
 
 
 async def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     # Obtener pendientes
@@ -134,7 +134,7 @@ async def main():
             print(f"  ID {r['id_norma']}: {r.get('titulo', 'N/A')[:60]}")
 
     # Guardar resultados
-    output_path = Path("data/busquedas/verificacion_pendientes.json")
+    output_path = Path("data/archivo/busquedas/verificacion_pendientes.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump({
             'total_pendientes': len(pendientes),

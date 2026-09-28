@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     # Calcular pendientes
@@ -93,11 +93,11 @@ def main():
         'pendientes': sorted(list(pendientes))
     }
 
-    with open("data/busquedas/resumen_final.json", 'w', encoding='utf-8') as f:
+    with open("data/archivo/busquedas/resumen_final.json", 'w', encoding='utf-8') as f:
         json.dump(resumen, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'=' * 70}")
-    print(f"Resumen guardado en: data/busquedas/resumen_final.json")
+    print(f"Resumen guardado en: data/archivo/busquedas/resumen_final.json")
     print("=" * 70)
 
 

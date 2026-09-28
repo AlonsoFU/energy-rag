@@ -76,7 +76,7 @@ def encontrar_normas_relacionadas(norma_base, normas, grafo, nivel_max=2):
 
 def main():
     # Cargar normas
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -285,11 +285,11 @@ def main():
         ]
     }
 
-    with open('data/busquedas/caso_compliance_generadora.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/caso_compliance_generadora.json', 'w', encoding='utf-8') as f:
         json.dump(analisis_compliance, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*80}")
-    print(f"✅ Análisis guardado en: data/busquedas/caso_compliance_generadora.json")
+    print(f"✅ Análisis guardado en: data/archivo/busquedas/caso_compliance_generadora.json")
     print(f"{'='*80}\n")
 
 

@@ -36,7 +36,7 @@ def detectar_tipo_relacion(norma_origen, norma_destino):
 
 def main():
     # Cargar datos
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -226,11 +226,11 @@ def main():
         ]
     }
 
-    with open('data/busquedas/analisis_relaciones.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/analisis_relaciones.json', 'w', encoding='utf-8') as f:
         json.dump(analisis, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*70}")
-    print(f"✅ Análisis guardado en: data/busquedas/analisis_relaciones.json")
+    print(f"✅ Análisis guardado en: data/archivo/busquedas/analisis_relaciones.json")
     print(f"{'='*70}")
 
 

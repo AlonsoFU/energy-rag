@@ -8,7 +8,7 @@ definition text (not invented, not re-accented); only orthographic
 normalization is used to compare the prefix. No fuzzy, no thresholds beyond
 the explicit word-count gate.
 
-See spec docs/superpowers/specs/2026-05-22-canonical-concept-names-design.md.
+See spec docs/bitacora/superpowers/specs/2026-05-22-canonical-concept-names-design.md.
 """
 from __future__ import annotations
 

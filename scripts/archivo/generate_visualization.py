@@ -18,7 +18,7 @@ def main():
     print("=" * 60)
 
     db_path = "db/bcn_norms.db"
-    output_path = "docs/norm_graph.html"
+    output_path = "docs/bitacora/norm_graph.html"
 
     engine = get_engine(db_path)
     session = get_session(engine)

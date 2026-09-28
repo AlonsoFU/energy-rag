@@ -1,43 +1,80 @@
-# Índice de `scripts/` — qué se usa en operación y qué es evidencia
+# Índice de `scripts/`
 
-236 archivos. **No se borró nada**: cada experimento es la evidencia de una decisión
-registrada en `docs/experimentos-registro.md`, y borrarlo dejaría el registro sin respaldo.
-Tampoco se movieron de carpeta: los runners se invocan como `scripts.<nombre>` desde el
-watchdog, los crons y entre ellos — mover 236 archivos rompería esas rutas a cambio de nada.
+Ordenado el 2026-09-28. **34 `.py` y 10 `.sh` en la raíz: todo lo que se usa.** El resto se movió
+(no se borró, porque `docs/bitacora/` lo cita como evidencia):
 
-Lo que faltaba era saber **cuáles de los 236 se usan de verdad**. Son estos 14.
+| carpeta | qué | cuántos |
+|---|---|---|
+| `scripts/` | lo que usa la operación, el monitor, la ingesta o el eval | 34 `.py` + 10 `.sh` |
+| `experimentos/` | experimentos ya decididos; resultado en `docs/bitacora/plan-operacion.md` | 87 |
+| `archivo/` | herramientas de un solo uso ya cumplidas y drivers de campañas cerradas | 155 |
 
-## Operación diaria
+Si hace falta uno de `archivo/`: `git mv` de vuelta. Antes de escribir uno nuevo, buscar ahí.
+
+## Usar el sistema
 ```
-preguntar.py                 la interfaz. Todo lo demás se llega desde acá
-mapa_obligaciones.py         obligaciones por sujeto, plazos, procesos, impacto
-```
-
-## Corren solas (cron)
-```
-watchdog.sh                  cada 15 min  relanza la cola si algo muere
-retomar.sh                   cada 3 h     quita pausas, levanta Postgres, GPU a 180 W
-monitor_run.sh               lunes 06:00  re-scrape + diff + informe
+preguntar.py                 la interfaz: --buscar, respuesta, --obligaciones, --plazos, --cambios...
+mapa_obligaciones.py         obligaciones por sujeto, plazos, procesos, impacto (lo usa preguntar.py)
+estado.py                    los números del sistema, generados (--markdown para los docs)
 ```
 
-## Monitor normativo
+## Corren solas (crontab)
 ```
-rescrape_modificadas.py      re-baja de BCN y compara (--alcance dominio)
+watchdog.sh        cada 15 min   relanza la cola si algo muere
+trabajar.sh        cada 10 min   copia plan_maestro.txt a cola.txt y llama a runner.sh
+runner.sh          cada hora :30 corre la primera tarea no hecha; reintenta hasta 3 veces
+retomar.sh         cada 3 h      quita pausas, levanta Postgres, reaplica el tope de GPU
+latido.sh          cada hora     deja constancia de que la máquina está viva
+gpu_vigia.sh       cada minuto   temperatura, W y MHz de la 3090 mientras hay trabajo
+monitor_run.sh     lunes 06:00   el monitor semanal de BCN (ver abajo)
+```
+Apoyo: `gpu_guard.sh` (tope de 180 W antes de lanzar), `gpu_modo.sh` (elegir el tope),
+`drenar_cola.sh` (vaciar la cola a mano). Cola: `plan_maestro.txt` → `cola.txt`.
+
+## Monitor semanal de BCN (lo que encadena `monitor_run.sh`)
+```
 rescrape_partial.py          repara los JSON que quedaron en 'Loading...'
+rescrape_modificadas.py      re-baja las normas del dominio y compara un hash estable
 monitor_diff.py              compara contra el snapshot, escribe norma_evento
 monitor_report.py            informe -> docs/monitor-ultimo-informe.md
-monitor_schema.py            tablas del monitor
+aplicar_cambios.py           aplica al corpus lo detectado (vía actualizar_norma.py)
+actualizar_norma.py          reemplaza una norma ya ingerida, con guardas (identidad, no encoger)
+detectar_articulos_duplicados.py   artículos repetidos entre ley modificatoria y cuerpo modificado
+detectar_derogaciones.py     qué está derogado, para no citarlo como vigente
+estructura_articulado.py     de qué proceso habla cada obligación, según el articulado
+resolver_citas_normas.py     citas norma→norma desde el texto -> docs/frontera-candidatas.md
+monitor_schema.py            crea las tablas del monitor (una vez, en una instalación nueva)
 ```
 
-## Ampliar el corpus
+## Ampliar o reparar el corpus
 ```
-bajar_candidatas.py          descarga de BCN (valida identidad: el buscador miente)
+bajar_candidatas.py          descarga de BCN validando identidad (el buscador de BCN miente)
 ingerir_nuevas.py            parsea e ingesta
+extract_vinculaciones.py     vinculaciones entre normas desde BCN
 marcar_fuera_dominio.py      frontera de mercados (MARCA, no borra)
-estructura_articulado.py     obligacion.proceso desde los títulos del articulado
+marcar_norma_derogada.py     marca una norma entera como derogada, con evidencia. Reversible
+reingest_faltantes.py        re-ingesta normas que quedaron con 0 artículos
+reparar_articulos.py         repara artículos cortados por notas BCN (backup por corrida: BAK=)
+limpiar_notas_bcn.py         quita las notas de modificación de BCN intercaladas en el texto
+resolve_authority.py         norma autoritativa para conceptos definidos en varias normas
+migrate_to_postgres.py       instalación nueva: JSON de data/normas_completas/ -> Postgres
 ```
 
-## Todo lo demás
-`exp_*.py` (~90) son experimentos con su resultado en `docs/experimentos-registro.md`.
-El resto son utilidades de una sola vez (ingesta, reparación, diagnóstico). Antes de escribir
-uno nuevo, conviene buscar: es probable que ya exista.
+## Embeddings
+```
+embed_all.py                 ingesta completa: chunk -> contexto -> embed -> store
+embed_4b.py                  re-embebe con Qwen3-Embedding-4B (el vigente)
+reembeber_limpiados.py       re-embebe en sitio solo lo que cambió de texto
+train_intent_gate.py         entrena el clasificador definición/no-definición (data/intents/)
+```
+
+## Medir
+```
+exp_think_paired.py          el harness del eval: pareado + McNemar, FLAGS/SETCFG/VAR, db_huella
+comparar_corridas.py         compara dos corridas: cita_ok, McNemar, huella, texto idéntico
+eval_metrics.py              métricas de cita (cita_ok, cita_limpia, precisión)
+red_golden.py                red de búsqueda: prueba un refactor de retrieve.py en ~15 min
+diag_donde_falla.py          ¿las fallas son de búsqueda o de redacción?
+medir_tiempos_busqueda.py    tiempo por etapa
+```
+Reglas para medir: `docs/sistema/04-evaluacion.md`.

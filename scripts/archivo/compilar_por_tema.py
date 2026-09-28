@@ -16,7 +16,7 @@ from collections import defaultdict
 
 def main():
     # Cargar todas las normas
-    input_path = Path("data/busquedas/normas_completas.json")
+    input_path = Path("data/archivo/busquedas/normas_completas.json")
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -95,7 +95,7 @@ def main():
         'temas': temas_solicitados
     }
 
-    output_path = Path("data/busquedas/normas_por_tema_solicitado.json")
+    output_path = Path("data/archivo/busquedas/normas_por_tema_solicitado.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 

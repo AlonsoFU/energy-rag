@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     # Calcular estadísticas
@@ -153,7 +153,7 @@ def main():
     md.append(f"\n`{sorted(list(pendientes))[:20]}...`")
 
     # Guardar
-    output_path = Path("data/busquedas/MAPA_NORMAS.md")
+    output_path = Path("data/archivo/busquedas/MAPA_NORMAS.md")
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(md))
 

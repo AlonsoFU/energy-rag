@@ -15,7 +15,7 @@ def analizar_caso_potencia(descripcion_caso):
     """
 
     # Cargar normas
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -219,9 +219,9 @@ if __name__ == "__main__":
 
     resultado = analizar_caso_potencia(caso)
 
-    with open('data/busquedas/analisis_caso_potencia.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/analisis_caso_potencia.json', 'w', encoding='utf-8') as f:
         json.dump(resultado, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*80}")
-    print(f"✅ Análisis guardado en: data/busquedas/analisis_caso_potencia.json")
+    print(f"✅ Análisis guardado en: data/archivo/busquedas/analisis_caso_potencia.json")
     print(f"{'='*80}\n")

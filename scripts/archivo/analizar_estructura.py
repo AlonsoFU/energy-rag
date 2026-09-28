@@ -9,7 +9,7 @@ from collections import defaultdict
 
 
 def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = data['normas']
 
     print("=" * 70)
@@ -163,10 +163,10 @@ def main():
         }
     }
 
-    with open("data/busquedas/analisis_estructura.json", 'w', encoding='utf-8') as f:
+    with open("data/archivo/busquedas/analisis_estructura.json", 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"\nAnálisis guardado en: data/busquedas/analisis_estructura.json")
+    print(f"\nAnálisis guardado en: data/archivo/busquedas/analisis_estructura.json")
 
 
 if __name__ == "__main__":

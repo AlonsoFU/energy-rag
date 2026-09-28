@@ -78,7 +78,7 @@ def main():
     for s, n in filas[-15:]:
         print(f"   {s:.3f}  {n['tipo']:<10} {str(n['numero']):>6}  {str(n['titulo'])[:62]}")
 
-    out = Path("docs/frontera-mercados.md")
+    out = Path("docs/bitacora/frontera-mercados.md")
     L = ["# Frontera del corpus — Subgerencia de Mercados", "",
          "Criterio del usuario (2026-08-22): *el corpus es todo lo referente a la subgerencia",
          "de mercados*. Acá se ordena por **cercanía semántica** del título a las funciones de",

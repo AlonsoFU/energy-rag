@@ -104,7 +104,7 @@ l69_apply_a|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --appl
 l69_apply_b|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reembeber_limpiados --apply
 l69_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=l69_dev venv/bin/python -m scripts.exp_think_paired
 l69_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=l69_holdout venv/bin/python -m scripts.exp_think_paired
-gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.gate_69a
+gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.archivo.gate_69a
 pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_final venv/bin/python -m scripts.exp_think_paired
 # ===== exp #87 (encolado 2026-09-21 00:30, usuario: "termina todo el plan sin que me preguntes") =====
 # PREGUNTA: ¿un modelo mejor arreglaria las fallas? Solo puede en las de GENERACION (gold en el
@@ -117,7 +117,7 @@ pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.json
 #   entre medio                                         -> no concluyente, se reporta tal cual.
 # CAVEAT: el monitor semanal corre lunes 06:00 y puede cambiar el corpus a mitad del 27B; la
 #   huella de cada result.json lo dira. Si difiere, el resultado se marca como contaminado.
-diag_final|bash scripts/diag_final.sh
+diag_final|bash scripts/archivo/diag_final.sh
 techo_30b|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_30b venv/bin/python -m scripts.exp_think_paired
 techo_27b|timeout 18000 env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 MODEL=ollama/qwen3.6:27b SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_27b venv/bin/python -m scripts.exp_think_paired
 
@@ -281,7 +281,7 @@ aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_ma
 # REPETIBILIDAD (2026-09-19) -- mide el RUIDO del pipeline, sin cambiar NADA.
 # Motivo: en aviso_smoke, 2 de 13 queries que antes caian a prosa produjeron cita verificada y
 # 4 cambiaron cita_ok/cita_limpia SIN tocar el buscador. Todos los criterios de estos dias
-# asumen "el pipeline es determinista" (docs/plan-operacion.md lo dice explicitamente). Si no
+# asumen "el pipeline es determinista" (docs/bitacora/plan-operacion.md lo dice explicitamente). Si no
 # lo es, las diferencias de 1 caso que decidieron #77 y #69a pueden ser ruido.
 # ESTA CORRIDA ES IDENTICA a qonly2_dev: misma config, misma DB, mismos flags. Cualquier
 # diferencia contra qonly2_dev es RUIDO puro, no efecto de ningun cambio.

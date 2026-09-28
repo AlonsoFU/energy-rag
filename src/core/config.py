@@ -60,7 +60,7 @@ class Settings(BaseSettings):
     # glossary-buried citations but REGRESSES entity-collision cases (it shrinks
     # our target below a competing definition → position-forces the wrong pick).
     # Needs competitor-aware gating before enabling — see spec
-    # docs/superpowers/specs/2026-05-22-canonical-concept-names-design.md §10.
+    # docs/bitacora/superpowers/specs/2026-05-22-canonical-concept-names-design.md §10.
     inject_focused_definition: bool = False
 
     # Eval runner: when True, the LLM is called even if retrieval didn't put
@@ -354,7 +354,7 @@ class Settings(BaseSettings):
     # bm25_doc2query (flag OFF): BM25 busca sobre tsv_aug = contextual_text +
     # preguntas coloquiales generadas offline por doc2query español (mT5). Ataca
     # la ceguera de BM25 en coloquial (medido: BM25 None en las 13 fallas).
-    # Requiere haber poblado fragmentos.doc2query_text (scripts/doc2query_generate).
+    # Requiere haber poblado fragmentos.doc2query_text (scripts/archivo/doc2query_generate).
     bm25_doc2query: bool = False
 
     # crag_routing (flag OFF): routing CRAG-style. Retrieval barato (rama simple,
@@ -367,7 +367,7 @@ class Settings(BaseSettings):
     # BM25 + Qwen + bge-m3). Complementarios (cada uno halla lo que el otro pierde).
     # Retrieval gold∈top10 2026-06-09: coloquial 28→32, dev 37→40, holdout 17→18
     # (sube TODO, cero regresión). Requiere fragmentos.embedding_bgem3 poblada
-    # (scripts/embed_bgem3). Costo a escala: +1 columna vector + 1 embed + 1 ANN/query.
+    # (scripts/archivo/embed_bgem3). Costo a escala: +1 columna vector + 1 embed + 1 ANN/query.
     ensemble_bgem3: bool = False
 
     # Reformulación SELECTIVA coloquial→legal (flag OFF). Un call LLM condicional
@@ -412,7 +412,7 @@ class Settings(BaseSettings):
     # (252 defs extraídas de 21 artículos-glosario densos, embedding_4b_1024). Se fusiona (RRF)
     # con la pata densa 4B para que la def enterrada en un glosario de ~10k chars suba al top-k;
     # mapea al artículo padre (cita [Art N de NORMA]). Ataca las fallas de RECALL de definiciones
-    # (89/106 fallas E0). Construir con scripts.build_def_fragments (WRITE=1). Requiere embed_4b_dim=1024.
+    # (89/106 fallas E0). Construir con scripts.archivo.build_def_fragments (WRITE=1). Requiere embed_4b_dim=1024.
     def_fragments: bool = False
 
     # glossary_exclude (flag OFF): parte del rechunk M2. Excluye del search 4b-1024 los chunks
@@ -453,7 +453,7 @@ class Settings(BaseSettings):
     # MISMA tabla (fragmentos_definicion.termino), asi que si el diccionario falla,
     # def_exact tampoco resuelve el concepto que extrae el regex.
     # Default OFF: el regex queda en el codigo pero FUERA del pipeline (ver
-    # docs/reglas-candidatas.md R5).
+    # docs/bitacora/reglas-candidatas.md R5).
     regex_fallback: bool = False
     # Frontera del corpus: excluir del retrieval las normas marcadas
     # metadata.fuera_de_dominio (33 de 95 al 2026-08-22, 1352 fragmentos).
@@ -505,7 +505,7 @@ class Settings(BaseSettings):
     # 2608.22228: pedir la abstencion por prompt falla cuando el contexto es plausible.
     # Este flag antepone un aviso deterministico. NO es un porcentaje de confianza: es el
     # hecho binario "hubo o no hubo calce literal contra el articulo" (ver
-    # docs/investigacion-abstencion-2026-09-16.md seccion 19: confianza MAL calibrada da
+    # docs/bitacora/investigacion-abstencion-2026-09-16.md seccion 19: confianza MAL calibrada da
     # +2% y AUMENTA el sesgo de automatizacion; un hecho binario no requiere calibracion).
     # NO se rechaza: de las 13 en prosa, 12 tenian la cita correcta -> negarse botaria 12
     # respuestas buenas para evitar 1 mala.

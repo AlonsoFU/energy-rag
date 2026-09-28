@@ -78,7 +78,7 @@ async def descargar_lote(ids_lote, num_lote):
 
 
 async def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     pendientes = set()
@@ -104,7 +104,7 @@ async def main():
             'total': len(normas),
             'normas': list(normas.values())
         }
-        with open("data/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
+        with open("data/archivo/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
             json.dump(output, f, indent=2, ensure_ascii=False)
         print(f"  Guardado. Total: {len(normas)}")
 

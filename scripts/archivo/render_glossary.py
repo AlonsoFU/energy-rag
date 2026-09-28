@@ -1,6 +1,6 @@
-"""Render glossary/concepts.yaml → docs/glossary.md (human-readable view).
+"""Render glossary/concepts.yaml → docs/bitacora/glossary.md (human-readable view).
 
-Auto-generated; do not edit docs/glossary.md by hand.
+Auto-generated; do not edit docs/bitacora/glossary.md by hand.
 Run after editing concepts.yaml:
     python scripts/archivo/render_glossary.py
 """

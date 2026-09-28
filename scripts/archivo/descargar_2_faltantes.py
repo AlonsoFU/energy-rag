@@ -80,7 +80,7 @@ async def main():
         await browser.close()
 
     # Actualizar normas_completas.json
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -92,16 +92,16 @@ async def main():
         'normas': list(normas.values())
     }
 
-    with open('data/busquedas/normas_completas.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/normas_completas.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
     # Actualizar log_problemas - remover de errores
-    with open('data/busquedas/log_problemas.json') as f:
+    with open('data/archivo/busquedas/log_problemas.json') as f:
         problemas = json.load(f)
 
     problemas['errores'] = [e for e in problemas['errores'] if e not in ids]
 
-    with open('data/busquedas/log_problemas.json', 'w') as f:
+    with open('data/archivo/busquedas/log_problemas.json', 'w') as f:
         json.dump(problemas, f, indent=2)
 
     print(f'\nTotal normas ahora: {len(normas)}')

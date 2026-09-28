@@ -106,7 +106,7 @@ async def extraer_vinculaciones_estructuradas(id_norma: str, page) -> dict:
 
 async def main():
     # Cargar normas
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -160,13 +160,13 @@ async def main():
         await browser.close()
 
     # Guardar resultados
-    with open('data/busquedas/vinculaciones_estructuradas.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/vinculaciones_estructuradas.json', 'w', encoding='utf-8') as f:
         json.dump(resultados, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*70}")
     print(f"✅ Vinculaciones estructuradas guardadas")
     print(f"   Total normas procesadas: {len(resultados)}")
-    print(f"   Archivo: data/busquedas/vinculaciones_estructuradas.json")
+    print(f"   Archivo: data/archivo/busquedas/vinculaciones_estructuradas.json")
     print(f"{'='*70}")
 
 

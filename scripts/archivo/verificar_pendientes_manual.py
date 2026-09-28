@@ -40,7 +40,7 @@ async def verificar_norma(id_norma: str, page) -> dict:
 
 async def main():
     # Cargar pendientes
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
 
     normas = {n['id_norma']: n for n in data['normas']}
@@ -99,10 +99,10 @@ async def main():
             print(f"    URL: {r['url']}")
 
     # Guardar resultados
-    with open('data/busquedas/verificacion_pendientes_manual.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/verificacion_pendientes_manual.json', 'w', encoding='utf-8') as f:
         json.dump(resultados, f, indent=2, ensure_ascii=False)
 
-    print(f"\nResultados guardados: data/busquedas/verificacion_pendientes_manual.json")
+    print(f"\nResultados guardados: data/archivo/busquedas/verificacion_pendientes_manual.json")
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ el orden ya viene mezclado.
 Acá el LLM lee el ARTICULADO (no el título: la fórmula burocrática del encabezado legal
 chileno es idéntica entre materias) y responde si la norma regula el mercado eléctrico.
 
-**El criterio está fijado en `docs/plan-operacion.md` ANTES de correr**: adoptar sólo si acierta
+**El criterio está fijado en `docs/bitacora/plan-operacion.md` ANTES de correr**: adoptar sólo si acierta
 >= 8 de los 9 casos de control. El embedding acierta 0 de 9 con el corte vigente.
 
   PYTHONPATH=. venv/bin/python -m scripts.experimentos.exp_dominio_llm [--todas]

@@ -4,8 +4,8 @@ Sistema de consulta sobre normativa eléctrica chilena: busca los artículos que
 pregunta y, si se pide, redacta un resumen con citas textuales verificadas. Todo corre en local
 (Postgres + pgvector, Ollama, GPU RTX 3090); no usa APIs pagadas.
 
-Esta carpeta es **la verdad vigente, dividida por tema**. Los `docs/handoff-*.md` y
-`docs/plan-operacion.md` son la bitácora histórica (qué se probó, cuándo y por qué); no hace
+Esta carpeta es **la verdad vigente, dividida por tema**. `docs/bitacora/` (handoffs,
+campañas y `plan-operacion.md`) es la historia (qué se probó, cuándo y por qué); no hace
 falta leerlos para entender el sistema.
 
 | tema | archivo | responde a |

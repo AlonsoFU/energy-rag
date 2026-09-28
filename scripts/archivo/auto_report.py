@@ -2,7 +2,7 @@
 
 Pensado para correr desde la cola al terminar cada experimento: lee el result.json,
 calcula cita_ok + McNemar + las métricas de precisión (E1) y APENDA el resultado a
-`docs/resultados-auto.md`. Así, si la sesión se corta, los números quedan escritos.
+`docs/bitacora/resultados-auto.md`. Así, si la sesión se corta, los números quedan escritos.
 
 Uso:  PYTHONPATH=. venv/bin/python -m scripts.archivo.auto_report <nombre_experimento> "<descripcion>"
       (busca data/eval/results/<nombre>/result.json)
@@ -13,7 +13,7 @@ from datetime import datetime
 from src.pipelines.grounding import extract_citations, _normalize_art
 from src.pipelines.off_topic import REFUSAL_TEXT
 
-OUT = Path("docs/resultados-auto.md")
+OUT = Path("docs/bitacora/resultados-auto.md")
 UMBRALES = (0.5, 1.0)
 
 

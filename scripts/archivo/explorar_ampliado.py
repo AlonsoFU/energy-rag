@@ -87,7 +87,7 @@ async def main():
     print("=" * 70)
 
     # Cargar normas ya encontradas
-    busqueda_path = Path("data/busquedas/transacciones_economicas.json")
+    busqueda_path = Path("data/archivo/busquedas/transacciones_economicas.json")
     with open(busqueda_path) as f:
         data = json.load(f)
 
@@ -182,7 +182,7 @@ async def main():
         'normas': list(normas_existentes.values())
     }
 
-    output_path = Path("data/busquedas/analisis_ampliado.json")
+    output_path = Path("data/archivo/busquedas/analisis_ampliado.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 

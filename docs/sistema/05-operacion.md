@@ -2,7 +2,7 @@
 
 Repo de trabajo: `/home/alonso/Documentos/Github/energy-rag-postgres-rag` (worktree, rama
 `adopt-winners`). El worktree `energy-rag` (rama `main`) está desactualizado. Ver también
-`docs/manual-operacion.md`.
+`docs/bitacora/manual-operacion.md`.
 
 ## Usar el sistema
 ```bash
@@ -24,12 +24,16 @@ PYTHONPATH=. venv/bin/python -m scripts.estado --markdown  # las mismas tablas p
 ## Dónde está cada script (limpieza 2026-09-28)
 | carpeta | qué hay | cuántos |
 |---|---|---|
-| `scripts/` | lo que usa algo vivo: cadena del monitor, ingesta, embeddings, `preguntar.py`, `exp_think_paired.py`, `red_golden.py`, `estado.py` | 40 |
+| `scripts/` | lo que usa algo vivo: cadena del monitor, ingesta, embeddings, `preguntar.py`, `exp_think_paired.py`, `red_golden.py`, `estado.py`. Detalle por script: `scripts/INDICE.md` | 34 `.py` + 10 `.sh` |
 | `scripts/experimentos/` | experimentos ya decididos; `docs/` los cita como evidencia | 87 |
-| `scripts/archivo/` | herramientas de un solo uso ya cumplidas (descargas puntuales, curación de glosario, migraciones). Nada de acá lo llama producción ni el cron | 134 |
+| `scripts/archivo/` | herramientas de un solo uso ya cumplidas y drivers de campañas cerradas. Nada de acá lo llama producción ni el cron | 155 |
 
-Criterio mecánico de «vivo»: aparece en `scripts/*.sh`, `scripts/plan_maestro.txt`,
-`docs/sistema/`, `src/` o `preguntar.py`. Si hace falta una de archivo: `git mv` de vuelta.
+Criterio de «vivo»: lo llama el crontab, un `.sh` vivo, `src/`, `preguntar.py` o la cadena del
+monitor, o es una herramienta de operación listada en `scripts/INDICE.md`. El criterio puramente
+mecánico (grep) se equivocó en los dos sentidos: mandó a archivo `monitor_schema.py` y
+`marcar_fuera_dominio.py` (operación, sin llamador automático) y dejó en la raíz scripts que solo
+alimentaban flags ya borrados (`embed_8b.py`, `embed_bgem3.py`, `doc2query_generate.py`,
+`build_def_fragments.py`). Si hace falta uno de archivo: `git mv` de vuelta.
 
 ## Correr experimentos largos: la cola
 **Nunca desde la sesión de Claude**: el harness mata procesos hijos por presión de RAM (pasó 2

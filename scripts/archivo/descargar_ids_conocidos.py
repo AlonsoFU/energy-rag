@@ -183,7 +183,7 @@ async def main():
         'normas': list(normas.values())
     }
 
-    output_path = Path("data/busquedas/normas_ids_conocidos.json")
+    output_path = Path("data/archivo/busquedas/normas_ids_conocidos.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, 'w', encoding='utf-8') as f:

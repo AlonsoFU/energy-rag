@@ -40,7 +40,7 @@ def setup_modelo():
 
     # Cargar normas
     print("\n1. Cargando normas...")
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
     normas = data['normas']
     print(f"   ✓ {len(normas)} normas cargadas")
@@ -63,7 +63,7 @@ def setup_modelo():
 
     # Guardar cache
     print("\n4. Guardando cache...")
-    cache_dir = Path('data/busquedas/cache_semantica')
+    cache_dir = Path('data/archivo/busquedas/cache_semantica')
     cache_dir.mkdir(exist_ok=True)
 
     with open(cache_dir / 'embeddings.pkl', 'wb') as f:
@@ -91,7 +91,7 @@ def buscar_semantico(caso, top_k=10):
         print("❌ ERROR: Instala primero: pip install sentence-transformers scikit-learn")
         return
 
-    cache_dir = Path('data/busquedas/cache_semantica')
+    cache_dir = Path('data/archivo/busquedas/cache_semantica')
 
     # Verificar cache
     if not (cache_dir / 'embeddings.pkl').exists():
@@ -116,7 +116,7 @@ def buscar_semantico(caso, top_k=10):
     with open(cache_dir / 'normas_ids.json') as f:
         normas_ids = json.load(f)
 
-    with open('data/busquedas/normas_completas.json') as f:
+    with open('data/archivo/busquedas/normas_completas.json') as f:
         data = json.load(f)
     normas = {n['id_norma']: n for n in data['normas']}
 
@@ -161,14 +161,14 @@ def buscar_semantico(caso, top_k=10):
         })
 
     # Guardar resultados
-    with open('data/busquedas/ultimo_resultado_semantico.json', 'w', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/ultimo_resultado_semantico.json', 'w', encoding='utf-8') as f:
         json.dump({
             'caso': caso,
             'resultados': resultados
         }, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*80}")
-    print("✅ Resultados guardados en: data/busquedas/ultimo_resultado_semantico.json")
+    print("✅ Resultados guardados en: data/archivo/busquedas/ultimo_resultado_semantico.json")
     print("="*80)
 
 

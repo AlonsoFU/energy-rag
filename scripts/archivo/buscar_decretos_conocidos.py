@@ -228,7 +228,7 @@ async def main():
         'normas': list(normas_encontradas.values())
     }
 
-    output_path = Path("data/busquedas/decretos_sector_electrico.json")
+    output_path = Path("data/archivo/busquedas/decretos_sector_electrico.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, 'w', encoding='utf-8') as f:

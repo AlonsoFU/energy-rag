@@ -11,7 +11,7 @@ print("DEMOSTRACIÓN: Cómo funciona el algoritmo de búsqueda")
 print("="*80)
 
 # Cargar datos
-with open('data/busquedas/normas_completas.json') as f:
+with open('data/archivo/busquedas/normas_completas.json') as f:
     data = json.load(f)
 
 normas = {n['id_norma']: n for n in data['normas']}

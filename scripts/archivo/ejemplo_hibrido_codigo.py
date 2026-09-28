@@ -432,7 +432,7 @@ def busqueda_solo_embeddings(query: str, normas: List[Dict], embeddings: np.ndar
 
 if __name__ == "__main__":
     # Cargar normas
-    with open('data/busquedas/normas_completas.json', 'r', encoding='utf-8') as f:
+    with open('data/archivo/busquedas/normas_completas.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
         normas = data['normas']
 

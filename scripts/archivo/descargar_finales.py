@@ -114,7 +114,7 @@ async def descargar_lote(ids_lote, num_lote):
 
 
 async def main():
-    data = json.load(open("data/busquedas/normas_completas.json"))
+    data = json.load(open("data/archivo/busquedas/normas_completas.json"))
     normas = {n['id_norma']: n for n in data['normas']}
 
     # Calcular pendientes
@@ -149,7 +149,7 @@ async def main():
             'total': len(normas),
             'normas': list(normas.values())
         }
-        with open("data/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
+        with open("data/archivo/busquedas/normas_completas.json", 'w', encoding='utf-8') as f:
             json.dump(output, f, indent=2, ensure_ascii=False)
         print(f"  Guardado. Total acumulado: {len(normas)}")
 
@@ -167,10 +167,10 @@ async def main():
         'no_existen': todas_no_existen,
         'errores': todos_errores
     }
-    with open("data/busquedas/log_problemas.json", 'w') as f:
+    with open("data/archivo/busquedas/log_problemas.json", 'w') as f:
         json.dump(problemas, f, indent=2)
 
-    print(f"\nLog de problemas guardado en: data/busquedas/log_problemas.json")
+    print(f"\nLog de problemas guardado en: data/archivo/busquedas/log_problemas.json")
 
 
 if __name__ == "__main__":

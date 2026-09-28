@@ -180,7 +180,7 @@ def main(escribir=False):
     # que el numero de citas, que pone arriba justo las normas transversales.
     try:
         from scripts.archivo.frontera_mercados import DOMINIO
-        from scripts.archivo.marcar_fuera_dominio import _v
+        from scripts.marcar_fuera_dominio import _v
         ref = _v(re.sub(r"\s+", " ", DOMINIO).strip())
         for k, v in externas.items():
             if not v["ctx"] or not ref:

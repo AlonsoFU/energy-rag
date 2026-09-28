@@ -19,7 +19,7 @@ from src.components.vectorstore import PostgresStore
 from src.components.llm import get_llm_provider
 from src.pipelines.retrieve import rrf_fusion, _length_weights
 from src.pipelines.grounding import _normalize_art
-from scripts.campaign_sweep import BGEReranker
+from scripts.archivo.campaign_sweep import BGEReranker
 
 KS = [5, 10]
 SETS = sys.argv[1:] or ["data/eval/queries_independent.jsonl", "data/eval/queries_extreme.jsonl"]
