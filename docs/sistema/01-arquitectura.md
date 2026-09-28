@@ -6,6 +6,10 @@ configuración adoptada) + `.env`.
 
 ## Flujo
 
+![Pipeline de Energy-RAG](pipeline.svg)
+
+El mismo flujo con los tiempos medidos, etapa por etapa:
+
 ```
 Pregunta
   │
