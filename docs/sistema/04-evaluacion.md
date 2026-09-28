@@ -43,6 +43,20 @@ Diagnóstico «¿búsqueda o redacción?»: `scripts/diag_donde_falla.py` cruza 
 con lo que respondió el modelo (estado final: 31 fallas de dev = 18 RETRIEVAL + 13 GENERACION).
 Tiempos por etapa: `scripts/medir_tiempos_busqueda.py`.
 
+## Red golden: probar un refactor sin re-medir
+El pipeline es determinista, así que un refactor se **prueba**: si la salida cambia, está mal.
+```bash
+PYTHONPATH=. venv/bin/python -m scripts.red_golden                          # graba la base (~15 min)
+PYTHONPATH=. venv/bin/python -m scripts.red_golden --salida /tmp/nueva.json
+PYTHONPATH=. venv/bin/python -m scripts.red_golden --comparar data/eval/redes/busqueda_base.json /tmp/nueva.json
+```
+- **Red de búsqueda** (`scripts/red_golden.py`, ~15 min): los 10 artículos de cada una de las
+  194 queries, en orden, con `db_huella`. Para cualquier cambio en `retrieve.py` o
+  `vectorstore.py`. Base vigente: `data/eval/redes/busqueda_base.json`. `--comparar` sale con
+  código 1 si un solo puesto cambió, o si la huella del corpus difiere.
+- **Red completa** (~4 h): `scripts.exp_think_paired` sobre dev + held-out. Para `generate.py`.
+- `--autoprueba` verifica que el comparador ve un cambio de orden y un corpus distinto.
+
 ## Reglas (aprendidas a golpes)
 1. **Criterio escrito ANTES de correr**, en `scripts/plan_maestro.txt`, con predicción registrada.
 2. **dev Y held-out**; si discrepan, no se adopta. Si se puede, también las 16 reales.

@@ -1,3 +1,13 @@
+# PLAN MAESTRO v40 (2026-09-28) -- sesion 3 del plan de limpieza. Usuario: "hazlo todo, 180 W".
+# Objetivo: la RED GOLDEN de busqueda, la linea base contra la que se prueba cada refactor de
+# retrieve.py. No es un experimento: no hay hipotesis, se graba el comportamiento de HOY.
+# CRITERIO, FIJADO ANTES: graba las 194 queries (dev 114 + holdout 64 + reales 16) con la config
+#   de produccion y estampa db_huella. Sirve si termina con los 194 y la huella coincide con la
+#   del corpus actual. Ademas deja medido el recall@10 de las 16 reales, que estaba PENDIENTE.
+# Prediccion registrada: recall@10 holdout 64/64, dev 92/114; reales SIN prediccion (nunca medido).
+# ~7 min con el reranker en GPU (fp32 = mismo orden que CPU, exp #88).
+red_base|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden
+
 # PLAN MAESTRO v39 (2026-09-21 19:00) -- exp #88b: BGE en GPU fp16 + empty_cache. Usuario: "sigue".
 # #88: GPU-fp32 = orden identico a CPU (194/194) pero el LLM queda 43/49 capas en GPU.
 # CRITERIO, FIJADO ANTES: (a) orden fp16 IDENTICO a fp32 en 194/194; (b) LLM recien cargado 49/49
