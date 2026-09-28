@@ -460,7 +460,7 @@ por contexto/jerarquía en vez de por longitud de texto.
 
 Primer experimento que NO prueba una mejora: mide **cuánto del 98.9% es circularidad**.
 Set: `data/eval/queries_fraseos_v1.jsonl` (64q, generado por `scripts/build_fraseos_set.py`).
-Runner: `scripts/exp_fraseos_paired.py`. Resultados: `data/eval/results/fraseos_v1/`.
+Runner: `scripts/experimentos/exp_fraseos_paired.py`. Resultados: `data/eval/results/fraseos_v1/`.
 
 **Diseño.** Pareado POR TÉRMINO, ambos brazos en la misma sesión (regla #4):
 control `"qué es <T>"` (fraseo que el regex cubre) vs fraseo natural sobre el MISMO término y
@@ -526,7 +526,7 @@ fáciles, no 98.9%. Y el 98.9% sigue siendo válido **solo** para las 3 plantill
 ## #42 — B2 PROBE: los embeddings agrupan por TEMA, no por INTENCIÓN (2026-08-18)
 
 Antes de construir el clasificador del BLOQUE 2, medir su premisa. Barato (solo embeddings,
-sin LLM): `scripts/exp_intent_probe.py`, ejemplos en `data/intents/ejemplos_v1.jsonl`
+sin LLM): `scripts/experimentos/exp_intent_probe.py`, ejemplos en `data/intents/ejemplos_v1.jsonl`
 (83 ejemplos escritos a mano, 6 intenciones, **tópicos variados dentro de cada intención**
 a propósito, para que la señal compartida sea la intención y no el tema).
 
@@ -1567,7 +1567,7 @@ fue el parser perdiendo 562 artículos sin que ninguna medición se moviera.
 
 ## 14. El pareado de `think` que no midió `think` (2026-09-03)
 
-**Qué pasó.** El plan v7 encoló `scripts/exp_selfcons_n1` para decidir `ollama_think`. Ese
+**Qué pasó.** El plan v7 encoló `scripts/experimentos/exp_selfcons_n1` para decidir `ollama_think`. Ese
 script togglea `self_consistency_n` (1 vs 3). Corrió ~6 h de GPU y devolvió una repetición del
 exp #54, no una medición de `think`.
 

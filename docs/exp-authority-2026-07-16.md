@@ -9,7 +9,7 @@ Boostear el tier alto podría subir cita_ok al preferir la norma más autoritati
   `derive_rank` — el `tipo` de la DB no es confiable) + `authority_boost()`.
 - Aplicado tras graph_boost, antes de truncar a top_k: `score·(1+β·(rank-2))`.
   LEGAL(3)→×(1+β), DECRETO(2)→×1, RESOLUCIÓN(1)→×(1-β).
-- Runner: `scripts/exp_authority.py` (pipeline prod real, AdaptiveRetriever →
+- Runner: `scripts/experimentos/exp_authority.py` (pipeline prod real, AdaptiveRetriever →
   generate_answer, gen = ollama/qwen3.5:9b prod). Barrido β∈{0.0, 0.1, 0.2}.
 
 **Resultado — PLANO, cero efecto en cita_ok:**

@@ -3,7 +3,7 @@
 # CRITERIO, FIJADO ANTES: (a) orden fp16 IDENTICO a fp32 en 194/194; (b) LLM recien cargado 49/49
 #   con el BGE fp16 en GPU. Pasan -> BGE fp16 en GPU por defecto. Falla (a) -> listar diferencias,
 #   no adoptar sin medir generacion. Falla (b) -> no se adopta. ~15 min.
-rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_fp16
+rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.experimentos.exp_reranker_fp16
 
 # PLAN MAESTRO v38 (2026-09-21) -- exp #88: reranker BGE a GPU. Aprobado por el usuario ("1 ok").
 # La busqueda tarda 21.69 s y 21.51 s son el rerank en CPU (reranker.py:59, default de la GTX 1080).
@@ -11,7 +11,7 @@ rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv
 #   rerank sobre dev + held-out + 16 reales (mismos pares, una sola pasada); (b) con el BGE en GPU,
 #   qwen3:30b-a3b queda 100 % GPU en `ollama ps`. Pasan -> BGE en cuda por defecto. Falla (a) ->
 #   no se adopta sin medir generacion. Falla (b) -> no se adopta. ~75 min (el brazo CPU manda).
-rerank_gpu|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_gpu
+rerank_gpu|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.experimentos.exp_reranker_gpu
 
 # PLAN MAESTRO v37 (2026-09-20 17:35) -- CIERRE: correr todo lo pendiente que se puede correr.
 # Config ADOPTADA ya vive en config.py (quote-only max 2, t=0.0, reatribuir, aviso): sin FLAGS.
@@ -81,8 +81,8 @@ techo_27b|timeout 18000 env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 M
 #   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
 bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
 bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
-juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
-juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.experimentos.exp_juez_responde
+juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.experimentos.exp_juez_responde
 # MEDICION (no experimento): 16 preguntas REALES de terceros (SEC, CGE, Coordinador) cuyo gold es
 # el articulo que cita LA PROPIA FUENTE, verificado en la DB. Primer eval no escrito por el asistente.
 # De 80 recolectadas (data/eval/preguntas_publicas_v1.jsonl): 18 traian articulo, 2 excluidas
@@ -158,7 +158,7 @@ combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_m
 # CRITERIO numctx_q, FIJADO ANTES: coseno minimo (prefijo 1024) < 0.9999 -> num_ctx es fuente.
 #   1.000000 en 114/114 -> NO es num_ctx, queda el tope de W.
 # OJO RAM: el brazo viejo carga 9.8 GB de 14. Por eso va SOLO y por la cola, no desde la sesion.
-numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.exp_numctx_queries
+numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.experimentos.exp_numctx_queries
 # #79 held-out (la regla es dev Y held-out antes de adoptar selfcons_temperature=0.0).
 # CRITERIO: contra qonly2_holdout, cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
 # CAVEAT: qonly2_holdout es del 09-14; si es previo a num_ctx=4096 carga el mismo corrimiento.

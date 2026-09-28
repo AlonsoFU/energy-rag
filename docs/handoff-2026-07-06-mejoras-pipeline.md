@@ -48,7 +48,7 @@ k    BM25:Vec  top5  top10
 - **Favorecer BM25 (2:1, 3:1) gana; favorecer vector (1:2, 1:3) pierde** — en balanced (mayoría formal). k chico (10) apenas mejor.
 - Ganancia +6 top5 (+2%) = marginal, y el screen MIENTE. **NO adoptado**: falta (a) desglose por clase (coloquial puede querer más vector), (b) confirmación end-to-end cita_ok. Producción sigue con peso adaptativo-por-largo + k=60.
 
-## Resultado experimento RERANKER (2026-07-06, `scripts/exp_reranker_bakeoff.py`, pipeline real, coloquial 39 + dev 44, gold∈topN)
+## Resultado experimento RERANKER (2026-07-06, `scripts/experimentos/exp_reranker_bakeoff.py`, pipeline real, coloquial 39 + dev 44, gold∈topN)
 ```
 reranker              cx_t5  dev_t5   nota
 bge-v2-m3 (baseline)    32     36     ← ADOPTADO, rey coloquial
@@ -67,7 +67,7 @@ qwen3-rerank-4b (4B)    —      —      MURO RAM: HF/bnb carga fp16 8GB a RAM(
 - Generativos (Qwen3-Reranker): loader propio (logits yes/no, prompt Instruct/Query/Document). 0.6b < baseline; 4b no corrió (RAM). Su familia NO es superior acá.
 - Los grandes LLM-based (bge-gemma2, qwen3-4b) exigen GGUF/Ollama o 4-bit; 4-bit igual choca RAM al cargar shards fp16. Valor esperado bajo (el 0.6b ya perdió) → cerrado.
 
-## Resultado campaña CHUNKING (2026-07-07, `scripts/exp_chunk_sweep.py`, vector-screen 4b-1024, coloquial39+dev44)
+## Resultado campaña CHUNKING (2026-07-07, `scripts/experimentos/exp_chunk_sweep.py`, vector-screen 4b-1024, coloquial39+dev44)
 Barrido no-destructivo de 12 estrategias (chunker × contexto) re-chunkeando en memoria desde `articulos.texto`. Baseline `asis` (fragmentos actuales) = cx5 **27**, dev5 **28**.
 ```
 estrategia            frags  cx5  dev5   Δcx5  Δdev5
@@ -84,7 +84,7 @@ whole+none             2978   28   26      +1    -2
 - **Regla 1 (section-aware) — GANA `inciso`** (partir por subdivisión legal a./1./incisos): dev **+10**, cx +2. Rescata pool-miss estructurales. La regla GENERAL (cualquier subdivisión) SUBSUME a la narrow (solo glosarios: dev +0).
 - **Regla 3 (context header-path) — ayuda**: en inciso, `light→path` = cx+1/dev+1 (estrictamente mejor). En `whole` el path sube cx pero baja dev (mezcla ruido de artículo entero).
 - **Slide (tamaño fijo) PEOR en cx** (−1/−2) → confirma el estándar: no romper la provisión.
-- **RONDA 2 (2026-07-07, QA de estructura + chunkers robustos):** el QA (`scripts/exp_chunk_qa.py`) marcó: inciso deja 2442/2978 en 1 chunk; 378 arts grandes 1-chunk (367 prosa sin marcador); 152 frags >3000c; 29 arts con marcadores NO cubiertos (§14, N°11, guion3, romano1). Se agregaron chunkers y se midió:
+- **RONDA 2 (2026-07-07, QA de estructura + chunkers robustos):** el QA (`scripts/experimentos/exp_chunk_qa.py`) marcó: inciso deja 2442/2978 en 1 chunk; 378 arts grandes 1-chunk (367 prosa sin marcador); 152 frags >3000c; 29 arts con marcadores NO cubiertos (§14, N°11, guion3, romano1). Se agregaron chunkers y se midió:
 ```
 estrategia            frags  cx5  dev5   Δcx  Δdev
 inciso+path            7087   29   38    +2   +10   ← techo
@@ -95,7 +95,7 @@ recursive+path         9979   27   31    +0    +3    (prosa: peor, chunks chicos
 recursive+light        9979   25   32    -2    +4
 ```
 - **GANADOR SCREEN = `inciso_robust+path`** (empata inciso+path pero robusto a §/N°/romano). recursive/maxsplit descartados.
-- **CONFIRMACIÓN END-TO-END (2026-07-08, `scripts/exp_chunk_e2e.py`, tabla paralela `fragmentos_inciso` 7141 chunks + pipeline REAL BM25+vec+RRF+BGE+gen 30b-a3b, gen solo en queries con top10 distinto): NO CONVIERTE = ESPEJISMO.**
+- **CONFIRMACIÓN END-TO-END (2026-07-08, `scripts/experimentos/exp_chunk_e2e.py`, tabla paralela `fragmentos_inciso` 7141 chunks + pipeline REAL BM25+vec+RRF+BGE+gen 30b-a3b, gen solo en queries con top10 distinto): NO CONVIERTE = ESPEJISMO.**
 ```
               cita_ok asis   inciso   delta
 coloquial        31           27       -4   (39 difieren)

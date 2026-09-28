@@ -186,8 +186,8 @@ conviene apagar complejo del todo para esta clase).
 torch cuda OK (`venv` cu130 + `venv-gpu` cu118), BGE reranker en GPU **0.13s/32pares** (antes CPU
 ~20-30min/eval), 8B embedder cabe (4.7GB). TODA restricción Pascal (BGE-CPU, sin fp16, sin
 bitsandbytes, swap 4B↔9B, "embedder grande no cabe", "LLM tope 9b") quedó OBSOLETA. Flags
-`embed_4b_cpu`/`BGE_DEVICE=cpu` ya no aplican. Artefactos nuevos: `scripts/exp_gen_32b.py`,
-`scripts/exp_8b_gen.py`, flag `embed_8b_dense`, `vectorstore.search_vector_8b`, `qwen3:32b` (Ollama).
+`embed_4b_cpu`/`BGE_DEVICE=cpu` ya no aplican. Artefactos nuevos: `scripts/experimentos/exp_gen_32b.py`,
+`scripts/experimentos/exp_8b_gen.py`, flag `embed_8b_dense`, `vectorstore.search_vector_8b`, `qwen3:32b` (Ollama).
 
 **Exp estrella — LLM gen 32B vs 9b (qwen3:32b, mismos docs cacheados = PURO efecto de generación):**
 config retrieval fija (4B-1024 + alias_union, BGE GPU), se genera desde los MISMOS docs con 9b y 32b.
@@ -222,7 +222,7 @@ producto: ¿32B para todo, o solo para queries donde el 9b duda? PENDIENTE del u
 Exp #2. Mapa CURADO `{trigger coloquial → término legal}` (`src/pipelines/alias_map.py`),
 query-side, determinista, **sin escribir DB** (sortea el bloqueo de permisos de glosario).
 Flag `alias_union` (OFF, requiere `embed_4b_dense`). Artefactos: `alias_map.py`,
-`scripts/exp_alias_screen.py` (screen), `scripts/exp_alias_gen.py` (gen), `scripts/exp_alias_auto.py` (B-auto).
+`scripts/experimentos/exp_alias_screen.py` (screen), `scripts/experimentos/exp_alias_gen.py` (gen), `scripts/experimentos/exp_alias_auto.py` (B-auto).
 
 **Oráculo (motivación):** con el término legal correcto, el gold de 118/212 rankea top-2/top-1
 (retrieval funciona; el único gap es NOMBRAR la entidad). El mapa lo hace determinista.
@@ -273,7 +273,7 @@ TÉRMINOS técnico-legales EXACTOS de una query coloquial (corto, anti-alucinaci
 filtran números de ley/decreto inventados) y se añaden ADITIVO vector-only a la query.
 Distinto a `selective_reform` (parafraseo verboso que alucinaba "Ley 20.383", "Código
 Eléctrico"). Flag `concept_inference` (default OFF). Artefactos: `expansion.infer_legal_concept`,
-`scripts/exp_concept_inference.py` (screen retrieval) + `exp_concept_inference_gen.py` (generación).
+`scripts/experimentos/exp_concept_inference.py` (screen retrieval) + `exp_concept_inference_gen.py` (generación).
 
 **Screen retrieval-only (SimpleRetriever, gold∈top-N, ON vs OFF):**
 | set | top5 | top10 | top20 |
@@ -343,7 +343,7 @@ Propiedad de seguridad: SOLO añade → cita_ok monótona (no puede regresar). F
 coloquial NO es la elección de cita (eso solo aplica a la clase formal/dev, donde repair da +2
 marginal con precisión mala) sino que **el gold no entra al pool** (retrieval deep-miss / hueco de
 vocabulario). Confirma la línea: el residual coloquial es límite de retrieval+hardware, no de
-post-proceso. Artefactos: `src/pipelines/citation_repair.py`, `scripts/exp_citation_repair_eval.py`,
+post-proceso. Artefactos: `src/pipelines/citation_repair.py`, `scripts/experimentos/exp_citation_repair_eval.py`,
 `data/eval/results/citation_repair/`. Flag-gated default OFF, producción intacta.
 
 ---

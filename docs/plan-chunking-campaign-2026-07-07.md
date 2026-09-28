@@ -16,7 +16,7 @@ coloquial 39 + dev 44), sin tocar la DB hasta elegir ganador.
 Ref: LegalBench-RAG (2408.10343), Reliable Retrieval Large Legal (2510.06999), Edtek.
 
 ## Método (no-destructivo)
-Harness `scripts/exp_chunk_sweep.py`: para cada estrategia (chunker × contexto),
+Harness `scripts/experimentos/exp_chunk_sweep.py`: para cada estrategia (chunker × contexto),
 re-chunkea en MEMORIA desde `articulos.texto`, embebe con 4B (ollama, MRL-1024 = producción),
 mide rank del gold. Checkpoint por estrategia en `data/eval/results/chunk_sweep/result.json`.
 Regla de oro: el screen MIENTE → el ganador se confirma end-to-end (cita_ok) antes de adoptar.

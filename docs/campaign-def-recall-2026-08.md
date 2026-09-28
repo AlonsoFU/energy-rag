@@ -9,7 +9,7 @@ Los sets chicos (coloquial 39 / dev 44 / holdout 18) MIENTEN para deltas chicos 
 LLM flickea ±1). Se adoptó como set primario **`balanced_v2` (339q: 279 in_domain + 30 off_domain
 + 30 off_corpus-rechazo)** + **McNemar pareado** (≥5-6 flips netos para p<0.05).
 
-**Baseline E0 (config campeona 4B-1024+alias+30b-a3b, `scripts/exp_e0_baseline.py`):**
+**Baseline E0 (config campeona 4B-1024+alias+30b-a3b, `scripts/experimentos/exp_e0_baseline.py`):**
 - in_domain **173/279 (62%)** · off_domain 21/30 · rechazo **30/30 (100%)**.
 - Los sets chicos daban 82-95% → eran optimistas. 62% es el número real y robusto.
 
@@ -60,7 +60,7 @@ De las 106 fallas in_domain:
   - **BGE gold@10 sobre eval limpio = 237/279 (85%)** (screen RK1).
   - El "62%" de E0 era **injusticia de eval** (rechazaba defs alternativas válidas) + gen.
 
-## RK1 — reranker Qwen3-Reranker-4B (MUERTO, screen `scripts/exp_rk1_screen.py`)
+## RK1 — reranker Qwen3-Reranker-4B (MUERTO, screen `scripts/experimentos/exp_rk1_screen.py`)
 - gold@10: BGE **237/279** vs Qwen3 **239/279** → **Δ=+2 (ruido)**. Y Qwen3 **17× más lento**
   (1591s vs 93s). El reranker NO es el muro — ambos meten ~85% de golds al top-10.
 - Los ~40 que faltan es que el gold **ni entra al pool** (retrieval), no reranking. NO adoptar.
@@ -110,7 +110,7 @@ de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). 
 3. Glosario-enterrado: def_fragments ayuda pero net-flat → no adoptar sin gating más fino.
 
 ## Cierre #1/#2 (2026-08, audit otros evals + vigencia)
-- **def_fragments en DEV** (`scripts/exp_deffrag_dev.py`): OFF 36/44 → ON 37/44 (gano 1 "seguridad
+- **def_fragments en DEV** (`scripts/experimentos/exp_deffrag_dev.py`): OFF 36/44 → ON 37/44 (gano 1 "seguridad
   de servicio", perdió 0), McNemar p=1.0 = FLAT. Ni en glosario puro (dev = cluster art-225 LGSE)
   convierte. El art-225 ya entra al top-10 (no es recall); es GEN y la def focalizada no ayuda a
   citar confiable. **def_fragments MUERTO en todos lados.**
@@ -128,7 +128,7 @@ de Falla ×2, Sistema Eléctrico Nacional, DIP, Informe Definitivo, Tránsito). 
 Todo lo de arriba concluía "FRENTE RETRIEVAL DEFINITIVAMENTE CERRADO, sistema ~84%, próximo valor
 = vigencia o escala". **Eso resultó FALSO.** Un experimento más lo movió 5.7 puntos.
 
-### Resultado (`scripts/exp_glossary_inject.py`, McNemar pareado, balanced_v2_clean in_domain 279q)
+### Resultado (`scripts/experimentos/exp_glossary_inject.py`, McNemar pareado, balanced_v2_clean in_domain 279q)
 ```
 OFF 233/279 (83.5%)  ->  ON 249/279 (89.2%)
 gano 16, perdio 0
@@ -176,7 +176,7 @@ en `SimpleRetriever.retrieve` paso 6c.
 
 ## M1 pool 50→100: MUERTO DEFINITIVO (2026-08-06) + 2 bugs de generación encontrados
 
-### M1 (`scripts/exp_m1_paired.py`, pareado, glossary_inject ON)
+### M1 (`scripts/experimentos/exp_m1_paired.py`, pareado, glossary_inject ON)
 ```
 OFF 252/279  ->  ON 252/279   (gano 0, perdio 0)
 McNemar p=1.0000  (flat)   279/279 pares, 0 errores
@@ -241,7 +241,7 @@ Sospecha (tras ver 28 citas duplicadas en una respuesta): `cita_ok` marca True s
 pega → una respuesta que rocía citas podría acertar por VOLUMEN. Si eso fuera masivo, el 252/279
 estaría inflado y todo el plan estaría optimizando contra un número falso.
 
-### Resultado (`scripts/exp_e3_shotgun.py`, 279 in_domain, config vigente)
+### Resultado (`scripts/experimentos/exp_e3_shotgun.py`, 279 in_domain, config vigente)
 ```
 cita_ok (ALGUNA pega):   253/279  (90.7%)
 hit_first (la 1a pega):  243/279  (87.1%)

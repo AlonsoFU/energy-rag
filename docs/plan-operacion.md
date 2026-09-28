@@ -158,7 +158,7 @@ de cita: cualquier diferencia menor a eso no es mejora, es ruido.
 ## Bitácora
 
 ### 2026-08-24 — FASE 1.1 lanzada
-Criterio fijado **antes** de correr (`scripts/exp_selfcons_n1.py`, set `queries_operativas_v1`):
+Criterio fijado **antes** de correr (`scripts/experimentos/exp_selfcons_n1.py`, set `queries_operativas_v1`):
 ```
 adoptar n=1 si   cita_ok cae <= 2   Y   cita_limpia cae <= 5
 si no            quedarse en n=3 y buscar velocidad en otro lado
@@ -186,7 +186,7 @@ Exp #54 cerró `self_consistency_n` (se queda n=3, 103 s). El objetivo de ≤45 
 
 **Se corre en dos tiempos, y el primero puede matar el segundo.**
 
-**Paso 1 — sonda de latencia** (`scripts/exp_doclimit_sonda.py`, 12 queries, ~30 min).
+**Paso 1 — sonda de latencia** (`scripts/experimentos/exp_doclimit_sonda.py`, 12 queries, ~30 min).
 Solo cronómetro, sin calidad.
 ```
 si NINGUN doc_limit deja mediana <= 45 s  ->  answer_doc_limit NO es el camino.
@@ -727,7 +727,7 @@ think=True, temp 0, una palabra: SOPORTADA / PARCIAL / NO_SOPORTADA.
 SOPORTADA ahí, es sesgo del juez. Ese % es el piso de la métrica.
 
 Dev: 102/114 respuestas con frases citadas, 291 frases, 5 citas inexistentes en DB.
-Script: `scripts/exp_fidelidad.py`. Salida `data/eval/results/fidelidad_{dev,holdout}.json`.
+Script: `scripts/experimentos/exp_fidelidad.py`. Salida `data/eval/results/fidelidad_{dev,holdout}.json`.
 
 **Criterio (sobre respuestas con `cita_ok`)**:
 ```
@@ -899,7 +899,7 @@ adoptar si   cita_ok NO cae > 3  Y  cita_limpia NO cae     (dev Y held-out)
         Y    mediana de latencia <= 130 s
 ```
 
-**#72 — verificar-y-filtrar** (`scripts/exp_verificar.py`, post-hoc sobre respuestas
+**#72 — verificar-y-filtrar** (`scripts/experimentos/exp_verificar.py`, post-hoc sobre respuestas
 guardadas de `limpio_*`): borra las frases que el juez no sostiene; sin frases → rechazo.
 CIRCULAR con el juez de #68, así que el criterio NO usa ese juez:
 ```
@@ -1241,7 +1241,7 @@ de "asistente que responde", y es consistente con el veredicto SOLO BUSCADOR de 
 - *Recorte del prompt*: presupuesto 45000 chars, el glosario mide 9889.
 - *Choque de claves en el verificador*: tras la expansion llega un doc por articulo.
 
-**Causa encontrada (`scripts/exp_diag_glosario.py`, `scripts/exp_diag_quote_first.py`):** el modelo
+**Causa encontrada (`scripts/experimentos/exp_diag_glosario.py`, `scripts/experimentos/exp_diag_quote_first.py`):** el modelo
 copia bien la frase pero la **etiqueta mal**. Toma la referencia de una nota BCN metida en el
 articulo o inventa el numero:
 
@@ -1279,7 +1279,7 @@ Alternativa mas amplia, NO elegida primero: limpiar las notas BCN de los 598 art
 Arregla tambien la prosa y al juez, pero exige refragmentar y re-embeber con GPU y RAM que hoy
 estan en riesgo. Queda como siguiente paso si #77 no alcanza.
 
-**Diagnostico completo (9/9 casos del glosario, `scripts/exp_diag_glosario.py`):**
+**Diagnostico completo (9/9 casos del glosario, `scripts/experimentos/exp_diag_glosario.py`):**
 
 | tipo de fallo | casos |
 |---|---|
@@ -1863,7 +1863,7 @@ Hay que re-juzgarlos contra esa base con criterio nuevo; NO se readopta nada por
 | DB | descartado | 0 vectores (4B y 0.6B) y 0 textos distintos contra `fragmentos_bak_emb_20260917` / `_bak_notas_20260906` |
 | Ollama / modelos | descartado | binario del 04-29 (0.22.1), blobs de junio |
 | dispositivo del embedder | descartado | CPU ambos dias (`exp_think_paired.py:190`; journal: `offloaded 0/37`) |
-| `embed_4b_num_ctx` 32768->4096 (`0a0d74e`) | **descartado, exp #80** | `scripts/exp_numctx_queries.py`: coseno 1.000000 en 114/114 (prefijo 1024), control 1.000000; journal confirma `KvSize:32768` en el brazo viejo. Mi hipotesis era falsa |
+| `embed_4b_num_ctx` 32768->4096 (`0a0d74e`) | **descartado, exp #80** | `scripts/experimentos/exp_numctx_queries.py`: coseno 1.000000 en 114/114 (prefijo 1024), control 1.000000; journal confirma `KvSize:32768` en el brazo viejo. Mi hipotesis era falsa |
 | tope GPU 230->180 W | descartado | `qonly2_holdout` (09-14 03:02) ya corrio a 180 W y muestra el mismo patron |
 | **`1517efe` (#77, 09-14 10:42)** | **en prueba, exp #81** | reescribio el verificador de citas de `generate.py` "con flag OFF"; una de las 13 cambia `[Art. 8 de 250604]` -> `[Art. 8º de 250604]` |
 
@@ -2093,7 +2093,7 @@ que el top-10 sea igual en dev + held-out, y adoptar. Esperable: busqueda de ~22
 `SETCFG=self_consistency_n=3`. Tests: 5 fallas preexistentes, las mismas antes y despues.
 
 ### RESULTADO #88 (2026-09-21 18:25) — reranker BGE en GPU: orden IDENTICO, pero desplaza al LLM
-`scripts/exp_reranker_gpu.py`, una pasada por query que puntua los MISMOS pares en CPU y en GPU-fp32
+`scripts/experimentos/exp_reranker_gpu.py`, una pasada por query que puntua los MISMOS pares en CPU y en GPU-fp32
 (dev + held-out + 16 reales = 194 llamadas a rerank):
 | | resultado | criterio |
 |---|---|---|

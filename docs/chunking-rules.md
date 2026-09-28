@@ -31,7 +31,7 @@ Fuentes:
 
 ## 2. Reglas de estructura (los regex, antes sueltos en el código)
 
-Viven en `scripts/exp_chunk_sweep.py`. Detectan la estructura que la norma **ya tiene**
+Viven en `scripts/experimentos/exp_chunk_sweep.py`. Detectan la estructura que la norma **ya tiene**
 (no inventan divisiones — eso es requisito legal-safe).
 
 | símbolo | regex | detecta | ejemplo | límite conocido |
@@ -90,7 +90,7 @@ Lecturas:
   whole) y parte **22.3%** de spans padre:hijo.
 - `glossary` pierde texto en 10 artículos (cobert <0.99) — el parser descarta ítems sin `:`.
 
-### Cobertura de estructura (`scripts/exp_chunk_qa.py`, 2978 artículos)
+### Cobertura de estructura (`scripts/experimentos/exp_chunk_qa.py`, 2978 artículos)
 Complementario al anterior: ¿el regex se está perdiendo estructura que la norma SÍ tiene?
 ```
 inciso_1chunk    2442   artículos sin subdivisión detectada (82%) → quedan enteros
@@ -246,7 +246,7 @@ Referencias: [small-to-big](https://medium.com/data-science/advanced-rag-01-smal
 [auto-merging (Haystack)](https://haystack.deepset.ai/blog/improve-retrieval-with-auto-merging) ·
 parent-document-retriever (LangChain) · AutoMergingRetriever (LlamaIndex).
 
-Script: `scripts/exp_small_to_big.py`. Reusa los pools ya cacheados; solo cambia QUÉ texto se
+Script: `scripts/experimentos/exp_small_to_big.py`. Reusa los pools ya cacheados; solo cambia QUÉ texto se
 sirve al generador. Padres deduplicados por artículo (auto-merging), cap 4000c/artículo.
 
 Métrica: **cita_ok** (end-to-end), gen `qwen3:30b-a3b`.
@@ -291,5 +291,5 @@ es "texto mejor apuntado".*
 
 Los tres inflaban el efecto en la dirección que yo esperaba. **Medir mal es peor que no medir.**
 
-Scripts: `scripts/exp_chunk_sweep.py` (sweep) · `scripts/qa_chunking.py` (QA).
+Scripts: `scripts/experimentos/exp_chunk_sweep.py` (sweep) · `scripts/qa_chunking.py` (QA).
 Datos: `data/eval/results/chunk_sweep/result.json`.

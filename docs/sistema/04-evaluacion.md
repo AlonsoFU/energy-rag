@@ -22,7 +22,7 @@ aportará preguntas propias; las 80 públicas son la fuente independiente.
 | `cita_limpia` | `cita_ok` y además precisión ≥ umbral (no rocía citas) |
 | `precision` | fracción de citas que son gold |
 | `refuso` / `rechazo_ok` | respondió «no encontré» / y correspondía |
-| fidelidad (juez #68) | ¿la frase dice lo que dice el artículo? `scripts/exp_fidelidad.py` |
+| fidelidad (juez #68) | ¿la frase dice lo que dice el artículo? `scripts/experimentos/exp_fidelidad.py` |
 
 ## Cómo se mide un cambio
 ```bash

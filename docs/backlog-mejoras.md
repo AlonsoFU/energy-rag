@@ -66,12 +66,12 @@ timeouts como False · golds mención-vs-definición · parser de ordinales +7).
    Ganó más de lo diagnosticado (atacaba 6 glosario, ganó 16): también arregló casos "ranking"
    donde el gold estaba en el pool pero el reranker lo enterraba.
 2. [-] **M1 re-test pool=100 sobre eval limpio** — PROBADO 2026-08-06, **MUERTO DEFINITIVO**.
-   Pareado limpio (`scripts/exp_m1_paired.py`, ambos brazos misma sesión, glossary_inject ON):
+   Pareado limpio (`scripts/experimentos/exp_m1_paired.py`, ambos brazos misma sesión, glossary_inject ON):
    **OFF 252/279 → ON 252/279, gano 0 perdio 0, McNemar p=1.0000.** 279/279 pares, 0 errores.
    41 top-10 cambiaron y NINGUNO convirtió. El pool NO es el muro; el gold no está en rank 50-100.
    No re-probar con otras profundidades sin una hipótesis nueva.
 3. [x] **D2 · extractor formato LEYENDA DE VARIABLE** — HECHO 2026-08-07, adoptado por
-   CORRECCIÓN DE DATOS (no por el Δ). `scripts/exp_d2_paired.py` (swap de tablas para el brazo OFF):
+   CORRECCIÓN DE DATOS (no por el Δ). `scripts/experimentos/exp_d2_paired.py` (swap de tablas para el brazo OFF):
    **OFF 252/267 → ON 254/267 (gano 3, perdio 1), McNemar p=0.6250 = NO significativo.**
    Ganó: `definición de TON`, `qué significa TON`, `qué significa Infracciones graves`.
    Perdió: `qué es Proyecto` (con el gold en rank=0 igual → flicker de gen).
@@ -121,10 +121,10 @@ timeouts como False · golds mención-vs-definición · parser de ordinales +7).
    PERO calidad de cita mala: **precisión media 0.43, mediana 0.33** (143/253 hits con <0.5);
    13.1 citas por respuesta, 4.2 únicas, máx 60. Citar normas erradas junto a la correcta es
    problema legal aunque cita_ok dé True. → causa = GEN8, no la métrica.
-   `scripts/exp_e3_shotgun.py` (además PERSISTE el texto de cada respuesta — ningún eval previo
+   `scripts/experimentos/exp_e3_shotgun.py` (además PERSISTE el texto de cada respuesta — ningún eval previo
    lo guardaba, por eso no se podía auditar hacia atrás).
 5c. [-] **GEN8a `think=True`** (razonamiento en canal separado) — PROBADO 2026-08-08, **NEGATIVO**.
-   `scripts/exp_gen8_paired.py`: **cita_ok 254→237 (gano 0, perdio 17)**.
+   `scripts/experimentos/exp_gen8_paired.py`: **cita_ok 254→237 (gano 0, perdio 17)**.
    Calidad de cita SÍ mejora: citas 13.23→2.55, únicas 4.04→1.80, **precisión 0.42→0.64**.
    Coste: +23% de tiempo (19.8→24.4 s).
    Desglose de las 17 pérdidas: **5 VACÍAS** (tecnico, ver abajo) · **2 def alternativa válida**

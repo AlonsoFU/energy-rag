@@ -23,7 +23,7 @@ import re
 import statistics as st
 from src.storage.connection import with_connection
 from psycopg.rows import dict_row
-from scripts.exp_chunk_sweep import CHUNKERS
+from scripts.experimentos.exp_chunk_sweep import CHUNKERS
 
 TINY, HUGE = 50, 3000
 _WS = re.compile(r"\s+")
