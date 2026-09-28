@@ -53,16 +53,16 @@ la entidad implícita = territorio `graph_boost_all`, con riesgo de falsos posit
 
 ## FASE C — Fine-tune del embedder (detalle)
 
-**Dataset** (`scripts/ft_gen_dataset.py` → `data/eval/ft_pairs.jsonl`): 1438 pares
+**Dataset** (`scripts/archivo/ft_gen_dataset.py` → `data/eval/ft_pairs.jsonl`): 1438 pares
 (coloquial sintético → texto de artículo), 719 artículos de las 5 normas eléctricas. **Held-out
 honesto:** los 39 artículos gold reales de `queries_coloquial_v2` se EXCLUYERON del
 entrenamiento → cualquier mejora sería generalización de registro, no memorización.
 
-**Entrenamiento** (`scripts/ft_train.py`, MultipleNegativesRankingLoss, GTX 1080 8GB, fp32):
+**Entrenamiento** (`scripts/archivo/ft_train.py`, MultipleNegativesRankingLoss, GTX 1080 8GB, fp32):
 - v1 suave: congela capas 0-19, entrena top-8 + norm, 2 épocas, batch 8.
 - v2 fuerte: congela 0-7, entrena 8-27 (315M) + grad checkpointing, 3 épocas, batch 4.
 
-**Eval pure-vector** (`scripts/ft_eval.py`, gold-artículo∈top10, índice = 2921 artículos):
+**Eval pure-vector** (`scripts/archivo/ft_eval.py`, gold-artículo∈top10, índice = 2921 artículos):
 ```
                  BASE   v1(suave)   v2(fuerte)
 coloquial(tgt)   25/39  26 (+1)     22 (−3)
@@ -87,7 +87,7 @@ degrada TODO — el held-out gold-leído-de-la-ley lo detecta. Fine-tune NO cier
   default OFF; retrieval top_k=10.
 - **Código nuevo flag-gated (inerte):** `selective_reform` en config/expansion/retrieve.
 - **Artefactos de experimento:** `scripts/ft_*.py`, `scripts/campaign_reform_driver.sh`,
-  `scripts/diag_coloquial_routing.py`, `data/eval/ft_pairs.jsonl`,
+  `scripts/archivo/diag_coloquial_routing.py`, `data/eval/ft_pairs.jsonl`,
   `data/eval/results/campaign/REF_*.json`, `data/eval/results/ft_eval*.log`.
 - **Modelos FT en disco** (~2.4GB): `models/qwen3-ft-coloquial{,-v2}/` — NO adoptados, borrables.
 

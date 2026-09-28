@@ -29,7 +29,7 @@ from psycopg.rows import dict_row
 from src.components.vectorstore import with_connection
 from src.parsers.norm_structure_parser import NormStructureParser
 from scripts.bajar_candidatas import identidad_ok
-from scripts.marcar_fuera_dominio import _embed_4b_query
+from scripts.archivo.marcar_fuera_dominio import _embed_4b_query
 
 DIR = Path("data/normas_completas/nuevas")
 TOLERANCIA = 0.90       # el texto nuevo no puede ser < 90% del guardado sin permiso explicito
@@ -46,7 +46,7 @@ class _D:
 def main(nid, aplicar=False, permitir_encoger=False):
     f = DIR / f"{nid}.json"
     if not f.exists():
-        print(f"no existe {f} — bajarla primero con scripts.bajar_por_id")
+        print(f"no existe {f} — bajarla primero con scripts.archivo.bajar_por_id")
         return
     d = json.loads(f.read_text())
     nuevo = d.get("texto_completo") or ""
@@ -149,8 +149,8 @@ def main(nid, aplicar=False, permitir_encoger=False):
     # insolvencia, ajena al dominio electrico, que estaba marcada dentro y sin puntaje. Sin
     # esto, 415 articulos ajenos entran al pool de retrieval.
     try:
-        from scripts.frontera_mercados import DOMINIO as _DOM
-        from scripts.marcar_fuera_dominio import CORTE as _CORTE, _v as _vv
+        from scripts.archivo.frontera_mercados import DOMINIO as _DOM
+        from scripts.archivo.marcar_fuera_dominio import CORTE as _CORTE, _v as _vv
         import re as _re
         _ref = _vv(_re.sub(r"\s+", " ", _DOM).strip())
         muestra = " ".join(a.texto for a in list(arts.values())[:3])[:1200]

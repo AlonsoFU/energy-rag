@@ -16,11 +16,11 @@
 |---|---|
 | `src/extraction/canonical_names.py` (NUEVO) | Reglas puras: `extract_canonical`, `decide_action`, constantes de límite, `_na`. Sin DB. |
 | `tests/extraction/test_canonical_names.py` (NUEVO) | Unit tests de las dos funciones puras + regresión de la distribución del corpus. |
-| `scripts/canonicalize_concepts.py` (NUEVO) | Runner de ingesta: lee conceptos, decide, `--apply` (UPDATE) o cola; idempotente. |
-| `scripts/dryrun_canonical_names.py` (MODIFICAR) | Refactor: importa `extract_canonical` del módulo (una sola fuente de verdad). |
+| `scripts/archivo/canonicalize_concepts.py` (NUEVO) | Runner de ingesta: lee conceptos, decide, `--apply` (UPDATE) o cola; idempotente. |
+| `scripts/archivo/dryrun_canonical_names.py` (MODIFICAR) | Refactor: importa `extract_canonical` del módulo (una sola fuente de verdad). |
 
 Convenciones del repo a seguir (ya verificadas):
-- DB: `from src.storage.connection import with_connection`; `conn.cursor(row_factory=dict_row)`; `conn.commit()`. Patrón `--dry-run`/`--apply` y `python -m scripts.X` como en `scripts/build_definitions_auto.py`.
+- DB: `from src.storage.connection import with_connection`; `conn.cursor(row_factory=dict_row)`; `conn.commit()`. Patrón `--dry-run`/`--apply` y `python -m scripts.X` como en `scripts/archivo/build_definitions_auto.py`.
 - Cola de revisión: YAML bajo `glossary/incoming/` (ya existe `glossary/incoming/off_domain.yaml`).
 - Tests con DB usan fixtures `postgres_container` (session) y `db_clean` de `tests/conftest.py`. Las dos funciones puras NO necesitan DB.
 
@@ -296,7 +296,7 @@ git commit -m "feat(extraction): decide_action — idempotency + collision routi
 ## Task 3: Refactor del dry-run + test de regresión del corpus
 
 **Files:**
-- Modify: `scripts/dryrun_canonical_names.py`
+- Modify: `scripts/archivo/dryrun_canonical_names.py`
 - Test: `tests/extraction/test_canonical_names.py`
 
 - [ ] **Step 1: Write the failing regression test**
@@ -328,14 +328,14 @@ def test_corpus_distribution_frozen():
 - [ ] **Step 2: Run test to verify it passes already**
 
 Run: `./venv/bin/python -m pytest tests/extraction/test_canonical_names.py::test_corpus_distribution_frozen -q`
-Expected: PASS (the module reproduces the dry-run's validated numbers). If it FAILS, the regex in Task 1 diverged from the validated dry-run — fix the regex to match `scripts/dryrun_canonical_names.py` before continuing.
+Expected: PASS (the module reproduces the dry-run's validated numbers). If it FAILS, the regex in Task 1 diverged from the validated dry-run — fix the regex to match `scripts/archivo/dryrun_canonical_names.py` before continuing.
 
 - [ ] **Step 3: Refactor the dry-run to import from the module (DRY)**
 
-Replace the inlined `extract_canonical`/`_BOUNDARY`/`_na` in `scripts/dryrun_canonical_names.py` with an import, keeping the reporting intact:
+Replace the inlined `extract_canonical`/`_BOUNDARY`/`_na` in `scripts/archivo/dryrun_canonical_names.py` with an import, keeping the reporting intact:
 
 ```python
-# scripts/dryrun_canonical_names.py — replace the rule definitions with:
+# scripts/archivo/dryrun_canonical_names.py — replace the rule definitions with:
 from src.extraction.canonical_names import extract_canonical, _na
 # (delete the local _na, _BOUNDARY and extract_canonical defined here)
 ```
@@ -344,13 +344,13 @@ Leave `main()` and its printing unchanged; it already calls `extract_canonical(n
 
 - [ ] **Step 4: Run the dry-run to confirm identical output**
 
-Run: `PYTHONPATH=. ./venv/bin/python scripts/dryrun_canonical_names.py`
+Run: `PYTHONPATH=. ./venv/bin/python scripts/archivo/dryrun_canonical_names.py`
 Expected: `high: 6 / low: 1 / no-fire: 327 / colisiones: 0` (same as before refactor).
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add scripts/dryrun_canonical_names.py tests/extraction/test_canonical_names.py
+git add scripts/archivo/dryrun_canonical_names.py tests/extraction/test_canonical_names.py
 git commit -m "refactor(extraction): dry-run imports rule A; freeze corpus distribution test"
 ```
 
@@ -359,12 +359,12 @@ git commit -m "refactor(extraction): dry-run imports rule A; freeze corpus distr
 ## Task 4: Runner de ingesta `canonicalize_concepts.py`
 
 **Files:**
-- Create: `scripts/canonicalize_concepts.py`
+- Create: `scripts/archivo/canonicalize_concepts.py`
 
 - [ ] **Step 1: Write the runner**
 
 ```python
-# scripts/canonicalize_concepts.py
+# scripts/archivo/canonicalize_concepts.py
 """Apply canonical-name extraction (rule A) over the concepts table.
 
 Default is DRY-RUN (prints what it would do). With --apply it writes:
@@ -375,8 +375,8 @@ Default is DRY-RUN (prints what it would do). With --apply it writes:
 Runs after build_definitions_auto.py in the ingestion flow. Idempotent: a
 concept with metadata.canonical_source is skipped.
 
-Run:  PYTHONPATH=. ./venv/bin/python scripts/canonicalize_concepts.py
-      PYTHONPATH=. ./venv/bin/python scripts/canonicalize_concepts.py --apply
+Run:  PYTHONPATH=. ./venv/bin/python scripts/archivo/canonicalize_concepts.py
+      PYTHONPATH=. ./venv/bin/python scripts/archivo/canonicalize_concepts.py --apply
 """
 from __future__ import annotations
 
@@ -470,7 +470,7 @@ if __name__ == "__main__":
 
 - [ ] **Step 2: Run the dry-run**
 
-Run: `PYTHONPATH=. ./venv/bin/python scripts/canonicalize_concepts.py`
+Run: `PYTHONPATH=. ./venv/bin/python scripts/archivo/canonicalize_concepts.py`
 Expected: `renames (high): 6 | reviews: 1` and the 6 rename lines (Comisión, Coordinador, Informe Técnico de Valorización, Panel, Registro de Participación, Superintendencia). Nothing written.
 
 - [ ] **Step 3: Verify idempotency precondition (read-only)**
@@ -481,7 +481,7 @@ Expected: `0` (nothing canonicalized yet).
 - [ ] **Step 4: Commit**
 
 ```bash
-git add scripts/canonicalize_concepts.py
+git add scripts/archivo/canonicalize_concepts.py
 git commit -m "feat(extraction): canonicalize_concepts ingestion runner (dry-run/apply)"
 ```
 
@@ -494,7 +494,7 @@ git commit -m "feat(extraction): canonicalize_concepts ingestion runner (dry-run
 
 - [ ] **Step 1: Apply to the DB**
 
-Run: `PYTHONPATH=. ./venv/bin/python scripts/canonicalize_concepts.py --apply`
+Run: `PYTHONPATH=. ./venv/bin/python scripts/archivo/canonicalize_concepts.py --apply`
 Expected: `Applied 6 renames.` and `Wrote 1 review candidates → glossary/incoming/canonical_review.yaml`.
 
 - [ ] **Step 2: Verify the renames + provenance**
@@ -508,7 +508,7 @@ Expected: 6 rows; e.g. `Comisión Nacional de Energía | {Comisión} | Comisión
 
 - [ ] **Step 3: Verify idempotency (second run is a no-op)**
 
-Run: `PYTHONPATH=. ./venv/bin/python scripts/canonicalize_concepts.py --apply`
+Run: `PYTHONPATH=. ./venv/bin/python scripts/archivo/canonicalize_concepts.py --apply`
 Expected: `renames (high): 0 | reviews: 0` (all 6 now carry canonical_source → skipped).
 
 - [ ] **Step 4: Re-measure citation correctness (honest, expected small)**
@@ -517,7 +517,7 @@ The injection alias index is cached in-process, so a fresh eval run picks up the
 ```bash
 PYTHONPATH=. ./venv/bin/python -m src eval --eval-file data/eval/queries_ab_focused.jsonl --top-k 10 --save
 # then, with the new results file <ts>:
-PYTHONPATH=. ./venv/bin/python scripts/score_correctness.py --results data/eval/results/<ts>.json
+PYTHONPATH=. ./venv/bin/python scripts/archivo/score_correctness.py --results data/eval/results/<ts>.json
 ```
 Expected: off_corpus refusal stays 100%; cited_expected change is small (the spec states the citation lift lives in the deferred authority/conflict iteration). Record the actual numbers.
 

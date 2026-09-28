@@ -53,7 +53,7 @@ De las 106 fallas in_domain:
   RESUMIBLES (guardar por-query, saltar los ya hechos). `exp_rechunk_clean.py` lo implementa.
 - Correr 1 solo proceso (procesos duplicados se pelean ollama → lentísimo + result.json corrupto).
 
-## E0b — auditar/limpiar golds (HECHO, `scripts/audit_golds.py`)
+## E0b — auditar/limpiar golds (HECHO, `scripts/archivo/audit_golds.py`)
 - `queries_balanced_v2_clean.jsonl`: **126 also_gold** agregados (conceptos definidos en varias
   normas ahora aceptan la def alternativa válida). Fuente: `fragmentos_definicion` (donde se define X).
 - **EL WIN de la campaña.** Reveló que el recall real es **85%**, no 62%:
@@ -256,7 +256,7 @@ timeouts contados como False, acá la sospecha NO se confirmó.*
 menos de la mitad son correctos. En contexto legal, citar normas equivocadas junto a la correcta
 es dañino aunque `cita_ok` dé True. La causa es GEN8 (el loop), no la métrica.
 
-### Descomposición REAL de las 26 fallas (`scripts/diag_refusals.py`)
+### Descomposición REAL de las 26 fallas (`scripts/archivo/diag_refusals.py`)
 ```
 RETRIEVAL (gold nunca llego al pool): 16
 GEN       (gold en el pool, no lo uso): 10   <- 6 de ellas con gold en RANK=0
@@ -339,7 +339,7 @@ extractor para 9 términos, de los cuales 4 simplemente no existen en el corpus.
 
 ## E0c HECHO (2026-08-07): 12 queries `unanswerable` → cita_ok real 94.4%
 
-`scripts/audit_unanswerable.py` auditó **las 279 in_domain** (no solo las fallas: una query que
+`scripts/archivo/audit_unanswerable.py` auditó **las 279 in_domain** (no solo las fallas: una query que
 PASA con gold mención-only acertó por suerte y también ensucia).
 
 ### Resultado

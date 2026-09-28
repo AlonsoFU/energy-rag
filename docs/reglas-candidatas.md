@@ -69,7 +69,7 @@ DISPOSITIVO = r"\n\s*(DECRETO|RESUELVO|RESUELVE|ORDENO)\s*:?\s*\n"
   separando el preámbulo (Visto/Considerando) del contenido real.
 - **Evidencia:** DECRETO 1 (precios de nudo) tiene **14.177 chars** de contenido dispositivo y
   **0 artículos** parseables. Sin esto el retrieval nunca lo alcanza.
-- **Por qué SÍ está (`scripts/ingest_sin_articulado.py`):** parsing de estructura documental
+- **Por qué SÍ está (`scripts/archivo/ingest_sin_articulado.py`):** parsing de estructura documental
   canónica, y es **ingesta, no decisión en runtime**.
 - **Qué la reemplazaría:** un parser de decretos que entienda la estructura completa.
 
@@ -132,7 +132,7 @@ llega última, medida y documentada.
 
 ## R8 — Atribuir artículos de una ley modificatoria a su norma destino — **NO APLICADO**
 
-`scripts/atribuir_articulos.py` existe y funciona a medias. **No se enchufa al pipeline** porque
+`scripts/archivo/atribuir_articulos.py` existe y funciona a medias. **No se enchufa al pipeline** porque
 ninguna de las dos variantes probadas es correcta, y equivocarse acá produce citas falsas.
 
 **El problema.** Una ley modificatoria no tiene artículos propios en los bloques que inserta:

@@ -39,7 +39,7 @@ Estados: `[ ]` pendiente · `[~]` en curso · `[x]` hecho-adoptado · `[-]` prob
 vacías) · [-] M2/def_fragments/rechunk (flat) · [-] RK1 (Δ+2, dead). Detalle: `campaign-def-recall-2026-08.md`.
 
 **Diagnóstico (2026-08-07, post-E3+E0c; la métrica quedó luego en 97.4% con GEN9a):** cita_ok
-contestables 252/267. De las **26 fallas brutas** (`scripts/diag_refusals.py`):
+contestables 252/267. De las **26 fallas brutas** (`scripts/archivo/diag_refusals.py`):
 Por origen: 16 RETRIEVAL (gold nunca llegó al pool) + 10 GEN (gold en pool, 6 con **rank=0**).
 19 de las 26 son **RECHAZOS** ("no encuentro la norma"), no citas erradas.
 
@@ -160,7 +160,7 @@ timeouts como False · golds mención-vs-definición · parser de ordinales +7).
 **Diferido:** FT1/FT2, escala, frontera (referencia).
 
 ### ADMIN / limpieza
-- [x] **E0c · golds MENCIÓN-vs-DEFINICIÓN** — HECHO 2026-08-07 (`scripts/audit_unanswerable.py`).
+- [x] **E0c · golds MENCIÓN-vs-DEFINICIÓN** — HECHO 2026-08-07 (`scripts/archivo/audit_unanswerable.py`).
   **12 queries in_domain piden definiciones que el corpus NO contiene**: `Gas licuado` ×3,
   `Acometida` ×3, `Vehículo` ×3, `Empresa distribuidora` ×3. El gold apunta a un artículo donde el
   término solo APARECE (1160108/16 "diagrama georreferenciado de la acometida"; 1155887/7°

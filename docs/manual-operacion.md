@@ -66,8 +66,8 @@ Con un cambio real: `--impacto <id_norma>` dice qué procesos toca antes de toca
 ```bash
 PYTHONPATH=. venv/bin/python -m scripts.bajar_candidatas          # baja de BCN
 PYTHONPATH=. venv/bin/python -m scripts.ingerir_nuevas            # parsea e ingesta
-PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio      # simula la frontera
-PYTHONPATH=. venv/bin/python -m scripts.marcar_fuera_dominio --aplicar
+PYTHONPATH=. venv/bin/python -m scripts.archivo.marcar_fuera_dominio      # simula la frontera
+PYTHONPATH=. venv/bin/python -m scripts.archivo.marcar_fuera_dominio --aplicar
 PYTHONPATH=. venv/bin/python -m scripts.estructura_articulado --aplicar   # procesos
 ```
 ⚠️ **El buscador de BCN busca solo por número.** Pedir `DECRETO 44` (Reglamento del Panel de

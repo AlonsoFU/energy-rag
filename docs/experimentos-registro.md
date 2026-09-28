@@ -459,7 +459,7 @@ por contexto/jerarquía en vez de por longitud de texto.
 ## #41 — B1.2 FRASEOS VARIADOS: el número honesto (2026-08-18) — **CONFIRMA LA CIRCULARIDAD**
 
 Primer experimento que NO prueba una mejora: mide **cuánto del 98.9% es circularidad**.
-Set: `data/eval/queries_fraseos_v1.jsonl` (64q, generado por `scripts/build_fraseos_set.py`).
+Set: `data/eval/queries_fraseos_v1.jsonl` (64q, generado por `scripts/archivo/build_fraseos_set.py`).
 Runner: `scripts/experimentos/exp_fraseos_paired.py`. Resultados: `data/eval/results/fraseos_v1/`.
 
 **Diseño.** Pareado POR TÉRMINO, ambos brazos en la misma sesión (regla #4):
@@ -898,7 +898,7 @@ Es la **REGLA #2** del proyecto ("todo scorer nuevo declara cómo puntúa el REC
 correrse"), fallada por tercera vez, ahora en un runner que yo mismo escribí.
 
 **Corregido SIN GPU** — el texto de cada respuesta estaba persistido (regla #5, que existe
-exactamente para esto). `scripts/repuntuar.py` re-puntúa las corridas guardadas:
+exactamente para esto). `scripts/archivo/repuntuar.py` re-puntúa las corridas guardadas:
 
 ```
                        scorer VIEJO            scorer CORRECTO

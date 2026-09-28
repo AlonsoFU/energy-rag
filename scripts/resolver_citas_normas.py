@@ -179,8 +179,8 @@ def main(escribir=False):
     # la cita, no la norma misma -- pero se obtiene sin descargar nada y ordena mucho mejor
     # que el numero de citas, que pone arriba justo las normas transversales.
     try:
-        from scripts.frontera_mercados import DOMINIO
-        from scripts.marcar_fuera_dominio import _v
+        from scripts.archivo.frontera_mercados import DOMINIO
+        from scripts.archivo.marcar_fuera_dominio import _v
         ref = _v(re.sub(r"\s+", " ", DOMINIO).strip())
         for k, v in externas.items():
             if not v["ctx"] or not ref:

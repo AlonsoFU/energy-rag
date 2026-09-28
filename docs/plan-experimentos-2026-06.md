@@ -67,7 +67,7 @@ AdaptiveRetriever completo (multi_query/step_back) + BGE sobre el extremo (`A_ad
   **lever NUEVO**, no la maquinaria existente.
 
 ### Lever DESCOMPOSICIÓN de query — PROBADO, DESCARTADO (2026-06)
-Prototipo retrieval-only (`scripts/diag_decompose.py`, LLM parte en sub-preguntas → unión de pools
+Prototipo retrieval-only (`scripts/archivo/diag_decompose.py`, LLM parte en sub-preguntas → unión de pools
 → BGE) sobre el extremo: TOTAL **12→10/18 (−2)**. No ayuda distractor (0/3) ni multi-parte (0/2),
 y **regresa ext_hundida 6→4** (partir queries limpias mete ruido). El LLM además no descompone los
 distractores (subs=1). Descartado.

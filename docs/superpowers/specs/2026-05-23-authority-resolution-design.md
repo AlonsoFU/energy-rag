@@ -41,7 +41,7 @@ ingenuo de autoridad. B1 arregla el sistema **y** el eval.
 | `src/extraction/authority.py` (NUEVO, puro) | `select_authoritative(cands) -> dict`. `cands` = lista de `{id_norma, articulo, rank, fecha}`. Regla: mayor rank → fecha más reciente (NULLS last) → si empata en rank+fecha, `{"status":"conflict", ...}`; si gana uno, `{"status":"resolved", "id_norma", "articulo"}`. Sin derogación ni ámbito. |
 | `scripts/resolve_authority.py` (NUEVO) | Sobre cada concepto con `define_termino` en >1 norma: arma candidatos, llama `select_authoritative`, guarda `conceptos.metadata.authoritative={id_norma,articulo}` (o `conflict=true` + lista). Idempotente (`metadata.authority_resolved`). `--apply`. Corre en ingesta tras `canonicalize_concepts`. |
 | `src/pipelines/concept_injection.py` (MODIFICAR) | Cuando un concepto tiene `metadata.authoritative`, el inject usa ESE artículo (en vez de la regla de fecha del `_concept_index`). Conflicto → no fuerza (se resolverá en B3). |
-| `scripts/build_eval_balanced.py` (MODIFICAR) | `expected_norma/articulo` por autoridad (no fecha) → corrige el gold ingenuo. Regenerar el set y re-medir cita_ok. |
+| `scripts/archivo/build_eval_balanced.py` (MODIFICAR) | `expected_norma/articulo` por autoridad (no fecha) → corrige el gold ingenuo. Regenerar el set y re-medir cita_ok. |
 
 ## 4. Flujo de datos
 

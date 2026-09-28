@@ -23,7 +23,7 @@ from psycopg.rows import dict_row
 
 from src.components.llm import get_llm_provider
 from src.components.vectorstore import with_connection
-from scripts.frontera_mercados import DOMINIO
+from scripts.archivo.frontera_mercados import DOMINIO
 
 MODEL = "ollama/qwen3:30b-a3b"
 

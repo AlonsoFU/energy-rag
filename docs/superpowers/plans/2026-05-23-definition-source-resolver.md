@@ -17,7 +17,7 @@
 - `src/extraction/definition_quality.py` (NUEVO, puro) — Capa 0: detección de definición floja.
 - `src/extraction/definition_source.py` (NUEVO, puro) — Capa 1: resolución determinista entre candidatos.
 - `src/extraction/definition_proposer.py` (NUEVO) — Capa 2: decisión tentativa vía LLM (inyectable para test).
-- `scripts/resolve_definition_sources.py` (NUEVO) — runner: orquesta 0→2, escribe puntero+bandera+YAML.
+- `scripts/archivo/resolve_definition_sources.py` (NUEVO) — runner: orquesta 0→2, escribe puntero+bandera+YAML.
 - `src/pipelines/concept_injection.py` (MODIFICAR) — el inject prefiere `metadata.definition_source`.
 - Tests espejo en `tests/extraction/` y `tests/pipelines/`.
 
@@ -386,13 +386,13 @@ def propose_definition_source(nombre: str, candidates: list[dict],
 ## Task 4: Runner `resolve_definition_sources.py`
 
 **Files:**
-- Create: `scripts/resolve_definition_sources.py`
+- Create: `scripts/archivo/resolve_definition_sources.py`
 - (Validación manual; sin test unitario — toca DB real, igual que `resolve_authority.py`.)
 
 - [ ] **Step 1: Implement** (sigue el patrón EXACTO de `scripts/resolve_authority.py`: `with_connection`, `dict_row`, argparse `--apply`, jsonb merge, dry-run por defecto)
 
 ```python
-# scripts/resolve_definition_sources.py
+# scripts/archivo/resolve_definition_sources.py
 """Resolve each concept's authoritative DEFINITION source (Capa 0→2).
 
 For every concept, gather its defining articles as candidates; if the marked
@@ -403,8 +403,8 @@ criterio, confianza, needs_review} — high confidence has needs_review=False,
 low confidence True. Also writes an auditable YAML. Dry-run by default;
 --apply writes. Idempotent (recomputes from current data each run).
 
-Run:  PYTHONPATH=. ./venv/bin/python scripts/resolve_definition_sources.py
-      PYTHONPATH=. ./venv/bin/python scripts/resolve_definition_sources.py --apply
+Run:  PYTHONPATH=. ./venv/bin/python scripts/archivo/resolve_definition_sources.py
+      PYTHONPATH=. ./venv/bin/python scripts/archivo/resolve_definition_sources.py --apply
 """
 from __future__ import annotations
 
@@ -532,7 +532,7 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Dry-run.** `PYTHONPATH=. ./venv/bin/python scripts/resolve_definition_sources.py`
+- [ ] **Step 2: Dry-run.** `PYTHONPATH=. ./venv/bin/python scripts/archivo/resolve_definition_sources.py`
   Esperado: SEC / Comisión / Ministerio aparecen como suspect; los institucionales caen en `⚠ baja/revisar` con candidato a ley orgánica (29819 / 1008692) y criterio `especialidad`.
 - [ ] **Step 3: Commit** `feat(extraction): resolve_definition_sources runner (deterministic + tentative, audited)`
 
@@ -616,8 +616,8 @@ Then in BOTH SELECT loops of `_concept_index`, replace the pointer-selection lin
 **Files:** ninguno (operación).
 
 - [ ] **Step 1:** Asegura DB+Ollama arriba: `docker start energy_rag_pg`; `curl -sf http://localhost:11434/api/tags >/dev/null && echo ok`.
-- [ ] **Step 2:** Dry-run y revisa la lista: `PYTHONPATH=. ./venv/bin/python scripts/resolve_definition_sources.py`. Confirma que SEC/Comisión/Ministerio salen `⚠ baja/revisar` apuntando a ley orgánica.
-- [ ] **Step 3:** Aplica: `PYTHONPATH=. ./venv/bin/python scripts/resolve_definition_sources.py --apply`. Revisa `glossary/incoming/definition_source_review.yaml`.
+- [ ] **Step 2:** Dry-run y revisa la lista: `PYTHONPATH=. ./venv/bin/python scripts/archivo/resolve_definition_sources.py`. Confirma que SEC/Comisión/Ministerio salen `⚠ baja/revisar` apuntando a ley orgánica.
+- [ ] **Step 3:** Aplica: `PYTHONPATH=. ./venv/bin/python scripts/archivo/resolve_definition_sources.py --apply`. Revisa `glossary/incoming/definition_source_review.yaml`.
 - [ ] **Step 4:** Verifica en vivo: `PYTHONPATH=. ./venv/bin/python -m src ask "qué es SEC" -k 10` → debe citar `[Art. 23 de 29819]` (ley orgánica) y la respuesta describir la SEC, no la etiqueta.
 - [ ] **Step 5:** Idempotencia: 2ª corrida `--apply` no cambia los de alta confianza ni re-marca lo ya resuelto.
 - [ ] **Step 6:** Medición del SKILL (no del eval): contar en el YAML cuántos `needs_review` y, tras tu revisión manual, cuántos confirmaste correctos = tasa de acierto de la capa tentativa. Anota el número en el handoff.
@@ -642,7 +642,7 @@ fuzzy). Cada candidato lleva `origin: "curated" | "retrieved"`.
 - [ ] Tests: merge dedup+tag+precedencia; `resolve_definition_source` con un sustantivo retrieved-only → `unresolved`.
 
 ### Task 8: wire retrieval en el runner
-**Files:** Modify `scripts/resolve_definition_sources.py`.
+**Files:** Modify `scripts/archivo/resolve_definition_sources.py`.
 
 - [ ] Flag `--with-retrieval` (default off). Cuando on y un concepto NO resuelve determinista: construir retriever lazy (`SimpleRetriever(store, Qwen3Embedder(), Qwen3Reranker())`, como `src/cli.py:42-49`), `retrieve(nombre, top_k=8)` (+ por cada alias), enriquecer cada doc retrieved con `rank=derive_rank(n.tipo,n.titulo)` y `fecha` vía lookup a `normas`, `definicion=articulo_text`, `origin="retrieved"`; `gather_candidates(curated, retrieved)`; pasar el merge al proposer.
 - [ ] Sin `--with-retrieval` el comportamiento es idéntico al actual (sólo curated).

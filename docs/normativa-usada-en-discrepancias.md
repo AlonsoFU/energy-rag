@@ -1,6 +1,6 @@
 # Normativa que el sector cita en sus discrepancias
 
-Generado por `scripts/extraer_de_discrepancias.py` sobre los PDF de
+Generado por `scripts/archivo/extraer_de_discrepancias.py` sobre los PDF de
 `data/discrepancias/`. **Es descubrimiento por USO, no por búsqueda**: una norma que
 aparece en una discrepancia real ante el Panel de Expertos es normativa viva del
 sector. El frente de descubrimiento prospectivo estaba bloqueado porque los sitios

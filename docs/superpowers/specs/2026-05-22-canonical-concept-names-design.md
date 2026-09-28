@@ -34,7 +34,7 @@ cuerpo. Consecuencia: "qué es Comité" es **ambiguo** (colisiona con "Comité p
 las Autorizaciones Sectoriales e Inversión" de otra norma), y el sistema cita /
 responde la entidad equivocada.
 
-**Alcance real medido** (dry-run `scripts/dryrun_canonical_names.py` sobre 334
+**Alcance real medido** (dry-run `scripts/archivo/dryrun_canonical_names.py` sobre 334
 conceptos): la mayoría de los 97 conceptos de una palabra son **términos
 legítimos** (Acometida, Cliente, Biomasa) y NO deben tocarse. El truncamiento
 re-enunciado afecta a ~6-7 conceptos hoy. El valor real es **a escala**: A
@@ -87,9 +87,9 @@ correr el paso es seguro y no re-extiende en cascada.
 | archivo | responsabilidad |
 |---|---|
 | `src/extraction/canonical_names.py` (NUEVO) | `extract_canonical(nombre, definicion) -> (canonical\|None, confianza)`. Puro, sin DB. Constantes de límites. |
-| `scripts/canonicalize_concepts.py` (NUEVO) | Corre A sobre la DB. `--apply` (default dry-run). Alta→UPDATE; baja/colisión→YAML. Idempotente. |
+| `scripts/archivo/canonicalize_concepts.py` (NUEVO) | Corre A sobre la DB. `--apply` (default dry-run). Alta→UPDATE; baja/colisión→YAML. Idempotente. |
 | `tests/extraction/test_canonical_names.py` (NUEVO) | Unit tests de la regla pura. |
-| `scripts/dryrun_canonical_names.py` (YA EXISTE) | Reporte read-only de distribución (queda como herramienta de inspección). |
+| `scripts/archivo/dryrun_canonical_names.py` (YA EXISTE) | Reporte read-only de distribución (queda como herramienta de inspección). |
 
 `extract_canonical` reemplaza la lógica del dry-run y este último la importa
 (DRY: una sola fuente de verdad de la regla).

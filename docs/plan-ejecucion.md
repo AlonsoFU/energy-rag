@@ -97,7 +97,7 @@ podía arreglar esto.** Prioridad sobre el resto del bloque — no depende de la
 
 | # | qué | GPU | h | dep |
 |---|---|---|---|---|
-| 4.1 | [x] **HECHO** — `norma_evento` + `norma_snapshot` (`scripts/monitor_schema.py`). 6 tipos de evento, dedup por índice único, campo `impacto` | no | 0.5 | — |
+| 4.1 | [x] **HECHO** — `norma_evento` + `norma_snapshot` (`scripts/archivo/monitor_schema.py`). 6 tipos de evento, dedup por índice único, campo `impacto` | no | 0.5 | — |
 | 4.2 | [x] **HECHO** — `scripts/monitor_diff.py` (`--snapshot` / diff). Probado: detecta norma_nueva, texto_modificado, estado_cambiado y cruza el impacto (LGSE → 17 artículos que la citan) | no | 2 | 4.1 |
 | 4.3 | [x] **HECHO** — `scripts/monitor_run.sh` (scrape→diff→informe→snapshot). Falta que el usuario lo instale en crontab (1 línea, está en el header) | no | 0.5 | 4.2 |
 | 4.4 | [x] **HECHO** — `scripts/monitor_report.py` → `docs/monitor-ultimo-informe.md`. Separa los eventos que afectan normas CITADAS por el corpus del resto | no | 1 | 4.2 |

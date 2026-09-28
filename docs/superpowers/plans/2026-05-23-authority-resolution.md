@@ -147,7 +147,7 @@ def select_authoritative(candidates: list[dict]) -> dict:
 
 **Files:** Create `scripts/resolve_authority.py`
 
-- [ ] **Step 1: Implement** (dry-run default; `--apply` writes `metadata.authoritative`/`authority_conflict`; idempotent via `metadata.authority_resolved`). For each concept with `define_termino` in >1 norma, build candidates `{id_norma, articulo, rank=derive_rank(n.tipo,n.titulo)[0], fecha=n.fecha_publicacion}`, call `select_authoritative`, write result. Follow `scripts/canonicalize_concepts.py` patterns (with_connection, dict_row, argparse, jsonb merge).
+- [ ] **Step 1: Implement** (dry-run default; `--apply` writes `metadata.authoritative`/`authority_conflict`; idempotent via `metadata.authority_resolved`). For each concept with `define_termino` in >1 norma, build candidates `{id_norma, articulo, rank=derive_rank(n.tipo,n.titulo)[0], fecha=n.fecha_publicacion}`, call `select_authoritative`, write result. Follow `scripts/archivo/canonicalize_concepts.py` patterns (with_connection, dict_row, argparse, jsonb merge).
 
 ```python
 # scripts/resolve_authority.py — skeleton (fill SQL like build_definitions_auto.py)
@@ -177,7 +177,7 @@ def select_authoritative(candidates: list[dict]) -> dict:
 
 ## Task 5: Corregir el ground-truth del eval + medir
 
-**Files:** Modify `scripts/build_eval_balanced.py` and/or `scripts/build_eval_diverse.py`; Modify handoff.
+**Files:** Modify `scripts/archivo/build_eval_balanced.py` and/or `scripts/archivo/build_eval_diverse.py`; Modify handoff.
 
 - [ ] **Step 1:** En el SQL que arma `expected_norma/articulo`, usar `metadata.authoritative` cuando exista (fallback a fecha). Regenerar `queries_diverse.jsonl`.
 - [ ] **Step 2:** Re-correr el eval diverso (182q) y `score_diverse.py`. Esperado: `alias_sigla` cita_ok sube hacia ~100% (SEC/Comisión ahora esperan la Ley, que el sistema ya cita). Sin regresión en off_corpus.

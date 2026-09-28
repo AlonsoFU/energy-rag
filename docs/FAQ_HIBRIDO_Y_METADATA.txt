@@ -330,7 +330,7 @@ ARCHIVOS CREADOS:
    → Cómo incorporar información experta (4 niveles)
    → Ejemplos de metadata, reglas, fine-tuning
 
-📄 dark-data-scrapers/pagina_bcn/scripts/ejemplo_hibrido_codigo.py
+📄 dark-data-scrapers/pagina_bcn/scripts/archivo/ejemplo_hibrido_codigo.py
    → Código ejecutable con las 3 estrategias
    → Ejemplo de metadata experta
    → Listo para adaptar a tu caso

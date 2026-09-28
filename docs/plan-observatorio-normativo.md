@@ -23,7 +23,7 @@ corpus vivo, con grafo de vinculaciones y monitoreo de cambios.
 | RAG (retrieval + generación + citas) | ✅ maduro: `cita_ok` 261/264, `cita_limpia` 71% |
 | `articulos.derogado` | ✅ 2 artículos auto-declarados |
 
-**En curso ahora:** `scripts/scrape_vinculaciones.py` puebla `norma_norma` y deriva
+**En curso ahora:** `scripts/archivo/scrape_vinculaciones.py` puebla `norma_norma` y deriva
 `normas.estado` para las 95 normas actuales. Es el primer eslabón del observatorio.
 
 ---

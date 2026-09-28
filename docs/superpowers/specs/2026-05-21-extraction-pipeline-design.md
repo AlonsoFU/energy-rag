@@ -18,7 +18,7 @@ Dominio legal → solo hechos literales del texto. Sin fuzzy, sin umbrales de
 similitud, sin inferencia silenciosa. Lo inferido (LLM) va flagged, no se
 auto-aplica.
 
-## Evidencia (estudio sobre 2664 artículos — `scripts/study_extraction_patterns.py`)
+## Evidencia (estudio sobre 2664 artículos — `scripts/archivo/study_extraction_patterns.py`)
 
 | patrón | cantidad | calidad |
 |---|---|---|

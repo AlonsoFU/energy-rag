@@ -2,7 +2,7 @@
 
 > 🤖 **Auto-generado** desde `glossary/concepts.yaml`. NO editar este archivo a mano.
 
-> Para editar: modificar `glossary/concepts.yaml`, después correr `python scripts/render_glossary.py`.
+> Para editar: modificar `glossary/concepts.yaml`, después correr `python scripts/archivo/render_glossary.py`.
 
 
 **Total conceptos:** 191

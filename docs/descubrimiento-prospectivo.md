@@ -4,7 +4,7 @@ Estado: **NO RESUELTO**. Documentado para no repetir la exploración.
 
 ## El hueco
 
-El descubrimiento que existe (`scripts/descubrir_normativa.py`) es **retrospectivo**: encuentra
+El descubrimiento que existe (`scripts/archivo/descubrir_normativa.py`) es **retrospectivo**: encuentra
 normas que el corpus YA cita y no tiene. Sirvió para traer la Ley 20.936. Pero:
 
 ```
@@ -83,7 +83,7 @@ sitios bloquean. Esta pregunta otra cosa: **¿qué normas cita la gente que est�
 
 Fuente: discrepancias y dictámenes ante el **Panel de Expertos** (`panelexpertos.cl`,
 `cartas.coordinador.cl`). Son PDF públicos, se bajan con `curl` sin bloqueo y se leen con
-`pdftotext -layout`. Script: `scripts/extraer_de_discrepancias.py`.
+`pdftotext -layout`. Script: `scripts/archivo/extraer_de_discrepancias.py`.
 
 Por qué es mejor fuente que un buscador: una norma que aparece en una discrepancia real es
 **normativa viva** — alguien la está usando para litigar hoy. Un resultado de búsqueda sólo

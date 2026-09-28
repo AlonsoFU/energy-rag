@@ -49,7 +49,7 @@ el número real es **0.4%**. Medir mal es peor que no medir.
 
 ---
 
-## 3. QA de chunking (`scripts/qa_chunking.py`)
+## 3. QA de chunking (`scripts/archivo/qa_chunking.py`)
 
 Chequeos que el sweep NUNCA hizo. El screen solo mide retrieval; no ve si el chunk está
 mutilado. Un chunk puede ser **nítido para buscar** y **basura para responder**.
@@ -67,7 +67,7 @@ mutilado. Un chunk puede ser **nítido para buscar** y **basura para responder**
 Del estándar (CoFE-RAG / span-based), pendientes de implementar: `Coverage@k`,
 `Redundancy@k`, `MRR@k` sobre spans gold.
 
-Correr: `./venv-gpu/bin/python -m scripts.qa_chunking`
+Correr: `./venv-gpu/bin/python -m scripts.archivo.qa_chunking`
 
 ### Resultados QA (2026-07-09, 2978 artículos)
 ```
@@ -178,7 +178,7 @@ embeddings convergen. Con `\b` word-boundary + `MIN_DEF_TERM=10` baja a 48%. Aun
   *Infeasible acá*: el 4b vía Ollama no expone token-embeddings.
 
 **Contextual Retrieval (Anthropic) YA ESTÁ EN PRODUCCIÓN** — corrección de un error de este doc.
-`scripts/recontextualize_all.py` llama a qwen3.5:9b, le pide 1-2 frases del rol del artículo y
+`scripts/archivo/recontextualize_all.py` llama a qwen3.5:9b, le pide 1-2 frases del rol del artículo y
 guarda `contextual_text = "{contexto}\n\n{texto}"`, que es lo que se embebe. 2021/3907 fragmentos
 lo tienen. Ejemplo real:
 ```
@@ -291,5 +291,5 @@ es "texto mejor apuntado".*
 
 Los tres inflaban el efecto en la dirección que yo esperaba. **Medir mal es peor que no medir.**
 
-Scripts: `scripts/experimentos/exp_chunk_sweep.py` (sweep) · `scripts/qa_chunking.py` (QA).
+Scripts: `scripts/experimentos/exp_chunk_sweep.py` (sweep) · `scripts/archivo/qa_chunking.py` (QA).
 Datos: `data/eval/results/chunk_sweep/result.json`.
