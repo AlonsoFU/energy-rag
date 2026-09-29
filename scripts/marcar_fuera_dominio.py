@@ -1,7 +1,7 @@
 """B3.1 — marcar las normas fuera del dominio de la Subgerencia de Mercados.
 
 Corte fijado por el usuario (2026-08-22): **similitud < 0.30** contra las funciones de la
-subgerencia (ver `scripts/frontera_mercados.py`).
+subgerencia (ver `scripts/archivo/frontera_mercados.py`).
 
 **MARCA, no borra.** Poner `metadata.fuera_de_dominio = true` es reversible; un DELETE de
 normas + articulos + fragmentos no lo es, y el criterio es semantico (puede fallar en un
@@ -17,7 +17,7 @@ from psycopg.rows import dict_row
 
 from src.components.vectorstore import with_connection
 from src.pipelines.retrieve import _embed_4b_query
-from scripts.frontera_mercados import DOMINIO
+from scripts.archivo.frontera_mercados import DOMINIO
 
 CORTE = 0.30
 

@@ -5,7 +5,7 @@ Por que existe este archivo y no se reusa `exp_selfcons_n1`: encolé ese script 
 fue una repeticion del exp #54 (n=1 vs n=3), que no decide nada de esto. Este script cambia
 UNA variable: `cfg.settings.ollama_think`.
 
-Criterio FIJADO ANTES de correr (docs/plan-operacion.md, exp #63):
+Criterio FIJADO ANTES de correr (docs/bitacora/plan-operacion.md, exp #63):
 
     adoptar think=True si   cita_ok cae <= 3   Y   cita_limpia NO cae
 
@@ -122,7 +122,7 @@ def resumen(rows, parcial=False):
         # VEREDICTO automatico contra el criterio escrito ANTES de correr. Se imprime aca para
         # que no quede a interpretacion mia despues de ver el numero.
         # El criterio depende de QUE se esta midiendo, y esta fijado en
-        # docs/plan-operacion.md ANTES de correr. Si el veredicto se imprimiera siempre con la
+        # docs/bitacora/plan-operacion.md ANTES de correr. Si el veredicto se imprimiera siempre con la
         # regla del exp #63, una corrida de #64 diria "NO ADOPTAR" por un criterio que no es
         # el suyo -- y ya perdimos 6 h una vez por leer un log que medía otra cosa.
         #   #63 answer_think        cita_ok <= 3  Y  cita_limpia NO cae
@@ -178,23 +178,11 @@ def main():
 
     llm = get_llm_provider()
     e = Qwen3Embedder(); r = get_reranker(); store = PostgresStore()
-    # Config ADOPTADA, identica en los dos brazos. Lo unico que se togglea es `ollama_think`.
-    cfg.settings.embed_4b_dense = True; cfg.settings.embed_4b_dim = 1024
-    cfg.settings.alias_union = True; cfg.settings.glossary_inject = True
-    cfg.settings.glossary_lookup = True; cfg.settings.intent_gate = True
-    cfg.settings.ambiguity_disclose = True; cfg.settings.filtrar_fuera_dominio = True
-    # 2026-09-21: antes fijaba self_consistency_n = 3 a mano, y el harness dejo de reflejar la
-    # config adoptada (#86: n=1). Ahora usa config.py. Las corridas <= 2026-09-20 (combo0_*,
-    # l69_*, fix84_*) se midieron a n=3; para comparar contra ellas, SETCFG=self_consistency_n=3.
-    cfg.settings.answer_think = True
-    # think_hybrid MUTA `ollama_think` por intento (GEN12). Si quedara prendido pisaria la
-    # variable del experimento en el reintento y los dos brazos convergerian. Se midio y se
-    # descarto (exp #36: 260->250, p=0.0063 NEGATIVO), pero se apaga explicito.
-    cfg.settings.think_hybrid = False
-    # embed_4b_cpu: el embedder va a CPU para NO pelear VRAM con el LLM. Medido: el 30b-a3b
-    # ocupa 20.5 de 20.8 GiB, cada embed desalojaba el LLM y habia que recargar 17 GiB ->
-    # 186 recargas en 3 h y el ritmo cayendo de 150 s/par a 888 s/par.
-    cfg.settings.embed_4b_cpu = True
+    # La config ADOPTADA son los defaults de config.py. Antes este bloque repetia 11 ajustes que
+    # ya eran el default, y esa duplicacion escondio `self_consistency_n = 3` durante semanas
+    # (#86). Lo que se quiera cambiar va por FLAGS/SETCFG, que quedan en el banner de la corrida.
+    # Corridas <= 2026-09-20 (combo0_*, l69_*, fix84_*) se midieron a n=3: comparar con
+    # SETCFG=self_consistency_n=3.
     retr = SimpleRetriever(store, e, r, top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)
 
@@ -212,11 +200,6 @@ def main():
         elif VAR == "top_rerank_override":
             # ON = config actual (10 sobrevivientes)   OFF = la propuesta (50).
             cfg.settings.top_rerank_override = 10 if val else 50
-        elif VAR == "selfcons_solo_definicion":
-            # OJO al signo: aca ON = la config ACTUAL (n=3 siempre) y OFF = la propuesta
-            # (n=3 solo en definiciones). Se mantiene "ON = lo que ya esta adoptado" en todos
-            # los VAR para que el veredicto se lea igual en los tres.
-            cfg.settings.selfcons_solo_definicion = not val
         elif VAR in ("answer_sin_meta", "answer_quote_first"):
             # exp #70 / #71: ON = config ACTUAL (flag apagado), OFF = la propuesta (flag
             # prendido). Mismo signo que top_rerank_override y selfcons_solo_definicion.

@@ -8,6 +8,13 @@
 | citas a normas derogadas | 0 | 0 | 0 |
 | errores sin ninguna advertencia | ~29 de 32 | 1 de 2 | 5 de 6 |
 
+| recall@10 (artículo correcto entre los 10 que muestra) | **92/114 = 81 %** | **64/64 = 100 %** | **13/16 = 81 %** |
+
+El recall@10 de las 16 reales se midió el 2026-09-28 con `scripts/red_golden.py` (antes era
+«NO medido»). Dice dónde está el cuello en las preguntas reales: el buscador encuentra el
+artículo en 13 de 16, pero solo 10 se citan bien → **3 de las 6 fallas son de redacción, no
+de búsqueda**.
+
 | tiempo por consulta | |
 |---|---|
 | `--buscar` (solo artículos) | 13 s |

@@ -61,9 +61,7 @@ def responder(pregunta, solo_buscar=False):
     t0 = time.time()
     llm = get_llm_provider()
     store = PostgresStore()
-    cfg.settings.embed_4b_dense = True
-    cfg.settings.embed_4b_dim = 1024
-    cfg.settings.embed_4b_cpu = True
+    # sin ajustes a mano: la config adoptada son los defaults de config.py
     retr = SimpleRetriever(store, Qwen3Embedder(), get_reranker(),
                            top_bm25=cfg.settings.retrieval_pool_depth,
                            top_vector=cfg.settings.retrieval_pool_depth, llm=llm)

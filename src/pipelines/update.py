@@ -4,8 +4,8 @@ Diff phase: implemented and tested. Reads `descargas_estado` and compares agains
 an injected BCN index list, returning nuevas / outdated / desaparecidas.
 
 Fetch phase: TODO. The actual scrape of the BCN catalog and download of new norms
-is not yet wired up; it should reuse the existing scripts/DOWNLOAD_ALL_NORMS.py
-logic. For now, run_update either receives an explicit bcn_index (tests, future
+is not yet wired up; it should reuse scripts/bajar_candidatas.py +
+src/crawlers/norm_detail_crawler.py. For now, run_update either receives an explicit bcn_index (tests, future
 scheduler), or skips when called without one.
 """
 from psycopg.rows import dict_row

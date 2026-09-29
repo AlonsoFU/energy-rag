@@ -1,44 +1,0 @@
-Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5914.65it/s]
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:36, 10.50it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 455.81it/s]
-=== veto_operativas: 114 pares  OFF(sin veto) / ON(veto del glosario) ===
-  pares nuevos=5  [5/114]
-  pares nuevos=10  [10/114]
-  pares nuevos=15  [15/114]
-  pares nuevos=20  [20/114]
-  pares nuevos=25  [25/114]
-[RESUME] 28 pares ya hechos
-Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 5748.70it/s]
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:   2%|▏         | 9/393 [00:00<00:27, 14.07it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 609.88it/s]
-=== veto_operativas: 114 pares  OFF(sin veto) / ON(veto del glosario) ===
-  pares nuevos=5  [33/114]
-  pares nuevos=10  [38/114]
-  pares nuevos=15  [43/114]
-  pares nuevos=20  [48/114]
-  pares nuevos=25  [53/114]
-  pares nuevos=30  [58/114]
-  pares nuevos=35  [63/114]
-  pares nuevos=40  [68/114]
-  pares nuevos=45  [73/114]
-  pares nuevos=50  [78/114]
-  pares nuevos=55  [83/114]
-  pares nuevos=60  [88/114]
-  pares nuevos=65  [93/114]
-  pares nuevos=70  [98/114]
-  pares nuevos=75  [103/114]
-  pares nuevos=80  [108/114]
-  pares nuevos=85  [113/114]
-
-=== veto_operativas — 114 pares validos ===
-  cita_ok      OFF 96/114  ->  ON 94/114   [gano 2, perdio 4]  McNemar p=0.6875  (ruido/flat)
-  cita_limpia  OFF 62/114  ->  ON 65/114
-  inject       OFF 3/114  ->  ON 3/114
-  rechazos     OFF 8/114  ->  ON 9/114
-  precision     OFF   0.51  ->  ON   0.54
-  citas unicas  OFF   2.18  ->  ON   2.06
-  segundos      OFF  71.11  ->  ON  67.44
-  GANO:   [?] Vivo en una casa común y corriente, gasto poco, ¿la empresa me
-  GANO:   [?] ¿Hay un tope de ganancia que les permiten cobrar a los dueños 
-  PERDIO: [?] Me cortaron la luz por una deuda que yo creo que está mal cobr
-  PERDIO: [?] ¿por qué en una zona la gente paga más cara la luz que en otra
-  PERDIO: [?] Si una empresa de luz hace las cosas mal, ¿quién puede castiga
-  PERDIO: [?] dónde se inscriben las personas que quieren participar como in

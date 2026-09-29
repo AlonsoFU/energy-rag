@@ -22,7 +22,7 @@ aportará preguntas propias; las 80 públicas son la fuente independiente.
 | `cita_limpia` | `cita_ok` y además precisión ≥ umbral (no rocía citas) |
 | `precision` | fracción de citas que son gold |
 | `refuso` / `rechazo_ok` | respondió «no encontré» / y correspondía |
-| fidelidad (juez #68) | ¿la frase dice lo que dice el artículo? `scripts/exp_fidelidad.py` |
+| fidelidad (juez #68) | ¿la frase dice lo que dice el artículo? `scripts/experimentos/exp_fidelidad.py` |
 
 ## Cómo se mide un cambio
 ```bash
@@ -43,11 +43,32 @@ Diagnóstico «¿búsqueda o redacción?»: `scripts/diag_donde_falla.py` cruza 
 con lo que respondió el modelo (estado final: 31 fallas de dev = 18 RETRIEVAL + 13 GENERACION).
 Tiempos por etapa: `scripts/medir_tiempos_busqueda.py`.
 
+## Red golden: probar un refactor sin re-medir
+El pipeline es determinista, así que un refactor se **prueba**: si la salida cambia, está mal.
+```bash
+PYTHONPATH=. venv/bin/python -m scripts.red_golden                          # graba la base (~15 min)
+PYTHONPATH=. venv/bin/python -m scripts.red_golden --salida /tmp/nueva.json
+PYTHONPATH=. venv/bin/python -m scripts.red_golden --comparar data/eval/redes/busqueda_base.json /tmp/nueva.json
+```
+- **Red de búsqueda** (`scripts/red_golden.py`, ~15 min): los 10 artículos de cada una de las
+  194 queries, en orden, con `db_huella`. Para cualquier cambio en `retrieve.py` o
+  `vectorstore.py`. Base vigente: `data/eval/redes/busqueda_base.json`. `--comparar` sale con
+  código 1 si un solo puesto cambió, o si la huella del corpus difiere.
+- **Red completa** (~4 h): `scripts.exp_think_paired` sobre dev + held-out. Para `generate.py`.
+- `--autoprueba` verifica que el comparador ve un cambio de orden y un corpus distinto.
+
 ## Reglas (aprendidas a golpes)
 1. **Criterio escrito ANTES de correr**, en `scripts/plan_maestro.txt`, con predicción registrada.
 2. **dev Y held-out**; si discrepan, no se adopta. Si se puede, también las 16 reales.
 3. **Misma huella de corpus** en base y brazo. Si el monitor aplicó cambios entre medio, la base caducó.
-4. **Pipeline determinista**: `selfcons_temperature=0.0`. Con 0.7 cambiaba el 11 % de los textos entre corridas idénticas.
+4. **Determinismo: la BÚSQUEDA sí, la REDACCIÓN no del todo.** `selfcons_temperature=0.0` (con 0.7
+   cambiaba el 11 % de los textos). La búsqueda es bit-exacta: `red_golden` dio 194/194 el mismo
+   orden en dos corridas. La redacción NO: medido el 2026-09-28 con el MISMO código, mismo corpus
+   y misma query («cómo se define Mora»), tres corridas dieron 751, 419 y 419 caracteres.
+   `qwen3:30b-a3b` es MoE y Ollama a temperatura 0 no es bit-exacto. **Por eso un refactor de
+   `generate.py` no se prueba por byte-identidad**: se prueba con el pareado (ganó 0 / perdió 0,
+   p=1.0) y la identidad de textos como señal, no como condición. Un texto distinto hay que
+   reproducirlo SIN cambiar código antes de culpar al refactor.
 5. **Leer a mano las fallas** antes de otro experimento: el defecto de notas marginales (#84) salió de leer 28 fallas, no de un experimento.
 6. Un `result.json` de más de 48 h con el mismo `NAME` ya no se reanuda (el harness aborta): una vez «corrió» en 7 s sobre datos de otro corpus.
 7. Las bases hasta 2026-09-20 (`combo0_*`, `l69_*`, `fix84_*`) se midieron con `self_consistency_n=3`; el harness ahora usa la config (n=1). Para comparar contra ellas: `SETCFG=self_consistency_n=3`.

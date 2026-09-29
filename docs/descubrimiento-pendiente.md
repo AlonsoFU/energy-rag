@@ -1,6 +1,6 @@
 # Descubrimiento pendiente — normativa que el corpus NO tiene
 
-Generado por `scripts/descubrir_normativa.py`. **No descarga nada**: es una lista
+Generado por `scripts/archivo/descubrir_normativa.py`. **No descarga nada**: es una lista
 para aprobar. El filtro de dominio es el mismo del corte de frontera (>= 0.30).
 
 ## Fuente 1 — citadas desde el dominio y ausentes

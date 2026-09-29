@@ -2,6 +2,9 @@ import json
 from psycopg.rows import dict_row
 from src.storage.connection import with_connection
 from src.core.models import Norma, Articulo, Fragmento, Concepto, Referencia
+# config a nivel de MODULO a proposito: importada dentro de cada funcion, un NameError
+# queda tapado por el `except Exception` de turno y la rama se apaga en silencio (bug #79).
+from src.core import config as cfg
 
 
 class PostgresStore:
@@ -96,8 +99,7 @@ class PostgresStore:
         Flag `filtrar_fuera_dominio` (default OFF hasta medir). Devuelve "" si esta apagado,
         asi que el SQL queda identico al de antes cuando no se usa.
         """
-        from src.core import config as _cfg
-        if not getattr(_cfg.settings, "filtrar_fuera_dominio", False):
+        if not getattr(cfg.settings, "filtrar_fuera_dominio", False):
             return ""
         sql = (" AND NOT coalesce((SELECT (n2.metadata->>'fuera_de_dominio')='true' "
                "FROM normas n2 WHERE n2.id_norma = a.id_norma), false)")
@@ -107,7 +109,7 @@ class PostgresStore:
         # sistema puede responder "[LEY 20936 art 92°]" cuando la cita correcta es
         # "[DFL 4 art 92°]" -- una cita FALSA, que es el peor error en un sistema legal.
         # Se excluye el duplicado, no el original: `duplicado_de` apunta al que se conserva.
-        if getattr(_cfg.settings, "filtrar_duplicados", True):
+        if getattr(cfg.settings, "filtrar_duplicados", True):
             sql += " AND (a.metadata->>'duplicado_de') IS NULL"
             # #69b FANTASMAS: filas que el parser viejo creo a partir de la nota de
             # modificacion ("Art. 1 N° 25 / D.O. 20.07.2016") tomada como encabezado, o
@@ -120,23 +122,12 @@ class PostgresStore:
         # citada del corpus. Su cuerpo entero es "Derogado.", asi que si entran al pool
         # ocupan un lugar y no aportan nada; y si el modelo los cita, afirma como vigente
         # algo que ya no rige, que es el peor error posible en materia legal.
-        if getattr(_cfg.settings, "filtrar_derogados", True):
+        if getattr(cfg.settings, "filtrar_derogados", True):
             sql += " AND NOT coalesce(a.derogado, false)"
         return sql
 
     def search_bm25(self, query: str, top_k: int = 50) -> list[dict]:
-        # bm25_doc2query (flag): busca sobre tsv_aug (contextual_text + preguntas
-        # doc2query generadas) en vez de tsv. "Despierta" BM25 para fraseo
-        # coloquial sin tocar el reranker (que sigue usando contextual_text).
-        # Cae a tsv si la columna no existe (corpus sin expandir).
-        from src.core import config as _cfg
         col = "tsv"
-        if getattr(_cfg.settings, "bm25_doc2query", False):
-            with with_connection() as conn, conn.cursor() as _c:
-                _c.execute("SELECT 1 FROM information_schema.columns "
-                           "WHERE table_name='fragmentos' AND column_name='tsv_aug'")
-                if _c.fetchone():
-                    col = "tsv_aug"
         with with_connection() as conn, conn.cursor(row_factory=dict_row) as cur:
             dom = self._filtro_dominio()
             cur.execute(f"""

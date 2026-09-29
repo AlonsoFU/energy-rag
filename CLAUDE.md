@@ -4,7 +4,7 @@ RAG sobre normativa eléctrica chilena (y futuro: toda la normativa chilena). St
 Postgres + pgvector + BM25 (tsvector) + BGE cross-encoder reranker + LLM local (Ollama).
 **Hardware (desde 2026-06-29): RTX 3090 24GB, 14GB RAM, offline.** (Antes GTX 1080 8GB Pascal —
 esa era imponía "BGE solo CPU", "embedder grande no cabe", "LLM tope 9b"; TODO eso quedó OBSOLETO,
-ver `docs/architecture-status.md`.)
+ver `docs/bitacora/architecture-status.md`.)
 
 ## Estado actual (2026-07-31) — leer ANTES de re-experimentar (no rehacer trabajo)
 
@@ -26,7 +26,7 @@ ver `docs/architecture-status.md`.)
 **Resultados cita_ok:** coloquial ~26→**37/39** (95%), dev ~29→**36/44**, holdout **17/18** (sin regresión).
 Coloquial subió por RETRIEVAL (4B+alias); dev por GENERACIÓN (30b-a3b).
 
-**Ya probado — NO repetir** (detalle: `architecture-status.md` + `docs/handoff-2026-07-31.md`):
+**Ya probado — NO repetir** (detalle: `architecture-status.md` + `docs/bitacora/handoff-2026-07-31.md`):
 - embedder 8B = trade-off (dev +5, coloq −4), NO gana coloquial. 4B queda.
 - ningún embedder (0.6b/8b/bge-m3) rescata los muros coloquiales; solo alias.
 - LLMs gen probados: 30b-a3b > qwen3:32b > 9b > qwen2.5:32b/phi4 > mistral/gemma3 > deepseek-r1. gemma2:27b roto (no cita).
@@ -57,7 +57,7 @@ adoptando GEN2 self-consistency**, que sube precisión SIN costar aciertos:
 4. Medir pareado, ambos brazos en la misma sesión.
 5. Persistir el TEXTO de las respuestas, no solo el booleano.
 6. Re-puntuar texto viejo SUBESTIMA cambios que alteran el bucle de generación.
-Detalle: **`docs/handoff-2026-08-09.md`** · `docs/experimentos-registro.md` §6-§8.
+Detalle: **`docs/bitacora/handoff-2026-08-09.md`** · `docs/bitacora/experimentos-registro.md` §6-§8.
 
 **LECCIÓN TRANSVERSAL (2026-08):** cuando el ordenador (cross-encoder) prefiere sistemáticamente el
 tipo de documento equivocado, **cambiar de reranker NO sirve** (RK1: Δ+2 ruido) — se sortea con
@@ -65,16 +65,16 @@ tipo de documento equivocado, **cambiar de reranker NO sirve** (RK1: Δ+2 ruido)
 Ganancias de DATOS/ESTRUCTURA, no swaps de modelo.
 
 **REGLA — MARCAR EL BACKLOG (obligatorio):** al terminar CUALQUIER experimento, marcar su checkbox
-en `docs/backlog-mejoras.md` en el mismo commit: `[x]` adoptado / `[-]` probado-descartado / `[~]`
+en `docs/bitacora/backlog-mejoras.md` en el mismo commit: `[x]` adoptado / `[-]` probado-descartado / `[~]`
 en curso, con el Δ medido (ej "+3 McNemar p=0.25 ruido"). Si no está en el backlog, agregarlo. NUNCA
 dejar un experimento corrido sin su check — el backlog es la única fuente de "qué falta / qué ya se probó".
 
-**Backlog UNIFICADO de mejoras:** cola activa única en `docs/backlog-mejoras.md` — consolida el
-research verificado (`docs/research-improvements-2026-07-31.md`) + TODO el trabajo futuro previo
+**Backlog UNIFICADO de mejoras:** cola activa única en `docs/bitacora/backlog-mejoras.md` — consolida el
+research verificado (`docs/bitacora/research-improvements-2026-07-31.md`) + TODO el trabajo futuro previo
 disperso (handoffs, `graphrag-roadmap.md`, `roadmap-gap-analysis`, ADRs). Protocolo: flag-gated,
 medir dev+holdout, anotar HECHO con Δ; si mejora sin regresión → **reemplaza la config vigente de
 arriba**; si no → "PROBADO — NO repetir". **REGLA DE ORO: el screen (gold∈topN) MIENTE, solo
-adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/backlog-mejoras.md` §PRIORIDAD**
+adopta cita_ok e2e.** **Orden vigente = plan por FASES A-D en `docs/bitacora/backlog-mejoras.md` §PRIORIDAD**
 (A exprimir buscador · B gap de gen vía RAGAS · C table-stakes legal · D gate GraphRAG).
 Ya cerrados: E0/E0b · glossary_inject(+16) · E3 · E0c(+Tránsito) · D2 · D3 · GEN9a(+7) ·
 strip `<think>` · E1 métricas · no-regresión · **GEN2 self-consistency ADOPTADO** ·
@@ -105,7 +105,7 @@ se verá como nula.
 **MATIZ (2026-08-21, decisión del usuario):** el hardcodeo **no está prohibido, está ORDENADO
 ÚLTIMO**. Es legítimo para atajar casos específicos **cuando la metodología ya no da más**; lo
 prohibido es usarlo como mecanismo principal. Y cuando aparece **no se pierde**: se guarda en
-`docs/reglas-candidatas.md` con su evidencia, **fuera del pipeline**, hasta que se justifique.
+`docs/bitacora/reglas-candidatas.md` con su evidencia, **fuera del pipeline**, hasta que se justifique.
 Orden obligatorio: **dato → modelo → estructura → regla**.
 Skill: `.claude/skills/sin-hardcodeo-en-experimentos/SKILL.md` (invocarla ANTES de escribir
 cualquier lista/regex que clasifique, decida o enrute).

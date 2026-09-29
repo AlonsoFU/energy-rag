@@ -4,8 +4,8 @@ Sistema de consulta sobre normativa eléctrica chilena: busca los artículos que
 pregunta y, si se pide, redacta un resumen con citas textuales verificadas. Todo corre en local
 (Postgres + pgvector, Ollama, GPU RTX 3090); no usa APIs pagadas.
 
-Esta carpeta es **la verdad vigente, dividida por tema**. Los `docs/handoff-*.md` y
-`docs/plan-operacion.md` son la bitácora histórica (qué se probó, cuándo y por qué); no hace
+Esta carpeta es **la verdad vigente, dividida por tema**. `docs/bitacora/` (handoffs,
+campañas y `plan-operacion.md`) es la historia (qué se probó, cuándo y por qué); no hace
 falta leerlos para entender el sistema.
 
 | tema | archivo | responde a |
@@ -17,7 +17,9 @@ falta leerlos para entender el sistema.
 | Operación | [05-operacion.md](05-operacion.md) | ¿cómo se usa, cómo se corren experimentos largos, cómo se cuida la GPU? |
 | Resultados y límites | [06-resultados-y-limites.md](06-resultados-y-limites.md) | ¿qué tan bien funciona, qué se probó y falló, qué falta? |
 
-Diagrama de bloques: artefacto "Energy-RAG por dentro" (claude.ai/code/artifacts).
+![Pipeline de Energy-RAG](pipeline.svg)
+
+(El mismo diagrama, en detalle y por etapas, en [01-arquitectura.md](01-arquitectura.md).)
 
 ## En 6 líneas
 1. **Uso correcto hoy: buscador interno con una persona que lee la fuente.** No responde solo a terceros.

@@ -81,15 +81,15 @@ Preguntá en este orden. Pasás al siguiente solo si el anterior falla:
 - **FALLBACK, nunca primero.** El mecanismo corre antes; la regla solo actúa donde
   el mecanismo no opinó. Nunca al revés.
 - **Flag-gated y medido.** Default OFF hasta tener el pareado. Si es flat, no entra.
-- **Documentada en `docs/reglas-candidatas.md`.** Con el caso que la motivó, el número
+- **Documentada en `docs/bitacora/reglas-candidatas.md`.** Con el caso que la motivó, el número
   que la justifica, y qué mecanismo debería reemplazarla.
 
-**Y si no cumple las tres: NO va al pipeline.** Va igual a `docs/reglas-candidatas.md`,
+**Y si no cumple las tres: NO va al pipeline.** Va igual a `docs/bitacora/reglas-candidatas.md`,
 porque el hallazgo no se pierde — se guarda para cuando la metodología se agote.
 
 ## Dónde vive lo que NO entra al pipeline
 
-`docs/reglas-candidatas.md` — el banco de reglas identificadas y **no aplicadas**.
+`docs/bitacora/reglas-candidatas.md` — el banco de reglas identificadas y **no aplicadas**.
 Cada entrada: qué caso ataja · qué evidencia hay · por qué no está en el pipeline ·
 qué la reemplazaría. Es material, no basura.
 
@@ -108,7 +108,7 @@ sigue siendo circular. Antes de creer un número:
 
 - [ ] El mecanismo principal es dato, modelo o estructura — no una lista
 - [ ] Toda regla que quedó es fallback, flag-gated y medida
-- [ ] Las reglas descartadas están en `docs/reglas-candidatas.md`, no borradas
+- [ ] Las reglas descartadas están en `docs/bitacora/reglas-candidatas.md`, no borradas
 - [ ] El set de test no comparte plantillas con el mecanismo
 - [ ] Train y test separados, y dicho explícitamente
 - [ ] El caveat de autoría del set está en el reporte

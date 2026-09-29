@@ -7,7 +7,7 @@ Capa 1, so a worse candidate resolved. The definitional edge must always win.
 """
 from datetime import date
 
-from scripts.resolve_definition_sources import build_candidates
+from scripts.archivo.resolve_definition_sources import build_candidates
 
 
 def _row(id_norma, articulo, tipo_relacion, fecha, norma_tipo="DECRETO",

@@ -27,7 +27,7 @@ from psycopg.rows import dict_row
 from src.components.vectorstore import with_connection
 from src.pipelines.retrieve import _embed_4b_query
 from src.parsers.norm_structure_parser import NormStructureParser
-from scripts.frontera_mercados import DOMINIO
+from scripts.archivo.frontera_mercados import DOMINIO
 
 CORTE = 0.30
 DIR = Path("data/normas_completas/nuevas")

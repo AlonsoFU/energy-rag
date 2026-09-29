@@ -1,9 +1,75 @@
+# PLAN MAESTRO v45 (2026-09-28 09:20) -- re-grabar la base de la red de busqueda.
+# La base `busqueda_base.json` se grabo con el corpus del 21-09. El monitor de hoy no aplico
+# cambios de BCN pero el reproceso toco 217 articulos, asi que la db_huella ya no coincide y
+# `--comparar` avisaria "CORPUS DISTINTO" en el proximo refactor.
+# CRITERIO, FIJADO ANTES: grabar las 194 con la huella de HOY. Como control, el recall@10 no
+#   deberia moverse (el reproceso no cambio textos de BCN, solo marco duplicados).
+# Prediccion registrada: dev 92/114, holdout 64/64, reales 13/16 -- iguales.
+red_base_28|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/busqueda_base.json
+
+# PLAN MAESTRO v44 (2026-09-28 08:10) -- rehacer la base del holdout: el MONITOR SEMANAL corrio
+# hoy 06:00-07:01 y toco 217 articulos. gen_despues_holdout arranco 07:01:54, 3 s despues, asi que
+# comparo contra una base de OTRO corpus (db_huella distinta, avisada por comparar_corridas).
+# La unica respuesta que difiere (1207690/3, "como se define Mora") es un articulo RE-PARSEADO:
+# antes eran 2 incisos, ahora uno. Es del corpus, pero "explicado" no es "probado".
+# Base nueva con el codigo VIEJO sobre el corpus de HOY, desde el worktree erag-antes2 (= 7a4e5d1).
+# CRITERIO, FIJADO ANTES: 64/64 textos identicos contra gen_despues_holdout y la MISMA db_huella.
+#   Si difiere algo, se revierte la limpieza de generate.py.
+# Prediccion registrada: 64/64 identicas (dev ya dio 114/114 con la misma huella).
+gen_antes2_holdout|( cd /home/alonso/Documentos/Github/erag-antes2 && env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_antes2_holdout /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
+
+# PLAN MAESTRO v43 (2026-09-28) -- sesion 4c/5: verificar la limpieza de generate.py, reranker.py
+# y config.py contra las dos redes.
+# Cambios a verificar: generate.py 484 -> 398 lineas (fuera _anchor_authoritative_citation,
+#   think_hybrid, selfcons_solo_definicion, semantic_offtopic_gate, citation_repair; config a
+#   nivel de modulo); reranker.py sin el alias sombreado Qwen3Reranker ni la rama RERANKER_KIND;
+#   config.py llm_default local y embed_4b_cpu=True por default; preguntar.py, red_golden.py y
+#   exp_think_paired.py sin los 11 ajustes que repetian el default.
+# CRITERIO, FIJADO ANTES: (a) red de busqueda identica en 194/194 contra busqueda_base.json;
+#   (b) las 178 respuestas IDENTICAS byte a byte contra gen_antes_dev/gen_antes_holdout, misma
+#   db_huella. Cualquier diferencia = se revierte.
+# Prediccion registrada: 194/194 y 178/178 identicas (todo lo borrado estaba en False y los 11
+#   ajustes se verificaron iguales al default antes de sacarlos).
+red_tras_gen|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/tras_gen.json
+gen_despues_dev|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=gen_despues_dev venv/bin/python -m scripts.exp_think_paired
+gen_despues_holdout|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_despues_holdout venv/bin/python -m scripts.exp_think_paired
+
+# PLAN MAESTRO v42 (2026-09-28) -- sesion 4b: la RED COMPLETA, base ANTES de limpiar generate.py.
+# La red de busqueda no cubre generate.py: hay que grabar las 178 respuestas (dev 114 + holdout 64)
+# con el codigo de HOY, limpiar, y volver a grabarlas. ~4 h cada pasada.
+# CRITERIO, FIJADO ANTES: tras limpiar generate.py, el TEXTO de las 178 respuestas tiene que ser
+#   identico byte a byte (el pipeline es determinista: temperatura 0.0, n=1). Una sola distinta =
+#   el refactor cambio el comportamiento y se revierte. Misma db_huella en las dos pasadas.
+# Prediccion registrada: 178/178 identicas (todas las ramas a borrar estan en False en config).
+gen_antes_dev|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=gen_antes_dev venv/bin/python -m scripts.exp_think_paired
+gen_antes_holdout|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=gen_antes_holdout venv/bin/python -m scripts.exp_think_paired
+
+# PLAN MAESTRO v41 (2026-09-28) -- sesion 4: limpiar el camino caliente contra la red golden.
+# Cambio: se borran las ramas muertas de SimpleRetriever/_vector_leg/_vector_4b_search/search_bm25
+#   (def_fragments, glossary_exclude, embed_8b_dense, concept_inference, selective_reform,
+#   hyde_in_simple, ensemble_bgem3, graph_boost_all, bm25_doc2query -- las 9 en False en config)
+#   y se sube `from src.core import config` a nivel de modulo en retrieve.py y vectorstore.py.
+# CRITERIO, FIJADO ANTES: la red de busqueda tiene que dar el orden IDENTICO en 194/194 y la misma
+#   db_huella. Un solo puesto distinto = el refactor cambio el comportamiento y se revierte.
+# Prediccion registrada: 194/194 identico (el pipeline es determinista y las 9 ramas estan OFF).
+red_tras_limpieza|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden --salida data/eval/redes/tras_limpieza.json
+
+# PLAN MAESTRO v40 (2026-09-28) -- sesion 3 del plan de limpieza. Usuario: "hazlo todo, 180 W".
+# Objetivo: la RED GOLDEN de busqueda, la linea base contra la que se prueba cada refactor de
+# retrieve.py. No es un experimento: no hay hipotesis, se graba el comportamiento de HOY.
+# CRITERIO, FIJADO ANTES: graba las 194 queries (dev 114 + holdout 64 + reales 16) con la config
+#   de produccion y estampa db_huella. Sirve si termina con los 194 y la huella coincide con la
+#   del corpus actual. Ademas deja medido el recall@10 de las 16 reales, que estaba PENDIENTE.
+# Prediccion registrada: recall@10 holdout 64/64, dev 92/114; reales SIN prediccion (nunca medido).
+# ~7 min con el reranker en GPU (fp32 = mismo orden que CPU, exp #88).
+red_base|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.red_golden
+
 # PLAN MAESTRO v39 (2026-09-21 19:00) -- exp #88b: BGE en GPU fp16 + empty_cache. Usuario: "sigue".
 # #88: GPU-fp32 = orden identico a CPU (194/194) pero el LLM queda 43/49 capas en GPU.
 # CRITERIO, FIJADO ANTES: (a) orden fp16 IDENTICO a fp32 en 194/194; (b) LLM recien cargado 49/49
 #   con el BGE fp16 en GPU. Pasan -> BGE fp16 en GPU por defecto. Falla (a) -> listar diferencias,
 #   no adoptar sin medir generacion. Falla (b) -> no se adopta. ~15 min.
-rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_fp16
+rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.experimentos.exp_reranker_fp16
 
 # PLAN MAESTRO v38 (2026-09-21) -- exp #88: reranker BGE a GPU. Aprobado por el usuario ("1 ok").
 # La busqueda tarda 21.69 s y 21.51 s son el rerank en CPU (reranker.py:59, default de la GTX 1080).
@@ -11,7 +77,7 @@ rerank_fp16|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv
 #   rerank sobre dev + held-out + 16 reales (mismos pares, una sola pasada); (b) con el BGE en GPU,
 #   qwen3:30b-a3b queda 100 % GPU en `ollama ps`. Pasan -> BGE en cuda por defecto. Falla (a) ->
 #   no se adopta sin medir generacion. Falla (b) -> no se adopta. ~75 min (el brazo CPU manda).
-rerank_gpu|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.exp_reranker_gpu
+rerank_gpu|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.experimentos.exp_reranker_gpu
 
 # PLAN MAESTRO v37 (2026-09-20 17:35) -- CIERRE: correr todo lo pendiente que se puede correr.
 # Config ADOPTADA ya vive en config.py (quote-only max 2, t=0.0, reatribuir, aviso): sin FLAGS.
@@ -38,7 +104,7 @@ l69_apply_a|env PYTHONPATH=. venv/bin/python -m scripts.limpiar_notas_bcn --appl
 l69_apply_b|env PYTHONPATH=. HF_HUB_OFFLINE=1 HF_HOME=/home/alonso/datos/hf venv/bin/python -m scripts.reembeber_limpiados --apply
 l69_dev|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_operativas_v1.jsonl NAME=l69_dev venv/bin/python -m scripts.exp_think_paired
 l69_holdout|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_fraseos_v1.jsonl NAME=l69_holdout venv/bin/python -m scripts.exp_think_paired
-gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.gate_69a
+gate_69a|env PYTHONPATH=. venv/bin/python -m scripts.archivo.gate_69a
 pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.jsonl NAME=pub_final venv/bin/python -m scripts.exp_think_paired
 # ===== exp #87 (encolado 2026-09-21 00:30, usuario: "termina todo el plan sin que me preguntes") =====
 # PREGUNTA: ¿un modelo mejor arreglaria las fallas? Solo puede en las de GENERACION (gold en el
@@ -51,7 +117,7 @@ pub_final|env PYTHONPATH=. SOLO_ON=1 SET=data/eval/queries_publicas_gold_v1.json
 #   entre medio                                         -> no concluyente, se reporta tal cual.
 # CAVEAT: el monitor semanal corre lunes 06:00 y puede cambiar el corpus a mitad del 27B; la
 #   huella de cada result.json lo dira. Si difiere, el resultado se marca como contaminado.
-diag_final|bash scripts/diag_final.sh
+diag_final|bash scripts/archivo/diag_final.sh
 techo_30b|env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_30b venv/bin/python -m scripts.exp_think_paired
 techo_27b|timeout 18000 env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 MODEL=ollama/qwen3.6:27b SET=data/eval/queries_techo_gen_v1.jsonl NAME=techo_27b venv/bin/python -m scripts.exp_think_paired
 
@@ -81,8 +147,8 @@ techo_27b|timeout 18000 env PYTHONPATH=. SOLO_ON=1 SETCFG=self_consistency_n=1 M
 #   Si bis_antes ya sale como repet_dev -> NO es el codigo; es el entorno y se sigue buscando.
 bis_antes|( cd /home/alonso/Documentos/Github/erag-bis-antes && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_antes /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
 bis_despues|( cd /home/alonso/Documentos/Github/erag-bis-despues && env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only SETCFG=answer_quote_max=2 SET=/home/alonso/Documentos/Github/energy-rag-postgres-rag/data/eval/queries_corrimiento13_v1.jsonl NAME=bis_despues /home/alonso/Documentos/Github/energy-rag-postgres-rag/venv/bin/python -m scripts.exp_think_paired )
-juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.exp_juez_responde
-juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.exp_juez_responde
+juez_resp_dev|env PYTHONPATH=. RES=data/eval/results/repet0_a/result.json NAME=juez_resp_dev venv/bin/python -m scripts.experimentos.exp_juez_responde
+juez_resp_holdout|env PYTHONPATH=. RES=data/eval/results/repet0_holdout/result.json NAME=juez_resp_holdout venv/bin/python -m scripts.experimentos.exp_juez_responde
 # MEDICION (no experimento): 16 preguntas REALES de terceros (SEC, CGE, Coordinador) cuyo gold es
 # el articulo que cita LA PROPIA FUENTE, verificado en la DB. Primer eval no escrito por el asistente.
 # De 80 recolectadas (data/eval/preguntas_publicas_v1.jsonl): 18 traian articulo, 2 excluidas
@@ -158,7 +224,7 @@ combo0_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_m
 # CRITERIO numctx_q, FIJADO ANTES: coseno minimo (prefijo 1024) < 0.9999 -> num_ctx es fuente.
 #   1.000000 en 114/114 -> NO es num_ctx, queda el tope de W.
 # OJO RAM: el brazo viejo carga 9.8 GB de 14. Por eso va SOLO y por la cola, no desde la sesion.
-numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.exp_numctx_queries
+numctx_q|env PYTHONPATH=. venv/bin/python -m scripts.experimentos.exp_numctx_queries
 # #79 held-out (la regla es dev Y held-out antes de adoptar selfcons_temperature=0.0).
 # CRITERIO: contra qonly2_holdout, cita_ok NO cae > 3 Y cita_limpia NO cae > 3.
 # CAVEAT: qonly2_holdout es del 09-14; si es previo a num_ctx=4096 carga el mismo corrimiento.
@@ -215,7 +281,7 @@ aviso_holdout|env PYTHONPATH=. SOLO_ON=1 FLAGS=answer_quote_only,answer_prosa_ma
 # REPETIBILIDAD (2026-09-19) -- mide el RUIDO del pipeline, sin cambiar NADA.
 # Motivo: en aviso_smoke, 2 de 13 queries que antes caian a prosa produjeron cita verificada y
 # 4 cambiaron cita_ok/cita_limpia SIN tocar el buscador. Todos los criterios de estos dias
-# asumen "el pipeline es determinista" (docs/plan-operacion.md lo dice explicitamente). Si no
+# asumen "el pipeline es determinista" (docs/bitacora/plan-operacion.md lo dice explicitamente). Si no
 # lo es, las diferencias de 1 caso que decidieron #77 y #69a pueden ser ruido.
 # ESTA CORRIDA ES IDENTICA a qonly2_dev: misma config, misma DB, mismos flags. Cualquier
 # diferencia contra qonly2_dev es RUIDO puro, no efecto de ningun cambio.

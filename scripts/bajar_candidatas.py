@@ -65,7 +65,7 @@ def dominio_sim(texto):
     """Parecido del ARTICULADO bajado con las funciones de la subgerencia. None si no se puede."""
     global _REF_DOMINIO
     try:
-        from scripts.frontera_mercados import DOMINIO
+        from scripts.archivo.frontera_mercados import DOMINIO
         from scripts.marcar_fuera_dominio import _v
         if _REF_DOMINIO is None:
             _REF_DOMINIO = _v(re.sub(r"\s+", " ", DOMINIO).strip())

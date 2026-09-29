@@ -108,7 +108,7 @@ class NormGraphBuilder:
 
     def export_to_pyvis(
         self,
-        output_path: str = "docs/norm_graph.html",
+        output_path: str = "docs/bitacora/norm_graph.html",
         height: str = "900px",
         width: str = "100%"
     ):
@@ -198,7 +198,7 @@ class NormGraphBuilder:
 
         return output_path
 
-    def export_to_graphml(self, output_path: str = "docs/norm_graph.graphml"):
+    def export_to_graphml(self, output_path: str = "docs/bitacora/norm_graph.graphml"):
         """Exportar a GraphML para Gephi."""
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         nx.write_graphml(self.graph, output_path)
@@ -215,7 +215,7 @@ class NormGraphBuilder:
         }
 
 
-def create_visualization(db_path: str = "db/bcn_norms.db", output_path: str = "docs/norm_graph.html"):
+def create_visualization(db_path: str = "db/bcn_norms.db", output_path: str = "docs/bitacora/norm_graph.html"):
     """Crear visualización del grafo de normas."""
     from src.database.models import get_engine, get_session
 

@@ -18,47 +18,9 @@ from src.pipelines.grounding import (
 )
 from src.pipelines.grammar import extract_valid_citations, build_json_schema
 from src.pipelines.off_topic import is_off_topic, REFUSAL_TEXT
-
-
-def _anchor_authoritative_citation(query: str, text: str) -> str:
-    """Post-hoc, DETERMINISTIC citation anchoring (no model, no thresholds).
-
-    When the query centers on a SINGLE curated concept whose authoritative
-    defining article A is known (high-confidence: define_termino + authority, or
-    a confirmed definition_source — find_subject_concept only surfaces gated
-    pointers), and the generated answer cited NOTHING from A's norma, append a
-    curated line naming A. The LLM writes the prose; the CITATION is anchored to
-    the curated source — closing the attribution gap where the law's article is
-    injected at the top but the LLM cites the reglamento instead.
-
-    Guard — two modes (cfg.anchor_guard_exact_article):
-      - False (norma-level, default): skip if the answer cited ANY article from
-        A's norma. Conservative: never overrides the LLM's article choice within
-        the right law (protects general-vs-detalle, e.g. AVI method article).
-      - True (article-level): skip only if the answer cited A EXACTLY (norma+art).
-        Fixes intra-norma attribution: when the law defines the term in a glossary
-        article (e.g. 250604/13) but the LLM cited an operative sibling
-        (250604/56), anchor the real defining article. Trade-off: may re-anchor
-        where the reglamento's article was the wanted answer → MEASURE A/B.
-    """
-    from src.core import config as cfg
-    from src.pipelines.concept_injection import find_subject_concept
-    from src.pipelines.grounding import extract_citations, _normalize_art
-    res = find_subject_concept(query)
-    if not res:
-        return text
-    norma, art = str(res[0]), str(res[1])
-    cited = extract_citations(text)
-    if getattr(cfg.settings, "anchor_guard_exact_article", False):
-        # article-level: only skip if A (norma+art) is already cited exactly
-        tgt_art = _normalize_art(art)
-        if any(str(n) == norma and _normalize_art(a) == tgt_art for n, a in cited):
-            return text
-    else:
-        # norma-level (default): skip if any article from A's norma is cited
-        if any(str(n) == norma for n, _a in cited):
-            return text
-    return text.rstrip() + f"\n\nFuente autoritativa de la definición: [Art. {art} de {norma}]."
+# config a nivel de MODULO a proposito: importada dentro de cada funcion, un NameError
+# queda tapado por el `except Exception` de turno y la rama se apaga en silencio (bug #79).
+from src.core import config as cfg
 
 
 def _format_as_text(parsed: dict) -> str:
@@ -114,8 +76,7 @@ def _self_consistency(query, docs, llm, model, kwargs, n):
     sola pasada suele ser ruido de deliberación.
     Si algo falla, devuelve None y el caller sigue por la ruta normal.
     """
-    from collections import Counter
-    from src.core import config as cfg          # OJO: `cfg` NO esta a nivel de modulo en este
+    from collections import Counter          # OJO: `cfg` NO esta a nivel de modulo en este
     # archivo (se importa dentro de cada funcion). Sin esta linea, el getattr de abajo lanza
     # NameError, el `except Exception: continue` se lo traga y la autoconsistencia queda
     # APAGADA EN SILENCIO (medido: 0 llamadas al LLM, `cands` vacio, return None).
@@ -172,8 +133,7 @@ def _quote_first(query, docs, llm, model, max_q):
          "No parafrasees, no resumas, no comentes. Si ningún artículo responde, escribe: NINGUNA.")
     resp = llm.generate(p, model=model, temperature=0.0, max_tokens=1500,
                         system="Extraes citas textuales de textos legales. Copias literal. No parafraseas ni comentas.")
-    from src.core import config as _cfg
-    reatribuir = getattr(_cfg.settings, "answer_quote_reatribuir", False)
+    reatribuir = getattr(cfg.settings, "answer_quote_reatribuir", False)
     # encabezado ORIGINAL de cada doc, para emitir la cita con el numero tal como esta en la DB
     cab = {(str(d["id_norma"]), _na(str(d["articulo_numero"]))): (str(d["articulo_numero"]), str(d["id_norma"]))
            for d in docs}
@@ -226,7 +186,6 @@ def generate_answer(
 
     Returns dict with keys: text, grounding_pass, model, tokens_in, tokens_out.
     """
-    from src.core import config as cfg
     llm = llm or get_llm_provider()
     model = model or cfg.settings.llm_default
 
@@ -251,9 +210,6 @@ def generate_answer(
         _bge = max((d.get("_bge_max", 0.0) for d in docs), default=0.0)
         _sem = _bge < getattr(cfg.settings, "offtopic_bge_threshold", 0.01)
         _off = (_lex and _sem) if _mode == "and" else _sem
-    elif getattr(cfg.settings, "semantic_offtopic_gate", False) and docs:
-        _bge = max((d.get("_bge_max", 0.0) for d in docs), default=0.0)
-        _off = _bge < getattr(cfg.settings, "offtopic_bge_threshold", 0.01)
     else:
         _off = _lex
     if _off:
@@ -305,15 +261,7 @@ def generate_answer(
             if _dlim and _dlim > 0:
                 active_docs = active_docs[:_dlim]
 
-            # GEN12 HÍBRIDO think (flag `think_hybrid`): 1er intento razonando en canal separado
-            # (respuesta corta y precisa), y si NO deja una cita utilizable se reintenta con el
-            # modo actual (razonamiento en el cuerpo), que es el que rescata los golds.
-            # Evidencia: think=True da precisión 0.66 vs 0.58 y +40 respuestas con TODAS las citas
-            # correctas, pero pierde 16 golds — casi siempre por RECHAZAR o comprometerse mal.
-            # El reintento se dispara exactamente ahí. Ver `_accept_attempt` más abajo.
-            if getattr(cfg.settings, "think_hybrid", False):
-                cfg.settings.ollama_think = (attempt == 0)
-            elif getattr(cfg.settings, "answer_think", False):
+            if getattr(cfg.settings, "answer_think", False):
                 # exp #63 ADOPTADO: el razonamiento va al campo `thinking` y `response` queda
                 # limpio. Se prende ACA y no en el default global porque el flag tambien pisa el
                 # num_predict del llamador (llm.py), y los llamadores de salida corta
@@ -366,14 +314,6 @@ def generate_answer(
             # GEN2 self-consistency: solo en el PRIMER intento (los reintentos ya llevan
             # `extra_instruction` correctiva y mezclarlos rompería la señal de consenso).
             _scn = getattr(cfg.settings, "self_consistency_n", 0)
-            # exp #65: n=3 solo donde aporta (definiciones). Ver config.selfcons_solo_definicion.
-            if _scn > 1 and getattr(cfg.settings, "selfcons_solo_definicion", False):
-                try:
-                    from src.pipelines.intent_gate import is_definition
-                    if not is_definition(query):
-                        _scn = 1
-                except Exception:
-                    pass   # sin gate disponible se queda con n=3: el fallback es el seguro
             if _scn and _scn > 1 and attempt == 0:
                 _alt = _self_consistency(
                     query, active_docs, llm, model,
@@ -397,14 +337,7 @@ def generate_answer(
             # A valid refusal (LLM says "No encuentro esa información") is also a
             # grounded response — it's the correct answer when docs don't contain
             # the query's topic. Not a hallucination.
-            # HÍBRIDO: en el PRIMER intento (think=True) el rechazo NO se acepta —
-            # es justo el modo de falla que hace perder los 16 golds. Se deja caer al
-            # reintento con el modo actual. En los intentos siguientes vale como siempre.
-            _hib_1er = getattr(cfg.settings, "think_hybrid", False) and attempt == 0
             if REFUSAL_TEXT.lower() in response_text.lower():
-                if _hib_1er and attempt < max_retries:
-                    extra_instruction = ""      # sin reproche: el 2o intento es otro MODO, no un castigo
-                    continue
                 grounding_pass = True
                 break
             if verify_citations(response_text, active_docs):
@@ -438,27 +371,7 @@ def generate_answer(
     # grounding_pass decision above has already been made.
     response_text = strip_malformed_citations(response_text)
 
-    # Deterministic citation anchoring (flag-gated, default off). Only on a
-    # grounded, non-refusal answer — never fabricate a source for a refusal.
-    if (getattr(cfg.settings, "anchor_authoritative_citation", False)
-            and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()):
-        response_text = _anchor_authoritative_citation(query, response_text)
-
-    # Post-hoc citation repair (flag-gated, default off; CiteFix-similarity).
-    # Solo en respuesta groundeada y no-refusal. AÑADE la cita del doc que mejor
-    # sostiene la respuesta si el LLM no la citó. Requiere un reranker (reusa el
-    # BGE ya cargado). Monótono sobre cita_ok (solo añade). Ver citation_repair.py.
-    repair_info = None
-    if (getattr(cfg.settings, "citation_repair", False) and reranker is not None
-            and grounding_pass and REFUSAL_TEXT.lower() not in response_text.lower()
-            and docs):
-        from src.pipelines.citation_repair import repair_citations
-        repair_info = repair_citations(
-            response_text, docs, reranker,
-            max_add=getattr(cfg.settings, "citation_repair_max_add", 1),
-            min_score=getattr(cfg.settings, "citation_repair_min_score", 0.0),
-        )
-        response_text = repair_info["text"]
+    repair_info = None   # se mantiene la clave "repair" del contrato de salida
 
     # exp #78 (flag OFF por defecto): si NINGUNA cita se verifico como substring, la
     # respuesta es prosa y hoy afirma sin titubear (medido: 13 de 13 sin lenguaje de duda).

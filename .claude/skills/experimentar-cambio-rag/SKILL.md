@@ -11,13 +11,13 @@ description: Use when about to change ANY part of the Energy-RAG retrieval/gener
 **Principio**: ningún cambio entra sin evidencia en **dos sets** (dev + held-out, para cazar
 overfit), sin **no-regresión de grounding**, y sin entrar **flag-gated**.
 
-**Fuente de verdad** (no duplicar acá): `docs/architecture-status.md` — §8 pipeline vigente y
+**Fuente de verdad** (no duplicar acá): `docs/bitacora/architecture-status.md` — §8 pipeline vigente y
 límites por componente, §8b límites de hardware. Este skill referencia ese doc; si los scripts,
 sets o gotchas cambian, se actualiza **ahí** y este skill sigue valiendo.
 
 ## Procedimiento
 
-1. **Leer el contexto primero** — `docs/architecture-status.md` (§8/§8b), el último
+1. **Leer el contexto primero** — `docs/bitacora/architecture-status.md` (§8/§8b), el último
    `docs/campaign-*.md`/`handoff-*.md`, y la memoria `project_energy_rag_state`. Saber qué ya se
    probó y descartó.
 2. **Investigar estándar + límites duros** de la técnica (ventana de tokens, hardware, latencia);
@@ -55,6 +55,6 @@ sets o gotchas cambian, se actualiza **ahí** y este skill sigue valiendo.
 ## Mantenimiento
 
 Lo volátil (pipeline, scripts, sets, gotchas, límites de hardware) vive en
-`docs/architecture-status.md` §8/§8b — **única fuente de verdad**. Este skill solo codifica la
+`docs/bitacora/architecture-status.md` §8/§8b — **única fuente de verdad**. Este skill solo codifica la
 *disciplina* (estable) y apunta ahí. Al renombrar scripts/sets o agregar gotchas: actualizar
 `architecture-status.md`; revisar este skill solo si cambia la disciplina, no los detalles.

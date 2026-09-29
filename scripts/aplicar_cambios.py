@@ -60,7 +60,7 @@ def main(aplicar=False):
         nid = e["id_norma"]
         print(f"\n=== {e['tipo']} {e['numero']} ({nid}) ===", flush=True)
         # 1. bajar de nuevo, con las guardas de identidad y dominio de bajar_por_id
-        r = subprocess.run([sys.executable, "-m", "scripts.bajar_por_id",
+        r = subprocess.run([sys.executable, "-m", "scripts.archivo.bajar_por_id",
                             f"{nid}:{e['tipo']}:{e['numero']}"],
                            capture_output=True, text=True, timeout=900)
         print(r.stdout[-600:] if r.stdout else "(sin salida)", flush=True)

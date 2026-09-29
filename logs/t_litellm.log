@@ -1,6 +1,0 @@
-think=False: content_len=7835 reasoning=0 tokens_out=2000
-   content: 'Okay, let\'s tackle this query. The user is asking for the definition of "Mora" based on the provided Chilean electrical regulations.\n\nFirst, I need to check all'
-   keys: ['content', 'role', 'tool_calls', 'function_call', 'provider_specific_fields', 'reasoning_content']
-think=True: content_len=792 reasoning=0 tokens_out=866
-   content: 'La Mora se define como el estado en que un Usuario de Sistema Interoperable se encuentra cuando existen deudas impagas en un plazo igual o inferior a 5 años, co'
-   keys: ['content', 'role', 'tool_calls', 'function_call', 'provider_specific_fields', 'reasoning_content']

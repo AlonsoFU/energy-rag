@@ -1,4 +1,0 @@
-think_paired
-citas_v7
-proc_v7
-desc_v7

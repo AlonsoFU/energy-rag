@@ -2,7 +2,7 @@
 
 DB-free by design: representative real-concept examples assert the rule's
 behaviour. The full-corpus distribution (6 high / 1 low / 327 no-fire) is
-validated separately by running scripts/dryrun_canonical_names.py against the
+validated separately by running scripts/archivo/dryrun_canonical_names.py against the
 real DB (the test container is empty, so a distribution test there is moot).
 """
 from src.extraction.canonical_names import (

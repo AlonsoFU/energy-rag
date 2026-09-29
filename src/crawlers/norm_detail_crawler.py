@@ -8,6 +8,7 @@ import asyncio
 import json
 import hashlib
 import re
+import unicodedata
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, Any
@@ -434,7 +435,9 @@ class NormDetailCrawler:
             subdir = 'otros'
 
         # Crear nombre de archivo
-        filename = f"{norm.tipo.lower()}_{norm.numero}".replace(' ', '_')
+        # sin tildes: "resolución_149.json" sale escapado en git y rompe en otros sistemas de archivos
+        tipo_ascii = unicodedata.normalize("NFKD", norm.tipo.lower()).encode("ascii", "ignore").decode()
+        filename = f"{tipo_ascii}_{norm.numero}".replace(' ', '_')
         if norm.fecha_publicacion:
             year_match = re.search(r'(\d{4})', norm.fecha_publicacion)
             if year_match:

@@ -77,6 +77,6 @@ alta confianza y se aplica sola.
 La versión automatizada en el pipeline es `src/extraction/definition_proposer.py`
 (prompt-procedimiento a Ollama) + `definition_source.py` (capa determinista) +
 `candidate_gather.py` (merge curated/retrieved) + runner
-`scripts/resolve_definition_sources.py`. Este SKILL.md documenta el **procedimiento**
+`scripts/archivo/resolve_definition_sources.py`. Este SKILL.md documenta el **procedimiento**
 para que lo siga un agente (Claude Code u OpenCode+Ollama) cuando la curación se
 hace asistida en vez de automática.

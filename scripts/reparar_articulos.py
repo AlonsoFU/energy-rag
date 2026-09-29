@@ -43,7 +43,7 @@ import argparse, json, math, os, re, sys, time
 from pathlib import Path
 from src.parsers.norm_structure_parser import NormStructureParser as P
 from src.storage.connection import with_connection
-from scripts.mark_derogados import es_derogado
+from scripts.archivo.mark_derogados import es_derogado
 
 # BAK por entorno (2026-09-20): cada aplicacion guarda SU respaldo y se revierte sola.
 # `BAK=84 ... --apply` convive con el respaldo de #69b; `BAK=84 ... --revertir` deshace solo esa.
