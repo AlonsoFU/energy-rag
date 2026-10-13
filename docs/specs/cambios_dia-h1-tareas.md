@@ -14,6 +14,41 @@ Reglas que aplican a todas:
   `sin-hardcodeo-en-experimentos`.
 - Carga de GPU solo bajo `gpu-seguridad`.
 
+## Estado (2026-10-13)
+
+Primera tanda implementada y revisada. Cada rama parte de `7643a68` y **no está integrada**.
+
+| Tarea | Rama | Commit | Tests | Revisión |
+|---|---|---|---|---|
+| T00 fuente de decretos | (en el spec, §9) | — | — | Hecha: `obtxml?opt=3` solo entrega leyes; las vinculaciones requieren navegador |
+| T01 esquema | `worktree-agent-aa77f60d84116e9e0` | `5b53c6d` | 7 escritos, **0 ejecutados** (sin Postgres) | Aprobada por lectura, condicionada a ejecutar |
+| T03 cliente BCN | `worktree-agent-a753cd86753c9d9da` | `12c0984` | 42 pasan | Aprobada en la tercera vuelta |
+| T04 listado | `worktree-agent-ab00292f3f102a3ba` | `cb6de4f` | 7 pasan | Aprobada |
+| T14 scorer de dominio | `worktree-agent-af2aecb7bd769a5ac` | `95f9de8` | 20 pasan | Aprobada en la segunda vuelta |
+
+Lo que las revisiones dejaron para las tareas siguientes:
+
+- **T05:** un listado que parsea pero viene vacío o con otra raíz no es "sin normas nuevas";
+  se trata como vía incompleta (H1-CA-24). Una `Publicacion` puede traer `tipo` y `numero`
+  vacíos: decidir si se descarta.
+- **T09:** `estado`, `vias`, `afecta`, `organismos` y `detalle` son `NOT NULL`; se insertan
+  listas u objetos vacíos, nunca null.
+- **T03 (menor):** `construir_opener(*manejadores_extra)` acepta handlers extra para los
+  tests; un handler de redirección pasado ahí las reactivaría. Hoy nadie lo llama con
+  argumentos. Conviene dejar la inyección solo del lado del test.
+- **T13:** los `id_norma` se comparan como texto literal en el scorer (`1.0` o `" 1"` no
+  calzan con `1`); el conjunto etiquetado debe guardar el id tal cual lo entrega BCN.
+
+Bloqueos para seguir:
+
+- **Entorno:** esta máquina no tiene el `venv` del proyecto, Docker está inactivo y no hay
+  Ollama ni Playwright. Sin Postgres no se verifican T01, T02, T05, T09, T10, T16; sin
+  navegador no se hacen T06, T07, T08; sin GPU no se hacen T11, T15, T17.
+- **Integración:** T05 necesita T01 y T04 juntas; T07 necesita T02 y T06. Hay que integrar
+  las ramas aprobadas en una rama común antes de la segunda tanda.
+- **Decisiones del usuario:** H1-PA-01 (fuente de decretos y resoluciones, sin resolver),
+  H1-PA-09 (umbral 0.90 y tamaño del conjunto) y la validación de etiquetas de T13.
+
 ## Orden y dependencias
 
 - **Carril A (registro):** T01 → T02 → T09 → T16
