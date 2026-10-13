@@ -69,7 +69,7 @@ resoluciones (H1-PA-01).
 - **Candidata:** norma nueva reconocida por la vía V, la vía O o ambas.
 - **Reconocida antes:** candidata registrada en una corrida previa, en cualquier estado
   (pendiente, aprobada, rechazada).
-- **Ventana:** período que cubre una corrida. Supuesto S1 (§7).
+- **Ventana:** período que cubre una corrida. Supuesto S1 (§8).
 
 ## 5. Criterios de aceptación (EARS)
 
@@ -97,6 +97,12 @@ que refina.
   norma del corpus afecta y con qué relación (modifica o deroga).
 - H1-CA-07 — Cuando una candidata afecte a más de una norma del corpus, el sistema deberá
   guardar todas las normas afectadas en una sola candidata.
+- H1-CA-29 — Cuando se ejecute una corrida, el sistema deberá consultar las vinculaciones de
+  todas las normas en dominio del corpus, sin rotar ni muestrear. (H1-D1)
+- H1-CA-30 — El sistema deberá leer las vinculaciones desde la página de vinculaciones de BCN
+  de cada norma y no inferirlas solo del texto ya descargado. (H1-D1)
+- H1-CA-31 — Si en la corrida anterior quedaron normas del corpus sin revisar, entonces el
+  sistema deberá revisarlas primero en la corrida siguiente. (H1-D1)
 
 **Vía O — publicada por Ministerio de Energía, CNE o SEC**
 
@@ -169,6 +175,7 @@ que refina.
 | H1-CA-01, 02, 04 | Test con fixture de listado que mezcla una norma del corpus, una `fuera_de_dominio` y una ausente: solo la ausente queda como candidata |
 | H1-CA-03, 12 | Dos corridas seguidas sobre los mismos fixtures: la segunda registra 0 candidatas; una norma presente en ambas vías ocupa una sola fila con dos motivos |
 | H1-CA-05, 06, 07 | Test con fixture de `nav_vinc_modificacion` de dos normas del corpus modificadas por la misma norma ausente: una candidata con dos normas afectadas y su relación |
+| H1-CA-29, 30, 31 | Corrida completa: el registro muestra tantas normas revisadas en la vía V como normas en dominio tiene el corpus, cada una con su petición a `nav_vinc_modificacion`. Tras una corrida cortada por 429, la siguiente empieza por las pendientes |
 | H1-CA-08, 09, 10 | Test con fixture de `obtxml?opt=3` con organismos Energía, CNE, SEC, otro ministerio y uno vacío: entran tres, el ministerio ajeno no, el vacío se cuenta como no reconocido |
 | H1-CA-11, 13, 14 | Tras una corrida con candidatas: la cola tiene todos los campos y `count(*)` de `normas` y `articulos` no cambió |
 | H1-CA-15 | Test con el caso ya medido (`DECRETO 42` → `ACUERDO 42`): queda como fallo de identidad, fuera de la cola |
@@ -181,7 +188,16 @@ que refina.
 | Aceptación en vivo | Una corrida real sobre una ventana pasada con publicación conocida del sector: la norma aparece como candidata con su vía y su puntaje |
 | General | `pytest tests/` sin regresiones |
 
-## 7. Supuestos
+## 7. Decisiones fijadas
+
+- **H1-D1 (2026-10-13, usuario) — En la vía V manda la precisión sobre la cuota.** Se revisan
+  las vinculaciones de todas las normas en dominio en cada corrida. No se rota (una norma
+  nueva aparecería con días de atraso) ni se depende de lo que traiga la descarga del
+  monitor. Costo aceptado: una petición por norma en dominio y por corrida (~70, ~25 min a
+  20 s) y más exposición al 429; lo cubren H1-CA-23, 24 y 31. A escala este costo crece con
+  el corpus y habrá que revisarlo.
+
+## 8. Supuestos
 
 Tomados para poder escribir los criterios. Si alguno es falso, cambian los criterios que
 lo citan.
@@ -196,7 +212,7 @@ lo citan.
   así que no hace falta resolver tipo+número con el buscador, que es donde nacían los
   fallos de identidad.
 
-## 8. Preguntas abiertas
+## 9. Preguntas abiertas
 
 Las marcadas ⚠️ bloquean el diseño de esta historia.
 
@@ -204,11 +220,9 @@ Las marcadas ⚠️ bloquean el diseño de esta historia.
   verificado solo para leyes. Falta comprobar si entrega otros tipos, o si hay que leer la
   portada de últimas publicaciones con navegador (el repo ya usa Playwright). Sin esto la
   vía O cubre solo leyes, que es la parte menor de lo que publican Energía, CNE y SEC.
-- **H1-PA-02 ⚠️ Costo de la vía V contra la cuota 429.** Mirar las vinculaciones de las 70
-  normas en dominio son 70 peticiones por corrida (~25 min a 20 s). ¿Se comparte con el
-  re-scrape diario del monitor (misma visita, dos usos) o se rota? Es la PA-02 del spec
-  madre vista desde aquí. A escala (miles de normas) este costo crece con el corpus; la vía
-  O no.
+- **H1-PA-02 — cerrada por H1-D1.** Queda un derivado no bloqueante: si la corrida diaria
+  del monitor y la vía V suman demasiadas peticiones, en qué orden corren (PA-02 del spec
+  madre).
 - **H1-PA-03 Dónde vive la candidata.** `norma_evento.norma_nueva` hoy significa "entró al
   corpus". ¿Tipo de evento nuevo, tabla propia para la cola, o ambas? Depende de PA-08.
 - **H1-PA-04 Candidatas bajo el corte.** H1-CA-19 las registra siempre; si después se
