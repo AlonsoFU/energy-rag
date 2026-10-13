@@ -251,6 +251,12 @@ lo citan.
 
 Las marcadas ⚠️ bloquean el diseño de esta historia.
 
+- **Resultado de T00 (2026-10-13, 2 peticiones a BCN).** (a) `obtxml?opt=3&cantidad=20`
+  devolvió 20 normas y **las 20 son leyes**: ese endpoint no sirve para decretos ni
+  resoluciones. Fixture guardado en `tests/fixtures/bcn/obtxml_opt3_cantidad20.xml`.
+  (b) `nav_vinc_modificacion?idNorma=258171` pedido sin navegador devuelve la cáscara de una
+  aplicación JavaScript con cero enlaces `idNorma`: **la vía V necesita navegador**
+  (Playwright), igual que el crawler actual. Sigue sin fuente para decretos y resoluciones.
 - **H1-PA-01 ⚠️ Fuente de decretos y resoluciones para la vía O.** `obtxml?opt=3` está
   verificado solo para leyes. Falta comprobar si entrega otros tipos, o si hay que leer la
   portada de últimas publicaciones con navegador (el repo ya usa Playwright). Sin esto la
