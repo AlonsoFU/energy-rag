@@ -30,11 +30,26 @@ class CuotaAgotada(ErrorBCN):
     """BCN respondió 429; la instancia ya no hace más peticiones."""
 
 
+class _SinRedireccion(urllib.request.HTTPRedirectHandler):
+    """No sigue redirecciones: el 3xx llega como HTTPError y termina en ErrorBCN.
+
+    Así un Location hacia otro host no burla la lista de hosts permitidos.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def construir_opener():
+    """Opener sin redirecciones (separado para poder probarlo sin red)."""
+    return urllib.request.build_opener(_SinRedireccion())
+
+
 def _transporte_urllib(url, headers):
     """Transporte por defecto: devuelve (status, cuerpo) también en errores HTTP."""
     peticion = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(peticion, timeout=60) as respuesta:
+        with construir_opener().open(peticion, timeout=60) as respuesta:
             return respuesta.status, respuesta.read()
     except urllib.error.HTTPError as e:
         return e.code, e.read()
@@ -55,10 +70,21 @@ class ClienteBCN:
         return self._peticiones
 
     def _validar_host(self, url):
+        """Solo http/https; host exacto (hostname en minúsculas, sin punto final).
+
+        Decisiones: se rechaza userinfo (user@host) por ambigüedad; el puerto
+        se acepta, porque el host sigue siendo el permitido (y sirve para
+        servidores locales de prueba).
+        """
         try:
-            host = urlsplit(url).hostname
-        except ValueError:
-            host = None
+            partes = urlsplit(url)
+            esquema, host, usuario = partes.scheme, partes.hostname, partes.username
+        except ValueError as e:
+            raise HostNoPermitido(f"URL inválida: {url}") from e
+        if esquema not in ("http", "https"):
+            raise HostNoPermitido(f"esquema no permitido: {esquema!r} en {url}")
+        if usuario is not None:
+            raise HostNoPermitido(f"userinfo no permitido en {url}")
         if host not in HOSTS_PERMITIDOS:
             raise HostNoPermitido(f"host no permitido: {host!r} en {url}")
 
@@ -74,7 +100,12 @@ class ClienteBCN:
         self._ultimo_inicio = self._reloj()
 
         self._peticiones += 1
-        status, cuerpo = self._transporte(url, {"User-Agent": USER_AGENT})
+        try:
+            status, cuerpo = self._transporte(url, {"User-Agent": USER_AGENT})
+        except ErrorBCN:
+            raise
+        except (OSError, ValueError) as e:  # incluye URLError y TimeoutError
+            raise ErrorBCN(f"fallo de transporte para {url}: {e!r}") from e
         if status == 429:
             self._cuota_agotada = True
             raise CuotaAgotada(f"BCN respondió 429 para {url}")
