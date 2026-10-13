@@ -1,7 +1,13 @@
 import pytest
 
+import email.message
+import http.client
+import io
+import urllib.error
 import urllib.request
+import urllib.response
 
+from src.descubrimiento import cliente_bcn
 from src.descubrimiento.cliente_bcn import (
     USER_AGENT,
     construir_opener,
@@ -211,3 +217,82 @@ def test_user_agent_de_navegador():
     assert visto["User-Agent"] == USER_AGENT
     assert visto["User-Agent"].startswith("Mozilla/5.0 ")
     assert "Chrome/" in visto["User-Agent"]
+
+
+@pytest.mark.parametrize(
+    "excepcion",
+    [http.client.BadStatusLine("basura"), http.client.IncompleteRead(b"par")],
+)
+def test_httpexception_sale_como_errorbcn(excepcion):
+    f = Falso()
+    llamadas = []
+
+    def transporte(url, headers):
+        llamadas.append(url)
+        if len(llamadas) == 1:
+            raise excepcion
+        return 200, b"ok"
+
+    c = ClienteBCN(20.0, transporte, f.reloj, f.dormir)
+    with pytest.raises(ErrorBCN) as e:
+        c.obtener(URL)
+    assert e.value.__cause__ is excepcion
+    assert not isinstance(e.value, CuotaAgotada)
+    assert c.obtener(URL) == b"ok"
+
+
+@pytest.mark.parametrize(
+    "url",
+    [" http://bcn.cl/a", "\thttp://bcn.cl/", "http://bcn.cl\t/", "http://bcn.cl/a\n",
+     "http://bcn.cl/a\x7f", None, b"http://bcn.cl/"],
+)
+def test_url_con_blancos_o_control_se_rechaza(url):
+    f = Falso()
+    c = f.cliente()
+    with pytest.raises(HostNoPermitido):
+        c.obtener(url)
+    assert f.urls == [] and c.peticiones == 0
+
+
+@pytest.mark.parametrize(
+    "url", ["http://bcn.cl:99999/", "http://bcn.cl:abc/", "http://bcn.cl:0/"]
+)
+def test_puerto_invalido_se_rechaza(url):
+    f = Falso()
+    with pytest.raises(HostNoPermitido):
+        f.cliente().obtener(url)
+    assert f.urls == []
+
+
+def test_puerto_valido_pasa():
+    assert Falso().cliente().obtener("http://bcn.cl:8080/x") == b"ok"
+
+
+def test_transporte_por_defecto_ante_302_no_sigue_la_redireccion(monkeypatch):
+    vistas = []
+
+    class HTTPFalso(urllib.request.HTTPHandler):
+        def http_open(self, req):
+            vistas.append(req.full_url)
+            cab = email.message.Message()
+            cab["Location"] = "http://evil.com/robo"
+            resp = urllib.response.addinfourl(
+                io.BytesIO(b"redir"), cab, req.full_url, code=302
+            )
+            resp.msg = "Found"
+            return resp
+
+    monkeypatch.setattr(
+        cliente_bcn, "construir_opener", lambda: construir_opener(HTTPFalso())
+    )
+    origen = "http://www.bcn.cl/x"
+    status, cuerpo = cliente_bcn._transporte_urllib(origen, {"User-Agent": "t"})
+    assert status == 302
+    assert vistas == [origen]
+
+    vistas.clear()
+    c = ClienteBCN(transporte=cliente_bcn._transporte_urllib)
+    with pytest.raises(ErrorBCN) as e:
+        c.obtener(origen)
+    assert "302" in str(e.value)
+    assert vistas == [origen]

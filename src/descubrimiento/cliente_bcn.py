@@ -3,6 +3,7 @@
 Respeta un intervalo mínimo entre peticiones, corta ordenadamente ante un 429
 y rechaza hosts fuera de la lista permitida.
 """
+import http.client
 import time
 import urllib.error
 import urllib.request
@@ -40,9 +41,12 @@ class _SinRedireccion(urllib.request.HTTPRedirectHandler):
         return None
 
 
-def construir_opener():
-    """Opener sin redirecciones (separado para poder probarlo sin red)."""
-    return urllib.request.build_opener(_SinRedireccion())
+def construir_opener(*manejadores_extra):
+    """Opener sin redirecciones (separado para poder probarlo sin red).
+
+    `manejadores_extra` permite inyectar handlers falsos en los tests.
+    """
+    return urllib.request.build_opener(_SinRedireccion(), *manejadores_extra)
 
 
 def _transporte_urllib(url, headers):
@@ -76,9 +80,16 @@ class ClienteBCN:
         se acepta, porque el host sigue siendo el permitido (y sirve para
         servidores locales de prueba).
         """
+        if not isinstance(url, str) or any(
+            c.isspace() or ord(c) < 0x20 or ord(c) == 0x7F for c in url
+        ):
+            raise HostNoPermitido(f"URL con espacios o caracteres de control: {url!r}")
         try:
             partes = urlsplit(url)
             esquema, host, usuario = partes.scheme, partes.hostname, partes.username
+            puerto = partes.port  # ValueError si no es entero válido
+            if puerto is not None and puerto < 1:
+                raise ValueError("puerto fuera de rango")
         except ValueError as e:
             raise HostNoPermitido(f"URL inválida: {url}") from e
         if esquema not in ("http", "https"):
@@ -104,7 +115,7 @@ class ClienteBCN:
             status, cuerpo = self._transporte(url, {"User-Agent": USER_AGENT})
         except ErrorBCN:
             raise
-        except (OSError, ValueError) as e:  # incluye URLError y TimeoutError
+        except (OSError, ValueError, http.client.HTTPException) as e:  # incluye URLError y TimeoutError
             raise ErrorBCN(f"fallo de transporte para {url}: {e!r}") from e
         if status == 429:
             self._cuota_agotada = True
