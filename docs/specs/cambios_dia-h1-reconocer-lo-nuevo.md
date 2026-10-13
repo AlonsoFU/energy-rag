@@ -98,11 +98,11 @@ que refina.
 - H1-CA-07 — Cuando una candidata afecte a más de una norma del corpus, el sistema deberá
   guardar todas las normas afectadas en una sola candidata.
 - H1-CA-29 — Cuando se ejecute una corrida, el sistema deberá consultar las vinculaciones de
-  todas las normas en dominio del corpus, sin rotar ni muestrear. (H1-D1)
+  todas las normas en dominio del corpus, sin rotar ni muestrear. (S4)
 - H1-CA-30 — El sistema deberá leer las vinculaciones desde la página de vinculaciones de BCN
-  de cada norma y no inferirlas solo del texto ya descargado. (H1-D1)
+  de cada norma y no inferirlas solo del texto ya descargado. (S4)
 - H1-CA-31 — Si en la corrida anterior quedaron normas del corpus sin revisar, entonces el
-  sistema deberá revisarlas primero en la corrida siguiente. (H1-D1)
+  sistema deberá revisarlas primero en la corrida siguiente. (S4)
 
 **Vía O — publicada por Ministerio de Energía, CNE o SEC**
 
@@ -151,6 +151,34 @@ que refina.
 - H1-CA-21 — Mientras se calcule el puntaje de dominio, el sistema deberá operar bajo el
   protocolo de `gpu-seguridad`. (CA-12)
 
+**Precisión de dominio (H1-D1)**
+
+"En dominio" significa atingente a las funciones de la subgerencia, medido contra la misma
+referencia (`DOMINIO`) con que se clasifica el resto del corpus.
+
+- H1-CA-32 — El sistema no deberá seguir las vinculaciones de normas del corpus marcadas
+  `fuera_de_dominio`.
+- H1-CA-33 — El sistema no deberá decidir el dominio de una candidata con listas de palabras
+  o patrones sobre su título como mecanismo principal.
+- H1-CA-34 — Cuando se guarde un puntaje, el sistema deberá clasificar la candidata como
+  "en dominio", "dudosa" o "fuera de dominio".
+- H1-CA-35 — El sistema deberá tomar los límites de la clase "dudosa" de una calibración
+  contra el conjunto etiquetado, guardada como dato y recalibrable sin cambiar código.
+- H1-CA-36 — Si una candidata de la vía V queda "dudosa" o "fuera de dominio", entonces el
+  sistema deberá mantenerla en la cola y marcarla como "relevante por vinculación".
+- H1-CA-37 — El sistema deberá alcanzar, sobre la parte held-out del conjunto etiquetado, una
+  precisión de al menos 0.90 en la clase "en dominio". (umbral propuesto, H1-PA-09)
+- H1-CA-38 — El sistema no deberá clasificar como "fuera de dominio" ninguna norma del
+  conjunto etiquetado que esté etiquetada en dominio. (propuesto, H1-PA-09)
+- H1-CA-39 — El conjunto etiquetado deberá construirse leyendo cada norma y no a partir del
+  puntaje del sistema, y deberá incluir los casos difíciles ya medidos.
+- H1-CA-40 — Cuando se guarde un puntaje, el sistema deberá guardar con qué embedder y con
+  qué versión de la referencia de dominio se calculó.
+- H1-CA-41 — Si cambia el embedder o la referencia de dominio, entonces el sistema deberá
+  recalcular el puntaje de las candidatas pendientes antes de clasificarlas.
+- H1-CA-42 — Cuando termine una corrida, el sistema deberá registrar cuántas candidatas
+  quedaron en cada clase y cuántas sin puntaje.
+
 **Cobertura y fallos**
 
 - H1-CA-22 — Cuando termine una corrida, el sistema deberá dejar registrado, por cada vía:
@@ -181,6 +209,11 @@ que refina.
 | H1-CA-15 | Test con el caso ya medido (`DECRETO 42` → `ACUERDO 42`): queda como fallo de identidad, fuera de la cola |
 | H1-CA-16, 20 | Test con texto `Loading...` y corrida con Ollama detenido: candidata registrada con puntaje "no disponible"; la corrida siguiente lo completa |
 | H1-CA-17, 18, 19 | Casos ya medidos: DS 44 (0.579) y DS 88 (0.591) quedan sobre el corte; LEY 21150 (0.191) queda bajo el corte **y sigue registrada**. Tolerancia ±0.01 frente a `marcar_fuera_dominio` |
+| H1-CA-32 | Test con una norma `fuera_de_dominio` que tiene vinculaciones: la vía V no la visita |
+| H1-CA-33 | Revisión del código con la skill `sin-hardcodeo-en-experimentos`: ninguna lista ni regex decide el dominio |
+| H1-CA-34, 35, 36 | Test con tres puntajes (sobre, dentro y bajo la zona dudosa) y la calibración leída de un archivo de datos: cada uno cae en su clase; el de la vía V bajo el corte sigue en la cola con su marca |
+| H1-CA-37, 38, 39 | Scorer pareado sobre el conjunto etiquetado, dev y held-out por separado. **Cómo puntúa cada caso:** precisión = en dominio correctas / clasificadas en dominio; "dudosa" no cuenta como acierto ni como error en la precisión y se informa aparte; "sin puntaje" se excluye y se cuenta. Casos obligatorios: DS 44, DS 88 (en dominio); LEY 21719, LEY 21150, LEY 20955, DECRETO 30, DFL 1 Tránsito (fuera) |
+| H1-CA-40, 41, 42 | Test que cambia la versión de la referencia: las pendientes se recalculan y el registro de la corrida trae el conteo por clase |
 | H1-CA-21 | El log muestra el paso por `gpu_guard.sh` antes del primer embedding |
 | H1-CA-22, 23, 24 | Test con el crawler simulando 429 a mitad de la vía V: las candidatas previas persisten, el registro lista las normas no revisadas y no dice "sin normas nuevas" |
 | H1-CA-25, 26 | Test con última corrida exitosa hace 5 días y listado que solo cubre 2: registra las de esos 2 días y el tramo sin cubrir |
@@ -190,12 +223,10 @@ que refina.
 
 ## 7. Decisiones fijadas
 
-- **H1-D1 (2026-10-13, usuario) — En la vía V manda la precisión sobre la cuota.** Se revisan
-  las vinculaciones de todas las normas en dominio en cada corrida. No se rota (una norma
-  nueva aparecería con días de atraso) ni se depende de lo que traiga la descarga del
-  monitor. Costo aceptado: una petición por norma en dominio y por corrida (~70, ~25 min a
-  20 s) y más exposición al 429; lo cubren H1-CA-23, 24 y 31. A escala este costo crece con
-  el corpus y habrá que revisarlo.
+- **H1-D1 (2026-10-13, usuario) — La precisión que manda es la de dominio.** Lo reconocido
+  tiene que ser atingente a este proyecto (normativa eléctrica, funciones de la
+  subgerencia). Se traduce en H1-CA-32 a H1-CA-42. No cambia D5: el puntaje sigue sin
+  decidir la entrada (H1-CA-19); decide cómo se clasifica y se muestra la candidata.
 
 ## 8. Supuestos
 
@@ -206,11 +237,15 @@ lo citan.
   un día con la máquina apagada pierde normas para siempre. Afecta H1-CA-08, 25, 26. El spec
   madre deja abierto qué pasa con el **informe** de los días perdidos (PA-05); aquí solo se
   fija que el reconocimiento no las pierda.
-- **S2 — La vía V solo mira normas en dominio del corpus**, igual que el monitor actual
-  (PA-14 del spec madre sigue abierta).
+- **S2 — promovido a criterio H1-CA-32** por H1-D1.
 - **S3 — El `idNorma` es la llave de identidad.** El listado y las vinculaciones ya lo traen,
   así que no hace falta resolver tipo+número con el buscador, que es donde nacían los
   fallos de identidad.
+
+- **S4 — La vía V revisa todas las normas en dominio en cada corrida** (H1-CA-29 a 31).
+  La precisión de dominio no elige entre revisar todo o rotar; se toma cobertura completa
+  porque rotar atrasa el reconocimiento. Costo: una petición por norma en dominio y por
+  corrida (~70, ~25 min a 20 s) y más exposición al 429; crece con el corpus.
 
 ## 9. Preguntas abiertas
 
@@ -220,9 +255,9 @@ Las marcadas ⚠️ bloquean el diseño de esta historia.
   verificado solo para leyes. Falta comprobar si entrega otros tipos, o si hay que leer la
   portada de últimas publicaciones con navegador (el repo ya usa Playwright). Sin esto la
   vía O cubre solo leyes, que es la parte menor de lo que publican Energía, CNE y SEC.
-- **H1-PA-02 — cerrada por H1-D1.** Queda un derivado no bloqueante: si la corrida diaria
-  del monitor y la vía V suman demasiadas peticiones, en qué orden corren (PA-02 del spec
-  madre).
+- **H1-PA-02 Costo de la vía V contra la cuota 429.** Cubierta por el supuesto S4; se
+  reabre si la corrida diaria del monitor y la vía V juntas chocan con la cuota (PA-02 del
+  spec madre).
 - **H1-PA-03 Dónde vive la candidata.** `norma_evento.norma_nueva` hoy significa "entró al
   corpus". ¿Tipo de evento nuevo, tabla propia para la cola, o ambas? Depende de PA-08.
 - **H1-PA-04 Candidatas bajo el corte.** H1-CA-19 las registra siempre; si después se
@@ -238,3 +273,10 @@ Las marcadas ⚠️ bloquean el diseño de esta historia.
 - **H1-PA-08 Falsos positivos del corte.** `DECRETO 30` (transporte) puntuó 0.341. El
   puntaje es informativo en esta historia, pero quien apruebe debe saber que el corte no
   separa bien en la zona 0.30–0.35.
+- **H1-PA-09 Umbrales y tamaño del conjunto etiquetado.** La precisión 0.90 (H1-CA-37) y el
+  "ninguna en dominio cae fuera" (H1-CA-38) son propuestas. Falta fijar el tamaño mínimo del
+  conjunto (propuesta: 40 normas, mitad en dominio, mitad dev y mitad held-out) y quién
+  valida las etiquetas.
+- **H1-PA-10 Leyes misceláneas.** Una ley que modifica un artículo de una norma del corpus y
+  cuyo resto trata de otra materia puntúa bajo por articulado. H1-CA-36 la conserva; falta
+  decidir si además se puntúa solo la parte que toca al corpus.
